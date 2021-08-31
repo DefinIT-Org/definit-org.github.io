@@ -1,35 +1,487 @@
-<!doctype html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class=no-js><!--<![endif]--><head><meta charset=utf-8><title>NSX &#183; DefinIT</title><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content><meta name=keywords content><meta property="og:title" content="NSX  &#183; DefinIT "><meta property="og:site_name" content="DefinIT"><meta property="og:url" content="https://www.definit.co.uk/category/nsx/"><meta property="og:locale" content="en-gb"><meta property="og:type" content="website"><link rel=alternate type=application/rss+xml href=https://www.definit.co.uk/category/nsx/index.xml title=DefinIT><link rel=canonical href=https://www.definit.co.uk/category/nsx/><link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png><link rel=icon href=/images/favicon-16x16.png><meta name=generator content="Hugo 0.84.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script><script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]--><script src=/js/clr-1.0/clr-icons.min.js></script><script src=/js/clr-1.0/custom-elements.min.js></script><link href=/css/clr-1.0/clr-ui-dark.css rel=stylesheet><link href=/css/clr-1.0/clr-icons.min.css rel=stylesheet><link href=/css/definit-clarity.css rel=stylesheet><link href=/css/lightbox.min.css rel=stylesheet></head><body data-ng-app=myapp data-ng-controller=MyController data-ng-mouseleave=MouseLeave($event)><div class=main-container><header class=header-6><div class=branding><a class=navbar-brand-img href=/><img alt src=/images/logos/definit-logo.png>
-<span class=title>DefinIT</span></a></div><nav class=header-nav><a class="nav-link nav-text" href=https://www.definit.co.uk/>Home</a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/about/>About</a>
-<a class="nav-link nav-text" href=https://www.github.com/sammcgeown>GitHub</a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml>RSS</a></nav><div class=header-actions><form class=search id=search method=get action=//google.com/search><label for=search_input><input id=search_input type=text name=q placeholder="Search with Google">
-<input type=hidden name=as_sitesearch value=https://www.definit.co.uk></label></form></div></header><nav class=subnav><ul class=nav><li class=nav-item><a class=nav-link href=https://www.definit.co.uk/>Home</a></li><li class=nav-item><a class=nav-link href=https://www.definit.co.uk/about/>About</a></li><li class=nav-item><a class=nav-link href=https://www.github.com/sammcgeown>GitHub</a></li><li class=nav-item><a class=nav-link href=https://www.definit.co.uk/index.xml>RSS</a></li></ul></nav><div class=content-container><div class=content-area><h1>NSX</h1><div class=clr-row><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2019/07/vmware-cloud-foundation-deployment-observations/>VMware Cloud Foundation - Deployment Observations</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
-on 29/7/2019</div><div class=clr-card-authors>Published under <a href=/category/vmware>VMware</a>, <a href=/category/automation>Automation</a>, <a href=/category/vrealize-automation>vRealize Automation</a>, <a href=/category/vsphere>vSphere</a> and <a href=/category/nsx>NSX</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden><img src=/images/logos/vmware-cloud-foundation.jpg class=clr-card-featured-image>
+<!doctype html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class=no-js><!--<![endif]-->
+<head>
+<meta charset=utf-8>
+<title>NSX &#183; DefinIT</title>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=HandheldFriendly content="True">
+<meta name=MobileOptimized content="320">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content>
+<meta name=keywords content>
+<meta property="og:title" content="NSX  &#183; DefinIT ">
+<meta property="og:site_name" content="DefinIT">
+<meta property="og:url" content="https://www.definit.co.uk/category/nsx/">
+<meta property="og:locale" content="en-gb">
+<meta property="og:type" content="website">
+<link rel=alternate type=application/rss+xml href=https://www.definit.co.uk/category/nsx/index.xml title=DefinIT>
+<link rel=canonical href=https://www.definit.co.uk/category/nsx/>
+<link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
+<link rel=icon href=/images/favicon-16x16.png>
+<meta name=generator content="Hugo 0.87.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
+<script src=/js/clr-1.0/clr-icons.min.js></script>
+<script src=/js/clr-1.0/custom-elements.min.js></script>
+<link href=/css/clr-1.0/clr-ui-dark.css rel=stylesheet>
+<link href=/css/clr-1.0/clr-icons.min.css rel=stylesheet>
+<link href=/css/definit-clarity.css rel=stylesheet>
+<link href=/css/lightbox.min.css rel=stylesheet>
+</head>
+<body data-ng-app=myapp data-ng-controller=MyController data-ng-mouseleave=MouseLeave($event)>
+<div class=main-container>
+<header class=header-6>
+<div class=branding>
+<a class=navbar-brand-img href=/>
+<img alt src=/images/logos/definit-logo.png>
+<span class=title>DefinIT</span>
+</a>
+</div>
+<nav class=header-nav>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/>
+Home
+</a>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/about/>
+About
+</a>
+<a class="nav-link nav-text" href=https://www.github.com/sammcgeown>
+GitHub
+</a>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml>
+RSS
+</a>
+</nav>
+<div class=header-actions>
+<form class=search id=search method=get action=//google.com/search>
+<label for=search_input>
+<input id=search_input type=text name=q placeholder="Search with Google">
+<input type=hidden name=as_sitesearch value=https://www.definit.co.uk>
+</label>
+</form>
+</div>
+</header>
+<nav class=subnav>
+<ul class=nav>
+<li class=nav-item>
+<a class=nav-link href=https://www.definit.co.uk/>
+Home
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://www.definit.co.uk/about/>
+About
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://www.github.com/sammcgeown>
+GitHub
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://www.definit.co.uk/index.xml>
+RSS
+</a>
+</li>
+</ul>
+</nav>
+<div class=content-container>
+<div class=content-area>
+<h1>NSX</h1>
+<div class=clr-row>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2019/07/vmware-cloud-foundation-deployment-observations/>VMware Cloud Foundation - Deployment Observations</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
+on 29/7/2019
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a>, <a href=/category/automation>Automation</a>, <a href=/category/vrealize-automation>vRealize Automation</a>, <a href=/category/vsphere>vSphere</a> and <a href=/category/nsx>NSX</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+<img src=/images/logos/vmware-cloud-foundation.jpg class=clr-card-featured-image>
 I have been working with VMware Cloud Foundation recently and while for the most part things went well there were occasions where challenges were encountered which made the delivery to the customer all the more trickier than expected.
 This article is a list of observations and things to most definitely check or watch out for when delivering a VCF project.
-We were working with VCF version 3.7.2 (yes I am aware 3.</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2019/07/vmware-cloud-foundation-deployment-observations/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step/>Lab Guide - Kubernetes and NSX-T Container Network Plugin - Step by Step</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 12/6/2019</div><div class=clr-card-authors>Published under <a href=/category/nsx>NSX</a>, <a href=/category/vmware>VMware</a> and <a href=/category/cloud-native>Cloud Native</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden><img src=/images/logos/kubernetes.svg class=clr-card-featured-image>
+We were working with VCF version 3.7.2 (yes I am aware 3.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2019/07/vmware-cloud-foundation-deployment-observations/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step/>Lab Guide - Kubernetes and NSX-T Container Network Plugin - Step by Step</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 12/6/2019
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/nsx>NSX</a>, <a href=/category/vmware>VMware</a> and <a href=/category/cloud-native>Cloud Native</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+<img src=/images/logos/kubernetes.svg class=clr-card-featured-image>
 I’ve done a fair amount of work learning VMware PKS and NSX-T, but I wanted to drop down a level and get more familiar with the inner workings for Kubernetes, as well as explore some of the newer features that are exposed by the NSX Container Plugin that are not yet in the PKS integrations.
-The NSX-T docs are…not great, I certainly don’t think you can work out the steps required from the official NCP installation guide without a healthy dollop of background knowledge and familiarity with Kubernetes and CNI.</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2019/05/unable-to-configure-route-redistribution-with-cross-vcenter-nsx-6.4/>Unable to configure route redistribution with cross-vCenter NSX 6.4</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 23/5/2019</div><div class=clr-card-authors>Published under <a href=/category/nsx>NSX</a> and <a href=/category/vmware>VMware</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden><img src=/images/logos/vmware-nsx.png class=clr-card-featured-image>
+The NSX-T docs are…not great, I certainly don’t think you can work out the steps required from the official NCP installation guide without a healthy dollop of background knowledge and familiarity with Kubernetes and CNI.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2019/05/unable-to-configure-route-redistribution-with-cross-vcenter-nsx-6.4/>Unable to configure route redistribution with cross-vCenter NSX 6.4</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 23/5/2019
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/nsx>NSX</a> and <a href=/category/vmware>VMware</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+<img src=/images/logos/vmware-nsx.png class=clr-card-featured-image>
 I ran into this UI bug the other day when I was trying to enable route redistribution on an Edge in a Secondary site of a cross-vCenter NSX deployment.
 The Edge itself was deployed correctly, and configured to peer with a physical northbound router, however when I attempted to configure the route redistribution I was unable to do so.
-Fortunately, the solution was simple - use the API.</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2019/05/unable-to-configure-route-redistribution-with-cross-vcenter-nsx-6.4/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2019/02/lab-notes-vcloud-director-9.1-for-service-providers-part-1-pre-requisites/>Lab Notes – vCloud Director 9.1 for Service Providers – Part 1: Pre-requisites</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 8/2/2019</div><div class=clr-card-authors>Published under <a href=/category/cloud>Cloud</a>, <a href=/category/nsx>NSX</a>, <a href=/category/vcloud-director>vCloud Director</a>, <a href=/category/vmware>VMware</a> and <a href=/category/vrealize-orchestrator>vRealize Orchestrator</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>This series was originally going to be a more polished endeavour, but unfortunately time got in the way. A prod from James Kilby (@jameskilbynet) has convinced me to publish as is, as a series of lab notes. Maybe one day I&rsquo;ll loop back and finish them…
-Requirements Routing Because I’m backing my vCloud Director installation with NSX-T, I will be using my existing Tier-0 router, which interfaces with my physical router via BGP.</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2019/02/lab-notes-vcloud-director-9.1-for-service-providers-part-1-pre-requisites/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2018/07/lab-notes-vcloud-director-9-1-for-service-providers-part-3-nfs-server-installation/>Lab Notes – vCloud Director 9.1 for Service Providers – Part 3: NFS Server Installation</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 13/7/2018</div><div class=clr-card-authors>Published under <a href=/category/nsx>NSX</a>, <a href=/category/vcloud-director>vCloud Director</a> and <a href=/category/vmware>VMware</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>This series was originally going to be a more polished endeavour, but unfortunately time got in the way. A prod from James Kilby (@jameskilbynet) has convinced me to publish as is, as a series of lab notes. Maybe one day I&rsquo;ll loop back and finish them…
-Prerequisites I’ve deployed a CentOS7 VM from my standard template, and configured the prerequisites as per my prerequisites post. Updates, NTP, DNS and SELinux have all been configured.</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2018/07/lab-notes-vcloud-director-9-1-for-service-providers-part-3-nfs-server-installation/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2018/07/lab-notes-vcloud-director-9-1-for-service-providers-part-2-postgresql-installation/>Lab Notes – vCloud Director 9.1 for Service Providers – Part 2: PostgreSQL Installation</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 10/7/2018</div><div class=clr-card-authors>Published under <a href=/category/cloud>Cloud</a>, <a href=/category/nsx>NSX</a>, <a href=/category/vcloud-director>vCloud Director</a> and <a href=/category/vmware>VMware</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>This series was originally going to be a more polished endeavour, but unfortunately time got in the way. A prod from James Kilby (@jameskilbynet) has convinced me to publish as is, as a series of lab notes. Maybe one day I&rsquo;ll loop back and finish them…
-Installing PostgreSQL 10 Server The base OS for the PostgreSQL server is CentOS7, deployed from the same template and with the same preparation as detailed in the prerequisites post.</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2018/07/lab-notes-vcloud-director-9-1-for-service-providers-part-2-postgresql-installation/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2018/06/upgrading-pks-with-nsx-t-from-1-0-x-to-1-1/>Upgrading PKS with NSX-T from 1.0.x to 1.1</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 29/6/2018</div><div class=clr-card-authors>Published under <a href=/category/cloud-native>Cloud Native</a>, <a href=/category/nsx>NSX</a> and <a href=/category/vmware>VMware</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden><img src=/images/2018/06/RSLocalFile-80846C91-9468-4917-B1FA-182B82280BBC.png class=clr-card-featured-image>
+Fortunately, the solution was simple - use the API.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2019/05/unable-to-configure-route-redistribution-with-cross-vcenter-nsx-6.4/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2019/02/lab-notes-vcloud-director-9.1-for-service-providers-part-1-pre-requisites/>Lab Notes – vCloud Director 9.1 for Service Providers – Part 1: Pre-requisites</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 8/2/2019
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/cloud>Cloud</a>, <a href=/category/nsx>NSX</a>, <a href=/category/vcloud-director>vCloud Director</a>, <a href=/category/vmware>VMware</a> and <a href=/category/vrealize-orchestrator>vRealize Orchestrator</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+This series was originally going to be a more polished endeavour, but unfortunately time got in the way. A prod from James Kilby (@jameskilbynet) has convinced me to publish as is, as a series of lab notes. Maybe one day I&rsquo;ll loop back and finish them…
+Requirements Routing Because I’m backing my vCloud Director installation with NSX-T, I will be using my existing Tier-0 router, which interfaces with my physical router via BGP.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2019/02/lab-notes-vcloud-director-9.1-for-service-providers-part-1-pre-requisites/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2018/07/lab-notes-vcloud-director-9-1-for-service-providers-part-3-nfs-server-installation/>Lab Notes – vCloud Director 9.1 for Service Providers – Part 3: NFS Server Installation</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 13/7/2018
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/nsx>NSX</a>, <a href=/category/vcloud-director>vCloud Director</a> and <a href=/category/vmware>VMware</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+This series was originally going to be a more polished endeavour, but unfortunately time got in the way. A prod from James Kilby (@jameskilbynet) has convinced me to publish as is, as a series of lab notes. Maybe one day I&rsquo;ll loop back and finish them…
+Prerequisites I’ve deployed a CentOS7 VM from my standard template, and configured the prerequisites as per my prerequisites post. Updates, NTP, DNS and SELinux have all been configured.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2018/07/lab-notes-vcloud-director-9-1-for-service-providers-part-3-nfs-server-installation/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2018/07/lab-notes-vcloud-director-9-1-for-service-providers-part-2-postgresql-installation/>Lab Notes – vCloud Director 9.1 for Service Providers – Part 2: PostgreSQL Installation</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 10/7/2018
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/cloud>Cloud</a>, <a href=/category/nsx>NSX</a>, <a href=/category/vcloud-director>vCloud Director</a> and <a href=/category/vmware>VMware</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+This series was originally going to be a more polished endeavour, but unfortunately time got in the way. A prod from James Kilby (@jameskilbynet) has convinced me to publish as is, as a series of lab notes. Maybe one day I&rsquo;ll loop back and finish them…
+Installing PostgreSQL 10 Server The base OS for the PostgreSQL server is CentOS7, deployed from the same template and with the same preparation as detailed in the prerequisites post.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2018/07/lab-notes-vcloud-director-9-1-for-service-providers-part-2-postgresql-installation/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2018/06/upgrading-pks-with-nsx-t-from-1-0-x-to-1-1/>Upgrading PKS with NSX-T from 1.0.x to 1.1</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 29/6/2018
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/cloud-native>Cloud Native</a>, <a href=/category/nsx>NSX</a> and <a href=/category/vmware>VMware</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+<img src=/images/2018/06/RSLocalFile-80846C91-9468-4917-B1FA-182B82280BBC.png class=clr-card-featured-image>
 Yesterday, Pivotal Container Service 1.1 dropped and, as it’s something I’ve been actively learning in my lab, I wanted to jump on the upgrade straight away. PKS with NSX-T is a really hot topic right now and I think it’s going to be a big part of the future CNA landscape.
-My Lab PKS 1.0.4 deployment is configured as a &ldquo;NO-NAT with Logical Switch (NSX-T) Topology” as depicted in the diagram below (from the PKS documentation).</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2018/06/upgrading-pks-with-nsx-t-from-1-0-x-to-1-1/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2018/04/vrealize-lifecycle-manager-1-2-vc-data-collection-fails-when-nsx-t-hostswitches-are-in-use/>vRealize Lifecycle Manager 1.2 VC data collection fails when NSX-T hostswitches are in use</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 18/4/2018</div><div class=clr-card-authors>Published under <a href=/category/log-insight>Log Insight</a>, <a href=/category/nsx>NSX</a>, <a href=/category/vmware>VMware</a>, <a href=/category/vrealize-automation>vRealize Automation</a>, <a href=/category/vrealize-operations>vRealize Operations</a> and <a href=/category/vsphere>vSphere</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden><img src=/images/2018/04/vRLCM-Logo.png class=clr-card-featured-image>
+My Lab PKS 1.0.4 deployment is configured as a &ldquo;NO-NAT with Logical Switch (NSX-T) Topology” as depicted in the diagram below (from the PKS documentation).
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2018/06/upgrading-pks-with-nsx-t-from-1-0-x-to-1-1/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2018/04/vrealize-lifecycle-manager-1-2-vc-data-collection-fails-when-nsx-t-hostswitches-are-in-use/>vRealize Lifecycle Manager 1.2 VC data collection fails when NSX-T hostswitches are in use</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 18/4/2018
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/log-insight>Log Insight</a>, <a href=/category/nsx>NSX</a>, <a href=/category/vmware>VMware</a>, <a href=/category/vrealize-automation>vRealize Automation</a>, <a href=/category/vrealize-operations>vRealize Operations</a> and <a href=/category/vsphere>vSphere</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+<img src=/images/2018/04/vRLCM-Logo.png class=clr-card-featured-image>
 When vRealize Lifecycle Manager 1.2 was released recently, I was keen to get it installed in my lab, since I maintain several vRealize Automation deployments for development and testing, as well as performing upgrades. With vRLCM I can reduce the administrative overhead of managing the environments, as well as easily migrate content between environments (I&rsquo;ll be blogging on some of these cool new features soon).
-However, I hit a snag when I began to import my existing environment - I couldn’t get the vCenter data collection to run.</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2018/04/vrealize-lifecycle-manager-1-2-vc-data-collection-fails-when-nsx-t-hostswitches-are-in-use/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2018/03/three-tier-app-for-vrealize-automation/>Three Tier App for vRealize Automation</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 26/3/2018</div><div class=clr-card-authors>Published under <a href=/category/nsx>NSX</a>, <a href=/category/vmware>VMware</a> and <a href=/category/vrealize-automation>vRealize Automation</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden><img src=/images/2018/03/three-tier-app.png class=clr-card-featured-image>
-One question I’m asked quite a lot is what I use for a 3-tier application when I’m testing things like NSX micro-segmentation with vRealize Automation. The simple answer is that I used to make something up as I went along, deploying components by hand and generally repeating myself a lot. I had some cut/paste commands in my note application that sped things up a little, but nothing that developed. I’ve been meaning to rectify this for a while, and this is the result!</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2018/03/three-tier-app-for-vrealize-automation/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2018/01/nsx-6-x-network-communications-diagram/>NSX 6.x Network Communications Diagram</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 26/1/2018</div><div class=clr-card-authors>Published under <a href=/category/nsx>NSX</a> and <a href=/category/vmware>VMware</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden><img src=/images/2018/01/NSX-Communications.png class=clr-card-featured-image>
-There are a few NSX Communications network diagrams floating around, but none have really displayed the info in a way I found to be clear or complete enough. To that end, I have been working on a diagram that covers as much of the communications between NSX Components as I can. I&rsquo;ve currently only covered single site NSX (not Cross vCenter) but I&rsquo;ll publish an updated version soon including that.</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2018/01/nsx-6-x-network-communications-diagram/>More</a></div></div></div></div><nav><ul class=pagination><li class="pagination__item pagination__item--current"><a href=/category/nsx/ class="btn btn-sm btn btn-primary">1</a></li><li class=pagination__item><a href=/category/nsx/page/2/ class="btn btn-sm btn btn-outline">2</a></li><li class=pagination__item><a href=/category/nsx/page/3/ class="btn btn-sm btn btn-outline">3</a></li><li class="pagination__item pagination__item--next"><a href=/category/nsx/page/2/ class="btn btn-sm btn-outline">...</a></li><li class="pagination__item pagination__item--last"><a class="btn btn-sm btn btn-outline" href=/category/nsx/page/3/>3</a></li></ul></nav></div><nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><section class=sidenav-content><section class="nav-group collapsible"><input id=Categories type=checkbox>
-<label for=Categories>Categories</label><ul class=nav-list><li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li><li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">22</span></a></li><li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li><li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li><li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">13</span></a></li><li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">41</span></a></li><li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li><li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li><li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li><li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li><li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li><li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li><li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li><li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">1</span></a></li><li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li><li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">204</span></a></li><li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li><li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">12</span></a></li><li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li><li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li><li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li><li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li><li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li><li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li></ul></section><section class="nav-group collapsible"><input id=Tags type=checkbox>
-<label for=Tags>Tags (Top 10)</label><ul class=nav-list><li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li><li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">51</span></a></li><li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li><li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li><li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li><li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li><li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li><li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">30</span></a></li><li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li><li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li></section><section class=nav-group><label for=Sponsors>Sponsors</label><ul class=nav-list></ul></section></section></nav></div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-4368767-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-4368767-1')</script><script src=/js/lightbox-plus-jquery.min.js></script></div></body></html>
+However, I hit a snag when I began to import my existing environment - I couldn’t get the vCenter data collection to run.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2018/04/vrealize-lifecycle-manager-1-2-vc-data-collection-fails-when-nsx-t-hostswitches-are-in-use/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2018/03/three-tier-app-for-vrealize-automation/>Three Tier App for vRealize Automation</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 26/3/2018
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/nsx>NSX</a>, <a href=/category/vmware>VMware</a> and <a href=/category/vrealize-automation>vRealize Automation</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+<img src=/images/2018/03/three-tier-app.png class=clr-card-featured-image>
+One question I’m asked quite a lot is what I use for a 3-tier application when I’m testing things like NSX micro-segmentation with vRealize Automation. The simple answer is that I used to make something up as I went along, deploying components by hand and generally repeating myself a lot. I had some cut/paste commands in my note application that sped things up a little, but nothing that developed. I’ve been meaning to rectify this for a while, and this is the result!
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2018/03/three-tier-app-for-vrealize-automation/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2018/01/nsx-6-x-network-communications-diagram/>NSX 6.x Network Communications Diagram</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 26/1/2018
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/nsx>NSX</a> and <a href=/category/vmware>VMware</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+<img src=/images/2018/01/NSX-Communications.png class=clr-card-featured-image>
+There are a few NSX Communications network diagrams floating around, but none have really displayed the info in a way I found to be clear or complete enough. To that end, I have been working on a diagram that covers as much of the communications between NSX Components as I can. I&rsquo;ve currently only covered single site NSX (not Cross vCenter) but I&rsquo;ll publish an updated version soon including that.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2018/01/nsx-6-x-network-communications-diagram/>More</a>
+</div>
+</div>
+</div>
+</div>
+<nav>
+<ul class=pagination>
+<li class="pagination__item pagination__item--current">
+<a href=/category/nsx/ class="btn btn-sm btn btn-primary">
+1
+</a>
+</li>
+<li class=pagination__item>
+<a href=/category/nsx/page/2/ class="btn btn-sm btn btn-outline">
+2
+</a>
+</li>
+<li class=pagination__item>
+<a href=/category/nsx/page/3/ class="btn btn-sm btn btn-outline">
+3
+</a>
+</li>
+<li class="pagination__item pagination__item--next">
+<a href=/category/nsx/page/2/ class="btn btn-sm btn-outline">
+...
+</a>
+</li>
+<li class="pagination__item pagination__item--last">
+<a class="btn btn-sm btn btn-outline" href=/category/nsx/page/3/>
+3
+</a>
+</li>
+</ul>
+</nav>
+</div>
+<nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<section class=sidenav-content>
+<section class="nav-group collapsible">
+<input id=Categories type=checkbox>
+<label for=Categories>Categories</label>
+<ul class=nav-list>
+<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">22</span></a></li>
+<li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
+<li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
+<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">13</span></a></li>
+<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">42</span></a></li>
+<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li>
+<li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li>
+<li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
+<li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li>
+<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li>
+<li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li>
+<li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
+<li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">1</span></a></li>
+<li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
+<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">204</span></a></li>
+<li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
+<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
+<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
+<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
+<li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
+<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
+</ul>
+</section>
+<section class="nav-group collapsible">
+<input id=Tags type=checkbox>
+<label for=Tags>Tags (Top 10)</label>
+<ul class=nav-list>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">51</span></a></li>
+<li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
+<li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
+<li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
+<li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
+<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li>
+<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">31</span></a></li>
+<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li>
+<li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li>
+</section>
+<section class=nav-group>
+<label for=Sponsors>Sponsors</label>
+<ul class=nav-list>
+</ul>
+</section>
+</section>
+</nav>
+</div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-4368767-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-4368767-1')</script>
+<script src=/js/lightbox-plus-jquery.min.js></script>
+</div>
+</body>
+</html>

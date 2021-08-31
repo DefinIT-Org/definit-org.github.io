@@ -1,11 +1,119 @@
-<!doctype html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class=no-js><!--<![endif]--><head><meta charset=utf-8><title>VCAC 6.0 build-out to distributed model &amp;ndash; Part 1: Certificates &#183; DefinIT</title><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content><meta name=keywords content="certificate,Certificate Services,distributed,pki,Security,vcac,vcloud automation center,VMWare,vPostgres,"><meta property="og:title" content="VCAC 6.0 build-out to distributed model &amp;ndash; Part 1: Certificates  &#183; DefinIT "><meta property="og:site_name" content="DefinIT"><meta property="og:url" content="https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-1-certificates/"><meta property="og:locale" content="en-gb"><meta property="og:type" content="article"><meta property="og:description" content><meta property="og:article:published_time" content="2014-06-23T11:43:30Z"><meta property="og:article:modified_time" content="2014-06-23T11:43:30Z"><meta property="og:article:tag" content="certificate"><meta property="og:article:tag" content="Certificate Services"><meta property="og:article:tag" content="distributed"><meta property="og:article:tag" content="pki"><meta property="og:article:tag" content="Security"><meta property="og:article:tag" content="vcac"><meta property="og:article:tag" content="vcloud automation center"><meta property="og:article:tag" content="VMWare"><meta property="og:article:tag" content="vPostgres"><meta name=twitter:card content="summary"><meta name=twitter:site content="@sammcgeown"><meta name=twitter:creator content="@sammcgeown"><meta name=twitter:title content="VCAC 6.0 build-out to distributed model &amp;ndash; Part 1: Certificates"><meta name=twitter:description content><meta name=twitter:url content="https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-1-certificates/"><meta name=twitter:domain content="https://www.definit.co.uk"><link rel=canonical href=https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-1-certificates/><link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png><link rel=icon href=/images/favicon-16x16.png><meta name=generator content="Hugo 0.84.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script><script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]--><script src=/js/clr-1.0/clr-icons.min.js></script><script src=/js/clr-1.0/custom-elements.min.js></script><link href=/css/clr-1.0/clr-ui-dark.css rel=stylesheet><link href=/css/clr-1.0/clr-icons.min.css rel=stylesheet><link href=/css/definit-clarity.css rel=stylesheet><link href=/css/lightbox.min.css rel=stylesheet></head><body data-ng-app=myapp data-ng-controller=MyController data-ng-mouseleave=MouseLeave($event)><div class=main-container><header class=header-6><div class=branding><a class=navbar-brand-img href=/><img alt src=/images/logos/definit-logo.png>
-<span class=title>DefinIT</span></a></div><nav class=header-nav><a class="nav-link nav-text" href=https://www.definit.co.uk/>Home</a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/about/>About</a>
-<a class="nav-link nav-text" href=https://www.github.com/sammcgeown>GitHub</a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml>RSS</a></nav><div class=header-actions><form class=search id=search method=get action=//google.com/search><label for=search_input><input id=search_input type=text name=q placeholder="Search with Google">
-<input type=hidden name=as_sitesearch value=https://www.definit.co.uk></label></form></div></header><nav class=subnav><ul class=nav><li class=nav-item><a class=nav-link href=https://www.definit.co.uk/>Home</a></li><li class=nav-item><a class=nav-link href=https://www.definit.co.uk/about/>About</a></li><li class=nav-item><a class=nav-link href=https://www.github.com/sammcgeown>GitHub</a></li><li class=nav-item><a class=nav-link href=https://www.definit.co.uk/index.xml>RSS</a></li></ul></nav><div class=content-container><div class=content-area><h1>VCAC 6.0 BUILD-OUT TO DISTRIBUTED MODEL &amp;NDASH; PART 1: CERTIFICATES</h1><div class=metas><span class=clr-card-authors><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+<!doctype html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class=no-js><!--<![endif]-->
+<head>
+<meta charset=utf-8>
+<title>VCAC 6.0 build-out to distributed model &amp;ndash; Part 1: Certificates &#183; DefinIT</title>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=HandheldFriendly content="True">
+<meta name=MobileOptimized content="320">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content>
+<meta name=keywords content="certificate,Certificate Services,distributed,pki,Security,vcac,vcloud automation center,VMWare,vPostgres,">
+<meta property="og:title" content="VCAC 6.0 build-out to distributed model &amp;ndash; Part 1: Certificates  &#183; DefinIT ">
+<meta property="og:site_name" content="DefinIT">
+<meta property="og:url" content="https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-1-certificates/">
+<meta property="og:locale" content="en-gb">
+<meta property="og:type" content="article">
+<meta property="og:description" content>
+<meta property="og:article:published_time" content="2014-06-23T11:43:30Z">
+<meta property="og:article:modified_time" content="2014-06-23T11:43:30Z">
+<meta property="og:article:tag" content="certificate">
+<meta property="og:article:tag" content="Certificate Services">
+<meta property="og:article:tag" content="distributed">
+<meta property="og:article:tag" content="pki">
+<meta property="og:article:tag" content="Security">
+<meta property="og:article:tag" content="vcac">
+<meta property="og:article:tag" content="vcloud automation center">
+<meta property="og:article:tag" content="VMWare">
+<meta property="og:article:tag" content="vPostgres">
+<meta name=twitter:card content="summary">
+<meta name=twitter:site content="@sammcgeown">
+<meta name=twitter:creator content="@sammcgeown">
+<meta name=twitter:title content="VCAC 6.0 build-out to distributed model &amp;ndash; Part 1: Certificates">
+<meta name=twitter:description content>
+<meta name=twitter:url content="https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-1-certificates/">
+<meta name=twitter:domain content="https://www.definit.co.uk">
+<link rel=canonical href=https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-1-certificates/>
+<link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
+<link rel=icon href=/images/favicon-16x16.png>
+<meta name=generator content="Hugo 0.87.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
+<script src=/js/clr-1.0/clr-icons.min.js></script>
+<script src=/js/clr-1.0/custom-elements.min.js></script>
+<link href=/css/clr-1.0/clr-ui-dark.css rel=stylesheet>
+<link href=/css/clr-1.0/clr-icons.min.css rel=stylesheet>
+<link href=/css/definit-clarity.css rel=stylesheet>
+<link href=/css/lightbox.min.css rel=stylesheet>
+</head>
+<body data-ng-app=myapp data-ng-controller=MyController data-ng-mouseleave=MouseLeave($event)>
+<div class=main-container>
+<header class=header-6>
+<div class=branding>
+<a class=navbar-brand-img href=/>
+<img alt src=/images/logos/definit-logo.png>
+<span class=title>DefinIT</span>
+</a>
+</div>
+<nav class=header-nav>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/>
+Home
+</a>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/about/>
+About
+</a>
+<a class="nav-link nav-text" href=https://www.github.com/sammcgeown>
+GitHub
+</a>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml>
+RSS
+</a>
+</nav>
+<div class=header-actions>
+<form class=search id=search method=get action=//google.com/search>
+<label for=search_input>
+<input id=search_input type=text name=q placeholder="Search with Google">
+<input type=hidden name=as_sitesearch value=https://www.definit.co.uk>
+</label>
+</form>
+</div>
+</header>
+<nav class=subnav>
+<ul class=nav>
+<li class=nav-item>
+<a class=nav-link href=https://www.definit.co.uk/>
+Home
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://www.definit.co.uk/about/>
+About
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://www.github.com/sammcgeown>
+GitHub
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://www.definit.co.uk/index.xml>
+RSS
+</a>
+</li>
+</ul>
+</nav>
+<div class=content-container>
+<div class=content-area>
+<h1>VCAC 6.0 BUILD-OUT TO DISTRIBUTED MODEL &amp;NDASH; PART 1: CERTIFICATES</h1>
+<div class=metas>
+<span class=clr-card-authors>
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 23/6/2014
-&#183; Read in about 8 min (1663 words)</div><div class=clr-card-authors>Published under <a href=/category/microsoft>Microsoft</a>, <a href=/category/vmware>VMware</a> and <a href=/category/vrealize-automation>vRealize Automation</a></div><div class=clr-card-authors>Tags:
+&#183; Read in about 8 min (1663 words)
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/microsoft>Microsoft</a>, <a href=/category/vmware>VMware</a> and <a href=/category/vrealize-automation>vRealize Automation</a>
+</div>
+<div class=clr-card-authors>
+Tags:
 <a class=clr-tags href=https://www.definit.co.uk/tag/certificate>#certificate</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/certificate-services>#Certificate Services</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/distributed>#distributed</a>
@@ -14,24 +122,275 @@ on 23/6/2014
 <a class=clr-tags href=https://www.definit.co.uk/tag/vcac>#vcac</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/vcloud-automation-center>#vcloud automation center</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/vmware>#VMWare</a>
-<a class=clr-tags href=https://www.definit.co.uk/tag/vpostgres>#vPostgres</a></div></span></div><br clear=all><div class="alert alert-info" role=alert><div class=alert-items><div class="alert-item static"><div class=alert-icon-wrapper><clr-icon class=alert-icon shape=info-circle></clr-icon></div><span class=alert-text>This post is part of the <a href=https://www.definit.co.uk/series/vcac-6.0-build-out/>vCAC 6.0 Build Out</a> series.</span><div class=alert-actions><ol><li><a href=https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-4-deploying-and-clustering-a-secondary-vcac-appliance/>vCAC 6.0 build-out to distributed model &amp;ndash; Part 4: Deploying and clustering a secondary vCAC Appliance</a></li><li><a href=https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-3-2-configure-load-balancing-with-nsx/>vCAC 6.0 build-out to distributed model &amp;ndash; Part 3.2: Configure load balancing with NSX</a></li><li><a href=https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-3-1-configure-load-balancing-with-vcns/>vCAC 6.0 build-out to distributed model &amp;ndash; Part 3.1: Configure Load Balancing with vCNS</a></li><li><a href=https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-2-vpostgres/>vCAC 6.0 build-out to distributed model &amp;ndash; Part 2: vPostgres</a></li><li>VCAC 6.0 build-out to distributed model &amp;ndash; Part 1: Certificates</li></ol></div></div></div></div><div class="alert alert-danger" role=alert><div class=alert-items><div class="alert-item static"><div class=alert-icon-wrapper><clr-icon class=alert-icon shape=warning-standard></clr-icon></div><span class=alert-text>This article is now 7 years old! It is highly likely that this information is out of date and the author will have completely forgotten about it. Please take care when following any guidance to ensure you have up-to-date recommendations.</span></div></div></div><p><img style="margin:0 0 10px 10px;display:inline" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRtpP50Mt6WX_zxXZC2aCKy2bIKfcfY3fBA42e7JwSMCaQACqjv" alt width=180 height=101 align=right>This is the first article in a series about how to build-out a simple vCAC 6 installation to a distributed model.</p><div style=width:109px class="wp-caption alignnone"><a href=/images/2014/06/image21.png><img style="margin:0 10px 0 0;display:inline;border:0" title=image src=/images/2014/06/image_thumb21.png alt=image width=99 height=301 align=left border=0></a><p class=wp-caption-text>Simple vCAC deployment</p></div><p>In a simple installation you have the Identity Appliance, the vCAC appliance (which includes a vPostgres DB and vCenter Orchestrator instance) and an IaaS server. The distributed model still has a single Identity Appliance but clusters 2 or more vCAC appliances behind a load balancer, backed by a separate vPostgres database appliance. The IaaS components are installed on 2 or more IaaS Windows servers and are load balanced, backed by an external MSSQL database. Additionally, the vCenter Orchestrator appliance is used in a failover cluster, backed by the external vPostgres database appliance.</p><p>The distributed model can improve availability, redundancy, disaster recovery and performance, however it is more complex to install and manage, and there are still single points of failure – e.g. the vPostgres database is not highly available and although protected by vSphere HA could be the cause of an outage. Clustering the database would provide an improved level of availability but may not be supported by VMware. Similarly the Identity Appliance is currently a single point of failure, although there are also options for high availability there too.</p><p>An overview of the steps required is below:</p><ul><li>Issue and install certificates</li><li>Deploy an external vPostgres appliance and migrate the vCAC database</li><li>Configure load balancing</li><li>Deploy a second vCAC appliance and configure clustering</li><li>Install and configure additional IaaS server</li><li>Deploy vCenter Orchestrator Appliance cluster</li></ul><h2 id=certificates>Certificates</h2><p>First of all, it’s important to understand that the certificates used for vCAC (whether distributed or not) should not be left as the self-signed certificates generated by default. These are OK for a proof of concept, or perhaps a lab installation, but really should be issued by a trusted CA – whether that’s internal or external.</p><p>When you move to a distributed model, it becomes more important that all the moving parts trust each other’s certificates so that communication is secured between the different components. With a load balancer in play, CA signed certificates become crucial.</p><p>You can use either a wildcard certificate, or a certificate with Subject Alternative Names, to replace all the certificates in the vCAC installation. To future proof the certificate, I opted for a wildcard certificate protecting *.definit.local, however if wildcards are not permitted in your organisation then generate a single certificate with all the required SAN. In reality, there aren’t many to protect (ID Appliance, vCAC Appliance load balanced address, IaaS web server load balanced address and IaaS manager service load balanced address – if different from the web server).</p><h2 id=requesting-and-issuing-a-wildcard-certificate-using-a-microsoft-certificate-services-ca>Requesting and issuing a wildcard certificate using a Microsoft Certificate Services CA</h2><p>This process uses the certificate template described in <a href="http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2062108" target=_blank>VMware KB 2062108</a>.</p><p>Create a new file “VCAC.cfg” and paste in the following, adjusting for your environment:</p><pre class="brush: text; gutter: true">[ req ]     default_md = sha512     default_bits = 2048     default_keyfile = vcac.key     distinguished_name = req_distinguished_name     encrypt_key = no     prompt = no     string_mask = nombstr     req_extensions = v3_req 
+<a class=clr-tags href=https://www.definit.co.uk/tag/vpostgres>#vPostgres</a>
+</div>
+</span>
+</div>
+<br clear=all>
+<div class="alert alert-info" role=alert>
+<div class=alert-items>
+<div class="alert-item static">
+<div class=alert-icon-wrapper>
+<clr-icon class=alert-icon shape=info-circle></clr-icon>
+</div>
+<span class=alert-text>This post is part of the <a href=https://www.definit.co.uk/series/vcac-6.0-build-out/>vCAC 6.0 Build Out</a> series.</span>
+<div class=alert-actions>
+<ol>
+<li>
+<a href=https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-4-deploying-and-clustering-a-secondary-vcac-appliance/>vCAC 6.0 build-out to distributed model &amp;ndash; Part 4: Deploying and clustering a secondary vCAC Appliance</a>
+</li>
+<li>
+<a href=https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-3-2-configure-load-balancing-with-nsx/>vCAC 6.0 build-out to distributed model &amp;ndash; Part 3.2: Configure load balancing with NSX</a>
+</li>
+<li>
+<a href=https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-3-1-configure-load-balancing-with-vcns/>vCAC 6.0 build-out to distributed model &amp;ndash; Part 3.1: Configure Load Balancing with vCNS</a>
+</li>
+<li>
+<a href=https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-2-vpostgres/>vCAC 6.0 build-out to distributed model &amp;ndash; Part 2: vPostgres</a>
+</li>
+<li>
+VCAC 6.0 build-out to distributed model &amp;ndash; Part 1: Certificates
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role=alert>
+<div class=alert-items>
+<div class="alert-item static">
+<div class=alert-icon-wrapper>
+<clr-icon class=alert-icon shape=warning-standard></clr-icon>
+</div>
+<span class=alert-text>This article is now 7 years old! It is highly likely that this information is out of date and the author will have completely forgotten about it. Please take care when following any guidance to ensure you have up-to-date recommendations.</span>
+</div>
+</div>
+</div>
+<p><img style="margin:0 0 10px 10px;display:inline" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRtpP50Mt6WX_zxXZC2aCKy2bIKfcfY3fBA42e7JwSMCaQACqjv" alt width=180 height=101 align=right>This is the first article in a series about how to build-out a simple vCAC 6 installation to a distributed model.</p>
+<div style=width:109px class="wp-caption alignnone">
+<a href=/images/2014/06/image21.png><img style="margin:0 10px 0 0;display:inline;border:0" title=image src=/images/2014/06/image_thumb21.png alt=image width=99 height=301 align=left border=0></a>
+<p class=wp-caption-text>
+Simple vCAC deployment
+</p>
+</div>
+<p>In a simple installation you have the Identity Appliance, the vCAC appliance (which includes a vPostgres DB and vCenter Orchestrator instance) and an IaaS server. The distributed model still has a single Identity Appliance but clusters 2 or more vCAC appliances behind a load balancer, backed by a separate vPostgres database appliance. The IaaS components are installed on 2 or more IaaS Windows servers and are load balanced, backed by an external MSSQL database. Additionally, the vCenter Orchestrator appliance is used in a failover cluster, backed by the external vPostgres database appliance.</p>
+<p>The distributed model can improve availability, redundancy, disaster recovery and performance, however it is more complex to install and manage, and there are still single points of failure – e.g. the vPostgres database is not highly available and although protected by vSphere HA could be the cause of an outage. Clustering the database would provide an improved level of availability but may not be supported by VMware. Similarly the Identity Appliance is currently a single point of failure, although there are also options for high availability there too.</p>
+<p>An overview of the steps required is below:</p>
+<ul>
+<li>Issue and install certificates</li>
+<li>Deploy an external vPostgres appliance and migrate the vCAC database</li>
+<li>Configure load balancing</li>
+<li>Deploy a second vCAC appliance and configure clustering</li>
+<li>Install and configure additional IaaS server</li>
+<li>Deploy vCenter Orchestrator Appliance cluster</li>
+</ul>
+<h2 id=certificates>Certificates</h2>
+<p>First of all, it’s important to understand that the certificates used for vCAC (whether distributed or not) should not be left as the self-signed certificates generated by default. These are OK for a proof of concept, or perhaps a lab installation, but really should be issued by a trusted CA – whether that’s internal or external.</p>
+<p>When you move to a distributed model, it becomes more important that all the moving parts trust each other’s certificates so that communication is secured between the different components. With a load balancer in play, CA signed certificates become crucial.</p>
+<p>You can use either a wildcard certificate, or a certificate with Subject Alternative Names, to replace all the certificates in the vCAC installation. To future proof the certificate, I opted for a wildcard certificate protecting *.definit.local, however if wildcards are not permitted in your organisation then generate a single certificate with all the required SAN. In reality, there aren’t many to protect (ID Appliance, vCAC Appliance load balanced address, IaaS web server load balanced address and IaaS manager service load balanced address – if different from the web server).</p>
+<h2 id=requesting-and-issuing-a-wildcard-certificate-using-a-microsoft-certificate-services-ca>Requesting and issuing a wildcard certificate using a Microsoft Certificate Services CA</h2>
+<p>This process uses the certificate template described in <a href="http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2062108" target=_blank>VMware KB 2062108</a>.</p>
+<p>Create a new file “VCAC.cfg” and paste in the following, adjusting for your environment:</p>
+<pre class="brush: text; gutter: true">[ req ]     default_md = sha512     default_bits = 2048     default_keyfile = vcac.key     distinguished_name = req_distinguished_name     encrypt_key = no     prompt = no     string_mask = nombstr     req_extensions = v3_req 
 [ v3_req ]     basicConstraints = CA:FALSE     keyUsage = digitalSignature, keyEncipherment, dataEncipherment     extendedKeyUsage = serverAuth, clientAuth 
-[ req_distinguished_name ]     countryName = UK     stateOrProvinceName = West Sussex     localityName = Horsham     0.organizationName = DefinIT     organizationalUnitName = VCAC     commonName = *.definit.local</pre><p>Create a new request and private key:</p><p> </p><pre class="brush: text; gutter: false">openssl req –new –nodes –out “c:\certs\vcac.csr” –keyout “c:\certs\vcac.key” –config “c:\certs\vcac.cfg”</pre><p>Submit the request to your CA:</p><p> </p><pre class="brush: text; gutter: false">certreq –submit –attrib “CertificateTemplate:VMware-SSL” –config “DC-01.definit.local\DefinIT-Root” –f c:\certs\vcac.csr c:\certs\vcac.cer</pre><p>Now log onto your Identity Appliance’s management website (mine is <a href=https://vcac-sso.definit.local:5480>https://vcac-sso.definit.local:5480</a>) and navigate to the certificates page (SSO > SSL).</p><p>Select “Import PEM encoded certificate” from the menu. Open the vcac.key file and copy and paste it into the RSA Private Key field.</p><p>The Certificate Chain key needs to be in the format of the image below: first paste in the contents of vcac.cer, then the contents of any Base64 encoded intermediate and finally the Root CA, again in Base64. Make sure there’s no whitespace in between. Since you’ll be using this later on, create a new file “vcac-chain.pem” and paste the certificates in the correct order:</p><p><img src=http://i0.wp.com/www.definit.co.uk/images/2014/06/image.png alt></p><p>Now copy and paste the vcac-chain.pem contents into the Certificate Chain field:</p><p><img src=https://www.definit.co.uk/images/2014/06/image_thumb2.png alt></p><p>Hit the “Replace Certificate” button and hold your breath until you see:</p><p><img src=https://www.definit.co.uk/images/2014/06/image_thumb3.png alt></p><h2 id=update-the-vcac-appliance-with-the-identity-appliance-certificate>Update the vCAC Appliance with the Identity Appliance Certificate</h2><p>SSH to the VCAC Appliance and log on using “root” and the root password.</p><p>Update the connection to the SSO server using:</p><pre class="brush: text; gutter: true">/usr/sbin/vcac-config import-certificate --alias websso --url https://vcac-sso.definit.local:7444</pre><p><img src=https://www.definit.co.uk/images/2014/06/image_thumb4.png alt></p><p>Reboot the appliance and wait until all the services are started – this can be up to 15m.</p><h2 id=update-the-iaas-components-with-the-identity-appliance-certificate>Update the IaaS components with the Identity Appliance Certificate</h2><p>At this point you would typically update the IaaS component certificates – if you’re following this series and building out a simple install to a distributed install, you will need to re-install the IaaS components to re-point them at the load balanced URLs – this means that there’s no point in updating the certificates in the current installation! However, for completeness, here’s the process:</p><p>On each server running an IaaS component import the CA certificates into the Computer > Trusted Root Certification Authorities store. To do this, open mmc.exe, add the snap in for Certificates, select Computer Account and Local computer. Expand the “Trusted Root Certification Authorities\Certificates”  folder and check if the CA is trusted. If not, right click and import the CA, and any intermediaries, into the store.</p><p>Now you can import the Identity Appliance certificate on the IaaS server running the Model Data Manager component using the following commands – open a command prompt and enter:</p><pre class="brush: text; gutter: true">cd C:\Program Files (x86)\VMware\vCAC\Server\Model Manager Data\Cafe
+[ req_distinguished_name ]     countryName = UK     stateOrProvinceName = West Sussex     localityName = Horsham     0.organizationName = DefinIT     organizationalUnitName = VCAC     commonName = *.definit.local</pre>
+<p>Create a new request and private key:</p>
+<p> </p>
+<pre class="brush: text; gutter: false">openssl req –new –nodes –out “c:\certs\vcac.csr” –keyout “c:\certs\vcac.key” –config “c:\certs\vcac.cfg”</pre>
+<p>Submit the request to your CA:</p>
+<p> </p>
+<pre class="brush: text; gutter: false">certreq –submit –attrib “CertificateTemplate:VMware-SSL” –config “DC-01.definit.local\DefinIT-Root” –f c:\certs\vcac.csr c:\certs\vcac.cer</pre>
+<p>Now log onto your Identity Appliance’s management website (mine is <a href=https://vcac-sso.definit.local:5480>https://vcac-sso.definit.local:5480</a>) and navigate to the certificates page (SSO > SSL).</p>
+<p>Select “Import PEM encoded certificate” from the menu. Open the vcac.key file and copy and paste it into the RSA Private Key field.</p>
+<p>The Certificate Chain key needs to be in the format of the image below: first paste in the contents of vcac.cer, then the contents of any Base64 encoded intermediate and finally the Root CA, again in Base64. Make sure there’s no whitespace in between. Since you’ll be using this later on, create a new file “vcac-chain.pem” and paste the certificates in the correct order:</p>
+<p><img src=http://i0.wp.com/www.definit.co.uk/images/2014/06/image.png alt></p>
+<p>Now copy and paste the vcac-chain.pem contents into the Certificate Chain field:</p>
+<p><img src=https://www.definit.co.uk/images/2014/06/image_thumb2.png alt></p>
+<p>Hit the “Replace Certificate” button and hold your breath until you see:</p>
+<p><img src=https://www.definit.co.uk/images/2014/06/image_thumb3.png alt></p>
+<h2 id=update-the-vcac-appliance-with-the-identity-appliance-certificate>Update the vCAC Appliance with the Identity Appliance Certificate</h2>
+<p>SSH to the VCAC Appliance and log on using “root” and the root password.</p>
+<p>Update the connection to the SSO server using:</p>
+<pre class="brush: text; gutter: true">/usr/sbin/vcac-config import-certificate --alias websso --url https://vcac-sso.definit.local:7444</pre>
+<p><img src=https://www.definit.co.uk/images/2014/06/image_thumb4.png alt></p>
+<p>Reboot the appliance and wait until all the services are started – this can be up to 15m.</p>
+<h2 id=update-the-iaas-components-with-the-identity-appliance-certificate>Update the IaaS components with the Identity Appliance Certificate</h2>
+<p>At this point you would typically update the IaaS component certificates – if you’re following this series and building out a simple install to a distributed install, you will need to re-install the IaaS components to re-point them at the load balanced URLs – this means that there’s no point in updating the certificates in the current installation! However, for completeness, here’s the process:</p>
+<p>On each server running an IaaS component import the CA certificates into the Computer > Trusted Root Certification Authorities store. To do this, open mmc.exe, add the snap in for Certificates, select Computer Account and Local computer. Expand the “Trusted Root Certification Authorities\Certificates”  folder and check if the CA is trusted. If not, right click and import the CA, and any intermediaries, into the store.</p>
+<p>Now you can import the Identity Appliance certificate on the IaaS server running the Model Data Manager component using the following commands – open a command prompt and enter:</p>
+<pre class="brush: text; gutter: true">cd C:\Program Files (x86)\VMware\vCAC\Server\Model Manager Data\Cafe
 
 vcac-config.exe DownloadRootCertificates --RootCertPath "C:\Program Files (x86)\VMware\vCAC\Server\Website\SSO root.cer"  --SignCertPath "C:\Program Files (x86)\VMware\vCAC\Server\Website\SSO signing.cer" –v
 
-vcac-config.exe DownloadRootCertificates --RootCertPath "C:\Program Files (x86)\VMware\vCAC\Web API\SSO root.cer" --SignCertPath "C:\Program Files (x86)\VMware\vCAC\Web API\SSO signing.cer" –v</pre><p>This will update the database with the certificate from the Identity Appliance – all other components will import the certificate from the database.</p><p>Reboot the IaaS servers.</p><h2 id=install-the-certificate-on-the-vcac-appliance>Install the certificate on the vCAC Appliance</h2><p>Installing the certificate on the vCAC Appliance is identical to the Identity Appliance, so log into the management console on port 5480 (e.g. <a href=https://vcac-app.definit.local:5480>https://vcac-app.definit.local:5480</a>) using the root user and password. Navigate to “vCAC Settings” and then select SSL.</p><p>Once again, the certificate format is important – paste the contents of the earlier generated “vcac.key” file into the “RSA Private Key” field. Paste the contents of the earlier generated “vcac-chain.pem” file into the “Certificate Chain” field. Click the “Replace Certificate” button – you should see “SSL Certificate is replaced successfully”:</p><p><img src=https://www.definit.co.uk/images/2014/06/image_thumb5.png alt>  <img src=https://www.definit.co.uk/images/2014/06/image_thumb6.png alt></p><p>Reboot the vCAC appliance.</p><h2 id=update-the-identity-appliance-with-the-vcac-appliances-certificate>Update the Identity Appliance with the vCAC Appliance’s certificate</h2><p>Once the vCAC appliance is back up and running (remember, up to 15 minutes!) log back onto the management console and click on the SSO tab.</p><p>You can safely ignore the warning about the hostname and certificate common name not matching – this is expected with both a wildcard and SAN certificates.</p><p>Enter the credentials for the SSO admin user (hint, likely to be <a href=mailto:administrator@vsphere.local>administrator@vsphere.local</a>) and click “Save settings” – the SSO can take quite a few minutes to update, just be patient and wait it out! You should see “SSO Configuration is updated successfully”.</p><p><img src=https://www.definit.co.uk/images/2014/06/image_thumb7.png alt> <img src=https://www.definit.co.uk/images/2014/06/image_thumb8.png alt></p><h2 id=update-iaas-components-with-the-vcac-appliances-certificate>Update IaaS components with the vCAC Appliance’s Certificate</h2><p>As before, there’s no point doing this step if you’re planning to build out to a distributed model – you will need to re-install the IaaS components and as such will not need to update the certificate. However, if you’re just updating the vCAC certificates then log onto your IaaS Model Data Manager server and run the following:</p><pre class="brush: text; gutter: false">vcac-Config.exe UpdateServerCertificates -d vcac_database -s sql_database_server –v</pre><p>e.g.</p><p> </p><pre class="brush: text; gutter: false">vcac-Config.exe UpdateServerCertificates -d vCACDB -s sql-01.definit.local -v</pre><p>Reboot your IaaS server(s).</p><h2 id=update-iaas-servers-with-the-new-certificate>Update IaaS servers with the new certificate</h2><p>This needs to be done whether you’re updating an existing IaaS install, or building out the distributed model.</p><p>On each of the IaaS server(s), install the wildcard or SAN certificate (including the Private Key) so that it’s available for IIS to use. To do this we need to create a PFX file from the component .cer and .key files we created earlier using OpenSSL:</p><pre class="brush: text; gutter: false">openssl pkcs12 -export -out c:\certs\vcac.pfx -inkey c:\certs\vcac.key -in c:\certs\vcac.cer</pre><p>To import the certificate, open mmc.exe, add the Certificates snap-in for the local machine and right click Personal > Certificates and import the PFX file. Double click the certificate once it’s installed and ensure the Private Key is installed, and that the certificate chain is trusted:</p><p><img src=https://www.definit.co.uk/images/2014/06/image_thumb9.png alt>  <img src=https://www.definit.co.uk/images/2014/06/image_thumb10.png alt></p><p><em>This next step only needs doing if you’re updating an existing IaaS install and will not be re-installing IaaS as part of a distributed setup.</em></p><p>Open IIS manager and update the bindings for HTTPS to use the newly installed SSL certificate. If you don’t see the SSL certificate in the drop down then verify that the private key is installed, and that the certificate chain is trusted.</p><p><img src=https://www.definit.co.uk/images/2014/06/image_thumb11.png alt></p><p>Restart IIS using the command “iisreset”.</p><p>It’s important NOT to create the binding to port 443 before you do the IaaS components install – if you do the installer will fail because the port isn’t available.</p><h2 id=update-vcac-appliance-with-the-iaas-certificate>Update vCAC appliance with the IaaS certificate</h2><p>The final step, and once again, only necessary if you are not doing a distributed install which requires the re-install of IaaS components, is to update the vCAC appliance database with the IaaS certificate. This is done using the vcac-config.exe on each of your IaaS server(s). Open a command prompt and enter the following commands. If you are using a load balancer already, then make sure you use the load balanced URL for each component.</p><p>Ensure each command completes successfully before moving on.</p><pre class="brush: text; gutter: true">cd C:\Program Files (x86)\VMware\vCAC\Server\Model Manager Data\Cafe
+vcac-config.exe DownloadRootCertificates --RootCertPath "C:\Program Files (x86)\VMware\vCAC\Web API\SSO root.cer" --SignCertPath "C:\Program Files (x86)\VMware\vCAC\Web API\SSO signing.cer" –v</pre>
+<p>This will update the database with the certificate from the Identity Appliance – all other components will import the certificate from the database.</p>
+<p>Reboot the IaaS servers.</p>
+<h2 id=install-the-certificate-on-the-vcac-appliance>Install the certificate on the vCAC Appliance</h2>
+<p>Installing the certificate on the vCAC Appliance is identical to the Identity Appliance, so log into the management console on port 5480 (e.g. <a href=https://vcac-app.definit.local:5480>https://vcac-app.definit.local:5480</a>) using the root user and password. Navigate to “vCAC Settings” and then select SSL.</p>
+<p>Once again, the certificate format is important – paste the contents of the earlier generated “vcac.key” file into the “RSA Private Key” field. Paste the contents of the earlier generated “vcac-chain.pem” file into the “Certificate Chain” field. Click the “Replace Certificate” button – you should see “SSL Certificate is replaced successfully”:</p>
+<p><img src=https://www.definit.co.uk/images/2014/06/image_thumb5.png alt>  <img src=https://www.definit.co.uk/images/2014/06/image_thumb6.png alt></p>
+<p>Reboot the vCAC appliance.</p>
+<h2 id=update-the-identity-appliance-with-the-vcac-appliances-certificate>Update the Identity Appliance with the vCAC Appliance’s certificate</h2>
+<p>Once the vCAC appliance is back up and running (remember, up to 15 minutes!) log back onto the management console and click on the SSO tab.</p>
+<p>You can safely ignore the warning about the hostname and certificate common name not matching – this is expected with both a wildcard and SAN certificates.</p>
+<p>Enter the credentials for the SSO admin user (hint, likely to be <a href=mailto:administrator@vsphere.local>administrator@vsphere.local</a>) and click “Save settings” – the SSO can take quite a few minutes to update, just be patient and wait it out! You should see “SSO Configuration is updated successfully”.</p>
+<p><img src=https://www.definit.co.uk/images/2014/06/image_thumb7.png alt> <img src=https://www.definit.co.uk/images/2014/06/image_thumb8.png alt></p>
+<h2 id=update-iaas-components-with-the-vcac-appliances-certificate>Update IaaS components with the vCAC Appliance’s Certificate</h2>
+<p>As before, there’s no point doing this step if you’re planning to build out to a distributed model – you will need to re-install the IaaS components and as such will not need to update the certificate. However, if you’re just updating the vCAC certificates then log onto your IaaS Model Data Manager server and run the following:</p>
+<pre class="brush: text; gutter: false">vcac-Config.exe UpdateServerCertificates -d vcac_database -s sql_database_server –v</pre>
+<p>e.g.</p>
+<p> </p>
+<pre class="brush: text; gutter: false">vcac-Config.exe UpdateServerCertificates -d vCACDB -s sql-01.definit.local -v</pre>
+<p>Reboot your IaaS server(s).</p>
+<h2 id=update-iaas-servers-with-the-new-certificate>Update IaaS servers with the new certificate</h2>
+<p>This needs to be done whether you’re updating an existing IaaS install, or building out the distributed model.</p>
+<p>On each of the IaaS server(s), install the wildcard or SAN certificate (including the Private Key) so that it’s available for IIS to use. To do this we need to create a PFX file from the component .cer and .key files we created earlier using OpenSSL:</p>
+<pre class="brush: text; gutter: false">openssl pkcs12 -export -out c:\certs\vcac.pfx -inkey c:\certs\vcac.key -in c:\certs\vcac.cer</pre>
+<p>To import the certificate, open mmc.exe, add the Certificates snap-in for the local machine and right click Personal > Certificates and import the PFX file. Double click the certificate once it’s installed and ensure the Private Key is installed, and that the certificate chain is trusted:</p>
+<p><img src=https://www.definit.co.uk/images/2014/06/image_thumb9.png alt>  <img src=https://www.definit.co.uk/images/2014/06/image_thumb10.png alt></p>
+<p><em>This next step only needs doing if you’re updating an existing IaaS install and will not be re-installing IaaS as part of a distributed setup.</em></p>
+<p>Open IIS manager and update the bindings for HTTPS to use the newly installed SSL certificate. If you don’t see the SSL certificate in the drop down then verify that the private key is installed, and that the certificate chain is trusted.</p>
+<p><img src=https://www.definit.co.uk/images/2014/06/image_thumb11.png alt></p>
+<p>Restart IIS using the command “iisreset”.</p>
+<p>It’s important NOT to create the binding to port 443 before you do the IaaS components install – if you do the installer will fail because the port isn’t available.</p>
+<h2 id=update-vcac-appliance-with-the-iaas-certificate>Update vCAC appliance with the IaaS certificate</h2>
+<p>The final step, and once again, only necessary if you are not doing a distributed install which requires the re-install of IaaS components, is to update the vCAC appliance database with the IaaS certificate. This is done using the vcac-config.exe on each of your IaaS server(s). Open a command prompt and enter the following commands. If you are using a load balancer already, then make sure you use the load balanced URL for each component.</p>
+<p>Ensure each command completes successfully before moving on.</p>
+<pre class="brush: text; gutter: true">cd C:\Program Files (x86)\VMware\vCAC\Server\Model Manager Data\Cafe
 
 Vcac-Config.exe RegisterEndpoint --EndpointAddress https://&lt;IaaS Web Server&gt;/vCAC/ --Endpoint ui -v 
 Vcac-Config.exe RegisterEndpoint --EndpointAddress https://&lt;IaaS Web Server&gt;/vCAC/SslCallback.aspx --Endpoint ssl -v 
 Vcac-Config.exe RegisterEndpoint --EndpointAddress https://&lt;IaaS Model Manager Web Server&gt;/Repository --Endpoint repo -v 
 Vcac-Config.exe RegisterEndpoint --EndpointAddress https://&lt;IaaS Web Server&gt;/WAPI --Endpoint wapi -v 
-Vcac-Config.exe RegisterEndpoint --EndpointAddress https://&lt;IaaS Web Server&gt;/WAPI/api/status --Endpoint status -v</pre><p>That concludes this first part in the series - stay tuned for the rest coming up over the next few weeks!</p><h6>Share this post</h6><span class=share-box><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-facebook-official"></i></a>
+Vcac-Config.exe RegisterEndpoint --EndpointAddress https://&lt;IaaS Web Server&gt;/WAPI/api/status --Endpoint status -v</pre>
+<p>That concludes this first part in the series - stay tuned for the rest coming up over the next few weeks!</p>
+<h6>Share this post</h6>
+<span class=share-box>
+<a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-facebook-official"></i></a>
 <a href="https://twitter.com/intent/tweet?text=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates&url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-twitter"></i></a>
 <a href="https://plus.google.com/share?url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-google-plus"></i></a>
 <a href="http://www.reddit.com/submit?url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=900,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-reddit"></i></a>
 <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f&title=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-linkedin"></i></a>
-<a href="mailto:?subject=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates&body=Check out this site https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f" data-proofer-ignore><i class="fa fa-envelope"></i></a></span>
-<a class=resp-sharing-button__link href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f" target=_blank rel=noopener aria-label><div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"/></svg></div></div></a><a class=resp-sharing-button__link href="https://twitter.com/intent/tweet/?text=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates&url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f" target=_blank rel=noopener aria-label><div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.44 4.83c-.8.37-1.5.38-2.22.02.93-.56.98-.96 1.32-2.02-.88.52-1.86.9-2.9 1.1-.82-.88-2-1.43-3.3-1.43-2.5.0-4.55 2.04-4.55 4.54.0.36.03.7.1 1.04-3.77-.2-7.12-2-9.36-4.75-.4.67-.6 1.45-.6 2.3.0 1.56.8 2.95 2 3.77-.74-.03-1.44-.23-2.05-.57v.06c0 2.2 1.56 4.03 3.64 4.44-.67.2-1.37.2-2.06.08.58 1.8 2.26 3.12 4.25 3.16C5.78 18.1 3.37 18.74 1 18.46c2 1.3 4.4 2.04 6.97 2.04 8.35.0 12.92-6.92 12.92-12.93.0-.2.0-.4-.02-.6.9-.63 1.96-1.22 2.56-2.14z"/></svg></div></div></a><a class=resp-sharing-button__link href="https://www.tumblr.com/widgets/share/tool?posttype=link&title=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates&caption=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates&content=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f&canonicalUrl=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f&shareSource=tumblr_share_button" target=_blank rel=noopener aria-label><div class="resp-sharing-button resp-sharing-button--tumblr resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.5.5v5h5v4h-5V15c0 5 3.5 4.4 6 2.8v4.4c-6.7 3.2-12 0-12-4.2V9.5h-3V6.7c1-.3 2.2-.7 3-1.3.5-.5 1-1.2 1.4-2 .3-.7.6-1.7.7-3h3.8z"/></svg></div></div></a><a class=resp-sharing-button__link href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f&title=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates&summary=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates&source=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f" target=_blank rel=noopener aria-label><div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 21.5h-5v-13h5v13zM4 6.5C2.5 6.5 1.5 5.3 1.5 4s1-2.4 2.5-2.4c1.6.0 2.5 1 2.6 2.5.0 1.4-1 2.5-2.6 2.5zm11.5 6c-1 0-2 1-2 2v7h-5v-13h5V10s1.6-1.5 4-1.5c3 0 5 2.2 5 6.3v6.7h-5v-7c0-1-1-2-2-2z"/></svg></div></div></a><a class=resp-sharing-button__link href="https://reddit.com/submit/?url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f&resubmit=true&title=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates" target=_blank rel=noopener aria-label><div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 11.5c0-1.65-1.35-3-3-3-.96.0-1.86.48-2.42 1.24-1.64-1-3.75-1.64-6.07-1.72.08-1.1.4-3.05 1.52-3.7.72-.4 1.73-.24 3 .5C17.2 6.3 18.46 7.5 20 7.5c1.65.0 3-1.35 3-3s-1.35-3-3-3c-1.38.0-2.54.94-2.88 2.22-1.43-.72-2.64-.8-3.6-.25-1.64.94-1.95 3.47-2 4.55-2.33.08-4.45.7-6.1 1.72C4.86 8.98 3.96 8.5 3 8.5c-1.65.0-3 1.35-3 3 0 1.32.84 2.44 2.05 2.84-.03.22-.05.44-.05.66.0 3.86 4.5 7 10 7s10-3.14 10-7c0-.22-.02-.44-.05-.66 1.2-.4 2.05-1.54 2.05-2.84zM2.3 13.37C1.5 13.07 1 12.35 1 11.5c0-1.1.9-2 2-2 .64.0 1.22.32 1.6.82-1.1.85-1.92 1.9-2.3 3.05zm3.7.13c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9.8 4.8c-1.08.63-2.42.96-3.8.96-1.4.0-2.74-.34-3.8-.95-.24-.13-.32-.44-.2-.68.15-.24.46-.32.7-.18 1.83 1.06 4.76 1.06 6.6.0.23-.13.53-.05.67.2.14.23.06.54-.18.67zm.2-2.8c-1.1.0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm5.7-2.13c-.38-1.16-1.2-2.2-2.3-3.05.38-.5.97-.82 1.6-.82 1.1.0 2 .9 2 2 0 .84-.53 1.57-1.3 1.87z"/></svg></div></div></a><a class=resp-sharing-button__link href="mailto:?subject=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates&body=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f" target=_self rel=noopener aria-label><div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 4H2C.9 4 0 4.9.0 6v12c0 1.1.9 2 2 2h20c1.1.0 2-.9 2-2V6c0-1.1-.9-2-2-2zM7.25 14.43l-3.5 2c-.08.05-.17.07-.25.07-.17.0-.34-.1-.43-.25-.14-.24-.06-.55.18-.68l3.5-2c.24-.14.55-.06.68.18.14.24.06.55-.18.68zm4.75.07c-.1.0-.2-.03-.27-.08l-8.5-5.5c-.23-.15-.3-.46-.15-.7.15-.22.46-.3.7-.14L12 13.4l8.23-5.32c.23-.15.54-.08.7.15.14.23.07.54-.16.7l-8.5 5.5c-.08.04-.17.07-.27.07zm8.93 1.75c-.1.16-.26.25-.43.25-.08.0-.17-.02-.25-.07l-3.5-2c-.24-.13-.32-.44-.18-.68s.44-.32.68-.18l3.5 2c.24.13.32.44.18.68z"/></svg></div></div></a><a class=resp-sharing-button__link href="whatsapp://send?text=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates%20https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f" target=_blank rel=noopener aria-label><div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.1 3.9C17.9 1.7 15 .5 12 .5 5.8.5.7 5.6.7 11.9c0 2 .5 3.9 1.5 5.6L.6 23.4l6-1.6c1.6.9 3.5 1.3 5.4 1.3 6.3.0 11.4-5.1 11.4-11.4-.1-2.8-1.2-5.7-3.3-7.8zM12 21.4c-1.7.0-3.3-.5-4.8-1.3l-.4-.2-3.5 1 1-3.4L4 17c-1-1.5-1.4-3.2-1.4-5.1.0-5.2 4.2-9.4 9.4-9.4 2.5.0 4.9 1 6.7 2.8s2.8 4.2 2.8 6.7c-.1 5.2-4.3 9.4-9.5 9.4zm5.1-7.1c-.3-.1-1.7-.9-1.9-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1s-1.2-.5-2.3-1.4c-.9-.8-1.4-1.7-1.6-2s0-.5.1-.6.3-.3.4-.5c.2-.1.3-.3.4-.5s0-.4.0-.5C10 9 9.3 7.6 9 7c-.1-.4-.4-.3-.5-.3h-.6s-.4.1-.7.3c-.3.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.3-.3-.4-.6-.5z"/></svg></div></div></a><a class=resp-sharing-button__link href="https://telegram.me/share/url?text=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates&url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f" target=_blank rel=noopener aria-label><div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M.707 8.475C.275 8.64.0 9.508.0 9.508s.284.867.718 1.03l5.09 1.897 1.986 6.38a1.102 1.102.0 001.75.527l2.96-2.41a.405.405.0 01.494-.013l5.34 3.87a1.1 1.1.0 001.046.135 1.1 1.1.0 00.682-.803l3.91-18.795A1.102 1.102.0 0022.5.075L.706 8.475z"/></svg></div></div></a><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var a=document.createElement('script');a.async=!0,a.type='text/javascript',a.src='//definit.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><div class="clarity-prev-next col-xs-12 col-sm-12 col-md-12 col-lg-12"><nav class=clarity-page-prev-next><div class=clr-nav-previous><a href=https://www.definit.co.uk/2014/06/vcenter-5-5-certificate-toolkit-for-distributed-environments/ title="vCenter 5.5 Certificate Toolkit for Distributed Environments" class="btn btn-sm btn-outline">Previous</a></div><div class=clr-nav-next><a href=https://www.definit.co.uk/2014/06/vmware-vforum-london-and-bloggers-vsanvchs-lunch/ title="VMware #vForum London and bloggers VSAN/vCHS lunch" class="btn btn-sm btn-outline">Next</a></div></nav></div></div><div class=content-area></div><nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><section class=sidenav-content><section class="nav-group collapsible"><input id=Categories type=checkbox>
-<label for=Categories>Categories</label><ul class=nav-list><li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li><li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">22</span></a></li><li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li><li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li><li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">13</span></a></li><li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">41</span></a></li><li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li><li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li><li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li><li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li><li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li><li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li><li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li><li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">1</span></a></li><li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li><li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">204</span></a></li><li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li><li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">12</span></a></li><li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li><li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li><li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li><li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li><li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li><li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li></ul></section><section class="nav-group collapsible"><input id=Tags type=checkbox>
-<label for=Tags>Tags (Top 10)</label><ul class=nav-list><li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li><li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">51</span></a></li><li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li><li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li><li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li><li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li><li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li><li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">30</span></a></li><li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li><li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li></section><section class=nav-group><label for=Sponsors>Sponsors</label><ul class=nav-list></ul></section></section></nav></div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-4368767-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-4368767-1')</script><script src=/js/lightbox-plus-jquery.min.js></script></div></body></html>
+<a href="mailto:?subject=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates&body=Check out this site https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f" data-proofer-ignore><i class="fa fa-envelope"></i></a>
+</span>
+<a class=resp-sharing-button__link href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"/></svg>
+</div>
+</div>
+</a>
+<a class=resp-sharing-button__link href="https://twitter.com/intent/tweet/?text=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates&url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.44 4.83c-.8.37-1.5.38-2.22.02.93-.56.98-.96 1.32-2.02-.88.52-1.86.9-2.9 1.1-.82-.88-2-1.43-3.3-1.43-2.5.0-4.55 2.04-4.55 4.54.0.36.03.7.1 1.04-3.77-.2-7.12-2-9.36-4.75-.4.67-.6 1.45-.6 2.3.0 1.56.8 2.95 2 3.77-.74-.03-1.44-.23-2.05-.57v.06c0 2.2 1.56 4.03 3.64 4.44-.67.2-1.37.2-2.06.08.58 1.8 2.26 3.12 4.25 3.16C5.78 18.1 3.37 18.74 1 18.46c2 1.3 4.4 2.04 6.97 2.04 8.35.0 12.92-6.92 12.92-12.93.0-.2.0-.4-.02-.6.9-.63 1.96-1.22 2.56-2.14z"/></svg>
+</div>
+</div>
+</a>
+<a class=resp-sharing-button__link href="https://www.tumblr.com/widgets/share/tool?posttype=link&title=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates&caption=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates&content=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f&canonicalUrl=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f&shareSource=tumblr_share_button" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--tumblr resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.5.5v5h5v4h-5V15c0 5 3.5 4.4 6 2.8v4.4c-6.7 3.2-12 0-12-4.2V9.5h-3V6.7c1-.3 2.2-.7 3-1.3.5-.5 1-1.2 1.4-2 .3-.7.6-1.7.7-3h3.8z"/></svg>
+</div>
+</div>
+</a>
+<a class=resp-sharing-button__link href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f&title=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates&summary=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates&source=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 21.5h-5v-13h5v13zM4 6.5C2.5 6.5 1.5 5.3 1.5 4s1-2.4 2.5-2.4c1.6.0 2.5 1 2.6 2.5.0 1.4-1 2.5-2.6 2.5zm11.5 6c-1 0-2 1-2 2v7h-5v-13h5V10s1.6-1.5 4-1.5c3 0 5 2.2 5 6.3v6.7h-5v-7c0-1-1-2-2-2z"/></svg>
+</div>
+</div>
+</a>
+<a class=resp-sharing-button__link href="https://reddit.com/submit/?url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f&resubmit=true&title=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 11.5c0-1.65-1.35-3-3-3-.96.0-1.86.48-2.42 1.24-1.64-1-3.75-1.64-6.07-1.72.08-1.1.4-3.05 1.52-3.7.72-.4 1.73-.24 3 .5C17.2 6.3 18.46 7.5 20 7.5c1.65.0 3-1.35 3-3s-1.35-3-3-3c-1.38.0-2.54.94-2.88 2.22-1.43-.72-2.64-.8-3.6-.25-1.64.94-1.95 3.47-2 4.55-2.33.08-4.45.7-6.1 1.72C4.86 8.98 3.96 8.5 3 8.5c-1.65.0-3 1.35-3 3 0 1.32.84 2.44 2.05 2.84-.03.22-.05.44-.05.66.0 3.86 4.5 7 10 7s10-3.14 10-7c0-.22-.02-.44-.05-.66 1.2-.4 2.05-1.54 2.05-2.84zM2.3 13.37C1.5 13.07 1 12.35 1 11.5c0-1.1.9-2 2-2 .64.0 1.22.32 1.6.82-1.1.85-1.92 1.9-2.3 3.05zm3.7.13c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9.8 4.8c-1.08.63-2.42.96-3.8.96-1.4.0-2.74-.34-3.8-.95-.24-.13-.32-.44-.2-.68.15-.24.46-.32.7-.18 1.83 1.06 4.76 1.06 6.6.0.23-.13.53-.05.67.2.14.23.06.54-.18.67zm.2-2.8c-1.1.0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm5.7-2.13c-.38-1.16-1.2-2.2-2.3-3.05.38-.5.97-.82 1.6-.82 1.1.0 2 .9 2 2 0 .84-.53 1.57-1.3 1.87z"/></svg>
+</div>
+</div>
+</a>
+<a class=resp-sharing-button__link href="mailto:?subject=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates&body=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f" target=_self rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 4H2C.9 4 0 4.9.0 6v12c0 1.1.9 2 2 2h20c1.1.0 2-.9 2-2V6c0-1.1-.9-2-2-2zM7.25 14.43l-3.5 2c-.08.05-.17.07-.25.07-.17.0-.34-.1-.43-.25-.14-.24-.06-.55.18-.68l3.5-2c.24-.14.55-.06.68.18.14.24.06.55-.18.68zm4.75.07c-.1.0-.2-.03-.27-.08l-8.5-5.5c-.23-.15-.3-.46-.15-.7.15-.22.46-.3.7-.14L12 13.4l8.23-5.32c.23-.15.54-.08.7.15.14.23.07.54-.16.7l-8.5 5.5c-.08.04-.17.07-.27.07zm8.93 1.75c-.1.16-.26.25-.43.25-.08.0-.17-.02-.25-.07l-3.5-2c-.24-.13-.32-.44-.18-.68s.44-.32.68-.18l3.5 2c.24.13.32.44.18.68z"/></svg>
+</div>
+</div>
+</a>
+<a class=resp-sharing-button__link href="whatsapp://send?text=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates%20https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.1 3.9C17.9 1.7 15 .5 12 .5 5.8.5.7 5.6.7 11.9c0 2 .5 3.9 1.5 5.6L.6 23.4l6-1.6c1.6.9 3.5 1.3 5.4 1.3 6.3.0 11.4-5.1 11.4-11.4-.1-2.8-1.2-5.7-3.3-7.8zM12 21.4c-1.7.0-3.3-.5-4.8-1.3l-.4-.2-3.5 1 1-3.4L4 17c-1-1.5-1.4-3.2-1.4-5.1.0-5.2 4.2-9.4 9.4-9.4 2.5.0 4.9 1 6.7 2.8s2.8 4.2 2.8 6.7c-.1 5.2-4.3 9.4-9.5 9.4zm5.1-7.1c-.3-.1-1.7-.9-1.9-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1s-1.2-.5-2.3-1.4c-.9-.8-1.4-1.7-1.6-2s0-.5.1-.6.3-.3.4-.5c.2-.1.3-.3.4-.5s0-.4.0-.5C10 9 9.3 7.6 9 7c-.1-.4-.4-.3-.5-.3h-.6s-.4.1-.7.3c-.3.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.3-.3-.4-.6-.5z"/></svg>
+</div>
+</div>
+</a>
+<a class=resp-sharing-button__link href="https://telegram.me/share/url?text=VCAC%206.0%20build-out%20to%20distributed%20model%20%26ndash%3b%20Part%201%3a%20Certificates&url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f06%2fvcac-6-0-build-out-to-distributed-model-part-1-certificates%2f" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M.707 8.475C.275 8.64.0 9.508.0 9.508s.284.867.718 1.03l5.09 1.897 1.986 6.38a1.102 1.102.0 001.75.527l2.96-2.41a.405.405.0 01.494-.013l5.34 3.87a1.1 1.1.0 001.046.135 1.1 1.1.0 00.682-.803l3.91-18.795A1.102 1.102.0 0022.5.075L.706 8.475z"/></svg>
+</div>
+</div>
+</a>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var a=document.createElement('script');a.async=!0,a.type='text/javascript',a.src='//definit.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<div class="clarity-prev-next col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<nav class=clarity-page-prev-next>
+<div class=clr-nav-previous>
+<a href=https://www.definit.co.uk/2014/06/vcenter-5-5-certificate-toolkit-for-distributed-environments/ title="vCenter 5.5 Certificate Toolkit for Distributed Environments" class="btn btn-sm btn-outline">
+Previous
+</a>
+</div>
+<div class=clr-nav-next>
+<a href=https://www.definit.co.uk/2014/06/vmware-vforum-london-and-bloggers-vsanvchs-lunch/ title="VMware #vForum London and bloggers VSAN/vCHS lunch" class="btn btn-sm btn-outline">
+Next
+</a>
+</div>
+</nav>
+</div>
+</div>
+<div class=content-area>
+</div>
+<nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<section class=sidenav-content>
+<section class="nav-group collapsible">
+<input id=Categories type=checkbox>
+<label for=Categories>Categories</label>
+<ul class=nav-list>
+<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">22</span></a></li>
+<li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
+<li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
+<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">13</span></a></li>
+<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">42</span></a></li>
+<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li>
+<li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li>
+<li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
+<li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li>
+<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li>
+<li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li>
+<li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
+<li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">1</span></a></li>
+<li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
+<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">204</span></a></li>
+<li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
+<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
+<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
+<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
+<li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
+<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
+</ul>
+</section>
+<section class="nav-group collapsible">
+<input id=Tags type=checkbox>
+<label for=Tags>Tags (Top 10)</label>
+<ul class=nav-list>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">51</span></a></li>
+<li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
+<li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
+<li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
+<li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
+<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li>
+<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">31</span></a></li>
+<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li>
+<li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li>
+</section>
+<section class=nav-group>
+<label for=Sponsors>Sponsors</label>
+<ul class=nav-list>
+</ul>
+</section>
+</section>
+</nav>
+</div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-4368767-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-4368767-1')</script>
+<script src=/js/lightbox-plus-jquery.min.js></script>
+</div>
+</body>
+</html>

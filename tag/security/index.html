@@ -1,27 +1,479 @@
-<!doctype html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class=no-js><!--<![endif]--><head><meta charset=utf-8><title>Security &#183; DefinIT</title><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content><meta name=keywords content><meta property="og:title" content="Security  &#183; DefinIT "><meta property="og:site_name" content="DefinIT"><meta property="og:url" content="https://www.definit.co.uk/tag/security/"><meta property="og:locale" content="en-gb"><meta property="og:type" content="website"><link rel=alternate type=application/rss+xml href=https://www.definit.co.uk/tag/security/index.xml title=DefinIT><link rel=canonical href=https://www.definit.co.uk/tag/security/><link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png><link rel=icon href=/images/favicon-16x16.png><meta name=generator content="Hugo 0.84.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script><script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]--><script src=/js/clr-1.0/clr-icons.min.js></script><script src=/js/clr-1.0/custom-elements.min.js></script><link href=/css/clr-1.0/clr-ui-dark.css rel=stylesheet><link href=/css/clr-1.0/clr-icons.min.css rel=stylesheet><link href=/css/definit-clarity.css rel=stylesheet><link href=/css/lightbox.min.css rel=stylesheet></head><body data-ng-app=myapp data-ng-controller=MyController data-ng-mouseleave=MouseLeave($event)><div class=main-container><header class=header-6><div class=branding><a class=navbar-brand-img href=/><img alt src=/images/logos/definit-logo.png>
-<span class=title>DefinIT</span></a></div><nav class=header-nav><a class="nav-link nav-text" href=https://www.definit.co.uk/>Home</a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/about/>About</a>
-<a class="nav-link nav-text" href=https://www.github.com/sammcgeown>GitHub</a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml>RSS</a></nav><div class=header-actions><form class=search id=search method=get action=//google.com/search><label for=search_input><input id=search_input type=text name=q placeholder="Search with Google">
-<input type=hidden name=as_sitesearch value=https://www.definit.co.uk></label></form></div></header><nav class=subnav><ul class=nav><li class=nav-item><a class=nav-link href=https://www.definit.co.uk/>Home</a></li><li class=nav-item><a class=nav-link href=https://www.definit.co.uk/about/>About</a></li><li class=nav-item><a class=nav-link href=https://www.github.com/sammcgeown>GitHub</a></li><li class=nav-item><a class=nav-link href=https://www.definit.co.uk/index.xml>RSS</a></li></ul></nav><div class=content-container><div class=content-area><h1>SECURITY</h1><div class=clr-row><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2016/11/security-fun-and-embracing-2fa/>Security “fun” and embracing 2FA</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
-on 2/11/2016</div><div class=clr-card-authors>Published under <a href=/category/community>Community</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>So the other day my Skype account was briefly compromised, a successful login from Russia (after digging through activity logs) and this was after many attempts from IP addresses all around the world (China, Korea, Argentina the list goes on). You can see from the picture below the successful login attempt.
-My initial reaction was stress and panic, as I didn&rsquo;t know precisely where I had been compromised I ran scans on my local machines while resetting passwords a plenty.</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2016/11/security-fun-and-embracing-2fa/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2016/03/can-i-secure-vrops/>Can I secure #vROps?</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
-on 8/3/2016</div><div class=clr-card-authors>Published under <a href=/category/vmware>VMware</a> and <a href=/category/vrealize-operations>vRealize Operations</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>Those of you used to using vSphere on a regular basis will already be aware of the hardening guide for ESXi and vSphere but what about vROps?
+<!doctype html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class=no-js><!--<![endif]-->
+<head>
+<meta charset=utf-8>
+<title>Security &#183; DefinIT</title>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=HandheldFriendly content="True">
+<meta name=MobileOptimized content="320">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content>
+<meta name=keywords content>
+<meta property="og:title" content="Security  &#183; DefinIT ">
+<meta property="og:site_name" content="DefinIT">
+<meta property="og:url" content="https://www.definit.co.uk/tag/security/">
+<meta property="og:locale" content="en-gb">
+<meta property="og:type" content="website">
+<link rel=alternate type=application/rss+xml href=https://www.definit.co.uk/tag/security/index.xml title=DefinIT>
+<link rel=canonical href=https://www.definit.co.uk/tag/security/>
+<link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
+<link rel=icon href=/images/favicon-16x16.png>
+<meta name=generator content="Hugo 0.87.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
+<script src=/js/clr-1.0/clr-icons.min.js></script>
+<script src=/js/clr-1.0/custom-elements.min.js></script>
+<link href=/css/clr-1.0/clr-ui-dark.css rel=stylesheet>
+<link href=/css/clr-1.0/clr-icons.min.css rel=stylesheet>
+<link href=/css/definit-clarity.css rel=stylesheet>
+<link href=/css/lightbox.min.css rel=stylesheet>
+</head>
+<body data-ng-app=myapp data-ng-controller=MyController data-ng-mouseleave=MouseLeave($event)>
+<div class=main-container>
+<header class=header-6>
+<div class=branding>
+<a class=navbar-brand-img href=/>
+<img alt src=/images/logos/definit-logo.png>
+<span class=title>DefinIT</span>
+</a>
+</div>
+<nav class=header-nav>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/>
+Home
+</a>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/about/>
+About
+</a>
+<a class="nav-link nav-text" href=https://www.github.com/sammcgeown>
+GitHub
+</a>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml>
+RSS
+</a>
+</nav>
+<div class=header-actions>
+<form class=search id=search method=get action=//google.com/search>
+<label for=search_input>
+<input id=search_input type=text name=q placeholder="Search with Google">
+<input type=hidden name=as_sitesearch value=https://www.definit.co.uk>
+</label>
+</form>
+</div>
+</header>
+<nav class=subnav>
+<ul class=nav>
+<li class=nav-item>
+<a class=nav-link href=https://www.definit.co.uk/>
+Home
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://www.definit.co.uk/about/>
+About
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://www.github.com/sammcgeown>
+GitHub
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://www.definit.co.uk/index.xml>
+RSS
+</a>
+</li>
+</ul>
+</nav>
+<div class=content-container>
+<div class=content-area>
+<h1>SECURITY</h1>
+<div class=clr-row>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2016/11/security-fun-and-embracing-2fa/>Security “fun” and embracing 2FA</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
+on 2/11/2016
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/community>Community</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+So the other day my Skype account was briefly compromised, a successful login from Russia (after digging through activity logs) and this was after many attempts from IP addresses all around the world (China, Korea, Argentina the list goes on). You can see from the picture below the successful login attempt.
+My initial reaction was stress and panic, as I didn&rsquo;t know precisely where I had been compromised I ran scans on my local machines while resetting passwords a plenty.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2016/11/security-fun-and-embracing-2fa/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2016/03/can-i-secure-vrops/>Can I secure #vROps?</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
+on 8/3/2016
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a> and <a href=/category/vrealize-operations>vRealize Operations</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+Those of you used to using vSphere on a regular basis will already be aware of the hardening guide for ESXi and vSphere but what about vROps?
 If the vROps appliance needs to be hardened there is already a VMware provided guide and tool to accommodate.
 Secure configuration guide - http://pubs.vmware.com/vrealizeoperationsmanager-61/topic/com.vmware.ICbase/PDF/vrealize-operations-manager-61-secure-configuration-guide.pdf
-“The documentation for Secure Configuration is intended to serve as a secure baseline for the deployment of vRealize Operations Manager.</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2016/03/can-i-secure-vrops/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2015/02/creating-a-vrealize-log-insight-2-5-cluster-with-integrated-load-balancing/>Creating a vRealize Log Insight 2.5 cluster with Integrated Load Balancing</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 11/2/2015</div><div class=clr-card-authors>Published under <a href=/category/vmware>VMware</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>vRealize Log Insight 2.5 improves on the clustering in previous versions with an Integrated Load Balancer (ILB) which allows you to distribute load across your cluster of Log Insight instances without actually needing an external load balancer. The advantage of this over an external load balancer is that the source IP is maintained which allows for easier analysis.
-The minimum number of nodes in a cluster is three, the first node becomes the Master node and the other two become Worker nodes.</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2015/02/creating-a-vrealize-log-insight-2-5-cluster-with-integrated-load-balancing/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2014/10/vmworld-2014-vcp-nv-exam-experience/>VMworld 2014: VCP NV Exam Experience</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 15/10/2014</div><div class=clr-card-authors>Published under <a href=/category/networking>Networking</a> and <a href=/category/vmware>VMware</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>It is with great relief that I can announce I have passed my VCP NV (Network Virtualisation) having been caught out by the difficulty of the exam and failing previously.
-Exam Preparation I was fortunate to attend a VMware internal bootcamp (roughly equivalent to the ICM course) for NSX and have had experience deploying production NSX environments, so that is by far the best preparation. As always, the exam blueprint is crucial, you *have* to know all areas covered there.</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2014/10/vmworld-2014-vcp-nv-exam-experience/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2014/09/configuring-a-remote-access-ssl-vpn-with-vmware-nsx/>Configuring a remote access SSL VPN with VMware NSX</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 11/9/2014</div><div class=clr-card-authors>Published under <a href=/category/networking>Networking</a> and <a href=/category/vmware>VMware</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>The NSX Edge Gateway comes pre-armed with the ability to provide an SSL VPN for remote access into your network. This isn&rsquo;t a new feature (SSL VPN was available in vCloud Networking and Security), but it&rsquo;s worth a run through. I&rsquo;m configuring remote access to my Lab, since it&rsquo;s often useful to access it when on a client site, but traditional VPN connections are often blocked on corporate networks where HTTPS isn&rsquo;t.</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2014/09/configuring-a-remote-access-ssl-vpn-with-vmware-nsx/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-1-certificates/>VCAC 6.0 build-out to distributed model &amp;ndash; Part 1: Certificates</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 23/6/2014</div><div class=clr-card-authors>Published under <a href=/category/microsoft>Microsoft</a>, <a href=/category/vmware>VMware</a> and <a href=/category/vrealize-automation>vRealize Automation</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>This is the first article in a series about how to build-out a simple vCAC 6 installation to a distributed model.
-Simple vCAC deployment In a simple installation you have the Identity Appliance, the vCAC appliance (which includes a vPostgres DB and vCenter Orchestrator instance) and an IaaS server. The distributed model still has a single Identity Appliance but clusters 2 or more vCAC appliances behind a load balancer, backed by a separate vPostgres database appliance.</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-1-certificates/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2014/03/extending-a-vcenter-orchestrator-vco-workflow-with-foreach-backing-up-all-esxi-hosts-in-a-cluster/>Extending a vCenter Orchestrator (vCO) Workflow with ForEach &amp;ndash; Backing up all ESXi hosts in a Cluster</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 20/3/2014</div><div class=clr-card-authors>Published under <a href=/category/vmware>VMware</a>, <a href=/category/vrealize-orchestrator>vRealize Orchestrator</a> and <a href=/category/vsphere>vSphere</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>In my previous post Backing up ESXi 5.5 host configurations with vCenter Orchestrator (vCO) – Workflow design walkthrough I showed how to create a workflow to back up host configurations, but it was limited to one host at a time. For this post I’m going to show how to create a new workflow that calls the previous one on multiple hosts using a ForEach loop to run it against each one.</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2014/03/extending-a-vcenter-orchestrator-vco-workflow-with-foreach-backing-up-all-esxi-hosts-in-a-cluster/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2014/03/backing-up-esxi-5-5-host-configurations-with-vcenter-orchestrator-vco-workflow-design-walkthrough/>Backing up ESXi 5.5 host configurations with vCenter Orchestrator (vCO) &amp;ndash; Workflow design walkthrough</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 13/3/2014</div><div class=clr-card-authors>Published under <a href=/category/vmware>VMware</a> and <a href=/category/vrealize-orchestrator>vRealize Orchestrator</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>As a little learning project, I thought I’d take on Simon’s previous post about backing up ESXi configurations and extend it to vCenter Orchestrator (vCO), and document how I go about building up a workflow. I&rsquo;m learning more and more about vCO all the time, but I found it has a really steep entry point, and finding use cases is hard if you haven&rsquo;t explored capabilities.
-The steps I want to create in this post are:</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2014/03/backing-up-esxi-5-5-host-configurations-with-vcenter-orchestrator-vco-workflow-design-walkthrough/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2014/03/generating-and-installing-ca-signed-certificates-for-vmware-srm-5-5/>Generating and Installing CA Signed Certificates for VMware SRM 5.5</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 5/3/2014</div><div class=clr-card-authors>Published under <a href=/category/microsoft>Microsoft</a> and <a href=/category/vmware>VMware</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>I’m fairly new to SRM, but even so this one seemed like a real head-scratcher! If you happen to be using CA signed certificates on your “protected site” vCenter and “recovery site” vCenter servers, when you come to linking the two SRM sites you encounter SSLHandShake errors – basically SRM assumes you want to use certificates for authentication because you’re using signed certificates. If you use the default self-signed certificates, SRM will default to using password authentication (see SRM Authentication).</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2014/03/generating-and-installing-ca-signed-certificates-for-vmware-srm-5-5/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2013/11/avoid-sso-admin-lockout-a-k-a-your-first-task-after-installing-vsphere-sso/>Avoid SSO Admin lockout &amp;ndash; a.k.a. your first task after installing vSphere SSO</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 6/11/2013</div><div class=clr-card-authors>Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>In my post yesterday (vexpert.me/hS) I talked about how to recover from an expired default SSO administrator password – this prompted a discussion on twitter with Anthony Spiteri (@anthonyspiteri) and Grant Orchard (@grantorchard) about the defaults for expiration and how to mitigate the risk.
-The first solution is to modify the password expiration policy for SSO. I’m not advocating this necessarily – I think that expiring passwords ensure that you change them regularly and increase the overall security of your SSO solution.</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2013/11/avoid-sso-admin-lockout-a-k-a-your-first-task-after-installing-vsphere-sso/>More</a></div></div></div></div><nav><ul class=pagination><li class="pagination__item pagination__item--current"><a href=/tag/security/ class="btn btn-sm btn btn-primary">1</a></li><li class=pagination__item><a href=/tag/security/page/2/ class="btn btn-sm btn btn-outline">2</a></li><li class=pagination__item><a href=/tag/security/page/3/ class="btn btn-sm btn btn-outline">3</a></li><li class="pagination__item pagination__item--next"><a href=/tag/security/page/2/ class="btn btn-sm btn-outline">...</a></li><li class="pagination__item pagination__item--last"><a class="btn btn-sm btn btn-outline" href=/tag/security/page/3/>3</a></li></ul></nav></div><nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><section class=sidenav-content><section class="nav-group collapsible"><input id=Categories type=checkbox>
-<label for=Categories>Categories</label><ul class=nav-list><li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li><li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">22</span></a></li><li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li><li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li><li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">13</span></a></li><li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">41</span></a></li><li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li><li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li><li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li><li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li><li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li><li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li><li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li><li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">1</span></a></li><li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li><li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">204</span></a></li><li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li><li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">12</span></a></li><li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li><li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li><li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li><li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li><li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li><li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li></ul></section><section class="nav-group collapsible"><input id=Tags type=checkbox>
-<label for=Tags>Tags (Top 10)</label><ul class=nav-list><li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li><li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">51</span></a></li><li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li><li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li><li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li><li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li><li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li><li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">30</span></a></li><li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li><li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li></section><section class=nav-group><label for=Sponsors>Sponsors</label><ul class=nav-list></ul></section></section></nav></div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-4368767-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-4368767-1')</script><script src=/js/lightbox-plus-jquery.min.js></script></div></body></html>
+“The documentation for Secure Configuration is intended to serve as a secure baseline for the deployment of vRealize Operations Manager.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2016/03/can-i-secure-vrops/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2015/02/creating-a-vrealize-log-insight-2-5-cluster-with-integrated-load-balancing/>Creating a vRealize Log Insight 2.5 cluster with Integrated Load Balancing</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 11/2/2015
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+vRealize Log Insight 2.5 improves on the clustering in previous versions with an Integrated Load Balancer (ILB) which allows you to distribute load across your cluster of Log Insight instances without actually needing an external load balancer. The advantage of this over an external load balancer is that the source IP is maintained which allows for easier analysis.
+The minimum number of nodes in a cluster is three, the first node becomes the Master node and the other two become Worker nodes.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2015/02/creating-a-vrealize-log-insight-2-5-cluster-with-integrated-load-balancing/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2014/10/vmworld-2014-vcp-nv-exam-experience/>VMworld 2014: VCP NV Exam Experience</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 15/10/2014
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/networking>Networking</a> and <a href=/category/vmware>VMware</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+It is with great relief that I can announce I have passed my VCP NV (Network Virtualisation) having been caught out by the difficulty of the exam and failing previously.
+Exam Preparation I was fortunate to attend a VMware internal bootcamp (roughly equivalent to the ICM course) for NSX and have had experience deploying production NSX environments, so that is by far the best preparation. As always, the exam blueprint is crucial, you *have* to know all areas covered there.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2014/10/vmworld-2014-vcp-nv-exam-experience/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2014/09/configuring-a-remote-access-ssl-vpn-with-vmware-nsx/>Configuring a remote access SSL VPN with VMware NSX</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 11/9/2014
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/networking>Networking</a> and <a href=/category/vmware>VMware</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+The NSX Edge Gateway comes pre-armed with the ability to provide an SSL VPN for remote access into your network. This isn&rsquo;t a new feature (SSL VPN was available in vCloud Networking and Security), but it&rsquo;s worth a run through. I&rsquo;m configuring remote access to my Lab, since it&rsquo;s often useful to access it when on a client site, but traditional VPN connections are often blocked on corporate networks where HTTPS isn&rsquo;t.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2014/09/configuring-a-remote-access-ssl-vpn-with-vmware-nsx/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-1-certificates/>VCAC 6.0 build-out to distributed model &amp;ndash; Part 1: Certificates</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 23/6/2014
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/microsoft>Microsoft</a>, <a href=/category/vmware>VMware</a> and <a href=/category/vrealize-automation>vRealize Automation</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+This is the first article in a series about how to build-out a simple vCAC 6 installation to a distributed model.
+Simple vCAC deployment In a simple installation you have the Identity Appliance, the vCAC appliance (which includes a vPostgres DB and vCenter Orchestrator instance) and an IaaS server. The distributed model still has a single Identity Appliance but clusters 2 or more vCAC appliances behind a load balancer, backed by a separate vPostgres database appliance.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-1-certificates/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2014/03/extending-a-vcenter-orchestrator-vco-workflow-with-foreach-backing-up-all-esxi-hosts-in-a-cluster/>Extending a vCenter Orchestrator (vCO) Workflow with ForEach &amp;ndash; Backing up all ESXi hosts in a Cluster</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 20/3/2014
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a>, <a href=/category/vrealize-orchestrator>vRealize Orchestrator</a> and <a href=/category/vsphere>vSphere</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+In my previous post Backing up ESXi 5.5 host configurations with vCenter Orchestrator (vCO) – Workflow design walkthrough I showed how to create a workflow to back up host configurations, but it was limited to one host at a time. For this post I’m going to show how to create a new workflow that calls the previous one on multiple hosts using a ForEach loop to run it against each one.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2014/03/extending-a-vcenter-orchestrator-vco-workflow-with-foreach-backing-up-all-esxi-hosts-in-a-cluster/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2014/03/backing-up-esxi-5-5-host-configurations-with-vcenter-orchestrator-vco-workflow-design-walkthrough/>Backing up ESXi 5.5 host configurations with vCenter Orchestrator (vCO) &amp;ndash; Workflow design walkthrough</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 13/3/2014
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a> and <a href=/category/vrealize-orchestrator>vRealize Orchestrator</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+As a little learning project, I thought I’d take on Simon’s previous post about backing up ESXi configurations and extend it to vCenter Orchestrator (vCO), and document how I go about building up a workflow. I&rsquo;m learning more and more about vCO all the time, but I found it has a really steep entry point, and finding use cases is hard if you haven&rsquo;t explored capabilities.
+The steps I want to create in this post are:
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2014/03/backing-up-esxi-5-5-host-configurations-with-vcenter-orchestrator-vco-workflow-design-walkthrough/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2014/03/generating-and-installing-ca-signed-certificates-for-vmware-srm-5-5/>Generating and Installing CA Signed Certificates for VMware SRM 5.5</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 5/3/2014
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/microsoft>Microsoft</a> and <a href=/category/vmware>VMware</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+I’m fairly new to SRM, but even so this one seemed like a real head-scratcher! If you happen to be using CA signed certificates on your “protected site” vCenter and “recovery site” vCenter servers, when you come to linking the two SRM sites you encounter SSLHandShake errors – basically SRM assumes you want to use certificates for authentication because you’re using signed certificates. If you use the default self-signed certificates, SRM will default to using password authentication (see SRM Authentication).
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2014/03/generating-and-installing-ca-signed-certificates-for-vmware-srm-5-5/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2013/11/avoid-sso-admin-lockout-a-k-a-your-first-task-after-installing-vsphere-sso/>Avoid SSO Admin lockout &amp;ndash; a.k.a. your first task after installing vSphere SSO</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 6/11/2013
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+In my post yesterday (vexpert.me/hS) I talked about how to recover from an expired default SSO administrator password – this prompted a discussion on twitter with Anthony Spiteri (@anthonyspiteri) and Grant Orchard (@grantorchard) about the defaults for expiration and how to mitigate the risk.
+The first solution is to modify the password expiration policy for SSO. I’m not advocating this necessarily – I think that expiring passwords ensure that you change them regularly and increase the overall security of your SSO solution.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2013/11/avoid-sso-admin-lockout-a-k-a-your-first-task-after-installing-vsphere-sso/>More</a>
+</div>
+</div>
+</div>
+</div>
+<nav>
+<ul class=pagination>
+<li class="pagination__item pagination__item--current">
+<a href=/tag/security/ class="btn btn-sm btn btn-primary">
+1
+</a>
+</li>
+<li class=pagination__item>
+<a href=/tag/security/page/2/ class="btn btn-sm btn btn-outline">
+2
+</a>
+</li>
+<li class=pagination__item>
+<a href=/tag/security/page/3/ class="btn btn-sm btn btn-outline">
+3
+</a>
+</li>
+<li class="pagination__item pagination__item--next">
+<a href=/tag/security/page/2/ class="btn btn-sm btn-outline">
+...
+</a>
+</li>
+<li class="pagination__item pagination__item--last">
+<a class="btn btn-sm btn btn-outline" href=/tag/security/page/3/>
+3
+</a>
+</li>
+</ul>
+</nav>
+</div>
+<nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<section class=sidenav-content>
+<section class="nav-group collapsible">
+<input id=Categories type=checkbox>
+<label for=Categories>Categories</label>
+<ul class=nav-list>
+<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">22</span></a></li>
+<li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
+<li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
+<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">13</span></a></li>
+<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">42</span></a></li>
+<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li>
+<li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li>
+<li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
+<li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li>
+<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li>
+<li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li>
+<li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
+<li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">1</span></a></li>
+<li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
+<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">204</span></a></li>
+<li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
+<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
+<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
+<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
+<li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
+<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
+</ul>
+</section>
+<section class="nav-group collapsible">
+<input id=Tags type=checkbox>
+<label for=Tags>Tags (Top 10)</label>
+<ul class=nav-list>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">51</span></a></li>
+<li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
+<li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
+<li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
+<li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
+<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li>
+<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">31</span></a></li>
+<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li>
+<li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li>
+</section>
+<section class=nav-group>
+<label for=Sponsors>Sponsors</label>
+<ul class=nav-list>
+</ul>
+</section>
+</section>
+</nav>
+</div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-4368767-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-4368767-1')</script>
+<script src=/js/lightbox-plus-jquery.min.js></script>
+</div>
+</body>
+</html>

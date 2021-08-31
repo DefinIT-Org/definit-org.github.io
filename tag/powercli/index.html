@@ -1,42 +1,489 @@
-<!doctype html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class=no-js><!--<![endif]--><head><meta charset=utf-8><title>PowerCLI &#183; DefinIT</title><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content><meta name=keywords content><meta property="og:title" content="PowerCLI  &#183; DefinIT "><meta property="og:site_name" content="DefinIT"><meta property="og:url" content="https://www.definit.co.uk/tag/powercli/"><meta property="og:locale" content="en-gb"><meta property="og:type" content="website"><link rel=alternate type=application/rss+xml href=https://www.definit.co.uk/tag/powercli/index.xml title=DefinIT><link rel=canonical href=https://www.definit.co.uk/tag/powercli/><link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png><link rel=icon href=/images/favicon-16x16.png><meta name=generator content="Hugo 0.84.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script><script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]--><script src=/js/clr-1.0/clr-icons.min.js></script><script src=/js/clr-1.0/custom-elements.min.js></script><link href=/css/clr-1.0/clr-ui-dark.css rel=stylesheet><link href=/css/clr-1.0/clr-icons.min.css rel=stylesheet><link href=/css/definit-clarity.css rel=stylesheet><link href=/css/lightbox.min.css rel=stylesheet></head><body data-ng-app=myapp data-ng-controller=MyController data-ng-mouseleave=MouseLeave($event)><div class=main-container><header class=header-6><div class=branding><a class=navbar-brand-img href=/><img alt src=/images/logos/definit-logo.png>
-<span class=title>DefinIT</span></a></div><nav class=header-nav><a class="nav-link nav-text" href=https://www.definit.co.uk/>Home</a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/about/>About</a>
-<a class="nav-link nav-text" href=https://www.github.com/sammcgeown>GitHub</a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml>RSS</a></nav><div class=header-actions><form class=search id=search method=get action=//google.com/search><label for=search_input><input id=search_input type=text name=q placeholder="Search with Google">
-<input type=hidden name=as_sitesearch value=https://www.definit.co.uk></label></form></div></header><nav class=subnav><ul class=nav><li class=nav-item><a class=nav-link href=https://www.definit.co.uk/>Home</a></li><li class=nav-item><a class=nav-link href=https://www.definit.co.uk/about/>About</a></li><li class=nav-item><a class=nav-link href=https://www.github.com/sammcgeown>GitHub</a></li><li class=nav-item><a class=nav-link href=https://www.definit.co.uk/index.xml>RSS</a></li></ul></nav><div class=content-container><div class=content-area><h1>POWERCLI</h1><div class=clr-row><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2017/11/introduction-to-nsx-apis-vbrownbag/>Introduction to NSX APIs – vBrownBag</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 24/11/2017</div><div class=clr-card-authors>Published under <a href=/category/community>Community</a>, <a href=/category/networking>Networking</a>, <a href=/category/nsx>NSX</a> and <a href=/category/powercli>PowerCLI</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden><img src=/images/2017/11/2017-11-24_13-22-20.png class=clr-card-featured-image>
+<!doctype html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class=no-js><!--<![endif]-->
+<head>
+<meta charset=utf-8>
+<title>PowerCLI &#183; DefinIT</title>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=HandheldFriendly content="True">
+<meta name=MobileOptimized content="320">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content>
+<meta name=keywords content>
+<meta property="og:title" content="PowerCLI  &#183; DefinIT ">
+<meta property="og:site_name" content="DefinIT">
+<meta property="og:url" content="https://www.definit.co.uk/tag/powercli/">
+<meta property="og:locale" content="en-gb">
+<meta property="og:type" content="website">
+<link rel=alternate type=application/rss+xml href=https://www.definit.co.uk/tag/powercli/index.xml title=DefinIT>
+<link rel=canonical href=https://www.definit.co.uk/tag/powercli/>
+<link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
+<link rel=icon href=/images/favicon-16x16.png>
+<meta name=generator content="Hugo 0.87.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
+<script src=/js/clr-1.0/clr-icons.min.js></script>
+<script src=/js/clr-1.0/custom-elements.min.js></script>
+<link href=/css/clr-1.0/clr-ui-dark.css rel=stylesheet>
+<link href=/css/clr-1.0/clr-icons.min.css rel=stylesheet>
+<link href=/css/definit-clarity.css rel=stylesheet>
+<link href=/css/lightbox.min.css rel=stylesheet>
+</head>
+<body data-ng-app=myapp data-ng-controller=MyController data-ng-mouseleave=MouseLeave($event)>
+<div class=main-container>
+<header class=header-6>
+<div class=branding>
+<a class=navbar-brand-img href=/>
+<img alt src=/images/logos/definit-logo.png>
+<span class=title>DefinIT</span>
+</a>
+</div>
+<nav class=header-nav>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/>
+Home
+</a>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/about/>
+About
+</a>
+<a class="nav-link nav-text" href=https://www.github.com/sammcgeown>
+GitHub
+</a>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml>
+RSS
+</a>
+</nav>
+<div class=header-actions>
+<form class=search id=search method=get action=//google.com/search>
+<label for=search_input>
+<input id=search_input type=text name=q placeholder="Search with Google">
+<input type=hidden name=as_sitesearch value=https://www.definit.co.uk>
+</label>
+</form>
+</div>
+</header>
+<nav class=subnav>
+<ul class=nav>
+<li class=nav-item>
+<a class=nav-link href=https://www.definit.co.uk/>
+Home
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://www.definit.co.uk/about/>
+About
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://www.github.com/sammcgeown>
+GitHub
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://www.definit.co.uk/index.xml>
+RSS
+</a>
+</li>
+</ul>
+</nav>
+<div class=content-container>
+<div class=content-area>
+<h1>POWERCLI</h1>
+<div class=clr-row>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2017/11/introduction-to-nsx-apis-vbrownbag/>Introduction to NSX APIs – vBrownBag</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 24/11/2017
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/community>Community</a>, <a href=/category/networking>Networking</a>, <a href=/category/nsx>NSX</a> and <a href=/category/powercli>PowerCLI</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+<img src=/images/2017/11/2017-11-24_13-22-20.png class=clr-card-featured-image>
 Last Tuesday I had the privilege of presenting an introduction to the NSX APIs on vBrownBag EMEA - you can view the recording below or on vBrownBag&rsquo;s youtube channel.
 During the presentation I showed a mind map of the API, which I&rsquo;ve made
 available on GitHub in PDF format
-I&rsquo;ve also published the Postman collection and environment I used during the demonstration, which covers some basic configuration and deploy tasks:</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2017/11/introduction-to-nsx-apis-vbrownbag/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2017/09/simons-vmworld-day-1-and-2-sunday-and-monday/>Simon’s #VMworld 2017: Sunday and Monday</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
-on 12/9/2017</div><div class=clr-card-authors>Published under <a href=/category/community>Community</a> and <a href=/category/vmworld>VMworld</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>Sunday Arriving in early on Sunday as the local flight choices are more limited from Bristol than perhaps a larger Airport, very fortunate to have a hotel so close to the VMworld venue, perhaps not so great for the evening activities but I am happy with it this way around.
+I&rsquo;ve also published the Postman collection and environment I used during the demonstration, which covers some basic configuration and deploy tasks:
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2017/11/introduction-to-nsx-apis-vbrownbag/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2017/09/simons-vmworld-day-1-and-2-sunday-and-monday/>Simon’s #VMworld 2017: Sunday and Monday</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
+on 12/9/2017
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/community>Community</a> and <a href=/category/vmworld>VMworld</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+Sunday Arriving in early on Sunday as the local flight choices are more limited from Bristol than perhaps a larger Airport, very fortunate to have a hotel so close to the VMworld venue, perhaps not so great for the evening activities but I am happy with it this way around.
 Other than registration (4pm-8pm) and hopefully catching up with a few folk who have also arrived early.
-In the evening I had the pleasure to meet many awesome people from the vCommunity.</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2017/09/simons-vmworld-day-1-and-2-sunday-and-monday/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2017/09/sams-vmworld-2017-vsan-specialist-and-vmware-code-hackathon/>Sam’s #VMworld 2017: vSAN Specialist and VMware {Code} Hackathon</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 12/9/2017</div><div class=clr-card-authors>Published under <a href=/category/career>Career</a>, <a href=/category/community>Community</a>, <a href=/category/powercli>PowerCLI</a>, <a href=/category/vmware>VMware</a>, <a href=/category/vmworld>VMworld</a> and <a href=/category/vsan>vSAN</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden><img src=/images/2017/09/vmware-code.png class=clr-card-featured-image>
-VMware vSAN 2017 Specialist Exam I always like to take a discounted exam at VMworld, this year I opted for the VMware vSAN 2017 Specialist exam, which was released a few weeks ago. Having delivered quite a few vSAN based solutions over the last few years, I was fairly confident in the blueprint. I am pleased to say that I passed the exam with a score of 422, way higher than I expected!</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2017/09/sams-vmworld-2017-vsan-specialist-and-vmware-code-hackathon/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2016/11/vrops-webinar-series-part-11-getting-more-out-of-vrops-with-powercli-2/>#vROps Webinar Series – Part 11 – Getting more out of #vROps with PowerCLI</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
-on 26/11/2016</div><div class=clr-card-authors>Published under <a href=/category/vrealize-operations>vRealize Operations</a> and <a href=/category/webinar>Webinar</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>Time to publish the recording for the 11th episode of the vROps Webinar Series. This time we were joined by Vinith Menon who spoke about getting more from your vROps builds with PowerCLI. Vinith demonstrated the many useful ways of leveraging PowerCLI to manage your vROps environments and also communicate with the vROps API.
+In the evening I had the pleasure to meet many awesome people from the vCommunity.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2017/09/simons-vmworld-day-1-and-2-sunday-and-monday/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2017/09/sams-vmworld-2017-vsan-specialist-and-vmware-code-hackathon/>Sam’s #VMworld 2017: vSAN Specialist and VMware {Code} Hackathon</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 12/9/2017
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/career>Career</a>, <a href=/category/community>Community</a>, <a href=/category/powercli>PowerCLI</a>, <a href=/category/vmware>VMware</a>, <a href=/category/vmworld>VMworld</a> and <a href=/category/vsan>vSAN</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+<img src=/images/2017/09/vmware-code.png class=clr-card-featured-image>
+VMware vSAN 2017 Specialist Exam I always like to take a discounted exam at VMworld, this year I opted for the VMware vSAN 2017 Specialist exam, which was released a few weeks ago. Having delivered quite a few vSAN based solutions over the last few years, I was fairly confident in the blueprint. I am pleased to say that I passed the exam with a score of 422, way higher than I expected!
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2017/09/sams-vmworld-2017-vsan-specialist-and-vmware-code-hackathon/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2016/11/vrops-webinar-series-part-11-getting-more-out-of-vrops-with-powercli-2/>#vROps Webinar Series – Part 11 – Getting more out of #vROps with PowerCLI</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
+on 26/11/2016
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vrealize-operations>vRealize Operations</a> and <a href=/category/webinar>Webinar</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+Time to publish the recording for the 11th episode of the vROps Webinar Series. This time we were joined by Vinith Menon who spoke about getting more from your vROps builds with PowerCLI. Vinith demonstrated the many useful ways of leveraging PowerCLI to manage your vROps environments and also communicate with the vROps API.
 Huge thanks to Vinith Menon for presenting this excellent session.
-So without further ado, here is the recording for this session:</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2016/11/vrops-webinar-series-part-11-getting-more-out-of-vrops-with-powercli-2/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2016/11/vrops-webinar-series-part-11-getting-more-out-of-vrops-with-powercli/>#vROps Webinar Series – Announcing Part 11 – Getting more out of #vROps with PowerCLI</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
-on 22/11/2016</div><div class=clr-card-authors>Published under <a href=/category/vrealize-operations>vRealize Operations</a> and <a href=/category/webinar>Webinar</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>Another month has gone and Christmas is now looming large! It has been extremely busy but we still want to continue with the momentum of webinar series getting to the business end of the year. This time around we will talk about getting more out of vRealize Operations Manager using PowerCLI.
+So without further ado, here is the recording for this session:
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2016/11/vrops-webinar-series-part-11-getting-more-out-of-vrops-with-powercli-2/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2016/11/vrops-webinar-series-part-11-getting-more-out-of-vrops-with-powercli/>#vROps Webinar Series – Announcing Part 11 – Getting more out of #vROps with PowerCLI</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
+on 22/11/2016
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vrealize-operations>vRealize Operations</a> and <a href=/category/webinar>Webinar</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+Another month has gone and Christmas is now looming large! It has been extremely busy but we still want to continue with the momentum of webinar series getting to the business end of the year. This time around we will talk about getting more out of vRealize Operations Manager using PowerCLI.
 This session we will be joined by Vinith Menon who will show us all kinds of PowerCLI goodness.
-So without further a do, save the date in your calendars and join use for the next episode of vRealize Operations Webinar Series 2016.</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2016/11/vrops-webinar-series-part-11-getting-more-out-of-vrops-with-powercli/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2016/10/installing-net-core-powershell-and-powercli-on-macos-sierra/>Installing .NET core, PowerShell and PowerCLI on macOS Sierra</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 18/10/2016</div><div class=clr-card-authors>Published under <a href=/category/microsoft>Microsoft</a> and <a href=/category/vmware>VMware</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden><img src=/images/2016/10/powerclicore140x140.jpg class=clr-card-featured-image>
+So without further a do, save the date in your calendars and join use for the next episode of vRealize Operations Webinar Series 2016.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2016/11/vrops-webinar-series-part-11-getting-more-out-of-vrops-with-powercli/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2016/10/installing-net-core-powershell-and-powercli-on-macos-sierra/>Installing .NET core, PowerShell and PowerCLI on macOS Sierra</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 18/10/2016
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/microsoft>Microsoft</a> and <a href=/category/vmware>VMware</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+<img src=/images/2016/10/powerclicore140x140.jpg class=clr-card-featured-image>
 So, this is something I&rsquo;ve been waiting to write up for a while! PowerShell for macOS has been available for a while now, but what a lot of PowerCLI fans have been waiting for is to be able to use PowerCLI direct from their Mac.
-Today, amidst all of the noise from VMWorld, PowerCLI Core dropped as a Fling! That means that although it&rsquo;s not ready for production use yet, it is ready to start testing - and I&rsquo;m way more excited than I should be!</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2016/10/installing-net-core-powershell-and-powercli-on-macos-sierra/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2015/05/automate-the-deployment-of-vrops-supporting-vds/>Automate the deployment of vROps (supporting vDS)</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
-on 18/5/2015</div><div class=clr-card-authors>Published under <a href=/category/vrealize-operations>vRealize Operations</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>Recently I have been looking at William Lam&rsquo;s excellent post on automating the deployment of vROps.
+Today, amidst all of the noise from VMWorld, PowerCLI Core dropped as a Fling! That means that although it&rsquo;s not ready for production use yet, it is ready to start testing - and I&rsquo;m way more excited than I should be!
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2016/10/installing-net-core-powershell-and-powercli-on-macos-sierra/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2015/05/automate-the-deployment-of-vrops-supporting-vds/>Automate the deployment of vROps (supporting vDS)</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
+on 18/5/2015
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vrealize-operations>vRealize Operations</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+Recently I have been looking at William Lam&rsquo;s excellent post on automating the deployment of vROps.
 After having a play around with it, to suit my own needs, I made some modifications to the Powershell script so it would support distributed switches.
 # William Lam
 # Edited by Simon Eady to support vDS
 # www.virtuallyghetto.com
-# Deployment of vRealize Operations Manager 6.0 (vROps)</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2015/05/automate-the-deployment-of-vrops-supporting-vds/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2014/06/another-fantastic-south-west-uk-vmug/>Another fantastic South West UK VMUG</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
-on 8/6/2014</div><div class=clr-card-authors>Published under</div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>On the 3rd of June we had our second South West UK VMUG and I am pleased to say it went superbly well.
+# Deployment of vRealize Operations Manager 6.0 (vROps)
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2015/05/automate-the-deployment-of-vrops-supporting-vds/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2014/06/another-fantastic-south-west-uk-vmug/>Another fantastic South West UK VMUG</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
+on 8/6/2014
+</div>
+<div class=clr-card-authors>
+Published under
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+On the 3rd of June we had our second South West UK VMUG and I am pleased to say it went superbly well.
 As before we held it at the Mshed facilities in Bristol.
 We had a great day with many sessions from sponsors,vendors and community speakers alike!
 Big thanks go to our speakers that day who were..
-Justin Rohan - @justinrohan - Nimble Storage - Sponsor James Smith - @james55smith - PernixData - Sponsor Julian Regel - @jr_on_the_cloud - Community session on vCD Adam Bohle - @adambohle - VMware - vCAC session Jonathan Medd - @jonathanmedd - Community session on PowerCLI/Automation Richard Munro - @RikMunro - VMware - vCHS Session One of the South West UK VMUG leaders Barry Coombs took a fantastic time lapse video of the day which can be viewed on his blog site.</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2014/06/another-fantastic-south-west-uk-vmug/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2013/08/powercli-warning-new-virtualswitch-without-the-numports-parameter-defaults-to-56-ports/>PowerCLI &amp;ndash; Warning! New-VirtualSwitch without the &amp;ndash;NumPorts parameter defaults to 56 ports!</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 28/8/2013</div><div class=clr-card-authors>Published under <a href=/category/vmware>VMware</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>There’s not a lot more to say than the title of this post – if you create a new Virtual Switch using PowerCLI without specifying the NumPorts parameter, it defaults to 64 ports. This strikes me as odd when the default for a standard switch is 120.
-You can see in the screenshot below that when I create a Virtual Switch without the parameter, it creates it with 64 ports. Once you minus the 8 reserved for physical NIC ports (uplinks), CDP traffic, and network discovery it leaves you with 56 ports available for VMs.</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2013/08/powercli-warning-new-virtualswitch-without-the-numports-parameter-defaults-to-56-ports/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2013/07/london-vmug-july-2013/>London VMUG &amp;ndash; July 2013</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 5/7/2013</div><div class=clr-card-authors>Published under</div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>Yesterday I attended my second ever #LonVMUG and did my first ever VMUG presentation! Generally it was a great day, with loads of really good sessions and some really cool community and vendor content.
-As ever it was great day for socialising and networking with people who you interact with on twitter. For me one of the major benefits of the VMUG is learning from other people’s experience. Twitter was alive with the hastag #LonVMUG and it definitely adds something to the day to be active</div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2013/07/london-vmug-july-2013/>More</a></div></div></div></div><nav><ul class=pagination><li class="pagination__item pagination__item--current"><a href=/tag/powercli/ class="btn btn-sm btn btn-primary">1</a></li><li class=pagination__item><a href=/tag/powercli/page/2/ class="btn btn-sm btn btn-outline">2</a></li><li class="pagination__item pagination__item--next"><a href=/tag/powercli/page/2/ class="btn btn-sm btn-outline">...</a></li><li class="pagination__item pagination__item--last"><a class="btn btn-sm btn btn-outline" href=/tag/powercli/page/2/>2</a></li></ul></nav></div><nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><section class=sidenav-content><section class="nav-group collapsible"><input id=Categories type=checkbox>
-<label for=Categories>Categories</label><ul class=nav-list><li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li><li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">22</span></a></li><li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li><li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li><li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">13</span></a></li><li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">41</span></a></li><li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li><li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li><li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li><li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li><li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li><li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li><li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li><li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">1</span></a></li><li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li><li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">204</span></a></li><li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li><li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">12</span></a></li><li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li><li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li><li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li><li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li><li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li><li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li></ul></section><section class="nav-group collapsible"><input id=Tags type=checkbox>
-<label for=Tags>Tags (Top 10)</label><ul class=nav-list><li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li><li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">51</span></a></li><li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li><li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li><li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li><li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li><li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li><li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">30</span></a></li><li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li><li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li></section><section class=nav-group><label for=Sponsors>Sponsors</label><ul class=nav-list></ul></section></section></nav></div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-4368767-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-4368767-1')</script><script src=/js/lightbox-plus-jquery.min.js></script></div></body></html>
+Justin Rohan - @justinrohan - Nimble Storage - Sponsor James Smith - @james55smith - PernixData - Sponsor Julian Regel - @jr_on_the_cloud - Community session on vCD Adam Bohle - @adambohle - VMware - vCAC session Jonathan Medd - @jonathanmedd - Community session on PowerCLI/Automation Richard Munro - @RikMunro - VMware - vCHS Session One of the South West UK VMUG leaders Barry Coombs took a fantastic time lapse video of the day which can be viewed on his blog site.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2014/06/another-fantastic-south-west-uk-vmug/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2013/08/powercli-warning-new-virtualswitch-without-the-numports-parameter-defaults-to-56-ports/>PowerCLI &amp;ndash; Warning! New-VirtualSwitch without the &amp;ndash;NumPorts parameter defaults to 56 ports!</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 28/8/2013
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+There’s not a lot more to say than the title of this post – if you create a new Virtual Switch using PowerCLI without specifying the NumPorts parameter, it defaults to 64 ports. This strikes me as odd when the default for a standard switch is 120.
+You can see in the screenshot below that when I create a Virtual Switch without the parameter, it creates it with 64 ports. Once you minus the 8 reserved for physical NIC ports (uplinks), CDP traffic, and network discovery it leaves you with 56 ports available for VMs.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2013/08/powercli-warning-new-virtualswitch-without-the-numports-parameter-defaults-to-56-ports/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2013/07/london-vmug-july-2013/>London VMUG &amp;ndash; July 2013</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 5/7/2013
+</div>
+<div class=clr-card-authors>
+Published under
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+Yesterday I attended my second ever #LonVMUG and did my first ever VMUG presentation! Generally it was a great day, with loads of really good sessions and some really cool community and vendor content.
+As ever it was great day for socialising and networking with people who you interact with on twitter. For me one of the major benefits of the VMUG is learning from other people’s experience. Twitter was alive with the hastag #LonVMUG and it definitely adds something to the day to be active
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2013/07/london-vmug-july-2013/>More</a>
+</div>
+</div>
+</div>
+</div>
+<nav>
+<ul class=pagination>
+<li class="pagination__item pagination__item--current">
+<a href=/tag/powercli/ class="btn btn-sm btn btn-primary">
+1
+</a>
+</li>
+<li class=pagination__item>
+<a href=/tag/powercli/page/2/ class="btn btn-sm btn btn-outline">
+2
+</a>
+</li>
+<li class="pagination__item pagination__item--next">
+<a href=/tag/powercli/page/2/ class="btn btn-sm btn-outline">
+...
+</a>
+</li>
+<li class="pagination__item pagination__item--last">
+<a class="btn btn-sm btn btn-outline" href=/tag/powercli/page/2/>
+2
+</a>
+</li>
+</ul>
+</nav>
+</div>
+<nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<section class=sidenav-content>
+<section class="nav-group collapsible">
+<input id=Categories type=checkbox>
+<label for=Categories>Categories</label>
+<ul class=nav-list>
+<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">22</span></a></li>
+<li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
+<li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
+<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">13</span></a></li>
+<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">42</span></a></li>
+<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li>
+<li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li>
+<li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
+<li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li>
+<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li>
+<li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li>
+<li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
+<li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">1</span></a></li>
+<li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
+<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">204</span></a></li>
+<li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
+<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
+<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
+<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
+<li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
+<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
+</ul>
+</section>
+<section class="nav-group collapsible">
+<input id=Tags type=checkbox>
+<label for=Tags>Tags (Top 10)</label>
+<ul class=nav-list>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">51</span></a></li>
+<li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
+<li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
+<li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
+<li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
+<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li>
+<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">31</span></a></li>
+<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li>
+<li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li>
+</section>
+<section class=nav-group>
+<label for=Sponsors>Sponsors</label>
+<ul class=nav-list>
+</ul>
+</section>
+</section>
+</nav>
+</div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-4368767-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-4368767-1')</script>
+<script src=/js/lightbox-plus-jquery.min.js></script>
+</div>
+</body>
+</html>
