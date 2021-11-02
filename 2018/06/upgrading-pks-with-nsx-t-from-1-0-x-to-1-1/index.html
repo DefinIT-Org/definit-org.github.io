@@ -36,7 +36,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2018/06/upgrading-pks-with-nsx-t-from-1-0-x-to-1-1/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.87.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.88.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -178,7 +178,7 @@ Tags:
 <h3 id=generate-a-super-user-principal-identity>Generate a Super User Principal Identity</h3>
 <p>First up, we need create a certificate that will &ldquo;represents a principal identity with superuser permissions that the PKS VM will use to communicate with NSX-T”. Follow the instructions in this document (6.1) <a href=https://docs.vmware.com/en/VMware-Pivotal-Container-Service/1.1/vmware-pks-11/GUID-PKS11-installing-nsx-t.html>https://docs.vmware.com/en/VMware-Pivotal-Container-Service/1.1/vmware-pks-11/GUID-PKS11-installing-nsx-t.html</a>. I ran the following on my pks-client Ubuntu server.</p>
 <p>Firstly, export some variables to use in the commands:</p>
-<pre><code>NSX_MANAGER=&quot;192.168.10.35&quot;
+<pre tabindex=0><code>NSX_MANAGER=&quot;192.168.10.35&quot;
 NSX_USER=&quot;admin&quot;
 NSX_PASSWORD=‘VMware1!'
 PI_NAME=&quot;pks-nsx-t-superuser&quot;
@@ -186,7 +186,7 @@ NSX_SUPERUSER_CERT_FILE=&quot;pks-nsx-t-superuser.crt&quot;
 NSX_SUPERUSER_KEY_FILE=&quot;pks-nsx-t-superuser.key&quot;
 NODE_ID=$(cat /proc/sys/kernel/random/uuid)
 </code></pre><p>Now generate a private key and certificate:</p>
-<pre><code>openssl req \
+<pre tabindex=0><code>openssl req \
 -newkey rsa:2048 \
  -x509 \
  -nodes \
@@ -207,14 +207,14 @@ NODE_ID=$(cat /proc/sys/kernel/random/uuid)
 <p>writing new private key to &lsquo;pks-nsx-t-superuser.key&rsquo;</p>
 <p>—-</p>
 <p>Create a variable with the certificate API request:</p>
-<pre><code>cert_request=$(cat &amp;lt;&amp;lt;END
+<pre tabindex=0><code>cert_request=$(cat &amp;lt;&amp;lt;END
 {
 &quot;display_name&quot;: &quot;$PI_NAME&quot;,
 &quot;pem_encoded&quot;: &quot;$(awk '{printf &quot;%s\\n&quot;, $0}' $NSX_SUPERUSER_CERT_FILE)&quot;
 }
 END)
 </code></pre><p>Then POST the request to the NSX API:</p>
-<pre><code>curl -k -X POST \
+<pre tabindex=0><code>curl -k -X POST \
 &quot;https://${NSX_MANAGER}/api/v1/trust-management/certificates?action=import&quot; \
 -u &quot;$NSX_USER:$NSX_PASSWORD&quot; \
 -H 'content-type: application/json' \
@@ -222,9 +222,9 @@ END)
 </code></pre><p>You can validate the certificate is installed in the NSX-T Manager interface under System > Trust > Certificates</p>
 <p><img title=nsxtcertificatetrust.png src=/images/2018/06/nsxtcertificatetrust.png alt="Certificate Trust" width=738 height=487 border=0></p>
 <p>Copy the “id” value from the response of the previous API call and create a variable:</p>
-<pre><code>CERTIFICATE_ID=&quot;a59f9a4f-c18c-49e8-8934-fca545d7ad93&quot;
+<pre tabindex=0><code>CERTIFICATE_ID=&quot;a59f9a4f-c18c-49e8-8934-fca545d7ad93&quot;
 </code></pre><p>Then create a variable to hold the API call to register the principal:</p>
-<pre><code>pi_request=$(cat &amp;lt;&amp;lt;END
+<pre tabindex=0><code>pi_request=$(cat &amp;lt;&amp;lt;END
 {
 &quot;display_name&quot;: &quot;$PI_NAME&quot;,
 &quot;name&quot;: &quot;$PI_NAME&quot;,
@@ -234,13 +234,13 @@ END)
 }
 END)
 </code></pre><p>And POST the call to NSX-T Manager to create it:</p>
-<pre><code>curl -k -X POST \
+<pre tabindex=0><code>curl -k -X POST \
 &quot;https://${NSX_MANAGER}/api/v1/trust-management/principal-identities&quot; \
 -u &quot;$NSX_USER:$NSX_PASSWORD&quot; \
 -H 'content-type: application/json' \
 -d &quot;$pi_request&quot;
 </code></pre><p>Finally, validate the certificate and key by using them to make a simple GET query on the API:</p>
-<pre><code>curl -k -X GET \
+<pre tabindex=0><code>curl -k -X GET \
 &quot;https://${NSX_MANAGER}/api/v1/trust-management/principal-identities&quot; \
 --cert $(pwd)/&quot;$NSX_SUPERUSER_CERT_FILE&quot; \
 --key $(pwd)/&quot;$NSX_SUPERUSER_KEY_FILE&quot;
@@ -272,7 +272,7 @@ END)
 <p><img title=pksapplyingchanges.png src=/images/2018/06/pksapplyingchanges.png alt="PKS Applying Changes" width=1272 height=739 border=0></p>
 <h2 id=upgrading-the-pks-and-kubectl-clis>Upgrading the PKS and Kubectl CLIs</h2>
 <p>Upgrading the CLIs is simply a case of uploading the binaries, chmod to allow execution, then moving to the correct folder:</p>
-<pre><code>sudo chmod +x pks-linux-amd64-1.1.0-build.301
+<pre tabindex=0><code>sudo chmod +x pks-linux-amd64-1.1.0-build.301
 sudo mv pks-linux-amd64-1.1.0-build.301 /usr/local/bin/pks
 sudo chmod +x kubectl-linux-amd64-v1.10.3
 sudo mv kubectl-linux-amd64-v1.10.3 /usr/local/bin/kubectl

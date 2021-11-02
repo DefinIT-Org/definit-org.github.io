@@ -34,7 +34,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2018/07/monitoring-temperature-and-humidity-with-a-raspberry-pi-3-dht22-sensor-influxdb-and-grafana/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.87.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.88.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -148,21 +148,21 @@ Tags:
 <p>Note the gpio # you connect to for later - I&rsquo;m using gpio 4.</p>
 <p><img src=https://www.definit.co.uk/images/2018/07/Raspberry-Pi-GPIO-Layout-Model-B-Plus-rotated-2700x900.png alt></p>
 <p>With everything connected, I powered on my Pi and proceeded to the installation. I have the latest Raspbian deployed freshly, with all software and firmware updates installed:</p>
-<pre><code>sudo apt-get update &amp;&amp; sudo apt-get upgrade -y
+<pre tabindex=0><code>sudo apt-get update &amp;&amp; sudo apt-get upgrade -y
 sudo rpi-update
 </code></pre><p>Firstly, because I&rsquo;m using the Raspberry Pi 3 on the latest Raspbian, I need to make sure the gpio driver module is loaded on boot. To do this I ran <code>sudo raspi-config</code> and selected &ldquo;Interfacing Options&rdquo; to enable SPI, I2C and 1-Wire. Reboot the Pi.</p>
 <p><img src=https://www.definit.co.uk/images/2018/07/2018-07-23_20-49-09.png alt></p>
 <p>Next I needed a Python library to deal with reading the sensor data. Fortunately there&rsquo;s already an excellent library freely available, the <a href=https://github.com/adafruit/Adafruit_Python_DHT>Adafruit_DHT library</a>. The following commands install the pre-requisites (which may already be installed), clones the Adafruit_DHT library from GitHub, then runs the installer:</p>
-<pre><code>sudo apt-get install build-essential python-dev python-openssl -y
+<pre tabindex=0><code>sudo apt-get install build-essential python-dev python-openssl -y
 git clone https://github.com/adafruit/Adafruit_Python_DHT.git
 cd Adafruit_Python_DHT
 sudo python setup.py install
 </code></pre><p>Nothing much to see there! But, all being well, we can now query the sensor using the example script with two argumets - 22 (for the DHT22 driver) and 4 (to use gpio 4):</p>
-<pre><code>sudo python Adafruit_Python_DHT/examples/AdafruitDHT.py 22 4
+<pre tabindex=0><code>sudo python Adafruit_Python_DHT/examples/AdafruitDHT.py 22 4
 </code></pre><p><img src=https://www.definit.co.uk/images/2018/07/2018-07-23_20-58-49.png alt></p>
 <p>And with that success, I moved onto installing InfluxDB. Since the Pi boots from an SD card, and I don&rsquo;t really want to be writing lots of data to an SD card (with questionable endurance), I am going to install InfluxDB and Grafana on my Intel NUC, which is running Ubuntu 18.04.</p>
 <p>I added the InfluxDB source to my apt repository by creating a new repository file, installing the public key, updating apt-get and then installing influxdb:</p>
-<pre><code>echo &quot;deb https://repos.influxdata.com/ubuntu bionic stable&quot; | sudo tee /etc/apt/sources.list.d/influxdb.list
+<pre tabindex=0><code>echo &quot;deb https://repos.influxdata.com/ubuntu bionic stable&quot; | sudo tee /etc/apt/sources.list.d/influxdb.list
 sudo curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
 sudo apt-get update
 sudo apt-get install influxdb -y
@@ -170,7 +170,7 @@ sudo systemctl start influxd
 sudo systemctl enable influxd
 </code></pre><p>I enable authentication for InfluxDB by because by default it&rsquo;s wide open, and I&rsquo;m nervous about that! Editing <code>sudo systemctl restart influxd</code></p>
 <p>Now using the<code>influx</code> command we can start issuing influx SQL-like commands - create a new database, create an admin user and grant admin rights, create a user for the Pi and grant read/write rights, and create a read only user for Grafana.</p>
-<pre><code>create database &quot;sensor_data&quot;
+<pre tabindex=0><code>create database &quot;sensor_data&quot;
 create user &quot;admin&quot; with password &quot;influxadmin&quot;
 grant all privileges to admin
 create user &quot;rpi-3&quot; with password &quot;rpi-3&quot;
@@ -178,7 +178,7 @@ grant all on &quot;sensor_data&quot; to &quot;rpi-3&quot;
 create user &quot;grafana&quot; with password &quot;grafana&quot;
 grant read on &quot;sensor_data&quot; to &quot;grafana&quot;
 </code></pre><p>Let&rsquo;s get some data going into the InfluxDB, back on the Pi I create a new folder &ldquo;sensor_data&rdquo; and edit a new python script - <code>sudo pip install influxdb</code></p>
-<pre><code>import time
+<pre tabindex=0><code>import time
 import sys
 import datetime
 import Adafruit_DHT
@@ -237,11 +237,11 @@ except KeyboardInterrupt:
 </code></pre><p>I can now test my script to make sure it&rsquo;s logging data for me using<code>sudo python sensor_data_logger.py</code></p>
 <p><img src=https://www.definit.co.uk/images/2018/07/2018-07-23_21-32-23.png alt></p>
 <p>Back on the NUC, using the influx CLI again, I can query the data collected:</p>
-<pre><code>use sensor_data
+<pre tabindex=0><code>use sensor_data
 select * from &quot;rpi-dht22&quot;
 </code></pre><p><img src=https://www.definit.co.uk/images/2018/07/2018-07-23_21-35-08.png alt></p>
 <p>Feeling more than a little pleased with myself (I will create a service to run my script at a later date), I move on to installing Grafana. Similarly to the InfluxDB install, I add the repository, trust the public key and update and install using apt:</p>
-<pre><code>echo &quot;deb https://packagecloud.io/grafana/stable/debian/ stretch main&quot; | sudo tee /etc/apt/sources.list.d/grafana.list
+<pre tabindex=0><code>echo &quot;deb https://packagecloud.io/grafana/stable/debian/ stretch main&quot; | sudo tee /etc/apt/sources.list.d/grafana.list
 curl https://packagecloud.io/gpg.key | sudo apt-key add -
 sudo apt-get update
 sudo apt-get install grafana
