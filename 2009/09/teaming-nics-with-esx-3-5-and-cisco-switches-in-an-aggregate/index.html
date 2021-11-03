@@ -32,7 +32,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2009/09/teaming-nics-with-esx-3-5-and-cisco-switches-in-an-aggregate/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.88.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.89.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -137,7 +137,7 @@ Tags:
 <p>First things first then - assign the four NICs to the vSwitch. This is done in the Configuration Tab in VMware Infrastructure Client, then the Networking page. Edit the properties of your vSwitch, then select the Network Adaptor tab. Add all the NICs you wish to team in there (they may already be in there, depending on your setup). You should end up with something that looks like this (note that I&rsquo;ve not assigned any VLAN yet):</p>
 <p> <img src="/BlogEngine/image.axd?picture=2009%2f9%2fESXvSwitch.png" alt width=459 height=333></p>
 <p>Now you need to configure the NIC teaming, so edit the vSwitch Properties and under the Ports tab select the vSwitch. Click edit, and then go to the NIC teaming tab. Configure the teaming options like this:</p>
-<p><img src="/BlogEngine/image.axd?picture=2009%2f9%2fvSwitchTeam.png" alt width=296 height=374></p>
+<img src="/BlogEngine/image.axd?picture=2009%2f9%2fvSwitchTeam.png" alt width=296 height=374>
 <p>That&rsquo;s the easy part over and done with! Time to move onto the Cisco!</p>
 <h2 id=configuring-the-cisco-core-switch>Configuring the Cisco Core Switch</h2>
 <p>Firstly, we need to log on to the switch and enter enable mode; I&rsquo;m going to assume you know how to do this - if not, you really shouldn&rsquo;t be attempting this setup!</p>
@@ -250,13 +250,12 @@ Next
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmware-vsphere class=nav-link>VMWARE-VSPHERE <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
 <li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
 <li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">57</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>

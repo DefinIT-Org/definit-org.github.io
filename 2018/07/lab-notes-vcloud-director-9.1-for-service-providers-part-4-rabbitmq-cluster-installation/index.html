@@ -33,7 +33,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2018/07/lab-notes-vcloud-director-9.1-for-service-providers-part-4-rabbitmq-cluster-installation/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.88.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.89.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -181,7 +181,7 @@ Lab Notes – vCloud Director 9.1 for Service Providers – Part 4: RabbitMQ Clu
 <li>vCloud Director will publish messages to the load balancer</li>
 <li>vRealize Orchestrator will subscribe as a consumer to the load balancer</li>
 </ul>
-<p><img title=rabbitmqcluster.png src=/images/2018/07/rabbitmqcluster.png alt="RabbitMQ HA Cluster" width=336 height=456 border=0></p>
+<img title=rabbitmqcluster.png src=/images/2018/07/rabbitmqcluster.png alt="RabbitMQ HA Cluster" width=336 height=456 border=0>
 <h2 id=prerequisites>Prerequisites</h2>
 <p>I’ve deployed two CentOS7 VMs from my standard template, and configured the pre-requisites as per my pre-requisites post. Updates, NTP, DNS and  SELinux have all been configured.</p>
 <p>RabbitMQ needs the exact same Erlang version installed on each node, the easiest way to do this is to enable the EPEL repository:</p>
@@ -216,7 +216,7 @@ Lab Notes – vCloud Director 9.1 for Service Providers – Part 4: RabbitMQ Clu
 <p>sudo rabbitmqctl set_user_tags vcloud administrator</p>
 <p>sudo rabbitmqctl set_permissions -p / vcloud &ldquo;.*&rdquo; &ldquo;.*&rdquo; &ldquo;.*&rdquo;</p>
 <p>Validate that the RabbitMQ admin page is accessible on <a href=http://vcd-rmq-1.definit.local:15672>http://vcd-rmq-1.definit.local:15672</a></p>
-<p><img title=rmqadmin.png src=/images/2018/07/rmqadmin.png alt="RabbitMQ Admin Interface" width=1233 height=659 border=0></p>
+<img title=rmqadmin.png src=/images/2018/07/rmqadmin.png alt="RabbitMQ Admin Interface" width=1233 height=659 border=0>
 <h2 id=clustering-rabbitmq-nodes>Clustering RabbitMQ nodes</h2>
 <p>Now I have two independent, stand-alone RabbitMQ nodes running, it’s time to cluster them. Firstly the Erlang cookie needs to be copied from the first node to the second, which allows them to join the same cluster.</p>
 <p><strong>IMPORTANT</strong>: Make sure both nodes can resolve each other using their short names (e.g. vcd-rmq-1 and vcd-rmq-2). If they cannot, create entries in the HOSTS file to ensure that they can.</p>
@@ -239,14 +239,14 @@ Lab Notes – vCloud Director 9.1 for Service Providers – Part 4: RabbitMQ Clu
 <p>Then start the RabbitMQ app:</p>
 <p>rabbitmqctl start_app</p>
 <p>Validate the cluster status, using rabbitmqctl cluster_status, or by refreshing the management interface:</p>
-<p><img title=rmqcluster.png src=/images/2018/07/rmqcluster.png alt="RabbitMQ Cluster Status" width=1250 height=708 border=0></p>
+<img title=rmqcluster.png src=/images/2018/07/rmqcluster.png alt="RabbitMQ Cluster Status" width=1250 height=708 border=0>
 <h2 id=configuring-rabbitmq-for-vcloud-director>Configuring RabbitMQ for vCloud Director</h2>
 <h3 id=queue-ha-policy>Queue HA Policy</h3>
 <p>Now that the RabbitMQ nodes are clustered, we can configure the Queue mirroring with a HA policy. The below command creates a policy called “ha-all”, which applies to all queues (matching “”), then sets the ha-mode to “all” (replicate to all nodes in cluster) and the ha-sync-mode to “automatic” (if a new node joins, sync automatically). You can read more about RabbitMQ HA configuration here https://www.rabbitmq.com/ha.html</p>
 <p>rabbitmqctl set_policy ha-all "" &lsquo;{&ldquo;ha-mode&rdquo;:&ldquo;all&rdquo;,&ldquo;ha-sync-mode&rdquo;:&ldquo;automatic&rdquo;}&rsquo;</p>
 <h3 id=create-a-topic-exchange>Create a Topic Exchange</h3>
 <p>Using the RabbitMQ management interface, log on with the “vcloud” user created earlier and select the “Exchanges” tab. Expand the “Add a new exchange” box and enter a name for the exchange. The remaining settings can be left at default. Once the new Exchange has been created, you can see that the “ha-all” policy has applied to it.</p>
-<p><img title=topicexchange.png src=/images/2018/07/topicexchange.png alt="Create Topic Exchange" width=1258 height=855 border=0></p>
+<img title=topicexchange.png src=/images/2018/07/topicexchange.png alt="Create Topic Exchange" width=1258 height=855 border=0>
 <h2 id=configuring-the-rabbitmq-load-balancer>Configuring the RabbitMQ Load Balancer</h2>
 <p>The final configuration step is to load balance the two RabbitMQ nodes in the cluster - as described in the opening of this post, this will steer the publisher (vCloud Director) and subscriber (vRealize Orchestrator) to the node with the active queue.</p>
 <p>I will be configuring an NSX-T load balancer, on the Tier-1 router that all the vCloud Director components are connected to. However the basic configuration should apply across most load balancer vendors. The load balancer should direct all traffic to vcd-rmq-1, unless the health check API does not return the expected status.</p>
@@ -408,13 +408,12 @@ Next
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmware-vsphere class=nav-link>VMWARE-VSPHERE <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
 <li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
 <li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">57</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>

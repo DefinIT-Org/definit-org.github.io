@@ -32,7 +32,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2018/04/vrealize-lifecycle-manager-1-2-vc-data-collection-fails-when-nsx-t-hostswitches-are-in-use/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.88.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.89.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -133,17 +133,17 @@ Tags:
 <img src=/images/2018/04/vRLCM-Logo.png class=clr-post-featured-image>
 <p><img style=float:right title=vRLCM-Logo.png src=/images/2018/04/vRLCM-Logo.png alt="vRLCM Logo" width=200 height=200 border=0>When vRealize Lifecycle Manager 1.2 was released recently, I was keen to get it installed in my lab, since I maintain several vRealize Automation deployments for development and testing, as well as performing upgrades. With vRLCM I can reduce the administrative overhead of managing the environments, as well as easily migrate content between environments (I&rsquo;ll be blogging on some of these cool new features soon).</p>
 <p>However, I hit a snag when I began to import my existing environment - I couldn’t get the vCenter data collection to run.</p>
-<p><img title=vcdcfailed.png src=/images/2018/04/vcdcfailed.png alt="Data Collection Failed" width=575 height=45 border=0></p>
+<img title=vcdcfailed.png src=/images/2018/04/vcdcfailed.png alt="Data Collection Failed" width=575 height=45 border=0>
 <p>When the data collection is initiated, it fails with the below error message. In the details fo the error, we can see that the task that fails is the “getNetworks” operation. Thanks to some colleagues in the engineering team, we were able to identify the NSX-T hostswitches as the likely cause. This workaround was identified by Christian Neugum, a PSO consultant working in Germany.</p>
 <blockquote>
 <p>LCMCOMMON80018: Error occurred while performing VC data collection.Please retry after some time.</p>
 <p>java.lang.NullPointerException at com.vmware.vrealize.lcm.drivers.commonplugin.task.VcInventoryDiscoveryTask.convert(VcInventoryDiscoveryTask.java:262) at com.vmware.vrealize.lcm.drivers.commonplugin.task.VcInventoryDiscoveryTask.<span style=color:#007600>getNetworks</span>(VcInventoryDiscoveryTask.java:243) at com.vmware.vrealize.lcm.drivers.commonplugin.task.VcInventoryDiscoveryTask.convert(VcInventoryDiscoveryTask.java:218) at com.vmware.vrealize.lcm.drivers.commonplugin.task.VcInventoryDiscoveryTask.getHosts(VcInventoryDiscoveryTask.java:204) at com.vmware.vrealize.lcm.drivers.commonplugin.task.VcInventoryDiscoveryTask.getClusters(VcInventoryDiscoveryTask.java:165)…[snip]</p>
 </blockquote>
-<p><img title=vrlcm-error.png src=/images/2018/04/vrlcm-error.png alt="vRLCM Error" width=419 height=600 border=0></p>
+<img title=vrlcm-error.png src=/images/2018/04/vrlcm-error.png alt="vRLCM Error" width=419 height=600 border=0>
 <p>The solution was to ensure the user created for vRealize Lifecycle Manager data collection does not have permissions to read the NSX-T hostswitches. I created a Network Folder to contain the hostswitches and then denied the user permission. Since an explicit deny on the object overrides the less specific permissions, the user (svc_vrlcm) can no longer view the hostswitches.</p>
-<p><img title=nsx-t-hostswitch-permissions.png src=/images/2018/04/nsx-t-hostswitch-permissions.png alt="Deny access to the vRLCM user" width=597 height=159 border=0></p>
+<img title=nsx-t-hostswitch-permissions.png src=/images/2018/04/nsx-t-hostswitch-permissions.png alt="Deny access to the vRLCM user" width=597 height=159 border=0>
 <p>Now when data collection is initiated, the collection succeeds and I can continue bringing my lab under LCM management!</p>
-<p><img title=vcdcsuccess.png src=/images/2018/04/vcdcsuccess.png alt="Data Collection Succeeded" width=598 height=41 border=0></p>
+<img title=vcdcsuccess.png src=/images/2018/04/vcdcsuccess.png alt="Data Collection Succeeded" width=598 height=41 border=0>
 <h6>Share this post</h6>
 <span class=share-box>
 <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2018%2f04%2fvrealize-lifecycle-manager-1-2-vc-data-collection-fails-when-nsx-t-hostswitches-are-in-use%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-facebook-official"></i></a>
@@ -238,13 +238,12 @@ Next
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmware-vsphere class=nav-link>VMWARE-VSPHERE <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
 <li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
 <li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">57</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>

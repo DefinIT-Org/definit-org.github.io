@@ -36,7 +36,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2018/03/three-tier-app-for-vrealize-automation/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.88.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.89.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -151,7 +151,7 @@ Tags:
 <li>Finally, I want to be able to deploy my 3-tier application using vRA Software Components (though you can also use startup scripts in the customisation spec)</li>
 </ul>
 <p>Based on this, my final application will look something like the image below, with clients connecting to the NSX load balancer on HTTPS/443, multiple NGINX reverse proxy servers communicating with the NSX load balancer on HTTP/8080, which is in front of multiple Apache web servers running the PHP application which all talk to the MySQL databased back end over MySQL/3306.</p>
-<p><img title=three-tier-app.png src=/images/2018/03/three-tier-app.png alt="Three Tier App" width=597 height=200 border=0></p>
+<img title=three-tier-app.png src=/images/2018/03/three-tier-app.png alt="Three Tier App" width=597 height=200 border=0>
 <p>When in use, the application looks like this:</p>
 <div style=width:720px class=wp-video>
 <!--[if lt IE 9]><![endif]--><video class=wp-video-shortcode id=video-8754-1 width=720 height=613 preload=metadata controls><source type=video/mp4 src="/images/2018/03/2018-03-26_11-48-23.mp4?_=1">
@@ -321,7 +321,7 @@ Tags:
 <li><strong>mysql_user_password</strong> - this is set as a Computed Value because the script auto-generates a password. Setting it to a Computed Value lets us bind to the property later in the blueprint to pass to other components)</li>
 <li><strong>mysql_user_name</strong> - the name of the MySQL user to be created for the app</li>
 </ul>
-<p><img title=demoappdatabase.png src=/images/2018/03/demoappdatabase.png alt="Demo App Database Properties" width=600 height=147 border=0></p>
+<img title=demoappdatabase.png src=/images/2018/03/demoappdatabase.png alt="Demo App Database Properties" width=600 height=147 border=0>
 <h3 id=demo-app-application>Demo App Application</h3>
 <p>The application tier install component has four inputs, which will be directly mapped to the properties for the database component</p>
 <ul>
@@ -330,14 +330,14 @@ Tags:
 <li><strong>demp_app_mysql_password</strong> - the generated password for the MySQL user</li>
 <li><strong>demo_app_mysql_database</strong> - the name of the MySQL databsae</li>
 </ul>
-<p><img title=demoappapplication.png src=/images/2018/03/demoappapplication.png alt="demo app application" width=596 height=135 border=0></p>
+<img title=demoappapplication.png src=/images/2018/03/demoappapplication.png alt="demo app application" width=596 height=135 border=0>
 <h3 id=demo-app-web>Demo App Web</h3>
 <p>The web tier install component has two inputs for the script, which can be either mapped to the tier server IP addresses (for single node deploys) or to the load balancer IP addresses (for multi-node deploys).</p>
 <ul>
 <li><strong>web_server_name</strong> - the name or IP of the web tier (server or load balancer)</li>
 <li><strong>app_server_name</strong> - the DNS name or IP of the app tier (server or load balancer)</li>
 </ul>
-<p><img title=demoappwebserver.png src=/images/2018/03/demoappwebserver.png alt="Demo App Web Server" width=597 height=117 border=0></p>
+<img title=demoappwebserver.png src=/images/2018/03/demoappwebserver.png alt="Demo App Web Server" width=597 height=117 border=0>
 <h2 id=creating-the-vrealize-automation-blueprints>Creating the vRealize Automation Blueprints</h2>
 <p>Now that all of the building blocks are in place, I can create the Blueprints that will tie it all together.</p>
 <p>For the multi-node deployment, the blueprint looks like this (running from left to right):</p>
@@ -379,23 +379,23 @@ Tags:
 <p><strong>Demo_App_Database</strong> - the Demo App Database software component</p>
 </li>
 </ul>
-<p><img title=multinodeblueprint.png src=/images/2018/03/multinodeblueprint.png alt="multi node blueprint" width=579 height=128 border=0></p>
+<img title=multinodeblueprint.png src=/images/2018/03/multinodeblueprint.png alt="multi node blueprint" width=579 height=128 border=0>
 <p>Note the lines depicting build dependencies - the Web depends on the App, which depends on the DB.</p>
 <p>The custom property mapping for the database tier lets the user specify the database name, root password and app user name in the request (Show in Request, Overridable) while providing some default values. The MySQL bind address is bound to the <em>_resource~db_tier~ip_address</em> property, which will be the IP address vRA assigns to the database server.</p>
-<p><img title=dbproperties.png src=/images/2018/03/dbproperties.png alt="Database custom property mapping" width=470 height=111 border=0></p>
+<img title=dbproperties.png src=/images/2018/03/dbproperties.png alt="Database custom property mapping" width=470 height=111 border=0>
 <p>All of the custom properties for the application tier are bound to property values from the database tier, so that the PHP file is updated with the database server configuration (server, database, user and password). These properties are hidden from the user as they’re bound.</p>
-<p><img title=apptierproperties.png src=/images/2018/03/apptierproperties.png alt="App Tier Properties" width=470 height=109 border=0></p>
+<img title=apptierproperties.png src=/images/2018/03/apptierproperties.png alt="App Tier Properties" width=470 height=109 border=0>
 <p>The two inputs for the web tier custom properties are mapped to the load balancer IP addresses for the web and app tier load balancers.</p>
-<p><img title=webtierproperties.png src=/images/2018/03/webtierproperties.png alt="Web Tier Properties" width=469 height=89 border=0></p>
+<img title=webtierproperties.png src=/images/2018/03/webtierproperties.png alt="Web Tier Properties" width=469 height=89 border=0>
 <p>To create a single-node blueprint of the application there’s only one difference - the web tier properties are mapped directly to the web_tier and app_tier IP addresses.</p>
-<p><img title=singlenodeapp.png src=/images/2018/03/singlenodeapp.png alt="Single Node App" width=469 height=262 border=0></p>
+<img title=singlenodeapp.png src=/images/2018/03/singlenodeapp.png alt="Single Node App" width=469 height=262 border=0>
 <h2 id=deploying-and-testing-the-three-tier-demo-app>Deploying and testing the three tier Demo App</h2>
 <p>Once the blueprint has been published and assigned to a catalog, service and entitlement, it’s time to deploy and test the app! Below you can see the deployment form, and the configuration of the database install script.</p>
-<p><img title=deploy3tierapp.png src=/images/2018/03/deploy3tierapp.png alt="Deploying the three-tier Demo App" width=600 height=193 border=0></p>
+<img title=deploy3tierapp.png src=/images/2018/03/deploy3tierapp.png alt="Deploying the three-tier Demo App" width=600 height=193 border=0>
 <p>The deployed blueprint looks something like this - you can see that the web tier load balancer has an IP address of 10.0.0.210.</p>
-<p><img title=deployedblueprint.png src=/images/2018/03/deployedblueprint.png alt="Deployed blueprint" width=598 height=294 border=0></p>
+<img title=deployedblueprint.png src=/images/2018/03/deployedblueprint.png alt="Deployed blueprint" width=598 height=294 border=0>
 <p>And when I hit the load balancer IP, the application loads!</p>
-<p><img title=workingapplication.png src=/images/2018/03/workingapplication.png alt="Working application" width=599 height=163 border=0></p>
+<img title=workingapplication.png src=/images/2018/03/workingapplication.png alt="Working application" width=599 height=163 border=0>
 <h2 id=and-finally8230>And finally…</h2>
 <p>All of the vRA components have been exported using CloudClient and are also on the GitHub repo if you want to import them. Since this post is getting pretty long, I’ll draw it to a close here - hopefully this is of some use to you - please feel free to leave me a comment or ping me on twitter if you have any questions!</p>
 <h6>Share this post</h6>
@@ -492,13 +492,12 @@ Next
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmware-vsphere class=nav-link>VMWARE-VSPHERE <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
 <li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
 <li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">57</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>

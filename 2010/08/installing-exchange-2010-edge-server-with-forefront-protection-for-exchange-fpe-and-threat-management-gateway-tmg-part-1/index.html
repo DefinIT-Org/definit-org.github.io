@@ -36,7 +36,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2010/08/installing-exchange-2010-edge-server-with-forefront-protection-for-exchange-fpe-and-threat-management-gateway-tmg-part-1/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.88.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.89.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -170,7 +170,7 @@ Tags:
 <pre>New-EdgeSubscription –FileName c:\EDGE01-Config.xml</pre>
 </blockquote>
 <p><img src=https://www.definit.co.uk/images/2010/08/image_thumb7.png alt></p>
-<p>You get the above message, which essentially warns you that a) EdgeSync will overwrite your existing configurations, b) you must now manage the server from your Internal Exchange organisation, c) the Edge and Hub Transport servers must be able to resolve each other’s FQDN, d) you have 1440 minutes (24 hours) to complete the subscription or it will eat your mum and/or dog*. (_*may not be true_)</p>
+<p>You get the above message, which essentially warns you that a) EdgeSync will overwrite your existing configurations, b) you must now manage the server from your Internal Exchange organisation, c) the Edge and Hub Transport servers must be able to resolve each other’s FQDN, d) you have 1440 minutes (24 hours) to complete the subscription or it will eat your mum and/or dog*. (<em>*may not be true</em>)</p>
 <p>If you view the created subscription file, you can see that there’s some pretty obvious configuration data such as the server name and FQDN, a certificate, a user name and password to create, the AD LDS (or ADAM in old money) port and some product version and ID info.</p>
 <p>Copy this subscription file over to your Hub Transport server and fire up a new EMS window.</p>
 <blockquote>
@@ -277,13 +277,12 @@ Next
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmware-vsphere class=nav-link>VMWARE-VSPHERE <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
 <li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
 <li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">57</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>

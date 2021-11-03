@@ -28,7 +28,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2017/12/one-node-vsan-lab-host/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.88.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.89.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -128,7 +128,7 @@ Tags:
 <h3 id=enabling-vsan-on-a-single-host>Enabling vSAN on a single host</h3>
 <p>Firstly, enable vSAN on either the existing VMKernel interface, or create a new VMKernel interface for vSAN. If the host is currently standalone (and you’ll deploy vCenter to vSAN later, for example), you can use an esxcli command to “tick the box” using the VMKernel ID (e.g. vmk0):</p>
 <pre>esxcli vsan network ipv4 add -i vmk0</pre>
-<p><img title=NewImage.png src=/images/2018/03/NewImage.png alt=NewImage width=303 height=168 border=0></p>
+<img title=NewImage.png src=/images/2018/03/NewImage.png alt=NewImage width=303 height=168 border=0>
 <p>Next, we need to update the default vSAN policy to allow us to use a single host vSAN. Querying the default policy via esxcli shows that the <em>cluster</em>, <em>vdisk</em>, <em>vmnamespace</em>, <em>vmswap</em> and <em>vmem</em> classes are all configured with a <em>hostFailuresToTolerate</em> (FTT) value of 1, and only <em>vmswap</em> and <em>vmem</em> are configured to _forceProvisioning _(that is, provision if policy is not met).</p>
 <pre>[root@t7500:~] esxcli vsan policy getdefault
 Policy Class Policy Value 
@@ -150,7 +150,7 @@ esxcli vsan vsan storage add -s &lt;SSD identifier&gt; -d &lt;HDD identifier&gt
 <p>The vSAN storage is now available, and you can deploy your vCenter (or other VMs) to the datastore.</p>
 <h3 id=and-finally8230>And finally…</h3>
 <p>If you are running a single node vSAN under vCenter, you’ll want to enable vSAN from within vCenter, and also update the default vSAN policy to match the settings:</p>
-<p><img title=NewImage.png src=/images/2018/03/NewImage-1.png alt="Create vSAN One Node Policy" width=479 height=279 border=0></p>
+<img title=NewImage.png src=/images/2018/03/NewImage-1.png alt="Create vSAN One Node Policy" width=479 height=279 border=0>
 <h6>Share this post</h6>
 <span class=share-box>
 <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2017%2f12%2fone-node-vsan-lab-host%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-facebook-official"></i></a>
@@ -245,13 +245,12 @@ Next
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmware-vsphere class=nav-link>VMWARE-VSPHERE <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
 <li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
 <li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">57</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>

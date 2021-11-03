@@ -31,7 +31,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2018/02/retrieve-blueprint-or-virtual-machine-custom-properties-using-the-vrealize-automation-api/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.88.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.89.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -130,14 +130,14 @@ Tags:
 </div>
 <img src=/images/logos/vmware-vra.png class=clr-post-featured-image>
 <p><img class="alignright wp-image-6186" src=/images/logos/vmware-vra.png alt width=150 height=150>Just a quick post today, as I was working with a customer recently and we were trying to retrieve the Custom Properties assigned to a vRealize Automation 7.3 deployed Virtual Machine, similar to the one in the image below. It’s not as intuitive as you’d like it to be because of the split between IaaS APIs and Cafe APIs. Below you can see I’ve deployed a simple CentOS blueprint with a custom property at the Blueprint level (called “BlueprintLevel” with a value of “CustomProperty”) and a custom property at the VM level (called “CustomProperty” and a value of “Test123”).</p>
-<p><img title=vra-bp-custom-prop.png src=/images/2018/02/vra-bp-custom-prop.png alt="vRA Blueprint Custom Property" width=282 height=141 border=0></p>
-<p><img title=vra-custom-property.png src=/images/2018/02/vra-custom-property.png alt="vRA VM Custom Property" width=475 height=202 border=0></p>
+<img title=vra-bp-custom-prop.png src=/images/2018/02/vra-bp-custom-prop.png alt="vRA Blueprint Custom Property" width=282 height=141 border=0>
+<img title=vra-custom-property.png src=/images/2018/02/vra-custom-property.png alt="vRA VM Custom Property" width=475 height=202 border=0>
 <h2 id=authenticating-with-the-vra-api>Authenticating with the vRA API</h2>
 <p>The first step when working with the vRA API is to get the bearer token by sending the username, password and tenant to the token service:</p>
 <blockquote>
 <p>https://{{vra-fqdn}}/identity/api/tokens</p>
 </blockquote>
-<p><img title=vra-bearer-token.png src=/images/2018/02/vra-bearer-token.png alt="vRA API Get Bearer Token" width=446 height=265 border=0></p>
+<img title=vra-bearer-token.png src=/images/2018/02/vra-bearer-token.png alt="vRA API Get Bearer Token" width=446 height=265 border=0>
 <p>I have stored the value of the bearer token in a Postman variable {{token}}.</p>
 <h2 id=finding-the-blueprints-custom-property>Finding the Blueprint’s Custom Property</h2>
 <p>It’s an odd quirk with the vRA API that even through you return the Catalog Resource with the resources API, you can’t see the property directly. There is a little trick to finding it though, by retrieving the form for the resource.</p>
@@ -145,24 +145,24 @@ Tags:
 <blockquote>
 <p>https://{{vra-fqdn}}/catalog-service/api/consumer/resources?$filter=name eq &lsquo;CentOS6-ExternalNetwork-58506054&rsquo;</p>
 </blockquote>
-<p><img title=vra-resource-id.png src=/images/2018/02/vra-resource-id.png alt="vRA API - Find Resource ID" width=615 height=215 border=0></p>
+<img title=vra-resource-id.png src=/images/2018/02/vra-resource-id.png alt="vRA API - Find Resource ID" width=615 height=215 border=0>
 <p>Grab the resource ID and query the form:</p>
 <blockquote>
 <p>https://{{vra-fqdn}}/catalog-service/api/consumer/resources/d4692cad-7fd3-4242-8472-6ed4359141bf/form</p>
 </blockquote>
-<p><img title=vra-bp-level-custom-property.png src=/images/2018/02/vra-bp-level-custom-property.png alt="vRA API Blueprint Level Custom Property" width=442 height=424 border=0></p>
+<img title=vra-bp-level-custom-property.png src=/images/2018/02/vra-bp-level-custom-property.png alt="vRA API Blueprint Level Custom Property" width=442 height=424 border=0>
 <p>There is an id assigned to the custom property (provider-PROP_BlueprintLevel), which you can use to find the value in the “values” array below. Not ideal, but workable.</p>
 <h2 id=finding-the-virtual-machines-custom-property>Finding the Virtual Machine’s Custom Property</h2>
 <p>Next we can query the resource and filter by the resource by the Virtual Machine name - &ldquo;lab00143&rdquo;</p>
 <blockquote>
 <p>https://{{vra-fqdn}}/catalog-service/api/consumer/resources?$filter=name eq &lsquo;lab00143&rsquo;</p>
 </blockquote>
-<p><img title=vra-api-resource-byname.png src=/images/2018/02/vra-api-resource-byname.png alt="Get vRA Resource by Name" width=446 height=361 border=0></p>
+<img title=vra-api-resource-byname.png src=/images/2018/02/vra-api-resource-byname.png alt="Get vRA Resource by Name" width=446 height=361 border=0>
 <p>Find and grab the providerBinding.bindingId, and query the IaaS server (using NTLM authentication) to retrieve the VirtualMachineProperties.</p>
 <blockquote>
 <p>https://{{vra-iaas}}/repository/Data/ManagementModelEntities.svc/VirtualMachines(guid'76e88125-8c81-4de0-82d9-f3e6f41f9531′)/VirtualMachineProperties</p>
 </blockquote>
-<p><img title=vra-custom-property.png src=/images/2018/02/vra-custom-property-1.png alt=vra-custom-property width=448 height=270 border=0></p>
+<img title=vra-custom-property.png src=/images/2018/02/vra-custom-property-1.png alt=vra-custom-property width=448 height=270 border=0>
 <p>Hope this quick snip helps you with retrieving the properties from a blueprint or an IaaS virtual machine!</p>
 <h6>Share this post</h6>
 <span class=share-box>
@@ -258,13 +258,12 @@ Next
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmware-vsphere class=nav-link>VMWARE-VSPHERE <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
 <li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
 <li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">57</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>

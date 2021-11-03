@@ -31,7 +31,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2009/09/multi-homed-domain-controller-logs-event-id-1030-and-1058/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.88.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.89.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -158,7 +158,7 @@ Tags:
 <p>Description:</p>
 </blockquote>
 <blockquote>
-<p>Windows cannot query for the list of Group Policy objects. Check the event log for possible messages previously logged by the policy engine that describes the reason for this. For more information, see Help and Support Center at_ <a href=http://go.microsoft.com/fwlink/events.asp><em>http://go.microsoft.com/fwlink/events.asp</em></a>_._</p>
+<p>Windows cannot query for the list of Group Policy objects. Check the event log for possible messages previously logged by the policy engine that describes the reason for this. For more information, see Help and Support Center at_ <a href=http://go.microsoft.com/fwlink/events.asp><em>http://go.microsoft.com/fwlink/events.asp</em></a><em>.</em></p>
 </blockquote>
 <blockquote>
 <p>_Event Type: Error</p>
@@ -188,7 +188,7 @@ Tags:
 <p>Description:</p>
 </blockquote>
 <blockquote>
-<p>Windows cannot access the file gpt.ini for GPO CN={31B2F340-016D-11D2-945F-00C04FB984F9},CN=Policies,CN=System,DC=DOMAIN,DC=LCL. The file must be present at the location &lt;<em></em>\DOMAIN.LCL\sysvol\DOMAIN.LCL\Policies{31B2F340-016D-11D2-945F-00C04FB984F9}\gpt.ini_<a href=file://domain.lcl/sysvol/DOMAIN.LCL/Policies/%7B31B2F340-016D-11D2-945F-00C04FB984F9%7D/gpt.ini></a><em>>. (Windows cannot find the network path. Verify that the network path is correct and the destination computer is not busy or turned off. If Windows still cannot find the network path, contact your network administrator. ). Group Policy processing aborted. For more information, see Help and Support Center at</em> <a href=http://go.microsoft.com/fwlink/events.asp><em>http://go.microsoft.com/fwlink/events.asp</em></a><em>.</em></p>
+<p>Windows cannot access the file gpt.ini for GPO CN={31B2F340-016D-11D2-945F-00C04FB984F9},CN=Policies,CN=System,DC=DOMAIN,DC=LCL. The file must be present at the location &lt;<em><a href=file://domain.lcl/sysvol/DOMAIN.LCL/Policies/%7B31B2F340-016D-11D2-945F-00C04FB984F9%7D/gpt.ini><em>\DOMAIN.LCL\sysvol\DOMAIN.LCL\Policies{31B2F340-016D-11D2-945F-00C04FB984F9}\gpt.ini</em></a></em>>. (Windows cannot find the network path. Verify that the network path is correct and the destination computer is not busy or turned off. If Windows still cannot find the network path, contact your network administrator. ). Group Policy processing aborted. For more information, see Help and Support Center at_ <a href=http://go.microsoft.com/fwlink/events.asp><em>http://go.microsoft.com/fwlink/events.asp</em></a><em>.</em></p>
 </blockquote>
 <p>On the affected machines, when navigating to <a href=file://domain.lcl/>\DOMAIN.LCL</a> there were no shares available, however navigating to <a href=file://dc/>\DC</a> shows the NETLOGON and SYSVOL shares. Pinging DOMAIN.LCL and then the DC showed that the IP addresses were not the same as expected, DOMAIN.LCL was resolving to the backup network, whereas DC was resolving to the servers LAN IP.</p>
 <p>I checked the DNS records for the server, which were correct. Investigating the adaptor binding settings under Control Panel > Network Connections > Advanced > Advanced Settings showed that the backup network&rsquo;s adaptor was first in the list. I moved the adaptor for the LAN to the top of the list and OK&rsquo;d my way out. I restarted the NETLOGON service and the issue was solved.</p>
@@ -317,13 +317,12 @@ Next
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmware-vsphere class=nav-link>VMWARE-VSPHERE <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
 <li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
 <li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">57</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>

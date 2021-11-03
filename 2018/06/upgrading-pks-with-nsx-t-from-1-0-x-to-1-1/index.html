@@ -36,7 +36,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2018/06/upgrading-pks-with-nsx-t-from-1-0-x-to-1-1/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.88.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.89.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -150,10 +150,10 @@ Tags:
 <p><img src=https://www.definit.co.uk/images/2018/06/nonatnsxttopology.png alt></p>
 <h2 id=check-pks-prerequisites>Check PKS Prerequisites</h2>
 <p>Check the Ops Manager version - PKS 1.1 requires Ops Manager 2.1, you can view your current version by accessing the Ops Manager web interface and the version is listed at the bottom. If it&rsquo;s not up to date enough, follow the Ops Manager upgrade documentation.</p>
-<p><img title=opsmanagerversion.png src=/images/2018/06/opsmanagerversion.png alt="Ops Manager version" width=482 height=48 border=0></p>
+<img title=opsmanagerversion.png src=/images/2018/06/opsmanagerversion.png alt="Ops Manager version" width=482 height=48 border=0>
 <p>If you chose to upgrade deployed k8s nodes as part of the upgrade you will need to make sure you have at least 3 worker nodes and your workloads are spread across the nodes to ensure workloads are available. Check if PKS k8s deployments are correctly sized, and scale if it’s required (it’ll go red under the Status tab if it’s under pressure!)</p>
-<p><img title=checkpksmetrics.png src=/images/2018/06/checkpksmetrics.png alt="Check PKS metrics" width=600 height=150 border=0></p>
-<p><img title=pksunderpressure.png src=/images/2018/06/pksunderpressure.png alt="PKS under pressure" width=600 height=24 border=0></p>
+<img title=checkpksmetrics.png src=/images/2018/06/checkpksmetrics.png alt="Check PKS metrics" width=600 height=150 border=0>
+<img title=pksunderpressure.png src=/images/2018/06/pksunderpressure.png alt="PKS under pressure" width=600 height=24 border=0>
 <h2 id=download-the-binaries>Download the binaries</h2>
 <p>Download the necessary binaries from the <a href=https://network.pivotal.io/products/pivotal-container-service/>Pivotal Container Service page</a> - mine is vSphere. For the PKS and Kubectl API, download the binary for your “PKS Client” platform - I’m using Linux. Also download the updated Stemcell (linked on the right under Release Details), I am using the Ubuntu Trusty for vSphere one.</p>
 <ul>
@@ -162,16 +162,16 @@ Tags:
 <li>pks-linux-amd64-1.1.0-build.301</li>
 <li>kubectl-linux-amd64-v1.10.3</li>
 </ul>
-<p><img title=downloadpks.png src=/images/2018/06/downloadpks.png alt="Download PKS" width=598 height=216 border=0></p>
+<img title=downloadpks.png src=/images/2018/06/downloadpks.png alt="Download PKS" width=598 height=216 border=0>
 <h2 id=upgrade-pks-tile>Upgrade PKS Tile</h2>
 <p>From the Ops Manager home page, click on “Import a Product” and select the <code>pivotal-container-service-1.1.0-build.311.pivotal</code> - it’s a 3.7GB file, so it may take a while to update. Once it’s uploaded, click the + symbol to add the updated version to the Installation Dashboard.</p>
-<p><img title=pksadded.png src=/images/2018/06/pksadded.png alt="PKS added" width=600 height=311 border=0></p>
+<img title=pksadded.png src=/images/2018/06/pksadded.png alt="PKS added" width=600 height=311 border=0>
 <p>The Pivotal Container Service tile will turn orange to indicate it has changes, and a link to show that an updated stemcell is required appears. You can click on this link, or the STEMCELL LIBRARY link to upload the new stemcell.</p>
-<p><img title=pksupgraded.png src=/images/2018/06/pksupgraded.png alt="PKS Upgraded" width=600 height=319 border=0></p>
+<img title=pksupgraded.png src=/images/2018/06/pksupgraded.png alt="PKS Upgraded" width=600 height=319 border=0>
 <p>Click IMPORT STEMCELL and select <code>bosh-stemcell-3586.24-vsphere-esxi-ubuntu-trusty-go_agent.tgz</code> to import the new stemcell</p>
-<p><img title=importstemcell.png src=/images/2018/06/importstemcell.png alt="Import Stemcell" width=601 height=136 border=0></p>
+<img title=importstemcell.png src=/images/2018/06/importstemcell.png alt="Import Stemcell" width=601 height=136 border=0>
 <p>Finally, apply the stemcell to the new Pivotal Container Service product.</p>
-<p><img title=applystemcell.png src=/images/2018/06/applystemcell.png alt="Apply stemcell" width=600 height=278 border=0></p>
+<img title=applystemcell.png src=/images/2018/06/applystemcell.png alt="Apply stemcell" width=600 height=278 border=0>
 <h2 id=configure-the-pks-tile>Configure the PKS tile</h2>
 <p>The PKS tile will now be orange, but the changes can’t be applied until some extra configuration is added - click on the tile to open the Settings page</p>
 <p>Under the Networking page, we have to add a certificate for the NSX user, move to an IP Block for the k8s node IP addressing, and add a DNS server configuration.</p>
@@ -220,7 +220,7 @@ END)
 -H 'content-type: application/json' \
 -d &quot;$cert_request&quot;
 </code></pre><p>You can validate the certificate is installed in the NSX-T Manager interface under System > Trust > Certificates</p>
-<p><img title=nsxtcertificatetrust.png src=/images/2018/06/nsxtcertificatetrust.png alt="Certificate Trust" width=738 height=487 border=0></p>
+<img title=nsxtcertificatetrust.png src=/images/2018/06/nsxtcertificatetrust.png alt="Certificate Trust" width=738 height=487 border=0>
 <p>Copy the “id” value from the response of the previous API call and create a variable:</p>
 <pre tabindex=0><code>CERTIFICATE_ID=&quot;a59f9a4f-c18c-49e8-8934-fca545d7ad93&quot;
 </code></pre><p>Then create a variable to hold the API call to register the principal:</p>
@@ -246,7 +246,7 @@ END)
 --key $(pwd)/&quot;$NSX_SUPERUSER_KEY_FILE&quot;
 </code></pre><h3 id=add-the-certificate-and-key-to-the-pks-tile>Add the Certificate and Key to the PKS Tile</h3>
 <p>Back in Ops Manager, click on the Pivotal Container Service tile and select the Networking settings tab. Paste the contents of the .crt file into the Certificate field, and the .key contents into the Key field.</p>
-<p><img title=pksnetworkingsettings.png src=/images/2018/06/pksnetworkingsettings.png alt="PKS Networking Settings" width=933 height=814 border=0></p>
+<img title=pksnetworkingsettings.png src=/images/2018/06/pksnetworkingsettings.png alt="PKS Networking Settings" width=933 height=814 border=0>
 <h3 id=configure-the-ip-block-id-nodes-dns-and-nat-mode>Configure the IP Block ID, Nodes DNS, and NAT mode</h3>
 <p>Next, further down the Networking page we need to add an NSX-T IP Block ID for the k8s nodes. If, like me, you followed William Lam’s configuration, part of the Ops Manager/BOSH setup was to configure a “Service Network” for the k8s nodes, on the 10.10.0.0/24 subnet. In PKS 1.0 this Service Network was used to configure the IP addresses for the Kubernetes nodes. In PKS 1.1 the IP Block is used, with the first IP being assigned to the t1 router for the k8s cluster.</p>
 <p>With this configuration (thanks to Francis Guillier for his help to understand):</p>
@@ -255,21 +255,21 @@ END)
 <li>new K8s clusters will be deployed using the Node IP Block (/24 allocated to this cluster)</li>
 </ul>
 <p>In order to complete the upgrade, I needed to create a new IP Block in NSX-T that mirrors the Service Network:</p>
-<p><img title=nsxtipblockid.png src=/images/2018/06/nsxtipblockid.png alt="NSX-T IP Block ID" width=870 height=462 border=0></p>
+<img title=nsxtipblockid.png src=/images/2018/06/nsxtipblockid.png alt="NSX-T IP Block ID" width=870 height=462 border=0>
 <p>Copy/paste the ID from NSX-T into the Nodes IP Block ID, disable the NAT mode checkbox and enter a DNS server IP for the Kubernetes Nodes.</p>
-<p><img title=pksnetworkconfig.png src=/images/2018/06/pksnetworkconfig.png alt="PKS Network Config" width=700 height=618 border=0></p>
+<img title=pksnetworkconfig.png src=/images/2018/06/pksnetworkconfig.png alt="PKS Network Config" width=700 height=618 border=0>
 <p>Finally, click Save at the bottom of the page!</p>
 <h3 id=configure-the-ceip-and-telemetry-options>Configure the CEIP and Telemetry Options</h3>
-<p><img title=ceipoptions.png src=/images/2018/06/ceipoptions.png alt="CEIP Options" width=1254 height=598 border=0></p>
+<img title=ceipoptions.png src=/images/2018/06/ceipoptions.png alt="CEIP Options" width=1254 height=598 border=0>
 <h3 id=validate-the-errands-configuration>Validate the Errands Configuration</h3>
 <p>Last but not least, validate that the Post-Deploy Errands for NSX-T Validation, and Upgrade all clusters are set to On - this ensures NSX-T is configured correctly, and that all Kubernetes Nodes are upgraded.</p>
-<p><img title=pkserrands.png src=/images/2018/06/pkserrands.png alt="PKS Validation Errands" width=1112 height=903 border=0></p>
+<img title=pkserrands.png src=/images/2018/06/pkserrands.png alt="PKS Validation Errands" width=1112 height=903 border=0>
 <p>Save the configuration and go back to the Installation Dashboard</p>
 <h2 id=running-the-upgrade>Running the Upgrade</h2>
 <p>From the installation Dashboard, click “Apply changes” to begin the upgrade process!</p>
-<p><img title=opsmanagerapplychagnes.png src=/images/2018/06/opsmanagerapplychagnes.png alt="Ops Manager Apply Changes" width=301 height=264 border=0></p>
+<img title=opsmanagerapplychagnes.png src=/images/2018/06/opsmanagerapplychagnes.png alt="Ops Manager Apply Changes" width=301 height=264 border=0>
 <p>Depending on your environment this can take a while - you can follow along by showing the verbose output on the Applying Changes page</p>
-<p><img title=pksapplyingchanges.png src=/images/2018/06/pksapplyingchanges.png alt="PKS Applying Changes" width=1272 height=739 border=0></p>
+<img title=pksapplyingchanges.png src=/images/2018/06/pksapplyingchanges.png alt="PKS Applying Changes" width=1272 height=739 border=0>
 <h2 id=upgrading-the-pks-and-kubectl-clis>Upgrading the PKS and Kubectl CLIs</h2>
 <p>Upgrading the CLIs is simply a case of uploading the binaries, chmod to allow execution, then moving to the correct folder:</p>
 <pre tabindex=0><code>sudo chmod +x pks-linux-amd64-1.1.0-build.301
@@ -371,13 +371,12 @@ Next
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmware-vsphere class=nav-link>VMWARE-VSPHERE <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
 <li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
 <li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">57</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>

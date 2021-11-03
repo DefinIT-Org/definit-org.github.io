@@ -33,7 +33,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2013/09/what-sort-of-lab-would-you-build-for-2000/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.88.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.89.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -152,7 +152,7 @@ Tags:
 </blockquote>
 <p> </p>
 <p>That got me thinking – was it possible to create an entire 2 host lab with storage on a $2000 budget? My first step was to convert it into a proper currency:</p>
-<p><img style=background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border:0 title=image alt=image src=/images/2013/09/image.png width=500 height=195 border=0></p>
+<img style=background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border:0 title=image alt=image src=/images/2013/09/image.png width=500 height=195 border=0>
 <p>I figured that I’d stick to the Intel NUC route that I’ve gone down for <a href=https://www.definit.co.uk/lab/ title=Lab>my lab</a> at home – I love the NUC for its tiny form factor, silent operation and really low power consumption. There are down sides – it can only take 16GB RAM, only one mSATA disk and only has one gigabit NIC. I don’t think any of those are too big a deal for a personal lab though – certainly I’ve not had any problems building and testing VMware products on my single NUC. I’d drop in an 8GB stick of RAM and an Intel 60GB mSATA SSD per NUC – you could always go 16GB later by adding another 8GB stick in the 2nd slot. I picked the Intel mSATA disk for it’s controller and throughput figures – there are larger and cheaper ones but not with the same write performance. Since the use of SSD is massively in focus with vFlash, PernixData FVP and several other technologies, you wouldn’t want to miss out. I’ve also added an 8GB USB3 flash drive per NUC to boot ESXi from.</p>
 <p>Storage wise I’ve gone for the well respected Synology DS213J 2 disk NAS with two WD Red 2TB SATA disks – full VAAI support is an absolute killer feature! As it’s a lab, you can get away with a non-resilient RAID level and get 4TB of usable storage (though I’d still go for a mirror and 2TB).</p>
 <p>Finally, to link it all together there’s the TP-Link 8 port switch – gigabit, L2, managed and with a decent feature set – not much more to say there!</p>
@@ -253,13 +253,12 @@ Next
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmware-vsphere class=nav-link>VMWARE-VSPHERE <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
 <li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
 <li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">57</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>

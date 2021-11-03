@@ -33,7 +33,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2016/12/increasing-the-java-heap-size-for-vrealize-orchestrator-client-7-x/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.88.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.89.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -159,7 +159,7 @@ After the config change, 1GB of RAM is used
 <p>Even with my old giant workflow, it&rsquo;s not easy to push the client over 1GB RAM, but for the sake of experimentation I edited the Xmx to be &ldquo;-Xmx2048m&rdquo;, saved the file and gave it a go, and sure enough it can now consume more than the original 1GB</p>
 <p><img src=https://www.definit.co.uk/images/2016/12/2016-12-16_10-16-33.png alt></p>
 <p>Finally, I took a look at the Windows download, which doesn&rsquo;t have an obvious configuration file as they&rsquo;re all either .jar or .exe binaries. By default it seems to consume up to 1024MB RAM, but I couldn&rsquo;t get it over. The vso.log file that is generated when you run the application shows that it looks for &ldquo;vmo.properties&rdquo; in the same directory as the application, but I was unable to work out a way of setting the memory pool. I also tried setting the environment variable for Java using _JAVA_OPTIONS=-Xmx2048, but was unable to push the client over 1GB RAM.</p>
-<p><img class="alignnone wp-image-7889" src=/images/2016/12/2016-12-16_10-51-58.png alt=2016-12-16_10-51-58 width=600 height=183></p>
+<img class="alignnone wp-image-7889" src=/images/2016/12/2016-12-16_10-51-58.png alt=2016-12-16_10-51-58 width=600 height=183>
 <p>So, to summarise:</p>
 <ul>
 <li>For most people, there is absolutely no need to modify the memory used by the vRO client!</li>
@@ -261,13 +261,12 @@ Next
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmware-vsphere class=nav-link>VMWARE-VSPHERE <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
 <li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
 <li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">57</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>

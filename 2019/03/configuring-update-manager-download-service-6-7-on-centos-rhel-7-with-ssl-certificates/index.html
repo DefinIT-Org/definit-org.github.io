@@ -32,7 +32,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2019/03/configuring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.88.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.89.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -257,7 +257,7 @@ Tags:
 </ul>
 <div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>mkdir /etc/nginx/ssl-certs/
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>openssl req -x509 -nodes -days <span style=color:#0086f7;font-weight:700>365</span> -newkey rsa:2048 -keyout /etc/nginx/ssl-certs/umds.key -out /etc/nginx/ssl-certs/umds.crt
-</code></pre></div><p><img class="alignright size-full wp-image-9012" src=/images/2019/03/2019-03-14_10-58-49.png style=max-width:100%></p>
+</code></pre></div><img class="alignright size-full wp-image-9012" src=/images/2019/03/2019-03-14_10-58-49.png style=max-width:100%>
 <ul>
 <li>Create an NGINX config file for UMDS - <code>/etc/nginx/conf.d/umds.conf</code></li>
 </ul>
@@ -283,12 +283,12 @@ Tags:
 <li>Add the certificate to vCenter trust - log in to vCenter and navigate to Administration > Certificate Management</li>
 <li>Log in as <a href=mailto:administrator@vsphere.local>administrator@vsphere.local</a></li>
 </ul>
-<p><img class="size-full wp-image-9013 alignnone" src=/images/2019/03/2019-03-14_12-06-33.png alt width=504 height=334></p>
+<img class="size-full wp-image-9013 alignnone" src=/images/2019/03/2019-03-14_12-06-33.png alt width=504 height=334>
 <ul>
 <li>Under Trusted Root Certificates click ADD and upload the generated umds.crt</li>
 <li>Navigate to Update Manager > Settings > Patch Setup and click Change Download Source - enter the UMDS web server</li>
 </ul>
-<p><img class="size-full wp-image-9015 alignnone" src=/images/2019/03/2019-03-14_12-09-08.png alt width=586 height=417></p>
+<img class="size-full wp-image-9015 alignnone" src=/images/2019/03/2019-03-14_12-09-08.png alt width=586 height=417>
 <ul>
 <li>Navigate to Patch Downloads > DOWNLOAD NOW</li>
 </ul>
@@ -386,13 +386,12 @@ Next
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmware-vsphere class=nav-link>VMWARE-VSPHERE <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
 <li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
 <li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">57</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>

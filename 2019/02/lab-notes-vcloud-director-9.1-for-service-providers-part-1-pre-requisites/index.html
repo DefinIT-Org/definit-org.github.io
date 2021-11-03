@@ -33,7 +33,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2019/02/lab-notes-vcloud-director-9.1-for-service-providers-part-1-pre-requisites/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.88.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.89.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -167,8 +167,8 @@ Lab Notes – vCloud Director 9.1 for Service Providers – Part 1: Pre-requisit
 <h2 id=routing>Routing</h2>
 <p>Because I’m backing my vCloud Director installation with NSX-T, I will be using my existing Tier-0 router, which interfaces with my physical router via BGP. The Tier-0 router will be connected to the Tier-1 router, the NSX-T logical switches will be connected to the Tier-1, and the IP networks advertised to the Tier-0 (using NSX-T’s internal routing mechanism) and up via eBGP to the physical router.</p>
 <p>The Tier-1 router will be created in Active-Standby mode because it will also provide the load balancing services later.</p>
-<p><img title=t1vcd.png src=/images/2018/07/t1vcd.png alt="Tier1 vCloud Director" width=591 height=617 border=0></p>
-<p><img title=t1vcdadvertised.png src=/images/2018/07/t1vcdadvertised.png alt="Tier 1 vCloud Director advertised routes" width=444 height=324 border=0></p>
+<img title=t1vcd.png src=/images/2018/07/t1vcd.png alt="Tier1 vCloud Director" width=591 height=617 border=0>
+<img title=t1vcdadvertised.png src=/images/2018/07/t1vcdadvertised.png alt="Tier 1 vCloud Director advertised routes" width=444 height=324 border=0>
 <h2 id=logical-switches>Logical Switches</h2>
 <p>I want to build vCloud Director as many Service Provider customers do, with different traffic types separated by logical switches. I will be using 10.12.0.0/24 and subnetting into some smaller /27 networks to avoid wasting IPs (a typical Service Provider requirement) To that end, I am deploying four NSX-T logical switches:</p>
 <ul>
@@ -178,7 +178,7 @@ Lab Notes – vCloud Director 9.1 for Service Providers – Part 1: Pre-requisit
 <li>vCloud Director RabbitMQ/Orchestrator</li>
 </ul>
 <p>The four logical switches have been connected to the Tier1 router created for vCloud Director, and have router ports configured in the correct subnet</p>
-<p><img title=vcdrps.png src=/images/2018/07/vcdrps.png alt="vCD Router Ports" width=776 height=479 border=0></p>
+<img title=vcdrps.png src=/images/2018/07/vcdrps.png alt="vCD Router Ports" width=776 height=479 border=0>
 <h2 id=load-balancing>Load Balancing</h2>
 <p>There are various load balancing requirements for the full vCloud Director installation, which will be fulfilled by the NSX-T Logical Load Balancer on the Tier-1 router:</p>
 <ul>
@@ -190,7 +190,7 @@ Lab Notes – vCloud Director 9.1 for Service Providers – Part 1: Pre-requisit
 <p>The actually load balancer configuration will be done later on when I have the components deployed.</p>
 <h2 id=dns-a-and-ptr>DNS A and PTR</h2>
 <p>All the VMs that are part of the vCloud Director installation will require A and PTR (forward and reverse) lookup records</p>
-<p><img title=vcddnsrecords.png src=/images/2018/07/vcddnsrecords.png alt="Required DNS Records" width=663 height=271 border=0></p>
+<img title=vcddnsrecords.png src=/images/2018/07/vcddnsrecords.png alt="Required DNS Records" width=663 height=271 border=0>
 <p>Notice that the VCD cells have two IPs per VM, one for the UI/API, and one for the Console traffic. Two records are also created for the load balancer URLs for vRealize Orchestrator, and RabbitMQ.</p>
 <h2 id=vm-sizing>VM Sizing</h2>
 <p>The vCloud Director cells, PostgreSQL database and RabbitMQ will be deployed using a standard CentOS7 template. vRealize Orchestrator is deployed as an appliance. The open-vm-tools package is installed on the template.</p>
@@ -299,13 +299,12 @@ Next
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmware-vsphere class=nav-link>VMWARE-VSPHERE <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
 <li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
 <li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">57</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>

@@ -37,7 +37,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2017/07/vrealize-automation-7-3-distributed-install-prerequisites/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.88.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.89.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -489,7 +489,7 @@ vra-sql
 <h3 id=configure-msdtc>Configure MSDTC</h3>
 <p>MSDTC should be configured on all the IaaS boxes to allow communication with the MSSQL Server. You can use the following PowerShell command, or manually set it from Component Services.</p>
 <p>[code]Set-DtcNetworkSetting -DtcName &ldquo;Local&rdquo; -RemoteAdministrationAccessEnabled:$True -RemoteClientAccessEnabled:$True -InboundTransactionsEnabled:$True -OutboundTransactionsEnabled:$True -LUTransactionsEnabled:$True -Confirm:$False[/code]</p>
-<p><img class="alignnone size-medium wp-image-8195" src=/images/2017/07/2017-07-20_10-15-21.png alt width=274 height=300></p>
+<img class="alignnone size-medium wp-image-8195" src=/images/2017/07/2017-07-20_10-15-21.png alt width=274 height=300>
 <h3 id=service-account>Service Account</h3>
 <p>Create a service account to run the IaaS components.  From the VMware documentation, it must meet the following requirements:</p>
 <ul id=GUID-6CB7D698-975D-41A4-8FC0-3EE40FE30203__ul_CB176962D91349C1B5145067C3F0AB21 class=ul>
@@ -576,7 +576,7 @@ If you use the installer to create the database, in SQL, add the sysadmin role t
 <li>Download the Certificate Authority root and intermediate certificates</li>
 </ol>
 <p>When I&rsquo;ve generated certificates and requests, I will have the following files:</p>
-<p><img class="alignnone size-full wp-image-8192" src=/images/2017/07/2017-07-19_16-42-41.png alt width=185 height=278></p>
+<img class="alignnone size-full wp-image-8192" src=/images/2017/07/2017-07-19_16-42-41.png alt width=185 height=278>
 <p>During the install wizard you need the .key (private key), .cer (certificate) and CA certificate files.</p>
 <h2 id=load-balancers>Load Balancers</h2>
 <p>During the installation phase of a distributed vRA deployment I always very strongly suggest using a CNAME pointed to the primary nodes for the Cafe, Web and Manager components. This is because the configuration of the load balancer is so critical to success that any misconfiguration can cause errors and a failed deployment. If you use a CNAME you can guarantee the deployment succeeds first time, and introduce the load balancer later.</p>
@@ -1264,13 +1264,12 @@ Next
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmware-vsphere class=nav-link>VMWARE-VSPHERE <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
 <li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
 <li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">57</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>

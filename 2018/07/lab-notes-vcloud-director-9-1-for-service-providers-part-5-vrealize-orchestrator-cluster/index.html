@@ -33,7 +33,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2018/07/lab-notes-vcloud-director-9-1-for-service-providers-part-5-vrealize-orchestrator-cluster/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.88.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.89.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -168,28 +168,28 @@ Lab Notes – vCloud Director 9.1 for Service Providers – Part 5: vRealize Orc
 <p>Two vRO 7.4 appliances deployed</p>
 <p>Before powering them on, add an additional network card on the vcd-sql network</p>
 <p>Power on the VM and wait until it boots, then log onto the VAMI interface (https://vcd-vro-[1-2]:5480) and configure the eth1 interface with an IP address on the vcd-sql subnet</p>
-<p><img title=vroeth1.png src=/images/2018/07/vroeth1.png alt="vRO eth1 interface" width=893 height=650 border=0></p>
+<img title=vroeth1.png src=/images/2018/07/vroeth1.png alt="vRO eth1 interface" width=893 height=650 border=0>
 <p>Configure the NTP server</p>
-<p><img title=vrontp.png src=/images/2018/07/vrontp.png alt="vRO NTP Server" width=523 height=360 border=0></p>
+<img title=vrontp.png src=/images/2018/07/vrontp.png alt="vRO NTP Server" width=523 height=360 border=0>
 <h2 id=configuring-the-first-vro-node>Configuring the first vRO node</h2>
 <p>Log onto the Control Centre for the first node <a href=https://vcd-vro-1.definit.local:8283/vco-controlcenter>https://vcd-vro-1.definit.local:8283/vco-controlcenter</a></p>
 <p>Select the deployment type as standalone, and configure the load balancer name.</p>
-<p><img title=vroinstalltype.png src=/images/2018/07/vroinstalltype.png alt="vRO Install type" width=1274 height=711 border=0></p>
+<img title=vroinstalltype.png src=/images/2018/07/vroinstalltype.png alt="vRO Install type" width=1274 height=711 border=0>
 <p>Select the vSphere authentication provider, and accept the certificate.</p>
-<p><img title=vrovsphereauth.png src=/images/2018/07/vrovsphereauth.png alt="vRO vSphere Authentication" width=1277 height=686 border=0></p>
+<img title=vrovsphereauth.png src=/images/2018/07/vrovsphereauth.png alt="vRO vSphere Authentication" width=1277 height=686 border=0>
 <p>Enter credentials to register with vSphere</p>
-<p><img title=vroauthcreds.png src=/images/2018/07/vroauthcreds.png alt="vRO Auth Credentials" width=1276 height=781 border=0></p>
+<img title=vroauthcreds.png src=/images/2018/07/vroauthcreds.png alt="vRO Auth Credentials" width=1276 height=781 border=0>
 <p>Select the an Administrators group to manage vRO</p>
-<p><img title=vroadmins.png src=/images/2018/07/vroadmins.png alt="vRO Admin Group" width=1279 height=586 border=0></p>
+<img title=vroadmins.png src=/images/2018/07/vroadmins.png alt="vRO Admin Group" width=1279 height=586 border=0>
 <p>Configure the remote database connection</p>
-<p><img title=vroremotedb.png src=/images/2018/07/vroremotedb.png alt="vRO Remote PostgreSQL DB" width=1275 height=693 border=0></p>
+<img title=vroremotedb.png src=/images/2018/07/vroremotedb.png alt="vRO Remote PostgreSQL DB" width=1275 height=693 border=0>
 <p>After a couple of minutes, the vRO server will have restarted and I can progress to the second node - check this has happened by going to the Validate Configuration page and waiting for all the green ticks!</p>
-<p><img title=vroconfigvalid.png src=/images/2018/07/vroconfigvalid.png alt="vRO Configuration Validation" width=1275 height=592 border=0></p>
+<img title=vroconfigvalid.png src=/images/2018/07/vroconfigvalid.png alt="vRO Configuration Validation" width=1275 height=592 border=0>
 <h2 id=configuring-the-second-vro-node>Configuring the second vRO node</h2>
 <p>Select Clustered Orchestrator from the deployment page, and enter the details of the first vRO node</p>
-<p><img title=vrocluster.png src=/images/2018/07/vrocluster.png alt="vRO Clustered Orchestrator" width=1276 height=698 border=0></p>
+<img title=vrocluster.png src=/images/2018/07/vrocluster.png alt="vRO Clustered Orchestrator" width=1276 height=698 border=0>
 <p>Wait for the second node to restart it’s services (~2 minutes again) to apply the configuration. Once the configuration has applied, you should see both nodes in the Orchestrator Cluster Management page</p>
-<p><img title=vroclustercomplete.png src=/images/2018/07/vroclustercomplete.png alt="vRO Cluster completed" width=1278 height=844 border=0></p>
+<img title=vroclustercomplete.png src=/images/2018/07/vroclustercomplete.png alt="vRO Cluster completed" width=1278 height=844 border=0>
 <h2 id=load-balancing-the-vrealize-orchestrator-cluster>Load Balancing the vRealize Orchestrator Cluster</h2>
 <p>I will be configuring an NSX-T load balancer, on the Tier-1 router that all the vCloud Director components are connected to. However the basic configuration should apply across most load balancer vendors.</p>
 <h3 id=virtual-servers>Virtual Servers</h3>
@@ -319,13 +319,12 @@ Next
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmware-vsphere class=nav-link>VMWARE-VSPHERE <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
 <li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
 <li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">57</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>

@@ -35,7 +35,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2015/01/performance-tweak-increasing-max-heap-size-for-the-vrealize-orchestrator-vrovco-client/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.88.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.89.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -141,7 +141,7 @@ Tags:
 <p>I&rsquo;m developing some very large, very complicated workflows for vRealize Orchestrator (vRO/vCO), and as it&rsquo;s a Java based application it will probably come as no surprise to many that the performance of the client drops off sharply as the client&rsquo;s RAM usage creeps up.</p>
 <p>When working on some of the larger workflows, or after long sessions and heavy clipboard use, the client would become (even more) sluggish and in some cases would freeze entirely. This is particularly annoying because the vRO client has a habit of forcing itself on top of other applications - for instance Task Manager.</p>
 <p>Exhibit 1 - a large workflow!</p>
-<p><img style=background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border:0 title=image src=/images/2015/01/image59.png alt=image width=644 height=169 border=0></p>
+<img style=background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border:0 title=image src=/images/2015/01/image59.png alt=image width=644 height=169 border=0>
 <p>I noticed that the sluggishness/crashes were happening when the client process was hitting ~650MB RAM - when I restarted the client it dropped back down to ~450MB and gradually crept up again, the speed of which depended on the type of use and the size of the workflows I was working on.</p>
 <p>I dug around in the Orchestrator folder in the installation directory, and found a settings file &ldquo;vCenter Orchestrator Client.lax&rdquo; which has the following setting:</p>
 <p>#   LAX.NL.JAVA.OPTION.JAVA.HEAP.SIZE.MAX</p>
@@ -247,13 +247,12 @@ Next
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmware-vsphere class=nav-link>VMWARE-VSPHERE <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
 <li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
 <li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">57</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>

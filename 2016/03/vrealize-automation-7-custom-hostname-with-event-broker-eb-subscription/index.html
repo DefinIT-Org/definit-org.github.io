@@ -33,7 +33,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2016/03/vrealize-automation-7-custom-hostname-with-event-broker-eb-subscription/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.88.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.89.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -149,14 +149,14 @@ Tags:
 <p>My desired outcome is that the machine that would be DefinIT-001 gets renamed as LAB-VM-WEB-001.</p>
 <h2 id=create-an-action>Create an Action</h2>
 <p>Not wishing to reinvent the wheel, I&rsquo;ll use the <strong>renameVirtualMachine</strong> action from Ted Spinks' blog article &ldquo;<a href=http://blogs.vmware.com/management/2015/09/manage-hostnames-with-vrealize-automation-part-2.html target=_blank>Manage Hostnames with vRealize Automation – Part 2: Use a small vRO workflow</a>&rdquo;. Create the action as described in the article and then drag it onto the canvas. You can see that it requires two inputs - a <strong>vCAC:Entity</strong> representing the Virtual Machine, and a string for the <strong>newHostname</strong>.</p>
-<p><img class="alignnone size-full wp-image-7002" src=/images/2016/03/2016-03-09_16-32-02.png alt=2016-03-09_16-32-02 width=442 height=63></p>
+<img class="alignnone size-full wp-image-7002" src=/images/2016/03/2016-03-09_16-32-02.png alt=2016-03-09_16-32-02 width=442 height=63>
 <h2 id=creating-the-main-workflow>Creating the main workflow</h2>
 <p>I created a new workflow - <strong>updateVirtualMachineName</strong> and created a &ldquo;<strong>payload</strong>&rdquo; input of type &ldquo;<strong>Properties</strong>&rdquo; - this is the properties object that the vRA EB will pass to Orchestrator.</p>
-<p><img class="alignnone size-full wp-image-6974" src=/images/2016/03/2016-03-08_12-03-12.png alt=2016-03-08_12-03-12 width=457 height=104></p>
+<img class="alignnone size-full wp-image-6974" src=/images/2016/03/2016-03-08_12-03-12.png alt=2016-03-08_12-03-12 width=457 height=104>
 <p>Move to the schema tab and drag a new scriptable task onto the canvas. Edit it and name it &ldquo;<strong>getVirtualMachineID</strong>&rdquo;. Using the Visual Binding tab, drag the <strong>payload</strong> in parameter to the input pane so we get the Properties as an input to this task. Create two OUT parameters that map to Attributes in the main workflow. These are both strings &ldquo;<strong>newHostname</strong>&rdquo; and &ldquo;<strong>virtualMachineID</strong>":</p>
-<p><img class="alignnone size-full wp-image-7020" src=/images/2016/03/2016-03-09_16-41-57.png alt=2016-03-09_16-41-57 width=974 height=523></p>
+<img class="alignnone size-full wp-image-7020" src=/images/2016/03/2016-03-09_16-41-57.png alt=2016-03-09_16-41-57 width=974 height=523>
 <p>Edit the scripting tab and enter the script (copy from below).</p>
-<p><img class="alignnone size-full wp-image-7067" src=/images/2016/03/2016-03-09_17-13-51.png alt=2016-03-09_17-13-51.png width=630 height=327></p>
+<img class="alignnone size-full wp-image-7067" src=/images/2016/03/2016-03-09_17-13-51.png alt=2016-03-09_17-13-51.png width=630 height=327>
 <p>Basically we retrieve a properties variable &ldquo;<strong>machine</strong>&rdquo; from the &ldquo;<span style=color:#f0f><strong>payload</strong></span>&rdquo; input (2), then retrieve the &ldquo;<strong>id</strong>&rdquo; value of &ldquo;<strong>machine</strong>&rdquo; (6). We will use this in a minute to retrieve the vCAC:Entity.</p>
 <p>Next we retrieve another Properties object, this time from the machine (9). That Properties object contains the properties defined in the blueprint - including our Hostname variables.</p>
 <p>We also define retrieve the &ldquo;<strong>name</strong>&rdquo; property of the &ldquo;<strong>machine</strong>&rdquo; object (11), which is the vRealize generated hostname (e.g. DefinIT-001). Using string replacement, we strip out the &ldquo;DefinIT&rdquo; portion of the hostname to leave the unique ID (e.g. &ldquo;-001&rdquo;) (14).</p>
@@ -183,16 +183,16 @@ var application = machineProperties.get("DefinIT.Hostname.Application");
 newHostname = (location+"-"+vmType+"-"+application+uniqueID);
 System.log(workflow.currentWorkflow.name+" New hostname will be "+newHostname);</pre>
 <p>Close the scripting action and then search for the &ldquo;<strong>getVirtualMachineEntityFromId</strong>&rdquo; action, and drag it onto the Schema. Search for the &ldquo;<strong>renameVirtualMachine</strong>&rdquo; action we created earlier and drag that onto the Schema too. The schema should look something like this:</p>
-<p><img class="alignnone size-full wp-image-7081" src=/images/2016/03/2016-03-09_17-18-46.png alt=2016-03-09_17-18-46.png width=633 height=103></p>
+<img class="alignnone size-full wp-image-7081" src=/images/2016/03/2016-03-09_17-18-46.png alt=2016-03-09_17-18-46.png width=633 height=103>
 <p>Use the Visual Binding view of &ldquo;<strong>getVirtualMachineEntityFromId</strong>&rdquo; to link up the &ldquo;<strong>virtualMachineId</strong>&rdquo; attribute and drag the &ldquo;<strong>actionResult</strong>&rdquo; OUT to the Out Attributes pane (I changed the attribute name to &ldquo;<strong>vCACVMEntity&rdquo;</strong>). Don&rsquo;t forget to go to the IN tab and bind &ldquo;<strong>host</strong>&rdquo; to NULL - the action will find the host for us.</p>
-<p><img class="alignnone size-full wp-image-7086" src=/images/2016/03/2016-03-09_17-19-36.png alt=2016-03-09_17-19-36.png width=824 height=445></p>
+<img class="alignnone size-full wp-image-7086" src=/images/2016/03/2016-03-09_17-19-36.png alt=2016-03-09_17-19-36.png width=824 height=445>
 <p> </p>
 <p>Next bind the input parameters for the &ldquo;<strong>renameVirtualMachine</strong> action&rdquo;, mapping the &ldquo;<strong>newHostname</strong>&rdquo; and &ldquo;<strong>vCACVMEntity</strong>&rdquo; attributes.</p>
-<p><img class="alignnone size-full wp-image-7095" src=/images/2016/03/2016-03-09_17-25-26.png alt=2016-03-09_17-25-26.png width=824 height=445></p>
+<img class="alignnone size-full wp-image-7095" src=/images/2016/03/2016-03-09_17-25-26.png alt=2016-03-09_17-25-26.png width=824 height=445>
 <p>Save and close the workflow.</p>
 <h2 id=creating-the-event-subscription>Creating the event subscription</h2>
 <p>Log into vRealize Automation and navigate Administration > Events > Subscriptions, then click for a new Subscription. Select the &ldquo;Machine provisioning&rdquo; topic and click next.</p>
-<p><img class="alignnone size-full wp-image-7105" src=/images/2016/03/2016-03-09_17-29-00.png alt=2016-03-09_17-29-00.png width=939 height=563></p>
+<img class="alignnone size-full wp-image-7105" src=/images/2016/03/2016-03-09_17-29-00.png alt=2016-03-09_17-29-00.png width=939 height=563>
 <p>As discussed, we need the workflow to run at BuildingMachine, before any work has been done with the VM. There&rsquo;s a bug in the EB subscription wizard that won&rsquo;t let you create an &ldquo;All of the following&rdquo; condition without adding three clauses (you can add three, then remove two of them later, it&rsquo;s just the initial creation that fails!).</p>
 <p>Add the following conditions:</p>
 <ul>
@@ -200,18 +200,18 @@ System.log(workflow.currentWorkflow.name+" New hostname will be "+newHostname);<
 <li>&ldquo;Data > Lifecycle state phase&rdquo; Equals &ldquo;PRE&rdquo;</li>
 <li>&ldquo;Data > Machine > Machine type&rdquo; Equals &ldquo;Virtual Machine&rdquo;</li>
 </ul>
-<p><img class="alignnone size-full wp-image-7119" src=/images/2016/03/2016-03-09_17-35-18.png alt=2016-03-09_17-35-18 width=491 height=301></p>
+<img class="alignnone size-full wp-image-7119" src=/images/2016/03/2016-03-09_17-35-18.png alt=2016-03-09_17-35-18 width=491 height=301>
 <p>Select the workflow created earlier:</p>
-<p><img class="alignnone size-full wp-image-7123" src=/images/2016/03/2016-03-09_17-36-11.png alt=2016-03-09_17-36-11.png width=945 height=420></p>
+<img class="alignnone size-full wp-image-7123" src=/images/2016/03/2016-03-09_17-36-11.png alt=2016-03-09_17-36-11.png width=945 height=420>
 <p>Next, name the subscription, leave the priority as default and make sure you check the &ldquo;<strong>Blocking</strong>&rdquo; option. If we don&rsquo;t create a blocking subscription, the workflow won&rsquo;t wait for the result of the Orchestrator workflow and will continue to the next state. When the workflow attempts to rename the <strong>vCAC:Entity</strong>, it will be too late. Click finish to complete the subscription.</p>
-<p><img class="alignnone size-full wp-image-7126" src=/images/2016/03/2016-03-09_17-37-44.png alt=2016-03-09_17-37-44.png width=586 height=323></p>
+<img class="alignnone size-full wp-image-7126" src=/images/2016/03/2016-03-09_17-37-44.png alt=2016-03-09_17-37-44.png width=586 height=323>
 <p>Select the subscription in the list and click the &ldquo;<strong>Publish</strong>&rdquo; button.</p>
 <h2 id=prepare-the-blueprint>Prepare the blueprint</h2>
 <p>Finally, we need to add the custom properties to the blueprint to ensure the &ldquo;payload&rdquo; is passed through to orchestrator from the Event Broker.</p>
 <p>Edit the blueprint and add the three properties from before, as well as the following:</p>
 <p><strong>Extensibility.Lifecycle.Properties.VMPSMasterWorkflow32.BuildingMachine</strong></p>
 <p>This property is critical because it tells the EB to pass through all of the properties related to the BuildingMachine lifecycle state. The value of &ldquo;*&rdquo; is a wildcard and allows us to inject all the values relating to BuildingMachine.</p>
-<p><img class="alignnone size-full wp-image-7134" src=/images/2016/03/2016-03-09_17-43-28.png alt=2016-03-09_17-43-28.png width=932 height=241></p>
+<img class="alignnone size-full wp-image-7134" src=/images/2016/03/2016-03-09_17-43-28.png alt=2016-03-09_17-43-28.png width=932 height=241>
 <h2 id=download>Download</h2>
 <p>You can download the <a href=http://vexpert.me/N0 target=_blank>org.definit.eventbroker package</a> from my GitHub page, including the action and workflow example.</p>
 <h2 id=conclusion>Conclusion</h2>
@@ -313,13 +313,12 @@ Next
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmware-vsphere class=nav-link>VMWARE-VSPHERE <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
 <li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
 <li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">57</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>
