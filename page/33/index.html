@@ -17,7 +17,7 @@
 <link rel=canonical href=https://www.definit.co.uk/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.89.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.89.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -86,6 +86,37 @@ RSS
 <div class="content-area col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 <h1>DEFINIT</h1>
 <div class=clr-row>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2012/08/vmware-esxi-maximum-paths-includes-local-storage/>VMware ESXi Maximum paths includes local storage</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 20/8/2012
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+If you are close to the VMware ESXi storage path limit of 1024 paths per host, you may want to consider the following: local storage, including CD-ROMs, are counted in your total paths.
+Simply because of the size and age of the environment, some of our production clusters have now reached the limit (including local paths) - you see this message in the logs
+[2012-08-20 01:48:52.256 77C3DB90 info &lsquo;ha-eventmgr&rsquo;] Event 2003 : The maximum number of supported paths of 1024 has been reached.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2012/08/vmware-esxi-maximum-paths-includes-local-storage/>More</a>
+</div>
+</div>
+</div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
@@ -355,36 +386,6 @@ param( [string] $vCenterServer = $(Read-Host -prompt "Enter vCenter Server Name"
 </div>
 </div>
 </div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2011/10/scom-2007-dfs-backlog-monitoring-%E2%80%93-distributing-a-runas-account-to-only-dfs-replication-members/>SCOM 2007 DFS Backlog Monitoring – Distributing a RunAs account to only DFS replication members</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 18/10/2011
-</div>
-<div class=clr-card-authors>
-Published under
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-The DFS monitoring tool in SCOM 2007 has some great features, which will replace many a custom VB script running in enterprises. As with a lot of Management Packs, to get the most out of it you need to have a dedicated RunAs account with local admin permissions on the servers you are monitoring (e.g. for the Backlogged Files reporting).
-The easy (and wrong) option here is to go with the less secure option and distribute a RunAs account to ALL servers.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2011/10/scom-2007-dfs-backlog-monitoring-%E2%80%93-distributing-a-runas-account-to-only-dfs-replication-members/>More</a>
-</div>
-</div>
-</div>
 </div>
 <nav>
 <ul class=pagination>
@@ -457,7 +458,7 @@ The easy (and wrong) option here is to go with the less secure option and distri
 <li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li>
 <li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li>
 <li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
-<li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">1</span></a></li>
+<li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
@@ -466,7 +467,7 @@ The easy (and wrong) option here is to go with the less secure option and distri
 <li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">57</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">58</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>
@@ -476,7 +477,7 @@ The easy (and wrong) option here is to go with the less secure option and distri
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
 <li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">51</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">52</span></a></li>
 <li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
 <li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
 <li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
