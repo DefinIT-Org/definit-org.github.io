@@ -17,7 +17,7 @@
 <link rel=canonical href=https://www.definit.co.uk/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.89.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.89.4"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -86,6 +86,36 @@ RSS
 <div class="content-area col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 <h1>DEFINIT</h1>
 <div class=clr-row>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2011/03/exchange-2010-createtestuser-mailbox-could-not-be-created-verify-that-ou-users-exists-and-that-password-meets-complexity-requirements/>Exchange 2010 – CreateTestUser : Mailbox could not be created. Verify that OU ( Users ) exists and that password meets complexity requirements</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 21/3/2011
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/microsoft>Microsoft</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+While using the New-TestCasConnectivityUser.ps1 script to create a test user for Exchange 2010’s connectivity testing, I ran into an issue:
+CreateTestUser : Mailbox could not be created. Verify that OU ( Users ) exists and that password meets complexity requirements. At C:\Program Files\Microsoft\Exchange Server\V14\Scripts\new-TestCasConnectivityUser.ps1:255 char:27 + $result = CreateTestUser &lt;&lt;&lt;&lt; $exchangeServer $mailboxServer $securePassword $OrganizationalUnit $UMDialPlan $UMExtension $Prompt + CategoryInfo : NotSpecified: (:) [Write-Error], WriteErrorException + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,CreateTestUser Oddly enough, that OU does exist (as it will by default on any Windows Domain!
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2011/03/exchange-2010-createtestuser-mailbox-could-not-be-created-verify-that-ou-users-exists-and-that-password-meets-complexity-requirements/>More</a>
+</div>
+</div>
+</div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
@@ -356,35 +386,6 @@ When it comes to servers you really want to audit, those that are by definition 
 </div>
 </div>
 </div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2010/11/using-powershell-to-add-ip-addresses-to-iis7s-ftp-ipv4-address-and-domain-restrictions/>Using PowerShell to add IP addresses to IIS7&amp;rsquo;s FTP IPv4 Address and Domain Restrictions</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 24/11/2010
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/microsoft>Microsoft</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-Today I was configuring a new FTP server based on IIS7 (well, 7.5 technically as it’s a Server 2008 R2 host), and I wanted an easy way to add and remove allowed IP addresses based on either an XML config file or a CSV import. Customers’ IP addresses are added or removed regularly, but I didn’t want to have to update their details twice, once on the server and once in the documents.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2010/11/using-powershell-to-add-ip-addresses-to-iis7s-ftp-ipv4-address-and-domain-restrictions/>More</a>
-</div>
-</div>
-</div>
 </div>
 <nav>
 <ul class=pagination>
@@ -429,8 +430,8 @@ Today I was configuring a new FTP server based on IIS7 (well, 7.5 technically as
 </a>
 </li>
 <li class="pagination__item pagination__item--last">
-<a class="btn btn-sm btn btn-outline" href=/page/45/>
-45
+<a class="btn btn-sm btn btn-outline" href=/page/46/>
+46
 </a>
 </li>
 </ul>
@@ -443,7 +444,7 @@ Today I was configuring a new FTP server based on IIS7 (well, 7.5 technically as
 <label for=Categories>Categories</label>
 <ul class=nav-list>
 <li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">23</span></a></li>
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
 <li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
 <li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">14</span></a></li>

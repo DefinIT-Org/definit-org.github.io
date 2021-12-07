@@ -31,7 +31,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2018/09/enable-vcenter-high-availability-with-vrealize-orchestrator/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.89.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.89.4"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -132,7 +132,7 @@ Tags:
 <p>Just a quick post today to cover a new vRO action and workflow I’ve uploaded to GitHub that configures vCenter High Availability in the basic mode. This is based on <a href=https://www.virtuallyghetto.com/2016/12/vcenter-server-high-availability-vcha-powercli-6-5-community-module.html>William Lam’s excellent PowerShell module</a> that does the same, but using vRO. I also hope to release a version for the advanced mode based on my <a href=https://www.definit.co.uk/2017/06/powershell-deploying-vcenter-high-availability-in-advanced-mode/>PowerShell script</a> in the near future.</p>
 <p>TL;DR - <a href=https://github.com/sammcgeown/org.definit.vcha>package is availabile on GitHub</a></p>
 <p>The workflow itself is pretty self explanatory, with my deployment action, which returns a VC:Task, and the standard “wait for a task to end” action.</p>
-<p><img class=alignnone title=vchaworkflow.png src=/images/2018/09/vchaworkflow.png alt="Configure vCenter HA workflow" width=509 height=207 border=0></p>
+<img class=alignnone title=vchaworkflow.png src=/images/2018/09/vchaworkflow.png alt="Configure vCenter HA workflow" width=509 height=207 border=0>
 <p>Executing the workflow requires some configuration for the vCenter HA heartbeat network (which must exist as a Distributed Port Group), as well as some details of the vCenter connection, the active vCSA VM and the datastores to clone the witness and passive appliances to (mine are both vSAN). The vCenter SSL thumbprint is the SHA1 thumbprint of the vCenter SSL certificate - I haven’t found a way to programatically get that within vRO.</p>
 <p><img src=https://www.definit.co.uk/images/2018/09/workflowinputs.png alt></p>
 <p>Once the action runs, vSphere will configure the vCenter Appliance for HA by adding a second NIC on the heartbeat network, then cloning the passive and witness VMs - below is the configured vCenter HA.</p>
@@ -283,7 +283,7 @@ Next
 <label for=Categories>Categories</label>
 <ul class=nav-list>
 <li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">23</span></a></li>
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
 <li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
 <li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">14</span></a></li>
