@@ -17,7 +17,7 @@
 <link rel=canonical href=https://www.definit.co.uk/authors/sam-mcgeown/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.89.4"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.90.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -95,6 +95,37 @@ Follow Sam McGeown on Twitter
 </p>
 <h3>All posts by Sam McGeown</h3>
 <div class=clr-row>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2012/08/vma-5-cannot-initialize-property-vami-dns0-vsphere_management_assistant_vma/>vMA 5: Cannot initialize property ‘ vami.DNS0.vSphere_Management_Assistant_(vMA)’</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 23/8/2012
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+Just a quick post regarding the vSphere Management Assistant 5 - when deploying the vMA with a static IP address, you might see the following error:
+Power On virtual machine Cannot initialize property ' vami.DNS0.vSphere_Man- agement_Assistant_(vMA)' , since network &lsquo;&rsquo; has no associated IP pool configuration.
+Edit the vMA virtual machine&rsquo;s properties and go to Options, vApp Options and select disable. Acknowledge the warning and click OK to close the VM properties.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2012/08/vma-5-cannot-initialize-property-vami-dns0-vsphere_management_assistant_vma/>More</a>
+</div>
+</div>
+</div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
@@ -365,36 +396,6 @@ Like many organisations there is a root CA (we&rsquo;ll call it ROOTCA01), and t
 </div>
 </div>
 </div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2011/10/vmware-powercli-set-path-selection-policy-on-all-luns-for-a-host/>VMware PowerCLI – Set Path Selection Policy on all LUNs for a host</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 28/10/2011
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/microsoft>Microsoft</a> and <a href=/category/vmware>VMware</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-Just a quick script to set the Path Selection Policy on any LUNs on a host that do not have your target policy enabled. The script sets the server to Maintenance mode first, evacuating any VMs if you are in a full DRS automated environment. While this is not strictly necessary, it was required for my production environment just to be safe.
-param( [string] $vCenterServer = $(Read-Host -prompt "Enter vCenter Server Name"
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2011/10/vmware-powercli-set-path-selection-policy-on-all-luns-for-a-host/>More</a>
-</div>
-</div>
-</div>
 </div>
 <nav>
 <ul class=pagination>
@@ -458,7 +459,7 @@ param( [string] $vCenterServer = $(Read-Host -prompt "Enter vCenter Server Name"
 <li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
 <li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">14</span></a></li>
+<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">15</span></a></li>
 <li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">42</span></a></li>
 <li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li>
 <li><a href=/category/exam class=nav-link>EXAM <span class="badge badge-1">1</span></a></li>
@@ -471,7 +472,7 @@ param( [string] $vCenterServer = $(Read-Host -prompt "Enter vCenter Server Name"
 <li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
 <li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
+<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">206</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
 <li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
@@ -488,7 +489,7 @@ param( [string] $vCenterServer = $(Read-Host -prompt "Enter vCenter Server Name"
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
 <li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">52</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">53</span></a></li>
 <li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
 <li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
 <li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
