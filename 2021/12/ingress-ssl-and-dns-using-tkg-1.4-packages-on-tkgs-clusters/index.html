@@ -293,7 +293,7 @@ Tags:
 </code></pre></div><ul>
 <li>Ref: <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-ingress-contour.html>Implement Ingress Control with Contour</a></li>
 </ul>
-<p># External-DNS</p>
+<h1 id=external-dns>External DNS</h1>
 <p>The final step in linking this all together is configuring <code>external-dns</code> to register and manage DNS records for the <code>ingress</code> objects created in <code>contour</code>. Since I&rsquo;m using Active Directory DNS servers, I need to configure kerberos authentication to make use of RFC3645 for secure updates.</p>
 <p>DNS-side configuration</p>
 <ul>
