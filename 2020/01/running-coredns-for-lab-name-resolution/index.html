@@ -34,7 +34,7 @@
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
-<link href=/css/clr-ui-dark.min.css rel=stylesheet>
+<link href=/css/clr-ui.min.css rel=stylesheet>
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
@@ -102,7 +102,7 @@ RSS
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 24/1/2020
-&#183; Read in about 5 min (970 words)
+&#183; Read in about 6 min (1147 words)
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/cloud-native>Cloud Native</a> and <a href=/category/development>Development</a>
@@ -129,189 +129,391 @@ Tags:
 </ul>
 <h2 id=namespace>Namespace</h2>
 <p>The namespace is pretty self explanatory&mldr;</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>Namespace<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#888> </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>coredns<span style=color:#888>
-</span></code></pre></div><h2 id=configmaps>ConfigMaps</h2>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>kind</span>:<span style=color:#bbb> </span>Namespace<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb> </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>coredns<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id=configmaps>ConfigMaps</h2>
 <p>I played about with various configurations of ConfigMaps in the setup, and in the end decided to separate the Corefile (which is the central CoreDNS configuration file) and the DNS Zones into separate ConfigMaps.</p>
 <p>The <code>coredns-config</code> ConfigMap tells CoreDNS how to run, and what plugins to load. It is mounted into the /etc/coredns folder later in the <code>deployment</code> configuration. Since I don&rsquo;t really want to restart my CoreDNS servers every time I make a change to a DNS zone, I am using the <code>auto</code> plugin to automatically load zone files (either new, or with a SOA Serial change) that are mounted in the <code>/etc/core/zones</code> folder. The second ConfigMap <code>coredns-zones</code> is mounted into the <code>/etc/core/zones</code> folder and provides the actual DNS zone information.</p>
 <p>The <code>log</code> and <code>errors</code> plugins are self-explanatory, they tell CoreDNS to write the log and errors to STDOUT. The <code>reload</code> plugin allows me to reload configuration from the <code>Corefile</code> whenever changes are made, it will check every 30 seconds. The <code>loadbalance</code> module will round-robin dns A, AAAA, and PTR records.</p>
 <p>Finally, the <code>health</code> and <code>ready</code> plugins will provide HTTP responses for the <code>deployment</code> health and ready probes.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>data</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>Corefile</span>:<span style=color:#888> </span>|<span style=color:#0086d2>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#0086d2>    .:53 {
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#0086d2>        # Automatically load zone files mounted in the &#34;zones&#34; directory
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#0086d2>        auto {
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#0086d2>            directory /etc/coredns/zones
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#0086d2>        }
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#0086d2>        # Enable logging to STDOUT
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#0086d2>        log
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#0086d2>        # Print errors to STDOUT
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#0086d2>        errors
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#0086d2>        # Automatically load changes to the Corefile
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#0086d2>        reload 30s
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#0086d2>        # Round-robin A, AAAA and PTR records
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#0086d2>        loadbalance
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#0086d2>        # Return HTTP 200 OK on :8080 when CoreDNS is running
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#0086d2>        health
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#0086d2>        # Return HTTP 200 OK on :8081 when CoreDNS and plugins are ready
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#0086d2>        ready
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span><span style=color:#0086d2>    }</span><span style=color:#888>    
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>ConfigMap<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>coredns-config<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>namespace</span>:<span style=color:#888> </span>coredns<span style=color:#888>
-</span></code></pre></div><p>The actual DNS zone data itself is stored in the <code>coredns-zones</code> ConfigMap, and as I mentioned before is mounted into the <code>/etc/core/zones</code> folder, from where the <code>Corefile</code> has specified that it will automatically load zones that are new, or have a SOA Serial increment. For brevity, this is just a snip of my DNS zone!</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>data</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>db.definit.local</span>:<span style=color:#888> </span>|<span style=color:#0086d2>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#0086d2>    $TTL  30M
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#0086d2>    @   IN  SOA  ns1.definit.local.  definit.local.  (
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#0086d2>                    2019041900  ; Serial
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#0086d2>                    4H          ; Refresh
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#0086d2>                    1H          ; Retry
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#0086d2>                    7D          ; Expire
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#0086d2>                    4H )        ; Negative Cache TTL
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#0086d2>        IN  NS  ns1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#0086d2>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#0086d2>    ns1                       IN  A   192.168.21.4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#0086d2>    pihole.definit.local.     IN  A   192.168.21.3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#0086d2>    unifi.definit.local.      IN  A   192.168.21.10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#0086d2>    vault.definit.local.      IN  A   192.168.21.11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#0086d2>    syn-ds-01.definit.local.  IN  A   192.168.4.10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#0086d2>    edgerouter                IN  A   192.168.1.1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#0086d2>    sg300-10                  IN  A   192.168.9.2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#0086d2>    sg300-20                  IN  A   192.168.100.3</span><span style=color:#888>    
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>ConfigMap<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>coredns-zones<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>namespace</span>:<span style=color:#888> </span>coredns<span style=color:#888>
-</span></code></pre></div><h2 id=deployment>Deployment</h2>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>data</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>Corefile</span>:<span style=color:#bbb> </span>|<span style=color:#d42;background-color:#e0e0ff>
+</span><span style=color:#d42;background-color:#e0e0ff>    .:53 {
+</span><span style=color:#d42;background-color:#e0e0ff>        # Automatically load zone files mounted in the &#34;zones&#34; directory
+</span><span style=color:#d42;background-color:#e0e0ff>        auto {
+</span><span style=color:#d42;background-color:#e0e0ff>            directory /etc/coredns/zones
+</span><span style=color:#d42;background-color:#e0e0ff>        }
+</span><span style=color:#d42;background-color:#e0e0ff>        # Enable logging to STDOUT
+</span><span style=color:#d42;background-color:#e0e0ff>        log
+</span><span style=color:#d42;background-color:#e0e0ff>        # Print errors to STDOUT
+</span><span style=color:#d42;background-color:#e0e0ff>        errors
+</span><span style=color:#d42;background-color:#e0e0ff>        # Automatically load changes to the Corefile
+</span><span style=color:#d42;background-color:#e0e0ff>        reload 30s
+</span><span style=color:#d42;background-color:#e0e0ff>        # Round-robin A, AAAA and PTR records
+</span><span style=color:#d42;background-color:#e0e0ff>        loadbalance
+</span><span style=color:#d42;background-color:#e0e0ff>        # Return HTTP 200 OK on :8080 when CoreDNS is running
+</span><span style=color:#d42;background-color:#e0e0ff>        health
+</span><span style=color:#d42;background-color:#e0e0ff>        # Return HTTP 200 OK on :8081 when CoreDNS and plugins are ready
+</span><span style=color:#d42;background-color:#e0e0ff>        ready
+</span><span style=color:#d42;background-color:#e0e0ff>    }</span><span style=color:#bbb>    
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ConfigMap<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>coredns-config<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>coredns<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>The actual DNS zone data itself is stored in the <code>coredns-zones</code> ConfigMap, and as I mentioned before is mounted into the <code>/etc/core/zones</code> folder, from where the <code>Corefile</code> has specified that it will automatically load zones that are new, or have a SOA Serial increment. For brevity, this is just a snip of my DNS zone!</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>data</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>db.definit.local</span>:<span style=color:#bbb> </span>|<span style=color:#d42;background-color:#e0e0ff>
+</span><span style=color:#d42;background-color:#e0e0ff>    $TTL  30M
+</span><span style=color:#d42;background-color:#e0e0ff>    @   IN  SOA  ns1.definit.local.  definit.local.  (
+</span><span style=color:#d42;background-color:#e0e0ff>                    2019041900  ; Serial
+</span><span style=color:#d42;background-color:#e0e0ff>                    4H          ; Refresh
+</span><span style=color:#d42;background-color:#e0e0ff>                    1H          ; Retry
+</span><span style=color:#d42;background-color:#e0e0ff>                    7D          ; Expire
+</span><span style=color:#d42;background-color:#e0e0ff>                    4H )        ; Negative Cache TTL
+</span><span style=color:#d42;background-color:#e0e0ff>        IN  NS  ns1
+</span><span style=color:#d42;background-color:#e0e0ff>
+</span><span style=color:#d42;background-color:#e0e0ff>    ns1                       IN  A   192.168.21.4
+</span><span style=color:#d42;background-color:#e0e0ff>    pihole.definit.local.     IN  A   192.168.21.3
+</span><span style=color:#d42;background-color:#e0e0ff>    unifi.definit.local.      IN  A   192.168.21.10
+</span><span style=color:#d42;background-color:#e0e0ff>    vault.definit.local.      IN  A   192.168.21.11
+</span><span style=color:#d42;background-color:#e0e0ff>    syn-ds-01.definit.local.  IN  A   192.168.4.10
+</span><span style=color:#d42;background-color:#e0e0ff>    edgerouter                IN  A   192.168.1.1
+</span><span style=color:#d42;background-color:#e0e0ff>    sg300-10                  IN  A   192.168.9.2
+</span><span style=color:#d42;background-color:#e0e0ff>    sg300-20                  IN  A   192.168.100.3</span><span style=color:#bbb>    
+</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ConfigMap<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>coredns-zones<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>coredns<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id=deployment>Deployment</h2>
 <p>The <code>deployment</code> spec is pretty simple, it calls for 3 replicas of the CoreDNS container image to be running (one per worker node in my Kubernetes cluster). There is a <code>-conf</code> argument telling CoreDNS where to look for the <code>Corefile</code> configuration file. The containers allow both TCP and UDP connections on port 53 (though CoreDNS can run other protocols for DNS, such as TLS, HTTP, RPC). Both the <code>livenessProbe</code> and <code>readinessProbe</code> point to the <code>/health</code> and <code>/ready</code> plugins configured in the Corefile. Finally, the <code>Volumes</code> and <code>VolumeMounts</code> map the contents of the ConfigMaps (shown above) as files in the /etc/core folder.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>apps/v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>Deployment<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>definit-coredns<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>namespace</span>:<span style=color:#888> </span>coredns<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>labels</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>app.kubernetes.io/name</span>:<span style=color:#888> </span>coredns<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>app.kubernetes.io/instance</span>:<span style=color:#888> </span>definit-coredns<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>spec</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>replicas</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>3</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>selector</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>matchLabels</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#888>      </span><span style=color:#fb660a;font-weight:700>app.kubernetes.io/name</span>:<span style=color:#888> </span>coredns<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#888>      </span><span style=color:#fb660a;font-weight:700>app.kubernetes.io/instance</span>:<span style=color:#888> </span>definit-coredns<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>template</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#888>      </span><span style=color:#fb660a;font-weight:700>labels</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#888>        </span><span style=color:#fb660a;font-weight:700>app.kubernetes.io/name</span>:<span style=color:#888> </span>coredns<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#888>        </span><span style=color:#fb660a;font-weight:700>app.kubernetes.io/instance</span>:<span style=color:#888> </span>definit-coredns<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>spec</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span><span style=color:#888>      </span><span style=color:#fb660a;font-weight:700>containers</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span><span style=color:#888>      </span>- <span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>coredns-lab<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span><span style=color:#888>        </span><span style=color:#fb660a;font-weight:700>image</span>:<span style=color:#888> </span>coredns/coredns:latest<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span><span style=color:#888>        </span><span style=color:#fb660a;font-weight:700>imagePullPolicy</span>:<span style=color:#888> </span>Always<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span><span style=color:#888>        </span><span style=color:#fb660a;font-weight:700>args</span>:<span style=color:#888> </span>[<span style=color:#888> </span><span style=color:#0086d2>&#34;-conf&#34;</span>,<span style=color:#888> </span><span style=color:#0086d2>&#34;/etc/coredns/Corefile&#34;</span><span style=color:#888> </span>]<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span><span style=color:#888>        </span><span style=color:#fb660a;font-weight:700>ports</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span><span style=color:#888>          </span>- <span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>dns-tcp<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span><span style=color:#888>            </span><span style=color:#fb660a;font-weight:700>containerPort</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>53</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span><span style=color:#888>            </span><span style=color:#fb660a;font-weight:700>protocol</span>:<span style=color:#888> </span>TCP<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span><span style=color:#888>          </span>- <span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>dns-udp<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span><span style=color:#888>            </span><span style=color:#fb660a;font-weight:700>containerPort</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>53</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33</span><span style=color:#888>            </span><span style=color:#fb660a;font-weight:700>protocol</span>:<span style=color:#888> </span>UDP<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34</span><span style=color:#888>        </span><span style=color:#fb660a;font-weight:700>livenessProbe</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>httpGet</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36</span><span style=color:#888>            </span><span style=color:#fb660a;font-weight:700>path</span>:<span style=color:#888> </span>/health<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37</span><span style=color:#888>            </span><span style=color:#fb660a;font-weight:700>port</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>8080</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38</span><span style=color:#888>            </span><span style=color:#fb660a;font-weight:700>scheme</span>:<span style=color:#888> </span>HTTP<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>initialDelaySeconds</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>60</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>timeoutSeconds</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>5</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>successThreshold</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>1</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>failureThreshold</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>5</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43</span><span style=color:#888>        </span><span style=color:#fb660a;font-weight:700>readinessProbe</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>httpGet</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45</span><span style=color:#888>            </span><span style=color:#fb660a;font-weight:700>path</span>:<span style=color:#888> </span>/ready<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46</span><span style=color:#888>            </span><span style=color:#fb660a;font-weight:700>port</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>8181</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47</span><span style=color:#888>            </span><span style=color:#fb660a;font-weight:700>scheme</span>:<span style=color:#888> </span>HTTP<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>initialDelaySeconds</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>10</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>timeoutSeconds</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>5</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>successThreshold</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>1</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>failureThreshold</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>5</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52</span><span style=color:#888>        </span><span style=color:#fb660a;font-weight:700>volumeMounts</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53</span><span style=color:#888>        </span>- <span style=color:#fb660a;font-weight:700>mountPath</span>:<span style=color:#888> </span><span style=color:#0086d2>&#34;/etc/coredns/Corefile&#34;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">54</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>subPath</span>:<span style=color:#888> </span><span style=color:#0086d2>&#34;Corefile&#34;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">55</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>coredns-config-volume<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">56</span><span style=color:#888>        </span>- <span style=color:#fb660a;font-weight:700>mountPath</span>:<span style=color:#888> </span><span style=color:#0086d2>&#34;/etc/coredns/zones&#34;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">57</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>coredns-zone-volume<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">58</span><span style=color:#888>      </span><span style=color:#fb660a;font-weight:700>restartPolicy</span>:<span style=color:#888> </span>Always<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">59</span><span style=color:#888>      </span><span style=color:#fb660a;font-weight:700>volumes</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">60</span><span style=color:#888>        </span>- <span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>coredns-config-volume<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">61</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>configMap</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">62</span><span style=color:#888>            </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>coredns-config<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">63</span><span style=color:#888>            </span><span style=color:#fb660a;font-weight:700>items</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">64</span><span style=color:#888>              </span>- <span style=color:#fb660a;font-weight:700>key</span>:<span style=color:#888> </span>Corefile<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">65</span><span style=color:#888>                </span><span style=color:#fb660a;font-weight:700>path</span>:<span style=color:#888> </span>Corefile<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">66</span><span style=color:#888>        </span>- <span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>coredns-zone-volume<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">67</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>configMap</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">68</span><span style=color:#888>            </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>coredns-zones<span style=color:#888>
-</span></code></pre></div><h2 id=services>Services</h2>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">57
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">58
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">59
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">60
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">61
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">62
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">63
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">64
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">65
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">66
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">67
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">68
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>apps/v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>Deployment<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>definit-coredns<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>coredns<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>labels</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>app.kubernetes.io/name</span>:<span style=color:#bbb> </span>coredns<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>app.kubernetes.io/instance</span>:<span style=color:#bbb> </span>definit-coredns<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>spec</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>replicas</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>3</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>selector</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>matchLabels</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>      </span><span style=color:#070>app.kubernetes.io/name</span>:<span style=color:#bbb> </span>coredns<span style=color:#bbb>
+</span><span style=color:#bbb>      </span><span style=color:#070>app.kubernetes.io/instance</span>:<span style=color:#bbb> </span>definit-coredns<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>template</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>      </span><span style=color:#070>labels</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>        </span><span style=color:#070>app.kubernetes.io/name</span>:<span style=color:#bbb> </span>coredns<span style=color:#bbb>
+</span><span style=color:#bbb>        </span><span style=color:#070>app.kubernetes.io/instance</span>:<span style=color:#bbb> </span>definit-coredns<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>spec</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>      </span><span style=color:#070>containers</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>      </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>coredns-lab<span style=color:#bbb>
+</span><span style=color:#bbb>        </span><span style=color:#070>image</span>:<span style=color:#bbb> </span>coredns/coredns:latest<span style=color:#bbb>
+</span><span style=color:#bbb>        </span><span style=color:#070>imagePullPolicy</span>:<span style=color:#bbb> </span>Always<span style=color:#bbb>
+</span><span style=color:#bbb>        </span><span style=color:#070>args</span>:<span style=color:#bbb> </span>[<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#34;-conf&#34;</span>,<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#34;/etc/coredns/Corefile&#34;</span><span style=color:#bbb> </span>]<span style=color:#bbb>
+</span><span style=color:#bbb>        </span><span style=color:#070>ports</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>          </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>dns-tcp<span style=color:#bbb>
+</span><span style=color:#bbb>            </span><span style=color:#070>containerPort</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>53</span><span style=color:#bbb>
+</span><span style=color:#bbb>            </span><span style=color:#070>protocol</span>:<span style=color:#bbb> </span>TCP<span style=color:#bbb>
+</span><span style=color:#bbb>          </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>dns-udp<span style=color:#bbb>
+</span><span style=color:#bbb>            </span><span style=color:#070>containerPort</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>53</span><span style=color:#bbb>
+</span><span style=color:#bbb>            </span><span style=color:#070>protocol</span>:<span style=color:#bbb> </span>UDP<span style=color:#bbb>
+</span><span style=color:#bbb>        </span><span style=color:#070>livenessProbe</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>httpGet</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>            </span><span style=color:#070>path</span>:<span style=color:#bbb> </span>/health<span style=color:#bbb>
+</span><span style=color:#bbb>            </span><span style=color:#070>port</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>8080</span><span style=color:#bbb>
+</span><span style=color:#bbb>            </span><span style=color:#070>scheme</span>:<span style=color:#bbb> </span>HTTP<span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>initialDelaySeconds</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>60</span><span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>timeoutSeconds</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>5</span><span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>successThreshold</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>1</span><span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>failureThreshold</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>5</span><span style=color:#bbb>
+</span><span style=color:#bbb>        </span><span style=color:#070>readinessProbe</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>httpGet</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>            </span><span style=color:#070>path</span>:<span style=color:#bbb> </span>/ready<span style=color:#bbb>
+</span><span style=color:#bbb>            </span><span style=color:#070>port</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>8181</span><span style=color:#bbb>
+</span><span style=color:#bbb>            </span><span style=color:#070>scheme</span>:<span style=color:#bbb> </span>HTTP<span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>initialDelaySeconds</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>10</span><span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>timeoutSeconds</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>5</span><span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>successThreshold</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>1</span><span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>failureThreshold</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>5</span><span style=color:#bbb>
+</span><span style=color:#bbb>        </span><span style=color:#070>volumeMounts</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>        </span>- <span style=color:#070>mountPath</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#34;/etc/coredns/Corefile&#34;</span><span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>subPath</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#34;Corefile&#34;</span><span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>coredns-config-volume<span style=color:#bbb>
+</span><span style=color:#bbb>        </span>- <span style=color:#070>mountPath</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#34;/etc/coredns/zones&#34;</span><span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>coredns-zone-volume<span style=color:#bbb>
+</span><span style=color:#bbb>      </span><span style=color:#070>restartPolicy</span>:<span style=color:#bbb> </span>Always<span style=color:#bbb>
+</span><span style=color:#bbb>      </span><span style=color:#070>volumes</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>        </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>coredns-config-volume<span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>configMap</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>            </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>coredns-config<span style=color:#bbb>
+</span><span style=color:#bbb>            </span><span style=color:#070>items</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>              </span>- <span style=color:#070>key</span>:<span style=color:#bbb> </span>Corefile<span style=color:#bbb>
+</span><span style=color:#bbb>                </span><span style=color:#070>path</span>:<span style=color:#bbb> </span>Corefile<span style=color:#bbb>
+</span><span style=color:#bbb>        </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>coredns-zone-volume<span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>configMap</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>            </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>coredns-zones<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id=services>Services</h2>
 <p>Finally, in order to allow clients on my network to query the CoreDNS servers, and to provide a little bit of resilience, I have a MetalLb load balancer configured to provide access to the nodes. Because Kubernetes can&rsquo;t yet support multi-protocol load balancers, I have to configure both a TCP and UDP service. By specifying the same <code>loadBalancerIp</code>, MetalLb will use the same external IP address for both. From there, MetalLb peers with my physical routers via BGP and advertises the address via a /32 route.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>Service<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>labels</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>app.kubernetes.io/name</span>:<span style=color:#888> </span>coredns<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>app.kubernetes.io/instance</span>:<span style=color:#888> </span>definit-coredns<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>annotations</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>metallb.universe.tf/allow-shared-ip</span>:<span style=color:#888> </span>coredns<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>coredns-tcp-service<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>namespace</span>:<span style=color:#888> </span>coredns<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>spec</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>ports</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#888>  </span>- <span style=color:#fb660a;font-weight:700>port</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>53</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>targetPort</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>53</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>protocol</span>:<span style=color:#888> </span>TCP<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>dns-tcp<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>selector</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>app.kubernetes.io/name</span>:<span style=color:#888> </span>coredns<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>app.kubernetes.io/instance</span>:<span style=color:#888> </span>definit-coredns<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>loadBalancerIP</span>:<span style=color:#888> </span><span style=color:#0086d2>&#34;192.168.21.4&#34;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>type</span>:<span style=color:#888> </span>LoadBalancer<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>sessionAffinity</span>:<span style=color:#888> </span>None<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>externalTrafficPolicy</span>:<span style=color:#888> </span>Local<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span><span style=color:#888></span>---<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>Service<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>labels</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>app.kubernetes.io/name</span>:<span style=color:#888> </span>coredns<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>app.kubernetes.io/instance</span>:<span style=color:#888> </span>definit-coredns<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>annotations</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>metallb.universe.tf/allow-shared-ip</span>:<span style=color:#888> </span>coredns<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>coredns-udp-service<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>namespace</span>:<span style=color:#888> </span>coredns<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>spec</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>ports</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39</span><span style=color:#888>  </span>- <span style=color:#fb660a;font-weight:700>port</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>53</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>targetPort</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>53</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>protocol</span>:<span style=color:#888> </span>UDP<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>dns-udp<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>selector</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>app.kubernetes.io/name</span>:<span style=color:#888> </span>coredns<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>app.kubernetes.io/instance</span>:<span style=color:#888> </span>definit-coredns<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>loadBalancerIP</span>:<span style=color:#888> </span><span style=color:#0086d2>&#34;192.168.21.4&#34;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>type</span>:<span style=color:#888> </span>LoadBalancer<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>sessionAffinity</span>:<span style=color:#888> </span>None<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>externalTrafficPolicy</span>:<span style=color:#888> </span>Local<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50</span><span style=color:#888>
-</span></code></pre></div><p>And that&rsquo;s that - simple! My own custom CoreDNS service running on Kubernetes. If I want to update the configuration, or a zone file, I simple update the ConfigMap YAML and apply it, and within 60 seconds the DNS zone has updated!</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>Service<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>labels</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>app.kubernetes.io/name</span>:<span style=color:#bbb> </span>coredns<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>app.kubernetes.io/instance</span>:<span style=color:#bbb> </span>definit-coredns<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>annotations</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>metallb.universe.tf/allow-shared-ip</span>:<span style=color:#bbb> </span>coredns<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>coredns-tcp-service<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>coredns<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>spec</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>ports</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- <span style=color:#070>port</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>53</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>targetPort</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>53</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>protocol</span>:<span style=color:#bbb> </span>TCP<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>dns-tcp<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>selector</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>app.kubernetes.io/name</span>:<span style=color:#bbb> </span>coredns<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>app.kubernetes.io/instance</span>:<span style=color:#bbb> </span>definit-coredns<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>loadBalancerIP</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#34;192.168.21.4&#34;</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>type</span>:<span style=color:#bbb> </span>LoadBalancer<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>sessionAffinity</span>:<span style=color:#bbb> </span>None<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>externalTrafficPolicy</span>:<span style=color:#bbb> </span>Local<span style=color:#bbb>
+</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#0e84b5;font-weight:700>---</span><span style=color:#bbb>
+</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>Service<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>labels</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>app.kubernetes.io/name</span>:<span style=color:#bbb> </span>coredns<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>app.kubernetes.io/instance</span>:<span style=color:#bbb> </span>definit-coredns<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>annotations</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>metallb.universe.tf/allow-shared-ip</span>:<span style=color:#bbb> </span>coredns<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>coredns-udp-service<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>coredns<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>spec</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>ports</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- <span style=color:#070>port</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>53</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>targetPort</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>53</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>protocol</span>:<span style=color:#bbb> </span>UDP<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>dns-udp<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>selector</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>app.kubernetes.io/name</span>:<span style=color:#bbb> </span>coredns<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>app.kubernetes.io/instance</span>:<span style=color:#bbb> </span>definit-coredns<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>loadBalancerIP</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#34;192.168.21.4&#34;</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>type</span>:<span style=color:#bbb> </span>LoadBalancer<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>sessionAffinity</span>:<span style=color:#bbb> </span>None<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>externalTrafficPolicy</span>:<span style=color:#bbb> </span>Local<span style=color:#bbb>
+</span><span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>And that&rsquo;s that - simple! My own custom CoreDNS service running on Kubernetes. If I want to update the configuration, or a zone file, I simple update the ConfigMap YAML and apply it, and within 60 seconds the DNS zone has updated!</p>
 <p><img src=images/kg-config-pods-services.png alt="kubectl get configmaps,pods,services"></p>
 <p><img src=images/dns-query.png alt="Query DNS resolution"></p>
 <h6>Share this post</h6>

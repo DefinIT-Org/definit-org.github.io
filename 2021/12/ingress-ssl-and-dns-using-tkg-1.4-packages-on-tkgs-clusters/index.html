@@ -38,7 +38,7 @@
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
-<link href=/css/clr-ui-dark.min.css rel=stylesheet>
+<link href=/css/clr-ui.min.css rel=stylesheet>
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
@@ -106,7 +106,7 @@ RSS
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 9/12/2021
-&#183; Read in about 9 min (1792 words)
+&#183; Read in about 10 min (2062 words)
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/cloud-native>Cloud-Native</a> and <a href=/category/vmware>VMware</a>
@@ -141,156 +141,335 @@ Tags:
 <h1 id=pre-requisites-for-tkg-packages>Pre-requisites for TKG Packages</h1>
 <p>I&rsquo;m going to assume you&rsquo;ve got a TKG cluster deployed, you have authenticated using the <code>kubectl vsphere login</code> commands and your current <code>kubctl</code> context is set to the cluster you&rsquo;re working on. You&rsquo;ll also need to have the <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-install-cli.html>Tanzu CLI installed</a>.</p>
 <p>Before anything is deployed, you need to configure a storage class as default - I&rsquo;m going to set <code>vsan-default-storage-policy</code> as mine.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#080;background-color:#0f140f;font-style:italic># Set the default storage class</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>$ kubectl patch storageclass vsan-default-storage-policy -p <span style=color:#0086d2>&#39;{&#34;metadata&#34;: {&#34;annotations&#34;:{&#34;storageclass.kubernetes.io/is-default-class&#34;:&#34;true&#34;}}}&#39;</span>
-</code></pre></div><p>In order to run privileged pods on TKGs workload clusters, the [pod security policy needs to be updated](Using Pod Security Policies with Tanzu Kubernetes Clusters). The command below allows privileged workloads to run <em>cluster wide</em> - to restrict this privilege use a <code>RoleBinding</code> for specific <code>namespaces</code> and <code>serviceaccounts</code>.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>$ kubectl create clusterrolebinding default-tkg-admin-privileged-binding --clusterrole=psp:vmware-system-privileged --group=system:authenticated
-</code></pre></div><p>## Install the <code>kapp-controller</code></p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#666;font-style:italic># Set the default storage class</span>
+$ kubectl patch storageclass vsan-default-storage-policy -p <span style=background-color:#e0e0ff>&#39;{&#34;metadata&#34;: {&#34;annotations&#34;:{&#34;storageclass.kubernetes.io/is-default-class&#34;:&#34;true&#34;}}}&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>In order to run privileged pods on TKGs workload clusters, the [pod security policy needs to be updated](Using Pod Security Policies with Tanzu Kubernetes Clusters). The command below allows privileged workloads to run <em>cluster wide</em> - to restrict this privilege use a <code>RoleBinding</code> for specific <code>namespaces</code> and <code>serviceaccounts</code>.</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ kubectl create clusterrolebinding default-tkg-admin-privileged-binding --clusterrole<span style=color:#333>=</span>psp:vmware-system-privileged --group<span style=color:#333>=</span>system:authenticated
+</code></pre></td></tr></table>
+</div>
+</div><p>## Install the <code>kapp-controller</code></p>
 <p>Part of Carvel is <code>kapp</code>, which allows you to bundle multiple kubernetes objects together into a single application definition, then deploy them in a dependency-aware fashion. The <code>kapp-controller</code> is a Kubernetes Controller that will watch the state of your cluster, then make or request changes where needed - reconciling the desired state defined in the <code>kapp</code> bundle with the current state on the cluster.</p>
 <p>Create a new file <code>kapp-controller.yaml</code> and paste the manifest from the <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-prep-tkgs-kapp.html#kapp-controller-manifest>Tanzu Packages documentation</a>.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#080;background-color:#0f140f;font-style:italic># Deploy the kapp-controller manifest</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>$ kubectl apply -f kapp-controller.yaml
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#080;background-color:#0f140f;font-style:italic># Add the tanzu package repo</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>$ tanzu package repository add tkg-packages-1-4-0 --url projects.registry.vmware.com/tkg/packages/standard/repo:v1.4.0
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#080;background-color:#0f140f;font-style:italic># Check the repository has been installed and the STATUS is Reconcile succeeded</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>$ tanzu package repository list
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>Retrieving repositories... 
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>  NAME                REPOSITORY                                                      STATUS               DETAILS  
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>  tkg-packages-1-4-0  projects.registry.vmware.com/tkg/packages/standard/repo:v1.4.0  Reconcile succeeded   
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#080;background-color:#0f140f;font-style:italic># List the available packages</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>$ tanzu package available list
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>- Retrieving available packages... 
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>  NAME                           DISPLAY-NAME  SHORT-DESCRIPTION                                                                                           
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>  cert-manager.tanzu.vmware.com  cert-manager  Certificate management                                                                                      
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>  contour.tanzu.vmware.com       Contour       An ingress controller                                                                                       
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>  external-dns.tanzu.vmware.com  external-dns  This package provides DNS synchronization functionality.                                                    
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>  fluent-bit.tanzu.vmware.com    fluent-bit    Fluent Bit is a fast Log Processor and Forwarder                                                            
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>  grafana.tanzu.vmware.com       grafana       Visualization and analytics software                                                                        
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>  harbor.tanzu.vmware.com        Harbor        OCI Registry                                                                                                
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>  multus-cni.tanzu.vmware.com    multus-cni    This package provides the ability <span style=color:#fb660a;font-weight:700>for</span> enabling attaching multiple network interfaces to pods in Kubernetes  
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>  prometheus.tanzu.vmware.com    prometheus    A time series database <span style=color:#fb660a;font-weight:700>for</span> your metrics 
-</code></pre></div><ul>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#666;font-style:italic># Deploy the kapp-controller manifest</span>
+$ kubectl apply -f kapp-controller.yaml
+<span style=color:#666;font-style:italic># Add the tanzu package repo</span>
+$ tanzu package repository add tkg-packages-1-4-0 --url projects.registry.vmware.com/tkg/packages/standard/repo:v1.4.0
+<span style=color:#666;font-style:italic># Check the repository has been installed and the STATUS is Reconcile succeeded</span>
+$ tanzu package repository list
+
+Retrieving repositories... 
+  NAME                REPOSITORY                                                      STATUS               DETAILS  
+  tkg-packages-1-4-0  projects.registry.vmware.com/tkg/packages/standard/repo:v1.4.0  Reconcile succeeded   
+<span style=color:#666;font-style:italic># List the available packages</span>
+$ tanzu package available list
+
+- Retrieving available packages... 
+  NAME                           DISPLAY-NAME  SHORT-DESCRIPTION                                                                                           
+  cert-manager.tanzu.vmware.com  cert-manager  Certificate management                                                                                      
+  contour.tanzu.vmware.com       Contour       An ingress controller                                                                                       
+  external-dns.tanzu.vmware.com  external-dns  This package provides DNS synchronization functionality.                                                    
+  fluent-bit.tanzu.vmware.com    fluent-bit    Fluent Bit is a fast Log Processor and Forwarder                                                            
+  grafana.tanzu.vmware.com       grafana       Visualization and analytics software                                                                        
+  harbor.tanzu.vmware.com        Harbor        OCI Registry                                                                                                
+  multus-cni.tanzu.vmware.com    multus-cni    This package provides the ability <span style=color:#289;font-weight:700>for</span> enabling attaching multiple network interfaces to pods in Kubernetes  
+  prometheus.tanzu.vmware.com    prometheus    A <span style=color:#072>time</span> series database <span style=color:#289;font-weight:700>for</span> your metrics 
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Ref: <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-prep-tkgs-kapp.html>Prepare a Tanzu Kubernetes Cluster Created by Using the Tanzu Kubernetes Grid Service to Run Packages</a></li>
 </ul>
 <h1 id=install-cert-manager>Install Cert Manager</h1>
 <p>The first package I&rsquo;m going to install is <code>cert-manager</code>, which provides &ldquo;certificates as a service&rdquo; inside of Kubernetes. I&rsquo;m going to install a CA certificate generated on my local machine to sign certificates, since the DNS domain I&rsquo;m using (cmbu.local) is not public. This means I can trust the CA created on my local machine to produce valid certificates for me - this is obviously not something you&rsquo;d do in a production environment!</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#080;background-color:#0f140f;font-style:italic># First, identify the latest version of the cert-manager package</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>tanzu package available list cert-manager.tanzu.vmware.com -A
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>Retrieving package versions <span style=color:#fb660a;font-weight:700>for</span> cert-manager.tanzu.vmware.com... 
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>  NAME                           VERSION               RELEASED-AT           NAMESPACE  
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>  cert-manager.tanzu.vmware.com  1.1.0+vmware.1-tkg.2  2020-11-24T18:00:00Z  default
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#080;background-color:#0f140f;font-style:italic># Next, install the package using the tanzu cli (this will install the package itself in the default</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#080;background-color:#0f140f;font-style:italic># namespace, and create the cert-manager namespace)</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>tanzu package install cert-manager --package-name cert-manager.tanzu.vmware.com --version 1.1.0+vmware.1-tkg.2 --create-namespace
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#080;background-color:#0f140f;font-style:italic># Once installed, we can check cert-manager is running as expected</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>kubectl get all -n cert-manager
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>READY   STATUS    RESTARTS   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>pod/cert-manager-5d98fc96c-ps88n               1/1     Running   <span style=color:#0086f7;font-weight:700>0</span>          42s
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>pod/cert-manager-cainjector-569d88547f-p6rqs   1/1     Running   <span style=color:#0086f7;font-weight:700>0</span>          42s
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>pod/cert-manager-webhook-79fd9fcbf-j6tvs       1/1     Running   <span style=color:#0086f7;font-weight:700>0</span>          42s
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>NAME                           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>service/cert-manager           ClusterIP   10.106.223.54   &lt;none&gt;        9402/TCP   42s
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>service/cert-manager-webhook   ClusterIP   10.102.63.18    &lt;none&gt;        443/TCP    43s
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>NAME                                      READY   UP-TO-DATE   AVAILABLE   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>deployment.apps/cert-manager              1/1     <span style=color:#0086f7;font-weight:700>1</span>            <span style=color:#0086f7;font-weight:700>1</span>           44s
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>deployment.apps/cert-manager-cainjector   1/1     <span style=color:#0086f7;font-weight:700>1</span>            <span style=color:#0086f7;font-weight:700>1</span>           44s
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>deployment.apps/cert-manager-webhook      1/1     <span style=color:#0086f7;font-weight:700>1</span>            <span style=color:#0086f7;font-weight:700>1</span>           44s
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span>NAME                                                 DESIRED   CURRENT   READY   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span>replicaset.apps/cert-manager-5d98fc96c               <span style=color:#0086f7;font-weight:700>1</span>         <span style=color:#0086f7;font-weight:700>1</span>         <span style=color:#0086f7;font-weight:700>1</span>       44s
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span>replicaset.apps/cert-manager-cainjector-569d88547f   <span style=color:#0086f7;font-weight:700>1</span>         <span style=color:#0086f7;font-weight:700>1</span>         <span style=color:#0086f7;font-weight:700>1</span>       44s
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span>replicaset.apps/cert-manager-webhook-79fd9fcbf       <span style=color:#0086f7;font-weight:700>1</span>         <span style=color:#0086f7;font-weight:700>1</span>         <span style=color:#0086f7;font-weight:700>1</span>       44s
-</code></pre></div><ul>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#666;font-style:italic># First, identify the latest version of the cert-manager package</span>
+tanzu package available list cert-manager.tanzu.vmware.com -A
+
+Retrieving package versions <span style=color:#289;font-weight:700>for</span> cert-manager.tanzu.vmware.com... 
+  NAME                           VERSION               RELEASED-AT           NAMESPACE  
+  cert-manager.tanzu.vmware.com  1.1.0+vmware.1-tkg.2  2020-11-24T18:00:00Z  default
+
+<span style=color:#666;font-style:italic># Next, install the package using the tanzu cli (this will install the package itself in the default</span>
+<span style=color:#666;font-style:italic># namespace, and create the cert-manager namespace)</span>
+tanzu package install cert-manager --package-name cert-manager.tanzu.vmware.com --version 1.1.0+vmware.1-tkg.2 --create-namespace
+
+<span style=color:#666;font-style:italic># Once installed, we can check cert-manager is running as expected</span>
+kubectl get all -n cert-manager
+
+READY   STATUS    RESTARTS   AGE
+pod/cert-manager-5d98fc96c-ps88n               1/1     Running   <span style=color:#60e;font-weight:700>0</span>          42s
+pod/cert-manager-cainjector-569d88547f-p6rqs   1/1     Running   <span style=color:#60e;font-weight:700>0</span>          42s
+pod/cert-manager-webhook-79fd9fcbf-j6tvs       1/1     Running   <span style=color:#60e;font-weight:700>0</span>          42s
+
+NAME                           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT<span style=color:#333>(</span>S<span style=color:#333>)</span>    AGE
+service/cert-manager           ClusterIP   10.106.223.54   &lt;none&gt;        9402/TCP   42s
+service/cert-manager-webhook   ClusterIP   10.102.63.18    &lt;none&gt;        443/TCP    43s
+
+NAME                                      READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/cert-manager              1/1     <span style=color:#60e;font-weight:700>1</span>            <span style=color:#60e;font-weight:700>1</span>           44s
+deployment.apps/cert-manager-cainjector   1/1     <span style=color:#60e;font-weight:700>1</span>            <span style=color:#60e;font-weight:700>1</span>           44s
+deployment.apps/cert-manager-webhook      1/1     <span style=color:#60e;font-weight:700>1</span>            <span style=color:#60e;font-weight:700>1</span>           44s
+
+NAME                                                 DESIRED   CURRENT   READY   AGE
+replicaset.apps/cert-manager-5d98fc96c               <span style=color:#60e;font-weight:700>1</span>         <span style=color:#60e;font-weight:700>1</span>         <span style=color:#60e;font-weight:700>1</span>       44s
+replicaset.apps/cert-manager-cainjector-569d88547f   <span style=color:#60e;font-weight:700>1</span>         <span style=color:#60e;font-weight:700>1</span>         <span style=color:#60e;font-weight:700>1</span>       44s
+replicaset.apps/cert-manager-webhook-79fd9fcbf       <span style=color:#60e;font-weight:700>1</span>         <span style=color:#60e;font-weight:700>1</span>         <span style=color:#60e;font-weight:700>1</span>       44s
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Ref: <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-cert-manager.html>Install Cert Manager</a></li>
 </ul>
 <h2 id=configuring-ca-signed-certificates>Configuring CA signed certificates</h2>
 <p>To create the CA certificates, I followed the steps documented by Jorge Morales Pou here - <a href=https://tanzu.vmware.com/developer/blog/securely-connect-with-your-local-kubernetes-environment/>Create your own local CA</a>, and exported the private key as <a href=https://cormachogan.com/2021/11/02/securing-application-access-on-tkg-v1-4-with-cert-manager-and-contour/>noted by Cormac Hogan here</a>.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>$ openssl rsa -in autotmm-ca.key -out autotmm-ca.unprotected.key
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#080;background-color:#0f140f;font-style:italic># Create a TLS secret in the cert-manager namespace</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>$ kubectl create secret tls autotmm-ca-secret --key autotmm-ca.unprotected.key --cert autotmm-ca.pem -n cert-manager
-</code></pre></div><p>Next create a ClusterIssuer manifest to use the CA secret, and deploy <code>kubectl apply ca-issuer.yaml</code>:</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>cert-manager.io/v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>ClusterIssuer<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>autotmm-issuer<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>namespace</span>:<span style=color:#888> </span>cert-manager<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>spec</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>ca</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>secretName</span>:<span style=color:#888> </span>autotmm-ca-secret<span style=color:#888>
-</span></code></pre></div><h1 id=install-contour>Install Contour</h1>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ openssl rsa -in autotmm-ca.key -out autotmm-ca.unprotected.key
+
+<span style=color:#666;font-style:italic># Create a TLS secret in the cert-manager namespace</span>
+$ kubectl create secret tls autotmm-ca-secret --key autotmm-ca.unprotected.key --cert autotmm-ca.pem -n cert-manager
+</code></pre></td></tr></table>
+</div>
+</div><p>Next create a ClusterIssuer manifest to use the CA secret, and deploy <code>kubectl apply ca-issuer.yaml</code>:</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>cert-manager.io/v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ClusterIssuer<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>autotmm-issuer<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>cert-manager<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>spec</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>ca</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>secretName</span>:<span style=color:#bbb> </span>autotmm-ca-secret<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id=install-contour>Install Contour</h1>
 <p>At this point <code>cert-manager</code> should be ready to issue certificates, so we can install <code>contour</code> to begin consuming them. I&rsquo;ve created <code>contour-data-values.yaml</code> based on the &ldquo;workload cluster with NSX ALB&rdquo; example to contain the configuration for the <code>contour</code> deployment, which will customize the package deployment to use a <code>LoadBalancer</code> for Envoy.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#fb660a;font-weight:700>infrastructure_provider</span>:<span style=color:#888> </span>vsphere<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>namespace</span>:<span style=color:#888> </span>tanzu-system-ingress<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>contour</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#888> </span><span style=color:#fb660a;font-weight:700>configFileContents</span>:<span style=color:#888> </span>{}<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#888> </span><span style=color:#fb660a;font-weight:700>useProxyProtocol</span>:<span style=color:#888> </span><span style=color:#fb660a;font-weight:700>false</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#888> </span><span style=color:#fb660a;font-weight:700>replicas</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>2</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#888> </span><span style=color:#fb660a;font-weight:700>pspNames</span>:<span style=color:#888> </span><span style=color:#0086d2>&#34;vmware-system-restricted&#34;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#888> </span><span style=color:#fb660a;font-weight:700>logLevel</span>:<span style=color:#888> </span>info<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>envoy</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#888> </span><span style=color:#fb660a;font-weight:700>service</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#888>   </span><span style=color:#fb660a;font-weight:700>type</span>:<span style=color:#888> </span>LoadBalancer<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#888>   </span><span style=color:#fb660a;font-weight:700>annotations</span>:<span style=color:#888> </span>{}<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#888>   </span><span style=color:#fb660a;font-weight:700>nodePorts</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#888>     </span><span style=color:#fb660a;font-weight:700>http</span>:<span style=color:#888> </span><span style=color:#fb660a;font-weight:700>null</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#888>     </span><span style=color:#fb660a;font-weight:700>https</span>:<span style=color:#888> </span><span style=color:#fb660a;font-weight:700>null</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#888>   </span><span style=color:#fb660a;font-weight:700>externalTrafficPolicy</span>:<span style=color:#888> </span>Cluster<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#888>   </span><span style=color:#fb660a;font-weight:700>disableWait</span>:<span style=color:#888> </span><span style=color:#fb660a;font-weight:700>false</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#888> </span><span style=color:#fb660a;font-weight:700>hostPorts</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#888>   </span><span style=color:#fb660a;font-weight:700>enable</span>:<span style=color:#888> </span><span style=color:#fb660a;font-weight:700>false</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#888>   </span><span style=color:#fb660a;font-weight:700>http</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>80</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span><span style=color:#888>   </span><span style=color:#fb660a;font-weight:700>https</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>443</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span><span style=color:#888> </span><span style=color:#fb660a;font-weight:700>hostNetwork</span>:<span style=color:#888> </span><span style=color:#fb660a;font-weight:700>false</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span><span style=color:#888> </span><span style=color:#fb660a;font-weight:700>terminationGracePeriodSeconds</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>300</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span><span style=color:#888> </span><span style=color:#fb660a;font-weight:700>logLevel</span>:<span style=color:#888> </span>info<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span><span style=color:#888> </span><span style=color:#fb660a;font-weight:700>pspNames</span>:<span style=color:#888> </span><span style=color:#fb660a;font-weight:700>null</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>certificates</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span><span style=color:#888> </span><span style=color:#fb660a;font-weight:700>duration</span>:<span style=color:#888> </span>8760h<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span><span style=color:#888> </span><span style=color:#fb660a;font-weight:700>renewBefore</span>:<span style=color:#888> </span>360h<span style=color:#888>
-</span></code></pre></div><p>With this configuration file we can deploy Contour into the cluster</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#080;background-color:#0f140f;font-style:italic># Identify the latest version of contour</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>$ tanzu package available list contour.tanzu.vmware.com -A
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#0086d2>\ </span>Retrieving package versions <span style=color:#fb660a;font-weight:700>for</span> contour.tanzu.vmware.com... 
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>  NAME                      VERSION                RELEASED-AT           NAMESPACE  
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>  contour.tanzu.vmware.com  1.17.1+vmware.1-tkg.1  2021-07-23T18:00:00Z  default 
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#080;background-color:#0f140f;font-style:italic># Next, install the package using the tanzu cli (this will install the package itself in the default</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#080;background-color:#0f140f;font-style:italic># namespace, and create the tanzu-system-ingress namespace)</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>tanzu package install contour --package-name contour.tanzu.vmware.com --version 1.17.1+vmware.1-tkg.1 --values-file contour-data-values.yaml --create-namespace
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#080;background-color:#0f140f;font-style:italic># Check the deployment</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>$ kubectl get all -n tanzu-system-ingress
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>NAME                          READY   STATUS    RESTARTS   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>pod/contour-cd965689f-9p4jh   1/1     Running   <span style=color:#0086f7;font-weight:700>0</span>          5h2m
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>pod/contour-cd965689f-gmm27   1/1     Running   <span style=color:#0086f7;font-weight:700>0</span>          5h2m
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>pod/envoy-67xzt               2/2     Running   <span style=color:#0086f7;font-weight:700>0</span>          5h2m
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>pod/envoy-vq49r               2/2     Running   <span style=color:#0086f7;font-weight:700>0</span>          5h2m
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>pod/envoy-x9qt4               2/2     Running   <span style=color:#0086f7;font-weight:700>0</span>          5h2m
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>NAME              TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                      AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>service/contour   ClusterIP      10.106.131.103   &lt;none&gt;           8001/TCP                     5h2m
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>service/envoy     LoadBalancer   10.109.244.41    10.176.149.101   80:30508/TCP,443:32580/TCP   5h2m
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>NAME                   DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>daemonset.apps/envoy   <span style=color:#0086f7;font-weight:700>3</span>         <span style=color:#0086f7;font-weight:700>3</span>         <span style=color:#0086f7;font-weight:700>3</span>       <span style=color:#0086f7;font-weight:700>3</span>            <span style=color:#0086f7;font-weight:700>3</span>           &lt;none&gt;          5h2m
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span>NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span>deployment.apps/contour   2/2     <span style=color:#0086f7;font-weight:700>2</span>            <span style=color:#0086f7;font-weight:700>2</span>           5h2m
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span>NAME                                DESIRED   CURRENT   READY   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33</span>replicaset.apps/contour-cd965689f   <span style=color:#0086f7;font-weight:700>2</span>         <span style=color:#0086f7;font-weight:700>2</span>         <span style=color:#0086f7;font-weight:700>2</span>       5h2m
-</code></pre></div><ul>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>infrastructure_provider</span>:<span style=color:#bbb> </span>vsphere<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>tanzu-system-ingress<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>contour</span>:<span style=color:#bbb>
+</span><span style=color:#bbb> </span><span style=color:#070>configFileContents</span>:<span style=color:#bbb> </span>{}<span style=color:#bbb>
+</span><span style=color:#bbb> </span><span style=color:#070>useProxyProtocol</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>false</span><span style=color:#bbb>
+</span><span style=color:#bbb> </span><span style=color:#070>replicas</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>2</span><span style=color:#bbb>
+</span><span style=color:#bbb> </span><span style=color:#070>pspNames</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#34;vmware-system-restricted&#34;</span><span style=color:#bbb>
+</span><span style=color:#bbb> </span><span style=color:#070>logLevel</span>:<span style=color:#bbb> </span>info<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>envoy</span>:<span style=color:#bbb>
+</span><span style=color:#bbb> </span><span style=color:#070>service</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>   </span><span style=color:#070>type</span>:<span style=color:#bbb> </span>LoadBalancer<span style=color:#bbb>
+</span><span style=color:#bbb>   </span><span style=color:#070>annotations</span>:<span style=color:#bbb> </span>{}<span style=color:#bbb>
+</span><span style=color:#bbb>   </span><span style=color:#070>nodePorts</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>     </span><span style=color:#070>http</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>null</span><span style=color:#bbb>
+</span><span style=color:#bbb>     </span><span style=color:#070>https</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>null</span><span style=color:#bbb>
+</span><span style=color:#bbb>   </span><span style=color:#070>externalTrafficPolicy</span>:<span style=color:#bbb> </span>Cluster<span style=color:#bbb>
+</span><span style=color:#bbb>   </span><span style=color:#070>disableWait</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>false</span><span style=color:#bbb>
+</span><span style=color:#bbb> </span><span style=color:#070>hostPorts</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>   </span><span style=color:#070>enable</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>false</span><span style=color:#bbb>
+</span><span style=color:#bbb>   </span><span style=color:#070>http</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>80</span><span style=color:#bbb>
+</span><span style=color:#bbb>   </span><span style=color:#070>https</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>443</span><span style=color:#bbb>
+</span><span style=color:#bbb> </span><span style=color:#070>hostNetwork</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>false</span><span style=color:#bbb>
+</span><span style=color:#bbb> </span><span style=color:#070>terminationGracePeriodSeconds</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>300</span><span style=color:#bbb>
+</span><span style=color:#bbb> </span><span style=color:#070>logLevel</span>:<span style=color:#bbb> </span>info<span style=color:#bbb>
+</span><span style=color:#bbb> </span><span style=color:#070>pspNames</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>null</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>certificates</span>:<span style=color:#bbb>
+</span><span style=color:#bbb> </span><span style=color:#070>duration</span>:<span style=color:#bbb> </span>8760h<span style=color:#bbb>
+</span><span style=color:#bbb> </span><span style=color:#070>renewBefore</span>:<span style=color:#bbb> </span>360h<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>With this configuration file we can deploy Contour into the cluster</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#666;font-style:italic># Identify the latest version of contour</span>
+$ tanzu package available list contour.tanzu.vmware.com -A
+
+<span style=color:#666;background-color:#e0e0ff;font-weight:700>\ </span>Retrieving package versions <span style=color:#289;font-weight:700>for</span> contour.tanzu.vmware.com... 
+  NAME                      VERSION                RELEASED-AT           NAMESPACE  
+  contour.tanzu.vmware.com  1.17.1+vmware.1-tkg.1  2021-07-23T18:00:00Z  default 
+
+<span style=color:#666;font-style:italic># Next, install the package using the tanzu cli (this will install the package itself in the default</span>
+<span style=color:#666;font-style:italic># namespace, and create the tanzu-system-ingress namespace)</span>
+tanzu package install contour --package-name contour.tanzu.vmware.com --version 1.17.1+vmware.1-tkg.1 --values-file contour-data-values.yaml --create-namespace
+
+<span style=color:#666;font-style:italic># Check the deployment</span>
+$ kubectl get all -n tanzu-system-ingress
+
+NAME                          READY   STATUS    RESTARTS   AGE
+pod/contour-cd965689f-9p4jh   1/1     Running   <span style=color:#60e;font-weight:700>0</span>          5h2m
+pod/contour-cd965689f-gmm27   1/1     Running   <span style=color:#60e;font-weight:700>0</span>          5h2m
+pod/envoy-67xzt               2/2     Running   <span style=color:#60e;font-weight:700>0</span>          5h2m
+pod/envoy-vq49r               2/2     Running   <span style=color:#60e;font-weight:700>0</span>          5h2m
+pod/envoy-x9qt4               2/2     Running   <span style=color:#60e;font-weight:700>0</span>          5h2m
+
+NAME              TYPE           CLUSTER-IP       EXTERNAL-IP      PORT<span style=color:#333>(</span>S<span style=color:#333>)</span>                      AGE
+service/contour   ClusterIP      10.106.131.103   &lt;none&gt;           8001/TCP                     5h2m
+service/envoy     LoadBalancer   10.109.244.41    10.176.149.101   80:30508/TCP,443:32580/TCP   5h2m
+
+NAME                   DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+daemonset.apps/envoy   <span style=color:#60e;font-weight:700>3</span>         <span style=color:#60e;font-weight:700>3</span>         <span style=color:#60e;font-weight:700>3</span>       <span style=color:#60e;font-weight:700>3</span>            <span style=color:#60e;font-weight:700>3</span>           &lt;none&gt;          5h2m
+
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/contour   2/2     <span style=color:#60e;font-weight:700>2</span>            <span style=color:#60e;font-weight:700>2</span>           5h2m
+
+NAME                                DESIRED   CURRENT   READY   AGE
+replicaset.apps/contour-cd965689f   <span style=color:#60e;font-weight:700>2</span>         <span style=color:#60e;font-weight:700>2</span>         <span style=color:#60e;font-weight:700>2</span>       5h2m
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Ref: <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-ingress-contour.html>Implement Ingress Control with Contour</a></li>
 </ul>
 <h1 id=external-dns>External DNS</h1>
@@ -302,200 +481,424 @@ Tags:
 <li>Enable Zone Transfers to all servers</li>
 </ul>
 <p>First, create the <code>external-dns-kerberos.yaml</code>, updating to match your AD Domain:</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>ConfigMap<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>creationTimestamp</span>:<span style=color:#888> </span><span style=color:#fb660a;font-weight:700>null</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>krb5.conf<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>namespace</span>:<span style=color:#888> </span>tanzu-system-service-discovery<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>data</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>krb5.conf</span>:<span style=color:#888> </span>|<span style=color:#0086d2>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#0086d2>    [logging]
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#0086d2>    default = FILE:/var/log/krb5libs.log
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#0086d2>    kdc = FILE:/var/log/krb5kdc.log
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#0086d2>    admin_server = FILE:/var/log/kadmind.log
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#0086d2>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#0086d2>    [libdefaults]
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#0086d2>    dns_lookup_realm = false
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#0086d2>    ticket_lifetime = 24h
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#0086d2>    renew_lifetime = 7d
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#0086d2>    forwardable = true
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#0086d2>    rdns = false
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#0086d2>    pkinit_anchors = /etc/pki/tls/certs/ca-bundle.crt
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span><span style=color:#0086d2>    default_ccache_name = KEYRING:persistent:%{uid}
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span><span style=color:#0086d2>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span><span style=color:#0086d2>    default_realm = CMBU.LOCAL
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span><span style=color:#0086d2>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span><span style=color:#0086d2>    [realms]
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span><span style=color:#0086d2>    CMBU.LOCAL = {
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span><span style=color:#0086d2>      kdc = domaincontroller.cmbu.local
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span><span style=color:#0086d2>      admin_server = domaincontroller.cmbu.local
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span><span style=color:#0086d2>    }
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span><span style=color:#0086d2>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span><span style=color:#0086d2>    [domain_realm]
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span><span style=color:#0086d2>    cmbu.local = CMBU.LOCAL
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33</span><span style=color:#0086d2>    .cmbu.local = CMBU.LOCAL</span><span style=color:#888>    
-</span></code></pre></div><p>Because I need the kerberos configuration to be present before deploying <code>external-dns</code>, I create the <code>namespace</code> and deploy the kerberos <code>configmap</code>:</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>$ kubectl create namespace tanzu-system-service-discovery
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>$ kubectl apply -f external-dns-kerberos.yaml
-</code></pre></div><p>Next, create a package configuration YAML <code>external-dns-data-values.yaml</code> to configure the package. This example is specific for Microsoft DNS, to configure for other DNS providers <a href=https://github.com/kubernetes-sigs/external-dns>check the external-dns docs</a>! The key things to note here are the three source types - this means external-dns will register DNS for <code>services</code>, <code>ingresses</code> and <code>httpproxies</code>.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#fb660a;font-weight:700>namespace</span>:<span style=color:#888> </span>tanzu-system-service-discovery<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>deployment</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>args</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#888>    </span>- --provider=rfc2136<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#888>    </span>- --rfc2136-host=cmbu-wdcdc-02.cmbu.local<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#888>    </span>- --rfc2136-port=53<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#888>    </span>- --rfc2136-zone=cmbu.local<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#888>    </span>- --rfc2136-kerberos-realm=cmbu.local<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#888>    </span>- --rfc2136-kerberos-username=service-account<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#888>    </span>- --rfc2136-kerberos-password=VMware1!<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#888>    </span>- --rfc2136-tsig-axfr<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#888>    </span>- --rfc2136-insecure<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#888>    </span>- --source=service<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#888>    </span>- --source=ingress<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#888>    </span>- --source=contour-httpproxy<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#888>    </span>- --domain-filter=cmbu.local<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#888>    </span>- --txt-owner-id=k8s<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#888>    </span>- --txt-prefix=external-dns-<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#888>    </span>- --registry=txt<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#888>    </span>- --policy=upsert-only<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>env</span>:<span style=color:#888> </span>[]<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>securityContext</span>:<span style=color:#888> </span>{}<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>volumeMounts</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span><span style=color:#888>  </span>- <span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>kerberos-config-volume<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>mountPath</span>:<span style=color:#888> </span>/etc/krb5.conf<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>subPath</span>:<span style=color:#888> </span>krb5.conf<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>volumes</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span><span style=color:#888>  </span>- <span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>kerberos-config-volume<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>configMap</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span><span style=color:#888>      </span><span style=color:#fb660a;font-weight:700>defaultMode</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>420</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span><span style=color:#888>      </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>krb5.conf<span style=color:#888>
-</span></code></pre></div><p>Finally, I can deploy the package!</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#080;background-color:#0f140f;font-style:italic># Get the latest package</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>$ tanzu package available list external-dns.tanzu.vmware.com -A
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>| Retrieving package versions <span style=color:#fb660a;font-weight:700>for</span> external-dns.tanzu.vmware.com... 
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>  NAME                           VERSION               RELEASED-AT           NAMESPACE  
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>  external-dns.tanzu.vmware.com  0.8.0+vmware.1-tkg.1  2021-06-11T18:00:00Z  default
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#080;background-color:#0f140f;font-style:italic># Next, install the package using the tanzu cli (this will install the package itself in the default</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#080;background-color:#0f140f;font-style:italic># namespace, and create the tanzu-system-service-discovery namespace)</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>tanzu package install external-dns --package-name external-dns.tanzu.vmware.com --version 0.8.0+vmware.1-tkg.1 --values-file external-dns-data-values.yaml
-</code></pre></div><ul>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ConfigMap<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>creationTimestamp</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>null</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>krb5.conf<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>tanzu-system-service-discovery<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>data</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>krb5.conf</span>:<span style=color:#bbb> </span>|<span style=color:#d42;background-color:#e0e0ff>
+</span><span style=color:#d42;background-color:#e0e0ff>    [logging]
+</span><span style=color:#d42;background-color:#e0e0ff>    default = FILE:/var/log/krb5libs.log
+</span><span style=color:#d42;background-color:#e0e0ff>    kdc = FILE:/var/log/krb5kdc.log
+</span><span style=color:#d42;background-color:#e0e0ff>    admin_server = FILE:/var/log/kadmind.log
+</span><span style=color:#d42;background-color:#e0e0ff>
+</span><span style=color:#d42;background-color:#e0e0ff>    [libdefaults]
+</span><span style=color:#d42;background-color:#e0e0ff>    dns_lookup_realm = false
+</span><span style=color:#d42;background-color:#e0e0ff>    ticket_lifetime = 24h
+</span><span style=color:#d42;background-color:#e0e0ff>    renew_lifetime = 7d
+</span><span style=color:#d42;background-color:#e0e0ff>    forwardable = true
+</span><span style=color:#d42;background-color:#e0e0ff>    rdns = false
+</span><span style=color:#d42;background-color:#e0e0ff>    pkinit_anchors = /etc/pki/tls/certs/ca-bundle.crt
+</span><span style=color:#d42;background-color:#e0e0ff>    default_ccache_name = KEYRING:persistent:%{uid}
+</span><span style=color:#d42;background-color:#e0e0ff>
+</span><span style=color:#d42;background-color:#e0e0ff>    default_realm = CMBU.LOCAL
+</span><span style=color:#d42;background-color:#e0e0ff>
+</span><span style=color:#d42;background-color:#e0e0ff>    [realms]
+</span><span style=color:#d42;background-color:#e0e0ff>    CMBU.LOCAL = {
+</span><span style=color:#d42;background-color:#e0e0ff>      kdc = domaincontroller.cmbu.local
+</span><span style=color:#d42;background-color:#e0e0ff>      admin_server = domaincontroller.cmbu.local
+</span><span style=color:#d42;background-color:#e0e0ff>    }
+</span><span style=color:#d42;background-color:#e0e0ff>
+</span><span style=color:#d42;background-color:#e0e0ff>    [domain_realm]
+</span><span style=color:#d42;background-color:#e0e0ff>    cmbu.local = CMBU.LOCAL
+</span><span style=color:#d42;background-color:#e0e0ff>    .cmbu.local = CMBU.LOCAL</span><span style=color:#bbb>    
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Because I need the kerberos configuration to be present before deploying <code>external-dns</code>, I create the <code>namespace</code> and deploy the kerberos <code>configmap</code>:</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ kubectl create namespace tanzu-system-service-discovery
+$ kubectl apply -f external-dns-kerberos.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>Next, create a package configuration YAML <code>external-dns-data-values.yaml</code> to configure the package. This example is specific for Microsoft DNS, to configure for other DNS providers <a href=https://github.com/kubernetes-sigs/external-dns>check the external-dns docs</a>! The key things to note here are the three source types - this means external-dns will register DNS for <code>services</code>, <code>ingresses</code> and <code>httpproxies</code>.</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>tanzu-system-service-discovery<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>deployment</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>args</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- --provider=rfc2136<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- --rfc2136-host=cmbu-wdcdc-02.cmbu.local<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- --rfc2136-port=53<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- --rfc2136-zone=cmbu.local<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- --rfc2136-kerberos-realm=cmbu.local<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- --rfc2136-kerberos-username=service-account<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- --rfc2136-kerberos-password=VMware1!<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- --rfc2136-tsig-axfr<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- --rfc2136-insecure<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- --source=service<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- --source=ingress<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- --source=contour-httpproxy<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- --domain-filter=cmbu.local<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- --txt-owner-id=k8s<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- --txt-prefix=external-dns-<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- --registry=txt<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- --policy=upsert-only<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>env</span>:<span style=color:#bbb> </span>[]<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>securityContext</span>:<span style=color:#bbb> </span>{}<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>volumeMounts</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>kerberos-config-volume<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>mountPath</span>:<span style=color:#bbb> </span>/etc/krb5.conf<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>subPath</span>:<span style=color:#bbb> </span>krb5.conf<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>volumes</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>kerberos-config-volume<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>configMap</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>      </span><span style=color:#070>defaultMode</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>420</span><span style=color:#bbb>
+</span><span style=color:#bbb>      </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>krb5.conf<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Finally, I can deploy the package!</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#666;font-style:italic># Get the latest package</span>
+$ tanzu package available list external-dns.tanzu.vmware.com -A
+
+| Retrieving package versions <span style=color:#289;font-weight:700>for</span> external-dns.tanzu.vmware.com... 
+  NAME                           VERSION               RELEASED-AT           NAMESPACE  
+  external-dns.tanzu.vmware.com  0.8.0+vmware.1-tkg.1  2021-06-11T18:00:00Z  default
+
+<span style=color:#666;font-style:italic># Next, install the package using the tanzu cli (this will install the package itself in the default</span>
+<span style=color:#666;font-style:italic># namespace, and create the tanzu-system-service-discovery namespace)</span>
+tanzu package install external-dns --package-name external-dns.tanzu.vmware.com --version 0.8.0+vmware.1-tkg.1 --values-file external-dns-data-values.yaml
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Ref: <a href=https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/rfc2136.md#secure-updates-using-rfc3645-gss-tsig>Secure Updates Using RFC3645 (GSS-TSIG)</a></li>
 <li>Ref: <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-external-dns.html>Implement Service Discovery with ExternalDNS</a></li>
 </ul>
 <h1 id=putting-it-all-together>Putting it all together</h1>
 <p>With this configuration I can now deploy an application and have that application URL be auto-magically signed with an SSL certificate using cert-manager, contour will steer traffic to the correct service based on the URL, and the DNS name of that service will be automatically registered in DNS!</p>
 <p>The below manifest for Kubernetes Up And Running Demo app (KUARD) is all pretty standard - the magic happens when we call the ingress object. Firstly, the annotation to use the CA issuer configuration <code>cert-manager.io/cluster-issuer: "autotmm-issuer"</code> and the <code>tls</code> configuration block means that Contour will request an SSL certificate from Cert Manager. External DNS will pick up the <code>host: kuard.cmbu.local</code> value and register it in DNS.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>apps/v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>Deployment<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>labels</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>app</span>:<span style=color:#888> </span>kuard<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>kuard<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>spec</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>replicas</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>3</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>selector</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>matchLabels</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#888>      </span><span style=color:#fb660a;font-weight:700>app</span>:<span style=color:#888> </span>kuard<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>template</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#888>      </span><span style=color:#fb660a;font-weight:700>labels</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#888>        </span><span style=color:#fb660a;font-weight:700>app</span>:<span style=color:#888> </span>kuard<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>spec</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#888>      </span><span style=color:#fb660a;font-weight:700>containers</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#888>      </span>- <span style=color:#fb660a;font-weight:700>image</span>:<span style=color:#888> </span>gcr.io/kuar-demo/kuard-amd64:1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#888>        </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>kuard<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#888></span>---<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>Service<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>labels</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>app</span>:<span style=color:#888> </span>kuard<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>kuard<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>spec</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>ports</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span><span style=color:#888>  </span>- <span style=color:#fb660a;font-weight:700>port</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>80</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>protocol</span>:<span style=color:#888> </span>TCP<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>targetPort</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>8080</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>selector</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>app</span>:<span style=color:#888> </span>kuard<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>sessionAffinity</span>:<span style=color:#888> </span>None<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>type</span>:<span style=color:#888> </span>ClusterIP<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36</span><span style=color:#888></span>---<span style=color:#888>  
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>networking.k8s.io/v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>Ingress<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>kuard<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>annotations</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>kubernetes.io/ingress.class</span>:<span style=color:#888> </span><span style=color:#0086d2>&#34;contour&#34;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>cert-manager.io/cluster-issuer</span>:<span style=color:#888> </span><span style=color:#0086d2>&#34;autotmm-issuer&#34;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>spec</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>defaultBackend</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>service</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47</span><span style=color:#888>      </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>kuard<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48</span><span style=color:#888>      </span><span style=color:#fb660a;font-weight:700>port</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49</span><span style=color:#888>        </span><span style=color:#fb660a;font-weight:700>number</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>80</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>rules</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51</span><span style=color:#888>  </span>- <span style=color:#fb660a;font-weight:700>host</span>:<span style=color:#888> </span>kuard.cmbu.local<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>http</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53</span><span style=color:#888>      </span><span style=color:#fb660a;font-weight:700>paths</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">54</span><span style=color:#888>      </span>- <span style=color:#fb660a;font-weight:700>path</span>:<span style=color:#888> </span>/<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">55</span><span style=color:#888>        </span><span style=color:#fb660a;font-weight:700>pathType</span>:<span style=color:#888> </span>Prefix<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">56</span><span style=color:#888>        </span><span style=color:#fb660a;font-weight:700>backend</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">57</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>service</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">58</span><span style=color:#888>            </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>kuard<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">59</span><span style=color:#888>            </span><span style=color:#fb660a;font-weight:700>port</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">60</span><span style=color:#888>              </span><span style=color:#fb660a;font-weight:700>number</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>80</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">61</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>tls</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">62</span><span style=color:#888>  </span>- <span style=color:#fb660a;font-weight:700>hosts</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">63</span><span style=color:#888>    </span>- kuard.cmbu.local<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">64</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>secretName</span>:<span style=color:#888> </span>kuard-cert<span style=color:#888>
-</span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>$ kubectl apply -f kuard.yml
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>deployment.apps/kuard created
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>service/kuard created
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>ingress.networking.k8s.io/kuard created
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#080;background-color:#0f140f;font-style:italic># View the created objects</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>$ kubectl get pod,service,deployment,ingress
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>NAME                         READY   STATUS    RESTARTS   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>pod/kuard-798585497b-7n72x   1/1     Running   <span style=color:#0086f7;font-weight:700>0</span>          3h40m
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>pod/kuard-798585497b-mhq5c   1/1     Running   <span style=color:#0086f7;font-weight:700>0</span>          3h40m
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>pod/kuard-798585497b-q55v8   1/1     Running   <span style=color:#0086f7;font-weight:700>0</span>          3h40m
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>service/kuard        ClusterIP   10.104.230.69   &lt;none&gt;        80/TCP     3h40m
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>service/kubernetes   ClusterIP   10.96.0.1       &lt;none&gt;        443/TCP    2d5h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>service/supervisor   ClusterIP   None            &lt;none&gt;        6443/TCP   2d5h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>deployment.apps/kuard   3/3     <span style=color:#0086f7;font-weight:700>3</span>            <span style=color:#0086f7;font-weight:700>3</span>           3h40m
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>NAME                              CLASS    HOSTS              ADDRESS          PORTS     AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>ingress.networking.k8s.io/kuard   &lt;none&gt;   kuard.cmbu.local   10.176.149.101   80, <span style=color:#0086f7;font-weight:700>443</span>   3h40m
-</code></pre></div><p>Lets check the DNS registration</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>$ nslookup
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>&gt; kuard.cmbu.local
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>Server:         10.16.142.68
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>Address:        10.16.142.68#53
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>Non-authoritative answer:
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>Name:   kuard.cmbu.local
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>Address: 10.176.149.101
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>&gt; set <span style=color:#fb660a>type</span>=txt
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>&gt; external-dns-kuard.cmbu.local
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>Server:         10.16.142.68
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>Address:        10.16.142.68#53
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>Non-authoritative answer:
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>external-dns-kuard.cmbu.local   <span style=color:#fb660a>text</span> = <span style=color:#0086d2>&#34;heritage=external-dns,external-dns/owner=k8s,external-dns/resource=HTTPProxy/default/kuard&#34;</span>
-</code></pre></div>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">57
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">58
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">59
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">60
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">61
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">62
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">63
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">64
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>apps/v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>Deployment<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>labels</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>app</span>:<span style=color:#bbb> </span>kuard<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>kuard<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>spec</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>replicas</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>3</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>selector</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>matchLabels</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>      </span><span style=color:#070>app</span>:<span style=color:#bbb> </span>kuard<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>template</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>      </span><span style=color:#070>labels</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>        </span><span style=color:#070>app</span>:<span style=color:#bbb> </span>kuard<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>spec</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>      </span><span style=color:#070>containers</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>      </span>- <span style=color:#070>image</span>:<span style=color:#bbb> </span>gcr.io/kuar-demo/kuard-amd64:1<span style=color:#bbb>
+</span><span style=color:#bbb>        </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>kuard<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#0e84b5;font-weight:700>---</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>Service<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>labels</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>app</span>:<span style=color:#bbb> </span>kuard<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>kuard<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>spec</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>ports</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- <span style=color:#070>port</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>80</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>protocol</span>:<span style=color:#bbb> </span>TCP<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>targetPort</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>8080</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>selector</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>app</span>:<span style=color:#bbb> </span>kuard<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>sessionAffinity</span>:<span style=color:#bbb> </span>None<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>type</span>:<span style=color:#bbb> </span>ClusterIP<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#0e84b5;font-weight:700>---</span><span style=color:#bbb>  
+</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>networking.k8s.io/v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>Ingress<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>kuard<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>annotations</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>kubernetes.io/ingress.class</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#34;contour&#34;</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>cert-manager.io/cluster-issuer</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#34;autotmm-issuer&#34;</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>spec</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>defaultBackend</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>service</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>      </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>kuard<span style=color:#bbb>
+</span><span style=color:#bbb>      </span><span style=color:#070>port</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>        </span><span style=color:#070>number</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>80</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>rules</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- <span style=color:#070>host</span>:<span style=color:#bbb> </span>kuard.cmbu.local<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>http</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>      </span><span style=color:#070>paths</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>      </span>- <span style=color:#070>path</span>:<span style=color:#bbb> </span>/<span style=color:#bbb>
+</span><span style=color:#bbb>        </span><span style=color:#070>pathType</span>:<span style=color:#bbb> </span>Prefix<span style=color:#bbb>
+</span><span style=color:#bbb>        </span><span style=color:#070>backend</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>service</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>            </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>kuard<span style=color:#bbb>
+</span><span style=color:#bbb>            </span><span style=color:#070>port</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>              </span><span style=color:#070>number</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>80</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>tls</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- <span style=color:#070>hosts</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- kuard.cmbu.local<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>secretName</span>:<span style=color:#bbb> </span>kuard-cert<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ kubectl apply -f kuard.yml
+deployment.apps/kuard created
+service/kuard created
+ingress.networking.k8s.io/kuard created
+
+<span style=color:#666;font-style:italic># View the created objects</span>
+$ kubectl get pod,service,deployment,ingress
+
+NAME                         READY   STATUS    RESTARTS   AGE
+pod/kuard-798585497b-7n72x   1/1     Running   <span style=color:#60e;font-weight:700>0</span>          3h40m
+pod/kuard-798585497b-mhq5c   1/1     Running   <span style=color:#60e;font-weight:700>0</span>          3h40m
+pod/kuard-798585497b-q55v8   1/1     Running   <span style=color:#60e;font-weight:700>0</span>          3h40m
+
+NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT<span style=color:#333>(</span>S<span style=color:#333>)</span>    AGE
+service/kuard        ClusterIP   10.104.230.69   &lt;none&gt;        80/TCP     3h40m
+service/kubernetes   ClusterIP   10.96.0.1       &lt;none&gt;        443/TCP    2d5h
+service/supervisor   ClusterIP   None            &lt;none&gt;        6443/TCP   2d5h
+
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/kuard   3/3     <span style=color:#60e;font-weight:700>3</span>            <span style=color:#60e;font-weight:700>3</span>           3h40m
+
+NAME                              CLASS    HOSTS              ADDRESS          PORTS     AGE
+ingress.networking.k8s.io/kuard   &lt;none&gt;   kuard.cmbu.local   10.176.149.101   80, <span style=color:#60e;font-weight:700>443</span>   3h40m
+</code></pre></td></tr></table>
+</div>
+</div><p>Lets check the DNS registration</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ nslookup
+
+&gt; kuard.cmbu.local
+
+Server:         10.16.142.68
+Address:        10.16.142.68#53
+
+Non-authoritative answer:
+Name:   kuard.cmbu.local
+Address: 10.176.149.101
+
+&gt; <span style=color:#072>set</span> <span style=color:#036>type</span><span style=color:#333>=</span>txt
+&gt; external-dns-kuard.cmbu.local
+
+Server:         10.16.142.68
+Address:        10.16.142.68#53
+
+Non-authoritative answer:
+external-dns-kuard.cmbu.local   <span style=color:#036>text</span> <span style=color:#333>=</span> <span style=background-color:#e0e0ff>&#34;heritage=external-dns,external-dns/owner=k8s,external-dns/resource=HTTPProxy/default/kuard&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
 <div class=clr-content-image-wrap>
 <a href=2021-12-09-17-26-41.png data-lightbox=2021-12-09-17-26-41.png data-title="KUARD running with valid SSL" class=lb>
 <img class=lb src=2021-12-09-17-26-41.png alt="KUARD running with valid SSL">

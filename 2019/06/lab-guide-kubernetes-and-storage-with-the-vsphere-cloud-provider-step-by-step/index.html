@@ -38,7 +38,7 @@
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
-<link href=/css/clr-ui-dark.min.css rel=stylesheet>
+<link href=/css/clr-ui.min.css rel=stylesheet>
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
@@ -106,7 +106,7 @@ RSS
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 19/6/2019
-&#183; Read in about 7 min (1299 words)
+&#183; Read in about 7 min (1405 words)
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/vmware>VMware</a>, <a href=/category/vsan>vSAN</a> and <a href=/category/cloud-native>Cloud Native</a>
@@ -285,94 +285,215 @@ Datastore Folder, if you have them).</p>
 <p>To secure the vSphere credentials they can be stored as a <a href=https://kubernetes.io/docs/concepts/configuration/secret/>Kubernetes
 Secret</a>. First,
 covert the credentials to base64:</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>echo -n <span style=color:#0086d2>&#39;vcp-k8s-svc@vsphere.local&#39;</span> | base64
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>echo -n <span style=color:#0086d2>&#39;VMware1!&#39;</span> | base64
-</code></pre></div><p>Create vcp-credentials.yaml with the base64 encoded credentials</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>Secret<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#888> </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>vcp-vcenter<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>type</span>:<span style=color:#888> </span>Opaque<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>data</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7</span><span style=color:#888>   </span><span style=color:#fb660a;font-weight:700>vcsa.definit.local.username</span>:<span style=color:#888> </span>dmNwLWs4cy1zdmNAdnNwaGVyZS5sb2NhbA==<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8</span><span style=color:#888>   </span><span style=color:#fb660a;font-weight:700>vcsa.definit.local.password</span>:<span style=color:#888> </span>Vk13YXJlMSE=<span style=color:#888>
-</span></code></pre></div><p>Create the secret using kubectl in the kube-system namespace:</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>kubectl create -f vcp-credentials.yaml --namespace=kube-system
-</code></pre></div><p>Validate the secret is visible, but not the passwords</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>kubectl describe secret vcp-vcenter --namespace=kube-system
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>Name:         vcp-vcenter
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>Namespace:    kube-system
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>Labels:       &lt;none&gt;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>Annotations:  &lt;none&gt;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>Type:  Opaque
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#fb660a>Data</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>====
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>vcsa.definit.local.password:  <span style=color:#0086f7;font-weight:700>8</span> bytes
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>vcsa.definit.local.username:  <span style=color:#0086f7;font-weight:700>25</span> bytes
-</code></pre></div><p>#Configuring the Kubernetes vSphere Cloud Provider
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#072>echo</span> -n <span style=background-color:#e0e0ff>&#39;vcp-k8s-svc@vsphere.local&#39;</span> | base64
+<span style=color:#072>echo</span> -n <span style=background-color:#e0e0ff>&#39;VMware1!&#39;</span> | base64
+</code></pre></td></tr></table>
+</div>
+</div><p>Create vcp-credentials.yaml with the base64 encoded credentials</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>Secret<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb> </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>vcp-vcenter<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>type</span>:<span style=color:#bbb> </span>Opaque<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>data</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>   </span><span style=color:#070>vcsa.definit.local.username</span>:<span style=color:#bbb> </span>dmNwLWs4cy1zdmNAdnNwaGVyZS5sb2NhbA==<span style=color:#bbb>
+</span><span style=color:#bbb>   </span><span style=color:#070>vcsa.definit.local.password</span>:<span style=color:#bbb> </span>Vk13YXJlMSE=<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Create the secret using kubectl in the kube-system namespace:</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl create -f vcp-credentials.yaml --namespace<span style=color:#333>=</span>kube-system
+</code></pre></td></tr></table>
+</div>
+</div><p>Validate the secret is visible, but not the passwords</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl describe secret vcp-vcenter --namespace<span style=color:#333>=</span>kube-system
+
+Name:         vcp-vcenter
+Namespace:    kube-system
+Labels:       &lt;none&gt;
+Annotations:  &lt;none&gt;
+
+Type:  Opaque
+
+<span style=color:#036>Data</span>
+<span style=color:#333>====</span>
+vcsa.definit.local.password:  <span style=color:#60e;font-weight:700>8</span> bytes
+vcsa.definit.local.username:  <span style=color:#60e;font-weight:700>25</span> bytes
+</code></pre></td></tr></table>
+</div>
+</div><p>#Configuring the Kubernetes vSphere Cloud Provider
 ##On the Kubernetes Master node</p>
 <h3 id=create-vsphereconf>Create vsphere.conf</h3>
 <p>Create the vSphere configuration file in /etc/kubernetes/vcp/vsphere.conf -
 you’ll need to create the folder.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>[Global]
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>        <span style=color:#080;background-color:#0f140f;font-style:italic># Global settings are defaults for all VirtualCenters defined below</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>        secret-name = <span style=color:#0086d2>&#34;vcp-vcenter&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>        secret-namespace = <span style=color:#0086d2>&#34;kube-system&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>        <span style=color:#fb660a>port</span> = <span style=color:#0086d2>&#34;443&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>        insecure-flag = <span style=color:#0086d2>&#34;1&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>[VirtualCenter <span style=color:#0086d2>&#34;vcsa.definit.local&#34;</span>]
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>        <span style=color:#fb660a>datacenters</span> = <span style=color:#0086d2>&#34;DefinIT&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>[Workspace] <span style=color:#080;background-color:#0f140f;font-style:italic># Defines </span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>        <span style=color:#fb660a>server</span> = <span style=color:#0086d2>&#34;vcsa.definit.local&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>        <span style=color:#fb660a>datacenter</span> = <span style=color:#0086d2>&#34;DefinIT&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>        default-datastore = <span style=color:#0086d2>&#34;SYN-NFS-01&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>        resourcepool-path = <span style=color:#0086d2>&#34;Cluster02/Resources&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>        <span style=color:#fb660a>folder</span> = <span style=color:#0086d2>&#34;kubernetes/k8s-01&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>[Disk]  <span style=color:#080;background-color:#0f140f;font-style:italic># Required...</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>        <span style=color:#fb660a>scsicontrollertype</span> = pvscsi
-</code></pre></div><h3 id=modify-the-kubelet-service>Modify the kubelet service</h3>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#333>[</span>Global<span style=color:#333>]</span>
+        <span style=color:#666;font-style:italic># Global settings are defaults for all VirtualCenters defined below</span>
+        secret-name <span style=color:#333>=</span> <span style=background-color:#e0e0ff>&#34;vcp-vcenter&#34;</span>
+        secret-namespace <span style=color:#333>=</span> <span style=background-color:#e0e0ff>&#34;kube-system&#34;</span>
+        <span style=color:#036>port</span> <span style=color:#333>=</span> <span style=background-color:#e0e0ff>&#34;443&#34;</span>
+        insecure-flag <span style=color:#333>=</span> <span style=background-color:#e0e0ff>&#34;1&#34;</span>
+
+<span style=color:#333>[</span>VirtualCenter <span style=background-color:#e0e0ff>&#34;vcsa.definit.local&#34;</span><span style=color:#333>]</span>
+        <span style=color:#036>datacenters</span> <span style=color:#333>=</span> <span style=background-color:#e0e0ff>&#34;DefinIT&#34;</span>
+
+<span style=color:#333>[</span>Workspace<span style=color:#333>]</span> <span style=color:#666;font-style:italic># Defines </span>
+        <span style=color:#036>server</span> <span style=color:#333>=</span> <span style=background-color:#e0e0ff>&#34;vcsa.definit.local&#34;</span>
+        <span style=color:#036>datacenter</span> <span style=color:#333>=</span> <span style=background-color:#e0e0ff>&#34;DefinIT&#34;</span>
+        default-datastore <span style=color:#333>=</span> <span style=background-color:#e0e0ff>&#34;SYN-NFS-01&#34;</span>
+        resourcepool-path <span style=color:#333>=</span> <span style=background-color:#e0e0ff>&#34;Cluster02/Resources&#34;</span>
+        <span style=color:#036>folder</span> <span style=color:#333>=</span> <span style=background-color:#e0e0ff>&#34;kubernetes/k8s-01&#34;</span>
+
+<span style=color:#333>[</span>Disk<span style=color:#333>]</span>  <span style=color:#666;font-style:italic># Required...</span>
+        <span style=color:#036>scsicontrollertype</span> <span style=color:#333>=</span> pvscsi
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=modify-the-kubelet-service>Modify the kubelet service</h3>
 <p>The vSphere Storage for Kubernetes docs are a little out of date on this - you
 don’t modify the systemd unit file directly (which is likely to be overwritten
 in upgrades). Instead there’s an environment file referenced in the</p>
 <p>Append the <code>--cloud-provider</code> and <code>--cloud-config</code> flags to
 <code>/var/lib/kubelet/kubeadm-flags.env</code></p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#fb660a>KUBELET_KUBEADM_ARGS</span>=--cgroup-driver=cgroupfs --network-plugin=cni --pod-infra-container-image=k8s.gcr.io/pause:3.1 --cloud-provider=vsphere --cloud-config=/etc/kubernetes/vcp/vsphere.conf
-</code></pre></div><h3 id=modify-container-manifests>Modify container manifests</h3>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#036>KUBELET_KUBEADM_ARGS</span><span style=color:#333>=</span>--cgroup-driver<span style=color:#333>=</span>cgroupfs --network-plugin<span style=color:#333>=</span>cni --pod-infra-container-image<span style=color:#333>=</span>k8s.gcr.io/pause:3.1 --cloud-provider<span style=color:#333>=</span>vsphere --cloud-config<span style=color:#333>=</span>/etc/kubernetes/vcp/vsphere.conf
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=modify-container-manifests>Modify container manifests</h3>
 <p>The container manifests for the Kubernetes API server and controller also need
 to be updated with the <code>--cloud-provider</code> and <code>--cloud-config</code> flags. These are
 located in the <code>/etc/kubernetes/manifests</code> folder.</p>
 <p>Add the following to the <code>spec:containers:command</code> array, paying attention to
 whitespace (it is yaml, after all!)</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>    - --cloud-provider=vsphere
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>    - --cloud-config=/etc/kubernetes/vcp/vsphere.conf
-</code></pre></div><p>We also need add a mount for the vsphere.conf file location in
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>    - --cloud-provider<span style=color:#333>=</span>vsphere
+    - --cloud-config<span style=color:#333>=</span>/etc/kubernetes/vcp/vsphere.conf
+</code></pre></td></tr></table>
+</div>
+</div><p>We also need add a mount for the vsphere.conf file location in
 <code>spec:containers:volumeMounts</code></p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>    - mountPath: /etc/kubernetes/vcp
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>      name: vcp
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>      readOnly: true
-</code></pre></div><p>And a volume in <code>spec:volumes</code></p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>  - hostPath:
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>      path: /etc/kubernetes/vcp
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>      type: DirectoryOrCreate
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>    name: vcp
-</code></pre></div><h2 id=on-the-kubernetes-worker-nodes>On the Kubernetes Worker nodes</h2>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>    - mountPath: /etc/kubernetes/vcp
+      name: vcp
+      readOnly: <span style=color:#072>true</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>And a volume in <code>spec:volumes</code></p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>  - hostPath:
+      path: /etc/kubernetes/vcp
+      type: DirectoryOrCreate
+    name: vcp
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=on-the-kubernetes-worker-nodes>On the Kubernetes Worker nodes</h2>
 <h3 id=modify-the-kubelet-service-1>Modify the kubelet service</h3>
 <p>Append the <code>--cloud-provider</code> flag to <code>/var/lib/kubelet/kubeadm-flags.env</code></p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#fb660a>KUBELET_KUBEADM_ARGS</span>=--cgroup-driver=cgroupfs --network-plugin=cni --pod-infra-container-image=k8s.gcr.io/pause:3.1 --cloud-provider=vsphere
-</code></pre></div><h2 id=update-the-node-provide-ids>Update the Node Provide IDs</h2>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#036>KUBELET_KUBEADM_ARGS</span><span style=color:#333>=</span>--cgroup-driver<span style=color:#333>=</span>cgroupfs --network-plugin<span style=color:#333>=</span>cni --pod-infra-container-image<span style=color:#333>=</span>k8s.gcr.io/pause:3.1 --cloud-provider<span style=color:#333>=</span>vsphere
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=update-the-node-provide-ids>Update the Node Provide IDs</h2>
 <p>Each Kubernetes node will need a *providerId *set so that the the created
 volumes are mounted to the correct node. The manual method for doing this is to
 look up the VM’s UUID in vSphere, then patch the node configuration with
 <code>kubectl</code> with the providerId spec. You can check if the providerId is set by
 running:</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>kubectl get nodes -o json | jq <span style=color:#0086d2>&#39;.items[]|[.metadata.name, .spec.providerID, .status.nodeInfo.systemUUID]&#39;</span>
-</code></pre></div><p>If the output contains <em>null</em> for the providerId, then you need to set it:</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get nodes -o json | jq <span style=background-color:#e0e0ff>&#39;.items[]|[.metadata.name, .spec.providerID, .status.nodeInfo.systemUUID]&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>If the output contains <em>null</em> for the providerId, then you need to set it:</p>
 <div class=clr-content-image-wrap>
 <a href=index.images/ZjeQay.png data-lightbox=index.images/ZjeQay.png data-title class=lb>
 <img class=lb src=index.images/ZjeQay.png alt>
@@ -399,102 +520,225 @@ for my vSAN provider on the host the nodes run on, and the NFS policy is a
 tag-based policy that will allow placement on any datastore tagged with the
 “NFS” tag.</p>
 <p>To use these policies I’m creating two storage classes - *fast *for vSAN:</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#080;background-color:#0f140f;font-style:italic># sc-vsan-policy.yaml</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>StorageClass<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>storage.k8s.io/v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>fast<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>provisioner</span>:<span style=color:#888> </span>kubernetes.io/vsphere-volume<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>parameters</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>storagePolicyName</span>:<span style=color:#888> </span><span style=color:#0086d2>&#34;One-node vSAN Policy&#34;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">9</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>datastore</span>:<span style=color:#888> </span>Cluster02-vSAN<span style=color:#888>
-</span></code></pre></div><p>And <em>slow</em>, for NFS:</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#080;background-color:#0f140f;font-style:italic># sc-nfs-policy.yaml</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>StorageClass<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>storage.k8s.io/v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>slow<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>provisioner</span>:<span style=color:#888> </span>kubernetes.io/vsphere-volume<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>parameters</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>diskformat</span>:<span style=color:#888> </span>thin<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">9</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>storagePolicyName</span>:<span style=color:#888> </span><span style=color:#0086d2>&#34;NFS-Storage&#34;</span><span style=color:#888>
-</span></code></pre></div><p>The policies are imported using the <code>kubectl apply -f sc-vsan-policy.yaml</code>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#666;font-style:italic># sc-vsan-policy.yaml</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>StorageClass<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>storage.k8s.io/v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>fast<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>provisioner</span>:<span style=color:#bbb> </span>kubernetes.io/vsphere-volume<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>parameters</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>storagePolicyName</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#34;One-node vSAN Policy&#34;</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>datastore</span>:<span style=color:#bbb> </span>Cluster02-vSAN<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>And <em>slow</em>, for NFS:</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#666;font-style:italic># sc-nfs-policy.yaml</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>StorageClass<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>storage.k8s.io/v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>slow<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>provisioner</span>:<span style=color:#bbb> </span>kubernetes.io/vsphere-volume<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>parameters</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>diskformat</span>:<span style=color:#bbb> </span>thin<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>storagePolicyName</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#34;NFS-Storage&#34;</span><span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>The policies are imported using the <code>kubectl apply -f sc-vsan-policy.yaml</code>
 command, and we can check the policy is created by using the <code>kubectl describe storageclaim fast</code> command.</p>
 <h3 id=create-a-persistent-volume-claim>Create a Persistent Volume Claim</h3>
 <p>To be able to consume the Storage Class we need to create a persistent volume
 claim, or pvc, that uses the storage class:</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#080;background-color:#0f140f;font-style:italic># pvc-vsan.yaml</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>PersistentVolumeClaim<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>pvc-vsan<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>annotations</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>volume.beta.kubernetes.io/storage-class</span>:<span style=color:#888> </span>fast<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>spec</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>accessModes</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#888>    </span>- ReadWriteOnce<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>resources</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>requests</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#888>      </span><span style=color:#fb660a;font-weight:700>storage</span>:<span style=color:#888> </span>2Gi<span style=color:#888>
-</span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#080;background-color:#0f140f;font-style:italic># pvc-nfs.yaml</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>PersistentVolumeClaim<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>pvc-nfs<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>annotations</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>volume.beta.kubernetes.io/storage-class</span>:<span style=color:#888> </span>slow<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>spec</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>accessModes</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#888>    </span>- ReadWriteOnce<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>resources</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>requests</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#888>      </span><span style=color:#fb660a;font-weight:700>storage</span>:<span style=color:#888> </span>2Gi<span style=color:#888>
-</span></code></pre></div><p>Again, these can be imported using the kubectl apply command, and examined with
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#666;font-style:italic># pvc-vsan.yaml</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>PersistentVolumeClaim<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>pvc-vsan<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>annotations</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>volume.beta.kubernetes.io/storage-class</span>:<span style=color:#bbb> </span>fast<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>spec</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>accessModes</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- ReadWriteOnce<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>resources</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>requests</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>      </span><span style=color:#070>storage</span>:<span style=color:#bbb> </span>2Gi<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#666;font-style:italic># pvc-nfs.yaml</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>PersistentVolumeClaim<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>pvc-nfs<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>annotations</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>volume.beta.kubernetes.io/storage-class</span>:<span style=color:#bbb> </span>slow<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>spec</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>accessModes</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- ReadWriteOnce<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>resources</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>requests</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>      </span><span style=color:#070>storage</span>:<span style=color:#bbb> </span>2Gi<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Again, these can be imported using the kubectl apply command, and examined with
 the kubectl describe command</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>kubectl create -f pvc-vsan.yaml
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>kubectl create -f pvc-nfs.yaml
-</code></pre></div><div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>kubectl describe pvc
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>Name:          pvc-nfs
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>Namespace:     default
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>StorageClass:  slow
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>Status:        Bound
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>Volume:        pvc-3d6ac709-92af-11e9-ba0c-0050568aec2b
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>Labels:        &lt;none&gt;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>Annotations:   pv.kubernetes.io/bind-completed: yes
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>               pv.kubernetes.io/bound-by-controller: yes
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>               volume.beta.kubernetes.io/storage-class: slow
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>               volume.beta.kubernetes.io/storage-provisioner: kubernetes.io/vsphere-volume
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>Finalizers:    [kubernetes.io/pvc-protection]
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>Capacity:      2Gi
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>Access Modes:  RWO
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>VolumeMode:    Filesystem
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>Events:
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>  Type       Reason                 Age                 From                         Message
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>  ----       ------                 ----                ----                         -------
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>  Normal     ProvisioningSucceeded  22s                 persistentvolume-controller  Successfully provisioned volume pvc-3d6ac709-92af-11e9-ba0c-0050568aec2b using kubernetes.io/vsphere-volume
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>Mounted By:  &lt;none&gt;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>Name:          pvc-vsan
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>Namespace:     default
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>StorageClass:  fast
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>Status:        Bound
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>Volume:        pvc-3f3363ee-92af-11e9-ba0c-0050568aec2b
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>Labels:        &lt;none&gt;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span>Annotations:   pv.kubernetes.io/bind-completed: yes
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span>               pv.kubernetes.io/bound-by-controller: yes
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span>               volume.beta.kubernetes.io/storage-class: fast
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span>               volume.beta.kubernetes.io/storage-provisioner: kubernetes.io/vsphere-volume
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33</span>Finalizers:    [kubernetes.io/pvc-protection]
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34</span>Capacity:      2Gi
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35</span>Access Modes:  RWO
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36</span>VolumeMode:    Filesystem
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37</span>Events:
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38</span>  Type       Reason                 Age                 From                         Message
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39</span>  ----       ------                 ----                ----                         -------
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40</span>  Normal     ProvisioningSucceeded  19s                 persistentvolume-controller  Successfully provisioned volume pvc-3f3363ee-92af-11e9-ba0c-0050568aec2b using kubernetes.io/vsphere-volume
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41</span>Mounted By:  &lt;none&gt;
-</code></pre></div><p>All being well, you should see some events initiated by the service account:</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl create -f pvc-vsan.yaml
+kubectl create -f pvc-nfs.yaml
+</code></pre></td></tr></table>
+</div>
+</div><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl describe pvc
+Name:          pvc-nfs
+Namespace:     default
+StorageClass:  slow
+Status:        Bound
+Volume:        pvc-3d6ac709-92af-11e9-ba0c-0050568aec2b
+Labels:        &lt;none&gt;
+Annotations:   pv.kubernetes.io/bind-completed: yes
+               pv.kubernetes.io/bound-by-controller: yes
+               volume.beta.kubernetes.io/storage-class: slow
+               volume.beta.kubernetes.io/storage-provisioner: kubernetes.io/vsphere-volume
+Finalizers:    <span style=color:#333>[</span>kubernetes.io/pvc-protection<span style=color:#333>]</span>
+Capacity:      2Gi
+Access Modes:  RWO
+VolumeMode:    Filesystem
+Events:
+  Type       Reason                 Age                 From                         Message
+  ----       ------                 ----                ----                         -------
+  Normal     ProvisioningSucceeded  22s                 persistentvolume-controller  Successfully provisioned volume pvc-3d6ac709-92af-11e9-ba0c-0050568aec2b using kubernetes.io/vsphere-volume
+Mounted By:  &lt;none&gt;
+
+
+Name:          pvc-vsan
+Namespace:     default
+StorageClass:  fast
+Status:        Bound
+Volume:        pvc-3f3363ee-92af-11e9-ba0c-0050568aec2b
+Labels:        &lt;none&gt;
+Annotations:   pv.kubernetes.io/bind-completed: yes
+               pv.kubernetes.io/bound-by-controller: yes
+               volume.beta.kubernetes.io/storage-class: fast
+               volume.beta.kubernetes.io/storage-provisioner: kubernetes.io/vsphere-volume
+Finalizers:    <span style=color:#333>[</span>kubernetes.io/pvc-protection<span style=color:#333>]</span>
+Capacity:      2Gi
+Access Modes:  RWO
+VolumeMode:    Filesystem
+Events:
+  Type       Reason                 Age                 From                         Message
+  ----       ------                 ----                ----                         -------
+  Normal     ProvisioningSucceeded  19s                 persistentvolume-controller  Successfully provisioned volume pvc-3f3363ee-92af-11e9-ba0c-0050568aec2b using kubernetes.io/vsphere-volume
+Mounted By:  &lt;none&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>All being well, you should see some events initiated by the service account:</p>
 <div class=clr-content-image-wrap>
 <a href=index.images/0jOFHS.png data-lightbox=index.images/0jOFHS.png data-title class=lb>
 <img class=lb src=index.images/0jOFHS.png alt>

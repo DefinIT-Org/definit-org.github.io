@@ -35,7 +35,7 @@
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
-<link href=/css/clr-ui-dark.min.css rel=stylesheet>
+<link href=/css/clr-ui.min.css rel=stylesheet>
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
@@ -103,7 +103,7 @@ RSS
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 21/9/2018
-&#183; Read in about 3 min (471 words)
+&#183; Read in about 3 min (525 words)
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/automation>Automation</a>, <a href=/category/vmware>VMware</a>, <a href=/category/vrealize-orchestrator>vRealize Orchestrator</a> and <a href=/category/vsphere>vSphere</a>
@@ -138,75 +138,149 @@ Tags:
 <p>Once the action runs, vSphere will configure the vCenter Appliance for HA by adding a second NIC on the heartbeat network, then cloning the passive and witness VMs - below is the configured vCenter HA.</p>
 <p><img src=https://www.definit.co.uk/images/2018/09/vchaconfigured.png alt></p>
 <p>The action code itself is a little more complicated, and involves building a series of configuration objects which are then passed to a method on a failoverClusterConfigurator object.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#080;background-color:#0f140f;font-style:italic>// Configure Active Node Settings
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#080;background-color:#0f140f;font-style:italic></span><span style=color:#fb660a;font-weight:700>var</span> activeIPSpec = <span style=color:#fb660a;font-weight:700>new</span> VcCustomizationFixedIp();
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>activeIPSpec.IpAddress = haActiveIp
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#fb660a;font-weight:700>var</span> activeIPSettings = <span style=color:#fb660a;font-weight:700>new</span> VcCustomizationIPSettings() ;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>activeIPSettings.SubnetMask = haSubnetMask
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>activeIPSettings.Ip = activeIPSpec
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#fb660a;font-weight:700>var</span> activeNetConfig = <span style=color:#fb660a;font-weight:700>new</span> VcClusterNetworkConfigSpec();
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>activeNetConfig.NetworkPortGroup = haNetworkPortGroup;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>activeNetConfig.IpSettings = activeIPSettings;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#fb660a;font-weight:700>var</span> serviceLocator = <span style=color:#fb660a;font-weight:700>new</span> VcServiceLocator();
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>serviceLocator.credential = <span style=color:#fb660a;font-weight:700>new</span> VcServiceLocatorNamePassword();
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>serviceLocator.credential.username = vCenterUser;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>serviceLocator.credential.password = vCenterPassword;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>serviceLocator.instanceUuid = vCenterSDK.instanceUuid;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>serviceLocator.url = <span style=color:#0086d2>&#34;https://&#34;</span>+vCenterSDK.sdkId;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>serviceLocator.sslThumbprint = vCenterSSLThumbprint;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span><span style=color:#fb660a;font-weight:700>var</span> activeNodeSpec = <span style=color:#fb660a;font-weight:700>new</span> VcSourceNodeSpec() ;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>activeNodeSpec.ActiveVc = vCenterVM;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>activeNodeSpec.ManagementVc = serviceLocator;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span><span style=color:#080;background-color:#0f140f;font-style:italic>// Configure Passive Node Settings
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span><span style=color:#080;background-color:#0f140f;font-style:italic></span><span style=color:#fb660a;font-weight:700>var</span> passiveIPSpec = <span style=color:#fb660a;font-weight:700>new</span> VcCustomizationFixedIp();
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>passiveIPSpec.IpAddress = haPassiveIp;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span><span style=color:#fb660a;font-weight:700>var</span> passiveIPSettings = <span style=color:#fb660a;font-weight:700>new</span> VcCustomizationIPSettings() ;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span>passiveIPSettings.SubnetMask = haSubnetMask;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span>passiveIPSettings.Ip = passiveIPSpec;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33</span><span style=color:#fb660a;font-weight:700>var</span> passiveNodeSpec = <span style=color:#fb660a;font-weight:700>new</span> VcPassiveNodeDeploymentSpec() ;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34</span>passiveNodeSpec.folder = vCenterVM.parent;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35</span>passiveNodeSpec.nodeName = vCenterVM.name+<span style=color:#0086d2>&#34;-passive&#34;</span>;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36</span>passiveNodeSpec.ipSettings = passiveIPSettings;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37</span>passiveNodeSpec.datastore = haPassiveDatastore;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39</span><span style=color:#080;background-color:#0f140f;font-style:italic>// Configure Witness Node Settings
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40</span><span style=color:#080;background-color:#0f140f;font-style:italic></span><span style=color:#fb660a;font-weight:700>var</span> witnessIPSpec = <span style=color:#fb660a;font-weight:700>new</span> VcCustomizationFixedIp();
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41</span>witnessIPSpec.IpAddress = haWitnessIp;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43</span><span style=color:#fb660a;font-weight:700>var</span> witnessIPSettings = <span style=color:#fb660a;font-weight:700>new</span> VcCustomizationIPSettings() ;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44</span>witnessIPSettings.SubnetMask = haSubnetMask;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45</span>witnessIPSettings.Ip = witnessIPSpec;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47</span><span style=color:#fb660a;font-weight:700>var</span> witnessNodeSpec = <span style=color:#fb660a;font-weight:700>new</span> VcNodeDeploymentSpec();
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48</span>witnessNodeSpec.folder = vCenterVM.parent;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49</span>witnessNodeSpec.nodeName = vCenterVM.name+<span style=color:#0086d2>&#34;-witness&#34;</span>;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50</span>witnessNodeSpec.ipSettings = witnessIPSettings;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51</span>witnessNodeSpec.datastore = haWitnessDatastore;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53</span><span style=color:#fb660a;font-weight:700>var</span> vcHADeploySpec = <span style=color:#fb660a;font-weight:700>new</span> VcVchaClusterDeploymentSpec();
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">54</span>vcHADeploySpec.witnessDeploymentSpec = witnessNodeSpec;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">55</span>vcHADeploySpec.passiveDeploymentSpec = passiveNodeSpec;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">56</span>vcHADeploySpec.activeVcNetworkConfig = activeNetConfig;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">57</span>vcHADeploySpec.activeVcSpec = activeNodeSpec;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">58</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">59</span>System.log(<span style=color:#0086d2>&#34;Starting deployment task...&#34;</span>);
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">60</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">61</span><span style=color:#fb660a;font-weight:700>var</span> instanceRef = <span style=color:#fb660a;font-weight:700>new</span> VcManagedObjectReference();
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">62</span>instanceRef.type = <span style=color:#0086d2>&#34;ServiceInstance&#34;</span>;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">63</span>instanceRef.value = <span style=color:#0086d2>&#34;ServiceInstance&#34;</span>;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">64</span>serviceInstance = VcPlugin.convertToVimManagedObject(vCenterSDK, instanceRef)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">65</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">66</span>serviceContent = serviceInstance.retrieveServiceContent()
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">67</span><span style=color:#fb660a;font-weight:700>var</span> vcHAClusterConfig = serviceContent.failoverClusterConfigurator;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">68</span><span style=color:#fb660a;font-weight:700>return</span> vcHAClusterConfig.deployVcha_Task(vcHADeploySpec);
-</code></pre></div><p>Both the workflow, and the action are available on <a href=https://github.com/sammcgeown/org.definit.vcha>my GitHub repository here</a>. Ping me on twitter if you find it useful, or have any questions!</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">57
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">58
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">59
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">60
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">61
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">62
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">63
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">64
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">65
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">66
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">67
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">68
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#666;font-style:italic>// Configure Active Node Settings
+</span><span style=color:#666;font-style:italic></span><span style=color:#289;font-weight:700>var</span> activeIPSpec <span style=color:#333>=</span> <span style=color:#289;font-weight:700>new</span> VcCustomizationFixedIp();
+activeIPSpec.IpAddress <span style=color:#333>=</span> haActiveIp
+
+<span style=color:#289;font-weight:700>var</span> activeIPSettings <span style=color:#333>=</span> <span style=color:#289;font-weight:700>new</span> VcCustomizationIPSettings() ;
+activeIPSettings.SubnetMask <span style=color:#333>=</span> haSubnetMask
+activeIPSettings.Ip <span style=color:#333>=</span> activeIPSpec
+
+<span style=color:#289;font-weight:700>var</span> activeNetConfig <span style=color:#333>=</span> <span style=color:#289;font-weight:700>new</span> VcClusterNetworkConfigSpec();
+activeNetConfig.NetworkPortGroup <span style=color:#333>=</span> haNetworkPortGroup;
+activeNetConfig.IpSettings <span style=color:#333>=</span> activeIPSettings;
+
+<span style=color:#289;font-weight:700>var</span> serviceLocator <span style=color:#333>=</span> <span style=color:#289;font-weight:700>new</span> VcServiceLocator();
+serviceLocator.credential <span style=color:#333>=</span> <span style=color:#289;font-weight:700>new</span> VcServiceLocatorNamePassword();
+serviceLocator.credential.username <span style=color:#333>=</span> vCenterUser;
+serviceLocator.credential.password <span style=color:#333>=</span> vCenterPassword;
+serviceLocator.instanceUuid <span style=color:#333>=</span> vCenterSDK.instanceUuid;
+serviceLocator.url <span style=color:#333>=</span> <span style=background-color:#e0e0ff>&#34;https://&#34;</span><span style=color:#333>+</span>vCenterSDK.sdkId;
+serviceLocator.sslThumbprint <span style=color:#333>=</span> vCenterSSLThumbprint;
+
+<span style=color:#289;font-weight:700>var</span> activeNodeSpec <span style=color:#333>=</span> <span style=color:#289;font-weight:700>new</span> VcSourceNodeSpec() ;
+activeNodeSpec.ActiveVc <span style=color:#333>=</span> vCenterVM;
+activeNodeSpec.ManagementVc <span style=color:#333>=</span> serviceLocator;
+
+<span style=color:#666;font-style:italic>// Configure Passive Node Settings
+</span><span style=color:#666;font-style:italic></span><span style=color:#289;font-weight:700>var</span> passiveIPSpec <span style=color:#333>=</span> <span style=color:#289;font-weight:700>new</span> VcCustomizationFixedIp();
+passiveIPSpec.IpAddress <span style=color:#333>=</span> haPassiveIp;
+
+<span style=color:#289;font-weight:700>var</span> passiveIPSettings <span style=color:#333>=</span> <span style=color:#289;font-weight:700>new</span> VcCustomizationIPSettings() ;
+passiveIPSettings.SubnetMask <span style=color:#333>=</span> haSubnetMask;
+passiveIPSettings.Ip <span style=color:#333>=</span> passiveIPSpec;
+
+<span style=color:#289;font-weight:700>var</span> passiveNodeSpec <span style=color:#333>=</span> <span style=color:#289;font-weight:700>new</span> VcPassiveNodeDeploymentSpec() ;
+passiveNodeSpec.folder <span style=color:#333>=</span> vCenterVM.parent;
+passiveNodeSpec.nodeName <span style=color:#333>=</span> vCenterVM.name<span style=color:#333>+</span><span style=background-color:#e0e0ff>&#34;-passive&#34;</span>;
+passiveNodeSpec.ipSettings <span style=color:#333>=</span> passiveIPSettings;
+passiveNodeSpec.datastore <span style=color:#333>=</span> haPassiveDatastore;
+
+<span style=color:#666;font-style:italic>// Configure Witness Node Settings
+</span><span style=color:#666;font-style:italic></span><span style=color:#289;font-weight:700>var</span> witnessIPSpec <span style=color:#333>=</span> <span style=color:#289;font-weight:700>new</span> VcCustomizationFixedIp();
+witnessIPSpec.IpAddress <span style=color:#333>=</span> haWitnessIp;
+
+<span style=color:#289;font-weight:700>var</span> witnessIPSettings <span style=color:#333>=</span> <span style=color:#289;font-weight:700>new</span> VcCustomizationIPSettings() ;
+witnessIPSettings.SubnetMask <span style=color:#333>=</span> haSubnetMask;
+witnessIPSettings.Ip <span style=color:#333>=</span> witnessIPSpec;
+
+<span style=color:#289;font-weight:700>var</span> witnessNodeSpec <span style=color:#333>=</span> <span style=color:#289;font-weight:700>new</span> VcNodeDeploymentSpec();
+witnessNodeSpec.folder <span style=color:#333>=</span> vCenterVM.parent;
+witnessNodeSpec.nodeName <span style=color:#333>=</span> vCenterVM.name<span style=color:#333>+</span><span style=background-color:#e0e0ff>&#34;-witness&#34;</span>;
+witnessNodeSpec.ipSettings <span style=color:#333>=</span> witnessIPSettings;
+witnessNodeSpec.datastore <span style=color:#333>=</span> haWitnessDatastore;
+
+<span style=color:#289;font-weight:700>var</span> vcHADeploySpec <span style=color:#333>=</span> <span style=color:#289;font-weight:700>new</span> VcVchaClusterDeploymentSpec();
+vcHADeploySpec.witnessDeploymentSpec <span style=color:#333>=</span> witnessNodeSpec;
+vcHADeploySpec.passiveDeploymentSpec <span style=color:#333>=</span> passiveNodeSpec;
+vcHADeploySpec.activeVcNetworkConfig <span style=color:#333>=</span> activeNetConfig;
+vcHADeploySpec.activeVcSpec <span style=color:#333>=</span> activeNodeSpec;
+
+System.log(<span style=background-color:#e0e0ff>&#34;Starting deployment task...&#34;</span>);
+
+<span style=color:#289;font-weight:700>var</span> instanceRef <span style=color:#333>=</span> <span style=color:#289;font-weight:700>new</span> VcManagedObjectReference();
+instanceRef.type <span style=color:#333>=</span> <span style=background-color:#e0e0ff>&#34;ServiceInstance&#34;</span>;
+instanceRef.value <span style=color:#333>=</span> <span style=background-color:#e0e0ff>&#34;ServiceInstance&#34;</span>;
+serviceInstance <span style=color:#333>=</span> VcPlugin.convertToVimManagedObject(vCenterSDK, instanceRef)
+
+serviceContent <span style=color:#333>=</span> serviceInstance.retrieveServiceContent()
+<span style=color:#289;font-weight:700>var</span> vcHAClusterConfig <span style=color:#333>=</span> serviceContent.failoverClusterConfigurator;
+<span style=color:#289;font-weight:700>return</span> vcHAClusterConfig.deployVcha_Task(vcHADeploySpec);
+</code></pre></td></tr></table>
+</div>
+</div><p>Both the workflow, and the action are available on <a href=https://github.com/sammcgeown/org.definit.vcha>my GitHub repository here</a>. Ping me on twitter if you find it useful, or have any questions!</p>
 <h6>Share this post</h6>
 <span class=share-box>
 <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2018%2f09%2fenable-vcenter-high-availability-with-vrealize-orchestrator%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-facebook-official"></i></a>

@@ -36,7 +36,7 @@
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
-<link href=/css/clr-ui-dark.min.css rel=stylesheet>
+<link href=/css/clr-ui.min.css rel=stylesheet>
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
@@ -104,7 +104,7 @@ RSS
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 23/5/2019
-&#183; Read in about 1 min (178 words)
+&#183; Read in about 1 min (180 words)
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/nsx>NSX</a> and <a href=/category/vmware>VMware</a>
@@ -146,43 +146,90 @@ redistribution I was unable to do so.</p>
 <ul>
 <li>Perform a GET operation to retrieve the current BGP configuration</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-http data-lang=http><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>GET https://{{nsxmanager}}/api/4.0/edges/{{edgeId}}/routing/config/bgp
-</code></pre></div><ul>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-http data-lang=http><span style=color:red;background-color:#faa>GET https://{{nsxmanager}}/api/4.0/edges/{{edgeId}}/routing/config/bgp
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Copy and modify the BGP section to include the redistribution settings you
 require</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-XML data-lang=XML><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>            <span style=color:#fb660a;font-weight:700>&lt;bgp&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>                <span style=color:#fb660a;font-weight:700>&lt;enabled&gt;</span>true<span style=color:#fb660a;font-weight:700>&lt;/enabled&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>                <span style=color:#fb660a;font-weight:700>&lt;localAS&gt;</span>65004<span style=color:#fb660a;font-weight:700>&lt;/localAS&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>                <span style=color:#fb660a;font-weight:700>&lt;localASNumber&gt;</span>65004<span style=color:#fb660a;font-weight:700>&lt;/localASNumber&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>                <span style=color:#fb660a;font-weight:700>&lt;bgpNeighbours&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>                    <span style=color:#fb660a;font-weight:700>&lt;bgpNeighbour&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>                        ...snip...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>                    <span style=color:#fb660a;font-weight:700>&lt;/bgpNeighbour&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>                <span style=color:#fb660a;font-weight:700>&lt;/bgpNeighbours&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>                <span style=color:#fb660a;font-weight:700>&lt;redistribution&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>                    <span style=color:#fb660a;font-weight:700>&lt;enabled&gt;</span>true<span style=color:#fb660a;font-weight:700>&lt;/enabled&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>                    <span style=color:#fb660a;font-weight:700>&lt;rules&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>                        <span style=color:#fb660a;font-weight:700>&lt;rule&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>                            <span style=color:#fb660a;font-weight:700>&lt;id&gt;</span>0<span style=color:#fb660a;font-weight:700>&lt;/id&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>                            <span style=color:#fb660a;font-weight:700>&lt;from&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>                                <span style=color:#fb660a;font-weight:700>&lt;ospf&gt;</span>false<span style=color:#fb660a;font-weight:700>&lt;/ospf&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>                                <span style=color:#fb660a;font-weight:700>&lt;bgp&gt;</span>false<span style=color:#fb660a;font-weight:700>&lt;/bgp&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>                                <span style=color:#fb660a;font-weight:700>&lt;static&gt;</span>false<span style=color:#fb660a;font-weight:700>&lt;/static&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>                                <span style=color:#fb660a;font-weight:700>&lt;connected&gt;</span>true<span style=color:#fb660a;font-weight:700>&lt;/connected&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>                            <span style=color:#fb660a;font-weight:700>&lt;/from&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>                            <span style=color:#fb660a;font-weight:700>&lt;action&gt;</span>permit<span style=color:#fb660a;font-weight:700>&lt;/action&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>                        <span style=color:#fb660a;font-weight:700>&lt;/rule&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>                    <span style=color:#fb660a;font-weight:700>&lt;/rules&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>                <span style=color:#fb660a;font-weight:700>&lt;/redistribution&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>                <span style=color:#fb660a;font-weight:700>&lt;gracefulRestart&gt;</span>false<span style=color:#fb660a;font-weight:700>&lt;/gracefulRestart&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>                <span style=color:#fb660a;font-weight:700>&lt;defaultOriginate&gt;</span>true<span style=color:#fb660a;font-weight:700>&lt;/defaultOriginate&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>            <span style=color:#fb660a;font-weight:700>&lt;/bgp&gt;</span>
-</code></pre></div><ul>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-XML data-lang=XML>            <span style=color:#070>&lt;bgp&gt;</span>
+                <span style=color:#070>&lt;enabled&gt;</span>true<span style=color:#070>&lt;/enabled&gt;</span>
+                <span style=color:#070>&lt;localAS&gt;</span>65004<span style=color:#070>&lt;/localAS&gt;</span>
+                <span style=color:#070>&lt;localASNumber&gt;</span>65004<span style=color:#070>&lt;/localASNumber&gt;</span>
+                <span style=color:#070>&lt;bgpNeighbours&gt;</span>
+                    <span style=color:#070>&lt;bgpNeighbour&gt;</span>
+                        ...snip...
+                    <span style=color:#070>&lt;/bgpNeighbour&gt;</span>
+                <span style=color:#070>&lt;/bgpNeighbours&gt;</span>
+                <span style=color:#070>&lt;redistribution&gt;</span>
+                    <span style=color:#070>&lt;enabled&gt;</span>true<span style=color:#070>&lt;/enabled&gt;</span>
+                    <span style=color:#070>&lt;rules&gt;</span>
+                        <span style=color:#070>&lt;rule&gt;</span>
+                            <span style=color:#070>&lt;id&gt;</span>0<span style=color:#070>&lt;/id&gt;</span>
+                            <span style=color:#070>&lt;from&gt;</span>
+                                <span style=color:#070>&lt;ospf&gt;</span>false<span style=color:#070>&lt;/ospf&gt;</span>
+                                <span style=color:#070>&lt;bgp&gt;</span>false<span style=color:#070>&lt;/bgp&gt;</span>
+                                <span style=color:#070>&lt;static&gt;</span>false<span style=color:#070>&lt;/static&gt;</span>
+                                <span style=color:#070>&lt;connected&gt;</span>true<span style=color:#070>&lt;/connected&gt;</span>
+                            <span style=color:#070>&lt;/from&gt;</span>
+                            <span style=color:#070>&lt;action&gt;</span>permit<span style=color:#070>&lt;/action&gt;</span>
+                        <span style=color:#070>&lt;/rule&gt;</span>
+                    <span style=color:#070>&lt;/rules&gt;</span>
+                <span style=color:#070>&lt;/redistribution&gt;</span>
+                <span style=color:#070>&lt;gracefulRestart&gt;</span>false<span style=color:#070>&lt;/gracefulRestart&gt;</span>
+                <span style=color:#070>&lt;defaultOriginate&gt;</span>true<span style=color:#070>&lt;/defaultOriginate&gt;</span>
+            <span style=color:#070>&lt;/bgp&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>PUT the BGP section back to reconfigure the Edge</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-http data-lang=http><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>PUT https://{{nsxmanager}}/api/4.0/edges/{{edgeId}}/routing/config/bgp
-</code></pre></div><p>The UI will still be disabled for route distribution, but the redistribution
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-http data-lang=http><span style=color:red;background-color:#faa>PUT https://{{nsxmanager}}/api/4.0/edges/{{edgeId}}/routing/config/bgp
+</span></code></pre></td></tr></table>
+</div>
+</div><p>The UI will still be disabled for route distribution, but the redistribution
 table will be populated, and BGP redistribution enabled.</p>
 <div class=clr-content-image-wrap>
 <a href=images/uasLC6.jpg data-lightbox=images/uasLC6.jpg data-title class=lb>

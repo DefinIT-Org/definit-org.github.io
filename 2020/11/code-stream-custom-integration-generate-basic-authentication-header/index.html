@@ -37,7 +37,7 @@
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
-<link href=/css/clr-ui-dark.min.css rel=stylesheet>
+<link href=/css/clr-ui.min.css rel=stylesheet>
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
@@ -105,7 +105,7 @@ RSS
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 4/11/2020
-&#183; Read in about 2 min (291 words)
+&#183; Read in about 2 min (345 words)
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/vrealize-automation>vRealize Automation</a>
@@ -150,60 +150,125 @@ Tags:
 <figcaption class=clr-caption>Consuming the Custom Integration</figcaption>
 </div>
 <p>Below are the shell and a Python3 examples, in the YAML format to paste into your custom integration:</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>---<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>runtime</span>:<span style=color:#888> </span>shell<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>code</span>:<span style=color:#888> </span>|<span style=color:#0086d2>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#0086d2>  </span><span style=color:#888>  </span>export basicAuthHeader=$(echo -n $username:$password | base64)<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>inputProperties</span>:<span style=color:#888>      </span><span style=color:#080;background-color:#0f140f;font-style:italic># Enter fields for input section of a task</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#888>  </span><span style=color:#080;background-color:#0f140f;font-style:italic># Username input</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#888>  </span>- <span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span><span style=color:#0086d2>&#39;username&#39;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>type</span>:<span style=color:#888> </span>text<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>title</span>:<span style=color:#888> </span><span style=color:#0086d2>&#39;Username&#39;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>placeHolder</span>:<span style=color:#888> </span><span style=color:#0086d2>&#39;Enter basic authentication usename&#39;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>required</span>:<span style=color:#888> </span><span style=color:#fb660a;font-weight:700>true</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>bindable</span>:<span style=color:#888> </span><span style=color:#fb660a;font-weight:700>true</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#888>  </span><span style=color:#080;background-color:#0f140f;font-style:italic># Password input</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#888>  </span>- <span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span><span style=color:#0086d2>&#39;password&#39;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>type</span>:<span style=color:#888> </span>password<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>title</span>:<span style=color:#888> </span><span style=color:#0086d2>&#39;Password&#39;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>placeHolder</span>:<span style=color:#888> </span><span style=color:#0086d2>&#39;Enter basic authentication password&#39;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>defaultValue</span>:<span style=color:#888> </span><span style=color:#0086d2>&#39;&#39;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>required</span>:<span style=color:#888> </span><span style=color:#fb660a;font-weight:700>true</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>bindable</span>:<span style=color:#888> </span><span style=color:#fb660a;font-weight:700>true</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>outputProperties</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span><span style=color:#888>  </span>- <span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>basicAuthHeader<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>type</span>:<span style=color:#888> </span>label<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>title</span>:<span style=color:#888> </span>Basic Authentication Header<span style=color:#888>
-</span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>---<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>runtime</span>:<span style=color:#888> </span><span style=color:#0086d2>&#34;python3&#34;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>code</span>:<span style=color:#888> </span>|<span style=color:#0086d2>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#0086d2>  from base64 import b64encode
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#0086d2>  from context import getInput, setOutput
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#0086d2>  username = getInput(&#39;username&#39;)
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#0086d2>  password = getInput(&#39;password&#39;)
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#0086d2>  usernameAndPassword = b64encode(bytes(f&#39;{username}:{password}&#39;,encoding=&#39;ascii&#39;)).decode(&#39;ascii&#39;)
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#0086d2>  setOutput(&#39;basicAuthHeader&#39;, &#34;Basic &#34;+usernameAndPassword)</span><span style=color:#888>  
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>inputProperties</span>:<span style=color:#888>      </span><span style=color:#080;background-color:#0f140f;font-style:italic># Enter fields for input section of a task</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#888>  </span><span style=color:#080;background-color:#0f140f;font-style:italic># Username input</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#888>  </span>- <span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span><span style=color:#0086d2>&#39;username&#39;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>type</span>:<span style=color:#888> </span>text<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>title</span>:<span style=color:#888> </span><span style=color:#0086d2>&#39;Username&#39;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>placeHolder</span>:<span style=color:#888> </span><span style=color:#0086d2>&#39;Enter basic authentication usename&#39;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>required</span>:<span style=color:#888> </span><span style=color:#fb660a;font-weight:700>true</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>bindable</span>:<span style=color:#888> </span><span style=color:#fb660a;font-weight:700>true</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#888>  </span><span style=color:#080;background-color:#0f140f;font-style:italic># Password input</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#888>  </span>- <span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span><span style=color:#0086d2>&#39;password&#39;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>type</span>:<span style=color:#888> </span>password<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>title</span>:<span style=color:#888> </span><span style=color:#0086d2>&#39;Password&#39;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>placeHolder</span>:<span style=color:#888> </span><span style=color:#0086d2>&#39;Enter basic authentication password&#39;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>defaultValue</span>:<span style=color:#888> </span><span style=color:#0086d2>&#39;&#39;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>required</span>:<span style=color:#888> </span><span style=color:#fb660a;font-weight:700>true</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>bindable</span>:<span style=color:#888> </span><span style=color:#fb660a;font-weight:700>true</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>outputProperties</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span><span style=color:#888>  </span>- <span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>basicAuthHeader<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>type</span>:<span style=color:#888> </span>label<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>title</span>:<span style=color:#888> </span>Basic Authentication Header<span style=color:#888>
-</span></code></pre></div>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#0e84b5;font-weight:700>---</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>runtime</span>:<span style=color:#bbb> </span>shell<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>code</span>:<span style=color:#bbb> </span>|<span style=color:#d42;background-color:#e0e0ff>
+</span><span style=color:#d42;background-color:#e0e0ff>  </span><span style=color:#bbb>  </span>export basicAuthHeader=$(echo -n $username:$password | base64)<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>inputProperties</span>:<span style=color:#bbb>      </span><span style=color:#666;font-style:italic># Enter fields for input section of a task</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Username input</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;username&#39;</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>type</span>:<span style=color:#bbb> </span>text<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>title</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;Username&#39;</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>placeHolder</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;Enter basic authentication usename&#39;</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>required</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>bindable</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Password input</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;password&#39;</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>type</span>:<span style=color:#bbb> </span>password<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>title</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;Password&#39;</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>placeHolder</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;Enter basic authentication password&#39;</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>defaultValue</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;&#39;</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>required</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>bindable</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>outputProperties</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>basicAuthHeader<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>type</span>:<span style=color:#bbb> </span>label<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>title</span>:<span style=color:#bbb> </span>Basic Authentication Header<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#0e84b5;font-weight:700>---</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>runtime</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#34;python3&#34;</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>code</span>:<span style=color:#bbb> </span>|<span style=color:#d42;background-color:#e0e0ff>
+</span><span style=color:#d42;background-color:#e0e0ff>  from base64 import b64encode
+</span><span style=color:#d42;background-color:#e0e0ff>  from context import getInput, setOutput
+</span><span style=color:#d42;background-color:#e0e0ff>  username = getInput(&#39;username&#39;)
+</span><span style=color:#d42;background-color:#e0e0ff>  password = getInput(&#39;password&#39;)
+</span><span style=color:#d42;background-color:#e0e0ff>  usernameAndPassword = b64encode(bytes(f&#39;{username}:{password}&#39;,encoding=&#39;ascii&#39;)).decode(&#39;ascii&#39;)
+</span><span style=color:#d42;background-color:#e0e0ff>  setOutput(&#39;basicAuthHeader&#39;, &#34;Basic &#34;+usernameAndPassword)</span><span style=color:#bbb>  
+</span><span style=color:#bbb></span><span style=color:#070>inputProperties</span>:<span style=color:#bbb>      </span><span style=color:#666;font-style:italic># Enter fields for input section of a task</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Username input</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;username&#39;</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>type</span>:<span style=color:#bbb> </span>text<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>title</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;Username&#39;</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>placeHolder</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;Enter basic authentication usename&#39;</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>required</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>bindable</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Password input</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;password&#39;</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>type</span>:<span style=color:#bbb> </span>password<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>title</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;Password&#39;</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>placeHolder</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;Enter basic authentication password&#39;</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>defaultValue</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;&#39;</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>required</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>bindable</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>outputProperties</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>basicAuthHeader<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>type</span>:<span style=color:#bbb> </span>label<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>title</span>:<span style=color:#bbb> </span>Basic Authentication Header<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div>
 <h6>Share this post</h6>
 <span class=share-box>
 <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2020%2f11%2fcode-stream-custom-integration-generate-basic-authentication-header%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-facebook-official"></i></a>

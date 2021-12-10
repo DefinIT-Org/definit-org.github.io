@@ -35,7 +35,7 @@
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
-<link href=/css/clr-ui-dark.min.css rel=stylesheet>
+<link href=/css/clr-ui.min.css rel=stylesheet>
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
@@ -103,7 +103,7 @@ RSS
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 2/8/2019
-&#183; Read in about 6 min (1261 words)
+&#183; Read in about 7 min (1333 words)
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/vmware>VMware</a> and <a href=/category/cloud-native>Cloud Native</a>
@@ -154,56 +154,118 @@ Tags:
 </blockquote>
 <h3 id=installing-metallb>Installing MetalLb</h3>
 <p>Installing MetalLB is really, really easy - I deployed it as a kubernetes manifest (or you can use a helm chart). It creates a Namespace, <code>metallb-system</code>, a controller <a href=https://kubernetes.io/docs/concepts/workloads/controllers/deployment/>Deployment</a> <code>metallb-system/controller</code>, a Daemonset <code>metallb-system/speaker</code> as well as ClusterRoles, ClusterRoleBindings, and ServiceAccounts to support the application.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.8.1/manifests/metallb.yaml
-</code></pre></div><p>You can inspect the created objects by using <code>kubectl get</code> commands, with the namespace selector:</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>kubectl get pods,serviceaccounts,daemonsets,deployments,roles,rolebindings -n metallb-system
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>NAME                            READY   STATUS    RESTARTS   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>pod/controller-55d74449-hjwtt   1/1     Running   <span style=color:#0086f7;font-weight:700>0</span>          44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>pod/speaker-fnff4               1/1     Running   <span style=color:#0086f7;font-weight:700>0</span>          44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>pod/speaker-sv728               1/1     Running   <span style=color:#0086f7;font-weight:700>0</span>          44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>NAME                        SECRETS   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>serviceaccount/controller   <span style=color:#0086f7;font-weight:700>1</span>         44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>serviceaccount/default      <span style=color:#0086f7;font-weight:700>1</span>         44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>serviceaccount/speaker      <span style=color:#0086f7;font-weight:700>1</span>         44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>NAME                           DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR                 AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>daemonset.extensions/speaker   <span style=color:#0086f7;font-weight:700>2</span>         <span style=color:#0086f7;font-weight:700>2</span>         <span style=color:#0086f7;font-weight:700>2</span>       <span style=color:#0086f7;font-weight:700>2</span>            <span style=color:#0086f7;font-weight:700>2</span>           beta.kubernetes.io/os=linux   44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>NAME                               READY   UP-TO-DATE   AVAILABLE   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>deployment.extensions/controller   1/1     <span style=color:#0086f7;font-weight:700>1</span>            <span style=color:#0086f7;font-weight:700>1</span>           44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>NAME                                            AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>role.rbac.authorization.k8s.io/config-watcher   44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>NAME                                                   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>rolebinding.rbac.authorization.k8s.io/config-watcher   44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>kubectl get clusterroles,clusterrolebindings -n metallb-system | grep metallb
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>clusterrole.rbac.authorization.k8s.io/metallb-system:controller                                              44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>clusterrole.rbac.authorization.k8s.io/metallb-system:speaker                                                 44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span>clusterrolebinding.rbac.authorization.k8s.io/metallb-system:controller                              44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span>clusterrolebinding.rbac.authorization.k8s.io/metallb-system:speaker                                 44h
-</code></pre></div><p>You can see that MetalLb has deployed a single controller and two speakers (one per node). Installed but unconfigured, it will sit there doing nothing, so lets configure it!</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.8.1/manifests/metallb.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>You can inspect the created objects by using <code>kubectl get</code> commands, with the namespace selector:</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pods,serviceaccounts,daemonsets,deployments,roles,rolebindings -n metallb-system
+
+NAME                            READY   STATUS    RESTARTS   AGE
+pod/controller-55d74449-hjwtt   1/1     Running   <span style=color:#60e;font-weight:700>0</span>          44h
+pod/speaker-fnff4               1/1     Running   <span style=color:#60e;font-weight:700>0</span>          44h
+pod/speaker-sv728               1/1     Running   <span style=color:#60e;font-weight:700>0</span>          44h
+
+NAME                        SECRETS   AGE
+serviceaccount/controller   <span style=color:#60e;font-weight:700>1</span>         44h
+serviceaccount/default      <span style=color:#60e;font-weight:700>1</span>         44h
+serviceaccount/speaker      <span style=color:#60e;font-weight:700>1</span>         44h
+
+NAME                           DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR                 AGE
+daemonset.extensions/speaker   <span style=color:#60e;font-weight:700>2</span>         <span style=color:#60e;font-weight:700>2</span>         <span style=color:#60e;font-weight:700>2</span>       <span style=color:#60e;font-weight:700>2</span>            <span style=color:#60e;font-weight:700>2</span>           beta.kubernetes.io/os<span style=color:#333>=</span>linux   44h
+
+NAME                               READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.extensions/controller   1/1     <span style=color:#60e;font-weight:700>1</span>            <span style=color:#60e;font-weight:700>1</span>           44h
+
+NAME                                            AGE
+role.rbac.authorization.k8s.io/config-watcher   44h
+
+NAME                                                   AGE
+rolebinding.rbac.authorization.k8s.io/config-watcher   44h
+
+kubectl get clusterroles,clusterrolebindings -n metallb-system | grep metallb
+
+clusterrole.rbac.authorization.k8s.io/metallb-system:controller                                              44h
+clusterrole.rbac.authorization.k8s.io/metallb-system:speaker                                                 44h
+
+clusterrolebinding.rbac.authorization.k8s.io/metallb-system:controller                              44h
+clusterrolebinding.rbac.authorization.k8s.io/metallb-system:speaker                                 44h
+</code></pre></td></tr></table>
+</div>
+</div><p>You can see that MetalLb has deployed a single controller and two speakers (one per node). Installed but unconfigured, it will sit there doing nothing, so lets configure it!</p>
 <h3 id=configuring-metallb-in-layer-2-mode>Configuring MetalLb in Layer 2 mode</h3>
 <p>As I mentioned before, MetalLb can run in two modes, Layer 2, or Layer 3 (BGP). Very simply, Layer 2 mode MetalLb uses a pool of IP addresses specified in the configuration and simply responds to ARP requests, claiming that additional IP on the &ldquo;speaker&rdquo; instance and forwarding traffic on to the kubernetes workloads.</p>
 <p>In my lab, Layer 2 mode is more than enough for my needs, so I&rsquo;m going to configure a pool of IPs to be consumed by kubernetes LoadBalancers.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>ConfigMap<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>namespace</span>:<span style=color:#888> </span>metallb-system<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>config<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>data</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>config</span>:<span style=color:#888> </span>|<span style=color:#0086d2>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#0086d2>    address-pools:
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#0086d2>    - name: default
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#0086d2>      protocol: layer2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#0086d2>      addresses:
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#0086d2>      - 192.168.10.200-192.168.10.240</span><span style=color:#888>    
-</span></code></pre></div><h1 id=install-and-configure-contour>Install and configure Contour</h1>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ConfigMap<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>metallb-system<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>config<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>data</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>config</span>:<span style=color:#bbb> </span>|<span style=color:#d42;background-color:#e0e0ff>
+</span><span style=color:#d42;background-color:#e0e0ff>    address-pools:
+</span><span style=color:#d42;background-color:#e0e0ff>    - name: default
+</span><span style=color:#d42;background-color:#e0e0ff>      protocol: layer2
+</span><span style=color:#d42;background-color:#e0e0ff>      addresses:
+</span><span style=color:#d42;background-color:#e0e0ff>      - 192.168.10.200-192.168.10.240</span><span style=color:#bbb>    
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id=install-and-configure-contour>Install and configure Contour</h1>
 <h3 id=what-is-contour>What is Contour?</h3>
 <blockquote>
 <p>Contour is an Ingress controller for Kubernetes that works by deploying the Envoy proxy as a reverse proxy and load balancer. Unlike other Ingress controllers, Contour supports dynamic configuration updates out of the box while maintaining a lightweight profile.</p>
@@ -217,8 +279,15 @@ Tags:
 </div>
 <h3 id=installing-contour>Installing Contour</h3>
 <p>Installation is as simple as applying a kubernetes manifest:</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>kubectl apply -f https://j.hept.io/contour-deployment-rbac
-</code></pre></div><p>To quote the <a href=https://github.com/heptio/contour>official docs</a> again, in addition to the IngressRoute CRD this command creates:</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl apply -f https://j.hept.io/contour-deployment-rbac
+</code></pre></td></tr></table>
+</div>
+</div><p>To quote the <a href=https://github.com/heptio/contour>official docs</a> again, in addition to the IngressRoute CRD this command creates:</p>
 <ul>
 <li>A new namespace heptio-contour with two instances of Contour in the namespace</li>
 <li>A Service of type: LoadBalancer that points to the Contour instances</li>
@@ -226,62 +295,134 @@ Tags:
 </ul>
 <p>In this deployment the LoadBalancer will be fulfilled by MetalLb based on the layer 2 configuration specified above.</p>
 <p>You can inspect the created components by using the <code>kubectl get</code> command again:</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>kubectl get pods,serviceaccounts,services,deployments -n heptio-contour
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>NAME                           READY   STATUS    RESTARTS   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>pod/contour-7848f99f46-4r7ct   2/2     Running   <span style=color:#0086f7;font-weight:700>0</span>          44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>pod/contour-7848f99f46-gct5m   2/2     Running   <span style=color:#0086f7;font-weight:700>0</span>          44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>NAME                     SECRETS   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>serviceaccount/contour   <span style=color:#0086f7;font-weight:700>1</span>         44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>serviceaccount/default   <span style=color:#0086f7;font-weight:700>1</span>         44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>NAME              TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)                      AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>service/contour   LoadBalancer   10.99.247.218   192.168.10.201   80:30395/TCP,443:32127/TCP   44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>deployment.extensions/contour   2/2     <span style=color:#0086f7;font-weight:700>2</span>            <span style=color:#0086f7;font-weight:700>2</span>           44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>kubectl get pods,serviceaccounts,services,deployments -n heptio-contour
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>NAME                           READY   STATUS    RESTARTS   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>pod/contour-7848f99f46-4r7ct   2/2     Running   <span style=color:#0086f7;font-weight:700>0</span>          44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>pod/contour-7848f99f46-gct5m   2/2     Running   <span style=color:#0086f7;font-weight:700>0</span>          44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>NAME                     SECRETS   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>serviceaccount/contour   <span style=color:#0086f7;font-weight:700>1</span>         44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>serviceaccount/default   <span style=color:#0086f7;font-weight:700>1</span>         44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>NAME              TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)                      AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>service/contour   LoadBalancer   10.99.247.218   192.168.10.201   80:30395/TCP,443:32127/TCP   44h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span>kubectl get customresourcedefinitions
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span>NAME                                           CREATED AT
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33</span>ingressroutes.contour.heptio.com               2019-07-31T16:29:29Z
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34</span>tlscertificatedelegations.contour.heptio.com   2019-07-31T16:29:29Z
-</code></pre></div><p>Note that the contour LoadBalancer has an external IP - this is the IP address that all the external traffic will go to, and then Contour will steer that traffic to the correct application based on the Ingress configuration.</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pods,serviceaccounts,services,deployments -n heptio-contour
+
+NAME                           READY   STATUS    RESTARTS   AGE
+pod/contour-7848f99f46-4r7ct   2/2     Running   <span style=color:#60e;font-weight:700>0</span>          44h
+pod/contour-7848f99f46-gct5m   2/2     Running   <span style=color:#60e;font-weight:700>0</span>          44h
+
+NAME                     SECRETS   AGE
+serviceaccount/contour   <span style=color:#60e;font-weight:700>1</span>         44h
+serviceaccount/default   <span style=color:#60e;font-weight:700>1</span>         44h
+
+NAME              TYPE           CLUSTER-IP      EXTERNAL-IP      PORT<span style=color:#333>(</span>S<span style=color:#333>)</span>                      AGE
+service/contour   LoadBalancer   10.99.247.218   192.168.10.201   80:30395/TCP,443:32127/TCP   44h
+
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.extensions/contour   2/2     <span style=color:#60e;font-weight:700>2</span>            <span style=color:#60e;font-weight:700>2</span>           44h
+
+kubectl get pods,serviceaccounts,services,deployments -n heptio-contour
+
+NAME                           READY   STATUS    RESTARTS   AGE
+pod/contour-7848f99f46-4r7ct   2/2     Running   <span style=color:#60e;font-weight:700>0</span>          44h
+pod/contour-7848f99f46-gct5m   2/2     Running   <span style=color:#60e;font-weight:700>0</span>          44h
+
+NAME                     SECRETS   AGE
+serviceaccount/contour   <span style=color:#60e;font-weight:700>1</span>         44h
+serviceaccount/default   <span style=color:#60e;font-weight:700>1</span>         44h
+
+NAME              TYPE           CLUSTER-IP      EXTERNAL-IP      PORT<span style=color:#333>(</span>S<span style=color:#333>)</span>                      AGE
+service/contour   LoadBalancer   10.99.247.218   192.168.10.201   80:30395/TCP,443:32127/TCP   44h
+
+kubectl get customresourcedefinitions
+
+NAME                                           CREATED AT
+ingressroutes.contour.heptio.com               2019-07-31T16:29:29Z
+tlscertificatedelegations.contour.heptio.com   2019-07-31T16:29:29Z
+</code></pre></td></tr></table>
+</div>
+</div><p>Note that the contour LoadBalancer has an external IP - this is the IP address that all the external traffic will go to, and then Contour will steer that traffic to the correct application based on the Ingress configuration.</p>
 <h1 id=deploying-an-load-balanced-and-ingress-routed-application>Deploying an load balanced and ingress routed application</h1>
 <p>To test out the new load balanacer and ingress functionality, we can use the example application in the Contour docs - <a href=https://raw.githubusercontent.com/heptio/contour/master/examples/example-workload/kuard.yaml>kuard</a>. I&rsquo;ve downloaded the manifest and dropped the number of replicas to two, as I&rsquo;ve only got 2 kubernetes nodes running.</p>
 <p>The manifest describes three kubernetes objects, a <a href=https://kubernetes.io/docs/concepts/workloads/controllers/deployment/>Deployment</a> of the kuard application with 2 replicas, a <a href=https://kubernetes.io/docs/concepts/services-networking/service/>Service</a> to expose port 80 on a ClusterIp, and an <a href=https://kubernetes.io/docs/concepts/services-networking/ingress/>Ingress</a> that describes how the Envoy proxy should pass traffic to the <a href=https://kubernetes.io/docs/concepts/services-networking/service/>Service</a>.</p>
 <p>So, when the manifest is applied, the two kuard containers are deployed and a service is configured. The Ingress is configured to pass traffic to the Service named &ldquo;kuard&rdquo; on port 80. First, we deploy the manifest:</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>kubectl apply -f https://j.hept.io/contour-kuard-example
-</code></pre></div><p>And then inspect the deployed components using <code>kubectl get</code> commands again:</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>kubectl get deployments,services,ingresses
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>NAME                          READY   UP-TO-DATE   AVAILABLE   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>deployment.extensions/kuard   2/2     <span style=color:#0086f7;font-weight:700>2</span>            <span style=color:#0086f7;font-weight:700>2</span>           22s
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>NAME                 TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)        AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>service/kuard        ClusterIP      10.105.219.245   &lt;none&gt;           80/TCP         22s
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>service/kubernetes   ClusterIP      10.96.0.1        &lt;none&gt;           443/TCP        47h
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>NAME                       HOSTS   ADDRESS   PORTS   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>ingress.extensions/kuard   *                 <span style=color:#0086f7;font-weight:700>80</span>      22s
-</code></pre></div><p>Note that there&rsquo;s no external IP for the kuard service - instead it&rsquo;s accessed via the Contour deployed Envoy proxy, which for me has an external IP of 192.168.10.201:</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>kubectl get services -A | grep contour
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>heptio-contour   contour      LoadBalancer   10.99.247.218    192.168.10.201   80:30395/TCP,443:32127/TCP   46h
-</code></pre></div><p>Now if I hit up the load balanced IP, I see the kuard, and if I hit refresh you can see that I&rsquo;m switching between the two container instances:</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl apply -f https://j.hept.io/contour-kuard-example
+</code></pre></td></tr></table>
+</div>
+</div><p>And then inspect the deployed components using <code>kubectl get</code> commands again:</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get deployments,services,ingresses
+
+NAME                          READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.extensions/kuard   2/2     <span style=color:#60e;font-weight:700>2</span>            <span style=color:#60e;font-weight:700>2</span>           22s
+
+NAME                 TYPE           CLUSTER-IP       EXTERNAL-IP      PORT<span style=color:#333>(</span>S<span style=color:#333>)</span>        AGE
+service/kuard        ClusterIP      10.105.219.245   &lt;none&gt;           80/TCP         22s
+service/kubernetes   ClusterIP      10.96.0.1        &lt;none&gt;           443/TCP        47h
+
+NAME                       HOSTS   ADDRESS   PORTS   AGE
+ingress.extensions/kuard   *                 <span style=color:#60e;font-weight:700>80</span>      22s
+</code></pre></td></tr></table>
+</div>
+</div><p>Note that there&rsquo;s no external IP for the kuard service - instead it&rsquo;s accessed via the Contour deployed Envoy proxy, which for me has an external IP of 192.168.10.201:</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get services -A | grep contour
+heptio-contour   contour      LoadBalancer   10.99.247.218    192.168.10.201   80:30395/TCP,443:32127/TCP   46h
+</code></pre></td></tr></table>
+</div>
+</div><p>Now if I hit up the load balanced IP, I see the kuard, and if I hit refresh you can see that I&rsquo;m switching between the two container instances:</p>
 <p><img src=images/load-kuard.gif alt="kuard application"></p>
 <p>So&mldr;this is cool, but not very useful over and above basic load balancer functionality (and MetalLb could provide this on it&rsquo;s own). The real magic of Contour is in the <a href=https://github.com/heptio/contour/blob/master/docs/ingressroute.md>IngressRoute</a>, and the ability to route incoming traffic based on the IngressRoute object, but that&rsquo;s the subject of another blog post! There are some great examples in the <a href=https://github.com/heptio/contour/tree/master/examples/example-workload/ingressroute>contour examples folder on GitHub</a> if you can&rsquo;t wait :)</p>
 <h6>Share this post</h6>

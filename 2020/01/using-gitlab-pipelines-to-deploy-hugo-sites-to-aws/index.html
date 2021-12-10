@@ -35,7 +35,7 @@
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
-<link href=/css/clr-ui-dark.min.css rel=stylesheet>
+<link href=/css/clr-ui.min.css rel=stylesheet>
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
@@ -103,7 +103,7 @@ RSS
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 9/1/2020
-&#183; Read in about 4 min (828 words)
+&#183; Read in about 5 min (896 words)
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/automation>Automation</a>, <a href=/category/community>Community</a> and <a href=/category/development>Development</a>
@@ -174,78 +174,156 @@ Tags:
 </tbody>
 </table>
 <p>These variables are used in the <code>.gitlab-ci.yml</code> file below, which I&rsquo;ve commented heavily to show what&rsquo;s happening.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>---<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#888></span><span style=color:#080;background-color:#0f140f;font-style:italic># Set the default container image to GitLab&#39;s Hugo image</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>image</span>:<span style=color:#888> </span>registry.gitlab.com/pages/hugo:latest<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>variables</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#888>  </span><span style=color:#080;background-color:#0f140f;font-style:italic># Ensure the git submodules are updated when the pipeline runs</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>GIT_SUBMODULE_STRATEGY</span>:<span style=color:#888> </span>recursive<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#888>  
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>stages</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#888>  </span>- build<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#888>  </span>- deploy<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#888></span><span style=color:#080;background-color:#0f140f;font-style:italic># Build the Staging site</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>buildStaging</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>stage</span>:<span style=color:#888> </span>build<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>script</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#888>    </span><span style=color:#080;background-color:#0f140f;font-style:italic># Run hugo with a different baseURL to ensure links work in the staging site, and flag to include drafts and future posts</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#888>    </span>- hugo --minify --baseURL http://$AWS_S3_Staging_Bucket.s3-website.$AWS_DEFAULT_REGION.amazonaws.com/ --buildDrafts --buildFuture<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>artifacts</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>paths</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span><span style=color:#888>      </span><span style=color:#080;background-color:#0f140f;font-style:italic># Create an artifact folder of the hugo &#34;public&#34; output</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span><span style=color:#888>      </span>- public<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span><span style=color:#888></span><span style=color:#080;background-color:#0f140f;font-style:italic># Deploy the Staging site</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>deployStaging</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span><span style=color:#888>  </span><span style=color:#080;background-color:#0f140f;font-style:italic># In the deploy stage</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>stage</span>:<span style=color:#888> </span>deploy<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span><span style=color:#888>  </span><span style=color:#080;background-color:#0f140f;font-style:italic># Use a docker image with AWS CLI pre-installed</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>image</span>:<span style=color:#888> </span>garland/aws-cli-docker<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>script</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span><span style=color:#888>  </span><span style=color:#080;background-color:#0f140f;font-style:italic># Synchronise the &#34;public&#34; folder passed from buildStaging to the Staging AWS S3 bucket name from the variable</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span><span style=color:#888>  </span>- aws s3 sync ./public s3://$AWS_S3_Staging_Bucket --delete --only-show-errors<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>dependencies</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34</span><span style=color:#888>  </span><span style=color:#080;background-color:#0f140f;font-style:italic># Depend on the buildStaging job to ensure the &#34;public&#34; artifact is available</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35</span><span style=color:#888>  </span>- buildStaging<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37</span><span style=color:#888></span><span style=color:#080;background-color:#0f140f;font-style:italic># Build the Production site</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>buildProduction</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39</span><span style=color:#888>  </span><span style=color:#080;background-color:#0f140f;font-style:italic># In the build stage</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>stage</span>:<span style=color:#888> </span>build<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>script</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42</span><span style=color:#888>    </span><span style=color:#080;background-color:#0f140f;font-style:italic># Run hugo with just the minify command (no drafts or future posts)</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43</span><span style=color:#888>    </span>- hugo --minify<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>artifacts</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>paths</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46</span><span style=color:#888>      </span><span style=color:#080;background-color:#0f140f;font-style:italic># Create an artifact folder of the hugo &#34;public&#34; output</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47</span><span style=color:#888>      </span>- public<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49</span><span style=color:#888></span><span style=color:#080;background-color:#0f140f;font-style:italic># Deploy the Production site</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>deployProduction</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51</span><span style=color:#888>  </span><span style=color:#080;background-color:#0f140f;font-style:italic># In the deploy stage</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>stage</span>:<span style=color:#888> </span>deploy<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53</span><span style=color:#888>  </span><span style=color:#080;background-color:#0f140f;font-style:italic># Use a docker image with AWS CLI pre-installed</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">54</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>image</span>:<span style=color:#888> </span>garland/aws-cli-docker<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">55</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>script</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">56</span><span style=color:#888>  </span><span style=color:#080;background-color:#0f140f;font-style:italic># Synchronise the &#34;public&#34; folder passed from buildProduction to the Production AWS S3 bucket name from the variable</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">57</span><span style=color:#888>  </span>- aws s3 sync ./public s3://$AWS_S3_Production_Bucket --delete --only-show-errors<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">58</span><span style=color:#888>  </span><span style=color:#080;background-color:#0f140f;font-style:italic># Invalidate the cloudfront cache to make the changes live</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">59</span><span style=color:#888>  </span>- aws cloudfront create-invalidation --distribution-id E37FU6DHWYT5T2 --paths &#34;/*&#34;<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">60</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">61</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>dependencies</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">62</span><span style=color:#888>  </span><span style=color:#080;background-color:#0f140f;font-style:italic># Depend on the buildProduction job to ensure the &#34;public&#34; artifact is available</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">63</span><span style=color:#888>  </span>- buildProduction<span style=color:#888>
-</span></code></pre></div><p>Commiting the <code>.gitlab-ci.yml</code> file to the <strong>definit-hugo</strong> repository actually triggers the pipeline.</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">57
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">58
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">59
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">60
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">61
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">62
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">63
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#0e84b5;font-weight:700>---</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Set the default container image to GitLab&#39;s Hugo image</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>image</span>:<span style=color:#bbb> </span>registry.gitlab.com/pages/hugo:latest<span style=color:#bbb>
+</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>variables</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Ensure the git submodules are updated when the pipeline runs</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>GIT_SUBMODULE_STRATEGY</span>:<span style=color:#bbb> </span>recursive<span style=color:#bbb>
+</span><span style=color:#bbb>  
+</span><span style=color:#bbb></span><span style=color:#070>stages</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- build<span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- deploy<span style=color:#bbb>
+</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Build the Staging site</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>buildStaging</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>stage</span>:<span style=color:#bbb> </span>build<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>script</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#666;font-style:italic># Run hugo with a different baseURL to ensure links work in the staging site, and flag to include drafts and future posts</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- hugo --minify --baseURL http://$AWS_S3_Staging_Bucket.s3-website.$AWS_DEFAULT_REGION.amazonaws.com/ --buildDrafts --buildFuture<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>artifacts</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>paths</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>      </span><span style=color:#666;font-style:italic># Create an artifact folder of the hugo &#34;public&#34; output</span><span style=color:#bbb>
+</span><span style=color:#bbb>      </span>- public<span style=color:#bbb>
+</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Deploy the Staging site</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>deployStaging</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># In the deploy stage</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>stage</span>:<span style=color:#bbb> </span>deploy<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Use a docker image with AWS CLI pre-installed</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>image</span>:<span style=color:#bbb> </span>garland/aws-cli-docker<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>script</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Synchronise the &#34;public&#34; folder passed from buildStaging to the Staging AWS S3 bucket name from the variable</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- aws s3 sync ./public s3://$AWS_S3_Staging_Bucket --delete --only-show-errors<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>dependencies</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Depend on the buildStaging job to ensure the &#34;public&#34; artifact is available</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- buildStaging<span style=color:#bbb>
+</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Build the Production site</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>buildProduction</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># In the build stage</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>stage</span>:<span style=color:#bbb> </span>build<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>script</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#666;font-style:italic># Run hugo with just the minify command (no drafts or future posts)</span><span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- hugo --minify<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>artifacts</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>paths</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>      </span><span style=color:#666;font-style:italic># Create an artifact folder of the hugo &#34;public&#34; output</span><span style=color:#bbb>
+</span><span style=color:#bbb>      </span>- public<span style=color:#bbb>
+</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Deploy the Production site</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>deployProduction</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># In the deploy stage</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>stage</span>:<span style=color:#bbb> </span>deploy<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Use a docker image with AWS CLI pre-installed</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>image</span>:<span style=color:#bbb> </span>garland/aws-cli-docker<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>script</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Synchronise the &#34;public&#34; folder passed from buildProduction to the Production AWS S3 bucket name from the variable</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- aws s3 sync ./public s3://$AWS_S3_Production_Bucket --delete --only-show-errors<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Invalidate the cloudfront cache to make the changes live</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- aws cloudfront create-invalidation --distribution-id E37FU6DHWYT5T2 --paths &#34;/*&#34;<span style=color:#bbb>
+</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>dependencies</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Depend on the buildProduction job to ensure the &#34;public&#34; artifact is available</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- buildProduction<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Commiting the <code>.gitlab-ci.yml</code> file to the <strong>definit-hugo</strong> repository actually triggers the pipeline.</p>
 <p><img src=images/BuildPipelineJobs.png alt="Pipeline build and deploy jobs"></p>
 <p>When the <code>draft: true</code> property is set in the hugo content&rsquo;s front matter, the draft content is built and released to the staging environment, but not the &ldquo;live&rdquo; blog thanks to the <code>--buildDrafts</code> flag:</p>
 <p><img src=images/DraftOnStaging.png alt="Draft content released to staging"></p>
 <p>All good so far, but there&rsquo;s a problem here. I want to commit new posts to the <strong>definit-content</strong> repository, not the <strong>definit-hugo</strong> repository, so I need to create a pipeline on the <strong>definit-content</strong> repository to trigger the pipeline in the <strong>definit-hugo</strong> project. Fortunately GitLab makes this easy using the <code>trigger</code> syntax, simply creating a job with the trigger action and the path to my <strong>definit-hugo</strong> project.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#fb660a;font-weight:700>trigger_hugo_build</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>stage</span>:<span style=color:#888> </span>deploy<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>trigger</span>:<span style=color:#888> </span>sammcgeown/definit-hugo<span style=color:#888>
-</span></code></pre></div><p>Now when there&rsquo;s a commit to the <strong>definit-content</strong> projcet the pipeline triggers the downstream build, and all the downstream steps are visible in the pipeline:</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>trigger_hugo_build</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>stage</span>:<span style=color:#bbb> </span>deploy<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>trigger</span>:<span style=color:#bbb> </span>sammcgeown/definit-hugo<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Now when there&rsquo;s a commit to the <strong>definit-content</strong> projcet the pipeline triggers the downstream build, and all the downstream steps are visible in the pipeline:</p>
 <p><img src=images/TriggerBuildPipelineJobs.png alt="Trigger downstream pipeline build and deploy jobs"></p>
 <h6>Share this post</h6>
 <span class=share-box>

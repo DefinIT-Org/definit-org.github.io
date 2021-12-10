@@ -36,7 +36,7 @@
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
-<link href=/css/clr-ui-dark.min.css rel=stylesheet>
+<link href=/css/clr-ui.min.css rel=stylesheet>
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
@@ -104,7 +104,7 @@ RSS
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 14/3/2019
-&#183; Read in about 4 min (725 words)
+&#183; Read in about 4 min (786 words)
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
@@ -147,68 +147,148 @@ Tags:
 <li>Format the data drive and mount to /umds</li>
 <li>Install PostgreSQL 9.4</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>yum install https://download.postgresql.org/pub/repos/yum/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-3.noarch.rpm
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>yum install postgresql94 postgresql94-server postgresql94-odbc
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>/usr/pgsql-9.4/bin/postgresql94-setup initdb
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>systemctl enable postgresql-9.4
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>systemctl start postgresql-9.4
-</code></pre></div><ul>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>yum install https://download.postgresql.org/pub/repos/yum/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-3.noarch.rpm
+yum install postgresql94 postgresql94-server postgresql94-odbc
+/usr/pgsql-9.4/bin/postgresql94-setup initdb
+systemctl <span style=color:#072>enable</span> postgresql-9.4
+systemctl start postgresql-9.4
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Create a UMDS user and database</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-postgres data-lang=postgres><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>su - postgres
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>createdb &lt;database_name&gt;;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>createuser -d -e -r &lt;database_username&gt;; -P
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>Pwd: &lt;database_password&gt;;
-</code></pre></div><ul>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-postgres data-lang=postgres>su <span style=color:#333>-</span> postgres
+createdb <span style=color:#333>&lt;</span>database_name<span style=color:#333>&gt;</span>;
+createuser <span style=color:#333>-</span>d <span style=color:#333>-</span>e <span style=color:#333>-</span>r <span style=color:#333>&lt;</span>database_username<span style=color:#333>&gt;</span>; <span style=color:#333>-</span>P
+Pwd: <span style=color:#333>&lt;</span>database_password<span style=color:#333>&gt;</span>;
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Edit <code>/var/lib/pgsql/9.4/data/pg_hba.conf</code> and change local, IPv4 and IPv6 to use md5 authentication (not ideal, but it works)</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#080;background-color:#0f140f;font-style:italic># TYPE  DATABASE        USER            ADDRESS                 METHOD</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#080;background-color:#0f140f;font-style:italic># &#34;local&#34; is for Unix domain socket connections only</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>local   all             all                                     md5
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#080;background-color:#0f140f;font-style:italic># IPv4 local connections:</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>host    all             all             127.0.0.1/32            md5
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#080;background-color:#0f140f;font-style:italic># IPv6 local connections:</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>host    all             all             ::1/128                 md5
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#080;background-color:#0f140f;font-style:italic># Allow replication connections from localhost, by a user with the</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#080;background-color:#0f140f;font-style:italic># replication privilege.</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#080;background-color:#0f140f;font-style:italic>#local   replication     postgres                                peer</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#080;background-color:#0f140f;font-style:italic>#host    replication     postgres        127.0.0.1/32            ident</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#080;background-color:#0f140f;font-style:italic>#host    replication     postgres        ::1/128                 ident</span>
-</code></pre></div><ul>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#666;font-style:italic># TYPE  DATABASE        USER            ADDRESS                 METHOD</span>
+<span style=color:#666;font-style:italic># &#34;local&#34; is for Unix domain socket connections only</span>
+<span style=color:#072>local</span>   all             all                                     md5
+<span style=color:#666;font-style:italic># IPv4 local connections:</span>
+host    all             all             127.0.0.1/32            md5
+<span style=color:#666;font-style:italic># IPv6 local connections:</span>
+host    all             all             ::1/128                 md5
+<span style=color:#666;font-style:italic># Allow replication connections from localhost, by a user with the</span>
+<span style=color:#666;font-style:italic># replication privilege.</span>
+<span style=color:#666;font-style:italic>#local   replication     postgres                                peer</span>
+<span style=color:#666;font-style:italic>#host    replication     postgres        127.0.0.1/32            ident</span>
+<span style=color:#666;font-style:italic>#host    replication     postgres        ::1/128                 ident</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Edit <code>/etc/odbcinst.ini</code> to use the ODBC driver</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>[PostgreSQL]
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#fb660a>Description</span>=PostgreSQL ODBC driver (Unicode version)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#fb660a>Driver64</span>=/usr/pgsql-9.4/lib/psqlodbcw.so
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#fb660a>Setup64</span>=/usr/lib64/libodbcpsqlS.so
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span><span style=color:#fb660a>Debug</span>=<span style=color:#0086f7;font-weight:700>0</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span><span style=color:#fb660a>CommLog</span>=<span style=color:#0086f7;font-weight:700>1</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7</span><span style=color:#fb660a>UsageCount</span>=<span style=color:#0086f7;font-weight:700>1</span>
-</code></pre></div><ul>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#333>[</span>PostgreSQL<span style=color:#333>]</span>
+<span style=color:#036>Description</span><span style=color:#333>=</span>PostgreSQL ODBC driver <span style=color:#333>(</span>Unicode version<span style=color:#333>)</span>
+<span style=color:#036>Driver64</span><span style=color:#333>=</span>/usr/pgsql-9.4/lib/psqlodbcw.so
+<span style=color:#036>Setup64</span><span style=color:#333>=</span>/usr/lib64/libodbcpsqlS.so
+<span style=color:#036>Debug</span><span style=color:#333>=</span><span style=color:#60e;font-weight:700>0</span>
+<span style=color:#036>CommLog</span><span style=color:#333>=</span><span style=color:#60e;font-weight:700>1</span>
+<span style=color:#036>UsageCount</span><span style=color:#333>=</span><span style=color:#60e;font-weight:700>1</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Create the ODBC DSN <code>/etc/odbc.ini</code></li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>[&lt;dsn_name&gt;]
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#fb660a>Driver</span> = PostgreSQL
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#fb660a>DSN</span> = &lt;dsn_name&gt;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#fb660a>ServerName</span> = localhost
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#fb660a>PortNumber</span> = <span style=color:#0086f7;font-weight:700>5432</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#fb660a>Server</span> = localhost
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#fb660a>Port</span> = <span style=color:#0086f7;font-weight:700>5432</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#fb660a>UserID</span> = &lt;database_username&gt;;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#fb660a>User</span> = &lt;database_username&gt;;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#fb660a>Database</span> = &lt;database_name&gt;;
-</code></pre></div><ul>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#333>[</span>&lt;dsn_name&gt;<span style=color:#333>]</span>
+<span style=color:#036>Driver</span> <span style=color:#333>=</span> PostgreSQL
+<span style=color:#036>DSN</span> <span style=color:#333>=</span> &lt;dsn_name&gt;
+<span style=color:#036>ServerName</span> <span style=color:#333>=</span> localhost
+<span style=color:#036>PortNumber</span> <span style=color:#333>=</span> <span style=color:#60e;font-weight:700>5432</span>
+<span style=color:#036>Server</span> <span style=color:#333>=</span> localhost
+<span style=color:#036>Port</span> <span style=color:#333>=</span> <span style=color:#60e;font-weight:700>5432</span>
+<span style=color:#036>UserID</span> <span style=color:#333>=</span> &lt;database_username&gt;;
+<span style=color:#036>User</span> <span style=color:#333>=</span> &lt;database_username&gt;;
+<span style=color:#036>Database</span> <span style=color:#333>=</span> &lt;database_name&gt;;
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Validate the connection using <code>isql -v UMDS_DSN &amp;lt;database_username&amp;gt; &lt;database_password>;</code></li>
 </ul>
 <h2 id=install-umds>Install UMDS</h2>
 <p>Next, mount the vCenter Server Appliance ISO file, copy the UMDS installer tar.gz file into the /umds folder and extract the installer. When this is complete there should be a vmware-umds-distrib folder.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>mkdir /mnt/cdrom
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>mount /dev/cdrom /mnt/cdrom
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>cp /mnt/cdrom/umds/VMware-UMDS-6.7.0-8169861.tar.gz /umds/VMware-UMDS-6.7.0-8169861.tar.gz
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>cd /umds
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>tar xvzf VMware-UMDS-6.7.0-8169861.tar.gz
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span>umount /mnt/cdrom
-</code></pre></div><p>Run the UMDS installation script <code>/umds/vmware-umds-distrib/vmware-install.pl</code></p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>mkdir /mnt/cdrom
+mount /dev/cdrom /mnt/cdrom
+cp /mnt/cdrom/umds/VMware-UMDS-6.7.0-8169861.tar.gz /umds/VMware-UMDS-6.7.0-8169861.tar.gz
+<span style=color:#072>cd</span> /umds
+tar xvzf VMware-UMDS-6.7.0-8169861.tar.gz
+umount /mnt/cdrom
+</code></pre></td></tr></table>
+</div>
+</div><p>Run the UMDS installation script <code>/umds/vmware-umds-distrib/vmware-install.pl</code></p>
 <ul>
 <li>Accept the EULA</li>
 <li>Enter the install location (/umds/vmware-umds)</li>
@@ -220,62 +300,145 @@ Tags:
 <ul>
 <li>View the current configuration</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>/umds/vmware-umds/bin/vmware-umds -G
-</code></pre></div><ul>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>/umds/vmware-umds/bin/vmware-umds -G
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Disable older patches (I just want 6.7)</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>/umds/vmware-umds/bin/vmware-umds -S -d embeddedEsx-6.0.0 embeddedEsx-6.5.0 embeddedEsx-6.6.1 embeddedEsx-6.6.2 embeddedEsx-6.6.3
-</code></pre></div><ul>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>/umds/vmware-umds/bin/vmware-umds -S -d embeddedEsx-6.0.0 embeddedEsx-6.5.0 embeddedEsx-6.6.1 embeddedEsx-6.6.2 embeddedEsx-6.6.3
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Add the Dell and HPE repositories</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>/umds/vmware-umds/bin/vmware-umds -S --add-url https://vmwaredepot.dell.com/index.xml --url-type HOST
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>/umds/vmware-umds/bin/vmware-umds -S --add-url https://vibsdepot.hpe.com/index.xml --url-type HOST
-</code></pre></div><ul>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>/umds/vmware-umds/bin/vmware-umds -S --add-url https://vmwaredepot.dell.com/index.xml --url-type HOST
+/umds/vmware-umds/bin/vmware-umds -S --add-url https://vibsdepot.hpe.com/index.xml --url-type HOST
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Fix the SSL errors (use the local lib curl binary)</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>mv /usr/local/vmware-umds/lib/libcurl.so.4 /usr/local/vmware-umds/lib/libcurl.so.4.backup
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>ln -s /usr/lib64/libcurl.so.4 /usr/local/vmware-umds/lib/libcurl.so.4
-</code></pre></div><ul>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>mv /usr/local/vmware-umds/lib/libcurl.so.4 /usr/local/vmware-umds/lib/libcurl.so.4.backup
+ln -s /usr/lib64/libcurl.so.4 /usr/local/vmware-umds/lib/libcurl.so.4
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Download the updates</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>/umds/vmware-umds/bin/vmware-umds -D
-</code></pre></div><h2 id=install-nginx>Install NGINX</h2>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>/umds/vmware-umds/bin/vmware-umds -D
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=install-nginx>Install NGINX</h2>
 <ul>
 <li>Install and start nginx</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>yum install epel-release
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>yum install nginx
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>sudo systemctl start nginx
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>sudo systemctl enable nginx
-</code></pre></div><ul>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>yum install epel-release
+yum install nginx
+sudo systemctl start nginx
+sudo systemctl <span style=color:#072>enable</span> nginx
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Configure the firewall for HTTPS</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>firewall-cmd --permanent --add-port=443/tcp
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>firewall-cmd --reload
-</code></pre></div><ul>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>firewall-cmd --permanent --add-port<span style=color:#333>=</span>443/tcp
+firewall-cmd --reload
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Generate SSL certificates</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>mkdir /etc/nginx/ssl-certs/
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>openssl req -x509 -nodes -days <span style=color:#0086f7;font-weight:700>365</span> -newkey rsa:2048 -keyout /etc/nginx/ssl-certs/umds.key -out /etc/nginx/ssl-certs/umds.crt
-</code></pre></div><img class="alignright size-full wp-image-9012" src=/images/2019/03/2019-03-14_10-58-49.png style=max-width:100%>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>mkdir /etc/nginx/ssl-certs/
+openssl req -x509 -nodes -days <span style=color:#60e;font-weight:700>365</span> -newkey rsa:2048 -keyout /etc/nginx/ssl-certs/umds.key -out /etc/nginx/ssl-certs/umds.crt
+</code></pre></td></tr></table>
+</div>
+</div><img class="alignright size-full wp-image-9012" src=/images/2019/03/2019-03-14_10-58-49.png style=max-width:100%>
 <ul>
 <li>Create an NGINX config file for UMDS - <code>/etc/nginx/conf.d/umds.conf</code></li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#fb660a;font-weight:700>server</span> {
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>    <span style=color:#fb660a;font-weight:700>listen</span> <span style=color:#0086f7;font-weight:700>443</span> <span style=color:#0086d2>ssl</span>;<span style=color:#fb660a;font-weight:700>ssl</span> <span style=color:#0086d2>on</span>;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    <span style=color:#fb660a;font-weight:700>ssl_certificate</span> <span style=color:#0086d2>/etc/nginx/ssl-certs/umds.crt</span>;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>    <span style=color:#fb660a;font-weight:700>ssl_trusted_certificate</span> <span style=color:#0086d2>/etc/nginx/ssl-certs/umds.crt</span>;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>    <span style=color:#fb660a;font-weight:700>ssl_certificate_key</span> <span style=color:#0086d2>/etc/nginx/ssl-certs/umds.key</span>;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>    <span style=color:#fb660a;font-weight:700>server_name</span> <span style=color:#0086d2>umds.definit.local</span>;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>    <span style=color:#fb660a;font-weight:700>root</span> <span style=color:#0086d2>/umds/vmware-umds-patches</span>;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>    <span style=color:#fb660a;font-weight:700>index</span> <span style=color:#0086d2>index.html</span>;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>    <span style=color:#fb660a;font-weight:700>location</span> <span style=color:#0086d2>/</span> {
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>        <span style=color:#fb660a;font-weight:700>autoindex</span> <span style=color:#0086d2>on</span>;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>        <span style=color:#fb660a;font-weight:700>try_files</span> <span style=color:#fb660a>$uri</span> <span style=color:#fb660a>$uri/</span> =<span style=color:#0086f7;font-weight:700>404</span>;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>    }
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>}
-</code></pre></div><ul>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=color:#289;font-weight:700>server</span> {
+    <span style=color:#289;font-weight:700>listen</span> <span style=color:#66f;font-weight:700>443</span> <span style=background-color:#e0e0ff>ssl</span>;<span style=color:#289;font-weight:700>ssl</span> <span style=color:#5ed;font-weight:700>on</span>;
+    <span style=color:#289;font-weight:700>ssl_certificate</span> <span style=background-color:#e0e0ff>/etc/nginx/ssl-certs/umds.crt</span>;
+    <span style=color:#289;font-weight:700>ssl_trusted_certificate</span> <span style=background-color:#e0e0ff>/etc/nginx/ssl-certs/umds.crt</span>;
+    <span style=color:#289;font-weight:700>ssl_certificate_key</span> <span style=background-color:#e0e0ff>/etc/nginx/ssl-certs/umds.key</span>;
+
+    <span style=color:#289;font-weight:700>server_name</span> <span style=background-color:#e0e0ff>umds.definit.local</span>;
+    <span style=color:#289;font-weight:700>root</span> <span style=background-color:#e0e0ff>/umds/vmware-umds-patches</span>;
+    <span style=color:#289;font-weight:700>index</span> <span style=background-color:#e0e0ff>index.html</span>;
+    <span style=color:#289;font-weight:700>location</span> <span style=background-color:#e0e0ff>/</span> {
+        <span style=color:#289;font-weight:700>autoindex</span> <span style=color:#5ed;font-weight:700>on</span>;
+        <span style=color:#289;font-weight:700>try_files</span> <span style=color:#036>$uri</span> <span style=color:#036>$uri/</span> =<span style=color:#66f;font-weight:700>404</span>;
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Restart NGINX - <code>systemctl restart nginx</code></li>
 </ul>
 <h2 id=configure-vcenter-update-manager>Configure vCenter Update Manager</h2>

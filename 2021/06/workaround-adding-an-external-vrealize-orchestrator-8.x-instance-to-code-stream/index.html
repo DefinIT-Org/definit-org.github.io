@@ -36,7 +36,7 @@
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
-<link href=/css/clr-ui-dark.min.css rel=stylesheet>
+<link href=/css/clr-ui.min.css rel=stylesheet>
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
@@ -104,7 +104,7 @@ RSS
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 25/6/2021
-&#183; Read in about 1 min (195 words)
+&#183; Read in about 1 min (207 words)
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/vrealize-automation>vRealize Automation</a> and <a href=/category/vrealize-orchestrator>vRealize Orchestrator</a>
@@ -134,18 +134,35 @@ Http failure response for https://&lt;vRA FQDN>/codestream/api/endpoint-certific
 <figcaption class=clr-caption>Error getting certificates!</figcaption>
 </div>
 <p>It turns out this is because the stand-alone vRO appliance redirects the appliance URL to <code>/vco</code>, where the vRA appliance does not. You can work around this issue by importing your endpoint from the YAML configuration and including the certificate fingerprint - after this the endpoint will validate successfully.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>---<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>project</span>:<span style=color:#888> </span>Field Demo<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>ENDPOINT<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>external-vro<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>description</span>:<span style=color:#888> </span><span style=color:#0086d2>&#39;External vRealize Orchestrator 8.4&#39;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>type</span>:<span style=color:#888> </span>vro<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>properties</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>url</span>:<span style=color:#888> </span>https://smcg-sc2-vro.cmbu.local<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>username</span>:<span style=color:#888> </span>configuser<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>password</span>:<span style=color:#888> </span>VMware1!<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>fingerprint</span>:<span style=color:#888> </span>6107B3E098C55349B1A216E721568F0C7AE24CE5444A431B49B40957B832AEE5<span style=color:#888>
-</span></code></pre></div><p>This should be fixed in the near future, but in the mean time, I hope this saves you a headache!</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#0e84b5;font-weight:700>---</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>project</span>:<span style=color:#bbb> </span>Field Demo<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ENDPOINT<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>name</span>:<span style=color:#bbb> </span>external-vro<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>description</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;External vRealize Orchestrator 8.4&#39;</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>type</span>:<span style=color:#bbb> </span>vro<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>properties</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>url</span>:<span style=color:#bbb> </span>https://smcg-sc2-vro.cmbu.local<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>username</span>:<span style=color:#bbb> </span>configuser<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>password</span>:<span style=color:#bbb> </span>VMware1!<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>fingerprint</span>:<span style=color:#bbb> </span>6107B3E098C55349B1A216E721568F0C7AE24CE5444A431B49B40957B832AEE5<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>This should be fixed in the near future, but in the mean time, I hope this saves you a headache!</p>
 <p>So, to clarify, when you add a vRealize Orchestrator endpoint to Code Stream:</p>
 <ul>
 <li>On-board - use the vRA FQDN (e.g. <a href=https://vra-appliance.cmbu.local>https://vra-appliance.cmbu.local</a>)</li>

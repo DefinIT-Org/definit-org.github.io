@@ -43,7 +43,7 @@
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
-<link href=/css/clr-ui-dark.min.css rel=stylesheet>
+<link href=/css/clr-ui.min.css rel=stylesheet>
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
@@ -111,7 +111,7 @@ RSS
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 7/2/2012
-&#183; Read in about 4 min (850 words)
+&#183; Read in about 5 min (865 words)
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/microsoft>Microsoft</a>
@@ -150,50 +150,104 @@ Tags:
 <p>Engaging with Microsoft product support for this gave us a solution of sorts - namely to run a looped batch file until all the folders were owned, and then running ICACLS.exe. There would be no way of knowing whether this had completed the tree unless you knew already the number of files and folders within the tree - and if you could get that info you would already have permissions! Not a great solution.</p>
 <p>Fortunately, using PowerShell and Takeown.exe, we can work around this limitation, by exploiting Get-ChildItem in recursive mode, and changing the default error action to SilentlyContinue. Get-ChildItem will throw an error if it tries to access a folder you do not have permissions to, and you can catch this error and pass the folder to Takeown.exe to seize ownership. Trapping this error does not work because it&rsquo;s a &ldquo;stop&rdquo; error - but changing the error action means that the $error variable is populated with the exception details. This is the basis of the first function in my script.</p>
 <h1 id=function-test-folder>Function: Test-Folder</h1>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#fb660a;font-weight:700>function</span> Test-Folder(<span style=color:#fb660a>$FolderToTest</span>){
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#fb660a>$error</span>.Clear()
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#fb660a>$ErrorArray</span> = @()
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>Get-ChildItem <span style=color:#fb660a>$FolderToTest</span> -Recurse -ErrorAction SilentlyContinue | Select FullName
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#fb660a;font-weight:700>if</span> (<span style=color:#fb660a>$error</span>) {
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#fb660a>$ErrorArray</span> = <span style=color:#fb660a>$error</span> + <span style=color:#fb660a>$ErrorArray</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#fb660a;font-weight:700>foreach</span> (<span style=color:#fb660a>$err</span> <span style=color:#fb660a;font-weight:700>in</span> <span style=color:#fb660a>$ErrorArray</span>) {
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#fb660a;font-weight:700>if</span>(<span style=color:#fb660a>$err</span>.FullyQualifiedErrorId -eq <span style=color:#0086d2>&#34;DirUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetChildItemCommand&#34;</span>) {
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>    Write-Host Unable to access <span style=color:#fb660a>$err</span>.TargetObject -Fore Red
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>    Write-Host Attempting to take ownership of <span style=color:#fb660a>$err</span>.TargetObject -Fore Yellow
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>    Take-Ownership(<span style=color:#fb660a>$err</span>.TargetObject)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>    Test-Folder(<span style=color:#fb660a>$err</span>.TargetObject)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>   }
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>  }
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span> }
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>}
-</code></pre></div><p>* <em>This section has been updated as per David&rsquo;s comments and solution below - thanks to David for his work!</em></p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=color:#289;font-weight:700>function</span> <span style=color:#072>Test-Folder</span>(<span style=color:#036>$FolderToTest</span>){
+<span style=color:#036>$error</span>.Clear()
+<span style=color:#036>$ErrorArray</span> = @()
+<span style=color:#072>Get-ChildItem</span> <span style=color:#036>$FolderToTest</span> -Recurse -ErrorAction SilentlyContinue | <span style=color:#072>Select </span>FullName
+<span style=color:#289;font-weight:700>if</span> (<span style=color:#036>$error</span>) {
+<span style=color:#036>$ErrorArray</span> = <span style=color:#036>$error</span> + <span style=color:#036>$ErrorArray</span>
+<span style=color:#289;font-weight:700>foreach</span> (<span style=color:#036>$err</span> <span style=color:#289;font-weight:700>in</span> <span style=color:#036>$ErrorArray</span>) {
+<span style=color:#289;font-weight:700>if</span>(<span style=color:#036>$err</span>.FullyQualifiedErrorId <span style=color:#333>-eq</span> <span style=background-color:#e0e0ff>&#34;DirUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetChildItemCommand&#34;</span>) {
+    <span style=color:#072>Write-Host</span> Unable to access <span style=color:#036>$err</span>.TargetObject -Fore Red
+    <span style=color:#072>Write-Host</span> Attempting to take ownership of <span style=color:#036>$err</span>.TargetObject -Fore Yellow
+    <span style=color:#072>Take-Ownership</span>(<span style=color:#036>$err</span>.TargetObject)
+    <span style=color:#072>Test-Folder</span>(<span style=color:#036>$err</span>.TargetObject)
+   }
+  }
+ }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>* <em>This section has been updated as per David&rsquo;s comments and solution below - thanks to David for his work!</em></p>
 <p>It&rsquo;s fairly simple code, running through it we clear any existing errors using $error.Clear(), recurse through the folder structure using Get-ChildItem with the errors suppressed. The select statement is for logging output - the full path of the file or folder that we DO have access to. We then check if $error is set - if it is then we had errors accessing a file or folder, so we loop through them and check if the error Fully Qualified ID matches the access denied error message. If it does we write something for the logging and call the Take-Ownership function, followed by looping back with a call to itself to re-test the folder we are working on (and anything below it).</p>
 <h1 id=function-take-ownership>Function: Take-Ownership</h1>
 <p> The Take-Ownership function simply calls Takeown.exe against the folder it is passed, then adds entries to the ACL for that folder.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#fb660a;font-weight:700>function</span> Take-Ownership {
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span> <span style=color:#fb660a;font-weight:700>param</span>(
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>  <span style=color:#0086d2>[String]</span><span style=color:#fb660a>$Folder</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span> )
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span> takeown.exe /A /F <span style=color:#fb660a>$Folder</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span> <span style=color:#fb660a>$CurrentACL</span> = Get-Acl <span style=color:#fb660a>$Folder</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span> write-host ...Adding NT Authority\SYSTEM to <span style=color:#fb660a>$Folder</span> -Fore Yellow
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span> <span style=color:#fb660a>$SystemACLPermission</span> = <span style=color:#0086d2>&#34;NT AUTHORITY\SYSTEM&#34;</span>,<span style=color:#0086d2>&#34;FullControl&#34;</span>,<span style=color:#0086d2>&#34;ContainerInherit,ObjectInherit&#34;</span>,<span style=color:#0086d2>&#34;None&#34;</span>,<span style=color:#0086d2>&#34;Allow&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span> <span style=color:#fb660a>$SystemAccessRule</span> = new-object System.Security.AccessControl.FileSystemAccessRule <span style=color:#fb660a>$SystemACLPermission</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span> <span style=color:#fb660a>$CurrentACL</span>.AddAccessRule(<span style=color:#fb660a>$SystemAccessRule</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span> write-host ...Adding Infrastructure Services to <span style=color:#fb660a>$Folder</span> -Fore Yellow
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span> <span style=color:#fb660a>$AdminACLPermission</span> = <span style=color:#0086d2>&#34;DEFINIT\AdminGroup&#34;</span>,<span style=color:#0086d2>&#34;FullControl&#34;</span>,<span style=color:#0086d2>&#34;ContainerInherit,ObjectInherit&#34;</span>,<span style=color:#0086d2>&#34;None&#34;</span>,<span style=color:#0086d2>&#34;Allow&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span> <span style=color:#fb660a>$SystemAccessRule</span> = new-object System.Security.AccessControl.FileSystemAccessRule <span style=color:#fb660a>$AdminACLPermission</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span> <span style=color:#fb660a>$CurrentACL</span>.AddAccessRule(<span style=color:#fb660a>$SystemAccessRule</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span> Set-Acl -Path <span style=color:#fb660a>$Folder</span> -AclObject <span style=color:#fb660a>$CurrentACL</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>}
-</code></pre></div><p>Running through, it takes the folder name as a parameter, runs Takeown.exe against it using the /A option to add the administrators group. We then get the current ACL from the folder, build a new ACL permission as a string and use that to create a FileSystemAccessRule object. That object is then added to the ACL we copied from the folder. In this example I am adding two accounts, NT AUTHORITY\SYSTEM and a domian group DEFINIT\AdminGroup. The Set-ACL command applies the ACL list with the two new entries to the folder.</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=color:#289;font-weight:700>function</span> <span style=color:#072>Take-Ownership</span> {
+ <span style=color:#289;font-weight:700>param</span>(
+  <span style=color:#5ed;font-weight:700>[String]</span><span style=color:#036>$Folder</span>
+ )
+ takeown.exe /A /F <span style=color:#036>$Folder</span>
+ <span style=color:#036>$CurrentACL</span> = <span style=color:#072>Get-Acl</span> <span style=color:#036>$Folder</span>
+ <span style=color:#072>write-host</span> ...Adding NT Authority\SYSTEM to <span style=color:#036>$Folder</span> -Fore Yellow
+ <span style=color:#036>$SystemACLPermission</span> = <span style=background-color:#e0e0ff>&#34;NT AUTHORITY\SYSTEM&#34;</span>,<span style=background-color:#e0e0ff>&#34;FullControl&#34;</span>,<span style=background-color:#e0e0ff>&#34;ContainerInherit,ObjectInherit&#34;</span>,<span style=background-color:#e0e0ff>&#34;None&#34;</span>,<span style=background-color:#e0e0ff>&#34;Allow&#34;</span>
+ <span style=color:#036>$SystemAccessRule</span> = <span style=color:#072>new-object</span> System.Security.AccessControl.FileSystemAccessRule <span style=color:#036>$SystemACLPermission</span>
+ <span style=color:#036>$CurrentACL</span>.AddAccessRule(<span style=color:#036>$SystemAccessRule</span>)
+ <span style=color:#072>write-host</span> ...Adding Infrastructure Services to <span style=color:#036>$Folder</span> -Fore Yellow
+ <span style=color:#036>$AdminACLPermission</span> = <span style=background-color:#e0e0ff>&#34;DEFINIT\AdminGroup&#34;</span>,<span style=background-color:#e0e0ff>&#34;FullControl&#34;</span>,<span style=background-color:#e0e0ff>&#34;ContainerInherit,ObjectInherit&#34;</span>,<span style=background-color:#e0e0ff>&#34;None&#34;</span>,<span style=background-color:#e0e0ff>&#34;Allow&#34;</span>
+ <span style=color:#036>$SystemAccessRule</span> = <span style=color:#072>new-object</span> System.Security.AccessControl.FileSystemAccessRule <span style=color:#036>$AdminACLPermission</span>
+ <span style=color:#036>$CurrentACL</span>.AddAccessRule(<span style=color:#036>$SystemAccessRule</span>)
+ <span style=color:#072>Set-Acl</span> -Path <span style=color:#036>$Folder</span> -AclObject <span style=color:#036>$CurrentACL</span>
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>Running through, it takes the folder name as a parameter, runs Takeown.exe against it using the /A option to add the administrators group. We then get the current ACL from the folder, build a new ACL permission as a string and use that to create a FileSystemAccessRule object. That object is then added to the ACL we copied from the folder. In this example I am adding two accounts, NT AUTHORITY\SYSTEM and a domian group DEFINIT\AdminGroup. The Set-ACL command applies the ACL list with the two new entries to the folder.</p>
 <h1 id=the-finalscript>The final script</h1>
 <p>Finally, we can build the script together taking a parameter for the target folder, and a log file. The Functions are called against the target folder - first taking ownership of the root, and then testing the contents. I start and stop a transcript around them to capture output, which can be crucial for proving that you have access!</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>Start-Transcript <span style=color:#fb660a>$Log</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>Take-OwnerShip (<span style=color:#fb660a>$RootPath</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>Test-Folder(<span style=color:#fb660a>$RootPath</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>Stop-Transcript
-</code></pre></div>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=color:#072>Start-Transcript</span> <span style=color:#036>$Log</span>
+<span style=color:#072>Take-OwnerShip</span> (<span style=color:#036>$RootPath</span>)
+<span style=color:#072>Test-Folder</span>(<span style=color:#036>$RootPath</span>)
+<span style=color:#072>Stop-Transcript</span>
+</code></pre></td></tr></table>
+</div>
+</div>
 <h6>Share this post</h6>
 <span class=share-box>
 <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2012%2f02%2fpowershell-recursively-taking-ownership-of-files-and-folders-and-adding-permissions-without-removing-existing-permissions%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-facebook-official"></i></a>

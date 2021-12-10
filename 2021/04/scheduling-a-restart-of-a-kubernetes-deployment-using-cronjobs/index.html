@@ -35,7 +35,7 @@
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
-<link href=/css/clr-ui-dark.min.css rel=stylesheet>
+<link href=/css/clr-ui.min.css rel=stylesheet>
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
@@ -103,7 +103,7 @@ RSS
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 8/4/2021
-&#183; Read in about 3 min (530 words)
+&#183; Read in about 3 min (600 words)
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/cloud-native>Cloud Native</a>
@@ -123,78 +123,180 @@ Tags:
 <p>If my PiHole or Plex deployments become slow to respond I can generally restart the <code>Deployment</code> and everything springs back into life. Typically this is just a <code>kubectl rollout restart deployment pihole</code> command to bounce the pods. This is generally pretty safe as it creates a new <code>ReplicaSet</code> and ensures the <code>Pods</code> are running before terminating the old ones.</p>
 <p>Rather than waiting for performance to degrade, then manually restarting the deployment, I wanted to bake in an automated restart once a week while the family sleep. The added benefit here is also that I can keep my Plex server up to date by specifying <code>imagePullPolicy: Always</code>. Fortunately, we can make use of the <a href>CronJob</a> functionality to schedule the command. To do this I need to create a few objects:</p>
 <p><strong>ServiceAccount</strong> - an account I can delegate the rights to restart the deployment, as the default service account does not have rights</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>ServiceAccount<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>restart-pihole<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>namespace</span>:<span style=color:#888> </span>pihole<span style=color:#888>
-</span></code></pre></div><p><strong>Role</strong> - a role with minimal permissions to perform the actions on the deployment</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>rbac.authorization.k8s.io/v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>Role<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>restart-pihole<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>namespace</span>:<span style=color:#888> </span>pihole<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>rules</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#888>  </span>- <span style=color:#fb660a;font-weight:700>apiGroups</span>:<span style=color:#888> </span>[<span style=color:#0086d2>&#34;apps&#34;</span>,<span style=color:#888> </span><span style=color:#0086d2>&#34;extensions&#34;</span>]<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>resources</span>:<span style=color:#888> </span>[<span style=color:#0086d2>&#34;deployments&#34;</span>]<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>resourceNames</span>:<span style=color:#888> </span>[<span style=color:#0086d2>&#34;pihole&#34;</span>]<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>verbs</span>:<span style=color:#888> </span>[<span style=color:#0086d2>&#34;get&#34;</span>,<span style=color:#888> </span><span style=color:#0086d2>&#34;patch&#34;</span>]<span style=color:#888>
-</span></code></pre></div><p><strong>RoleBinding</strong> - to bind the role to the service account</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>rbac.authorization.k8s.io/v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>RoleBinding<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>restart-pihole<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>namespace</span>:<span style=color:#888> </span>pihole<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>roleRef</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>apiGroup</span>:<span style=color:#888> </span>rbac.authorization.k8s.io<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>Role<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>restart-pihole<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>subjects</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#888>  </span>- <span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>ServiceAccount<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>restart-pihole<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>namespace</span>:<span style=color:#888> </span>pihole<span style=color:#888>
-</span></code></pre></div><p>Lastly, I need a <strong>CronJob</strong> - the Cron-like task definition to run my kubectl command. I&rsquo;m using the <a href=https://hub.docker.com/r/raspbernetes/kubectl>raspbernetes/kubectl</a> image to provide kubectl compatible with my Raspberry Pi&rsquo;s architecture - if you&rsquo;re doing it on a different architecture I&rsquo;d recommend the <a href=https://hub.docker.com/r/bitnami/kubectl>bitnami/kubectl</a> image.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>batch/v1beta1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>CronJob<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>restart-pihole<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>namespace</span>:<span style=color:#888> </span>pihole<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>spec</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>concurrencyPolicy</span>:<span style=color:#888> </span>Forbid<span style=color:#888> </span><span style=color:#080;background-color:#0f140f;font-style:italic># Do not run concurrently!</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>schedule</span>:<span style=color:#888> </span><span style=color:#0086d2>&#39;0 0 * * 0&#39;</span><span style=color:#888>     </span><span style=color:#080;background-color:#0f140f;font-style:italic># Run once a week at midnight on Sunday morning</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>jobTemplate</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>spec</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#888>      </span><span style=color:#fb660a;font-weight:700>backoffLimit</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>2</span><span style=color:#888> 
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#888>      </span><span style=color:#fb660a;font-weight:700>activeDeadlineSeconds</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>600</span><span style=color:#888> 
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#888>      </span><span style=color:#fb660a;font-weight:700>template</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#888>        </span><span style=color:#fb660a;font-weight:700>spec</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>serviceAccountName</span>:<span style=color:#888> </span>restart-pihole<span style=color:#888> </span><span style=color:#080;background-color:#0f140f;font-style:italic># Run under the service account created above</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>restartPolicy</span>:<span style=color:#888> </span>Never<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>containers</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#888>            </span>- <span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>kubectl<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#888>              </span><span style=color:#fb660a;font-weight:700>image</span>:<span style=color:#888> </span>raspbernetes/kubectl<span style=color:#888> </span><span style=color:#080;background-color:#0f140f;font-style:italic># Specify the kubectl image</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#888>              </span><span style=color:#fb660a;font-weight:700>command</span>:<span style=color:#888> </span><span style=color:#080;background-color:#0f140f;font-style:italic># The kubectl command to execute</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span><span style=color:#888>                </span>- <span style=color:#0086d2>&#39;kubectl&#39;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span><span style=color:#888>                </span>- <span style=color:#0086d2>&#39;rollout&#39;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span><span style=color:#888>                </span>- <span style=color:#0086d2>&#39;restart&#39;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span><span style=color:#888>                </span>- <span style=color:#0086d2>&#39;deployment/pihole&#39;</span><span style=color:#888>
-</span></code></pre></div><p>Once these configurations have been applied, I can view my new setup:</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>$ kubectl get cronjobs.batch
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>NAME             SCHEDULE    SUSPEND   ACTIVE   LAST SCHEDULE   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>restart-pihole   <span style=color:#0086f7;font-weight:700>0</span> <span style=color:#0086f7;font-weight:700>0</span> * * <span style=color:#0086f7;font-weight:700>0</span>   False     <span style=color:#0086f7;font-weight:700>0</span>        &lt;none&gt;          10s
-</code></pre></div><p>One final tip&mldr;if I don&rsquo;t want to wait until next week to see if the cronjob works, I can create a new job based on the cronjob configuration using the <code>--from=cronjob</code> flag:</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>$ kubectl create job --from=cronjob/restart-pihole restart-pihole-now
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>job.batch/restart-pihole-now created
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>$ kubectl get jobs
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>NAME                 COMPLETIONS   DURATION   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>restart-pihole-now   1/1           111s       2m22s
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>$ kubectl get pods
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>NAME                       READY   STATUS      RESTARTS   AGE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>pihole-c8774858-tqj65      1/1     Running     <span style=color:#0086f7;font-weight:700>0</span>          65s
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>restart-pihole-now-l2r69   0/1     Completed   <span style=color:#0086f7;font-weight:700>0</span>          90s
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>$ kubectl logs restart-pihole-now-l2r69
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>deployment.apps/pihole restarted
-</code></pre></div><p>From the command above I can see that the job is created, then has completed (<code>COMPLETIONS: 1/1</code>) and the pihole pod was created 65s ago. I can also see the restart-pihole-now job pod has a <code>STATUS: Completed</code>, and if I check the pod logs I can see the response to the kubectl command.</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ServiceAccount<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>restart-pihole<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>pihole<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Role</strong> - a role with minimal permissions to perform the actions on the deployment</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>rbac.authorization.k8s.io/v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>Role<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>restart-pihole<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>pihole<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>rules</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- <span style=color:#070>apiGroups</span>:<span style=color:#bbb> </span>[<span style=background-color:#e0e0ff>&#34;apps&#34;</span>,<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#34;extensions&#34;</span>]<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>resources</span>:<span style=color:#bbb> </span>[<span style=background-color:#e0e0ff>&#34;deployments&#34;</span>]<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>resourceNames</span>:<span style=color:#bbb> </span>[<span style=background-color:#e0e0ff>&#34;pihole&#34;</span>]<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>verbs</span>:<span style=color:#bbb> </span>[<span style=background-color:#e0e0ff>&#34;get&#34;</span>,<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#34;patch&#34;</span>]<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><p><strong>RoleBinding</strong> - to bind the role to the service account</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>rbac.authorization.k8s.io/v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>RoleBinding<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>restart-pihole<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>pihole<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>roleRef</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>apiGroup</span>:<span style=color:#bbb> </span>rbac.authorization.k8s.io<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>Role<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>restart-pihole<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>subjects</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span>- <span style=color:#070>kind</span>:<span style=color:#bbb> </span>ServiceAccount<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>restart-pihole<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>pihole<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Lastly, I need a <strong>CronJob</strong> - the Cron-like task definition to run my kubectl command. I&rsquo;m using the <a href=https://hub.docker.com/r/raspbernetes/kubectl>raspbernetes/kubectl</a> image to provide kubectl compatible with my Raspberry Pi&rsquo;s architecture - if you&rsquo;re doing it on a different architecture I&rsquo;d recommend the <a href=https://hub.docker.com/r/bitnami/kubectl>bitnami/kubectl</a> image.</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>batch/v1beta1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>CronJob<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>restart-pihole<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>pihole<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>spec</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>concurrencyPolicy</span>:<span style=color:#bbb> </span>Forbid<span style=color:#bbb> </span><span style=color:#666;font-style:italic># Do not run concurrently!</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>schedule</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;0 0 * * 0&#39;</span><span style=color:#bbb>     </span><span style=color:#666;font-style:italic># Run once a week at midnight on Sunday morning</span><span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>jobTemplate</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>spec</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>      </span><span style=color:#070>backoffLimit</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>2</span><span style=color:#bbb> 
+</span><span style=color:#bbb>      </span><span style=color:#070>activeDeadlineSeconds</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>600</span><span style=color:#bbb> 
+</span><span style=color:#bbb>      </span><span style=color:#070>template</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>        </span><span style=color:#070>spec</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>serviceAccountName</span>:<span style=color:#bbb> </span>restart-pihole<span style=color:#bbb> </span><span style=color:#666;font-style:italic># Run under the service account created above</span><span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>restartPolicy</span>:<span style=color:#bbb> </span>Never<span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>containers</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>            </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>kubectl<span style=color:#bbb>
+</span><span style=color:#bbb>              </span><span style=color:#070>image</span>:<span style=color:#bbb> </span>raspbernetes/kubectl<span style=color:#bbb> </span><span style=color:#666;font-style:italic># Specify the kubectl image</span><span style=color:#bbb>
+</span><span style=color:#bbb>              </span><span style=color:#070>command</span>:<span style=color:#bbb> </span><span style=color:#666;font-style:italic># The kubectl command to execute</span><span style=color:#bbb>
+</span><span style=color:#bbb>                </span>- <span style=background-color:#e0e0ff>&#39;kubectl&#39;</span><span style=color:#bbb>
+</span><span style=color:#bbb>                </span>- <span style=background-color:#e0e0ff>&#39;rollout&#39;</span><span style=color:#bbb>
+</span><span style=color:#bbb>                </span>- <span style=background-color:#e0e0ff>&#39;restart&#39;</span><span style=color:#bbb>
+</span><span style=color:#bbb>                </span>- <span style=background-color:#e0e0ff>&#39;deployment/pihole&#39;</span><span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Once these configurations have been applied, I can view my new setup:</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ kubectl get cronjobs.batch
+NAME             SCHEDULE    SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+restart-pihole   <span style=color:#60e;font-weight:700>0</span> <span style=color:#60e;font-weight:700>0</span> * * <span style=color:#60e;font-weight:700>0</span>   False     <span style=color:#60e;font-weight:700>0</span>        &lt;none&gt;          10s
+</code></pre></td></tr></table>
+</div>
+</div><p>One final tip&mldr;if I don&rsquo;t want to wait until next week to see if the cronjob works, I can create a new job based on the cronjob configuration using the <code>--from=cronjob</code> flag:</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl create job --from<span style=color:#333>=</span>cronjob/restart-pihole restart-pihole-now
+job.batch/restart-pihole-now created
+$ kubectl get <span style=color:#072>jobs</span>
+NAME                 COMPLETIONS   DURATION   AGE
+restart-pihole-now   1/1           111s       2m22s
+$ kubectl get pods
+NAME                       READY   STATUS      RESTARTS   AGE
+pihole-c8774858-tqj65      1/1     Running     <span style=color:#60e;font-weight:700>0</span>          65s
+restart-pihole-now-l2r69   0/1     Completed   <span style=color:#60e;font-weight:700>0</span>          90s
+$ kubectl logs restart-pihole-now-l2r69
+deployment.apps/pihole restarted
+</code></pre></td></tr></table>
+</div>
+</div><p>From the command above I can see that the job is created, then has completed (<code>COMPLETIONS: 1/1</code>) and the pihole pod was created 65s ago. I can also see the restart-pihole-now job pod has a <code>STATUS: Completed</code>, and if I check the pod logs I can see the response to the kubectl command.</p>
 <p>Hopefully that&rsquo;s a useful little starter for <code>CronJobs</code> in Kubernetes - as with cron jobs in Linux or scheduled tasks in Windows, it&rsquo;s a useful tool in the administrator&rsquo;s toolbelt!</p>
 <h6>Share this post</h6>
 <span class=share-box>

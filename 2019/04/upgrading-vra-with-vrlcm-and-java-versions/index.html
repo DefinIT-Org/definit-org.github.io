@@ -37,7 +37,7 @@
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
-<link href=/css/clr-ui-dark.min.css rel=stylesheet>
+<link href=/css/clr-ui.min.css rel=stylesheet>
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
@@ -105,7 +105,7 @@ RSS
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
 on 5/4/2019
-&#183; Read in about 4 min (676 words)
+&#183; Read in about 4 min (698 words)
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/vmware>VMware</a> and <a href=/category/vrealize-automation>vRealize Automation</a>
@@ -140,52 +140,108 @@ Tags:
 </figcaption>
 </figure>
 <p>However! when it came to upgrading the IaaS servers, it failed and gave me this lovely error message.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>com.vmware.vrealize.lcm.common.exception.EngineException: {<span style=color:#0086d2>&#34;status&#34;</span>: <span style=color:#0086d2>&#34;Failed&#34;</span>, <span style=color:#0086d2>&#34;statusText&#34;</span>: <span style=color:#0086d2>&#34;Upgrade failed.&#34;</span>, <span style=color:#0086d2>&#34;commands&#34;</span>: [{<span style=color:#0086d2>&#34;node&#34;</span>: {<span style=color:#0086d2>&#34;nodeHost&#34;</span>: <span style=color:#0086d2>&#34;web1.definit.local&#34;</span>, <span style=color:#0086d2>&#34;version&#34;</span>: <span style=color:#0086d2>&#34;7.2.0.9518&#34;</span>, <span style=color:#0086d2>&#34;nodeType&#34;</span>: <span style=color:#0086d2>&#34;Database&#34;</span>, <span style=color:#0086d2>&#34;nodeId&#34;</span>: <span style=color:#0086d2>&#34;EE5A021D-2A11-4158-9EEC-9A5F758E91DD&#34;</span>}, <span style=color:#0086d2>&#34;continueOnError&#34;</span>: false, <span style=color:#0086d2>&#34;command&#34;</span>: <span style=color:#0086d2>&#34;upgrade-server&#34;</span>, <span style=color:#0086d2>&#34;log&#34;</span>: null, <span style=color:#0086d2>&#34;parameters&#34;</span>: [], <span style=color:#0086d2>&#34;error&#34;</span>: <span style=color:#0086d2>&#34;Failed to execute command upgrade-server on node web1.definit.local&#34;</span>, <span style=color:#0086d2>&#34;validate&#34;</span>: false, <span style=color:#0086d2>&#34;waitAfterInSeconds&#34;</span>: null, <span style=color:#0086d2>&#34;status&#34;</span>: <span style=color:#0086d2>&#34;Failed&#34;</span>, <span style=color:#0086d2>&#34;message&#34;</span>: <span style=color:#0086d2>&#34;Upgrading server components for node web1.definit.local. Note: This may take up to 30 minutes.&#34;</span>}, {<span style=color:#0086d2>&#34;node&#34;</span>: {<span style=color:#0086d2>&#34;nodeHost&#34;</span>: <span style=color:#0086d2>&#34;web1.definit.local&#34;</span>, <span style=color:#0086d2>&#34;version&#34;</span>: <span style=color:#0086d2>&#34;7.2.0.9518&#34;</span>, <span style=color:#0086d2>&#34;nodeType&#34;</span>: <span style=color:#0086d2>&#34;DemWorker&#34;</span>, <span style=color:#0086d2>&#34;nodeId&#34;</span>: <span style=color:#0086d2>&#34;EE5A021D-2A11-4158-9EEC-9A5F758E91DD&#34;</span>}, <span style=color:#0086d2>&#34;continueOnError&#34;</span>: false, <span style=color:#0086d2>&#34;command&#34;</span>: <span style=color:#0086d2>&#34;upgrade-dem&#34;</span>, <span style=color:#0086d2>&#34;log&#34;</span>: null, <span style=color:#0086d2>&#34;parameters&#34;</span>: [], <span style=color:#0086d2>&#34;error&#34;</span>: null, <span style=color:#0086d2>&#34;validate&#34;</span>: false, <span style=color:#0086d2>&#34;waitAfterInSeconds&#34;</span>: null, <span style=color:#0086d2>&#34;status&#34;</span>: <span style=color:#0086d2>&#34;Pending&#34;</span>, <span style=color:#0086d2>&#34;message&#34;</span>: <span style=color:#0086d2>&#34;Upgrading DEM components for node web1.definit.local ...&#34;</span>}, {<span style=color:#0086d2>&#34;node&#34;</span>: {<span style=color:#0086d2>&#34;nodeHost&#34;</span>: <span style=color:#0086d2>&#34;web1.definit.local&#34;</span>, <span style=color:#0086d2>&#34;version&#34;</span>: <span style=color:#0086d2>&#34;7.2.0.9518&#34;</span>, <span style=color:#0086d2>&#34;nodeType&#34;</span>: <span style=color:#0086d2>&#34;vSphereAgent&#34;</span>, <span style=color:#0086d2>&#34;nodeId&#34;</span>: <span style=color:#0086d2>&#34;EE5A021D-2A11-4158-9EEC-9A5F758E91DD&#34;</span>}, <span style=color:#0086d2>&#34;continueOnError&#34;</span>: false, <span style=color:#0086d2>&#34;command&#34;</span>: <span style=color:#0086d2>&#34;upgrade-agent&#34;</span>, <span style=color:#0086d2>&#34;log&#34;</span>: null, <span style=color:#0086d2>&#34;parameters&#34;</span>: [], <span style=color:#0086d2>&#34;error&#34;</span>: null, <span style=color:#0086d2>&#34;validate&#34;</span>: false, <span style=color:#0086d2>&#34;waitAfterInSeconds&#34;</span>: null, <span style=color:#0086d2>&#34;status&#34;</span>: <span style=color:#0086d2>&#34;Pending&#34;</span>, <span style=color:#0086d2>&#34;message&#34;</span>: <span style=color:#0086d2>&#34;Upgrading proxy agent component for node web1.definit.local ...&#34;</span>}, {<span style=color:#0086d2>&#34;node&#34;</span>: {<span style=color:#0086d2>&#34;nodeHost&#34;</span>: <span style=color:#0086d2>&#34;web1.definit.local&#34;</span>, <span style=color:#0086d2>&#34;version&#34;</span>: <span style=color:#0086d2>&#34;7.2.0.9518&#34;</span>, <span style=color:#0086d2>&#34;nodeType&#34;</span>: <span style=color:#0086d2>&#34;ManagerService&#34;</span>, <span style=color:#0086d2>&#34;nodeId&#34;</span>: <span style=color:#0086d2>&#34;EE5A021D-2A11-4158-9EEC-9A5F758E91DD&#34;</span>}, <span style=color:#0086d2>&#34;continueOnError&#34;</span>: false, <span style=color:#0086d2>&#34;command&#34;</span>: <span style=color:#0086d2>&#34;toggle-manager-service-failover-mode&#34;</span>, <span style=color:#0086d2>&#34;log&#34;</span>: null, <span style=color:#0086d2>&#34;parameters&#34;</span>: [{<span style=color:#0086d2>&#34;name&#34;</span>: <span style=color:#0086d2>&#34;NewState&#34;</span>, <span style=color:#0086d2>&#34;value&#34;</span>: <span style=color:#0086d2>&#34;Enabled&#34;</span>}], <span style=color:#0086d2>&#34;error&#34;</span>: null, <span style=color:#0086d2>&#34;validate&#34;</span>: false, <span style=color:#0086d2>&#34;waitAfterInSeconds&#34;</span>: null, <span style=color:#0086d2>&#34;status&#34;</span>: <span style=color:#0086d2>&#34;Pending&#34;</span>, <span style=color:#0086d2>&#34;message&#34;</span>: <span style=color:#0086d2>&#34;Enabling ManagerService automatic failover mode for node web1.definit.local ...&#34;</span>}], <span style=color:#0086d2>&#34;startTime&#34;</span>: 1554298002.529656}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>    at com.vmware.vrealize.lcm.core.vra70.task.upgrade.VraIaasUpgradeTask.execute(VraIaasUpgradeTask.java:104)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>    at com.vmware.vrealize.lcm.platform.automata.service.Task.retry(Task.java:80)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>    at com.vmware.vrealize.lcm.platform.automata.core.ExecutionTask.run(ExecutionTask.java:39)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span>    at java.util.concurrent.ThreadPoolExecutor<span style=color:#fb660a>$Worker</span>.run(ThreadPoolExecutor.java:624)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7</span>    at java.lang.Thread.run(Thread.java:748)</code></pre></div>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>com.vmware.vrealize.lcm.common.exception.EngineException: <span style=color:#333>{</span><span style=background-color:#e0e0ff>&#34;status&#34;</span>: <span style=background-color:#e0e0ff>&#34;Failed&#34;</span>, <span style=background-color:#e0e0ff>&#34;statusText&#34;</span>: <span style=background-color:#e0e0ff>&#34;Upgrade failed.&#34;</span>, <span style=background-color:#e0e0ff>&#34;commands&#34;</span>: <span style=color:#333>[{</span><span style=background-color:#e0e0ff>&#34;node&#34;</span>: <span style=color:#333>{</span><span style=background-color:#e0e0ff>&#34;nodeHost&#34;</span>: <span style=background-color:#e0e0ff>&#34;web1.definit.local&#34;</span>, <span style=background-color:#e0e0ff>&#34;version&#34;</span>: <span style=background-color:#e0e0ff>&#34;7.2.0.9518&#34;</span>, <span style=background-color:#e0e0ff>&#34;nodeType&#34;</span>: <span style=background-color:#e0e0ff>&#34;Database&#34;</span>, <span style=background-color:#e0e0ff>&#34;nodeId&#34;</span>: <span style=background-color:#e0e0ff>&#34;EE5A021D-2A11-4158-9EEC-9A5F758E91DD&#34;</span><span style=color:#333>}</span>, <span style=background-color:#e0e0ff>&#34;continueOnError&#34;</span>: false, <span style=background-color:#e0e0ff>&#34;command&#34;</span>: <span style=background-color:#e0e0ff>&#34;upgrade-server&#34;</span>, <span style=background-color:#e0e0ff>&#34;log&#34;</span>: null, <span style=background-color:#e0e0ff>&#34;parameters&#34;</span>: <span style=color:#333>[]</span>, <span style=background-color:#e0e0ff>&#34;error&#34;</span>: <span style=background-color:#e0e0ff>&#34;Failed to execute command upgrade-server on node web1.definit.local&#34;</span>, <span style=background-color:#e0e0ff>&#34;validate&#34;</span>: false, <span style=background-color:#e0e0ff>&#34;waitAfterInSeconds&#34;</span>: null, <span style=background-color:#e0e0ff>&#34;status&#34;</span>: <span style=background-color:#e0e0ff>&#34;Failed&#34;</span>, <span style=background-color:#e0e0ff>&#34;message&#34;</span>: <span style=background-color:#e0e0ff>&#34;Upgrading server components for node web1.definit.local. Note: This may take up to 30 minutes.&#34;</span><span style=color:#333>}</span>, <span style=color:#333>{</span><span style=background-color:#e0e0ff>&#34;node&#34;</span>: <span style=color:#333>{</span><span style=background-color:#e0e0ff>&#34;nodeHost&#34;</span>: <span style=background-color:#e0e0ff>&#34;web1.definit.local&#34;</span>, <span style=background-color:#e0e0ff>&#34;version&#34;</span>: <span style=background-color:#e0e0ff>&#34;7.2.0.9518&#34;</span>, <span style=background-color:#e0e0ff>&#34;nodeType&#34;</span>: <span style=background-color:#e0e0ff>&#34;DemWorker&#34;</span>, <span style=background-color:#e0e0ff>&#34;nodeId&#34;</span>: <span style=background-color:#e0e0ff>&#34;EE5A021D-2A11-4158-9EEC-9A5F758E91DD&#34;</span><span style=color:#333>}</span>, <span style=background-color:#e0e0ff>&#34;continueOnError&#34;</span>: false, <span style=background-color:#e0e0ff>&#34;command&#34;</span>: <span style=background-color:#e0e0ff>&#34;upgrade-dem&#34;</span>, <span style=background-color:#e0e0ff>&#34;log&#34;</span>: null, <span style=background-color:#e0e0ff>&#34;parameters&#34;</span>: <span style=color:#333>[]</span>, <span style=background-color:#e0e0ff>&#34;error&#34;</span>: null, <span style=background-color:#e0e0ff>&#34;validate&#34;</span>: false, <span style=background-color:#e0e0ff>&#34;waitAfterInSeconds&#34;</span>: null, <span style=background-color:#e0e0ff>&#34;status&#34;</span>: <span style=background-color:#e0e0ff>&#34;Pending&#34;</span>, <span style=background-color:#e0e0ff>&#34;message&#34;</span>: <span style=background-color:#e0e0ff>&#34;Upgrading DEM components for node web1.definit.local ...&#34;</span><span style=color:#333>}</span>, <span style=color:#333>{</span><span style=background-color:#e0e0ff>&#34;node&#34;</span>: <span style=color:#333>{</span><span style=background-color:#e0e0ff>&#34;nodeHost&#34;</span>: <span style=background-color:#e0e0ff>&#34;web1.definit.local&#34;</span>, <span style=background-color:#e0e0ff>&#34;version&#34;</span>: <span style=background-color:#e0e0ff>&#34;7.2.0.9518&#34;</span>, <span style=background-color:#e0e0ff>&#34;nodeType&#34;</span>: <span style=background-color:#e0e0ff>&#34;vSphereAgent&#34;</span>, <span style=background-color:#e0e0ff>&#34;nodeId&#34;</span>: <span style=background-color:#e0e0ff>&#34;EE5A021D-2A11-4158-9EEC-9A5F758E91DD&#34;</span><span style=color:#333>}</span>, <span style=background-color:#e0e0ff>&#34;continueOnError&#34;</span>: false, <span style=background-color:#e0e0ff>&#34;command&#34;</span>: <span style=background-color:#e0e0ff>&#34;upgrade-agent&#34;</span>, <span style=background-color:#e0e0ff>&#34;log&#34;</span>: null, <span style=background-color:#e0e0ff>&#34;parameters&#34;</span>: <span style=color:#333>[]</span>, <span style=background-color:#e0e0ff>&#34;error&#34;</span>: null, <span style=background-color:#e0e0ff>&#34;validate&#34;</span>: false, <span style=background-color:#e0e0ff>&#34;waitAfterInSeconds&#34;</span>: null, <span style=background-color:#e0e0ff>&#34;status&#34;</span>: <span style=background-color:#e0e0ff>&#34;Pending&#34;</span>, <span style=background-color:#e0e0ff>&#34;message&#34;</span>: <span style=background-color:#e0e0ff>&#34;Upgrading proxy agent component for node web1.definit.local ...&#34;</span><span style=color:#333>}</span>, <span style=color:#333>{</span><span style=background-color:#e0e0ff>&#34;node&#34;</span>: <span style=color:#333>{</span><span style=background-color:#e0e0ff>&#34;nodeHost&#34;</span>: <span style=background-color:#e0e0ff>&#34;web1.definit.local&#34;</span>, <span style=background-color:#e0e0ff>&#34;version&#34;</span>: <span style=background-color:#e0e0ff>&#34;7.2.0.9518&#34;</span>, <span style=background-color:#e0e0ff>&#34;nodeType&#34;</span>: <span style=background-color:#e0e0ff>&#34;ManagerService&#34;</span>, <span style=background-color:#e0e0ff>&#34;nodeId&#34;</span>: <span style=background-color:#e0e0ff>&#34;EE5A021D-2A11-4158-9EEC-9A5F758E91DD&#34;</span><span style=color:#333>}</span>, <span style=background-color:#e0e0ff>&#34;continueOnError&#34;</span>: false, <span style=background-color:#e0e0ff>&#34;command&#34;</span>: <span style=background-color:#e0e0ff>&#34;toggle-manager-service-failover-mode&#34;</span>, <span style=background-color:#e0e0ff>&#34;log&#34;</span>: null, <span style=background-color:#e0e0ff>&#34;parameters&#34;</span>: <span style=color:#333>[{</span><span style=background-color:#e0e0ff>&#34;name&#34;</span>: <span style=background-color:#e0e0ff>&#34;NewState&#34;</span>, <span style=background-color:#e0e0ff>&#34;value&#34;</span>: <span style=background-color:#e0e0ff>&#34;Enabled&#34;</span><span style=color:#333>}]</span>, <span style=background-color:#e0e0ff>&#34;error&#34;</span>: null, <span style=background-color:#e0e0ff>&#34;validate&#34;</span>: false, <span style=background-color:#e0e0ff>&#34;waitAfterInSeconds&#34;</span>: null, <span style=background-color:#e0e0ff>&#34;status&#34;</span>: <span style=background-color:#e0e0ff>&#34;Pending&#34;</span>, <span style=background-color:#e0e0ff>&#34;message&#34;</span>: <span style=background-color:#e0e0ff>&#34;Enabling ManagerService automatic failover mode for node web1.definit.local ...&#34;</span><span style=color:#333>}]</span>, <span style=background-color:#e0e0ff>&#34;startTime&#34;</span>: 1554298002.529656<span style=color:#333>}</span>
+    at com.vmware.vrealize.lcm.core.vra70.task.upgrade.VraIaasUpgradeTask.execute<span style=color:#333>(</span>VraIaasUpgradeTask.java:104<span style=color:#333>)</span>
+    at com.vmware.vrealize.lcm.platform.automata.service.Task.retry<span style=color:#333>(</span>Task.java:80<span style=color:#333>)</span>
+    at com.vmware.vrealize.lcm.platform.automata.core.ExecutionTask.run<span style=color:#333>(</span>ExecutionTask.java:39<span style=color:#333>)</span>
+    at java.util.concurrent.ThreadPoolExecutor.runWorker<span style=color:#333>(</span>ThreadPoolExecutor.java:1149<span style=color:#333>)</span>
+    at java.util.concurrent.ThreadPoolExecutor<span style=color:#036>$Worker</span>.run<span style=color:#333>(</span>ThreadPoolExecutor.java:624<span style=color:#333>)</span>
+    at java.lang.Thread.run<span style=color:#333>(</span>Thread.java:748<span style=color:#333>)</span></code></pre></td></tr></table>
+</div>
+</div>
 <p>While this error maybe clear to some for me it was not very helpful.</p>
 <p>So I reverted upgrading the IaaS components manually and this was the more helpful error message I encountered.
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>[master] vra1:/usr/lib/vcac/tools/upgrade <span style=color:#080;background-color:#0f140f;font-style:italic># ./upgrade</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>IaaS upgrade is pending: Waiting <span style=color:#fb660a;font-weight:700>for</span> VA services to start...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>All VA services have started.
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>Upgrade of IaaS to version 7.5.0.14711 is starting.
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>Upgrading server components <span style=color:#fb660a;font-weight:700>for</span> node web1.definit.local. Note: This may take up to <span style=color:#0086f7;font-weight:700>30</span> minutes.
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>Executing shell command: /usr/sbin/vra-command execute --node EE5A021D-2A11-4158-9EEC-9A5F758E91DD --timeout <span style=color:#0086f7;font-weight:700>120</span> --json true upgrade-server
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>Command execution result:
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>Command id: 4bd2674e-1b93-6151-245a-4d7352811156
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>   Type: upgrade-server
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>   Node id: EE5A021D-2A11-4158-9EEC-9A5F758E91DD
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>   Node host: web1.definit.local
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>   Result: Java version 1.8 update <span style=color:#0086f7;font-weight:700>181</span> or higher (64-bit) must be installed, the environment variable JAVA_HOME must be set to the Java install folder, and %JAVA_HOME%<span style=color:#0086d2>\b</span>in<span style=color:#0086d2>\j</span>ava.exe must exist.
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>   Error: {u<span style=color:#0086d2>&#39;10031&#39;</span>: [{u<span style=color:#0086d2>&#39;resultMsg&#39;</span>: u<span style=color:#0086d2>&#39;Java version 1.8 update 181 or higher (64-bit) must be installed, the environment variable JAVA_HOME must be set to the Java install folder, and %JAVA_HOME%\\bin\\java.exe must exist.&#39;</span>, u<span style=color:#0086d2>&#39;resultDescr&#39;</span>: None}]}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>   Status: FAILED
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>Failed to execute command upgrade-server on node web1.definit.local
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>Traceback (most recent call last):
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>  File <span style=color:#0086d2>&#34;./upgrade&#34;</span>, line 628, in executeCommand
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>    <span style=color:#fb660a>result</span> = self.execVraCommandWithRetry(command.command, command.node, command.parameters, command.continueOnError, command.validate)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>  File <span style=color:#0086d2>&#34;./upgrade&#34;</span>, line 377, in execVraCommandWithRetry
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>    raise Exception(err_template % (command, node[<span style=color:#0086d2>&#39;nodeHost&#39;</span>]))
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>Exception: Failed to execute command upgrade-server on node web1.definit.local
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>Validation failed on node web1.definit.local.
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>Failed to execute command upgrade-server on node web1.definit.local
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>Traceback (most recent call last):
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>  File <span style=color:#0086d2>&#34;./upgrade&#34;</span>, line 860, in execute
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>    self.executeCommand(command)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>  File <span style=color:#0086d2>&#34;./upgrade&#34;</span>, line 648, in executeCommand
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>    raise e
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span>Exception: Failed to execute command upgrade-server on node web1.definit.local
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span>Failed to execute command upgrade-server on node web1.definit.local
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span>Traceback (most recent call last):
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span>  File <span style=color:#0086d2>&#34;./upgrade&#34;</span>, line 865, in execute
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33</span>    raise e
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34</span>Exception: Failed to execute command upgrade-server on node web1.definit.local
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35</span>Upgrade failed.
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36</span>Restoring Postgres replication mode...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37</span>Postgres replication mode set to SYNC.</code></pre></div></p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#333>[</span>master<span style=color:#333>]</span> vra1:/usr/lib/vcac/tools/upgrade <span style=color:#666;font-style:italic># ./upgrade</span>
+IaaS upgrade is pending: Waiting <span style=color:#289;font-weight:700>for</span> VA services to start...
+All VA services have started.
+Upgrade of IaaS to version 7.5.0.14711 is starting.
+Upgrading server components <span style=color:#289;font-weight:700>for</span> node web1.definit.local. Note: This may take up to <span style=color:#60e;font-weight:700>30</span> minutes.
+Executing shell command: /usr/sbin/vra-command execute --node EE5A021D-2A11-4158-9EEC-9A5F758E91DD --timeout <span style=color:#60e;font-weight:700>120</span> --json <span style=color:#072>true</span> upgrade-server
+Command execution result:
+Command id: 4bd2674e-1b93-6151-245a-4d7352811156
+   Type: upgrade-server
+   Node id: EE5A021D-2A11-4158-9EEC-9A5F758E91DD
+   Node host: web1.definit.local
+   Result: Java version 1.8 update <span style=color:#60e;font-weight:700>181</span> or higher <span style=color:#333>(</span>64-bit<span style=color:#333>)</span> must be installed, the environment variable JAVA_HOME must be <span style=color:#072>set</span> to the Java install folder, and %JAVA_HOME%<span style=color:#666;background-color:#e0e0ff;font-weight:700>\b</span>in<span style=color:#666;background-color:#e0e0ff;font-weight:700>\j</span>ava.exe must exist.
+   Error: <span style=color:#333>{</span>u<span style=background-color:#e0e0ff>&#39;10031&#39;</span>: <span style=color:#333>[{</span>u<span style=background-color:#e0e0ff>&#39;resultMsg&#39;</span>: u<span style=background-color:#e0e0ff>&#39;Java version 1.8 update 181 or higher (64-bit) must be installed, the environment variable JAVA_HOME must be set to the Java install folder, and %JAVA_HOME%\\bin\\java.exe must exist.&#39;</span>, u<span style=background-color:#e0e0ff>&#39;resultDescr&#39;</span>: None<span style=color:#333>}]}</span>
+   Status: FAILED
+Failed to execute <span style=color:#072>command</span> upgrade-server on node web1.definit.local
+Traceback <span style=color:#333>(</span>most recent call last<span style=color:#333>)</span>:
+  File <span style=background-color:#e0e0ff>&#34;./upgrade&#34;</span>, line 628, in executeCommand
+    <span style=color:#036>result</span> <span style=color:#333>=</span> self.execVraCommandWithRetry<span style=color:#333>(</span>command.command, command.node, command.parameters, command.continueOnError, command.validate<span style=color:#333>)</span>
+  File <span style=background-color:#e0e0ff>&#34;./upgrade&#34;</span>, line 377, in execVraCommandWithRetry
+    raise Exception<span style=color:#333>(</span>err_template % <span style=color:#333>(</span>command, node<span style=color:#333>[</span><span style=background-color:#e0e0ff>&#39;nodeHost&#39;</span><span style=color:#333>]))</span>
+Exception: Failed to execute <span style=color:#072>command</span> upgrade-server on node web1.definit.local
+Validation failed on node web1.definit.local.
+Failed to execute <span style=color:#072>command</span> upgrade-server on node web1.definit.local
+Traceback <span style=color:#333>(</span>most recent call last<span style=color:#333>)</span>:
+  File <span style=background-color:#e0e0ff>&#34;./upgrade&#34;</span>, line 860, in execute
+    self.executeCommand<span style=color:#333>(</span><span style=color:#072>command</span><span style=color:#333>)</span>
+  File <span style=background-color:#e0e0ff>&#34;./upgrade&#34;</span>, line 648, in executeCommand
+    raise e
+Exception: Failed to execute <span style=color:#072>command</span> upgrade-server on node web1.definit.local
+Failed to execute <span style=color:#072>command</span> upgrade-server on node web1.definit.local
+Traceback <span style=color:#333>(</span>most recent call last<span style=color:#333>)</span>:
+  File <span style=background-color:#e0e0ff>&#34;./upgrade&#34;</span>, line 865, in execute
+    raise e
+Exception: Failed to execute <span style=color:#072>command</span> upgrade-server on node web1.definit.local
+Upgrade failed.
+Restoring Postgres replication mode...
+Postgres replication mode <span style=color:#072>set</span> to SYNC.</code></pre></td></tr></table>
+</div>
+</div></p>
 <p>Essentially what this all boils down to is that vRA -NEEDS- Java version 181. While the VMware documentation says 181 or later, (I had a slightly later version install on the IaaS server) the upgrade process just fails horribly.</p>
 <p>So I removed JAVA from the IaaS server and installed specifically the 181 version and voila the manual upgrade was successful. Interestingly I did try the automatic upgrade via vRLCM after install Java 181 but it still failed.</p>
 <p>Either way it is something to watch out for.</p>

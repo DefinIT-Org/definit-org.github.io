@@ -36,7 +36,7 @@
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
-<link href=/css/clr-ui-dark.min.css rel=stylesheet>
+<link href=/css/clr-ui.min.css rel=stylesheet>
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
@@ -104,7 +104,7 @@ RSS
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 1/9/2021
-&#183; Read in about 4 min (739 words)
+&#183; Read in about 4 min (780 words)
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/cloud-native>Cloud Native</a>, <a href=/category/vmware>VMware</a>, <a href=/category/fusion>Fusion</a> and <a href=/category/workstation>Workstation</a>
@@ -139,52 +139,103 @@ Tags:
 <figcaption class=clr-caption>Start the container runtime with vctl</figcaption>
 </div>
 <p>From there, you can use <code>vctl</code> commands like you would <code>docker</code> - as I mentioned before, I have created an alias <code>alias docker=vctl</code>, so the following commands could be using <code>docker</code> instead</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#080;background-color:#0f140f;font-style:italic># Pull the latest NGINX image</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>vctl pull nginx
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>INFO Pulling from index.docker.io/library/nginx:latest
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>───                                                                                ──────   ────────
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>REF                                                                                STATUS   PROGRESS
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>───                                                                                ──────   ────────
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>index-sha256:4d4d96ac750af48c6a551d757c1cbfc071692309b491b70b2b8976e102dd3fef      Done     100% (1862/1862)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>manifest-sha256:5e95e5eb8be4322e3b3652d737371705e56809ed8b307ad68ec59ddebaaf60e4   Done     100% (1570/1570)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>layer-sha256:b86f2ba62d17b165964516228297d3ba669d60b6a283b5fd7779b27d7ec33871      Done     100% (1394/1394)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>layer-sha256:e21006f71c6fb784a76159590b6ba8ab3fb22e5026f67abcf5feb8e4231837d6      Done     100% (26596486/26596486)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>layer-sha256:e1acddbe380c63f0de4b77d3f287b7c81cd9d89563a230692378126b46ea6546      Done     100% (27145985/27145985)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>config-sha256:dd34e67e3371dc2d1328790c3157ee42dfcae74afffd86b297459ed87a98c0fb     Done     100% (7732/7732)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>layer-sha256:f3341cc17e586daa9660abf087f13b2eba247bcf6646ee972e85d4cbaf18dbae      Done     100% (603/603)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>layer-sha256:12455f71a9b5e0c207a601fb32bcf7f10a933d7193574d968409bbc5c2d89fe0      Done     100% (666/666)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>layer-sha256:2a53fa598ee20ad436f2f9da7c0a21cce583bd236f47828895d771fb2e8795e1      Done     100% (894/894)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>INFO Unpacking nginx:latest...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>INFO <span style=color:#fb660a;font-weight:700>done</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#080;background-color:#0f140f;font-style:italic># View the images available locally</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>vctl images
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>────                                  ─────────────               ────
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>NAME                                  CREATION TIME               SIZE
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>────                                  ─────────────               ────
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>nginx:latest                          2021-09-01T17:33:12+01:00   51.3 MiB
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>sammcgeown/codestream-ci-tkg:latest   2021-09-01T16:16:19+01:00   1.2 GiB
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>sammcgeown/codestream-ci:latest       2021-09-01T16:14:52+01:00   188.9 MiB
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span><span style=color:#080;background-color:#0f140f;font-style:italic># Run an NGINX instance that hosts the local directory</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span>vctl run -v <span style=color:#fb660a;font-weight:700>$(</span>pwd<span style=color:#fb660a;font-weight:700>)</span>:/usr/share/nginx/html:ro -d -p 8080:80 nginx
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span>INFO container nginx-cff5 started and detached from current session
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span><span style=color:#080;background-color:#0f140f;font-style:italic># Exec to run commands in the container</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33</span>docker exec -it nginx-cff5 /bin/bash
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34</span>root@nginx-cff5:/# uname -a
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35</span>Linux nginx-cff5 4.19.138-7.ph3-esx 1-photon SMP Thu Aug <span style=color:#0086f7;font-weight:700>27</span> 20:40:23 UTC <span style=color:#0086f7;font-weight:700>2020</span> x86_64 GNU/Linux
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36</span>root@nginx-cff5:/# exit
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37</span>exit
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39</span><span style=color:#080;background-color:#0f140f;font-style:italic># Stop and delete the VM</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40</span>vctl stop nginx-cff5 &amp;&amp; vctl rm nginx-cff5
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41</span>INFO container nginx-cff5 has been stopped
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42</span>────         ──────    ──────
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43</span>NAME         RESULT    REASON
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44</span>────         ──────    ──────
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45</span>nginx-cff5   REMOVED
-</code></pre></div><h2 id=using-kind-with-vctl>Using KIND with <code>vctl</code></h2>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#666;font-style:italic># Pull the latest NGINX image</span>
+vctl pull nginx
+INFO Pulling from index.docker.io/library/nginx:latest
+───                                                                                ──────   ────────
+REF                                                                                STATUS   PROGRESS
+───                                                                                ──────   ────────
+index-sha256:4d4d96ac750af48c6a551d757c1cbfc071692309b491b70b2b8976e102dd3fef      Done     100% <span style=color:#333>(</span>1862/1862<span style=color:#333>)</span>
+manifest-sha256:5e95e5eb8be4322e3b3652d737371705e56809ed8b307ad68ec59ddebaaf60e4   Done     100% <span style=color:#333>(</span>1570/1570<span style=color:#333>)</span>
+layer-sha256:b86f2ba62d17b165964516228297d3ba669d60b6a283b5fd7779b27d7ec33871      Done     100% <span style=color:#333>(</span>1394/1394<span style=color:#333>)</span>
+layer-sha256:e21006f71c6fb784a76159590b6ba8ab3fb22e5026f67abcf5feb8e4231837d6      Done     100% <span style=color:#333>(</span>26596486/26596486<span style=color:#333>)</span>
+layer-sha256:e1acddbe380c63f0de4b77d3f287b7c81cd9d89563a230692378126b46ea6546      Done     100% <span style=color:#333>(</span>27145985/27145985<span style=color:#333>)</span>
+config-sha256:dd34e67e3371dc2d1328790c3157ee42dfcae74afffd86b297459ed87a98c0fb     Done     100% <span style=color:#333>(</span>7732/7732<span style=color:#333>)</span>
+layer-sha256:f3341cc17e586daa9660abf087f13b2eba247bcf6646ee972e85d4cbaf18dbae      Done     100% <span style=color:#333>(</span>603/603<span style=color:#333>)</span>
+layer-sha256:12455f71a9b5e0c207a601fb32bcf7f10a933d7193574d968409bbc5c2d89fe0      Done     100% <span style=color:#333>(</span>666/666<span style=color:#333>)</span>
+layer-sha256:2a53fa598ee20ad436f2f9da7c0a21cce583bd236f47828895d771fb2e8795e1      Done     100% <span style=color:#333>(</span>894/894<span style=color:#333>)</span>
+INFO Unpacking nginx:latest...
+INFO <span style=color:#289;font-weight:700>done</span>
+
+<span style=color:#666;font-style:italic># View the images available locally</span>
+vctl images
+────                                  ─────────────               ────
+NAME                                  CREATION TIME               SIZE
+────                                  ─────────────               ────
+nginx:latest                          2021-09-01T17:33:12+01:00   51.3 MiB
+sammcgeown/codestream-ci-tkg:latest   2021-09-01T16:16:19+01:00   1.2 GiB
+sammcgeown/codestream-ci:latest       2021-09-01T16:14:52+01:00   188.9 MiB
+
+<span style=color:#666;font-style:italic># Run an NGINX instance that hosts the local directory</span>
+vctl run -v <span style=color:#289;font-weight:700>$(</span><span style=color:#072>pwd</span><span style=color:#289;font-weight:700>)</span>:/usr/share/nginx/html:ro -d -p 8080:80 nginx
+INFO container nginx-cff5 started and detached from current session
+
+<span style=color:#666;font-style:italic># Exec to run commands in the container</span>
+docker <span style=color:#072>exec</span> -it nginx-cff5 /bin/bash
+root@nginx-cff5:/# uname -a
+Linux nginx-cff5 4.19.138-7.ph3-esx 1-photon SMP Thu Aug <span style=color:#60e;font-weight:700>27</span> 20:40:23 UTC <span style=color:#60e;font-weight:700>2020</span> x86_64 GNU/Linux
+root@nginx-cff5:/# <span style=color:#072>exit</span>
+<span style=color:#072>exit</span>
+
+<span style=color:#666;font-style:italic># Stop and delete the VM</span>
+vctl stop nginx-cff5 <span style=color:#333>&amp;&amp;</span> vctl rm nginx-cff5
+INFO container nginx-cff5 has been stopped
+────         ──────    ──────
+NAME         RESULT    REASON
+────         ──────    ──────
+nginx-cff5   REMOVED
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=using-kind-with-vctl>Using KIND with <code>vctl</code></h2>
 <p>Creating a KIND cluster with <code>vctl</code> is, again, a trivial thing. You can configure memory and CPU with the <code>vctl system config</code> commands, or go with the defaults. Running <code>vctl kind</code> configures an alias for <code>docker</code> so that <code>kind cluster create</code> will use <code>vctl</code>. After that you can use your <code>kind</code> cluster in exactly the normal way.</p>
 <div class=clr-content-image-wrap>
 <a href=images/vctl-kind.png data-lightbox=images/vctl-kind.png data-title="Build a KIND (Kubernetes in Docker) cluster with vctl" class=lb>

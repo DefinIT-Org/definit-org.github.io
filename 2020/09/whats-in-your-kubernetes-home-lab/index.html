@@ -36,7 +36,7 @@
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
-<link href=/css/clr-ui-dark.min.css rel=stylesheet>
+<link href=/css/clr-ui.min.css rel=stylesheet>
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
@@ -104,7 +104,7 @@ RSS
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 21/9/2020
-&#183; Read in about 7 min (1333 words)
+&#183; Read in about 7 min (1470 words)
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/cloud-native>Cloud-Native</a>
@@ -150,11 +150,21 @@ Tags:
 </p>
 <h3 id=booting-from-usb-ssd>Booting from USB SSD</h3>
 <p><a href=https://www.raspberrypi.org/documentation/hardware/raspberrypi/booteeprom.md>Booting the RPi4s from the USB SSD directly is now supported directly from the latest EEPROM (2020-09-03 or newer)</a>, which is a lot easier than the previous Beta versions. Simply update the bootloader and reboot</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>sudo apt update
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>sudo apt full-upgrade
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>sudo rpi-eeprom-update -a -d
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>sudo reboot now
-</code></pre></div><p>Once you&rsquo;ve rebooted you can use <code>sudo raspi-config</code> to set the boot order, assuming you do not want a more complicated boot configuration. This sets <code>BOOT_ORDER=0xf41</code> - f = loop, 4 = USB, 1 = SD Card.
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo apt update
+sudo apt full-upgrade
+sudo rpi-eeprom-update -a -d
+sudo reboot now
+</code></pre></td></tr></table>
+</div>
+</div><p>Once you&rsquo;ve rebooted you can use <code>sudo raspi-config</code> to set the boot order, assuming you do not want a more complicated boot configuration. This sets <code>BOOT_ORDER=0xf41</code> - f = loop, 4 = USB, 1 = SD Card.
 <div class=clr-content-image-wrap>
 <a href=2020-09-21-16-16-09.png data-lightbox=2020-09-21-16-16-09.png data-title="Set the USB boot option via raspi-config" class=lb>
 <img class=lb src=2020-09-21-16-16-09.png alt="Set the USB boot option via raspi-config">
@@ -167,162 +177,352 @@ Tags:
 <p>At the time of writing Kubernetes 1.19.2 is the most recent version, I&rsquo;ve found that installing on Rasbian requires a little more fettling to get working than a &ldquo;normal&rdquo; distro</p>
 <h2 id=installing-docker>Installing Docker</h2>
 <p>Docker needs to be installed, cgroups enabled and then the docker daemon configured:</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#080;background-color:#0f140f;font-style:italic># Obligatory updates</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>sudo apt-get update &amp;&amp; sudo apt-get upgrade -y
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#080;background-color:#0f140f;font-style:italic># Install pre-requisities</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>sudo apt-get install apt-transport-https ca-certificates software-properties-common vim -y
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#080;background-color:#0f140f;font-style:italic># Install Docker</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>curl -fsSL get.docker.com -o get-docker.sh
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>sh get-docker.sh
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#080;background-color:#0f140f;font-style:italic># Add Pi user to Docker group</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>sudo usermod -aG docker pi
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#080;background-color:#0f140f;font-style:italic># Backup the current cmdline.txt</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>sudo cp /boot/cmdline.txt /boot/cmdline_cgroup.txt
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#080;background-color:#0f140f;font-style:italic># Enable cgroups</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#fb660a>orig</span>=<span style=color:#0086d2>&#34;</span><span style=color:#fb660a;font-weight:700>$(</span>head -n1 /boot/cmdline.txt<span style=color:#fb660a;font-weight:700>)</span><span style=color:#0086d2> cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>echo <span style=color:#fb660a>$orig</span> | sudo tee /boot/cmdline.txt
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#080;background-color:#0f140f;font-style:italic># Edit Docker daemon</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>sudo bash -c <span style=color:#0086d2>&#39;cat &lt;&lt; EOF &gt; /etc/docker/daemon.json
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#0086d2>{
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#0086d2>  &#34;exec-opts&#34;: [&#34;native.cgroupdriver=systemd&#34;],
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span><span style=color:#0086d2>  &#34;log-driver&#34;: &#34;json-file&#34;,
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span><span style=color:#0086d2>  &#34;log-opts&#34;: {
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span><span style=color:#0086d2>    &#34;max-size&#34;: &#34;100m&#34;
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span><span style=color:#0086d2>  },
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span><span style=color:#0086d2>  &#34;storage-driver&#34;: &#34;overlay2&#34;
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span><span style=color:#0086d2>}
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span><span style=color:#0086d2>EOF&#39;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span>sudo reboot
-</code></pre></div><p>I&rsquo;ve configured legacy versions of iptables for compatibility since Raspbian Buster uses nftables by default. I&rsquo;ve also disabled swap and then added the Kubernetes repository to <code>apt</code>.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#080;background-color:#0f140f;font-style:italic># Ensure legacy iptables binaries are installed and used</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>sudo apt-get install -y iptables arptables ebtables
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>sudo update-alternatives --set arptables /usr/sbin/arptables-legacy
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>sudo update-alternatives --set ebtables /usr/sbin/ebtables-legacy
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#080;background-color:#0f140f;font-style:italic># Disable swap</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>sudo dphys-swapfile swapoff
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>sudo dphys-swapfile uninstall
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>sudo update-rc.d dphys-swapfile remove
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>sudo systemctl disable dphys-swapfile.service
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#080;background-color:#0f140f;font-style:italic># If you&#39;re using flannel...</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#080;background-color:#0f140f;font-style:italic># sudo sysctl -w net.bridge.bridge-nf-call-iptables=1</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#080;background-color:#0f140f;font-style:italic># Add the Kubernetes repo</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>echo <span style=color:#0086d2>&#34;deb http://apt.kubernetes.io/ kubernetes-xenial main&#34;</span> | sudo tee /etc/apt/sources.list.d/kubernetes.list
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>sudo apt-get update -q
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span><span style=color:#080;background-color:#0f140f;font-style:italic># Install Kubernetes binaries (v1.19.2-00) and hold any upgrades</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>sudo apt-mark unhold kubelet kubeadm kubectl
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>sudo apt-get install -y <span style=color:#fb660a>kubelet</span>=v1.19.2-00 <span style=color:#fb660a>kubeadm</span>=v1.19.2-00 <span style=color:#fb660a>kubectl</span>=v1.19.2-00
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>sudo apt-mark hold kubelet kubeadm kubectl
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span><span style=color:#080;background-color:#0f140f;font-style:italic># Pre-stage the kubernetes images</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>sudo kubeadm config images pull
-</code></pre></div><p>I always like add the members of your cluster to /etc/hosts for name resolution (especially as I use <a href=/2020/01/running-coredns-for-lab-name-resolution/>CoreDNS running on this cluster for my home DNS</a>!)</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#080;background-color:#0f140f;font-style:italic># Add to /etc/hosts</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>192.168.20.9    rpi-vip rpi-vip.lab.definit.co.uk
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>192.168.20.12   rpi4-01 rpi4-01.lab.definit.co.uk
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>192.168.20.13   rpi4-02 rpi4-02.lab.definit.co.uk
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>192.168.20.14   rpi4-03 rpi4-03.lab.definit.co.uk
-</code></pre></div><h3 id=configuring-kube-vip>Configuring kube-vip</h3>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#666;font-style:italic># Obligatory updates</span>
+sudo apt-get update <span style=color:#333>&amp;&amp;</span> sudo apt-get upgrade -y
+<span style=color:#666;font-style:italic># Install pre-requisities</span>
+sudo apt-get install apt-transport-https ca-certificates software-properties-common vim -y
+<span style=color:#666;font-style:italic># Install Docker</span>
+curl -fsSL get.docker.com -o get-docker.sh
+sh get-docker.sh
+<span style=color:#666;font-style:italic># Add Pi user to Docker group</span>
+sudo usermod -aG docker pi
+
+<span style=color:#666;font-style:italic># Backup the current cmdline.txt</span>
+sudo cp /boot/cmdline.txt /boot/cmdline_cgroup.txt
+<span style=color:#666;font-style:italic># Enable cgroups</span>
+<span style=color:#036>orig</span><span style=color:#333>=</span><span style=background-color:#e0e0ff>&#34;</span><span style=color:#289;font-weight:700>$(</span>head -n1 /boot/cmdline.txt<span style=color:#289;font-weight:700>)</span><span style=background-color:#e0e0ff> cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory&#34;</span>
+<span style=color:#072>echo</span> <span style=color:#036>$orig</span> | sudo tee /boot/cmdline.txt
+
+<span style=color:#666;font-style:italic># Edit Docker daemon</span>
+sudo bash -c <span style=background-color:#e0e0ff>&#39;cat &lt;&lt; EOF &gt; /etc/docker/daemon.json
+</span><span style=background-color:#e0e0ff>{
+</span><span style=background-color:#e0e0ff>  &#34;exec-opts&#34;: [&#34;native.cgroupdriver=systemd&#34;],
+</span><span style=background-color:#e0e0ff>  &#34;log-driver&#34;: &#34;json-file&#34;,
+</span><span style=background-color:#e0e0ff>  &#34;log-opts&#34;: {
+</span><span style=background-color:#e0e0ff>    &#34;max-size&#34;: &#34;100m&#34;
+</span><span style=background-color:#e0e0ff>  },
+</span><span style=background-color:#e0e0ff>  &#34;storage-driver&#34;: &#34;overlay2&#34;
+</span><span style=background-color:#e0e0ff>}
+</span><span style=background-color:#e0e0ff>EOF&#39;</span>
+
+sudo reboot
+</code></pre></td></tr></table>
+</div>
+</div><p>I&rsquo;ve configured legacy versions of iptables for compatibility since Raspbian Buster uses nftables by default. I&rsquo;ve also disabled swap and then added the Kubernetes repository to <code>apt</code>.</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#666;font-style:italic># Ensure legacy iptables binaries are installed and used</span>
+sudo apt-get install -y iptables arptables ebtables
+sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
+sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
+sudo update-alternatives --set arptables /usr/sbin/arptables-legacy
+sudo update-alternatives --set ebtables /usr/sbin/ebtables-legacy
+
+<span style=color:#666;font-style:italic># Disable swap</span>
+sudo dphys-swapfile swapoff
+sudo dphys-swapfile uninstall
+sudo update-rc.d dphys-swapfile remove
+sudo systemctl disable dphys-swapfile.service
+
+<span style=color:#666;font-style:italic># If you&#39;re using flannel...</span>
+<span style=color:#666;font-style:italic># sudo sysctl -w net.bridge.bridge-nf-call-iptables=1</span>
+
+<span style=color:#666;font-style:italic># Add the Kubernetes repo</span>
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+<span style=color:#072>echo</span> <span style=background-color:#e0e0ff>&#34;deb http://apt.kubernetes.io/ kubernetes-xenial main&#34;</span> | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update -q
+
+<span style=color:#666;font-style:italic># Install Kubernetes binaries (v1.19.2-00) and hold any upgrades</span>
+sudo apt-mark unhold kubelet kubeadm kubectl
+sudo apt-get install -y <span style=color:#036>kubelet</span><span style=color:#333>=</span>v1.19.2-00 <span style=color:#036>kubeadm</span><span style=color:#333>=</span>v1.19.2-00 <span style=color:#036>kubectl</span><span style=color:#333>=</span>v1.19.2-00
+sudo apt-mark hold kubelet kubeadm kubectl
+
+<span style=color:#666;font-style:italic># Pre-stage the kubernetes images</span>
+sudo kubeadm config images pull
+</code></pre></td></tr></table>
+</div>
+</div><p>I always like add the members of your cluster to /etc/hosts for name resolution (especially as I use <a href=/2020/01/running-coredns-for-lab-name-resolution/>CoreDNS running on this cluster for my home DNS</a>!)</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#666;font-style:italic># Add to /etc/hosts</span>
+192.168.20.9    rpi-vip rpi-vip.lab.definit.co.uk
+192.168.20.12   rpi4-01 rpi4-01.lab.definit.co.uk
+192.168.20.13   rpi4-02 rpi4-02.lab.definit.co.uk
+192.168.20.14   rpi4-03 rpi4-03.lab.definit.co.uk
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=configuring-kube-vip>Configuring kube-vip</h3>
 <p>I&rsquo;m using <a href=https://kube-vip.io/control-plane>kube-vip</a> to provide control plane load balancing on my Kubernetes cluster. The latest version is much simpler to configure, requiring very little configuration to get a basic setup working. It&rsquo;s also got the option to use BGP for VIP failover rather than ARP, which I love - though I&rsquo;ve not tested it yet.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#080;background-color:#0f140f;font-style:italic># Generate the kube-vip manifest</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>sudo docker run --network host --rm plndr/kube-vip:0.1.8 kubeadm init <span style=color:#0086d2>\
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#0086d2></span>--interface eth0 <span style=color:#0086d2>\
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#0086d2></span>--vip 192.168.20.9 <span style=color:#0086d2>\
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#0086d2></span>--arp <span style=color:#0086d2>\
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#0086d2></span>--leaderElection | sudo tee /etc/kubernetes/manifests/vip.yaml
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#080;background-color:#0f140f;font-style:italic># Initialise the first node</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>sudo kubeadm init --control-plane-endpoint <span style=color:#0086d2>&#34;192.168.20.9:6443&#34;</span> --upload-certs
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#080;background-color:#0f140f;font-style:italic># Join other control plane nodes to cluster - if the token has expired, use</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>kubeadm token create --print-join-command --certificate-key <span style=color:#fb660a;font-weight:700>$(</span>sudo kubeadm init phase upload-certs --upload-certs | tail -1<span style=color:#fb660a;font-weight:700>)</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#080;background-color:#0f140f;font-style:italic># Generate the kube-vip manifest on additional nodes</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>sudo docker run --network host --rm plndr/kube-vip:0.1.8 kubeadm init <span style=color:#0086d2>\
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#0086d2></span>--interface eth0 <span style=color:#0086d2>\
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#0086d2></span>--vip 192.168.20.9 <span style=color:#0086d2>\
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#0086d2></span>--arp <span style=color:#0086d2>\
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#0086d2></span>--leaderElection | sudo tee /etc/kubernetes/manifests/vip.yaml
-</code></pre></div><h2 id=network-plugin---weave>Network Plugin - Weave</h2>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#666;font-style:italic># Generate the kube-vip manifest</span>
+sudo docker run --network host --rm plndr/kube-vip:0.1.8 kubeadm init <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
+</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>--interface eth0 <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
+</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>--vip 192.168.20.9 <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
+</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>--arp <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
+</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>--leaderElection | sudo tee /etc/kubernetes/manifests/vip.yaml
+
+<span style=color:#666;font-style:italic># Initialise the first node</span>
+sudo kubeadm init --control-plane-endpoint <span style=background-color:#e0e0ff>&#34;192.168.20.9:6443&#34;</span> --upload-certs
+
+<span style=color:#666;font-style:italic># Join other control plane nodes to cluster - if the token has expired, use</span>
+kubeadm token create --print-join-command --certificate-key <span style=color:#289;font-weight:700>$(</span>sudo kubeadm init phase upload-certs --upload-certs | tail -1<span style=color:#289;font-weight:700>)</span>
+
+<span style=color:#666;font-style:italic># Generate the kube-vip manifest on additional nodes</span>
+sudo docker run --network host --rm plndr/kube-vip:0.1.8 kubeadm init <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
+</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>--interface eth0 <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
+</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>--vip 192.168.20.9 <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
+</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>--arp <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
+</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>--leaderElection | sudo tee /etc/kubernetes/manifests/vip.yaml
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=network-plugin---weave>Network Plugin - Weave</h2>
 <p>I&rsquo;ve chosen Weave to provide the network plugin for my cluster based on my requirements - but generally I would recommend Flannel for a small cluster like this. There are loads of considerations when picking a CNI - things like does it have an arm-compatible image, and whether it works with metallb were two key ones! I really recommend looking at the <a href=https://itnext.io/benchmark-results-of-kubernetes-network-plugins-cni-over-10gbit-s-network-updated-august-2020-6e1b757b9e49>ITNEXT benchmark results</a> as well, there&rsquo;s some really good information there.</p>
 <p>Be sure to run this command on the RPi - if you run it on your laptop it&rsquo;s very likely you&rsquo;ll get the wrong architecture downloaded!</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#080;background-color:#0f140f;font-style:italic># Install Weave with NO_MASQ_LOCAL for metallb</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>sudo kubectl apply -f <span style=color:#0086d2>&#34;https://cloud.weave.works/k8s/net?k8s-version=</span><span style=color:#fb660a;font-weight:700>$(</span>kubectl version | base64 | tr -d <span style=color:#0086d2>&#39;\n&#39;</span><span style=color:#fb660a;font-weight:700>)</span><span style=color:#0086d2>&amp;env.NO_MASQ_LOCAL=1&#34;</span>
-</code></pre></div><h2 id=load-balancing-with-metallb>Load Balancing with MetalLb</h2>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#666;font-style:italic># Install Weave with NO_MASQ_LOCAL for metallb</span>
+sudo kubectl apply -f <span style=background-color:#e0e0ff>&#34;https://cloud.weave.works/k8s/net?k8s-version=</span><span style=color:#289;font-weight:700>$(</span>kubectl version | base64 | tr -d <span style=background-color:#e0e0ff>&#39;\n&#39;</span><span style=color:#289;font-weight:700>)</span><span style=background-color:#e0e0ff>&amp;env.NO_MASQ_LOCAL=1&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=load-balancing-with-metallb>Load Balancing with MetalLb</h2>
 <p>Last year I covered using <a href=2019/08/lab-guide-kubernetes-load-balancer-and-ingress-with-metallb-and-contour/>MetalLb with Contour for ingress and load balancing</a>, and since then I&rsquo;ve moved my metallb configuration over to using BGP (layer3) to advertise load balanced VIPs to my EdgeRouter (rather than the ARP-based L2 load balancing). The installation process is really easy, install the manifests, and create a secret for encryption between nodes.</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#080;background-color:#0f140f;font-style:italic># Install metallb for ingress/load balancing</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#080;background-color:#0f140f;font-style:italic># On first install only</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>kubectl create secret generic -n metallb-system memberlist --from-literal=<span style=color:#fb660a>secretkey</span>=<span style=color:#0086d2>&#34;</span><span style=color:#fb660a;font-weight:700>$(</span>openssl rand -base64 128<span style=color:#fb660a;font-weight:700>)</span><span style=color:#0086d2>&#34;</span>
-</code></pre></div><p>Once metallb is installed it will sit idle until you provide it with a configMap:</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>ConfigMap<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>namespace</span>:<span style=color:#888> </span>metallb-system<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>config<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>data</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>config</span>:<span style=color:#888> </span>|<span style=color:#0086d2>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#0086d2>    peers:
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#0086d2>    - peer-address: 192.168.20.1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#0086d2>      peer-asn: 65000
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#0086d2>      my-asn: 65000
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#0086d2>    address-pools:
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#0086d2>    - name: default
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#0086d2>      protocol: bgp
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#0086d2>      avoid-buggy-ips: true
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#0086d2>      addresses:
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#0086d2>      - 192.168.21.0/24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#0086d2>      bgp-advertisements:
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#0086d2>      - aggregation-length: 32</span><span style=color:#888>    
-</span></code></pre></div><h2 id=storage>Storage</h2>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#666;font-style:italic># Install metallb for ingress/load balancing</span>
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
+<span style=color:#666;font-style:italic># On first install only</span>
+kubectl create secret generic -n metallb-system memberlist --from-literal<span style=color:#333>=</span><span style=color:#036>secretkey</span><span style=color:#333>=</span><span style=background-color:#e0e0ff>&#34;</span><span style=color:#289;font-weight:700>$(</span>openssl rand -base64 128<span style=color:#289;font-weight:700>)</span><span style=background-color:#e0e0ff>&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Once metallb is installed it will sit idle until you provide it with a configMap:</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ConfigMap<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>metallb-system<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>config<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>data</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>config</span>:<span style=color:#bbb> </span>|<span style=color:#d42;background-color:#e0e0ff>
+</span><span style=color:#d42;background-color:#e0e0ff>    peers:
+</span><span style=color:#d42;background-color:#e0e0ff>    - peer-address: 192.168.20.1
+</span><span style=color:#d42;background-color:#e0e0ff>      peer-asn: 65000
+</span><span style=color:#d42;background-color:#e0e0ff>      my-asn: 65000
+</span><span style=color:#d42;background-color:#e0e0ff>    address-pools:
+</span><span style=color:#d42;background-color:#e0e0ff>    - name: default
+</span><span style=color:#d42;background-color:#e0e0ff>      protocol: bgp
+</span><span style=color:#d42;background-color:#e0e0ff>      avoid-buggy-ips: true
+</span><span style=color:#d42;background-color:#e0e0ff>      addresses:
+</span><span style=color:#d42;background-color:#e0e0ff>      - 192.168.21.0/24
+</span><span style=color:#d42;background-color:#e0e0ff>      bgp-advertisements:
+</span><span style=color:#d42;background-color:#e0e0ff>      - aggregation-length: 32</span><span style=color:#bbb>    
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id=storage>Storage</h2>
 <p>From a storage perspective, I either use NFS (for persistent storage) or the local SSD (for more transient storage). Instead of creating a whole load of mount points on my Synology, I&rsquo;m making use of the <code>subPath</code> property of my <code>volumeMounts</code>. I&rsquo;m aware there are issues with using NFS around the number of connections created, but this is mitigated by the size of my cluster and the small number of persistent apps that are running.</p>
 <p>e.g. below I have a single NFS <code>PersistentVolume</code> that is mounting three different <code>subPath</code> in the container&mldr;hmm I should switch the transcode to local SSD&mldr;</p>
-<div class=highlight><pre tabindex=0 style=color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#fb660a;font-weight:700>apiVersion</span>:<span style=color:#888> </span>v1<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>kind</span>:<span style=color:#888> </span>PersistentVolume<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>metadata</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>plex-system-pvc<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>namespace</span>:<span style=color:#888> </span>plex<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>labels</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>app.kubernetes.io/name</span>:<span style=color:#888> </span>plex-media-server<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>app.kubernetes.io/instance</span>:<span style=color:#888> </span>definit-plex<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#888></span><span style=color:#fb660a;font-weight:700>spec</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>capacity</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>storage</span>:<span style=color:#888> </span>100Gi<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>accessModes</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#888>    </span>- ReadWriteMany<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>persistentVolumeReclaimPolicy</span>:<span style=color:#888> </span>Retain<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#888>  </span><span style=color:#fb660a;font-weight:700>nfs</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>server</span>:<span style=color:#888> </span><span style=color:#0086f7;font-weight:700>192.168.4.10</span><span style=color:#888> 
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#888>    </span><span style=color:#fb660a;font-weight:700>path</span>:<span style=color:#888> </span>/volume1/kubernetes<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#888></span>---<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#888></span>&lt;snip&gt;<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>volumeMounts</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span><span style=color:#888>            </span>- <span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>system<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span><span style=color:#888>              </span><span style=color:#fb660a;font-weight:700>mountPath</span>:<span style=color:#888> </span>/config<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span><span style=color:#888>              </span><span style=color:#fb660a;font-weight:700>subPath</span>:<span style=color:#888> </span>plex/config<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span><span style=color:#888>            </span>- <span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>system<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span><span style=color:#888>              </span><span style=color:#fb660a;font-weight:700>mountPath</span>:<span style=color:#888> </span>/transcode<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span><span style=color:#888>              </span><span style=color:#fb660a;font-weight:700>subPath</span>:<span style=color:#888> </span>plex/transcode<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span><span style=color:#888>            </span>- <span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>system<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span><span style=color:#888>              </span><span style=color:#fb660a;font-weight:700>mountPath</span>:<span style=color:#888> </span>/shared<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span><span style=color:#888>              </span><span style=color:#fb660a;font-weight:700>subPath</span>:<span style=color:#888> </span>plex/shared<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span><span style=color:#888>      </span><span style=color:#fb660a;font-weight:700>volumes</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span><span style=color:#888>        </span>- <span style=color:#fb660a;font-weight:700>name</span>:<span style=color:#888> </span>system<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33</span><span style=color:#888>          </span><span style=color:#fb660a;font-weight:700>persistentVolumeClaim</span>:<span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34</span><span style=color:#888>            </span><span style=color:#fb660a;font-weight:700>claimName</span>:<span style=color:#888> </span><span style=color:#0086d2>&#34;plex-system-pvc&#34;</span><span style=color:#888>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35</span><span style=color:#888></span>&lt;/snip&gt;<span style=color:#888>
-</span></code></pre></div><p>So - that&rsquo;s a summary, more or less, of my current configuration and a little bit of how I got here. I hope you&rsquo;ve found it interesting, and I&rsquo;d love to hear a bit more about your setup!</p>
+<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>PersistentVolume<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>plex-system-pvc<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>plex<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>labels</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>app.kubernetes.io/name</span>:<span style=color:#bbb> </span>plex-media-server<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>app.kubernetes.io/instance</span>:<span style=color:#bbb> </span>definit-plex<span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#070>spec</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>capacity</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>storage</span>:<span style=color:#bbb> </span>100Gi<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>accessModes</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span>- ReadWriteMany<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>persistentVolumeReclaimPolicy</span>:<span style=color:#bbb> </span>Retain<span style=color:#bbb>
+</span><span style=color:#bbb>  </span><span style=color:#070>nfs</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>    </span><span style=color:#070>server</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>192.168.4.10</span><span style=color:#bbb> 
+</span><span style=color:#bbb>    </span><span style=color:#070>path</span>:<span style=color:#bbb> </span>/volume1/kubernetes<span style=color:#bbb>
+</span><span style=color:#bbb>
+</span><span style=color:#bbb></span><span style=color:#0e84b5;font-weight:700>---</span><span style=color:#bbb>
+</span><span style=color:#bbb></span>&lt;snip&gt;<span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>volumeMounts</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>            </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>system<span style=color:#bbb>
+</span><span style=color:#bbb>              </span><span style=color:#070>mountPath</span>:<span style=color:#bbb> </span>/config<span style=color:#bbb>
+</span><span style=color:#bbb>              </span><span style=color:#070>subPath</span>:<span style=color:#bbb> </span>plex/config<span style=color:#bbb>
+</span><span style=color:#bbb>            </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>system<span style=color:#bbb>
+</span><span style=color:#bbb>              </span><span style=color:#070>mountPath</span>:<span style=color:#bbb> </span>/transcode<span style=color:#bbb>
+</span><span style=color:#bbb>              </span><span style=color:#070>subPath</span>:<span style=color:#bbb> </span>plex/transcode<span style=color:#bbb>
+</span><span style=color:#bbb>            </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>system<span style=color:#bbb>
+</span><span style=color:#bbb>              </span><span style=color:#070>mountPath</span>:<span style=color:#bbb> </span>/shared<span style=color:#bbb>
+</span><span style=color:#bbb>              </span><span style=color:#070>subPath</span>:<span style=color:#bbb> </span>plex/shared<span style=color:#bbb>
+</span><span style=color:#bbb>      </span><span style=color:#070>volumes</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>        </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>system<span style=color:#bbb>
+</span><span style=color:#bbb>          </span><span style=color:#070>persistentVolumeClaim</span>:<span style=color:#bbb>
+</span><span style=color:#bbb>            </span><span style=color:#070>claimName</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#34;plex-system-pvc&#34;</span><span style=color:#bbb>
+</span><span style=color:#bbb></span>&lt;/snip&gt;<span style=color:#bbb>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>So - that&rsquo;s a summary, more or less, of my current configuration and a little bit of how I got here. I hope you&rsquo;ve found it interesting, and I&rsquo;d love to hear a bit more about your setup!</p>
 <h6>Share this post</h6>
 <span class=share-box>
 <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-facebook-official"></i></a>
