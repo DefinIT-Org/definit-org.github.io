@@ -82,7 +82,7 @@ RSS
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 9/12/2021
-&#183; Read in about 10 min (2061 words)
+&#183; Read in about 10 min (2086 words)
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/cloud-native>Cloud-Native</a> and <a href=/category/vmware>VMware</a>
@@ -456,6 +456,16 @@ replicaset.apps/contour-cd965689f   <span class=m>2</span>         <span class=m
 <h1 id=external-dns>External DNS <a class=anchor href=#external-dns>
 <i class="fas fa-hashtag"></i>
 </a></h1><p>The final step in linking this all together is configuring <code>external-dns</code> to register and manage DNS records for the <code>ingress</code> objects created in <code>contour</code>. Since I&rsquo;m using Active Directory DNS servers, I need to configure kerberos authentication to make use of RFC3645 for secure updates.</p>
+<div class="alert alert-info" role=alert>
+<div class=alert-items>
+<div class="alert-item static">
+<div class=alert-icon-wrapper>
+<clr-icon class=alert-icon shape=info-circle></clr-icon>
+</div>
+<span class=alert-text>I previously blogged about similar functionality to external-dns <a href=/2020/12/automatically-adding-kubernetes-service-dns-records-to-microsoft-dns-using-coredns-and-k8s_gateway/>using CoreDNS and k8s_gateway to automatically register service DNS records using DNS delegation with Microsoft Active Directory</a></span>
+</div>
+</div>
+</div>
 <p>DNS-side configuration</p>
 <ul>
 <li>Create a DNS zone</li>
