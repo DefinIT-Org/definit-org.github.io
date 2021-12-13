@@ -39,7 +39,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2012/02/powershell-recursively-taking-ownership-of-files-and-folders-and-adding-permissions-without-removing-existing-permissions/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.90.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.90.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -58,16 +58,16 @@
 </a>
 </div>
 <nav class=header-nav>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/ title=Home>
 Home
 </a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/about/>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/about/ title=About>
 About
 </a>
-<a class="nav-link nav-text" href=https://www.github.com/sammcgeown>
+<a class="nav-link nav-text" href=https://www.github.com/sammcgeown title=GitHub>
 GitHub
 </a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml title=RSS>
 RSS
 </a>
 </nav>
@@ -80,30 +80,6 @@ RSS
 </form>
 </div>
 </header>
-<nav class=subnav>
-<ul class=nav>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/>
-Home
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/about/>
-About
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.github.com/sammcgeown>
-GitHub
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/index.xml>
-RSS
-</a>
-</li>
-</ul>
-</nav>
 <div class=content-container>
 <div class=content-area>
 <h1>PowerShell: Recursively taking ownership of files and folders and adding permissions without removing existing permissions</h1>
@@ -150,101 +126,101 @@ Tags:
 <p>Engaging with Microsoft product support for this gave us a solution of sorts - namely to run a looped batch file until all the folders were owned, and then running ICACLS.exe. There would be no way of knowing whether this had completed the tree unless you knew already the number of files and folders within the tree - and if you could get that info you would already have permissions! Not a great solution.</p>
 <p>Fortunately, using PowerShell and Takeown.exe, we can work around this limitation, by exploiting Get-ChildItem in recursive mode, and changing the default error action to SilentlyContinue. Get-ChildItem will throw an error if it tries to access a folder you do not have permissions to, and you can catch this error and pass the folder to Takeown.exe to seize ownership. Trapping this error does not work because it&rsquo;s a &ldquo;stop&rdquo; error - but changing the error action means that the $error variable is populated with the exception details. This is the basis of the first function in my script.</p>
 <h1 id=function-test-folder>Function: Test-Folder</h1>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=color:#289;font-weight:700>function</span> <span style=color:#072>Test-Folder</span>(<span style=color:#036>$FolderToTest</span>){
-<span style=color:#036>$error</span>.Clear()
-<span style=color:#036>$ErrorArray</span> = @()
-<span style=color:#072>Get-ChildItem</span> <span style=color:#036>$FolderToTest</span> -Recurse -ErrorAction SilentlyContinue | <span style=color:#072>Select </span>FullName
-<span style=color:#289;font-weight:700>if</span> (<span style=color:#036>$error</span>) {
-<span style=color:#036>$ErrorArray</span> = <span style=color:#036>$error</span> + <span style=color:#036>$ErrorArray</span>
-<span style=color:#289;font-weight:700>foreach</span> (<span style=color:#036>$err</span> <span style=color:#289;font-weight:700>in</span> <span style=color:#036>$ErrorArray</span>) {
-<span style=color:#289;font-weight:700>if</span>(<span style=color:#036>$err</span>.FullyQualifiedErrorId <span style=color:#333>-eq</span> <span style=background-color:#e0e0ff>&#34;DirUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetChildItemCommand&#34;</span>) {
-    <span style=color:#072>Write-Host</span> Unable to access <span style=color:#036>$err</span>.TargetObject -Fore Red
-    <span style=color:#072>Write-Host</span> Attempting to take ownership of <span style=color:#036>$err</span>.TargetObject -Fore Yellow
-    <span style=color:#072>Take-Ownership</span>(<span style=color:#036>$err</span>.TargetObject)
-    <span style=color:#072>Test-Folder</span>(<span style=color:#036>$err</span>.TargetObject)
-   }
-  }
- }
-}
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=k>function</span> <span class=nb>Test-Folder</span><span class=p>(</span><span class=nv>$FolderToTest</span><span class=p>){</span>
+<span class=nv>$error</span><span class=p>.</span><span class=n>Clear</span><span class=p>()</span>
+<span class=nv>$ErrorArray</span> <span class=p>=</span> <span class=p>@()</span>
+<span class=nb>Get-ChildItem</span> <span class=nv>$FolderToTest</span> <span class=n>-Recurse</span> <span class=n>-ErrorAction</span> <span class=n>SilentlyContinue</span> <span class=p>|</span> <span class=nb>Select </span><span class=n>FullName</span>
+<span class=k>if</span> <span class=p>(</span><span class=nv>$error</span><span class=p>)</span> <span class=p>{</span>
+<span class=nv>$ErrorArray</span> <span class=p>=</span> <span class=nv>$error</span> <span class=p>+</span> <span class=nv>$ErrorArray</span>
+<span class=k>foreach</span> <span class=p>(</span><span class=nv>$err</span> <span class=k>in</span> <span class=nv>$ErrorArray</span><span class=p>)</span> <span class=p>{</span>
+<span class=k>if</span><span class=p>(</span><span class=nv>$err</span><span class=p>.</span><span class=n>FullyQualifiedErrorId</span> <span class=o>-eq</span> <span class=s2>&#34;DirUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetChildItemCommand&#34;</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nb>Write-Host</span> <span class=n>Unable</span> <span class=n>to</span> <span class=n>access</span> <span class=nv>$err</span><span class=p>.</span><span class=n>TargetObject</span> <span class=n>-Fore</span> <span class=n>Red</span>
+    <span class=nb>Write-Host</span> <span class=n>Attempting</span> <span class=n>to</span> <span class=n>take</span> <span class=n>ownership</span> <span class=n>of</span> <span class=nv>$err</span><span class=p>.</span><span class=n>TargetObject</span> <span class=n>-Fore</span> <span class=n>Yellow</span>
+    <span class=nb>Take-Ownership</span><span class=p>(</span><span class=nv>$err</span><span class=p>.</span><span class=n>TargetObject</span><span class=p>)</span>
+    <span class=nb>Test-Folder</span><span class=p>(</span><span class=nv>$err</span><span class=p>.</span><span class=n>TargetObject</span><span class=p>)</span>
+   <span class=p>}</span>
+  <span class=p>}</span>
+ <span class=p>}</span>
+<span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>* <em>This section has been updated as per David&rsquo;s comments and solution below - thanks to David for his work!</em></p>
 <p>It&rsquo;s fairly simple code, running through it we clear any existing errors using $error.Clear(), recurse through the folder structure using Get-ChildItem with the errors suppressed. The select statement is for logging output - the full path of the file or folder that we DO have access to. We then check if $error is set - if it is then we had errors accessing a file or folder, so we loop through them and check if the error Fully Qualified ID matches the access denied error message. If it does we write something for the logging and call the Take-Ownership function, followed by looping back with a call to itself to re-test the folder we are working on (and anything below it).</p>
 <h1 id=function-take-ownership>Function: Take-Ownership</h1>
 <p> The Take-Ownership function simply calls Takeown.exe against the folder it is passed, then adds entries to the ACL for that folder.</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=color:#289;font-weight:700>function</span> <span style=color:#072>Take-Ownership</span> {
- <span style=color:#289;font-weight:700>param</span>(
-  <span style=color:#5ed;font-weight:700>[String]</span><span style=color:#036>$Folder</span>
- )
- takeown.exe /A /F <span style=color:#036>$Folder</span>
- <span style=color:#036>$CurrentACL</span> = <span style=color:#072>Get-Acl</span> <span style=color:#036>$Folder</span>
- <span style=color:#072>write-host</span> ...Adding NT Authority\SYSTEM to <span style=color:#036>$Folder</span> -Fore Yellow
- <span style=color:#036>$SystemACLPermission</span> = <span style=background-color:#e0e0ff>&#34;NT AUTHORITY\SYSTEM&#34;</span>,<span style=background-color:#e0e0ff>&#34;FullControl&#34;</span>,<span style=background-color:#e0e0ff>&#34;ContainerInherit,ObjectInherit&#34;</span>,<span style=background-color:#e0e0ff>&#34;None&#34;</span>,<span style=background-color:#e0e0ff>&#34;Allow&#34;</span>
- <span style=color:#036>$SystemAccessRule</span> = <span style=color:#072>new-object</span> System.Security.AccessControl.FileSystemAccessRule <span style=color:#036>$SystemACLPermission</span>
- <span style=color:#036>$CurrentACL</span>.AddAccessRule(<span style=color:#036>$SystemAccessRule</span>)
- <span style=color:#072>write-host</span> ...Adding Infrastructure Services to <span style=color:#036>$Folder</span> -Fore Yellow
- <span style=color:#036>$AdminACLPermission</span> = <span style=background-color:#e0e0ff>&#34;DEFINIT\AdminGroup&#34;</span>,<span style=background-color:#e0e0ff>&#34;FullControl&#34;</span>,<span style=background-color:#e0e0ff>&#34;ContainerInherit,ObjectInherit&#34;</span>,<span style=background-color:#e0e0ff>&#34;None&#34;</span>,<span style=background-color:#e0e0ff>&#34;Allow&#34;</span>
- <span style=color:#036>$SystemAccessRule</span> = <span style=color:#072>new-object</span> System.Security.AccessControl.FileSystemAccessRule <span style=color:#036>$AdminACLPermission</span>
- <span style=color:#036>$CurrentACL</span>.AddAccessRule(<span style=color:#036>$SystemAccessRule</span>)
- <span style=color:#072>Set-Acl</span> -Path <span style=color:#036>$Folder</span> -AclObject <span style=color:#036>$CurrentACL</span>
-}
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=k>function</span> <span class=nb>Take-Ownership</span> <span class=p>{</span>
+ <span class=k>param</span><span class=p>(</span>
+  <span class=no>[String]</span><span class=nv>$Folder</span>
+ <span class=p>)</span>
+ <span class=n>takeown</span><span class=p>.</span><span class=n>exe</span> <span class=p>/</span><span class=n>A</span> <span class=p>/</span><span class=n>F</span> <span class=nv>$Folder</span>
+ <span class=nv>$CurrentACL</span> <span class=p>=</span> <span class=nb>Get-Acl</span> <span class=nv>$Folder</span>
+ <span class=nb>write-host</span> <span class=p>...</span><span class=n>Adding</span> <span class=n>NT</span> <span class=n>Authority</span><span class=p>\</span><span class=n>SYSTEM</span> <span class=n>to</span> <span class=nv>$Folder</span> <span class=n>-Fore</span> <span class=n>Yellow</span>
+ <span class=nv>$SystemACLPermission</span> <span class=p>=</span> <span class=s2>&#34;NT AUTHORITY\SYSTEM&#34;</span><span class=p>,</span><span class=s2>&#34;FullControl&#34;</span><span class=p>,</span><span class=s2>&#34;ContainerInherit,ObjectInherit&#34;</span><span class=p>,</span><span class=s2>&#34;None&#34;</span><span class=p>,</span><span class=s2>&#34;Allow&#34;</span>
+ <span class=nv>$SystemAccessRule</span> <span class=p>=</span> <span class=nb>new-object</span> <span class=n>System</span><span class=p>.</span><span class=n>Security</span><span class=p>.</span><span class=n>AccessControl</span><span class=p>.</span><span class=n>FileSystemAccessRule</span> <span class=nv>$SystemACLPermission</span>
+ <span class=nv>$CurrentACL</span><span class=p>.</span><span class=n>AddAccessRule</span><span class=p>(</span><span class=nv>$SystemAccessRule</span><span class=p>)</span>
+ <span class=nb>write-host</span> <span class=p>...</span><span class=n>Adding</span> <span class=n>Infrastructure</span> <span class=n>Services</span> <span class=n>to</span> <span class=nv>$Folder</span> <span class=n>-Fore</span> <span class=n>Yellow</span>
+ <span class=nv>$AdminACLPermission</span> <span class=p>=</span> <span class=s2>&#34;DEFINIT\AdminGroup&#34;</span><span class=p>,</span><span class=s2>&#34;FullControl&#34;</span><span class=p>,</span><span class=s2>&#34;ContainerInherit,ObjectInherit&#34;</span><span class=p>,</span><span class=s2>&#34;None&#34;</span><span class=p>,</span><span class=s2>&#34;Allow&#34;</span>
+ <span class=nv>$SystemAccessRule</span> <span class=p>=</span> <span class=nb>new-object</span> <span class=n>System</span><span class=p>.</span><span class=n>Security</span><span class=p>.</span><span class=n>AccessControl</span><span class=p>.</span><span class=n>FileSystemAccessRule</span> <span class=nv>$AdminACLPermission</span>
+ <span class=nv>$CurrentACL</span><span class=p>.</span><span class=n>AddAccessRule</span><span class=p>(</span><span class=nv>$SystemAccessRule</span><span class=p>)</span>
+ <span class=nb>Set-Acl</span> <span class=n>-Path</span> <span class=nv>$Folder</span> <span class=n>-AclObject</span> <span class=nv>$CurrentACL</span>
+<span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Running through, it takes the folder name as a parameter, runs Takeown.exe against it using the /A option to add the administrators group. We then get the current ACL from the folder, build a new ACL permission as a string and use that to create a FileSystemAccessRule object. That object is then added to the ACL we copied from the folder. In this example I am adding two accounts, NT AUTHORITY\SYSTEM and a domian group DEFINIT\AdminGroup. The Set-ACL command applies the ACL list with the two new entries to the folder.</p>
 <h1 id=the-finalscript>The final script</h1>
 <p>Finally, we can build the script together taking a parameter for the target folder, and a log file. The Functions are called against the target folder - first taking ownership of the root, and then testing the contents. I start and stop a transcript around them to capture output, which can be crucial for proving that you have access!</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=color:#072>Start-Transcript</span> <span style=color:#036>$Log</span>
-<span style=color:#072>Take-OwnerShip</span> (<span style=color:#036>$RootPath</span>)
-<span style=color:#072>Test-Folder</span>(<span style=color:#036>$RootPath</span>)
-<span style=color:#072>Stop-Transcript</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=nb>Start-Transcript</span> <span class=nv>$Log</span>
+<span class=nb>Take-OwnerShip</span> <span class=p>(</span><span class=nv>$RootPath</span><span class=p>)</span>
+<span class=nb>Test-Folder</span><span class=p>(</span><span class=nv>$RootPath</span><span class=p>)</span>
+<span class=nb>Stop-Transcript</span>
 </code></pre></td></tr></table>
 </div>
 </div>
@@ -321,31 +297,31 @@ Next
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
+<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">9</span></a></li>
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">28</span></a></li>
 <li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">15</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">42</span></a></li>
-<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li>
+<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">24</span></a></li>
+<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">49</span></a></li>
+<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/exam class=nav-link>EXAM <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/fusion class=nav-link>FUSION <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
 <li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li>
+<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li>
 <li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
 <li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">206</span></a></li>
+<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">214</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
+<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">14</span></a></li>
+<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">47</span></a></li>
+<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">74</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">58</span></a></li>
+<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">5</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">59</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>
@@ -354,15 +330,15 @@ Next
 <input id=Tags type=checkbox>
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
-<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">53</span></a></li>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">70</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">56</span></a></li>
 <li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
 <li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
+<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">34</span></a></li>
 <li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
 <li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li>
+<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">32</span></a></li>
+<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">32</span></a></li>
 <li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li>
 </section>
 </section>

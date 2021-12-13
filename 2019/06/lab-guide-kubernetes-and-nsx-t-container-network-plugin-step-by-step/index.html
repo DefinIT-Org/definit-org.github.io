@@ -32,7 +32,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.90.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.90.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -51,16 +51,16 @@
 </a>
 </div>
 <nav class=header-nav>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/ title=Home>
 Home
 </a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/about/>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/about/ title=About>
 About
 </a>
-<a class="nav-link nav-text" href=https://www.github.com/sammcgeown>
+<a class="nav-link nav-text" href=https://www.github.com/sammcgeown title=GitHub>
 GitHub
 </a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml title=RSS>
 RSS
 </a>
 </nav>
@@ -73,30 +73,6 @@ RSS
 </form>
 </div>
 </header>
-<nav class=subnav>
-<ul class=nav>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/>
-Home
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/about/>
-About
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.github.com/sammcgeown>
-GitHub
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/index.xml>
-RSS
-</a>
-</li>
-</ul>
-</nav>
 <div class=content-container>
 <div class=content-area>
 <h1>Lab Guide - Kubernetes and NSX-T Container Network Plugin - Step by Step</h1>
@@ -126,7 +102,7 @@ Tags:
 <div class=alert-icon-wrapper>
 <clr-icon class=alert-icon shape=warning-standard></clr-icon>
 </div>
-<span class=alert-text>This article is now 2 years old! It is highly likely that this information is out of date and the author will have completely forgotten about it. Please take care when following any guidance to ensure you have up-to-date recommendations.</span>
+<span class=alert-text>This article is now 3 years old! It is highly likely that this information is out of date and the author will have completely forgotten about it. Please take care when following any guidance to ensure you have up-to-date recommendations.</span>
 </div>
 </div>
 </div>
@@ -256,42 +232,42 @@ same.</p>
 </tbody>
 </table>
 <p>Example <code>/etc/network/interfaces</code> file:</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>iface lo inet loopback
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>iface lo inet loopback
 auto lo
 
-<span style=color:#666;font-style:italic># management</span>
+<span class=c1># management</span>
 auto ens160
 iface ens160 inet static
     address 192.168.10.90
     netmask 255.255.255.0
 
-<span style=color:#666;font-style:italic># k8s-access</span>
+<span class=c1># k8s-access</span>
 auto ens192
 iface ens192 inet static
     address 10.0.0.10
@@ -300,143 +276,143 @@ iface ens192 inet static
     dns-nameservers	192.168.10.17
     dns-search	definit.local
 
-<span style=color:#666;font-style:italic># k8s-transport</span>
+<span class=c1># k8s-transport</span>
 auto ens224
 iface ens224 inet manual
-    up ip link <span style=color:#072>set</span> ens224 up
+    up ip link <span class=nb>set</span> ens224 up
 </code></pre></td></tr></table>
 </div>
 </div><h2 id=install-docker-and-kubernetes>Install Docker and Kubernetes</h2>
 <p>Disable swap (required for kubelet to run), install Docker, and install Kubernetes 1.13.</p>
 <h4 id=master-and-worker-nodes><strong>Master and Worker Nodes</strong></h4>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#666;font-style:italic># Disable swap</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Disable swap</span>
 sudo swapoff -a
-<span style=color:#666;font-style:italic># Update and upgrade</span>
-sudo apt-get update <span style=color:#333>&amp;&amp;</span> sudo apt-get upgrade -y
-<span style=color:#666;font-style:italic># Install docker</span>
+<span class=c1># Update and upgrade</span>
+sudo apt-get update <span class=o>&amp;&amp;</span> sudo apt-get upgrade -y
+<span class=c1># Install docker</span>
 sudo apt-get install -y docker.io apt-transport-https curl
-<span style=color:#666;font-style:italic># Start and enable docker</span>
+<span class=c1># Start and enable docker</span>
 sudo systemctl start docker.service
-sudo systemctl <span style=color:#072>enable</span> docker.service
-<span style=color:#666;font-style:italic># Add the Kubernetes repository and key</span>
-<span style=color:#072>echo</span> <span style=background-color:#e0e0ff>&#34;deb  http://apt.kubernetes.io/  kubernetes-xenial  main&#34;</span> | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-<span style=color:#666;font-style:italic># Update package lists</span>
+sudo systemctl <span class=nb>enable</span> docker.service
+<span class=c1># Add the Kubernetes repository and key</span>
+<span class=nb>echo</span> <span class=s2>&#34;deb  http://apt.kubernetes.io/  kubernetes-xenial  main&#34;</span> <span class=p>|</span> sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg <span class=p>|</span> sudo apt-key add -
+<span class=c1># Update package lists</span>
 sudo apt-get update
-<span style=color:#666;font-style:italic># Install kubernetes 1.13 and hold the packages</span>
-sudo apt-get install -y <span style=color:#036>kubelet</span><span style=color:#333>=</span>1.13.5-00 <span style=color:#036>kubeadm</span><span style=color:#333>=</span>1.13.5-00 <span style=color:#036>kubectl</span><span style=color:#333>=</span>1.13.5-00
+<span class=c1># Install kubernetes 1.13 and hold the packages</span>
+sudo apt-get install -y <span class=nv>kubelet</span><span class=o>=</span>1.13.5-00 <span class=nv>kubeadm</span><span class=o>=</span>1.13.5-00 <span class=nv>kubectl</span><span class=o>=</span>1.13.5-00
 sudo apt-mark hold kubelet kubeadm kubectl
 </code></pre></td></tr></table>
 </div>
 </div><p>You should also edit /etc/fstab and comment out the swap line to ensure the swap stays disabled</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#666;font-style:italic># /etc/fstab: static file system information.</span>
-<span style=color:#666;font-style:italic>#</span>
-<span style=color:#666;font-style:italic># Use &#39;blkid&#39; to print the universally unique identifier for a</span>
-<span style=color:#666;font-style:italic># device; this may be used with UUID= as a more robust way to name devices</span>
-<span style=color:#666;font-style:italic># that works even if disks are added and removed. See fstab(5).</span>
-<span style=color:#666;font-style:italic>#</span>
-<span style=color:#666;font-style:italic># &lt;file system&gt; &lt;mount point&gt;   &lt;type&gt;  &lt;options&gt;       &lt;dump&gt;  &lt;pass&gt;</span>
-/dev/mapper/ubuntu--1604--k8s--vg-root /               ext4    <span style=color:#036>errors</span><span style=color:#333>=</span>remount-ro <span style=color:#60e;font-weight:700>0</span>       <span style=color:#60e;font-weight:700>1</span>
-<span style=color:#666;font-style:italic># /boot was on /dev/sda1 during installation</span>
-<span style=color:#036>UUID</span><span style=color:#333>=</span>0caaf4eb-734a-43f0-b4ef-b7b0a012abfc /boot           ext2    defaults        <span style=color:#60e;font-weight:700>0</span>       <span style=color:#60e;font-weight:700>2</span>
-<span style=color:#666;font-style:italic>#/dev/mapper/ubuntu--1604--k8s--vg-swap_1 none            swap    sw              0       0</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># /etc/fstab: static file system information.</span>
+<span class=c1>#</span>
+<span class=c1># Use &#39;blkid&#39; to print the universally unique identifier for a</span>
+<span class=c1># device; this may be used with UUID= as a more robust way to name devices</span>
+<span class=c1># that works even if disks are added and removed. See fstab(5).</span>
+<span class=c1>#</span>
+<span class=c1># &lt;file system&gt; &lt;mount point&gt;   &lt;type&gt;  &lt;options&gt;       &lt;dump&gt;  &lt;pass&gt;</span>
+/dev/mapper/ubuntu--1604--k8s--vg-root /               ext4    <span class=nv>errors</span><span class=o>=</span>remount-ro <span class=m>0</span>       <span class=m>1</span>
+<span class=c1># /boot was on /dev/sda1 during installation</span>
+<span class=nv>UUID</span><span class=o>=</span>0caaf4eb-734a-43f0-b4ef-b7b0a012abfc /boot           ext2    defaults        <span class=m>0</span>       <span class=m>2</span>
+<span class=c1>#/dev/mapper/ubuntu--1604--k8s--vg-swap_1 none            swap    sw              0       0</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id=install-the-cni-plugin>Install the CNI Plugin</h2>
 <p>Download the NSX Container zip package to the home folder</p>
 <h4 id=master-and-worker-nodes-1><strong>Master and Worker Nodes</strong></h4>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#666;font-style:italic># Validate apparmor is enables (expected output is &#34;Y&#34;)</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Validate apparmor is enables (expected output is &#34;Y&#34;)</span>
 sudo cat /sys/module/apparmor/parameters/enabled
-<span style=color:#666;font-style:italic># Extract the NSX Container package</span>
+<span class=c1># Extract the NSX Container package</span>
 unzip nsx-container-2.4.1.13515827.zip
-<span style=color:#666;font-style:italic># Install the CNI Plugin</span>
+<span class=c1># Install the CNI Plugin</span>
 sudo dpkg -i nsx-container-2.4.1.13515827/Kubernetes/ubuntu_amd64/nsx-cni_2.4.1.13515827_amd64.deb
 </code></pre></td></tr></table>
 </div>
 </div><h2 id=install-open-vswitch>Install Open vSwitch</h2>
 <p>You must install the Open vSwitch package bundled with the NSX Container plugin</p>
 <h4 id=master-and-worker-nodes-2><strong>Master and Worker Nodes</strong></h4>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#666;font-style:italic># Install dependencies</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Install dependencies</span>
 sudo apt-get install -y dkms libc6-dev make python python-six python-argparse 
-<span style=color:#666;font-style:italic># Install OVS</span>
+<span class=c1># Install OVS</span>
 sudo dpkg -i nsx-container-2.4.1.13515827/OpenvSwitch/xenial_amd64/openvswitch-datapath-dkms_2.10.2.13185890-1_all.deb nsx-container-2.4.1.13515827/OpenvSwitch/xenial_amd64/openvswitch-common_2.10.2.13185890-1_amd64.deb nsx-container-2.4.1.13515827/OpenvSwitch/xenial_amd64/openvswitch-switch_2.10.2.13185890-1_amd64.deb nsx-container-2.4.1.13515827/OpenvSwitch/xenial_amd64/libopenvswitch_2.10.2.13185890-1_amd64.deb
 </code></pre></td></tr></table>
 </div>
 </div><h2 id=configure-open-vswitch>Configure Open vSwitch</h2>
 <p>Open vSwitch should be configured to use the network interface</p>
 <h4 id=master-and-worker-nodes-3><strong>Master and Worker Nodes</strong></h4>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#666;font-style:italic># Create the OVS Bridge</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Create the OVS Bridge</span>
 sudo ovs-vsctl add-br br-int
-<span style=color:#666;font-style:italic># Assign the k8s-transport interface for overlay traffic</span>
-sudo ovs-vsctl add-port br-int ens224 -- <span style=color:#072>set</span> Interface ens224 <span style=color:#036>ofport_request</span><span style=color:#333>=</span><span style=color:#60e;font-weight:700>1</span>
-<span style=color:#666;font-style:italic># Bring the bridge and overlay interface up</span>
-sudo ip link <span style=color:#072>set</span> br-int up
-sudo ip link <span style=color:#072>set</span> ens224 up
+<span class=c1># Assign the k8s-transport interface for overlay traffic</span>
+sudo ovs-vsctl add-port br-int ens224 -- <span class=nb>set</span> Interface ens224 <span class=nv>ofport_request</span><span class=o>=</span><span class=m>1</span>
+<span class=c1># Bring the bridge and overlay interface up</span>
+sudo ip link <span class=nb>set</span> br-int up
+sudo ip link <span class=nb>set</span> ens224 up
 </code></pre></td></tr></table>
 </div>
 </div><h1 id=configure-nsx-t-resources>Configure NSX-T Resources</h1>
@@ -597,34 +573,34 @@ markers.</p>
 <h1 id=create-the-kubernetes-cluster>Create the Kubernetes Cluster</h1>
 <h2 id=initialise-the-cluster>Initialise the Cluster</h2>
 <h4 id=master-node><strong>Master Node</strong></h4>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#666;font-style:italic># Initialise the cluster using the master node&#39;s k8s-access IP address</span>
-sudo kubeadm init --apiserver-advertise-address<span style=color:#333>=</span>10.0.0.10
-<span style=color:#666;font-style:italic># Copy the Kubernetes config to the non-root user</span>
-mkdir -p <span style=color:#036>$HOME</span>/.kube
-sudo cp -i /etc/kubernetes/admin.conf <span style=color:#036>$HOME</span>/.kube/config
-sudo chown <span style=color:#289;font-weight:700>$(</span>id -u<span style=color:#289;font-weight:700>)</span>:<span style=color:#289;font-weight:700>$(</span>id -g<span style=color:#289;font-weight:700>)</span> <span style=color:#036>$HOME</span>/.kube/config
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Initialise the cluster using the master node&#39;s k8s-access IP address</span>
+sudo kubeadm init --apiserver-advertise-address<span class=o>=</span>10.0.0.10
+<span class=c1># Copy the Kubernetes config to the non-root user</span>
+mkdir -p <span class=nv>$HOME</span>/.kube
+sudo cp -i /etc/kubernetes/admin.conf <span class=nv>$HOME</span>/.kube/config
+sudo chown <span class=k>$(</span>id -u<span class=k>)</span>:<span class=k>$(</span>id -g<span class=k>)</span> <span class=nv>$HOME</span>/.kube/config
 </code></pre></td></tr></table>
 </div>
 </div><h2 id=join-the-cluster-from-the-worker-nodes>Join the Cluster from the worker nodes</h2>
 <p>Grab the join command from the output of the master node init command</p>
 <h4 id=worker-nodes><strong>Worker Nodes</strong></h4>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#666;font-style:italic># Join each node</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Join each node</span>
 sudo kubeadm join 10.0.0.10:6443 --token u1kyen.mr7aeihrkkuz597h --discovery-token-ca-cert-hash sha256:f214d9abdadd1752405250bc99c69dee4d51d24d1940b8984948c4bee7c382a3
 </code></pre></td></tr></table>
 </div>
@@ -635,13 +611,13 @@ image will be loaded with a long and ugly name
 &ldquo;registry.local/2.4.1.13515827/nsx-ncp-ubuntu”, so to keep the config files
 simple and to help with upgrades later, tag the image to create an alias.</p>
 <h4 id=master-and-worker-nodes-4><strong>Master and Worker Nodes</strong></h4>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo docker load -i nsx-container-2.4.1.13515827/Kubernetes/nsx-ncp-ubuntu-2.4.1.13515827.tar
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo docker load -i nsx-container-2.4.1.13515827/Kubernetes/nsx-ncp-ubuntu-2.4.1.13515827.tar
 sudo docker image tag registry.local/2.4.1.13515827/nsx-ncp-ubuntu nsx-ncp-ubuntu:2.4.1.13515827
 </code></pre></td></tr></table>
 </div>
@@ -651,20 +627,20 @@ files.</p>
 <p>The NCP pod can run in the <strong>default</strong> or <strong>kube-system</strong> namespaces, however
 creating a namespace for pods to run in is considered a best practice and allows
 more granular control over access and permissions.</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#666;font-style:italic># Create Namespace for NSX resources</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>Namespace<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>nsx-system<span style=color:#bbb>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=c># Create Namespace for NSX resources</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Namespace</span><span class=w>
+</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
 </div><p>The recommended RBAC policy for the NCP pod is documented under <a href=https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-AC96C51A-052B-403F-9670-67E55C4C9170.html>Security
@@ -681,363 +657,363 @@ getting started like me. I found the official documentation pretty useful to
 understand how Kubernetes service accounts and roles interact - see <a href=https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/>Managing
 Service
 Accounts</a>.</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 26
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 27
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 28
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 29
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 30
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 31
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 32
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 33
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 34
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 35
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 36
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 37
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 38
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 39
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 40
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 41
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 42
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 43
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 44
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 45
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 46
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 47
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 48
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 49
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 50
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 51
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 52
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 53
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 54
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 55
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 56
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 57
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 58
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 59
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 60
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 61
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 62
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 63
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 64
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 65
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 66
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 67
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 68
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 69
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 70
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 71
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 72
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 73
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 74
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 75
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 76
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 77
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 78
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 79
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 80
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 81
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 82
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 83
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 84
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 85
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 86
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 87
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 88
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 89
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 90
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 91
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 92
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 93
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 94
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 95
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 96
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 97
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 98
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 99
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">100
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">101
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">102
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">103
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">104
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">105
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">106
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">107
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">108
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">109
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">110
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">111
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">112
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">113
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">114
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">115
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">116
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">117
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">118
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">119
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">120
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">121
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#666;font-style:italic># Create a ServiceAccount for NCP namespace</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ServiceAccount<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>ncp-svc<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>nsx-system<span style=color:#bbb>
-</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#0e84b5;font-weight:700>---</span><span style=color:#bbb>
-</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Create ClusterRole for NCP</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ClusterRole<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>rbac.authorization.k8s.io/v1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>ncp-cluster-role<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>rules</span>:<span style=color:#bbb>
-</span><span style=color:#bbb> </span>- <span style=color:#070>apiGroups</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>   </span>- <span style=background-color:#e0e0ff>&#34;&#34;</span><span style=color:#bbb>
-</span><span style=color:#bbb>   </span>- extensions<span style=color:#bbb>
-</span><span style=color:#bbb>   </span>- networking.k8s.io<span style=color:#bbb>
-</span><span style=color:#bbb>   </span><span style=color:#070>resources</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- deployments<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- endpoints<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- pods<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- pods/log<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- networkpolicies<span style=color:#bbb>
-</span><span style=color:#bbb>     </span><span style=color:#666;font-style:italic># Move &#39;nodes&#39; to ncp-patch-role when hyperbus is disabled.</span><span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- nodes<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- replicationcontrollers<span style=color:#bbb>
-</span><span style=color:#bbb>     </span><span style=color:#666;font-style:italic># Remove &#39;secrets&#39; if not using Native Load Balancer.</span><span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- secrets<span style=color:#bbb>
-</span><span style=color:#bbb>   </span><span style=color:#070>verbs</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- get<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- watch<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- list<span style=color:#bbb>
-</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#0e84b5;font-weight:700>---</span><span style=color:#bbb>
-</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Create ClusterRole for NCP to edit resources</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ClusterRole<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>rbac.authorization.k8s.io/v1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>ncp-patch-role<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>rules</span>:<span style=color:#bbb>
-</span><span style=color:#bbb> </span>- <span style=color:#070>apiGroups</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>   </span>- <span style=background-color:#e0e0ff>&#34;&#34;</span><span style=color:#bbb>
-</span><span style=color:#bbb>   </span>- extensions<span style=color:#bbb>
-</span><span style=color:#bbb>   </span><span style=color:#070>resources</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>     </span><span style=color:#666;font-style:italic># NCP needs to annotate the SNAT errors on namespaces</span><span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- namespaces<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- ingresses<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- services<span style=color:#bbb>
-</span><span style=color:#bbb>   </span><span style=color:#070>verbs</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- get<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- watch<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- list<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- update<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- patch<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#666;font-style:italic># NCP needs permission to CRUD custom resource nsxerrors</span><span style=color:#bbb>
-</span><span style=color:#bbb> </span>- <span style=color:#070>apiGroups</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>   </span><span style=color:#666;font-style:italic># The api group is specified in custom resource definition for nsxerrors</span><span style=color:#bbb>
-</span><span style=color:#bbb>   </span>- nsx.vmware.com<span style=color:#bbb>
-</span><span style=color:#bbb>   </span><span style=color:#070>resources</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- nsxerrors<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- nsxnetworkinterfaces<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- nsxlocks<span style=color:#bbb>
-</span><span style=color:#bbb>   </span><span style=color:#070>verbs</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- create<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- get<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- list<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- patch<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- delete<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- watch<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- update<span style=color:#bbb>
-</span><span style=color:#bbb> </span>- <span style=color:#070>apiGroups</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>   </span>- <span style=background-color:#e0e0ff>&#34;&#34;</span><span style=color:#bbb>
-</span><span style=color:#bbb>   </span>- extensions<span style=color:#bbb>
-</span><span style=color:#bbb>   </span>- nsx.vmware.com<span style=color:#bbb>
-</span><span style=color:#bbb>   </span><span style=color:#070>resources</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- ingresses/status<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- services/status<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- nsxnetworkinterfaces/status<span style=color:#bbb>
-</span><span style=color:#bbb>   </span><span style=color:#070>verbs</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- replace<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- update<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- patch<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#0e84b5;font-weight:700>---</span><span style=color:#bbb>
-</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Bind ServiceAccount created for NCP to its ClusterRole</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ClusterRoleBinding<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>rbac.authorization.k8s.io/v1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>ncp-cluster-role-binding<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>roleRef</span>:<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#666;font-style:italic># Comment out the apiGroup while using OpenShift</span><span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#070>apiGroup</span>:<span style=color:#bbb> </span>rbac.authorization.k8s.io<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ClusterRole<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>ncp-cluster-role<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>subjects</span>:<span style=color:#bbb>
-</span><span style=color:#bbb> </span>- <span style=color:#070>kind</span>:<span style=color:#bbb> </span>ServiceAccount<span style=color:#bbb>
-</span><span style=color:#bbb>   </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>ncp-svc<span style=color:#bbb>
-</span><span style=color:#bbb>   </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>nsx-system<span style=color:#bbb>
-</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#0e84b5;font-weight:700>---</span><span style=color:#bbb>
-</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Bind ServiceAccount created for NCP to the patch ClusterRole</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ClusterRoleBinding<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>rbac.authorization.k8s.io/v1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>ncp-patch-role-binding<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>roleRef</span>:<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#070>apiGroup</span>:<span style=color:#bbb> </span>rbac.authorization.k8s.io<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ClusterRole<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>ncp-patch-role<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>subjects</span>:<span style=color:#bbb>
-</span><span style=color:#bbb> </span>- <span style=color:#070>kind</span>:<span style=color:#bbb> </span>ServiceAccount<span style=color:#bbb>
-</span><span style=color:#bbb>   </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>ncp-svc<span style=color:#bbb>
-</span><span style=color:#bbb>   </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>nsx-system<span style=color:#bbb>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=c># Create a ServiceAccount for NCP namespace</span><span class=w>
+</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ServiceAccount</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-svc</span><span class=w>
+</span><span class=w> </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nn>---</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># Create ClusterRole for NCP</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRole</span><span class=w>
+</span><span class=w></span><span class=c># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span class=w>
+</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io/v1</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-cluster-role</span><span class=w>
+</span><span class=w></span><span class=nt>rules</span><span class=p>:</span><span class=w>
+</span><span class=w> </span>- <span class=nt>apiGroups</span><span class=p>:</span><span class=w>
+</span><span class=w>   </span>- <span class=s2>&#34;&#34;</span><span class=w>
+</span><span class=w>   </span>- <span class=l>extensions</span><span class=w>
+</span><span class=w>   </span>- <span class=l>networking.k8s.io</span><span class=w>
+</span><span class=w>   </span><span class=nt>resources</span><span class=p>:</span><span class=w>
+</span><span class=w>     </span>- <span class=l>deployments</span><span class=w>
+</span><span class=w>     </span>- <span class=l>endpoints</span><span class=w>
+</span><span class=w>     </span>- <span class=l>pods</span><span class=w>
+</span><span class=w>     </span>- <span class=l>pods/log</span><span class=w>
+</span><span class=w>     </span>- <span class=l>networkpolicies</span><span class=w>
+</span><span class=w>     </span><span class=c># Move &#39;nodes&#39; to ncp-patch-role when hyperbus is disabled.</span><span class=w>
+</span><span class=w>     </span>- <span class=l>nodes</span><span class=w>
+</span><span class=w>     </span>- <span class=l>replicationcontrollers</span><span class=w>
+</span><span class=w>     </span><span class=c># Remove &#39;secrets&#39; if not using Native Load Balancer.</span><span class=w>
+</span><span class=w>     </span>- <span class=l>secrets</span><span class=w>
+</span><span class=w>   </span><span class=nt>verbs</span><span class=p>:</span><span class=w>
+</span><span class=w>     </span>- <span class=l>get</span><span class=w>
+</span><span class=w>     </span>- <span class=l>watch</span><span class=w>
+</span><span class=w>     </span>- <span class=l>list</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nn>---</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># Create ClusterRole for NCP to edit resources</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRole</span><span class=w>
+</span><span class=w></span><span class=c># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span class=w>
+</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io/v1</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-patch-role</span><span class=w>
+</span><span class=w></span><span class=nt>rules</span><span class=p>:</span><span class=w>
+</span><span class=w> </span>- <span class=nt>apiGroups</span><span class=p>:</span><span class=w>
+</span><span class=w>   </span>- <span class=s2>&#34;&#34;</span><span class=w>
+</span><span class=w>   </span>- <span class=l>extensions</span><span class=w>
+</span><span class=w>   </span><span class=nt>resources</span><span class=p>:</span><span class=w>
+</span><span class=w>     </span><span class=c># NCP needs to annotate the SNAT errors on namespaces</span><span class=w>
+</span><span class=w>     </span>- <span class=l>namespaces</span><span class=w>
+</span><span class=w>     </span>- <span class=l>ingresses</span><span class=w>
+</span><span class=w>     </span>- <span class=l>services</span><span class=w>
+</span><span class=w>   </span><span class=nt>verbs</span><span class=p>:</span><span class=w>
+</span><span class=w>     </span>- <span class=l>get</span><span class=w>
+</span><span class=w>     </span>- <span class=l>watch</span><span class=w>
+</span><span class=w>     </span>- <span class=l>list</span><span class=w>
+</span><span class=w>     </span>- <span class=l>update</span><span class=w>
+</span><span class=w>     </span>- <span class=l>patch</span><span class=w>
+</span><span class=w> </span><span class=c># NCP needs permission to CRUD custom resource nsxerrors</span><span class=w>
+</span><span class=w> </span>- <span class=nt>apiGroups</span><span class=p>:</span><span class=w>
+</span><span class=w>   </span><span class=c># The api group is specified in custom resource definition for nsxerrors</span><span class=w>
+</span><span class=w>   </span>- <span class=l>nsx.vmware.com</span><span class=w>
+</span><span class=w>   </span><span class=nt>resources</span><span class=p>:</span><span class=w>
+</span><span class=w>     </span>- <span class=l>nsxerrors</span><span class=w>
+</span><span class=w>     </span>- <span class=l>nsxnetworkinterfaces</span><span class=w>
+</span><span class=w>     </span>- <span class=l>nsxlocks</span><span class=w>
+</span><span class=w>   </span><span class=nt>verbs</span><span class=p>:</span><span class=w>
+</span><span class=w>     </span>- <span class=l>create</span><span class=w>
+</span><span class=w>     </span>- <span class=l>get</span><span class=w>
+</span><span class=w>     </span>- <span class=l>list</span><span class=w>
+</span><span class=w>     </span>- <span class=l>patch</span><span class=w>
+</span><span class=w>     </span>- <span class=l>delete</span><span class=w>
+</span><span class=w>     </span>- <span class=l>watch</span><span class=w>
+</span><span class=w>     </span>- <span class=l>update</span><span class=w>
+</span><span class=w> </span>- <span class=nt>apiGroups</span><span class=p>:</span><span class=w>
+</span><span class=w>   </span>- <span class=s2>&#34;&#34;</span><span class=w>
+</span><span class=w>   </span>- <span class=l>extensions</span><span class=w>
+</span><span class=w>   </span>- <span class=l>nsx.vmware.com</span><span class=w>
+</span><span class=w>   </span><span class=nt>resources</span><span class=p>:</span><span class=w>
+</span><span class=w>     </span>- <span class=l>ingresses/status</span><span class=w>
+</span><span class=w>     </span>- <span class=l>services/status</span><span class=w>
+</span><span class=w>     </span>- <span class=l>nsxnetworkinterfaces/status</span><span class=w>
+</span><span class=w>   </span><span class=nt>verbs</span><span class=p>:</span><span class=w>
+</span><span class=w>     </span>- <span class=l>replace</span><span class=w>
+</span><span class=w>     </span>- <span class=l>update</span><span class=w>
+</span><span class=w>     </span>- <span class=l>patch</span><span class=w>
+</span><span class=w></span><span class=nn>---</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># Bind ServiceAccount created for NCP to its ClusterRole</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRoleBinding</span><span class=w>
+</span><span class=w></span><span class=c># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span class=w>
+</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io/v1</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-cluster-role-binding</span><span class=w>
+</span><span class=w></span><span class=nt>roleRef</span><span class=p>:</span><span class=w>
+</span><span class=w> </span><span class=c># Comment out the apiGroup while using OpenShift</span><span class=w>
+</span><span class=w> </span><span class=nt>apiGroup</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io</span><span class=w>
+</span><span class=w> </span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRole</span><span class=w>
+</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-cluster-role</span><span class=w>
+</span><span class=w></span><span class=nt>subjects</span><span class=p>:</span><span class=w>
+</span><span class=w> </span>- <span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ServiceAccount</span><span class=w>
+</span><span class=w>   </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-svc</span><span class=w>
+</span><span class=w>   </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nn>---</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># Bind ServiceAccount created for NCP to the patch ClusterRole</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRoleBinding</span><span class=w>
+</span><span class=w></span><span class=c># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span class=w>
+</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io/v1</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-patch-role-binding</span><span class=w>
+</span><span class=w></span><span class=nt>roleRef</span><span class=p>:</span><span class=w>
+</span><span class=w> </span><span class=nt>apiGroup</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io</span><span class=w>
+</span><span class=w> </span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRole</span><span class=w>
+</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-patch-role</span><span class=w>
+</span><span class=w></span><span class=nt>subjects</span><span class=p>:</span><span class=w>
+</span><span class=w> </span>- <span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ServiceAccount</span><span class=w>
+</span><span class=w>   </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-svc</span><span class=w>
+</span><span class=w>   </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
 </div><p>The second <strong>ServiceAccount</strong> we need to create is called <em>nsx-agent-svc</em>, which
 is used to run the NSX Node Agent Pod. We create a <strong>ClusterRole</strong> to assign the
 required permissions, and then another <strong>ClusterRoleBinding</strong> to assign the
 account to the role.</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#666;font-style:italic># Create a ServiceAccount for nsx-node-agent</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ServiceAccount<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>nsx-agent-svc<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>nsx-system<span style=color:#bbb>
-</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#0e84b5;font-weight:700>---</span><span style=color:#bbb>
-</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Create ClusterRole for nsx-node-agent</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ClusterRole<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>rbac.authorization.k8s.io/v1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>nsx-agent-cluster-role<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>rules</span>:<span style=color:#bbb>
-</span><span style=color:#bbb> </span>- <span style=color:#070>apiGroups</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>   </span>- <span style=background-color:#e0e0ff>&#34;&#34;</span><span style=color:#bbb>
-</span><span style=color:#bbb>   </span><span style=color:#070>resources</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- endpoints<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- services<span style=color:#bbb>
-</span><span style=color:#bbb>     </span><span style=color:#666;font-style:italic># Uncomment the following resources when hyperbus is disabled</span><span style=color:#bbb>
-</span><span style=color:#bbb>     </span><span style=color:#666;font-style:italic># - nodes</span><span style=color:#bbb>
-</span><span style=color:#bbb>     </span><span style=color:#666;font-style:italic># - pods</span><span style=color:#bbb>
-</span><span style=color:#bbb>   </span><span style=color:#070>verbs</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- get<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- watch<span style=color:#bbb>
-</span><span style=color:#bbb>     </span>- list<span style=color:#bbb>
-</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#0e84b5;font-weight:700>---</span><span style=color:#bbb>
-</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Bind ServiceAccount created for nsx-node-agent to its ClusterRole</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ClusterRoleBinding<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>rbac.authorization.k8s.io/v1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>nsx-agent-cluster-role-binding<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>roleRef</span>:<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#070>apiGroup</span>:<span style=color:#bbb> </span>rbac.authorization.k8s.io<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ClusterRole<span style=color:#bbb>
-</span><span style=color:#bbb> </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>nsx-agent-cluster-role<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>subjects</span>:<span style=color:#bbb>
-</span><span style=color:#bbb> </span>- <span style=color:#070>kind</span>:<span style=color:#bbb> </span>ServiceAccount<span style=color:#bbb>
-</span><span style=color:#bbb>   </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>nsx-agent-svc<span style=color:#bbb>
-</span><span style=color:#bbb>   </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>nsx-system<span style=color:#bbb>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=c># Create a ServiceAccount for nsx-node-agent</span><span class=w>
+</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ServiceAccount</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-agent-svc</span><span class=w>
+</span><span class=w> </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nn>---</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># Create ClusterRole for nsx-node-agent</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRole</span><span class=w>
+</span><span class=w></span><span class=c># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span class=w>
+</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io/v1</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-agent-cluster-role</span><span class=w>
+</span><span class=w></span><span class=nt>rules</span><span class=p>:</span><span class=w>
+</span><span class=w> </span>- <span class=nt>apiGroups</span><span class=p>:</span><span class=w>
+</span><span class=w>   </span>- <span class=s2>&#34;&#34;</span><span class=w>
+</span><span class=w>   </span><span class=nt>resources</span><span class=p>:</span><span class=w>
+</span><span class=w>     </span>- <span class=l>endpoints</span><span class=w>
+</span><span class=w>     </span>- <span class=l>services</span><span class=w>
+</span><span class=w>     </span><span class=c># Uncomment the following resources when hyperbus is disabled</span><span class=w>
+</span><span class=w>     </span><span class=c># - nodes</span><span class=w>
+</span><span class=w>     </span><span class=c># - pods</span><span class=w>
+</span><span class=w>   </span><span class=nt>verbs</span><span class=p>:</span><span class=w>
+</span><span class=w>     </span>- <span class=l>get</span><span class=w>
+</span><span class=w>     </span>- <span class=l>watch</span><span class=w>
+</span><span class=w>     </span>- <span class=l>list</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nn>---</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># Bind ServiceAccount created for nsx-node-agent to its ClusterRole</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRoleBinding</span><span class=w>
+</span><span class=w></span><span class=c># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span class=w>
+</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io/v1</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-agent-cluster-role-binding</span><span class=w>
+</span><span class=w></span><span class=nt>roleRef</span><span class=p>:</span><span class=w>
+</span><span class=w> </span><span class=nt>apiGroup</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io</span><span class=w>
+</span><span class=w> </span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRole</span><span class=w>
+</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-agent-cluster-role</span><span class=w>
+</span><span class=w></span><span class=nt>subjects</span><span class=p>:</span><span class=w>
+</span><span class=w> </span>- <span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ServiceAccount</span><span class=w>
+</span><span class=w>   </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-agent-svc</span><span class=w>
+</span><span class=w>   </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
 </div><p>Save the namespace, NCP and NSX Agent config as a single YAML file called
 nsx-ncp-rbac.yml, and then deploy the new resources using the following command:</p>
 <h4 id=master-node-or-admin-workstation><strong>Master Node or Admin Workstation</strong></h4>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl apply -f nsx-ncp-rbac.yml
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>kubectl apply -f nsx-ncp-rbac.yml
 </code></pre></td></tr></table>
 </div>
 </div><h2 id=prepare-the-ncp-config-file>Prepare the NCP config file</h2>
@@ -1048,13 +1024,13 @@ and a
 <a href=https://kubernetes.io/docs/concepts/workloads/controllers/deployment/>Deployment</a>.
 These specify the configuration data required to run the application (in this
 case NCP) and the pod deployment details.</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#666;font-style:italic># Copy the ncp-deployment template from the NSX Container Plugin folder</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Copy the ncp-deployment template from the NSX Container Plugin folder</span>
 cp nsx-container-2.4.1.13515827/Kubernetes/ncp-deployment.yml . 
 </code></pre></td></tr></table>
 </div>
@@ -1073,208 +1049,208 @@ created in the RBAC</li>
 <li>Make sure the <em>image</em> value is updated with the tagged name in the docker
 local registry</li>
 </ul>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">57
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">58
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">59
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">60
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">61
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">62
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">63
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">64
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">65
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">66
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">67
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">68
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">69
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">70
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">71
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">72
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">73
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">74
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">75
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">76
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">77
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">78
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">79
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">80
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">81
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">82
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">83
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">84
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">85
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">86
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">87
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">88
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">89
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">90
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">91
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">92
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">93
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span><span class=lnt>81
+</span><span class=lnt>82
+</span><span class=lnt>83
+</span><span class=lnt>84
+</span><span class=lnt>85
+</span><span class=lnt>86
+</span><span class=lnt>87
+</span><span class=lnt>88
+</span><span class=lnt>89
+</span><span class=lnt>90
+</span><span class=lnt>91
+</span><span class=lnt>92
+</span><span class=lnt>93
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ConfigMap<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>nsx-ncp-config<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>nsx-system<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>labels</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>version</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>data</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>ncp.ini</span>:<span style=color:#bbb> </span>|<span style=color:#d42;background-color:#e0e0ff>
-</span><span style=color:#d42;background-color:#e0e0ff>    [DEFAULT]
-</span><span style=color:#d42;background-color:#e0e0ff>    [coe]
-</span><span style=color:#d42;background-color:#e0e0ff>    cluster = k8s-01
-</span><span style=color:#d42;background-color:#e0e0ff>    nsxlib_loglevel=INFO
-</span><span style=color:#d42;background-color:#e0e0ff>    enable_snat = True
-</span><span style=color:#d42;background-color:#e0e0ff>    node_type = HOSTVM
-</span><span style=color:#d42;background-color:#e0e0ff>    [ha]
-</span><span style=color:#d42;background-color:#e0e0ff>    [k8s]
-</span><span style=color:#d42;background-color:#e0e0ff>    apiserver_host_ip = 10.0.0.10
-</span><span style=color:#d42;background-color:#e0e0ff>    apiserver_host_port = 6443
-</span><span style=color:#d42;background-color:#e0e0ff>    ca_file = /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-</span><span style=color:#d42;background-color:#e0e0ff>    client_token_file = /var/run/secrets/kubernetes.io/serviceaccount/token
-</span><span style=color:#d42;background-color:#e0e0ff>    [nsx_v3]
-</span><span style=color:#d42;background-color:#e0e0ff>    nsx_api_managers = nsx-manager.definit.local
-</span><span style=color:#d42;background-color:#e0e0ff>    nsx_api_user = admin
-</span><span style=color:#d42;background-color:#e0e0ff>    nsx_api_password = VMware1!
-</span><span style=color:#d42;background-color:#e0e0ff>    insecure = True
-</span><span style=color:#d42;background-color:#e0e0ff>    top_tier_router = b92fbb43-b664-46e9-bd4a-d8d46dac82f8
-</span><span style=color:#d42;background-color:#e0e0ff>    overlay_tz = tz-overlay
-</span><span style=color:#d42;background-color:#e0e0ff>    subnet_prefix = 24
-</span><span style=color:#d42;background-color:#e0e0ff>    use_native_loadbalancer = True
-</span><span style=color:#d42;background-color:#e0e0ff>    l4_lb_auto_scaling = True
-</span><span style=color:#d42;background-color:#e0e0ff>    default_ingress_class_nsx = True
-</span><span style=color:#d42;background-color:#e0e0ff>    pool_algorithm = &#39;ROUND_ROBIN&#39;
-</span><span style=color:#d42;background-color:#e0e0ff>    service_size = &#39;SMALL&#39;
-</span><span style=color:#d42;background-color:#e0e0ff>    l7_persistence = &#39;source_ip&#39;
-</span><span style=color:#d42;background-color:#e0e0ff>    l4_persistence = &#39;source_ip&#39;
-</span><span style=color:#d42;background-color:#e0e0ff>    container_ip_blocks = ab81892f-eb9a-4248-8606-b26f2293fa83
-</span><span style=color:#d42;background-color:#e0e0ff>    external_ip_pools = dde463fb-15d9-456f-aa3d-030e24f1b1db
-</span><span style=color:#d42;background-color:#e0e0ff>    top_firewall_section_marker = f887ba4f-d634-44ff-8338-05c4a214cc93
-</span><span style=color:#d42;background-color:#e0e0ff>    bottom_firewall_section_marker = 820da106-a35c-43c0-bcf0-edaf94004d9e</span><span style=color:#bbb>    
-</span><span style=color:#bbb></span><span style=color:#0e84b5;font-weight:700>---</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>extensions/v1beta1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>Deployment<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>nsx-ncp<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>nsx-system<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>labels</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>tier</span>:<span style=color:#bbb> </span>nsx-networking<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>component</span>:<span style=color:#bbb> </span>nsx-ncp<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>version</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>spec</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>replicas</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>1</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>template</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>      </span><span style=color:#070>labels</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>        </span><span style=color:#070>tier</span>:<span style=color:#bbb> </span>nsx-networking<span style=color:#bbb>
-</span><span style=color:#bbb>        </span><span style=color:#070>component</span>:<span style=color:#bbb> </span>nsx-ncp<span style=color:#bbb>
-</span><span style=color:#bbb>        </span><span style=color:#070>version</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>spec</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>        </span><span style=color:#070>hostNetwork</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
-</span><span style=color:#bbb>        </span><span style=color:#070>serviceAccountName</span>:<span style=color:#bbb> </span>ncp-svc<span style=color:#bbb>
-</span><span style=color:#bbb>        </span><span style=color:#070>containers</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>        </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>nsx-ncp<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>image</span>:<span style=color:#bbb> </span>nsx-ncp-ubuntu:2.4.1.13515827<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>imagePullPolicy</span>:<span style=color:#bbb> </span>IfNotPresent<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>env</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>            </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>NCP_NAME<span style=color:#bbb>
-</span><span style=color:#bbb>              </span><span style=color:#070>valueFrom</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>                </span><span style=color:#070>fieldRef</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>                  </span><span style=color:#070>fieldPath</span>:<span style=color:#bbb> </span>metadata.name<span style=color:#bbb>
-</span><span style=color:#bbb>            </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>NCP_NAMESPACE<span style=color:#bbb>
-</span><span style=color:#bbb>              </span><span style=color:#070>valueFrom</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>                </span><span style=color:#070>fieldRef</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>                  </span><span style=color:#070>fieldPath</span>:<span style=color:#bbb> </span>metadata.namespace<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>livenessProbe</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>exec</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>              </span><span style=color:#070>command</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- /bin/sh<span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- -c<span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- timeout 5 check_pod_liveness nsx-ncp<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>initialDelaySeconds</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>5</span><span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>timeoutSeconds</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>5</span><span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>periodSeconds</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>10</span><span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>failureThreshold</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>5</span><span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>volumeMounts</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>          </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>config-volume<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>mountPath</span>:<span style=color:#bbb> </span>/etc/nsx-ujo/ncp.ini<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>subPath</span>:<span style=color:#bbb> </span>ncp.ini<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>readOnly</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
-</span><span style=color:#bbb>        </span><span style=color:#070>volumes</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>        </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>config-volume<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>configMap</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>nsx-ncp-config<span style=color:#bbb>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ConfigMap</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp-config</span><span class=w>
+</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
+</span><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span><span class=w></span><span class=nt>data</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>ncp.ini</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>    [DEFAULT]
+</span><span class=sd>    [coe]
+</span><span class=sd>    cluster = k8s-01
+</span><span class=sd>    nsxlib_loglevel=INFO
+</span><span class=sd>    enable_snat = True
+</span><span class=sd>    node_type = HOSTVM
+</span><span class=sd>    [ha]
+</span><span class=sd>    [k8s]
+</span><span class=sd>    apiserver_host_ip = 10.0.0.10
+</span><span class=sd>    apiserver_host_port = 6443
+</span><span class=sd>    ca_file = /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+</span><span class=sd>    client_token_file = /var/run/secrets/kubernetes.io/serviceaccount/token
+</span><span class=sd>    [nsx_v3]
+</span><span class=sd>    nsx_api_managers = nsx-manager.definit.local
+</span><span class=sd>    nsx_api_user = admin
+</span><span class=sd>    nsx_api_password = VMware1!
+</span><span class=sd>    insecure = True
+</span><span class=sd>    top_tier_router = b92fbb43-b664-46e9-bd4a-d8d46dac82f8
+</span><span class=sd>    overlay_tz = tz-overlay
+</span><span class=sd>    subnet_prefix = 24
+</span><span class=sd>    use_native_loadbalancer = True
+</span><span class=sd>    l4_lb_auto_scaling = True
+</span><span class=sd>    default_ingress_class_nsx = True
+</span><span class=sd>    pool_algorithm = &#39;ROUND_ROBIN&#39;
+</span><span class=sd>    service_size = &#39;SMALL&#39;
+</span><span class=sd>    l7_persistence = &#39;source_ip&#39;
+</span><span class=sd>    l4_persistence = &#39;source_ip&#39;
+</span><span class=sd>    container_ip_blocks = ab81892f-eb9a-4248-8606-b26f2293fa83
+</span><span class=sd>    external_ip_pools = dde463fb-15d9-456f-aa3d-030e24f1b1db
+</span><span class=sd>    top_firewall_section_marker = f887ba4f-d634-44ff-8338-05c4a214cc93
+</span><span class=sd>    bottom_firewall_section_marker = 820da106-a35c-43c0-bcf0-edaf94004d9e</span><span class=w>    
+</span><span class=w></span><span class=nn>---</span><span class=w>
+</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>extensions/v1beta1</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Deployment</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp</span><span class=w>
+</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
+</span><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>tier</span><span class=p>:</span><span class=w> </span><span class=l>nsx-networking</span><span class=w>
+</span><span class=w>    </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp</span><span class=w>
+</span><span class=w>    </span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>replicas</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
+</span><span class=w>  </span><span class=nt>template</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>tier</span><span class=p>:</span><span class=w> </span><span class=l>nsx-networking</span><span class=w>
+</span><span class=w>        </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp</span><span class=w>
+</span><span class=w>        </span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span><span class=w>    </span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>hostNetwork</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>        </span><span class=nt>serviceAccountName</span><span class=p>:</span><span class=w> </span><span class=l>ncp-svc</span><span class=w>
+</span><span class=w>        </span><span class=nt>containers</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp</span><span class=w>
+</span><span class=w>          </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp-ubuntu:2.4.1.13515827</span><span class=w>
+</span><span class=w>          </span><span class=nt>imagePullPolicy</span><span class=p>:</span><span class=w> </span><span class=l>IfNotPresent</span><span class=w>
+</span><span class=w>          </span><span class=nt>env</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>NCP_NAME</span><span class=w>
+</span><span class=w>              </span><span class=nt>valueFrom</span><span class=p>:</span><span class=w>
+</span><span class=w>                </span><span class=nt>fieldRef</span><span class=p>:</span><span class=w>
+</span><span class=w>                  </span><span class=nt>fieldPath</span><span class=p>:</span><span class=w> </span><span class=l>metadata.name</span><span class=w>
+</span><span class=w>            </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>NCP_NAMESPACE</span><span class=w>
+</span><span class=w>              </span><span class=nt>valueFrom</span><span class=p>:</span><span class=w>
+</span><span class=w>                </span><span class=nt>fieldRef</span><span class=p>:</span><span class=w>
+</span><span class=w>                  </span><span class=nt>fieldPath</span><span class=p>:</span><span class=w> </span><span class=l>metadata.namespace</span><span class=w>
+</span><span class=w>          </span><span class=nt>livenessProbe</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>exec</span><span class=p>:</span><span class=w>
+</span><span class=w>              </span><span class=nt>command</span><span class=p>:</span><span class=w>
+</span><span class=w>                </span>- <span class=l>/bin/sh</span><span class=w>
+</span><span class=w>                </span>- -<span class=l>c</span><span class=w>
+</span><span class=w>                </span>- <span class=l>timeout 5 check_pod_liveness nsx-ncp</span><span class=w>
+</span><span class=w>            </span><span class=nt>initialDelaySeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span><span class=w>            </span><span class=nt>timeoutSeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span><span class=w>            </span><span class=nt>periodSeconds</span><span class=p>:</span><span class=w> </span><span class=m>10</span><span class=w>
+</span><span class=w>            </span><span class=nt>failureThreshold</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span><span class=w>          </span><span class=nt>volumeMounts</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>config-volume</span><span class=w>
+</span><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/etc/nsx-ujo/ncp.ini</span><span class=w>
+</span><span class=w>            </span><span class=nt>subPath</span><span class=p>:</span><span class=w> </span><span class=l>ncp.ini</span><span class=w>
+</span><span class=w>            </span><span class=nt>readOnly</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>        </span><span class=nt>volumes</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>config-volume</span><span class=w>
+</span><span class=w>          </span><span class=nt>configMap</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp-config</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
 </div><h2 id=prepare-the-nsx-node-agent-config-file>Prepare the NSX Node Agent config file</h2>
 <p>For the NSX Node Agent, we also need to prepare a YAML config file consisting of
 a <strong>ConfigMap</strong> and <strong>Deployment</strong>.</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#666;font-style:italic># Copy the NSX Node Agent YAML config</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Copy the NSX Node Agent YAML config</span>
 cp nsx-container-2.4.1.13515827/Kubernetes/ubuntu_amd64/nsx-node-agent-ds.yml .
 </code></pre></td></tr></table>
 </div>
@@ -1286,275 +1262,275 @@ cp nsx-container-2.4.1.13515827/Kubernetes/ubuntu_amd64/nsx-node-agent-ds.yml .
 <li>Be sure to update the <em>serviceAccountName</em> value with the ServiceAccount created in the RBAC</li>
 <li>Make sure the <em>image</em> value is updated with the tagged name in the docker local registry</li>
 </ul>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 26
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 27
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 28
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 29
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 30
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 31
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 32
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 33
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 34
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 35
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 36
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 37
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 38
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 39
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 40
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 41
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 42
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 43
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 44
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 45
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 46
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 47
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 48
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 49
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 50
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 51
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 52
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 53
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 54
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 55
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 56
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 57
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 58
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 59
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 60
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 61
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 62
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 63
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 64
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 65
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 66
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 67
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 68
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 69
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 70
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 71
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 72
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 73
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 74
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 75
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 76
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 77
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 78
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 79
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 80
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 81
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 82
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 83
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 84
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 85
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 86
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 87
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 88
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 89
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 90
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 91
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 92
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 93
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 94
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 95
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 96
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 97
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 98
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 99
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">100
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">101
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">102
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">103
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">104
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">105
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">106
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">107
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">108
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">109
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">110
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">111
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">112
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">113
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">114
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">115
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">116
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">117
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">118
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">119
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">120
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">121
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">122
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">123
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">124
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">125
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">126
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ConfigMap<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>nsx-node-agent-config<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>nsx-system<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>labels</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>version</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>data</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>ncp.ini</span>:<span style=color:#bbb> </span>|<span style=color:#d42;background-color:#e0e0ff>
-</span><span style=color:#d42;background-color:#e0e0ff>    [DEFAULT]
-</span><span style=color:#d42;background-color:#e0e0ff>    [coe]
-</span><span style=color:#d42;background-color:#e0e0ff>    cluster = k8s-01
-</span><span style=color:#d42;background-color:#e0e0ff>    nsxlib_loglevel=INFO
-</span><span style=color:#d42;background-color:#e0e0ff>    enable_snat = True
-</span><span style=color:#d42;background-color:#e0e0ff>    node_type = HOSTVM
-</span><span style=color:#d42;background-color:#e0e0ff>    [ha]
-</span><span style=color:#d42;background-color:#e0e0ff>    [k8s]
-</span><span style=color:#d42;background-color:#e0e0ff>    apiserver_host_ip = 10.0.0.10
-</span><span style=color:#d42;background-color:#e0e0ff>    apiserver_host_port = 6443
-</span><span style=color:#d42;background-color:#e0e0ff>    ca_file = /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-</span><span style=color:#d42;background-color:#e0e0ff>    client_token_file = /var/run/secrets/kubernetes.io/serviceaccount/token
-</span><span style=color:#d42;background-color:#e0e0ff>    [nsx_node_agent]
-</span><span style=color:#d42;background-color:#e0e0ff>    ovs_bridge = br-int
-</span><span style=color:#d42;background-color:#e0e0ff>    [nsx_kube_proxy]</span><span style=color:#bbb>    
-</span><span style=color:#bbb></span><span style=color:#0e84b5;font-weight:700>---</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>extensions/v1beta1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>DaemonSet<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>nsx-node-agent<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>nsx-system<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>labels</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>tier</span>:<span style=color:#bbb> </span>nsx-networking<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>component</span>:<span style=color:#bbb> </span>nsx-node-agent<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>version</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>spec</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>updateStrategy</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>type</span>:<span style=color:#bbb> </span>RollingUpdate<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>template</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>      </span><span style=color:#070>annotations</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>        </span><span style=color:#070>container.apparmor.security.beta.kubernetes.io/nsx-node-agent</span>:<span style=color:#bbb> </span>localhost/node-agent-apparmor<span style=color:#bbb>
-</span><span style=color:#bbb>      </span><span style=color:#070>labels</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>        </span><span style=color:#070>tier</span>:<span style=color:#bbb> </span>nsx-networking<span style=color:#bbb>
-</span><span style=color:#bbb>        </span><span style=color:#070>component</span>:<span style=color:#bbb> </span>nsx-node-agent<span style=color:#bbb>
-</span><span style=color:#bbb>        </span><span style=color:#070>version</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>spec</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>      </span><span style=color:#070>hostNetwork</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
-</span><span style=color:#bbb>      </span><span style=color:#070>serviceAccountName</span>:<span style=color:#bbb> </span>nsx-agent-svc<span style=color:#bbb>
-</span><span style=color:#bbb>      </span><span style=color:#070>containers</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>        </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>nsx-node-agent<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>image</span>:<span style=color:#bbb> </span>nsx-ncp-ubuntu:2.4.1.13515827<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>imagePullPolicy</span>:<span style=color:#bbb> </span>IfNotPresent<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>command</span>:<span style=color:#bbb> </span>[<span style=background-color:#e0e0ff>&#34;start_node_agent&#34;</span>]<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>livenessProbe</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>exec</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>              </span><span style=color:#070>command</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- /bin/sh<span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- -c<span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- timeout 5 check_pod_liveness nsx-node-agent<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>initialDelaySeconds</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>5</span><span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>timeoutSeconds</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>5</span><span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>periodSeconds</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>10</span><span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>failureThreshold</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>5</span><span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>securityContext</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>capabilities</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>              </span><span style=color:#070>add</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- NET_ADMIN<span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- SYS_ADMIN<span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- SYS_PTRACE<span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- DAC_READ_SEARCH<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>volumeMounts</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>          </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>config-volume<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>mountPath</span>:<span style=color:#bbb> </span>/etc/nsx-ujo/ncp.ini<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>subPath</span>:<span style=color:#bbb> </span>ncp.ini<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>readOnly</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
-</span><span style=color:#bbb>          </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>openvswitch<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>mountPath</span>:<span style=color:#bbb> </span>/var/run/openvswitch<span style=color:#bbb>
-</span><span style=color:#bbb>          </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>cni-sock<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>mountPath</span>:<span style=color:#bbb> </span>/var/run/nsx-ujo<span style=color:#bbb>
-</span><span style=color:#bbb>          </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>netns<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>mountPath</span>:<span style=color:#bbb> </span>/var/run/netns<span style=color:#bbb>
-</span><span style=color:#bbb>          </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>proc<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>mountPath</span>:<span style=color:#bbb> </span>/host/proc<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>readOnly</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
-</span><span style=color:#bbb>        </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>nsx-kube-proxy<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>image</span>:<span style=color:#bbb> </span>nsx-ncp-ubuntu:2.4.1.13515827<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>imagePullPolicy</span>:<span style=color:#bbb> </span>IfNotPresent<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>command</span>:<span style=color:#bbb> </span>[<span style=background-color:#e0e0ff>&#34;start_kube_proxy&#34;</span>]<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>livenessProbe</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>exec</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>              </span><span style=color:#070>command</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- /bin/sh<span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- -c<span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- timeout 5 check_pod_liveness nsx-kube-proxy<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>initialDelaySeconds</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>5</span><span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>periodSeconds</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>5</span><span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>securityContext</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>capabilities</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>              </span><span style=color:#070>add</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- NET_ADMIN<span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- SYS_ADMIN<span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- SYS_PTRACE<span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- DAC_READ_SEARCH<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>volumeMounts</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>          </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>config-volume<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>mountPath</span>:<span style=color:#bbb> </span>/etc/nsx-ujo/ncp.ini<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>subPath</span>:<span style=color:#bbb> </span>ncp.ini<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>readOnly</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
-</span><span style=color:#bbb>          </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>openvswitch<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>mountPath</span>:<span style=color:#bbb> </span>/var/run/openvswitch<span style=color:#bbb>
-</span><span style=color:#bbb>      </span><span style=color:#070>volumes</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>        </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>config-volume<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>configMap</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>nsx-node-agent-config<span style=color:#bbb>
-</span><span style=color:#bbb>        </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>cni-sock<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>hostPath</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>path</span>:<span style=color:#bbb> </span>/var/run/nsx-ujo<span style=color:#bbb>
-</span><span style=color:#bbb>        </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>netns<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>hostPath</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>path</span>:<span style=color:#bbb> </span>/var/run/netns<span style=color:#bbb>
-</span><span style=color:#bbb>        </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>proc<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>hostPath</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>path</span>:<span style=color:#bbb> </span>/proc<span style=color:#bbb>
-</span><span style=color:#bbb>        </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>openvswitch<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>hostPath</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>            </span><span style=color:#070>path</span>:<span style=color:#bbb> </span>/var/run/openvswitch<span style=color:#bbb>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ConfigMap</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-node-agent-config</span><span class=w>
+</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
+</span><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span><span class=w></span><span class=nt>data</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>ncp.ini</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>    [DEFAULT]
+</span><span class=sd>    [coe]
+</span><span class=sd>    cluster = k8s-01
+</span><span class=sd>    nsxlib_loglevel=INFO
+</span><span class=sd>    enable_snat = True
+</span><span class=sd>    node_type = HOSTVM
+</span><span class=sd>    [ha]
+</span><span class=sd>    [k8s]
+</span><span class=sd>    apiserver_host_ip = 10.0.0.10
+</span><span class=sd>    apiserver_host_port = 6443
+</span><span class=sd>    ca_file = /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+</span><span class=sd>    client_token_file = /var/run/secrets/kubernetes.io/serviceaccount/token
+</span><span class=sd>    [nsx_node_agent]
+</span><span class=sd>    ovs_bridge = br-int
+</span><span class=sd>    [nsx_kube_proxy]</span><span class=w>    
+</span><span class=w></span><span class=nn>---</span><span class=w>
+</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>extensions/v1beta1</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>DaemonSet</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-node-agent</span><span class=w>
+</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
+</span><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>tier</span><span class=p>:</span><span class=w> </span><span class=l>nsx-networking</span><span class=w>
+</span><span class=w>    </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>nsx-node-agent</span><span class=w>
+</span><span class=w>    </span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>updateStrategy</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>RollingUpdate</span><span class=w>
+</span><span class=w>  </span><span class=nt>template</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=nt>annotations</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>container.apparmor.security.beta.kubernetes.io/nsx-node-agent</span><span class=p>:</span><span class=w> </span><span class=l>localhost/node-agent-apparmor</span><span class=w>
+</span><span class=w>      </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>tier</span><span class=p>:</span><span class=w> </span><span class=l>nsx-networking</span><span class=w>
+</span><span class=w>        </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>nsx-node-agent</span><span class=w>
+</span><span class=w>        </span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span><span class=w>    </span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=nt>hostNetwork</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>      </span><span class=nt>serviceAccountName</span><span class=p>:</span><span class=w> </span><span class=l>nsx-agent-svc</span><span class=w>
+</span><span class=w>      </span><span class=nt>containers</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-node-agent</span><span class=w>
+</span><span class=w>          </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp-ubuntu:2.4.1.13515827</span><span class=w>
+</span><span class=w>          </span><span class=nt>imagePullPolicy</span><span class=p>:</span><span class=w> </span><span class=l>IfNotPresent</span><span class=w>
+</span><span class=w>          </span><span class=nt>command</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&#34;start_node_agent&#34;</span><span class=p>]</span><span class=w>
+</span><span class=w>          </span><span class=nt>livenessProbe</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>exec</span><span class=p>:</span><span class=w>
+</span><span class=w>              </span><span class=nt>command</span><span class=p>:</span><span class=w>
+</span><span class=w>                </span>- <span class=l>/bin/sh</span><span class=w>
+</span><span class=w>                </span>- -<span class=l>c</span><span class=w>
+</span><span class=w>                </span>- <span class=l>timeout 5 check_pod_liveness nsx-node-agent</span><span class=w>
+</span><span class=w>            </span><span class=nt>initialDelaySeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span><span class=w>            </span><span class=nt>timeoutSeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span><span class=w>            </span><span class=nt>periodSeconds</span><span class=p>:</span><span class=w> </span><span class=m>10</span><span class=w>
+</span><span class=w>            </span><span class=nt>failureThreshold</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span><span class=w>          </span><span class=nt>securityContext</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>capabilities</span><span class=p>:</span><span class=w>
+</span><span class=w>              </span><span class=nt>add</span><span class=p>:</span><span class=w>
+</span><span class=w>                </span>- <span class=l>NET_ADMIN</span><span class=w>
+</span><span class=w>                </span>- <span class=l>SYS_ADMIN</span><span class=w>
+</span><span class=w>                </span>- <span class=l>SYS_PTRACE</span><span class=w>
+</span><span class=w>                </span>- <span class=l>DAC_READ_SEARCH</span><span class=w>
+</span><span class=w>          </span><span class=nt>volumeMounts</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>config-volume</span><span class=w>
+</span><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/etc/nsx-ujo/ncp.ini</span><span class=w>
+</span><span class=w>            </span><span class=nt>subPath</span><span class=p>:</span><span class=w> </span><span class=l>ncp.ini</span><span class=w>
+</span><span class=w>            </span><span class=nt>readOnly</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>openvswitch</span><span class=w>
+</span><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/openvswitch</span><span class=w>
+</span><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>cni-sock</span><span class=w>
+</span><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/nsx-ujo</span><span class=w>
+</span><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>netns</span><span class=w>
+</span><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/netns</span><span class=w>
+</span><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>proc</span><span class=w>
+</span><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/host/proc</span><span class=w>
+</span><span class=w>            </span><span class=nt>readOnly</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-kube-proxy</span><span class=w>
+</span><span class=w>          </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp-ubuntu:2.4.1.13515827</span><span class=w>
+</span><span class=w>          </span><span class=nt>imagePullPolicy</span><span class=p>:</span><span class=w> </span><span class=l>IfNotPresent</span><span class=w>
+</span><span class=w>          </span><span class=nt>command</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&#34;start_kube_proxy&#34;</span><span class=p>]</span><span class=w>
+</span><span class=w>          </span><span class=nt>livenessProbe</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>exec</span><span class=p>:</span><span class=w>
+</span><span class=w>              </span><span class=nt>command</span><span class=p>:</span><span class=w>
+</span><span class=w>                </span>- <span class=l>/bin/sh</span><span class=w>
+</span><span class=w>                </span>- -<span class=l>c</span><span class=w>
+</span><span class=w>                </span>- <span class=l>timeout 5 check_pod_liveness nsx-kube-proxy</span><span class=w>
+</span><span class=w>            </span><span class=nt>initialDelaySeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span><span class=w>            </span><span class=nt>periodSeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span><span class=w>          </span><span class=nt>securityContext</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>capabilities</span><span class=p>:</span><span class=w>
+</span><span class=w>              </span><span class=nt>add</span><span class=p>:</span><span class=w>
+</span><span class=w>                </span>- <span class=l>NET_ADMIN</span><span class=w>
+</span><span class=w>                </span>- <span class=l>SYS_ADMIN</span><span class=w>
+</span><span class=w>                </span>- <span class=l>SYS_PTRACE</span><span class=w>
+</span><span class=w>                </span>- <span class=l>DAC_READ_SEARCH</span><span class=w>
+</span><span class=w>          </span><span class=nt>volumeMounts</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>config-volume</span><span class=w>
+</span><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/etc/nsx-ujo/ncp.ini</span><span class=w>
+</span><span class=w>            </span><span class=nt>subPath</span><span class=p>:</span><span class=w> </span><span class=l>ncp.ini</span><span class=w>
+</span><span class=w>            </span><span class=nt>readOnly</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>openvswitch</span><span class=w>
+</span><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/openvswitch</span><span class=w>
+</span><span class=w>      </span><span class=nt>volumes</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>config-volume</span><span class=w>
+</span><span class=w>          </span><span class=nt>configMap</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-node-agent-config</span><span class=w>
+</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>cni-sock</span><span class=w>
+</span><span class=w>          </span><span class=nt>hostPath</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/nsx-ujo</span><span class=w>
+</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>netns</span><span class=w>
+</span><span class=w>          </span><span class=nt>hostPath</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/netns</span><span class=w>
+</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>proc</span><span class=w>
+</span><span class=w>          </span><span class=nt>hostPath</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/proc</span><span class=w>
+</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>openvswitch</span><span class=w>
+</span><span class=w>          </span><span class=nt>hostPath</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/openvswitch</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
 </div><h2 id=finallydeploy-ncp-and-nsx-node-agent>Finally…deploy NCP and NSX Node Agent!</h2>
 <p>After what seems like a long journey, we’re finally at the point where we can
 deploy the NCP and Node Agent.</p>
 <h4 id=master-node-or-admin-workstation-1><strong>Master Node or Admin Workstation</strong></h4>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl apply -f ncp-deployment.yml
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>kubectl apply -f ncp-deployment.yml
 kubectl apply -f nsx-node-agent-ds.yml
 </code></pre></td></tr></table>
 </div>
@@ -1651,7 +1627,7 @@ Previous
 </a>
 </div>
 <div class=clr-nav-next>
-<a href=https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-storage-with-the-vsphere-cloud-provider-step-by-step/ title="Lab Guide - Kubernetes and Storage with the vSphere Cloud Provider - Step by Step" class="btn btn-sm btn-outline">
+<a href=https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step/ title="Lab Guide - Kubernetes and NSX-T Container Network Plugin - Step by Step" class="btn btn-sm btn-outline">
 Next
 </a>
 </div>
@@ -1664,31 +1640,31 @@ Next
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
+<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">9</span></a></li>
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">28</span></a></li>
 <li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">15</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">42</span></a></li>
-<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li>
+<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">24</span></a></li>
+<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">49</span></a></li>
+<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/exam class=nav-link>EXAM <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/fusion class=nav-link>FUSION <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
 <li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li>
+<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li>
 <li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
 <li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">206</span></a></li>
+<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">214</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
+<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">14</span></a></li>
+<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">47</span></a></li>
+<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">74</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">58</span></a></li>
+<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">5</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">59</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>
@@ -1697,15 +1673,15 @@ Next
 <input id=Tags type=checkbox>
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
-<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">53</span></a></li>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">70</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">56</span></a></li>
 <li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
 <li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
+<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">34</span></a></li>
 <li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
 <li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li>
+<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">32</span></a></li>
+<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">32</span></a></li>
 <li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li>
 </section>
 </section>

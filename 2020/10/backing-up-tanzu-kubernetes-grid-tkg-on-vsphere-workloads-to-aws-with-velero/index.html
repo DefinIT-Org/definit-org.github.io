@@ -34,7 +34,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2020/10/backing-up-tanzu-kubernetes-grid-tkg-on-vsphere-workloads-to-aws-with-velero/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.90.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.90.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -53,16 +53,16 @@
 </a>
 </div>
 <nav class=header-nav>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/ title=Home>
 Home
 </a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/about/>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/about/ title=About>
 About
 </a>
-<a class="nav-link nav-text" href=https://www.github.com/sammcgeown>
+<a class="nav-link nav-text" href=https://www.github.com/sammcgeown title=GitHub>
 GitHub
 </a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml title=RSS>
 RSS
 </a>
 </nav>
@@ -75,30 +75,6 @@ RSS
 </form>
 </div>
 </header>
-<nav class=subnav>
-<ul class=nav>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/>
-Home
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/about/>
-About
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.github.com/sammcgeown>
-GitHub
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/index.xml>
-RSS
-</a>
-</li>
-</ul>
-</nav>
 <div class=content-container>
 <div class=content-area>
 <h1>Backing up Tanzu Kubernetes Grid (TKG) on vSphere Workloads to AWS with Velero</h1>
@@ -140,12 +116,12 @@ Tags:
 <p>Keep the details safe (I store mine in my password manager).</p>
 <h3 id=install-aws-cli>Install AWS CLI</h3>
 <p>I&rsquo;m using <a href=https://brew.sh/>homebrew</a> to install the AWS CLI, and other packages, because I&rsquo;m on a Mac - check out the <a href=https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html>official install docs</a> for other OSes.</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>brew install awscli
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>brew install awscli
 </code></pre></td></tr></table>
 </div>
 </div><h3 id=configure-a-new-profile>Configure a new profile</h3>
@@ -153,400 +129,400 @@ Tags:
 <p>Note: <em>I&rsquo;m using a named profile as I&rsquo;ve got a few accounts - you can omit this if you are just setting up the one</em></p>
 </blockquote>
 <p>Lets set up some variables first:</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#036>BUCKET</span><span style=color:#333>=</span>prod-cluster-backup <span style=color:#666;font-style:italic># The name of your S3 bucket to create</span>
-<span style=color:#036>REGION</span><span style=color:#333>=</span>us-west-1 <span style=color:#666;font-style:italic># AWS Region in which to create the S3 bucket</span>
-<span style=color:#036>PROFILE</span><span style=color:#333>=</span>my-profile <span style=color:#666;font-style:italic># Only needed if you&#39;re creating a named profile for AWS CLI</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=nv>BUCKET</span><span class=o>=</span>prod-cluster-backup <span class=c1># The name of your S3 bucket to create</span>
+<span class=nv>REGION</span><span class=o>=</span>us-west-1 <span class=c1># AWS Region in which to create the S3 bucket</span>
+<span class=nv>PROFILE</span><span class=o>=</span>my-profile <span class=c1># Only needed if you&#39;re creating a named profile for AWS CLI</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Configure your AWS profile (omit <code>--profile $PROFILE</code> if you&rsquo;re using the default profile)</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>aws configure --profile <span style=color:#036>$PROFILE</span>
-&gt; AWS Access Key ID <span style=color:#333>[</span>None<span style=color:#333>]</span>: AKIAIOSFODNN7EXAMPLE
-&gt; AWS Secret Access Key <span style=color:#333>[</span>None<span style=color:#333>]</span>: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
-&gt; Default region name <span style=color:#333>[</span>None<span style=color:#333>]</span>: us-west-2
-&gt; Default output format <span style=color:#333>[</span>None<span style=color:#333>]</span>: ENTER
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>aws configure --profile <span class=nv>$PROFILE</span>
+&gt; AWS Access Key ID <span class=o>[</span>None<span class=o>]</span>: AKIAIOSFODNN7EXAMPLE
+&gt; AWS Secret Access Key <span class=o>[</span>None<span class=o>]</span>: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+&gt; Default region name <span class=o>[</span>None<span class=o>]</span>: us-west-2
+&gt; Default output format <span class=o>[</span>None<span class=o>]</span>: ENTER
 </code></pre></td></tr></table>
 </div>
 </div><h3 id=create-an-s3-bucket-for-the-backups>Create an S3 bucket for the backups:</h3>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>aws s3api create-bucket <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
-</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>    --bucket <span style=color:#036>$BUCKET</span> <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
-</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>    --region <span style=color:#036>$REGION</span> <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
-</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>    --create-bucket-configuration <span style=color:#036>LocationConstraint</span><span style=color:#333>=</span><span style=color:#036>$REGION</span> <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
-</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>    --profile <span style=color:#036>$PROFILE</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>aws s3api create-bucket <span class=se>\
+</span><span class=se></span>    --bucket <span class=nv>$BUCKET</span> <span class=se>\
+</span><span class=se></span>    --region <span class=nv>$REGION</span> <span class=se>\
+</span><span class=se></span>    --create-bucket-configuration <span class=nv>LocationConstraint</span><span class=o>=</span><span class=nv>$REGION</span> <span class=se>\
+</span><span class=se></span>    --profile <span class=nv>$PROFILE</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id=create-an-iam-user>Create an IAM user</h3>
 <p>I&rsquo;m creating a user with the same name as my bucket - since this user and bucket will be used to back up a single cluster, it makes sense for me to be able to identify and link the two by name.</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>aws iam create-user --user-name <span style=color:#036>$BUCKET</span> --profile <span style=color:#036>$PROFILE</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>aws iam create-user --user-name <span class=nv>$BUCKET</span> --profile <span class=nv>$PROFILE</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Create a JSON file with a policy definition of the permissions velero needs - note that it&rsquo;s scoped to the specific bucket using the $BUCKET variable:</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>cat &gt; velero-policy.json <span style=background-color:#e0e0ff>&lt;&lt;EOF
-</span><span style=background-color:#e0e0ff>{
-</span><span style=background-color:#e0e0ff>    &#34;Version&#34;: &#34;2012-10-17&#34;,
-</span><span style=background-color:#e0e0ff>    &#34;Statement&#34;: [
-</span><span style=background-color:#e0e0ff>        {
-</span><span style=background-color:#e0e0ff>            &#34;Effect&#34;: &#34;Allow&#34;,
-</span><span style=background-color:#e0e0ff>            &#34;Action&#34;: [
-</span><span style=background-color:#e0e0ff>                &#34;ec2:DescribeVolumes&#34;,
-</span><span style=background-color:#e0e0ff>                &#34;ec2:DescribeSnapshots&#34;,
-</span><span style=background-color:#e0e0ff>                &#34;ec2:CreateTags&#34;,
-</span><span style=background-color:#e0e0ff>                &#34;ec2:CreateVolume&#34;,
-</span><span style=background-color:#e0e0ff>                &#34;ec2:CreateSnapshot&#34;,
-</span><span style=background-color:#e0e0ff>                &#34;ec2:DeleteSnapshot&#34;
-</span><span style=background-color:#e0e0ff>            ],
-</span><span style=background-color:#e0e0ff>            &#34;Resource&#34;: &#34;*&#34;
-</span><span style=background-color:#e0e0ff>        },
-</span><span style=background-color:#e0e0ff>        {
-</span><span style=background-color:#e0e0ff>            &#34;Effect&#34;: &#34;Allow&#34;,
-</span><span style=background-color:#e0e0ff>            &#34;Action&#34;: [
-</span><span style=background-color:#e0e0ff>                &#34;s3:GetObject&#34;,
-</span><span style=background-color:#e0e0ff>                &#34;s3:DeleteObject&#34;,
-</span><span style=background-color:#e0e0ff>                &#34;s3:PutObject&#34;,
-</span><span style=background-color:#e0e0ff>                &#34;s3:AbortMultipartUpload&#34;,
-</span><span style=background-color:#e0e0ff>                &#34;s3:ListMultipartUploadParts&#34;
-</span><span style=background-color:#e0e0ff>            ],
-</span><span style=background-color:#e0e0ff>            &#34;Resource&#34;: [
-</span><span style=background-color:#e0e0ff>                &#34;arn:aws:s3:::${BUCKET}/*&#34;
-</span><span style=background-color:#e0e0ff>            ]
-</span><span style=background-color:#e0e0ff>        },
-</span><span style=background-color:#e0e0ff>        {
-</span><span style=background-color:#e0e0ff>            &#34;Effect&#34;: &#34;Allow&#34;,
-</span><span style=background-color:#e0e0ff>            &#34;Action&#34;: [
-</span><span style=background-color:#e0e0ff>                &#34;s3:ListBucket&#34;
-</span><span style=background-color:#e0e0ff>            ],
-</span><span style=background-color:#e0e0ff>            &#34;Resource&#34;: [
-</span><span style=background-color:#e0e0ff>                &#34;arn:aws:s3:::${BUCKET}&#34;
-</span><span style=background-color:#e0e0ff>            ]
-</span><span style=background-color:#e0e0ff>        }
-</span><span style=background-color:#e0e0ff>    ]
-</span><span style=background-color:#e0e0ff>}
-</span><span style=background-color:#e0e0ff>EOF</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>cat &gt; velero-policy.json <span class=s>&lt;&lt;EOF
+</span><span class=s>{
+</span><span class=s>    &#34;Version&#34;: &#34;2012-10-17&#34;,
+</span><span class=s>    &#34;Statement&#34;: [
+</span><span class=s>        {
+</span><span class=s>            &#34;Effect&#34;: &#34;Allow&#34;,
+</span><span class=s>            &#34;Action&#34;: [
+</span><span class=s>                &#34;ec2:DescribeVolumes&#34;,
+</span><span class=s>                &#34;ec2:DescribeSnapshots&#34;,
+</span><span class=s>                &#34;ec2:CreateTags&#34;,
+</span><span class=s>                &#34;ec2:CreateVolume&#34;,
+</span><span class=s>                &#34;ec2:CreateSnapshot&#34;,
+</span><span class=s>                &#34;ec2:DeleteSnapshot&#34;
+</span><span class=s>            ],
+</span><span class=s>            &#34;Resource&#34;: &#34;*&#34;
+</span><span class=s>        },
+</span><span class=s>        {
+</span><span class=s>            &#34;Effect&#34;: &#34;Allow&#34;,
+</span><span class=s>            &#34;Action&#34;: [
+</span><span class=s>                &#34;s3:GetObject&#34;,
+</span><span class=s>                &#34;s3:DeleteObject&#34;,
+</span><span class=s>                &#34;s3:PutObject&#34;,
+</span><span class=s>                &#34;s3:AbortMultipartUpload&#34;,
+</span><span class=s>                &#34;s3:ListMultipartUploadParts&#34;
+</span><span class=s>            ],
+</span><span class=s>            &#34;Resource&#34;: [
+</span><span class=s>                &#34;arn:aws:s3:::${BUCKET}/*&#34;
+</span><span class=s>            ]
+</span><span class=s>        },
+</span><span class=s>        {
+</span><span class=s>            &#34;Effect&#34;: &#34;Allow&#34;,
+</span><span class=s>            &#34;Action&#34;: [
+</span><span class=s>                &#34;s3:ListBucket&#34;
+</span><span class=s>            ],
+</span><span class=s>            &#34;Resource&#34;: [
+</span><span class=s>                &#34;arn:aws:s3:::${BUCKET}&#34;
+</span><span class=s>            ]
+</span><span class=s>        }
+</span><span class=s>    ]
+</span><span class=s>}
+</span><span class=s>EOF</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Attach the policy to the user to allow it to access the S3 bucket.</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>aws iam put-user-policy <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
-</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>    --user-name <span style=color:#036>$BUCKET</span> <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
-</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>    --policy-name <span style=color:#036>$BUCKET</span> <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
-</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>    --policy-document file://velero-policy.json <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
-</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>    --profile <span style=color:#036>$PROFILE</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>aws iam put-user-policy <span class=se>\
+</span><span class=se></span>    --user-name <span class=nv>$BUCKET</span> <span class=se>\
+</span><span class=se></span>    --policy-name <span class=nv>$BUCKET</span> <span class=se>\
+</span><span class=se></span>    --policy-document file://velero-policy.json <span class=se>\
+</span><span class=se></span>    --profile <span class=nv>$PROFILE</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>We can then create an Access Key for the newly created account, which will be used by Velero to upload the data.</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>aws iam create-access-key --user-name <span style=color:#036>$BUCKET</span> --profile <span style=color:#036>$PROFILE</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>aws iam create-access-key --user-name <span class=nv>$BUCKET</span> --profile <span class=nv>$PROFILE</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>The response should include an <code>AccessKeyId</code> and <code>SecretAccessKey</code> - make a note of them:</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">9
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
-    <span style=color:#070>&#34;AccessKey&#34;</span>: {
-        <span style=color:#070>&#34;UserName&#34;</span>: <span style=background-color:#e0e0ff>&#34;prod-cluster-backup&#34;</span>,
-        <span style=color:#070>&#34;AccessKeyId&#34;</span>: <span style=background-color:#e0e0ff>&#34;AKIA4Z..snip..N7QGT5&#34;</span>,
-        <span style=color:#070>&#34;Status&#34;</span>: <span style=background-color:#e0e0ff>&#34;Active&#34;</span>,
-        <span style=color:#070>&#34;SecretAccessKey&#34;</span>: <span style=background-color:#e0e0ff>&#34;gqjNLeZ..snip..hnGJjNKU&#34;</span>,
-        <span style=color:#070>&#34;CreateDate&#34;</span>: <span style=background-color:#e0e0ff>&#34;2020-10-07T15:14:08+00:00&#34;</span>
-    }
-}
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=p>{</span>
+    <span class=nt>&#34;AccessKey&#34;</span><span class=p>:</span> <span class=p>{</span>
+        <span class=nt>&#34;UserName&#34;</span><span class=p>:</span> <span class=s2>&#34;prod-cluster-backup&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;AccessKeyId&#34;</span><span class=p>:</span> <span class=s2>&#34;AKIA4Z..snip..N7QGT5&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;Status&#34;</span><span class=p>:</span> <span class=s2>&#34;Active&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;SecretAccessKey&#34;</span><span class=p>:</span> <span class=s2>&#34;gqjNLeZ..snip..hnGJjNKU&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;CreateDate&#34;</span><span class=p>:</span> <span class=s2>&#34;2020-10-07T15:14:08+00:00&#34;</span>
+    <span class=p>}</span>
+<span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Next we create a credentials file using the Access Key created above - this will be imported into the Velero deployment as a secret.</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>cat &gt; credentials-prod-cluster-backup <span style=background-color:#e0e0ff>&lt;&lt;EOF
-</span><span style=background-color:#e0e0ff>[default]
-</span><span style=background-color:#e0e0ff>aws_access_key_id=&lt;AccessKeyId&gt;
-</span><span style=background-color:#e0e0ff>aws_secret_access_key=&lt;SecretAccessKey&gt;
-</span><span style=background-color:#e0e0ff>EOF</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>cat &gt; credentials-prod-cluster-backup <span class=s>&lt;&lt;EOF
+</span><span class=s>[default]
+</span><span class=s>aws_access_key_id=&lt;AccessKeyId&gt;
+</span><span class=s>aws_secret_access_key=&lt;SecretAccessKey&gt;
+</span><span class=s>EOF</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id=install-and-configure-velero>Install and Configure Velero</h2>
 <p>Once again I&rsquo;m using <a href=https://brew.sh>homebrew</a> to install Velero - <a href=https://velero.io/docs/v1.5/basic-install/#install-the-cli>other installation instructions are a here</a></p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>brew install velero
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>brew install velero
 </code></pre></td></tr></table>
 </div>
 </div><p>Install Velero into your Kubernetes cluster using the CLI - your <code>kubectl</code> context should be pointed to the cluster you want to install on!</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>velero install <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
-</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>    --provider aws <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
-</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>    --plugins velero/velero-plugin-for-aws:v1.1.0 <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
-</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>    --bucket <span style=color:#036>$BUCKET</span> <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
-</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>    --backup-location-config <span style=color:#036>region</span><span style=color:#333>=</span><span style=color:#036>$REGION</span> <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
-</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>    --secret-file ./credentials-prod-cluster-backup <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
-</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>    --use-volume-snapshots<span style=color:#333>=</span><span style=color:#072>false</span> <span style=color:#666;background-color:#e0e0ff;font-weight:700>\
-</span><span style=color:#666;background-color:#e0e0ff;font-weight:700></span>    --use-restic
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>velero install <span class=se>\
+</span><span class=se></span>    --provider aws <span class=se>\
+</span><span class=se></span>    --plugins velero/velero-plugin-for-aws:v1.1.0 <span class=se>\
+</span><span class=se></span>    --bucket <span class=nv>$BUCKET</span> <span class=se>\
+</span><span class=se></span>    --backup-location-config <span class=nv>region</span><span class=o>=</span><span class=nv>$REGION</span> <span class=se>\
+</span><span class=se></span>    --secret-file ./credentials-prod-cluster-backup <span class=se>\
+</span><span class=se></span>    --use-volume-snapshots<span class=o>=</span><span class=nb>false</span> <span class=se>\
+</span><span class=se></span>    --use-restic
 </code></pre></td></tr></table>
 </div>
 </div><p>At this point you could use <code>velero backup create</code> to start backing things up, but Velero won&rsquo;t automatically backup your persistent volumes - you need to tell it what to backup using an annotation. Without annotating the pods the backup will complete and look successful but it won&rsquo;t include your data!</p>
 <h3 id=annotate-deployments-stateful-sets-or-pods>Annotate deployments, stateful sets or pods</h3>
 <p>Let&rsquo;s take my Vault deployment, for example. It consists of a stateful set of three pods, each pod has a persistant volume called &ldquo;data&rdquo;. Prior to deployment I can add the <code>backup.velero.io/backup-volumes: &lt;volume name></code> annotation to the template metadata in my YAML configuration:</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>apps/v1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>StatefulSet<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>labels</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>app.kubernetes.io/instance</span>:<span style=color:#bbb> </span>vault<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>app.kubernetes.io/name</span>:<span style=color:#bbb> </span>vault<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>vault<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>vault<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>spec</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>replicas</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>3</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>selector</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>matchLabels</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>      </span><span style=color:#070>app.kubernetes.io/instance</span>:<span style=color:#bbb> </span>vault<span style=color:#bbb>
-</span><span style=color:#bbb>      </span><span style=color:#070>app.kubernetes.io/name</span>:<span style=color:#bbb> </span>vault<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>serviceName</span>:<span style=color:#bbb> </span>vault-internal<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>template</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>      </span><span style=color:#070>annotations</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>        </span><span style=color:#070>backup.velero.io/backup-volumes</span>:<span style=color:#bbb> </span>data<span style=color:#bbb>
-</span><span style=color:#bbb>      </span><span style=color:#070>labels</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>        </span><span style=color:#070>app.kubernetes.io/instance</span>:<span style=color:#bbb> </span>vault<span style=color:#bbb>
-</span><span style=color:#bbb>        </span><span style=color:#070>app.kubernetes.io/name</span>:<span style=color:#bbb> </span>vault<span style=color:#bbb>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>apps/v1</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>StatefulSet</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>app.kubernetes.io/instance</span><span class=p>:</span><span class=w> </span><span class=l>vault</span><span class=w>
+</span><span class=w>    </span><span class=nt>app.kubernetes.io/name</span><span class=p>:</span><span class=w> </span><span class=l>vault</span><span class=w>
+</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>vault</span><span class=w>
+</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>vault</span><span class=w>
+</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>replicas</span><span class=p>:</span><span class=w> </span><span class=m>3</span><span class=w>
+</span><span class=w>  </span><span class=nt>selector</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>matchLabels</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=nt>app.kubernetes.io/instance</span><span class=p>:</span><span class=w> </span><span class=l>vault</span><span class=w>
+</span><span class=w>      </span><span class=nt>app.kubernetes.io/name</span><span class=p>:</span><span class=w> </span><span class=l>vault</span><span class=w>
+</span><span class=w>  </span><span class=nt>serviceName</span><span class=p>:</span><span class=w> </span><span class=l>vault-internal</span><span class=w>
+</span><span class=w>  </span><span class=nt>template</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=nt>annotations</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>backup.velero.io/backup-volumes</span><span class=p>:</span><span class=w> </span><span class=l>data</span><span class=w>
+</span><span class=w>      </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>app.kubernetes.io/instance</span><span class=p>:</span><span class=w> </span><span class=l>vault</span><span class=w>
+</span><span class=w>        </span><span class=nt>app.kubernetes.io/name</span><span class=p>:</span><span class=w> </span><span class=l>vault</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
 </div><p>Alternatively I could annotate the <code>pods</code> directly, but remember these annotations might be overwritten at a later point by the <code>statefulset</code></p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl annotate pod/vault-0 backup.velero.io/backup-volumes<span style=color:#333>=</span>data
-kubectl annotate pod/vault-1 backup.velero.io/backup-volumes<span style=color:#333>=</span>data
-kubectl annotate pod/vault-2 backup.velero.io/backup-volumes<span style=color:#333>=</span>data
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>kubectl annotate pod/vault-0 backup.velero.io/backup-volumes<span class=o>=</span>data
+kubectl annotate pod/vault-1 backup.velero.io/backup-volumes<span class=o>=</span>data
+kubectl annotate pod/vault-2 backup.velero.io/backup-volumes<span class=o>=</span>data
 </code></pre></td></tr></table>
 </div>
 </div><p>Now I can generate a backup of my <code>vault</code> namespace using:</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>velero backup create vault-backup-test-1 --include-namespaces<span style=color:#333>=</span>vault
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>velero backup create vault-backup-test-1 --include-namespaces<span class=o>=</span>vault
 </code></pre></td></tr></table>
 </div>
 </div><p>You can create a backup of your entire cluster using <code>velero backup create whole-cluster-backup</code>, or you can create scheduled backups using a cron-like schedule</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>velero create schedule whole-cluster-backup-daily --schedule<span style=color:#333>=</span><span style=background-color:#e0e0ff>&#34;0 7 * * *&#34;</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>velero create schedule whole-cluster-backup-daily --schedule<span class=o>=</span><span class=s2>&#34;0 7 * * *&#34;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>It&rsquo;s also worth noting you can <em>exclude</em> specific namespaces as well as include, using <code>--exclude-namespaces</code>.</p>
 <p>Once I&rsquo;ve created a backup, I can view it using:</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>velero backup describe vault-backup-test-1
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>velero backup describe vault-backup-test-1
 Name:         vault-backup-test-1
 Namespace:    velero
-Labels:       velero.io/storage-location<span style=color:#333>=</span>default
-Annotations:  velero.io/source-cluster-k8s-gitversion<span style=color:#333>=</span>v1.19.1+vmware.2
-              velero.io/source-cluster-k8s-major-version<span style=color:#333>=</span><span style=color:#60e;font-weight:700>1</span>
-              velero.io/source-cluster-k8s-minor-version<span style=color:#333>=</span><span style=color:#60e;font-weight:700>19</span>
+Labels:       velero.io/storage-location<span class=o>=</span>default
+Annotations:  velero.io/source-cluster-k8s-gitversion<span class=o>=</span>v1.19.1+vmware.2
+              velero.io/source-cluster-k8s-major-version<span class=o>=</span><span class=m>1</span>
+              velero.io/source-cluster-k8s-minor-version<span class=o>=</span><span class=m>19</span>
 
 Phase:  Completed
 
-Errors:    <span style=color:#60e;font-weight:700>0</span>
-Warnings:  <span style=color:#60e;font-weight:700>0</span>
+Errors:    <span class=m>0</span>
+Warnings:  <span class=m>0</span>
 
 Namespaces:
   Included:  vault
@@ -574,13 +550,13 @@ Completed:  2020-10-09 16:25:32 +0100 BST
 
 Expiration:  2020-11-08 15:25:13 +0000 GMT
 
-Total items to be backed up:  <span style=color:#60e;font-weight:700>48</span>
-Items backed up:              <span style=color:#60e;font-weight:700>48</span>
+Total items to be backed up:  <span class=m>48</span>
+Items backed up:              <span class=m>48</span>
 
 Velero-Native Snapshots: &lt;none included&gt;
 
-Restic Backups <span style=color:#333>(</span>specify --details <span style=color:#289;font-weight:700>for</span> more information<span style=color:#333>)</span>:
-  Completed:  <span style=color:#60e;font-weight:700>3</span>
+Restic Backups <span class=o>(</span>specify --details <span class=k>for</span> more information<span class=o>)</span>:
+  Completed:  <span class=m>3</span>
 </code></pre></td></tr></table>
 </div>
 </div>
@@ -644,7 +620,7 @@ Previous
 </a>
 </div>
 <div class=clr-nav-next>
-<a href=https://www.definit.co.uk/2020/11/code-stream-custom-integration-generate-basic-authentication-header/ title="Code Stream - Custom Integration - Generate Basic Authentication Header" class="btn btn-sm btn-outline">
+<a href=https://www.definit.co.uk/2020/10/backing-up-tanzu-kubernetes-grid-tkg-on-vsphere-workloads-to-aws-with-velero/ title="Backing up Tanzu Kubernetes Grid (TKG) on vSphere Workloads to AWS with Velero" class="btn btn-sm btn-outline">
 Next
 </a>
 </div>
@@ -657,31 +633,31 @@ Next
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
+<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">9</span></a></li>
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">28</span></a></li>
 <li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">15</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">42</span></a></li>
-<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li>
+<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">24</span></a></li>
+<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">49</span></a></li>
+<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/exam class=nav-link>EXAM <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/fusion class=nav-link>FUSION <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
 <li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li>
+<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li>
 <li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
 <li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">206</span></a></li>
+<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">214</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
+<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">14</span></a></li>
+<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">47</span></a></li>
+<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">74</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">58</span></a></li>
+<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">5</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">59</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>
@@ -690,15 +666,15 @@ Next
 <input id=Tags type=checkbox>
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
-<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">53</span></a></li>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">70</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">56</span></a></li>
 <li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
 <li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
+<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">34</span></a></li>
 <li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
 <li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li>
+<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">32</span></a></li>
+<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">32</span></a></li>
 <li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li>
 </section>
 </section>

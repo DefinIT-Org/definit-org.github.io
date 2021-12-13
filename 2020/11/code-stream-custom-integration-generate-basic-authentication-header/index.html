@@ -33,7 +33,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2020/11/code-stream-custom-integration-generate-basic-authentication-header/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.90.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.90.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -52,16 +52,16 @@
 </a>
 </div>
 <nav class=header-nav>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/ title=Home>
 Home
 </a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/about/>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/about/ title=About>
 About
 </a>
-<a class="nav-link nav-text" href=https://www.github.com/sammcgeown>
+<a class="nav-link nav-text" href=https://www.github.com/sammcgeown title=GitHub>
 GitHub
 </a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml title=RSS>
 RSS
 </a>
 </nav>
@@ -74,30 +74,6 @@ RSS
 </form>
 </div>
 </header>
-<nav class=subnav>
-<ul class=nav>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/>
-Home
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/about/>
-About
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.github.com/sammcgeown>
-GitHub
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/index.xml>
-RSS
-</a>
-</li>
-</ul>
-</nav>
 <div class=content-container>
 <div class=content-area>
 <h1>Code Stream - Custom Integration - Generate Basic Authentication Header</h1>
@@ -150,122 +126,122 @@ Tags:
 <figcaption class=clr-caption>Consuming the Custom Integration</figcaption>
 </div>
 <p>Below are the shell and a Python3 examples, in the YAML format to paste into your custom integration:</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#0e84b5;font-weight:700>---</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>runtime</span>:<span style=color:#bbb> </span>shell<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>code</span>:<span style=color:#bbb> </span>|<span style=color:#d42;background-color:#e0e0ff>
-</span><span style=color:#d42;background-color:#e0e0ff>  </span><span style=color:#bbb>  </span>export basicAuthHeader=$(echo -n $username:$password | base64)<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>inputProperties</span>:<span style=color:#bbb>      </span><span style=color:#666;font-style:italic># Enter fields for input section of a task</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Username input</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;username&#39;</span><span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>type</span>:<span style=color:#bbb> </span>text<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>title</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;Username&#39;</span><span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>placeHolder</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;Enter basic authentication usename&#39;</span><span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>required</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>bindable</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Password input</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;password&#39;</span><span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>type</span>:<span style=color:#bbb> </span>password<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>title</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;Password&#39;</span><span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>placeHolder</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;Enter basic authentication password&#39;</span><span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>defaultValue</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;&#39;</span><span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>required</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>bindable</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>outputProperties</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>basicAuthHeader<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>type</span>:<span style=color:#bbb> </span>label<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>title</span>:<span style=color:#bbb> </span>Basic Authentication Header<span style=color:#bbb>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nn>---</span><span class=w>
+</span><span class=w></span><span class=nt>runtime</span><span class=p>:</span><span class=w> </span><span class=l>shell</span><span class=w>
+</span><span class=w></span><span class=nt>code</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>  </span><span class=w>  </span><span class=l>export basicAuthHeader=$(echo -n $username:$password | base64)</span><span class=w>
+</span><span class=w></span><span class=nt>inputProperties</span><span class=p>:</span><span class=w>      </span><span class=c># Enter fields for input section of a task</span><span class=w>
+</span><span class=w>  </span><span class=c># Username input</span><span class=w>
+</span><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;username&#39;</span><span class=w>
+</span><span class=w>    </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>text</span><span class=w>
+</span><span class=w>    </span><span class=nt>title</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;Username&#39;</span><span class=w>
+</span><span class=w>    </span><span class=nt>placeHolder</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;Enter basic authentication usename&#39;</span><span class=w>
+</span><span class=w>    </span><span class=nt>required</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>    </span><span class=nt>bindable</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>  </span><span class=c># Password input</span><span class=w>
+</span><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;password&#39;</span><span class=w>
+</span><span class=w>    </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>password</span><span class=w>
+</span><span class=w>    </span><span class=nt>title</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;Password&#39;</span><span class=w>
+</span><span class=w>    </span><span class=nt>placeHolder</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;Enter basic authentication password&#39;</span><span class=w>
+</span><span class=w>    </span><span class=nt>defaultValue</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;&#39;</span><span class=w>
+</span><span class=w>    </span><span class=nt>required</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>    </span><span class=nt>bindable</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w></span><span class=nt>outputProperties</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>basicAuthHeader</span><span class=w>
+</span><span class=w>    </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>label</span><span class=w>
+</span><span class=w>    </span><span class=nt>title</span><span class=p>:</span><span class=w> </span><span class=l>Basic Authentication Header</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
-</div><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</div><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#0e84b5;font-weight:700>---</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>runtime</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#34;python3&#34;</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>code</span>:<span style=color:#bbb> </span>|<span style=color:#d42;background-color:#e0e0ff>
-</span><span style=color:#d42;background-color:#e0e0ff>  from base64 import b64encode
-</span><span style=color:#d42;background-color:#e0e0ff>  from context import getInput, setOutput
-</span><span style=color:#d42;background-color:#e0e0ff>  username = getInput(&#39;username&#39;)
-</span><span style=color:#d42;background-color:#e0e0ff>  password = getInput(&#39;password&#39;)
-</span><span style=color:#d42;background-color:#e0e0ff>  usernameAndPassword = b64encode(bytes(f&#39;{username}:{password}&#39;,encoding=&#39;ascii&#39;)).decode(&#39;ascii&#39;)
-</span><span style=color:#d42;background-color:#e0e0ff>  setOutput(&#39;basicAuthHeader&#39;, &#34;Basic &#34;+usernameAndPassword)</span><span style=color:#bbb>  
-</span><span style=color:#bbb></span><span style=color:#070>inputProperties</span>:<span style=color:#bbb>      </span><span style=color:#666;font-style:italic># Enter fields for input section of a task</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Username input</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;username&#39;</span><span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>type</span>:<span style=color:#bbb> </span>text<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>title</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;Username&#39;</span><span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>placeHolder</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;Enter basic authentication usename&#39;</span><span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>required</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>bindable</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Password input</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;password&#39;</span><span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>type</span>:<span style=color:#bbb> </span>password<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>title</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;Password&#39;</span><span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>placeHolder</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;Enter basic authentication password&#39;</span><span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>defaultValue</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;&#39;</span><span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>required</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>bindable</span>:<span style=color:#bbb> </span><span style=color:#289;font-weight:700>true</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>outputProperties</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>basicAuthHeader<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>type</span>:<span style=color:#bbb> </span>label<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>title</span>:<span style=color:#bbb> </span>Basic Authentication Header<span style=color:#bbb>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nn>---</span><span class=w>
+</span><span class=w></span><span class=nt>runtime</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;python3&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>code</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>  from base64 import b64encode
+</span><span class=sd>  from context import getInput, setOutput
+</span><span class=sd>  username = getInput(&#39;username&#39;)
+</span><span class=sd>  password = getInput(&#39;password&#39;)
+</span><span class=sd>  usernameAndPassword = b64encode(bytes(f&#39;{username}:{password}&#39;,encoding=&#39;ascii&#39;)).decode(&#39;ascii&#39;)
+</span><span class=sd>  setOutput(&#39;basicAuthHeader&#39;, &#34;Basic &#34;+usernameAndPassword)</span><span class=w>  
+</span><span class=w></span><span class=nt>inputProperties</span><span class=p>:</span><span class=w>      </span><span class=c># Enter fields for input section of a task</span><span class=w>
+</span><span class=w>  </span><span class=c># Username input</span><span class=w>
+</span><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;username&#39;</span><span class=w>
+</span><span class=w>    </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>text</span><span class=w>
+</span><span class=w>    </span><span class=nt>title</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;Username&#39;</span><span class=w>
+</span><span class=w>    </span><span class=nt>placeHolder</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;Enter basic authentication usename&#39;</span><span class=w>
+</span><span class=w>    </span><span class=nt>required</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>    </span><span class=nt>bindable</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>  </span><span class=c># Password input</span><span class=w>
+</span><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;password&#39;</span><span class=w>
+</span><span class=w>    </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>password</span><span class=w>
+</span><span class=w>    </span><span class=nt>title</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;Password&#39;</span><span class=w>
+</span><span class=w>    </span><span class=nt>placeHolder</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;Enter basic authentication password&#39;</span><span class=w>
+</span><span class=w>    </span><span class=nt>defaultValue</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;&#39;</span><span class=w>
+</span><span class=w>    </span><span class=nt>required</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>    </span><span class=nt>bindable</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w></span><span class=nt>outputProperties</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>basicAuthHeader</span><span class=w>
+</span><span class=w>    </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>label</span><span class=w>
+</span><span class=w>    </span><span class=nt>title</span><span class=p>:</span><span class=w> </span><span class=l>Basic Authentication Header</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
 </div>
@@ -329,7 +305,7 @@ Previous
 </a>
 </div>
 <div class=clr-nav-next>
-<a href=https://www.definit.co.uk/2021/02/vrops-remote-collectors-design-considerations/ title="vROps Remote Collectors - Design Considerations" class="btn btn-sm btn-outline">
+<a href=https://www.definit.co.uk/2020/11/code-stream-custom-integration-generate-basic-authentication-header/ title="Code Stream - Custom Integration - Generate Basic Authentication Header" class="btn btn-sm btn-outline">
 Next
 </a>
 </div>
@@ -342,31 +318,31 @@ Next
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
+<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">9</span></a></li>
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">28</span></a></li>
 <li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">15</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">42</span></a></li>
-<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li>
+<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">24</span></a></li>
+<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">49</span></a></li>
+<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/exam class=nav-link>EXAM <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/fusion class=nav-link>FUSION <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
 <li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li>
+<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li>
 <li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
 <li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">206</span></a></li>
+<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">214</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
+<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">14</span></a></li>
+<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">47</span></a></li>
+<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">74</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">58</span></a></li>
+<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">5</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">59</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>
@@ -375,15 +351,15 @@ Next
 <input id=Tags type=checkbox>
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
-<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">53</span></a></li>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">70</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">56</span></a></li>
 <li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
 <li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
+<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">34</span></a></li>
 <li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
 <li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li>
+<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">32</span></a></li>
+<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">32</span></a></li>
 <li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li>
 </section>
 </section>

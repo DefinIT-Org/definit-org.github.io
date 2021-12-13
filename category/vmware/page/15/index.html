@@ -17,7 +17,7 @@
 <link rel=canonical href=https://www.definit.co.uk/category/vmware/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.90.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.90.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -36,16 +36,16 @@
 </a>
 </div>
 <nav class=header-nav>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/ title=Home>
 Home
 </a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/about/>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/about/ title=About>
 About
 </a>
-<a class="nav-link nav-text" href=https://www.github.com/sammcgeown>
+<a class="nav-link nav-text" href=https://www.github.com/sammcgeown title=GitHub>
 GitHub
 </a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml title=RSS>
 RSS
 </a>
 </nav>
@@ -58,34 +58,252 @@ RSS
 </form>
 </div>
 </header>
-<nav class=subnav>
-<ul class=nav>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/>
-Home
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/about/>
-About
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.github.com/sammcgeown>
-GitHub
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/index.xml>
-RSS
-</a>
-</li>
-</ul>
-</nav>
 <div class=content-container>
 <div class=content-area>
 <h1>VMware</h1>
 <div class=clr-row>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2014/03/backing-up-esxi-5-5-host-configurations-with-vcenter-orchestrator-vco-workflow-design-walkthrough/>Backing up ESXi 5.5 host configurations with vCenter Orchestrator (vCO) &amp;ndash; Workflow design walkthrough</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 13/3/2014
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a> and <a href=/category/vrealize-orchestrator>vRealize Orchestrator</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+As a little learning project, I thought I’d take on Simon’s previous post about backing up ESXi configurations and extend it to vCenter Orchestrator (vCO), and document how I go about building up a workflow. I&rsquo;m learning more and more about vCO all the time, but I found it has a really steep entry point, and finding use cases is hard if you haven&rsquo;t explored capabilities.
+The steps I want to create in this post are:
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2014/03/backing-up-esxi-5-5-host-configurations-with-vcenter-orchestrator-vco-workflow-design-walkthrough/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2014/03/installing-vmware-site-recovery-manager-srm-5-5-in-the-lab/>Installing VMware Site Recovery Manager (SRM) 5.5 in the Lab</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 6/3/2014
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+I&rsquo;ve been playing about with a compact SRM install in my lab - since I have limited resources and only one site I wanted to create a run-through for anyone learning SRM to be able to do it in their own lab too. I am creating two sites on the same IP subnet (pretend it&rsquo;s a stretched LAN across two sites) and will be protecting a single, tiny Linux web server using vSphere Replication.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2014/03/installing-vmware-site-recovery-manager-srm-5-5-in-the-lab/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2014/03/generating-and-installing-ca-signed-certificates-for-vmware-srm-5-5/>Generating and Installing CA Signed Certificates for VMware SRM 5.5</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 5/3/2014
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/microsoft>Microsoft</a> and <a href=/category/vmware>VMware</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+I’m fairly new to SRM, but even so this one seemed like a real head-scratcher! If you happen to be using CA signed certificates on your “protected site” vCenter and “recovery site” vCenter servers, when you come to linking the two SRM sites you encounter SSLHandShake errors – basically SRM assumes you want to use certificates for authentication because you’re using signed certificates. If you use the default self-signed certificates, SRM will default to using password authentication (see SRM Authentication).
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2014/03/generating-and-installing-ca-signed-certificates-for-vmware-srm-5-5/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2014/03/vcsa-5-5-web-client-fails-to-log-on-with-ssl-certificate-verification-failed/>VCSA 5.5 Web Client fails to log on with &amp;ldquo;SSL certificate verification failed&amp;rdquo;</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 3/3/2014
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+This had me scratching my head, what seemed to be a common problem wasn’t fixed by the common solution. It was actually my fault – too familiar with the product and setting things up too quickly to test.
+I installed a VCSA 5.5 instance in my lab as a secondary site for some testing and during the process found I couldn’t log on to the web client – it failed with the error:
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2014/03/vcsa-5-5-web-client-fails-to-log-on-with-ssl-certificate-verification-failed/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2014/02/reclaiming-an-ssd-device-from-esxi-5-5-virtual-flash/>Reclaiming an SSD device from ESXi 5.5 Virtual Flash</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 27/2/2014
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+After having a play with Virtual Flash and Host Caching on one of my lab hosts I wanted to re-use the SSD drive, but couldn’t seem to get vFlash to release the drive. I disabled flash usage on all VMs and disabled the Host Cache, then went to the Virtual Flash Resource Management page to click the “Remove All” button. That failed with errors:
+“Host’s virtual flash resource is inaccessible.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2014/02/reclaiming-an-ssd-device-from-esxi-5-5-virtual-flash/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2014/02/vchs-first-impressions/>vCHS – first impressions</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
+on 26/2/2014
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+In case you missed it VMware have now released vCHS (VMware vCloud Hybrid Service) in Europe! The first data center residing in Slough with more data centers planned across Europe in the near future.
+Working in an SME that has several existing vSphere environments this was of real interest, as the need to scale out quickly from our Private clouds is rapidly becoming a requirement.
+Having already spoken to VMware on the phone to get a rough idea on options and costs I decided to take a look at the Hands-on-labs to see how easy it really is to use and migrate VMs from an existing private cloud to vCHS.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2014/02/vchs-first-impressions/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2014/02/vmware-vsphere-mobile-watchlist-released/>VMware vSphere Mobile Watchlist released</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
+on 12/2/2014
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+For those of you unaware VMware recently released the VMware vSphere Mobile Watchlist
+What does it do?
+&ldquo;VMware vSphere Mobile Watchlist allows you to monitor the virtual machines you care about in your vSphere infrastructure remotely on your phone. Discover diagnostic information about any alerts on your VMs using VMware Knowledge Base Articles and the web. Remediate problems from your phone by using power operations or delegate the problem to someone on your team back at the datacenter.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2014/02/vmware-vsphere-mobile-watchlist-released/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2014/01/vcsa-5-5-wont-join-ad-domain%E2%80%8F/>vCSA 5.5 won’t join AD Domain‏</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
+on 30/1/2014
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+Just a quick post on something that was not immediately obvious when it happened to me.
+When deploying vCSA 5.5 and trying to add it to the domain, I was presented with the following error.
+     I immediately did all the all the usual checks, making sure it had a static IP and correct DNS servers etc..
+The one thing missing however was a FQDN for the hostname (in the network tab).
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2014/01/vcsa-5-5-wont-join-ad-domain%E2%80%8F/>More</a>
+</div>
+</div>
+</div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
@@ -147,249 +365,6 @@ Effectively it takes a look at the network connections that are running between 
 </div>
 </div>
 </div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2014/01/installing-vcops-5-8-in-the-definit-lab-4gb-ram-and-2-vcpu/>Installing vCOps 5.8 in the DefinIT Lab &amp;ndash; 4GB RAM and 2 vCPU</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 10/1/2014
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a> and <a href=/category/vrealize-operations>vRealize Operations</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-There’s no doubt that vCOps is a great product for proactively monitoring your vSphere environment, but it’s a hefty package for the lab. The minimum recommended RAM is a whopping 16GB – in my lab that’s the whole of my management host! I recently needed to do some testing so I wanted to get it running in the lab with the barest minimum I could get working, and it turns out you can get working with just 4GB and 2 CPU…albeit you wouldn’t want to monitor much!
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2014/01/installing-vcops-5-8-in-the-definit-lab-4gb-ram-and-2-vcpu/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2014/01/2014-what-does-the-future-look-like/>2014: what does the future look like?</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
-on 3/1/2014
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-After attending the &ldquo;Future of IT&rdquo; Google hangout in September, I was asked to give a quick summary on what 2014 may hold.
-So without further ado..
-I believe in 2014, we will see an increased demand for - and usage of - hybrid clouds, especially among SMEs who are trying to avoid large investment on private clouds to accommodate high demand, short term projects.
-End user computing will play an ever larger role, with BYOD becoming even more viable for businesses, including those with strict data controlled environments.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2014/01/2014-what-does-the-future-look-like/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2013/11/moving-on-ive-got-a-new-job/>Moving on – I&amp;rsquo;ve got a new job!</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 26/11/2013
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-2013 has been an amazing year for me – I was awarded the vExpert title, I’ve taken and passed my VCP5-DCV, VCAP5-DCA and VCAP5-DCD and spoken at the London and UK national VMUGs. I’ve attended my first VMworld and spent countless hours in the lab and on study, generating about 30 blog posts. All I can say is that it’s been a truly blessed year.
-After two and a half years working as a Senior Infrastructure Analyst for a global insurance company, the time has come for a change!
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2013/11/moving-on-ive-got-a-new-job/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2013/11/avoid-sso-admin-lockout-a-k-a-your-first-task-after-installing-vsphere-sso/>Avoid SSO Admin lockout &amp;ndash; a.k.a. your first task after installing vSphere SSO</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 6/11/2013
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-In my post yesterday (vexpert.me/hS) I talked about how to recover from an expired default SSO administrator password – this prompted a discussion on twitter with Anthony Spiteri (@anthonyspiteri) and Grant Orchard (@grantorchard) about the defaults for expiration and how to mitigate the risk.
-The first solution is to modify the password expiration policy for SSO. I’m not advocating this necessarily – I think that expiring passwords ensure that you change them regularly and increase the overall security of your SSO solution.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2013/11/avoid-sso-admin-lockout-a-k-a-your-first-task-after-installing-vsphere-sso/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2013/11/sso-admin-password-reset-with-ssopass-sslhandshakefailed-vsphere-5-1/>SSO Admin password reset with ssopass – SslHandshakeFailed – vSphere 5.1</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 5/11/2013
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-Today I found out that in vSphere 5.1 the SSO administrator account (admin@system-domain) has a password that expires after 365 days. See KB2035864:
-vCenter Single Sign-On account (SSO) passwords expire after 365 days, including the password for admin@system-domain.
-Awesome.
-In vSphere 5.5 it gets even better – the password expires every 90 days by default! (See the vSphere 5.5 SSO documentation)
-By default, vCenter Single Sign-On passwords, including the password for administrator@vsphere.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2013/11/sso-admin-password-reset-with-ssopass-sslhandshakefailed-vsphere-5-1/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2013/10/vsphere-security-advanced-ssh-configurations/>vSphere Security: Advanced SSH Configurations</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 22/10/2013
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/networking>Networking</a> and <a href=/category/vmware>VMware</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-There are different schools of thought as to whether you should have SSH enabled on your hosts. VMware recommend it is disabled. With SSH disabled there is no possibility of attack, so that’s the “most secure” option. Of course in the real world there’s a balance between “most secure” and “usability” (e.g. the most secure host is powered off and physically isolated from the network, but you can’t run any workloads ).
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2013/10/vsphere-security-advanced-ssh-configurations/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2013/10/vmworld-europe-2013-day-2-vcap5-dcd-exam-experience/>VMworld Europe 2013 &amp;ndash; Day 2, VCAP5-DCD Exam Experience</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 16/10/2013
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-Today was always going to be a bit of a funny day as I scheduled the VCAP5-DCD exam for 10am this morning. I am happy to say that I passed! I’m a bit light on VMworld to report today, so forgive my DCD experience to pad it out!
-Preparation I have to confess my prep for this exam was light – I literally only watched the TrainSignal course by Scott Lowe (@scott_lowe) and just about finished that last night in the hotel!
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2013/10/vmworld-europe-2013-day-2-vcap5-dcd-exam-experience/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2013/10/vmworld-europe-2013-arriving-and-day-1/>VMworld Europe 2013 – Day 1</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 15/10/2013
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-I flew from Gatwick to Barcelona last night to my very first VMworld!
-I&rsquo;m staying in a hotel that is actually quite far from the conference, it&rsquo;s a metro, train and bus journey away from the conference center and it takes about 40 minutes to get here. On the plus side I was only 5 minutes away from the VMUG party last night so I went over there for an hour or so.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2013/10/vmworld-europe-2013-arriving-and-day-1/>More</a>
-</div>
-</div>
-</div>
 </div>
 <nav>
 <ul class=pagination>
@@ -434,8 +409,8 @@ I&rsquo;m staying in a hotel that is actually quite far from the conference, it&
 </a>
 </li>
 <li class="pagination__item pagination__item--last">
-<a class="btn btn-sm btn btn-outline" href=/category/vmware/page/21/>
-21
+<a class="btn btn-sm btn btn-outline" href=/category/vmware/page/22/>
+22
 </a>
 </li>
 </ul>
@@ -447,31 +422,31 @@ I&rsquo;m staying in a hotel that is actually quite far from the conference, it&
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
+<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">9</span></a></li>
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">28</span></a></li>
 <li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">15</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">42</span></a></li>
-<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li>
+<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">24</span></a></li>
+<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">49</span></a></li>
+<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/exam class=nav-link>EXAM <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/fusion class=nav-link>FUSION <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
 <li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li>
+<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li>
 <li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
 <li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">206</span></a></li>
+<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">214</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
+<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">14</span></a></li>
+<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">47</span></a></li>
+<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">74</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">58</span></a></li>
+<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">5</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">59</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>
@@ -480,15 +455,15 @@ I&rsquo;m staying in a hotel that is actually quite far from the conference, it&
 <input id=Tags type=checkbox>
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
-<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">53</span></a></li>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">70</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">56</span></a></li>
 <li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
 <li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
+<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">34</span></a></li>
 <li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
 <li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li>
+<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">32</span></a></li>
+<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">32</span></a></li>
 <li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li>
 </section>
 </section>

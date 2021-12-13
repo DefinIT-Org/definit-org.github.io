@@ -32,7 +32,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2019/03/configuring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.90.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.90.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -51,16 +51,16 @@
 </a>
 </div>
 <nav class=header-nav>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/ title=Home>
 Home
 </a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/about/>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/about/ title=About>
 About
 </a>
-<a class="nav-link nav-text" href=https://www.github.com/sammcgeown>
+<a class="nav-link nav-text" href=https://www.github.com/sammcgeown title=GitHub>
 GitHub
 </a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml title=RSS>
 RSS
 </a>
 </nav>
@@ -73,30 +73,6 @@ RSS
 </form>
 </div>
 </header>
-<nav class=subnav>
-<ul class=nav>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/>
-Home
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/about/>
-About
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.github.com/sammcgeown>
-GitHub
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/index.xml>
-RSS
-</a>
-</li>
-</ul>
-</nav>
 <div class=content-container>
 <div class=content-area>
 <h1>Configuring Update Manager Download Service 6.7 on CentOS/RHEL 7 with SSL certificates</h1>
@@ -147,122 +123,122 @@ Tags:
 <li>Format the data drive and mount to /umds</li>
 <li>Install PostgreSQL 9.4</li>
 </ul>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>yum install https://download.postgresql.org/pub/repos/yum/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-3.noarch.rpm
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>yum install https://download.postgresql.org/pub/repos/yum/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-3.noarch.rpm
 yum install postgresql94 postgresql94-server postgresql94-odbc
 /usr/pgsql-9.4/bin/postgresql94-setup initdb
-systemctl <span style=color:#072>enable</span> postgresql-9.4
+systemctl <span class=nb>enable</span> postgresql-9.4
 systemctl start postgresql-9.4
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>Create a UMDS user and database</li>
 </ul>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-postgres data-lang=postgres>su <span style=color:#333>-</span> postgres
-createdb <span style=color:#333>&lt;</span>database_name<span style=color:#333>&gt;</span>;
-createuser <span style=color:#333>-</span>d <span style=color:#333>-</span>e <span style=color:#333>-</span>r <span style=color:#333>&lt;</span>database_username<span style=color:#333>&gt;</span>; <span style=color:#333>-</span>P
-Pwd: <span style=color:#333>&lt;</span>database_password<span style=color:#333>&gt;</span>;
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-postgres data-lang=postgres><span class=n>su</span> <span class=o>-</span> <span class=n>postgres</span>
+<span class=n>createdb</span> <span class=o>&lt;</span><span class=n>database_name</span><span class=o>&gt;</span><span class=p>;</span>
+<span class=n>createuser</span> <span class=o>-</span><span class=n>d</span> <span class=o>-</span><span class=n>e</span> <span class=o>-</span><span class=n>r</span> <span class=o>&lt;</span><span class=n>database_username</span><span class=o>&gt;</span><span class=p>;</span> <span class=o>-</span><span class=n>P</span>
+<span class=n>Pwd</span><span class=p>:</span> <span class=o>&lt;</span><span class=n>database_password</span><span class=o>&gt;</span><span class=p>;</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>Edit <code>/var/lib/pgsql/9.4/data/pg_hba.conf</code> and change local, IPv4 and IPv6 to use md5 authentication (not ideal, but it works)</li>
 </ul>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#666;font-style:italic># TYPE  DATABASE        USER            ADDRESS                 METHOD</span>
-<span style=color:#666;font-style:italic># &#34;local&#34; is for Unix domain socket connections only</span>
-<span style=color:#072>local</span>   all             all                                     md5
-<span style=color:#666;font-style:italic># IPv4 local connections:</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># TYPE  DATABASE        USER            ADDRESS                 METHOD</span>
+<span class=c1># &#34;local&#34; is for Unix domain socket connections only</span>
+<span class=nb>local</span>   all             all                                     md5
+<span class=c1># IPv4 local connections:</span>
 host    all             all             127.0.0.1/32            md5
-<span style=color:#666;font-style:italic># IPv6 local connections:</span>
+<span class=c1># IPv6 local connections:</span>
 host    all             all             ::1/128                 md5
-<span style=color:#666;font-style:italic># Allow replication connections from localhost, by a user with the</span>
-<span style=color:#666;font-style:italic># replication privilege.</span>
-<span style=color:#666;font-style:italic>#local   replication     postgres                                peer</span>
-<span style=color:#666;font-style:italic>#host    replication     postgres        127.0.0.1/32            ident</span>
-<span style=color:#666;font-style:italic>#host    replication     postgres        ::1/128                 ident</span>
+<span class=c1># Allow replication connections from localhost, by a user with the</span>
+<span class=c1># replication privilege.</span>
+<span class=c1>#local   replication     postgres                                peer</span>
+<span class=c1>#host    replication     postgres        127.0.0.1/32            ident</span>
+<span class=c1>#host    replication     postgres        ::1/128                 ident</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>Edit <code>/etc/odbcinst.ini</code> to use the ODBC driver</li>
 </ul>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#333>[</span>PostgreSQL<span style=color:#333>]</span>
-<span style=color:#036>Description</span><span style=color:#333>=</span>PostgreSQL ODBC driver <span style=color:#333>(</span>Unicode version<span style=color:#333>)</span>
-<span style=color:#036>Driver64</span><span style=color:#333>=</span>/usr/pgsql-9.4/lib/psqlodbcw.so
-<span style=color:#036>Setup64</span><span style=color:#333>=</span>/usr/lib64/libodbcpsqlS.so
-<span style=color:#036>Debug</span><span style=color:#333>=</span><span style=color:#60e;font-weight:700>0</span>
-<span style=color:#036>CommLog</span><span style=color:#333>=</span><span style=color:#60e;font-weight:700>1</span>
-<span style=color:#036>UsageCount</span><span style=color:#333>=</span><span style=color:#60e;font-weight:700>1</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=o>[</span>PostgreSQL<span class=o>]</span>
+<span class=nv>Description</span><span class=o>=</span>PostgreSQL ODBC driver <span class=o>(</span>Unicode version<span class=o>)</span>
+<span class=nv>Driver64</span><span class=o>=</span>/usr/pgsql-9.4/lib/psqlodbcw.so
+<span class=nv>Setup64</span><span class=o>=</span>/usr/lib64/libodbcpsqlS.so
+<span class=nv>Debug</span><span class=o>=</span><span class=m>0</span>
+<span class=nv>CommLog</span><span class=o>=</span><span class=m>1</span>
+<span class=nv>UsageCount</span><span class=o>=</span><span class=m>1</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>Create the ODBC DSN <code>/etc/odbc.ini</code></li>
 </ul>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#333>[</span>&lt;dsn_name&gt;<span style=color:#333>]</span>
-<span style=color:#036>Driver</span> <span style=color:#333>=</span> PostgreSQL
-<span style=color:#036>DSN</span> <span style=color:#333>=</span> &lt;dsn_name&gt;
-<span style=color:#036>ServerName</span> <span style=color:#333>=</span> localhost
-<span style=color:#036>PortNumber</span> <span style=color:#333>=</span> <span style=color:#60e;font-weight:700>5432</span>
-<span style=color:#036>Server</span> <span style=color:#333>=</span> localhost
-<span style=color:#036>Port</span> <span style=color:#333>=</span> <span style=color:#60e;font-weight:700>5432</span>
-<span style=color:#036>UserID</span> <span style=color:#333>=</span> &lt;database_username&gt;;
-<span style=color:#036>User</span> <span style=color:#333>=</span> &lt;database_username&gt;;
-<span style=color:#036>Database</span> <span style=color:#333>=</span> &lt;database_name&gt;;
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=o>[</span>&lt;dsn_name&gt;<span class=o>]</span>
+<span class=nv>Driver</span> <span class=o>=</span> PostgreSQL
+<span class=nv>DSN</span> <span class=o>=</span> &lt;dsn_name&gt;
+<span class=nv>ServerName</span> <span class=o>=</span> localhost
+<span class=nv>PortNumber</span> <span class=o>=</span> <span class=m>5432</span>
+<span class=nv>Server</span> <span class=o>=</span> localhost
+<span class=nv>Port</span> <span class=o>=</span> <span class=m>5432</span>
+<span class=nv>UserID</span> <span class=o>=</span> &lt;database_username&gt;<span class=p>;</span>
+<span class=nv>User</span> <span class=o>=</span> &lt;database_username&gt;<span class=p>;</span>
+<span class=nv>Database</span> <span class=o>=</span> &lt;database_name&gt;<span class=p>;</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -270,20 +246,20 @@ host    all             all             ::1/128                 md5
 </ul>
 <h2 id=install-umds>Install UMDS</h2>
 <p>Next, mount the vCenter Server Appliance ISO file, copy the UMDS installer tar.gz file into the /umds folder and extract the installer. When this is complete there should be a vmware-umds-distrib folder.</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>mkdir /mnt/cdrom
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>mkdir /mnt/cdrom
 mount /dev/cdrom /mnt/cdrom
 cp /mnt/cdrom/umds/VMware-UMDS-6.7.0-8169861.tar.gz /umds/VMware-UMDS-6.7.0-8169861.tar.gz
-<span style=color:#072>cd</span> /umds
+<span class=nb>cd</span> /umds
 tar xvzf VMware-UMDS-6.7.0-8169861.tar.gz
 umount /mnt/cdrom
 </code></pre></td></tr></table>
@@ -300,142 +276,142 @@ umount /mnt/cdrom
 <ul>
 <li>View the current configuration</li>
 </ul>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>/umds/vmware-umds/bin/vmware-umds -G
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>/umds/vmware-umds/bin/vmware-umds -G
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>Disable older patches (I just want 6.7)</li>
 </ul>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>/umds/vmware-umds/bin/vmware-umds -S -d embeddedEsx-6.0.0 embeddedEsx-6.5.0 embeddedEsx-6.6.1 embeddedEsx-6.6.2 embeddedEsx-6.6.3
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>/umds/vmware-umds/bin/vmware-umds -S -d embeddedEsx-6.0.0 embeddedEsx-6.5.0 embeddedEsx-6.6.1 embeddedEsx-6.6.2 embeddedEsx-6.6.3
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>Add the Dell and HPE repositories</li>
 </ul>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>/umds/vmware-umds/bin/vmware-umds -S --add-url https://vmwaredepot.dell.com/index.xml --url-type HOST
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>/umds/vmware-umds/bin/vmware-umds -S --add-url https://vmwaredepot.dell.com/index.xml --url-type HOST
 /umds/vmware-umds/bin/vmware-umds -S --add-url https://vibsdepot.hpe.com/index.xml --url-type HOST
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>Fix the SSL errors (use the local lib curl binary)</li>
 </ul>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>mv /usr/local/vmware-umds/lib/libcurl.so.4 /usr/local/vmware-umds/lib/libcurl.so.4.backup
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>mv /usr/local/vmware-umds/lib/libcurl.so.4 /usr/local/vmware-umds/lib/libcurl.so.4.backup
 ln -s /usr/lib64/libcurl.so.4 /usr/local/vmware-umds/lib/libcurl.so.4
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>Download the updates</li>
 </ul>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>/umds/vmware-umds/bin/vmware-umds -D
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>/umds/vmware-umds/bin/vmware-umds -D
 </code></pre></td></tr></table>
 </div>
 </div><h2 id=install-nginx>Install NGINX</h2>
 <ul>
 <li>Install and start nginx</li>
 </ul>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>yum install epel-release
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>yum install epel-release
 yum install nginx
 sudo systemctl start nginx
-sudo systemctl <span style=color:#072>enable</span> nginx
+sudo systemctl <span class=nb>enable</span> nginx
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>Configure the firewall for HTTPS</li>
 </ul>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>firewall-cmd --permanent --add-port<span style=color:#333>=</span>443/tcp
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>firewall-cmd --permanent --add-port<span class=o>=</span>443/tcp
 firewall-cmd --reload
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>Generate SSL certificates</li>
 </ul>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>mkdir /etc/nginx/ssl-certs/
-openssl req -x509 -nodes -days <span style=color:#60e;font-weight:700>365</span> -newkey rsa:2048 -keyout /etc/nginx/ssl-certs/umds.key -out /etc/nginx/ssl-certs/umds.crt
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>mkdir /etc/nginx/ssl-certs/
+openssl req -x509 -nodes -days <span class=m>365</span> -newkey rsa:2048 -keyout /etc/nginx/ssl-certs/umds.key -out /etc/nginx/ssl-certs/umds.crt
 </code></pre></td></tr></table>
 </div>
 </div><img class="alignright size-full wp-image-9012" src=/images/2019/03/2019-03-14_10-58-49.png style=max-width:100%>
 <ul>
 <li>Create an NGINX config file for UMDS - <code>/etc/nginx/conf.d/umds.conf</code></li>
 </ul>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=color:#289;font-weight:700>server</span> {
-    <span style=color:#289;font-weight:700>listen</span> <span style=color:#66f;font-weight:700>443</span> <span style=background-color:#e0e0ff>ssl</span>;<span style=color:#289;font-weight:700>ssl</span> <span style=color:#5ed;font-weight:700>on</span>;
-    <span style=color:#289;font-weight:700>ssl_certificate</span> <span style=background-color:#e0e0ff>/etc/nginx/ssl-certs/umds.crt</span>;
-    <span style=color:#289;font-weight:700>ssl_trusted_certificate</span> <span style=background-color:#e0e0ff>/etc/nginx/ssl-certs/umds.crt</span>;
-    <span style=color:#289;font-weight:700>ssl_certificate_key</span> <span style=background-color:#e0e0ff>/etc/nginx/ssl-certs/umds.key</span>;
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-nginx data-lang=nginx><span class=k>server</span> <span class=p>{</span>
+    <span class=kn>listen</span> <span class=mi>443</span> <span class=s>ssl</span><span class=p>;</span><span class=kn>ssl</span> <span class=no>on</span><span class=p>;</span>
+    <span class=kn>ssl_certificate</span> <span class=s>/etc/nginx/ssl-certs/umds.crt</span><span class=p>;</span>
+    <span class=kn>ssl_trusted_certificate</span> <span class=s>/etc/nginx/ssl-certs/umds.crt</span><span class=p>;</span>
+    <span class=kn>ssl_certificate_key</span> <span class=s>/etc/nginx/ssl-certs/umds.key</span><span class=p>;</span>
 
-    <span style=color:#289;font-weight:700>server_name</span> <span style=background-color:#e0e0ff>umds.definit.local</span>;
-    <span style=color:#289;font-weight:700>root</span> <span style=background-color:#e0e0ff>/umds/vmware-umds-patches</span>;
-    <span style=color:#289;font-weight:700>index</span> <span style=background-color:#e0e0ff>index.html</span>;
-    <span style=color:#289;font-weight:700>location</span> <span style=background-color:#e0e0ff>/</span> {
-        <span style=color:#289;font-weight:700>autoindex</span> <span style=color:#5ed;font-weight:700>on</span>;
-        <span style=color:#289;font-weight:700>try_files</span> <span style=color:#036>$uri</span> <span style=color:#036>$uri/</span> =<span style=color:#66f;font-weight:700>404</span>;
-    }
-}
+    <span class=kn>server_name</span> <span class=s>umds.definit.local</span><span class=p>;</span>
+    <span class=kn>root</span> <span class=s>/umds/vmware-umds-patches</span><span class=p>;</span>
+    <span class=kn>index</span> <span class=s>index.html</span><span class=p>;</span>
+    <span class=kn>location</span> <span class=s>/</span> <span class=p>{</span>
+        <span class=kn>autoindex</span> <span class=no>on</span><span class=p>;</span>
+        <span class=kn>try_files</span> <span class=nv>$uri</span> <span class=nv>$uri/</span> <span class=p>=</span><span class=mi>404</span><span class=p>;</span>
+    <span class=p>}</span>
+<span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -528,31 +504,31 @@ Next
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
+<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">9</span></a></li>
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">28</span></a></li>
 <li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">15</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">42</span></a></li>
-<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li>
+<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">24</span></a></li>
+<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">49</span></a></li>
+<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/exam class=nav-link>EXAM <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/fusion class=nav-link>FUSION <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
 <li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li>
+<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li>
 <li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
 <li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">206</span></a></li>
+<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">214</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
+<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">14</span></a></li>
+<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">47</span></a></li>
+<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">74</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">58</span></a></li>
+<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">5</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">59</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>
@@ -561,15 +537,15 @@ Next
 <input id=Tags type=checkbox>
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
-<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">53</span></a></li>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">70</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">56</span></a></li>
 <li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
 <li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
+<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">34</span></a></li>
 <li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
 <li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li>
+<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">32</span></a></li>
+<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">32</span></a></li>
 <li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li>
 </section>
 </section>

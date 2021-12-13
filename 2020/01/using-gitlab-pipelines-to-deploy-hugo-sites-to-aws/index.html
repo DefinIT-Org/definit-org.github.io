@@ -31,7 +31,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2020/01/using-gitlab-pipelines-to-deploy-hugo-sites-to-aws/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.90.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.90.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -50,16 +50,16 @@
 </a>
 </div>
 <nav class=header-nav>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/ title=Home>
 Home
 </a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/about/>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/about/ title=About>
 About
 </a>
-<a class="nav-link nav-text" href=https://www.github.com/sammcgeown>
+<a class="nav-link nav-text" href=https://www.github.com/sammcgeown title=GitHub>
 GitHub
 </a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml title=RSS>
 RSS
 </a>
 </nav>
@@ -72,30 +72,6 @@ RSS
 </form>
 </div>
 </header>
-<nav class=subnav>
-<ul class=nav>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/>
-Home
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/about/>
-About
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.github.com/sammcgeown>
-GitHub
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/index.xml>
-RSS
-</a>
-</li>
-</ul>
-</nav>
 <div class=content-container>
 <div class=content-area>
 <h1>Using GitLab Pipelines to deploy Hugo sites to AWS</h1>
@@ -174,136 +150,136 @@ Tags:
 </tbody>
 </table>
 <p>These variables are used in the <code>.gitlab-ci.yml</code> file below, which I&rsquo;ve commented heavily to show what&rsquo;s happening.</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">57
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">58
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">59
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">60
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">61
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">62
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">63
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#0e84b5;font-weight:700>---</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Set the default container image to GitLab&#39;s Hugo image</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>image</span>:<span style=color:#bbb> </span>registry.gitlab.com/pages/hugo:latest<span style=color:#bbb>
-</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>variables</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Ensure the git submodules are updated when the pipeline runs</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>GIT_SUBMODULE_STRATEGY</span>:<span style=color:#bbb> </span>recursive<span style=color:#bbb>
-</span><span style=color:#bbb>  
-</span><span style=color:#bbb></span><span style=color:#070>stages</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span>- build<span style=color:#bbb>
-</span><span style=color:#bbb>  </span>- deploy<span style=color:#bbb>
-</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Build the Staging site</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>buildStaging</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>stage</span>:<span style=color:#bbb> </span>build<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>script</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#666;font-style:italic># Run hugo with a different baseURL to ensure links work in the staging site, and flag to include drafts and future posts</span><span style=color:#bbb>
-</span><span style=color:#bbb>    </span>- hugo --minify --baseURL http://$AWS_S3_Staging_Bucket.s3-website.$AWS_DEFAULT_REGION.amazonaws.com/ --buildDrafts --buildFuture<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>artifacts</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>paths</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>      </span><span style=color:#666;font-style:italic># Create an artifact folder of the hugo &#34;public&#34; output</span><span style=color:#bbb>
-</span><span style=color:#bbb>      </span>- public<span style=color:#bbb>
-</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Deploy the Staging site</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>deployStaging</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># In the deploy stage</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>stage</span>:<span style=color:#bbb> </span>deploy<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Use a docker image with AWS CLI pre-installed</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>image</span>:<span style=color:#bbb> </span>garland/aws-cli-docker<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>script</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Synchronise the &#34;public&#34; folder passed from buildStaging to the Staging AWS S3 bucket name from the variable</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span>- aws s3 sync ./public s3://$AWS_S3_Staging_Bucket --delete --only-show-errors<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>dependencies</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Depend on the buildStaging job to ensure the &#34;public&#34; artifact is available</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span>- buildStaging<span style=color:#bbb>
-</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Build the Production site</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>buildProduction</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># In the build stage</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>stage</span>:<span style=color:#bbb> </span>build<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>script</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#666;font-style:italic># Run hugo with just the minify command (no drafts or future posts)</span><span style=color:#bbb>
-</span><span style=color:#bbb>    </span>- hugo --minify<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>artifacts</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>paths</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>      </span><span style=color:#666;font-style:italic># Create an artifact folder of the hugo &#34;public&#34; output</span><span style=color:#bbb>
-</span><span style=color:#bbb>      </span>- public<span style=color:#bbb>
-</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#666;font-style:italic># Deploy the Production site</span><span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>deployProduction</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># In the deploy stage</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>stage</span>:<span style=color:#bbb> </span>deploy<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Use a docker image with AWS CLI pre-installed</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>image</span>:<span style=color:#bbb> </span>garland/aws-cli-docker<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>script</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Synchronise the &#34;public&#34; folder passed from buildProduction to the Production AWS S3 bucket name from the variable</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span>- aws s3 sync ./public s3://$AWS_S3_Production_Bucket --delete --only-show-errors<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Invalidate the cloudfront cache to make the changes live</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span>- aws cloudfront create-invalidation --distribution-id E37FU6DHWYT5T2 --paths &#34;/*&#34;<span style=color:#bbb>
-</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>dependencies</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#666;font-style:italic># Depend on the buildProduction job to ensure the &#34;public&#34; artifact is available</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span>- buildProduction<span style=color:#bbb>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nn>---</span><span class=w>
+</span><span class=w></span><span class=c># Set the default container image to GitLab&#39;s Hugo image</span><span class=w>
+</span><span class=w></span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>registry.gitlab.com/pages/hugo:latest</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>variables</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=c># Ensure the git submodules are updated when the pipeline runs</span><span class=w>
+</span><span class=w>  </span><span class=nt>GIT_SUBMODULE_STRATEGY</span><span class=p>:</span><span class=w> </span><span class=l>recursive</span><span class=w>
+</span><span class=w>  
+</span><span class=w></span><span class=nt>stages</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span>- <span class=l>build</span><span class=w>
+</span><span class=w>  </span>- <span class=l>deploy</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># Build the Staging site</span><span class=w>
+</span><span class=w></span><span class=nt>buildStaging</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>stage</span><span class=p>:</span><span class=w> </span><span class=l>build</span><span class=w>
+</span><span class=w>  </span><span class=nt>script</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=c># Run hugo with a different baseURL to ensure links work in the staging site, and flag to include drafts and future posts</span><span class=w>
+</span><span class=w>    </span>- <span class=l>hugo --minify --baseURL http://$AWS_S3_Staging_Bucket.s3-website.$AWS_DEFAULT_REGION.amazonaws.com/ --buildDrafts --buildFuture</span><span class=w>
+</span><span class=w>  </span><span class=nt>artifacts</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>paths</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=c># Create an artifact folder of the hugo &#34;public&#34; output</span><span class=w>
+</span><span class=w>      </span>- <span class=l>public</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># Deploy the Staging site</span><span class=w>
+</span><span class=w></span><span class=nt>deployStaging</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=c># In the deploy stage</span><span class=w>
+</span><span class=w>  </span><span class=nt>stage</span><span class=p>:</span><span class=w> </span><span class=l>deploy</span><span class=w>
+</span><span class=w>  </span><span class=c># Use a docker image with AWS CLI pre-installed</span><span class=w>
+</span><span class=w>  </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>garland/aws-cli-docker</span><span class=w>
+</span><span class=w>  </span><span class=nt>script</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=c># Synchronise the &#34;public&#34; folder passed from buildStaging to the Staging AWS S3 bucket name from the variable</span><span class=w>
+</span><span class=w>  </span>- <span class=l>aws s3 sync ./public s3://$AWS_S3_Staging_Bucket --delete --only-show-errors</span><span class=w>
+</span><span class=w>  </span><span class=nt>dependencies</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=c># Depend on the buildStaging job to ensure the &#34;public&#34; artifact is available</span><span class=w>
+</span><span class=w>  </span>- <span class=l>buildStaging</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># Build the Production site</span><span class=w>
+</span><span class=w></span><span class=nt>buildProduction</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=c># In the build stage</span><span class=w>
+</span><span class=w>  </span><span class=nt>stage</span><span class=p>:</span><span class=w> </span><span class=l>build</span><span class=w>
+</span><span class=w>  </span><span class=nt>script</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=c># Run hugo with just the minify command (no drafts or future posts)</span><span class=w>
+</span><span class=w>    </span>- <span class=l>hugo --minify</span><span class=w>
+</span><span class=w>  </span><span class=nt>artifacts</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>paths</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=c># Create an artifact folder of the hugo &#34;public&#34; output</span><span class=w>
+</span><span class=w>      </span>- <span class=l>public</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># Deploy the Production site</span><span class=w>
+</span><span class=w></span><span class=nt>deployProduction</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=c># In the deploy stage</span><span class=w>
+</span><span class=w>  </span><span class=nt>stage</span><span class=p>:</span><span class=w> </span><span class=l>deploy</span><span class=w>
+</span><span class=w>  </span><span class=c># Use a docker image with AWS CLI pre-installed</span><span class=w>
+</span><span class=w>  </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>garland/aws-cli-docker</span><span class=w>
+</span><span class=w>  </span><span class=nt>script</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=c># Synchronise the &#34;public&#34; folder passed from buildProduction to the Production AWS S3 bucket name from the variable</span><span class=w>
+</span><span class=w>  </span>- <span class=l>aws s3 sync ./public s3://$AWS_S3_Production_Bucket --delete --only-show-errors</span><span class=w>
+</span><span class=w>  </span><span class=c># Invalidate the cloudfront cache to make the changes live</span><span class=w>
+</span><span class=w>  </span>- <span class=l>aws cloudfront create-invalidation --distribution-id E37FU6DHWYT5T2 --paths &#34;/*&#34;</span><span class=w>
+</span><span class=w>
+</span><span class=w>  </span><span class=nt>dependencies</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=c># Depend on the buildProduction job to ensure the &#34;public&#34; artifact is available</span><span class=w>
+</span><span class=w>  </span>- <span class=l>buildProduction</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
 </div><p>Commiting the <code>.gitlab-ci.yml</code> file to the <strong>definit-hugo</strong> repository actually triggers the pipeline.</p>
@@ -311,16 +287,16 @@ Tags:
 <p>When the <code>draft: true</code> property is set in the hugo content&rsquo;s front matter, the draft content is built and released to the staging environment, but not the &ldquo;live&rdquo; blog thanks to the <code>--buildDrafts</code> flag:</p>
 <p><img src=images/DraftOnStaging.png alt="Draft content released to staging"></p>
 <p>All good so far, but there&rsquo;s a problem here. I want to commit new posts to the <strong>definit-content</strong> repository, not the <strong>definit-hugo</strong> repository, so I need to create a pipeline on the <strong>definit-content</strong> repository to trigger the pipeline in the <strong>definit-hugo</strong> project. Fortunately GitLab makes this easy using the <code>trigger</code> syntax, simply creating a job with the trigger action and the path to my <strong>definit-hugo</strong> project.</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>trigger_hugo_build</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>stage</span>:<span style=color:#bbb> </span>deploy<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>trigger</span>:<span style=color:#bbb> </span>sammcgeown/definit-hugo<span style=color:#bbb>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>trigger_hugo_build</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>stage</span><span class=p>:</span><span class=w> </span><span class=l>deploy</span><span class=w>
+</span><span class=w>  </span><span class=nt>trigger</span><span class=p>:</span><span class=w> </span><span class=l>sammcgeown/definit-hugo</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
 </div><p>Now when there&rsquo;s a commit to the <strong>definit-content</strong> projcet the pipeline triggers the downstream build, and all the downstream steps are visible in the pipeline:</p>
@@ -385,7 +361,7 @@ Previous
 </a>
 </div>
 <div class=clr-nav-next>
-<a href=https://www.definit.co.uk/2020/01/running-coredns-for-lab-name-resolution/ title="Running CoreDNS for lab name resolution" class="btn btn-sm btn-outline">
+<a href=https://www.definit.co.uk/2020/01/using-gitlab-pipelines-to-deploy-hugo-sites-to-aws/ title="Using GitLab Pipelines to deploy Hugo sites to AWS" class="btn btn-sm btn-outline">
 Next
 </a>
 </div>
@@ -398,31 +374,31 @@ Next
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
+<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">9</span></a></li>
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">28</span></a></li>
 <li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">15</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">42</span></a></li>
-<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li>
+<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">24</span></a></li>
+<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">49</span></a></li>
+<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/exam class=nav-link>EXAM <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/fusion class=nav-link>FUSION <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
 <li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li>
+<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li>
 <li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
 <li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">206</span></a></li>
+<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">214</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
+<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">14</span></a></li>
+<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">47</span></a></li>
+<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">74</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">58</span></a></li>
+<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">5</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">59</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>
@@ -431,15 +407,15 @@ Next
 <input id=Tags type=checkbox>
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
-<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">53</span></a></li>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">70</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">56</span></a></li>
 <li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
 <li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
+<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">34</span></a></li>
 <li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
 <li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li>
+<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">32</span></a></li>
+<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">32</span></a></li>
 <li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li>
 </section>
 </section>

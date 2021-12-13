@@ -31,7 +31,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2021/04/scheduling-a-restart-of-a-kubernetes-deployment-using-cronjobs/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.90.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.90.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -50,16 +50,16 @@
 </a>
 </div>
 <nav class=header-nav>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/ title=Home>
 Home
 </a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/about/>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/about/ title=About>
 About
 </a>
-<a class="nav-link nav-text" href=https://www.github.com/sammcgeown>
+<a class="nav-link nav-text" href=https://www.github.com/sammcgeown title=GitHub>
 GitHub
 </a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml title=RSS>
 RSS
 </a>
 </nav>
@@ -72,30 +72,6 @@ RSS
 </form>
 </div>
 </header>
-<nav class=subnav>
-<ul class=nav>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/>
-Home
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/about/>
-About
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.github.com/sammcgeown>
-GitHub
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/index.xml>
-RSS
-</a>
-</li>
-</ul>
-</nav>
 <div class=content-container>
 <div class=content-area>
 <h1>Scheduling a restart of a Kubernetes Deployment using CronJobs</h1>
@@ -123,175 +99,175 @@ Tags:
 <p>If my PiHole or Plex deployments become slow to respond I can generally restart the <code>Deployment</code> and everything springs back into life. Typically this is just a <code>kubectl rollout restart deployment pihole</code> command to bounce the pods. This is generally pretty safe as it creates a new <code>ReplicaSet</code> and ensures the <code>Pods</code> are running before terminating the old ones.</p>
 <p>Rather than waiting for performance to degrade, then manually restarting the deployment, I wanted to bake in an automated restart once a week while the family sleep. The added benefit here is also that I can keep my Plex server up to date by specifying <code>imagePullPolicy: Always</code>. Fortunately, we can make use of the <a href>CronJob</a> functionality to schedule the command. To do this I need to create a few objects:</p>
 <p><strong>ServiceAccount</strong> - an account I can delegate the rights to restart the deployment, as the default service account does not have rights</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>kind</span>:<span style=color:#bbb> </span>ServiceAccount<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>v1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>restart-pihole<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>pihole<span style=color:#bbb>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ServiceAccount</span><span class=w>
+</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>restart-pihole</span><span class=w>
+</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>pihole</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
 </div><p><strong>Role</strong> - a role with minimal permissions to perform the actions on the deployment</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>rbac.authorization.k8s.io/v1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>Role<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>restart-pihole<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>pihole<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>rules</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span>- <span style=color:#070>apiGroups</span>:<span style=color:#bbb> </span>[<span style=background-color:#e0e0ff>&#34;apps&#34;</span>,<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#34;extensions&#34;</span>]<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>resources</span>:<span style=color:#bbb> </span>[<span style=background-color:#e0e0ff>&#34;deployments&#34;</span>]<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>resourceNames</span>:<span style=color:#bbb> </span>[<span style=background-color:#e0e0ff>&#34;pihole&#34;</span>]<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>verbs</span>:<span style=color:#bbb> </span>[<span style=background-color:#e0e0ff>&#34;get&#34;</span>,<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#34;patch&#34;</span>]<span style=color:#bbb>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io/v1</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Role</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>restart-pihole</span><span class=w>
+</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>pihole</span><span class=w>
+</span><span class=w></span><span class=nt>rules</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span>- <span class=nt>apiGroups</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&#34;apps&#34;</span><span class=p>,</span><span class=w> </span><span class=s2>&#34;extensions&#34;</span><span class=p>]</span><span class=w>
+</span><span class=w>    </span><span class=nt>resources</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&#34;deployments&#34;</span><span class=p>]</span><span class=w>
+</span><span class=w>    </span><span class=nt>resourceNames</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&#34;pihole&#34;</span><span class=p>]</span><span class=w>
+</span><span class=w>    </span><span class=nt>verbs</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&#34;get&#34;</span><span class=p>,</span><span class=w> </span><span class=s2>&#34;patch&#34;</span><span class=p>]</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
 </div><p><strong>RoleBinding</strong> - to bind the role to the service account</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>rbac.authorization.k8s.io/v1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>RoleBinding<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>restart-pihole<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>pihole<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>roleRef</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>apiGroup</span>:<span style=color:#bbb> </span>rbac.authorization.k8s.io<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>Role<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>restart-pihole<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>subjects</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span>- <span style=color:#070>kind</span>:<span style=color:#bbb> </span>ServiceAccount<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>restart-pihole<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>pihole<span style=color:#bbb>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io/v1</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>RoleBinding</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>restart-pihole</span><span class=w>
+</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>pihole</span><span class=w>
+</span><span class=w></span><span class=nt>roleRef</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>apiGroup</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io</span><span class=w>
+</span><span class=w>  </span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Role</span><span class=w>
+</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>restart-pihole</span><span class=w>
+</span><span class=w></span><span class=nt>subjects</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span>- <span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ServiceAccount</span><span class=w>
+</span><span class=w>    </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>restart-pihole</span><span class=w>
+</span><span class=w>    </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>pihole</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
 </div><p>Lastly, I need a <strong>CronJob</strong> - the Cron-like task definition to run my kubectl command. I&rsquo;m using the <a href=https://hub.docker.com/r/raspbernetes/kubectl>raspbernetes/kubectl</a> image to provide kubectl compatible with my Raspberry Pi&rsquo;s architecture - if you&rsquo;re doing it on a different architecture I&rsquo;d recommend the <a href=https://hub.docker.com/r/bitnami/kubectl>bitnami/kubectl</a> image.</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#070>apiVersion</span>:<span style=color:#bbb> </span>batch/v1beta1<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>kind</span>:<span style=color:#bbb> </span>CronJob<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>metadata</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>name</span>:<span style=color:#bbb> </span>restart-pihole<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>namespace</span>:<span style=color:#bbb> </span>pihole<span style=color:#bbb>
-</span><span style=color:#bbb></span><span style=color:#070>spec</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>concurrencyPolicy</span>:<span style=color:#bbb> </span>Forbid<span style=color:#bbb> </span><span style=color:#666;font-style:italic># Do not run concurrently!</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>schedule</span>:<span style=color:#bbb> </span><span style=background-color:#e0e0ff>&#39;0 0 * * 0&#39;</span><span style=color:#bbb>     </span><span style=color:#666;font-style:italic># Run once a week at midnight on Sunday morning</span><span style=color:#bbb>
-</span><span style=color:#bbb>  </span><span style=color:#070>jobTemplate</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>    </span><span style=color:#070>spec</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>      </span><span style=color:#070>backoffLimit</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>2</span><span style=color:#bbb> 
-</span><span style=color:#bbb>      </span><span style=color:#070>activeDeadlineSeconds</span>:<span style=color:#bbb> </span><span style=color:#60e;font-weight:700>600</span><span style=color:#bbb> 
-</span><span style=color:#bbb>      </span><span style=color:#070>template</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>        </span><span style=color:#070>spec</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>serviceAccountName</span>:<span style=color:#bbb> </span>restart-pihole<span style=color:#bbb> </span><span style=color:#666;font-style:italic># Run under the service account created above</span><span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>restartPolicy</span>:<span style=color:#bbb> </span>Never<span style=color:#bbb>
-</span><span style=color:#bbb>          </span><span style=color:#070>containers</span>:<span style=color:#bbb>
-</span><span style=color:#bbb>            </span>- <span style=color:#070>name</span>:<span style=color:#bbb> </span>kubectl<span style=color:#bbb>
-</span><span style=color:#bbb>              </span><span style=color:#070>image</span>:<span style=color:#bbb> </span>raspbernetes/kubectl<span style=color:#bbb> </span><span style=color:#666;font-style:italic># Specify the kubectl image</span><span style=color:#bbb>
-</span><span style=color:#bbb>              </span><span style=color:#070>command</span>:<span style=color:#bbb> </span><span style=color:#666;font-style:italic># The kubectl command to execute</span><span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- <span style=background-color:#e0e0ff>&#39;kubectl&#39;</span><span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- <span style=background-color:#e0e0ff>&#39;rollout&#39;</span><span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- <span style=background-color:#e0e0ff>&#39;restart&#39;</span><span style=color:#bbb>
-</span><span style=color:#bbb>                </span>- <span style=background-color:#e0e0ff>&#39;deployment/pihole&#39;</span><span style=color:#bbb>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>batch/v1beta1</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>CronJob</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>restart-pihole</span><span class=w>
+</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>pihole</span><span class=w>
+</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>concurrencyPolicy</span><span class=p>:</span><span class=w> </span><span class=l>Forbid</span><span class=w> </span><span class=c># Do not run concurrently!</span><span class=w>
+</span><span class=w>  </span><span class=nt>schedule</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;0 0 * * 0&#39;</span><span class=w>     </span><span class=c># Run once a week at midnight on Sunday morning</span><span class=w>
+</span><span class=w>  </span><span class=nt>jobTemplate</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=nt>backoffLimit</span><span class=p>:</span><span class=w> </span><span class=m>2</span><span class=w> 
+</span><span class=w>      </span><span class=nt>activeDeadlineSeconds</span><span class=p>:</span><span class=w> </span><span class=m>600</span><span class=w> 
+</span><span class=w>      </span><span class=nt>template</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>serviceAccountName</span><span class=p>:</span><span class=w> </span><span class=l>restart-pihole</span><span class=w> </span><span class=c># Run under the service account created above</span><span class=w>
+</span><span class=w>          </span><span class=nt>restartPolicy</span><span class=p>:</span><span class=w> </span><span class=l>Never</span><span class=w>
+</span><span class=w>          </span><span class=nt>containers</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>kubectl</span><span class=w>
+</span><span class=w>              </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>raspbernetes/kubectl</span><span class=w> </span><span class=c># Specify the kubectl image</span><span class=w>
+</span><span class=w>              </span><span class=nt>command</span><span class=p>:</span><span class=w> </span><span class=c># The kubectl command to execute</span><span class=w>
+</span><span class=w>                </span>- <span class=s1>&#39;kubectl&#39;</span><span class=w>
+</span><span class=w>                </span>- <span class=s1>&#39;rollout&#39;</span><span class=w>
+</span><span class=w>                </span>- <span class=s1>&#39;restart&#39;</span><span class=w>
+</span><span class=w>                </span>- <span class=s1>&#39;deployment/pihole&#39;</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
 </div><p>Once these configurations have been applied, I can view my new setup:</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ kubectl get cronjobs.batch
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ kubectl get cronjobs.batch
 NAME             SCHEDULE    SUSPEND   ACTIVE   LAST SCHEDULE   AGE
-restart-pihole   <span style=color:#60e;font-weight:700>0</span> <span style=color:#60e;font-weight:700>0</span> * * <span style=color:#60e;font-weight:700>0</span>   False     <span style=color:#60e;font-weight:700>0</span>        &lt;none&gt;          10s
+restart-pihole   <span class=m>0</span> <span class=m>0</span> * * <span class=m>0</span>   False     <span class=m>0</span>        &lt;none&gt;          10s
 </code></pre></td></tr></table>
 </div>
 </div><p>One final tip&mldr;if I don&rsquo;t want to wait until next week to see if the cronjob works, I can create a new job based on the cronjob configuration using the <code>--from=cronjob</code> flag:</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ kubectl create job --from<span style=color:#333>=</span>cronjob/restart-pihole restart-pihole-now
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ kubectl create job --from<span class=o>=</span>cronjob/restart-pihole restart-pihole-now
 job.batch/restart-pihole-now created
-$ kubectl get <span style=color:#072>jobs</span>
+$ kubectl get <span class=nb>jobs</span>
 NAME                 COMPLETIONS   DURATION   AGE
 restart-pihole-now   1/1           111s       2m22s
 $ kubectl get pods
 NAME                       READY   STATUS      RESTARTS   AGE
-pihole-c8774858-tqj65      1/1     Running     <span style=color:#60e;font-weight:700>0</span>          65s
-restart-pihole-now-l2r69   0/1     Completed   <span style=color:#60e;font-weight:700>0</span>          90s
+pihole-c8774858-tqj65      1/1     Running     <span class=m>0</span>          65s
+restart-pihole-now-l2r69   0/1     Completed   <span class=m>0</span>          90s
 $ kubectl logs restart-pihole-now-l2r69
 deployment.apps/pihole restarted
 </code></pre></td></tr></table>
@@ -371,31 +347,31 @@ Next
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
+<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">9</span></a></li>
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">28</span></a></li>
 <li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">15</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">42</span></a></li>
-<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li>
+<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">24</span></a></li>
+<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">49</span></a></li>
+<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/exam class=nav-link>EXAM <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/fusion class=nav-link>FUSION <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
 <li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li>
+<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li>
 <li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
 <li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">206</span></a></li>
+<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">214</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
+<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">14</span></a></li>
+<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">47</span></a></li>
+<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">74</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">58</span></a></li>
+<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">5</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">59</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>
@@ -404,15 +380,15 @@ Next
 <input id=Tags type=checkbox>
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
-<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">53</span></a></li>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">70</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">56</span></a></li>
 <li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
 <li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
+<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">34</span></a></li>
 <li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
 <li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li>
+<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">32</span></a></li>
+<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">32</span></a></li>
 <li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li>
 </section>
 </section>

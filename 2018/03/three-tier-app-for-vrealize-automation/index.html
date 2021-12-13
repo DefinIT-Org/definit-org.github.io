@@ -36,7 +36,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2018/03/three-tier-app-for-vrealize-automation/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.90.0"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.90.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -55,16 +55,16 @@
 </a>
 </div>
 <nav class=header-nav>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/ title=Home>
 Home
 </a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/about/>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/about/ title=About>
 About
 </a>
-<a class="nav-link nav-text" href=https://www.github.com/sammcgeown>
+<a class="nav-link nav-text" href=https://www.github.com/sammcgeown title=GitHub>
 GitHub
 </a>
-<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml>
+<a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml title=RSS>
 RSS
 </a>
 </nav>
@@ -77,30 +77,6 @@ RSS
 </form>
 </div>
 </header>
-<nav class=subnav>
-<ul class=nav>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/>
-Home
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/about/>
-About
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.github.com/sammcgeown>
-GitHub
-</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://www.definit.co.uk/index.xml>
-RSS
-</a>
-</li>
-</ul>
-</nav>
 <div class=content-container>
 <div class=content-area>
 <h1>Three Tier App for vRealize Automation</h1>
@@ -170,57 +146,57 @@ Tags:
 <li>Enables remote connections to the database</li>
 <li>Opens the firewall for mysql connections</li>
 </ul>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#579>#!/bin/bash
-</span><span style=color:#579></span><span style=color:#666;font-style:italic># Install the database</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=cp>#!/bin/bash
+</span><span class=cp></span><span class=c1># Install the database</span>
 /usr/bin/yum -y install mariadb-server
-/usr/bin/systemctl <span style=color:#072>enable</span> mariadb.service
+/usr/bin/systemctl <span class=nb>enable</span> mariadb.service
 /usr/bin/systemctl start mariadb.service
-<span style=color:#666;font-style:italic>## Configure the Database</span>
-<span style=color:#036>mysql_user_password</span><span style=color:#333>=</span><span style=color:#289;font-weight:700>$(</span>cat /dev/urandom | tr -dc <span style=background-color:#e0e0ff>&#39;a-zA-Z0-9&#39;</span> | fold -w <span style=color:#60e;font-weight:700>32</span> | head -n 1<span style=color:#289;font-weight:700>)</span>
-<span style=color:#666;font-style:italic># Secure the database installation</span>
-/usr/bin/mysqladmin -u root password <span style=background-color:#e0e0ff>&#34;</span><span style=color:#036>$mysql_root_password</span><span style=background-color:#e0e0ff>&#34;</span>
-/usr/bin/mysql -u root -p<span style=background-color:#e0e0ff>&#34;</span><span style=color:#036>$mysql_root_password</span><span style=background-color:#e0e0ff>&#34;</span> -e <span style=background-color:#e0e0ff>&#34;UPDATE mysql.user SET Password=PASSWORD(&#39;</span><span style=color:#036>$mysql_root_password</span><span style=background-color:#e0e0ff>&#39;) WHERE User=&#39;root&#39;&#34;</span>
-/usr/bin/mysql -u root -p<span style=background-color:#e0e0ff>&#34;</span><span style=color:#036>$mysql_root_password</span><span style=background-color:#e0e0ff>&#34;</span> -e <span style=background-color:#e0e0ff>&#34;DELETE FROM mysql.user WHERE User=&#39;root&#39; AND Host NOT IN (&#39;localhost&#39;, &#39;127.0.0.1&#39;, &#39;::1&#39;)&#34;</span>
-/usr/bin/mysql -u root -p<span style=background-color:#e0e0ff>&#34;</span><span style=color:#036>$mysql_root_password</span><span style=background-color:#e0e0ff>&#34;</span> -e <span style=background-color:#e0e0ff>&#34;DELETE FROM mysql.user WHERE User=&#39;&#39;&#34;</span>
-/usr/bin/mysql -u root -p<span style=background-color:#e0e0ff>&#34;</span><span style=color:#036>$mysql_root_password</span><span style=background-color:#e0e0ff>&#34;</span> -e <span style=background-color:#e0e0ff>&#34;DELETE FROM mysql.db WHERE Db=&#39;test&#39; OR Db=&#39;test\_%&#39;&#34;</span>
-<span style=color:#666;font-style:italic># Add the app user and database</span>
-/usr/bin/mysql -u root -p<span style=background-color:#e0e0ff>&#34;</span><span style=color:#036>$mysql_root_password</span><span style=background-color:#e0e0ff>&#34;</span> -e <span style=background-color:#e0e0ff>&#34;CREATE DATABASE </span><span style=color:#036>$mysql_app_database</span><span style=background-color:#e0e0ff>;&#34;</span>
-/usr/bin/mysql -u root -p<span style=background-color:#e0e0ff>&#34;</span><span style=color:#036>$mysql_root_password</span><span style=background-color:#e0e0ff>&#34;</span> -e <span style=background-color:#e0e0ff>&#34;GRANT ALL PRIVILEGES ON </span><span style=color:#036>$mysql_app_database</span><span style=background-color:#e0e0ff>.* TO &#39;</span><span style=color:#036>$mysql_user_name</span><span style=background-color:#e0e0ff>&#39;@&#39;%&#39; IDENTIFIED BY &#39;</span><span style=color:#036>$mysql_user_password</span><span style=background-color:#e0e0ff>&#39;;&#34;</span>
-<span style=color:#666;font-style:italic># Flush privileges</span>
-/usr/bin/mysql -u root -p<span style=background-color:#e0e0ff>&#34;</span><span style=color:#036>$mysql_root_password</span><span style=background-color:#e0e0ff>&#34;</span> -e <span style=background-color:#e0e0ff>&#34;FLUSH PRIVILEGES&#34;</span>
-<span style=color:#666;font-style:italic># Enable remote connections</span>
-/usr/bin/echo <span style=background-color:#e0e0ff>&#34;bind-address = </span><span style=color:#036>$mysql_bind_address</span><span style=background-color:#e0e0ff>&#34;</span> &amp;gt;&amp;gt; /etc/my.cnf
-<span style=color:#666;font-style:italic># Open MySQL firewall for remote connections</span>
-/usr/bin/firewall-cmd --zone<span style=color:#333>=</span>public --add-service<span style=color:#333>=</span>mysql --permanent
+<span class=c1>## Configure the Database</span>
+<span class=nv>mysql_user_password</span><span class=o>=</span><span class=k>$(</span>cat /dev/urandom <span class=p>|</span> tr -dc <span class=s1>&#39;a-zA-Z0-9&#39;</span> <span class=p>|</span> fold -w <span class=m>32</span> <span class=p>|</span> head -n 1<span class=k>)</span>
+<span class=c1># Secure the database installation</span>
+/usr/bin/mysqladmin -u root password <span class=s2>&#34;</span><span class=nv>$mysql_root_password</span><span class=s2>&#34;</span>
+/usr/bin/mysql -u root -p<span class=s2>&#34;</span><span class=nv>$mysql_root_password</span><span class=s2>&#34;</span> -e <span class=s2>&#34;UPDATE mysql.user SET Password=PASSWORD(&#39;</span><span class=nv>$mysql_root_password</span><span class=s2>&#39;) WHERE User=&#39;root&#39;&#34;</span>
+/usr/bin/mysql -u root -p<span class=s2>&#34;</span><span class=nv>$mysql_root_password</span><span class=s2>&#34;</span> -e <span class=s2>&#34;DELETE FROM mysql.user WHERE User=&#39;root&#39; AND Host NOT IN (&#39;localhost&#39;, &#39;127.0.0.1&#39;, &#39;::1&#39;)&#34;</span>
+/usr/bin/mysql -u root -p<span class=s2>&#34;</span><span class=nv>$mysql_root_password</span><span class=s2>&#34;</span> -e <span class=s2>&#34;DELETE FROM mysql.user WHERE User=&#39;&#39;&#34;</span>
+/usr/bin/mysql -u root -p<span class=s2>&#34;</span><span class=nv>$mysql_root_password</span><span class=s2>&#34;</span> -e <span class=s2>&#34;DELETE FROM mysql.db WHERE Db=&#39;test&#39; OR Db=&#39;test\_%&#39;&#34;</span>
+<span class=c1># Add the app user and database</span>
+/usr/bin/mysql -u root -p<span class=s2>&#34;</span><span class=nv>$mysql_root_password</span><span class=s2>&#34;</span> -e <span class=s2>&#34;CREATE DATABASE </span><span class=nv>$mysql_app_database</span><span class=s2>;&#34;</span>
+/usr/bin/mysql -u root -p<span class=s2>&#34;</span><span class=nv>$mysql_root_password</span><span class=s2>&#34;</span> -e <span class=s2>&#34;GRANT ALL PRIVILEGES ON </span><span class=nv>$mysql_app_database</span><span class=s2>.* TO &#39;</span><span class=nv>$mysql_user_name</span><span class=s2>&#39;@&#39;%&#39; IDENTIFIED BY &#39;</span><span class=nv>$mysql_user_password</span><span class=s2>&#39;;&#34;</span>
+<span class=c1># Flush privileges</span>
+/usr/bin/mysql -u root -p<span class=s2>&#34;</span><span class=nv>$mysql_root_password</span><span class=s2>&#34;</span> -e <span class=s2>&#34;FLUSH PRIVILEGES&#34;</span>
+<span class=c1># Enable remote connections</span>
+/usr/bin/echo <span class=s2>&#34;bind-address = </span><span class=nv>$mysql_bind_address</span><span class=s2>&#34;</span> <span class=p>&amp;</span>gt<span class=p>;&amp;</span>gt<span class=p>;</span> /etc/my.cnf
+<span class=c1># Open MySQL firewall for remote connections</span>
+/usr/bin/firewall-cmd --zone<span class=o>=</span>public --add-service<span class=o>=</span>mysql --permanent
 /usr/bin/firewall-cmd --reload
 /usr/bin/systemctl restart mariadb.service
 
@@ -238,42 +214,42 @@ Tags:
 <li>Configure SELinux to allow the web server to connect to remote databases</li>
 </ul>
 <p>The PHP and SQL files that are downloaded are on <a href=https://github.com/sammcgeown/vRA-3-Tier-Application/tree/master/app>my GitHub repository</a> - I’d always suggest reviewing them before downloading and executing!</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#579>#!/bin/bash
-</span><span style=color:#579></span><span style=color:#666;font-style:italic># Install Apache and PHP</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=cp>#!/bin/bash
+</span><span class=cp></span><span class=c1># Install Apache and PHP</span>
 /usr/bin/yum -y install mysql httpd php php-mysqlnd php-common php-gd php-xml php-mbstring php-mcrypt php-xmlrpc unzip wget
-<span style=color:#666;font-style:italic># Download and install Demo app</span>
+<span class=c1># Download and install Demo app</span>
 /usr/bin/wget -O /var/www/html/config.php https://raw.githubusercontent.com/sammcgeown/vRA-3-Tier-Application/master/app/config.php
 /usr/bin/wget -O /var/www/html/create.php https://raw.githubusercontent.com/sammcgeown/vRA-3-Tier-Application/master/app/create.php
 /usr/bin/wget -O /var/www/html/delete.php https://raw.githubusercontent.com/sammcgeown/vRA-3-Tier-Application/master/app/delete.php
@@ -281,22 +257,22 @@ Tags:
 /usr/bin/wget -O /var/www/html/index.php https://raw.githubusercontent.com/sammcgeown/vRA-3-Tier-Application/master/app/index.php
 /usr/bin/wget -O /var/www/html/read.php https://raw.githubusercontent.com/sammcgeown/vRA-3-Tier-Application/master/app/read.php
 /usr/bin/wget -O /var/www/html/update.php https://raw.githubusercontent.com/sammcgeown/vRA-3-Tier-Application/master/app/update.php
-/usr/bin/sed -i <span style=background-color:#e0e0ff>&#34;s@DBName@</span><span style=color:#036>$demo_app_mysql_database</span><span style=background-color:#e0e0ff>@&#34;</span> /var/www/html/config.php
-/usr/bin/sed -i <span style=background-color:#e0e0ff>&#34;s@DBUser@</span><span style=color:#036>$demo_app_mysql_user</span><span style=background-color:#e0e0ff>@&#34;</span> /var/www/html/config.php
-/usr/bin/sed -i <span style=background-color:#e0e0ff>&#34;s@DBPassword@</span><span style=color:#036>$demo_app_mysql_password</span><span style=background-color:#e0e0ff>@&#34;</span> /var/www/html/config.php
-/usr/bin/sed -i <span style=background-color:#e0e0ff>&#34;s@DBServer@</span><span style=color:#036>$demo_app_mysql_server</span><span style=background-color:#e0e0ff>@&#34;</span> /var/www/html/config.php
-/usr/bin/sed -i <span style=background-color:#e0e0ff>&#34;s@HOSTNAME@</span><span style=color:#036>$hostname</span><span style=background-color:#e0e0ff>@&#34;</span> /var/www/html/index.php
+/usr/bin/sed -i <span class=s2>&#34;s@DBName@</span><span class=nv>$demo_app_mysql_database</span><span class=s2>@&#34;</span> /var/www/html/config.php
+/usr/bin/sed -i <span class=s2>&#34;s@DBUser@</span><span class=nv>$demo_app_mysql_user</span><span class=s2>@&#34;</span> /var/www/html/config.php
+/usr/bin/sed -i <span class=s2>&#34;s@DBPassword@</span><span class=nv>$demo_app_mysql_password</span><span class=s2>@&#34;</span> /var/www/html/config.php
+/usr/bin/sed -i <span class=s2>&#34;s@DBServer@</span><span class=nv>$demo_app_mysql_server</span><span class=s2>@&#34;</span> /var/www/html/config.php
+/usr/bin/sed -i <span class=s2>&#34;s@HOSTNAME@</span><span class=nv>$hostname</span><span class=s2>@&#34;</span> /var/www/html/index.php
 /usr/bin/wget -O /tmp/employees.sql https://raw.githubusercontent.com/sammcgeown/vRA-3-Tier-Application/master/app/employees.sql
-/usr/bin/mysql -u <span style=background-color:#e0e0ff>&#34;</span><span style=color:#036>$demo_app_mysql_user</span><span style=background-color:#e0e0ff>&#34;</span> -p<span style=background-color:#e0e0ff>&#34;</span><span style=color:#036>$demo_app_mysql_password</span><span style=background-color:#e0e0ff>&#34;</span> demo -h <span style=color:#036>$demo_app_mysql_server</span> &amp;lt; /tmp/employees.sql
-<span style=color:#666;font-style:italic># Configure and start Apache</span>
-/usr/bin/sed -i <span style=background-color:#e0e0ff>&#34;/^&amp;lt;Directory \&#34;\/var\/www\/html\&#34;&amp;gt;/,/^&amp;lt;\/Directory&amp;gt;/{s/AllowOverride None/AllowOverride All/g}&#34;</span> /etc/httpd/conf/httpd.conf
-/usr/bin/sed -i <span style=background-color:#e0e0ff>&#34;s@Listen 80@Listen 8080@&#34;</span> /etc/httpd/conf/httpd.conf
-/usr/bin/systemctl <span style=color:#072>enable</span> httpd.service
+/usr/bin/mysql -u <span class=s2>&#34;</span><span class=nv>$demo_app_mysql_user</span><span class=s2>&#34;</span> -p<span class=s2>&#34;</span><span class=nv>$demo_app_mysql_password</span><span class=s2>&#34;</span> demo -h <span class=nv>$demo_app_mysql_server</span> <span class=p>&amp;</span>lt<span class=p>;</span> /tmp/employees.sql
+<span class=c1># Configure and start Apache</span>
+/usr/bin/sed -i <span class=s2>&#34;/^&amp;lt;Directory \&#34;\/var\/www\/html\&#34;&amp;gt;/,/^&amp;lt;\/Directory&amp;gt;/{s/AllowOverride None/AllowOverride All/g}&#34;</span> /etc/httpd/conf/httpd.conf
+/usr/bin/sed -i <span class=s2>&#34;s@Listen 80@Listen 8080@&#34;</span> /etc/httpd/conf/httpd.conf
+/usr/bin/systemctl <span class=nb>enable</span> httpd.service
 /usr/bin/systemctl start httpd.service
-<span style=color:#666;font-style:italic># Open http firewall for remote connections</span>
-/usr/bin/firewall-cmd --permanent --zone<span style=color:#333>=</span>public --add-port<span style=color:#333>=</span>8080/tcp
+<span class=c1># Open http firewall for remote connections</span>
+/usr/bin/firewall-cmd --permanent --zone<span class=o>=</span>public --add-port<span class=o>=</span>8080/tcp
 /usr/bin/firewall-cmd --reload
-<span style=color:#666;font-style:italic># Configure SELinux to allow remote DB connection</span>
+<span class=c1># Configure SELinux to allow remote DB connection</span>
 /usr/sbin/setsebool httpd_can_network_connect_db on -P
 </code></pre></td></tr></table>
 </div>
@@ -310,150 +286,150 @@ Tags:
 <li>Open the firewall port</li>
 <li>Configure SELinux to allow the web server to connect to remote servers</li>
 </ul>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#579>#!/bin/bash
-</span><span style=color:#579></span><span style=color:#666;font-style:italic># Add epel-release</span>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=cp>#!/bin/bash
+</span><span class=cp></span><span class=c1># Add epel-release</span>
 /usr/bin/yum -y install epel-release
-<span style=color:#666;font-style:italic># Install nginx</span>
+<span class=c1># Install nginx</span>
 /usr/bin/yum -y install nginx
-<span style=color:#666;font-style:italic># Download the reverse proxy configuration</span>
+<span class=c1># Download the reverse proxy configuration</span>
 /usr/bin/wget -O /etc/nginx/conf.d/proxy.conf https://raw.githubusercontent.com/sammcgeown/vRA-3-Tier-Application/master/app/proxy.nginx.conf
-/usr/bin/sed -i <span style=background-color:#e0e0ff>&#34;s@SERVERNAME@</span><span style=color:#036>$web_server_name</span><span style=background-color:#e0e0ff>@&#34;</span> /etc/nginx/conf.d/proxy.conf
-/usr/bin/sed -i <span style=background-color:#e0e0ff>&#34;s@APPTIER@</span><span style=color:#036>$app_server_name</span><span style=background-color:#e0e0ff>@&#34;</span> /etc/nginx/conf.d/proxy.conf
-<span style=color:#666;font-style:italic># Create the SSL folder</span>
+/usr/bin/sed -i <span class=s2>&#34;s@SERVERNAME@</span><span class=nv>$web_server_name</span><span class=s2>@&#34;</span> /etc/nginx/conf.d/proxy.conf
+/usr/bin/sed -i <span class=s2>&#34;s@APPTIER@</span><span class=nv>$app_server_name</span><span class=s2>@&#34;</span> /etc/nginx/conf.d/proxy.conf
+<span class=c1># Create the SSL folder</span>
 /usr/bin/mkdir /etc/nginx/ssl
-<span style=color:#666;font-style:italic># Download the proxy SSL conf</span>
+<span class=c1># Download the proxy SSL conf</span>
 /usr/bin/wget -O /etc/nginx/ssl/proxy.conf https://raw.githubusercontent.com/sammcgeown/vRA-3-Tier-Application/master/app/proxy.ssl.conf
-/usr/bin/sed -i <span style=background-color:#e0e0ff>&#34;s@WEBSERVERNAME@</span><span style=color:#036>$web_server_name</span><span style=background-color:#e0e0ff>@&#34;</span> /etc/nginx/ssl/proxy.conf
-<span style=color:#666;font-style:italic># Generate SSL keys</span>
-/usr/bin/openssl req -x509 -nodes -days <span style=color:#60e;font-weight:700>1825</span> -newkey rsa:2048 -keyout /etc/nginx/ssl/proxy.key -out /etc/nginx/ssl/proxy.pem -config /etc/nginx/ssl/proxy.conf
-<span style=color:#666;font-style:italic># Open http firewall for remote connections</span>
-/usr/bin/firewall-cmd --permanent --zone<span style=color:#333>=</span>public --add-service<span style=color:#333>=</span>https
+/usr/bin/sed -i <span class=s2>&#34;s@WEBSERVERNAME@</span><span class=nv>$web_server_name</span><span class=s2>@&#34;</span> /etc/nginx/ssl/proxy.conf
+<span class=c1># Generate SSL keys</span>
+/usr/bin/openssl req -x509 -nodes -days <span class=m>1825</span> -newkey rsa:2048 -keyout /etc/nginx/ssl/proxy.key -out /etc/nginx/ssl/proxy.pem -config /etc/nginx/ssl/proxy.conf
+<span class=c1># Open http firewall for remote connections</span>
+/usr/bin/firewall-cmd --permanent --zone<span class=o>=</span>public --add-service<span class=o>=</span>https
 /usr/bin/firewall-cmd --reload
-<span style=color:#666;font-style:italic># Configure SELinux</span>
-/usr/sbin/setsebool -P httpd_can_network_connect <span style=color:#072>true</span>
-<span style=color:#666;font-style:italic># Start and enable nginx</span>
+<span class=c1># Configure SELinux</span>
+/usr/sbin/setsebool -P httpd_can_network_connect <span class=nb>true</span>
+<span class=c1># Start and enable nginx</span>
 /usr/bin/systemctl start nginx
-/usr/bin/systemctl <span style=color:#072>enable</span> nginx
+/usr/bin/systemctl <span class=nb>enable</span> nginx
 </code></pre></td></tr></table>
 </div>
 </div><p>The two configuration files that are downloaded are available from <a href=https://github.com/sammcgeown/vRA-3-Tier-Application/tree/master/config>my GitHub repository</a>, one is a configuration file for the NGINX reverse proxy, which is placed in the /etc/nginx/conf.d folder. I don’t make any changes to the default NGINX configuration.</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>server <span style=color:#333>{</span>
-      listen 443;
-      server_name SERVERNAME;
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>server <span class=o>{</span>
+      listen 443<span class=p>;</span>
+      server_name SERVERNAME<span class=p>;</span>
 
-      ssl on;
-      ssl_certificate     /etc/nginx/ssl/proxy.pem;
-      ssl_certificate_key /etc/nginx/ssl/proxy.key;
+      ssl on<span class=p>;</span>
+      ssl_certificate     /etc/nginx/ssl/proxy.pem<span class=p>;</span>
+      ssl_certificate_key /etc/nginx/ssl/proxy.key<span class=p>;</span>
 
-      ssl_session_cache shared:SSL:1m;
-      ssl_session_timeout 2m;
+      ssl_session_cache shared:SSL:1m<span class=p>;</span>
+      ssl_session_timeout 2m<span class=p>;</span>
 
-      location / <span style=color:#333>{</span>
-         proxy_pass http://APPTIER:8080;
-         proxy_set_header Host <span style=color:#036>$host</span>;
-         proxy_redirect off;
-         proxy_set_header X-Real-IP <span style=color:#036>$remote_addr</span>;
-         proxy_set_header X-Forwarded-For <span style=color:#036>$proxy_add_x_forwarded_for</span>;
-         proxy_set_header X-Forwarded-Proto https;
-      <span style=color:#333>}</span>
-<span style=color:#333>}</span>
+      location / <span class=o>{</span>
+         proxy_pass http://APPTIER:8080<span class=p>;</span>
+         proxy_set_header Host <span class=nv>$host</span><span class=p>;</span>
+         proxy_redirect off<span class=p>;</span>
+         proxy_set_header X-Real-IP <span class=nv>$remote_addr</span><span class=p>;</span>
+         proxy_set_header X-Forwarded-For <span class=nv>$proxy_add_x_forwarded_for</span><span class=p>;</span>
+         proxy_set_header X-Forwarded-Proto https<span class=p>;</span>
+      <span class=o>}</span>
+<span class=o>}</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><p>The second configuration file is a template for openSSL to generate an SSL certificate for the NGINX reverse proxy.</p>
-<div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
 </span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#333>[</span>req<span style=color:#333>]</span>
-<span style=color:#036>distinguished_name</span> <span style=color:#333>=</span> req_distinguished_name
-<span style=color:#036>x509_extensions</span> <span style=color:#333>=</span> v3_req
-<span style=color:#036>default_md</span> <span style=color:#333>=</span> sha256
-<span style=color:#036>prompt</span> <span style=color:#333>=</span> no
-<span style=color:#333>[</span>req_distinguished_name<span style=color:#333>]</span>
-<span style=color:#036>C</span> <span style=color:#333>=</span> GB
-<span style=color:#036>ST</span> <span style=color:#333>=</span> West Sussex
-<span style=color:#036>L</span> <span style=color:#333>=</span> Horsham
-<span style=color:#036>O</span> <span style=color:#333>=</span> DefinIT
-<span style=color:#036>OU</span> <span style=color:#333>=</span> Lab
-<span style=color:#036>CN</span> <span style=color:#333>=</span> WEBSERVERNAME
-<span style=color:#333>[</span>v3_req<span style=color:#333>]</span>
-<span style=color:#036>keyUsage</span> <span style=color:#333>=</span> keyEncipherment, dataEncipherment
-<span style=color:#036>extendedKeyUsage</span> <span style=color:#333>=</span> serverAuth
-<span style=color:#036>subjectAltName</span> <span style=color:#333>=</span> @alt_names
-<span style=color:#333>[</span>alt_names<span style=color:#333>]</span>
-DNS.1 <span style=color:#333>=</span> WEBSERVERNAME
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=o>[</span>req<span class=o>]</span>
+<span class=nv>distinguished_name</span> <span class=o>=</span> req_distinguished_name
+<span class=nv>x509_extensions</span> <span class=o>=</span> v3_req
+<span class=nv>default_md</span> <span class=o>=</span> sha256
+<span class=nv>prompt</span> <span class=o>=</span> no
+<span class=o>[</span>req_distinguished_name<span class=o>]</span>
+<span class=nv>C</span> <span class=o>=</span> GB
+<span class=nv>ST</span> <span class=o>=</span> West Sussex
+<span class=nv>L</span> <span class=o>=</span> Horsham
+<span class=nv>O</span> <span class=o>=</span> DefinIT
+<span class=nv>OU</span> <span class=o>=</span> Lab
+<span class=nv>CN</span> <span class=o>=</span> WEBSERVERNAME
+<span class=o>[</span>v3_req<span class=o>]</span>
+<span class=nv>keyUsage</span> <span class=o>=</span> keyEncipherment, dataEncipherment
+<span class=nv>extendedKeyUsage</span> <span class=o>=</span> serverAuth
+<span class=nv>subjectAltName</span> <span class=o>=</span> @alt_names
+<span class=o>[</span>alt_names<span class=o>]</span>
+DNS.1 <span class=o>=</span> WEBSERVERNAME
 </code></pre></td></tr></table>
 </div>
 </div><h2 id=creating-the-vrealize-automation-software-components>Creating the vRealize Automation Software Components</h2>
@@ -617,31 +593,31 @@ Next
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
+<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">9</span></a></li>
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">28</span></a></li>
 <li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">15</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">42</span></a></li>
-<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li>
+<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">24</span></a></li>
+<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">49</span></a></li>
+<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">5</span></a></li>
 <li><a href=/category/exam class=nav-link>EXAM <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/fusion class=nav-link>FUSION <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
 <li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li>
+<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">29</span></a></li>
 <li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li>
 <li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
 <li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">206</span></a></li>
+<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">214</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
+<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">14</span></a></li>
+<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">47</span></a></li>
+<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">74</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">58</span></a></li>
+<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">5</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">59</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>
@@ -650,15 +626,15 @@ Next
 <input id=Tags type=checkbox>
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
-<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">53</span></a></li>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">70</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">56</span></a></li>
 <li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
 <li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
+<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">34</span></a></li>
 <li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
 <li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li>
+<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">32</span></a></li>
+<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">32</span></a></li>
 <li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li>
 </section>
 </section>
