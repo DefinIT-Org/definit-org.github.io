@@ -74,14 +74,14 @@ Follow Sam McGeown on Twitter
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2010/09/installing-exchange-2010-sp1/>Installing Exchange 2010 SP1</a>
+<a href=https://www.definit.co.uk/2010/05/certificate-errors-when-connecting-gateway-server-or-non-domain-agent-to-system-center-operations-manager-2007-r2/>Certificate errors when connecting Gateway Server or non-domain Agent to System Center Operations Manager 2007 R2</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 9/9/2010
+on 7/5/2010
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/microsoft>Microsoft</a>
@@ -92,179 +92,27 @@ Published under <a href=/category/microsoft>Microsoft</a>
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-Exchange SP1 has now been released, so I thought I’d document the upgrade process for my small Exchange 2010 organisation, consisting of one CAS/Transport/Mailbox server, and an Edge Transport server.
-References The starting point is always working out if you *need* to upgrade – what’s the business argument. For that you need to look at what’s new in Exchange 2010 SP1, the release notes and prerequisites. Finally, the installation instructions for upgrading from Exchange 2010 RTM to SP1.
+This was a bit of an odd one. I was adding a Gateway Server to a newly rebuilt SCOM 2007 R2 Root Management Server when I kept encountering this error:
+The certificate specified in the registry at HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft Operations Manager\3.0\Machine Settings cannot be used for authentication. The error is The credentials supplied to the package were not recognized(0x8009030D).
+I followed the Microsoft install and setup guides exactly, and it’s not my first time either – but I’d never seen that one before.
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2010/09/installing-exchange-2010-sp1/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2010/05/certificate-errors-when-connecting-gateway-server-or-non-domain-agent-to-system-center-operations-manager-2007-r2/>More</a>
 </div>
 </div>
 </div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2010/09/installing-system-center-operations-manager-2007-r2-cu2/>Installing System Center Operations Manager 2007 R2 CU2</a>
+<a href=https://www.definit.co.uk/2010/04/migrating-the-hp-systems-insight-manager-6-x-database/>Migrating the HP Systems Insight Manager 6.x database</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 8/9/2010
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/microsoft>Microsoft</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-This should be a simple update of some hotfixes, but there were a few tripping points along the way that I had to stumble past. As reference I used the CU2 update page and I also a Kevin Holman technet article.
-So, I’m going to assume that a) you’re installing the update for a reason, like one of the bugs it fixes and b) you have taken a backup of your OpsManager databases.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2010/09/installing-system-center-operations-manager-2007-r2-cu2/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2010/08/testing-throughput-between-two-windows-servers-with-nt-testing-tcp-tool/>Testing throughput between two Windows Servers with NT Testing TCP Tool</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 13/8/2010
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/microsoft>Microsoft</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-The NT Testing TCP Tool is a handy little tool for testing the throughput between two servers – and it’s free! It’s available to download here: http://www.microsoft.com/whdc/device/network/TCP_tool.mspx
-First, you need to install the MSI on both ends – for the sake of this, say SERVER1 and SERVER2. Once you’ve installed it on the server, navigate to \Program Files\Microsoft Corporation\NT Testing TCP Tool, you should see a few copies of the tool for different architectures.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2010/08/testing-throughput-between-two-windows-servers-with-nt-testing-tcp-tool/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2010/08/installing-exchange-2010-edge-server-with-forefront-protection-for-exchange-fpe-and-threat-management-gateway-tmg-part-1/>Installing Exchange 2010 Edge Server with Forefront Protection for Exchange (FPE) and Threat Management Gateway (TMG) – Part 1</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 10/8/2010
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/microsoft>Microsoft</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-I am mid-migration, in a co-existence setup with Exchange 2010, 2007 and 2003. So far the roles installed for Exchange 2010 are CAS, Hub and Mailbox on a single server. Into this mix I need to introduce an Edge Server, with message hygiene in the form of Forefront Protection for Exchange (FPE) and Threat Management Gateway (TMG) as a reverse proxy to publish OWA, ActiveSync et-al.
-Since Edge, FPE and TMG can now all exist on a single 64-bit server, I will start with a clean installation of Windows Server 2008 R2, up to date with all the latest hot fixes.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2010/08/installing-exchange-2010-edge-server-with-forefront-protection-for-exchange-fpe-and-threat-management-gateway-tmg-part-1/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2010/08/unable-to-access-outlook-web-access-owa-after-installing-update-rollup-1-2-3-or-4-flogon-js-errors/>Unable to access Outlook Web Access (OWA) after installing Update Rollup 1, 2, 3 or 4 – flogon.js errors</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 10/8/2010
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/microsoft>Microsoft</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-If you’re having trouble accessing OWA after updating Exchange 2010 with any of the Rollup packages, try this:
-Uninstall the update package from the Programs and Features control panel
-Download the package file directly from Microsoft, don’t use Windows Update
-Open a command prompt or PowerShell prompt as Administrator
-Navigate to the location of the package (.msp) and run from the elevated command prompt.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2010/08/unable-to-access-outlook-web-access-owa-after-installing-update-rollup-1-2-3-or-4-flogon-js-errors/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2010/07/passed-microsoft-exams-70-662-and-70-663-now-officially-mcitp-enterprise-messaging-administrator/>Passed Microsoft Exams 70-662 and 70-663 – Now officially MCITP: Enterprise Messaging Administrator</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 29/7/2010
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/microsoft>Microsoft</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-On Monday I took the two Exchange 2010 exams, “70-662 TS: Microsoft Exchange Server 2010, Configuring” and “70-663 PRO: Deploying Messaging Solutions with Microsoft Exchange Server 2010” and I am pleased to say that I passed both of them, scoring an 812 on the 70-662 and 960 on the 70-663. I am especially pleased with the score on the PRO exam!
-Overall, there’s quite a lot of overlap between the two exams, with the more heavily theory and design based PRO exam being a “high-level” of the more hands-on management and cmdlet based TS exam.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2010/07/passed-microsoft-exams-70-662-and-70-663-now-officially-mcitp-enterprise-messaging-administrator/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2010/07/why-ive-changed-my-bogging-software-from-blogengine-net-to-wordpress/>Why I&amp;rsquo;ve changed my blogging software from BlogEngine.Net to WordPress</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 21/7/2010
+on 15/4/2010
 </div>
 <div class=clr-card-authors>
 Published under
@@ -275,25 +123,210 @@ Published under
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-Up until now, I’ve been using BlogEngine.Net as my blogging platform, and up until now I’ve been relatively happy with using it. One of the major drivers for me as a “Microsoft” person was to use something that is based on Microsoft technology – BlogEngine.Net is based (as the name suggests) on the .Net framework. I’m much happier these days writing limited amounts of C#.Net than I am with PHP.
+We run to monitoring systems where I work, the first is HP SIM and the second is Microsoft System Center Operations Manager. Currently, they and their databases all reside on a single rather battered server, “MONITOR1”.
+I’ve installed a new SQL Server 2008 server “SQL1” on Windows Server 2008 to take some of the load, and take advantage of the 64-bit OS and SQL installation.
+Both servers are part of the domain “DOMAIN”
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2010/07/why-ive-changed-my-bogging-software-from-blogengine-net-to-wordpress/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2010/04/migrating-the-hp-systems-insight-manager-6-x-database/>More</a>
 </div>
 </div>
 </div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2010/07/testing-access-to-your-exchange-services-with-microsoft-exchange-remote-connectivity-analyzer/>Testing access to your Exchange services with Microsoft Exchange Remote Connectivity Analyzer</a>
+<a href=https://www.definit.co.uk/2010/04/microsoft-forefront-client-security-setup-wizard-fails-on-%E2%80%9Cinstall-collection-server-component%E2%80%9D/>Microsoft Forefront Client Security Setup Wizard fails on “Install Collection Server Component”</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 21/7/2010
+on 6/4/2010
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/microsoft>Microsoft</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+If you see the following cryptic errors when trying to install FCS, then the chances are you need to install the .Net Framework 1.1 AND SP1.
+ [06/04/2010 10:47:11] Task (Install Collection Server Component) The following process failed. Process: C:\Windows\system32\msiexec.exe Exit code: 1603 Number of tasks completed: [06/04/2010 10:47:12]
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2010/04/microsoft-forefront-client-security-setup-wizard-fails-on-%E2%80%9Cinstall-collection-server-component%E2%80%9D/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2010/04/server-2008-reporting-services-error-the-permissions-granted-to-user-domainuser-are-insufficient-for-performing-this-operation-rsaccessdenied/>Server 2008 – Reporting Services Error The permissions granted to user DOMAIN\USER are insufficient for performing this operation. (rsAccessDenied)</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 1/4/2010
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/microsoft>Microsoft</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+If you install Reporting Services on Windows Server 2008 (RTM or R2) and attempt to verify the installation by opening the http://SERVER/ReportServer site, you may well see the following message:
+Reporting Services Error -------------------------------------------------------------------------------- The permissions granted to user &lsquo;MCGEOWN\Sam.McGeown&rsquo; are insufficient for performing this operation. (rsAccessDenied) Get Online Help
+SQL Server Reporting Services
+Additionally, you may be able to access the http://SERVER/Reports site, but will have no permissions:
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2010/04/server-2008-reporting-services-error-the-permissions-granted-to-user-domainuser-are-insufficient-for-performing-this-operation-rsaccessdenied/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2010/03/event-ids-1030-and-1058-on-server-2003-domain-controller/>Event IDs 1030 and 1058 on Server 2003 Domain Controller</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 29/3/2010
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/microsoft>Microsoft</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+I logged onto a production domain controller this morning and checked the event logs to be confronted with this:
+Event ID 1030 and 1058 every 5 minutes, looking into the detail for these events I can see its a replication issue for one of the GPOs.
+Event Type: Error Event Source: Userenv Event Category: None Event ID: 1030 Date: 29/03/2010 Time: 04:01:29 User: NT AUTHORITY\SYSTEM Computer: DC01 Description: Windows cannot query for the list of Group Policy objects.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2010/03/event-ids-1030-and-1058-on-server-2003-domain-controller/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2010/03/configuring-server-2008-r2-core-series-installing-and-managing-iis/>Configuring Server 2008 R2 Core Series: Installing and Managing IIS</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 24/3/2010
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/microsoft>Microsoft</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+So, you’ve installed a new server with Server 2008 R2 Core – what next? Logging on, you’re presented with a shiny command prompt, you can run notepad or regedit…but aside from that, where do you go from there? In the next few series of posts I’ll hopefully point out the basics, and some not so basics!
+In this post, I’m covering Installing the IIS web server (and a few useful bits) and managing it from the IIS Management Snap-in.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2010/03/configuring-server-2008-r2-core-series-installing-and-managing-iis/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2010/03/configuring-server-2008-r2-core-series-management-tasks/>Configuring Server 2008 R2 Core Series: Management Tasks</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 24/3/2010
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/microsoft>Microsoft</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+So, you’ve installed a new server with Server 2008 R2 Core – what next? Logging on, you’re presented with a shiny command prompt, you can run notepad or regedit…but aside from that, where do you go from there? In the next few series of posts I’ll hopefully point out the basics, and some not so basics!
+I’m going to look at some management tasks – the bread and butter of being a Windows admin.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2010/03/configuring-server-2008-r2-core-series-management-tasks/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2010/03/configuring-server-2008-r2-core-series-network-settings/>Configuring Server 2008 R2 Core Series: Network Settings</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 24/3/2010
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/microsoft>Microsoft</a> and <a href=/category/networking>Networking</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+So, you’ve installed a new server with Server 2008 R2 Core – what next? Logging on, you’re presented with a shiny command prompt, you can run notepad or regedit…but aside from that, where do you go from there? In the next few series of posts I’ll hopefully point out the basics, and some not so basics!
+Using the Server Configuration Tool The server configuration tool (sconfig.cmd) is provided in R2 for some of the basic setup tasks, so you can run that by issuing the “sconfig” command.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2010/03/configuring-server-2008-r2-core-series-network-settings/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2010/03/mcitp-server-administrator-and-mcitp-enterprise-administrator/>MCITP: Server Administrator and MCITP: Enterprise Administrator</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 23/3/2010
 </div>
 <div class=clr-card-authors>
 Published under
@@ -304,25 +337,25 @@ Published under
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-The Microsoft Exchange Remote Connectivity Analyzer is perhaps the best tool I’ve used in a long time for troubleshooting Exchange external access – it just works! On the forums and websites I read, it doesn’t seem to get the coverage that I’d expect, so I thought I’d give it a mention.
+I’m pleased to say that yesterday I took and passed two Microsoft Certified IT Professional exams, the Server Administrator (70-646) and the Enterprise Administrator (70-647). Hopefully I can take a bit of a break from study and write a few more technical posts here now!
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2010/07/testing-access-to-your-exchange-services-with-microsoft-exchange-remote-connectivity-analyzer/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2010/03/mcitp-server-administrator-and-mcitp-enterprise-administrator/>More</a>
 </div>
 </div>
 </div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2010/07/useful-commands-for-troubleshooting-exchange-2010-routing-with-exchange-20032007/>Useful commands for troubleshooting Exchange 2010 routing with Exchange 2003/2007</a>
+<a href=https://www.definit.co.uk/2010/03/70-649-ts-upgrading-your-mcse-on-windows-server-2003-to-windows-server-2008-technology-specialist/>70-649: TS: Upgrading Your MCSE on Windows Server 2003 to Windows Server 2008, Technology Specialist</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 8/7/2010
+on 8/3/2010
 </div>
 <div class=clr-card-authors>
 Published under
@@ -333,44 +366,15 @@ Published under
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-I’ve just fixed an issue with Routing for my mixed Exchange 2003/2007/2010 environment.
-The environment is a single AD domain with 4 sites, Site1, Site2, Site3 and Site4. In Site1, Site2 and Site3 there are 3 Exchange 2003 servers, one per site. In Site4 there is an Exchange 2007 SP2 server (CAS, Mailbox, HT). All the connectors required worked as expected, and inter-site routing works as expected.
-I introduced into the mix a 2010 Enterprise server (CAS, Mailbox, HT) to Site1 as a prelude to a full upgrade of the site to Exchange 2010.
+I’m pleased to announce that I’ve passed the 70-649, which gives me the following MCTS certifications:
+Windows Server 2008 Active Directory, Configuration
+Windows Server 2008 Applications Infrastructure, Configuration
+Windows Server 2008 Network Infrastructure, Configuration
+Next I’ll be looking at the 70-647 to get the full MCITP: Enterprise Administrator (I already took the 70-620 exam for my MCSE).
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2010/07/useful-commands-for-troubleshooting-exchange-2010-routing-with-exchange-20032007/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2010/07/exchange-activesync-fails-on-iphone-after-upgrade-to-ios4/>Exchange ActiveSync fails on iPhone after upgrade to iOS4</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 2/7/2010
-</div>
-<div class=clr-card-authors>
-Published under
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-I’ve spent a fair bit of time today trying to sort out my iPhone sync to my Exchange Server, failing miserably. It used to work, pre-upgrade to iOS4, but for some reason fails to sync.
-Symptoms were:
-iPhone fails to sync, generic timeout error (or is very slow) https://www.testexchangeconnectivity.com/ successfully tests the mailbox access  The server was configured as per http://support.microsoft.com/kb/817379/en-us to allow OWA/ActiveSync with SSL on OWA.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2010/07/exchange-activesync-fails-on-iphone-after-upgrade-to-ios4/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2010/03/70-649-ts-upgrading-your-mcse-on-windows-server-2003-to-windows-server-2008-technology-specialist/>More</a>
 </div>
 </div>
 </div>
@@ -418,8 +422,8 @@ iPhone fails to sync, generic timeout error (or is very slow) https://www.testex
 </a>
 </li>
 <li class="pagination__item pagination__item--last">
-<a class="btn btn-sm btn btn-outline" href=/authors/sam-mcgeown/page/34/>
-34
+<a class="btn btn-sm btn btn-outline" href=/authors/sam-mcgeown/page/32/>
+32
 </a>
 </li>
 </ul>
@@ -433,31 +437,31 @@ iPhone fails to sync, generic timeout error (or is very slow) https://www.testex
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">9</span></a></li>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">28</span></a></li>
+<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
 <li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">24</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">49</span></a></li>
-<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">5</span></a></li>
+<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">16</span></a></li>
+<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">42</span></a></li>
+<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li>
 <li><a href=/category/exam class=nav-link>EXAM <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/fusion class=nav-link>FUSION <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
 <li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">29</span></a></li>
+<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li>
 <li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li>
 <li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
 <li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">214</span></a></li>
+<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">207</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">14</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">47</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">74</span></a></li>
+<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
+<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
+<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">5</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">59</span></a></li>
+<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">58</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>
@@ -466,15 +470,15 @@ iPhone fails to sync, generic timeout error (or is very slow) https://www.testex
 <input id=Tags type=checkbox>
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
-<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">70</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">56</span></a></li>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">54</span></a></li>
 <li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
 <li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">34</span></a></li>
 <li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
 <li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">32</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">32</span></a></li>
+<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li>
+<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">31</span></a></li>
+<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li>
 <li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li>
 </section>
 </section>

@@ -74,14 +74,73 @@ Follow Sam McGeown on Twitter
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2013/11/sso-admin-password-reset-with-ssopass-sslhandshakefailed-vsphere-5-1/>SSO Admin password reset with ssopass – SslHandshakeFailed – vSphere 5.1</a>
+<a href=https://www.definit.co.uk/2013/06/powercli-basics-auditing-virtual-machine-hardware-and-tools-using-powercli/>PowerCLI Basics: Auditing Virtual Machine Hardware and Tools using PowerCLI</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 5/11/2013
+on 27/6/2013
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+The VM estate that I manage is large: there are more than 20 different clusters and over 300 hosts of varying ages and hardware levels – as a consequence there are various different versions of ESX and ESXi running. Upgrading the hosts is somewhat akin to painting the Forth Bridge, a never-ending task. So keeping the thousands of VMs at the correct hardware and VMtools versions can be a bit of a losing battle.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2013/06/powercli-basics-auditing-virtual-machine-hardware-and-tools-using-powercli/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2013/06/installing-and-configuring-vcenter-log-insight/>Installing and Configuring vCenter Log Insight</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 12/6/2013
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+With the release of vCenter Log Insight Public Beta (http://communities.vmware.com/community/vmtn/vcenter/vcenter-log-insight) I thought I’d strike while the iron is hot and run through the installation and configuration.
+Deploying the OVF This is such a bread and butter task that it doesn’t require more than a few words – it’s definitely worth looking at the Sizing PDF before you deploy (VMware-vCenter-Log-Insight-1.0-Beta-Virtual-Appliance-Sizing.pdf) as it’s not small even for a test installation. If you’re using less than the recommended 8GB RAM there are additional steps to change the heap size for performance.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2013/06/installing-and-configuring-vcenter-log-insight/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2013/06/installing-vmware-vsphere-update-manager-download-service-and-publishing-via-iis/>Installing VMware vSphere Update Manager Download Service and publishing via IIS</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 11/6/2013
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
@@ -92,88 +151,25 @@ Published under <a href=/category/vmware>VMware</a> and <a href=/category/vspher
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-Today I found out that in vSphere 5.1 the SSO administrator account (admin@system-domain) has a password that expires after 365 days. See KB2035864:
-vCenter Single Sign-On account (SSO) passwords expire after 365 days, including the password for admin@system-domain.
-Awesome.
-In vSphere 5.5 it gets even better – the password expires every 90 days by default! (See the vSphere 5.5 SSO documentation)
-By default, vCenter Single Sign-On passwords, including the password for administrator@vsphere.
+The vSphere UMDS provides a way to download patches for VMware servers that have an air-gap, or for some reason aren’t allowed to go out to the internet themselves – in my case a security policy prevented a DMZ vCenter Server from connecting to the internet directly. The solution is to use UMDS to download the updates to a 2nd server that was hosted in the DMZ and then update the vCenter Server from there.
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2013/11/sso-admin-password-reset-with-ssopass-sslhandshakefailed-vsphere-5-1/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2013/06/installing-vmware-vsphere-update-manager-download-service-and-publishing-via-iis/>More</a>
 </div>
 </div>
 </div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2013/10/vsphere-security-advanced-ssh-configurations/>vSphere Security: Advanced SSH Configurations</a>
+<a href=https://www.definit.co.uk/2013/06/changing-esxi-root-passwords-the-smart-way-via-powercli/>Changing ESXi root passwords the smart way (via PowerCLI)</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 22/10/2013
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/networking>Networking</a> and <a href=/category/vmware>VMware</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-There are different schools of thought as to whether you should have SSH enabled on your hosts. VMware recommend it is disabled. With SSH disabled there is no possibility of attack, so that’s the “most secure” option. Of course in the real world there’s a balance between “most secure” and “usability” (e.g. the most secure host is powered off and physically isolated from the network, but you can’t run any workloads ).
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2013/10/vsphere-security-advanced-ssh-configurations/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2013/10/wmworld-europe-2013-day-3-and-recap/>WMworld Europe 2013 – Day 3 and Recap</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 17/10/2013
-</div>
-<div class=clr-card-authors>
-Published under
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-Last night was the VMworld party which was loads of fun, I took some pictures so I won&rsquo;t write loads! Highlights include watching people fall over on the roller disco, losing to @shogan85 at street fighter (he has some skills showing a misspent youth) and a rather amusing game of spot the difference.
-#vcm5477 Cloud Service Automation with NSX and vCloud Automation Center with Cargi Keeling and Phil Fleischer This was one of the most technically cool sessions I&rsquo;ve been in this week, setting how vCAC and NSX come together to deploy multi tiered applications with the networks provisioned on demand, including firewalls and routing.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2013/10/wmworld-europe-2013-day-3-and-recap/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2013/10/vmworld-europe-2013-day-2-vcap5-dcd-exam-experience/>VMworld Europe 2013 &amp;ndash; Day 2, VCAP5-DCD Exam Experience</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 16/10/2013
+on 4/6/2013
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/vmware>VMware</a>
@@ -184,26 +180,25 @@ Published under <a href=/category/vmware>VMware</a>
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-Today was always going to be a bit of a funny day as I scheduled the VCAP5-DCD exam for 10am this morning. I am happy to say that I passed! I’m a bit light on VMworld to report today, so forgive my DCD experience to pad it out!
-Preparation I have to confess my prep for this exam was light – I literally only watched the TrainSignal course by Scott Lowe (@scott_lowe) and just about finished that last night in the hotel!
+If you work in company with strict password compliance rules, for example under SOX, you might well have to change administrator passwords every month. Doing this on any more than a few hosts is tedious work – even on two hosts it seems like a waste of time logging on the host via SSH (or even enabling it first) before changing the password. Then we also need to audit the change, there’s no point making it for compliance reasons if we can’t then prove we did it!
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2013/10/vmworld-europe-2013-day-2-vcap5-dcd-exam-experience/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2013/06/changing-esxi-root-passwords-the-smart-way-via-powercli/>More</a>
 </div>
 </div>
 </div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2013/10/vmworld-europe-2013-arriving-and-day-1/>VMworld Europe 2013 – Day 1</a>
+<a href=https://www.definit.co.uk/2013/05/awarded-vexpert-2013-and-vote-for-simon/>Awarded vExpert 2013 – and vote for Simon!</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 15/10/2013
+on 30/5/2013
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/vmware>VMware</a>
@@ -214,26 +209,27 @@ Published under <a href=/category/vmware>VMware</a>
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-I flew from Gatwick to Barcelona last night to my very first VMworld!
-I&rsquo;m staying in a hotel that is actually quite far from the conference, it&rsquo;s a metro, train and bus journey away from the conference center and it takes about 40 minutes to get here. On the plus side I was only 5 minutes away from the VMUG party last night so I went over there for an hour or so.
+I am absolutely thrilled to announce that I&rsquo;ve been awarded vExpert 2013 - it&rsquo;s such an honour to be listed among these others and hopefully I can continue to contribute throughout the year. I am looking forward to getting stuck in to the vExpert programme.
+The vExpert announcement is here: http://blogs.vmware.com/vmtn/2013/05/vexpert-2013-awardees-announced.html
+In other news, one of DefinIT&rsquo;s contributing authors @SimonEady is a finalist for the VMware V.I.T. Competition and needs your votes!
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2013/10/vmworld-europe-2013-arriving-and-day-1/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2013/05/awarded-vexpert-2013-and-vote-for-simon/>More</a>
 </div>
 </div>
 </div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2013/10/recover-esxi-root-password-using-ad-authentication/>Recover ESXi Root Password using AD Authentication</a>
+<a href=https://www.definit.co.uk/2013/05/why-secure-your-vsphere-environment-with-valid-ssl-certificates/>Why secure your vSphere environment with valid SSL certificates?</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 7/10/2013
+on 14/5/2013
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
@@ -244,25 +240,26 @@ Published under <a href=/category/vmware>VMware</a> and <a href=/category/vspher
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-Losing a root password isn’t something that happens often, but when it does it’s normally a really irritating time. I have to rotate the password of all hosts once a month for compliance, but sometimes a host drops out of the loop and the root password gets lost. Fortunately, as the vpxuser is still valid I can manage the host via vCenter - this lends itself to this little recovery process:
+It&rsquo;s no secret that installing certificates from an internal CA is a pain in the…vCenter, but having just gone through the process of updating 3 vCenter installations with the 5-7 certificates required for each server I was asked &ldquo;just why is it we need to do this again?&rdquo;
+Why does it require multiple certificates for my vCenter server? In short, each service requires a certificate because it could feasibly be on a server (or servers) of it&rsquo;s own - take this hypothetical design - each role is hosted on it&rsquo;s own VM, and there are 7 certificates required - SSO, Inventory Service, vCenter Server, Orchestrator, Web Client, Log Browser and Update Manager.
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2013/10/recover-esxi-root-password-using-ad-authentication/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2013/05/why-secure-your-vsphere-environment-with-valid-ssl-certificates/>More</a>
 </div>
 </div>
 </div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2013/10/vsphere-security-active-directory-authentication/>vSphere Security: Active Directory Authentication</a>
+<a href=https://www.definit.co.uk/2013/05/updating-esxi-fibre-channel-hba-drivers-via-vmware-update-manager/>Updating ESXi Fibre Channel HBA Drivers via VMware Update Manager</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 4/10/2013
+on 7/5/2013
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/vmware>VMware</a>
@@ -273,26 +270,25 @@ Published under <a href=/category/vmware>VMware</a>
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-This is the second article in a series of vSphere Security articles that I have planned. The majority of this article is based on vSphere/ESXi 5.1, though I will include any 5.5 information that I find relevant. The first article in this series was vSphere Security: Understanding ESXi 5.x Lockdown Mode.
-Why would you want to join an ESXi host to an Active Directory domain? Well you’re not going to get Group Policies applying, what you’re really doing is adding another authentication provider directly to the ESXi host.
+A problem reared it&rsquo;s head over the weekend with one of our hosts' Fibre Channel HBAs negotiating it&rsquo;s way down to 2GB, and consequently introducing massive latency for the LUNs behind it. Analysis showed that the drivers for the HBA were over a year out of date so the suggested fix from VMware was to update the drivers. This is fine to do manually for a few hosts, but would be a real pain for the 300+ hosts in the environment I manage.
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2013/10/vsphere-security-active-directory-authentication/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2013/05/updating-esxi-fibre-channel-hba-drivers-via-vmware-update-manager/>More</a>
 </div>
 </div>
 </div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2013/09/vsphere-security-understanding-esxi-5-x-lockdown-mode/>vSphere Security: Understanding ESXi 5.x Lockdown Mode</a>
+<a href=https://www.definit.co.uk/2013/04/using-the-vmware-ssl-certificate-automation-tool-with-a-microsoft-certificate-authority/>Using the VMware SSL Certificate Automation Tool with a Microsoft Certificate Authority</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 26/9/2013
+on 5/4/2013
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
@@ -303,29 +299,30 @@ Published under <a href=/category/vmware>VMware</a> and <a href=/category/vspher
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-This is the first article in a series of vSphere Security articles that I have planned. The majority of this article is based on vSphere/ESXi 5.1, though I will include any 5.5 information that I find relevant.
-I think lockdown mode is a feature that is rarely understood, and even more rarely used. Researching this article I’ve already encountered several different definitions that weren’t quite right. As far as I can see there are no differences between lockdown more in 5.
+Updating vCenter Server certificates has always been a pain - it has only got worse with the sheer number of services that are running under vSphere 5.1 - each service requiring a unique certificate and to be installed in many complex steps.
+Fortunately , with the release of the SSL Certificate Automation Tool, VMware have gone some way to reducing the headache.
+Gather all the components you need OpenSSL installer: http://slproweb.
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2013/09/vsphere-security-understanding-esxi-5-x-lockdown-mode/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2013/04/using-the-vmware-ssl-certificate-automation-tool-with-a-microsoft-certificate-authority/>More</a>
 </div>
 </div>
 </div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2013/09/what-sort-of-lab-would-you-build-for-2000/>What sort of lab would you build for $2000?</a>
+<a href=https://www.definit.co.uk/2013/03/powercli-script-to-set-rdm-luns-to-perennially-reserved-fixes-slow-boot-of-esxi-5-1-with-mscs-rdms/>PowerCLI Script to set RDM LUNs to Perennially Reserved – Fixes Slow Boot of ESXi 5.1 with MSCS RDMs</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 20/9/2013
+on 6/3/2013
 </div>
 <div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a>
+Published under <a href=/category/microsoft>Microsoft</a>, <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
 </div>
 </span>
 </div>
@@ -333,29 +330,28 @@ Published under <a href=/category/vmware>VMware</a>
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-John Troyer (@jtroyer) asked a question on Twitter last night about a CloudCred prize of $1000-2000:
-@jtroyer a nice lab setup! — Sam McGeown (@sammcgeown) September 19, 2013 @jtroyer I guess a couple of hosts, storage and a switch, wouldn't get HCL certified for that but I'm sure it's doable! — Sam McGeown (@sammcgeown) September 19, 2013  That got me thinking – was it possible to create an entire 2 host lab with storage on a $2000 budget?
+I&rsquo;ve previously posted around this topic as part of another problem but having had to figure out the process again I think it&rsquo;s worth re-posting a proper script for this. VMware KB 1016106 is snappily titled &ldquo;ESXi/ESX hosts with visibility to RDM LUNs being used by MSCS nodes with RDMs may take a long time to boot or during LUN rescan&rdquo; and describes the situation where booting ESXi (5.1 in my case) takes a huge amount of time to boot because it&rsquo;s attempting to gain a SCSI reservation on an RDM disk used by MS Clustering Services.
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2013/09/what-sort-of-lab-would-you-build-for-2000/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2013/03/powercli-script-to-set-rdm-luns-to-perennially-reserved-fixes-slow-boot-of-esxi-5-1-with-mscs-rdms/>More</a>
 </div>
 </div>
 </div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2013/09/vcap5-dca-achievement-unlocked-and-vmworld-europe/>VCAP5-DCA &amp;ndash; Achievement Unlocked! And VMworld Europe</a>
+<a href=https://www.definit.co.uk/2013/02/vmware-vcenter-linked-mode-not-supported-through-firewalls/>VMware vCenter Linked Mode not supported through firewalls</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 2/9/2013
+on 15/2/2013
 </div>
 <div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a>
+Published under <a href=/category/networking>Networking</a>, <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
 </div>
 </span>
 </div>
@@ -363,11 +359,12 @@ Published under <a href=/category/vmware>VMware</a>
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-After my previous post about studying and the exam experience of the VCAP5-DCA exam (and 3 weeks of waking up to check my phone for the email all night) I am pleased to say that I received my Exam Score last week and it was a pass! I was really pleased to see that I passed with a very decent margin too, which was great! The rushed nature of the exam and long wait for the results leaves you going over the exam in your head convincing yourself how badly you’ve done, so it came as a huge relief and surprise.
+This article originally started off life as a record of how I managed to get this working, as a lot of my posts do, but this time it appears I am foiled.
+Last week, I had 3 vCenter Servers that appeared to be happily talking to each other in Linked Mode sharing a singe Multi-site SSO domain without any real issues. I had a single-pane-of-glass view of all 3 and I could manage them all from the one client.
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2013/09/vcap5-dca-achievement-unlocked-and-vmworld-europe/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2013/02/vmware-vcenter-linked-mode-not-supported-through-firewalls/>More</a>
 </div>
 </div>
 </div>
@@ -415,8 +412,8 @@ After my previous post about studying and the exam experience of the VCAP5-DCA e
 </a>
 </li>
 <li class="pagination__item pagination__item--last">
-<a class="btn btn-sm btn btn-outline" href=/authors/sam-mcgeown/page/34/>
-34
+<a class="btn btn-sm btn btn-outline" href=/authors/sam-mcgeown/page/32/>
+32
 </a>
 </li>
 </ul>
@@ -430,31 +427,31 @@ After my previous post about studying and the exam experience of the VCAP5-DCA e
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">9</span></a></li>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">28</span></a></li>
+<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
 <li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">24</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">49</span></a></li>
-<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">5</span></a></li>
+<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">16</span></a></li>
+<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">42</span></a></li>
+<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li>
 <li><a href=/category/exam class=nav-link>EXAM <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/fusion class=nav-link>FUSION <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
 <li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">29</span></a></li>
+<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li>
 <li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li>
 <li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
 <li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">214</span></a></li>
+<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">207</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">14</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">47</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">74</span></a></li>
+<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
+<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
+<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">5</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">59</span></a></li>
+<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">58</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>
@@ -463,15 +460,15 @@ After my previous post about studying and the exam experience of the VCAP5-DCA e
 <input id=Tags type=checkbox>
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
-<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">70</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">56</span></a></li>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">54</span></a></li>
 <li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
 <li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">34</span></a></li>
 <li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
 <li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">32</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">32</span></a></li>
+<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li>
+<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">31</span></a></li>
+<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li>
 <li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li>
 </section>
 </section>

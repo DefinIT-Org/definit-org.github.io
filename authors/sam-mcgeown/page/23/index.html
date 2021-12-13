@@ -74,14 +74,14 @@ Follow Sam McGeown on Twitter
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2011/06/configuring-guest-wireless-network-restricted-access-production-vlans/>Configuring a Guest wireless network with restricted access to Production VLANs</a>
+<a href=https://www.definit.co.uk/2010/11/in-depth-installing-and-configuring-threat-management-gateway-2010-in-a-network-load-balanced-array/>In-depth: Installing and Configuring Threat Management Gateway 2010 in a Network Load Balanced Array</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 29/6/2011
+on 8/11/2010
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/microsoft>Microsoft</a> and <a href=/category/networking>Networking</a>
@@ -92,25 +92,113 @@ Published under <a href=/category/microsoft>Microsoft</a> and <a href=/category/
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-It’s a fairly common requirement – setting up a guest WiFi network that is secure from the rest of your LAN. You need a secure WLAN access for the domain laptops which has full access to the Server and Client VLANs, but you also need a guest WLAN for visitors to the office which only allows internet access. Since the budget is limited, this must all be accomplished via a single Access Point – for this article, the access point is a Cisco WAP4410N.
+In this post I will be installing a TMG Array as a “back firewall” behind a hardware firewall. The Array will consist of two virtual servers, TMG01 and TMG02 which each have 3 NICs. One NIC will be dedicated to the LAN network, accessible internally. One NIC will be dedicated to the DMZ network, accessible to the outside world on a static mapped IP. The third NIC will be a dedicated intra-array communications NIC as per Microsoft’s recommendation.
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2011/06/configuring-guest-wireless-network-restricted-access-production-vlans/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2010/11/in-depth-installing-and-configuring-threat-management-gateway-2010-in-a-network-load-balanced-array/>More</a>
 </div>
 </div>
 </div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2011/04/installing-sharepoint-foundation-2010-remote-blob-support-sql-2008-r2/>Installing SharePoint Foundation 2010 with Remote BLOB support in SQL 2008 R2</a>
+<a href=https://www.definit.co.uk/2010/10/managing-esxi-4-1-with-vma-4-1-on-vmware-workstation/>Managing ESXi 4.1 with vMA 4.1 on VMware Workstation</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 14/4/2011
+on 21/10/2010
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/networking>Networking</a> and <a href=/category/vmware>VMware</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+vMA is available as a Virtual Appliance (OVF) from VMware. To install it on VMware Workstation 7, open Workstation and select Import or Export to import a new OVF, the URL for the latest OVF for vMA is on the vMA download page
+As per this article on virtualkenneth.com, you need to edit the VMX file to change the SCSI card and OS type, otherwise you’ll have a kernel panic on boot.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2010/10/managing-esxi-4-1-with-vma-4-1-on-vmware-workstation/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2010/09/wordle-word-cloud-of-mcgeown-co-uk/>Wordle word cloud of McGeown.co.uk</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 24/9/2010
+</div>
+<div class=clr-card-authors>
+Published under
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+Wordle.net is a great little site that’s been around for ages – but it gives quite a unique insight into the content of your blog – just shove the RSS feed in and out comes a nice word cloud. I found it interesting to compare this to the Tag cloud generated from how I tagged my posts – for example Exchange is the predominant word in the Wordle.net cloud – but not in the tag cloud.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2010/09/wordle-word-cloud-of-mcgeown-co-uk/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2010/09/updated-wordpress-3-0-1/>Updated to WordPress 3.0.1</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 17/9/2010
+</div>
+<div class=clr-card-authors>
+Published under
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+Hardly seems newsworthy any more, with the Automatic Upgrade option on WordPress 2.7+, but I&rsquo;ve just upgraded to WordPress 3.0.1
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2010/09/updated-wordpress-3-0-1/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2010/09/creatingenabling-exchange-2010-personal-archives/>Creating/Enabling Exchange 2010 Personal Archives</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 13/9/2010
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/microsoft>Microsoft</a>
@@ -121,55 +209,25 @@ Published under <a href=/category/microsoft>Microsoft</a>
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-Configuring WSS or SharePoint Services for a small client is a pretty effective way of getting a document management solution for a reasonable cost point. One of the limitations that caused headaches was that it used to have a maximum storage of 4GB, which was the database limit. If you wanted to go larger, you would need either a) multiple SPS installations, b) a full version of SQL server, or c) the full version of MOSS.
+With the release of Exchange 2010 SP1, administrators can now use separate Mailbox Databases to store the Personal Archives of users – this is particularly useful if you have some larger, slower (and probably by virtue, older) storage that’s not really up to the I/O of your Exchange Server (that old SAN/NAS sitting in the corner of the server room?). It’s also useful if you just don’t have the capacity on your main storage.
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2011/04/installing-sharepoint-foundation-2010-remote-blob-support-sql-2008-r2/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2010/09/creatingenabling-exchange-2010-personal-archives/>More</a>
 </div>
 </div>
 </div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2011/03/configuring-sstp-vpn-connections-threat-management-gateway-2010/>Configuring SSTP VPN connections to Threat Management Gateway 2010</a>
+<a href=https://www.definit.co.uk/2010/09/installing-exchange-2010-sp1/>Installing Exchange 2010 SP1</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 24/3/2011
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/microsoft>Microsoft</a> and <a href=/category/networking>Networking</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-SSTP or SSL VPN connections are great for people working on client sites or behind very restrictive firewalls – they only require HTTPS (port 443) to be open to be able to connect. Unfortunately, you need to be running Windows 7 or Server 2008 (or newer) in order to make use of them. Threat Management Gateway 2010 is one option for an SSL VPN endpoint.
-SSTP VPN Requirements Clients must be Windows 7/Server 2008 or newer Certificate – either commercial or an internal Certificate Authority Published CRL – SSTP clients check for the Certificate Revocation List of the CA If you already have an SSL listener (e.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2011/03/configuring-sstp-vpn-connections-threat-management-gateway-2010/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2011/03/online-archiving-with-exchange-2010-cant-see-your-online-archive-in-outlook/>Online Archiving with Exchange 2010? Can&amp;rsquo;t see your Online Archive in Outlook?</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 22/3/2011
+on 9/9/2010
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/microsoft>Microsoft</a>
@@ -180,26 +238,26 @@ Published under <a href=/category/microsoft>Microsoft</a>
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-Having recently managed several Exchange 2010 migration projects, one of the best new features which really sells it to systems administrators is the Online Archive. “No more managing PST files? When can we have it installed by?”
-The problem is, once they’ve purchased licensing for Exchange 2010 and installed and configured the server, migrated the users’ mailboxes and decommissioned the old Exchange 2003 server, the Online Archive feature is not available.
+Exchange SP1 has now been released, so I thought I’d document the upgrade process for my small Exchange 2010 organisation, consisting of one CAS/Transport/Mailbox server, and an Edge Transport server.
+References The starting point is always working out if you *need* to upgrade – what’s the business argument. For that you need to look at what’s new in Exchange 2010 SP1, the release notes and prerequisites. Finally, the installation instructions for upgrading from Exchange 2010 RTM to SP1.
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2011/03/online-archiving-with-exchange-2010-cant-see-your-online-archive-in-outlook/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2010/09/installing-exchange-2010-sp1/>More</a>
 </div>
 </div>
 </div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2011/03/exchange-2010-createtestuser-mailbox-could-not-be-created-verify-that-ou-users-exists-and-that-password-meets-complexity-requirements/>Exchange 2010 – CreateTestUser : Mailbox could not be created. Verify that OU ( Users ) exists and that password meets complexity requirements</a>
+<a href=https://www.definit.co.uk/2010/09/installing-system-center-operations-manager-2007-r2-cu2/>Installing System Center Operations Manager 2007 R2 CU2</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 21/3/2011
+on 8/9/2010
 </div>
 <div class=clr-card-authors>
 Published under <a href=/category/microsoft>Microsoft</a>
@@ -210,29 +268,29 @@ Published under <a href=/category/microsoft>Microsoft</a>
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-While using the New-TestCasConnectivityUser.ps1 script to create a test user for Exchange 2010’s connectivity testing, I ran into an issue:
-CreateTestUser : Mailbox could not be created. Verify that OU ( Users ) exists and that password meets complexity requirements. At C:\Program Files\Microsoft\Exchange Server\V14\Scripts\new-TestCasConnectivityUser.ps1:255 char:27 + $result = CreateTestUser &lt;&lt;&lt;&lt; $exchangeServer $mailboxServer $securePassword $OrganizationalUnit $UMDialPlan $UMExtension $Prompt + CategoryInfo : NotSpecified: (:) [Write-Error], WriteErrorException + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,CreateTestUser Oddly enough, that OU does exist (as it will by default on any Windows Domain!
+This should be a simple update of some hotfixes, but there were a few tripping points along the way that I had to stumble past. As reference I used the CU2 update page and I also a Kevin Holman technet article.
+So, I’m going to assume that a) you’re installing the update for a reason, like one of the bugs it fixes and b) you have taken a backup of your OpsManager databases.
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2011/03/exchange-2010-createtestuser-mailbox-could-not-be-created-verify-that-ou-users-exists-and-that-password-meets-complexity-requirements/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2010/09/installing-system-center-operations-manager-2007-r2-cu2/>More</a>
 </div>
 </div>
 </div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2011/03/batch-converting-video-files-on-ubuntu-linux-using-handbrakecli/>Batch Converting Video Files on Ubuntu Linux using HandbrakeCLI</a>
+<a href=https://www.definit.co.uk/2010/08/testing-throughput-between-two-windows-servers-with-nt-testing-tcp-tool/>Testing throughput between two Windows Servers with NT Testing TCP Tool</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 10/3/2011
+on 13/8/2010
 </div>
 <div class=clr-card-authors>
-Published under
+Published under <a href=/category/microsoft>Microsoft</a>
 </div>
 </span>
 </div>
@@ -240,29 +298,29 @@ Published under
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-Disclaimer: this post is more for my own recollection than anything else! When it comes to Linux, I’m an amateur and everything I do from the simplest thing upwards is copy-and-paste from much more informed bloggers and websites!
-My home server is running Ubuntu Linux 10.10 – access is via an SSH client only. I run an NFS file server for my home network, which stores my Music and Video for the network, and is running an iTunes server.
+The NT Testing TCP Tool is a handy little tool for testing the throughput between two servers – and it’s free! It’s available to download here: http://www.microsoft.com/whdc/device/network/TCP_tool.mspx
+First, you need to install the MSI on both ends – for the sake of this, say SERVER1 and SERVER2. Once you’ve installed it on the server, navigate to \Program Files\Microsoft Corporation\NT Testing TCP Tool, you should see a few copies of the tool for different architectures.
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2011/03/batch-converting-video-files-on-ubuntu-linux-using-handbrakecli/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2010/08/testing-throughput-between-two-windows-servers-with-nt-testing-tcp-tool/>More</a>
 </div>
 </div>
 </div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2011/03/the-case-of-the-missing-network-adaptor-a-k-a-installing-additional-drivers-on-esxi-4-1/>The case of the missing network adaptor: a.k.a Installing additional drivers on ESXi 4.1</a>
+<a href=https://www.definit.co.uk/2010/08/installing-exchange-2010-edge-server-with-forefront-protection-for-exchange-fpe-and-threat-management-gateway-tmg-part-1/>Installing Exchange 2010 Edge Server with Forefront Protection for Exchange (FPE) and Threat Management Gateway (TMG) – Part 1</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 3/3/2011
+on 10/8/2010
 </div>
 <div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a>
+Published under <a href=/category/microsoft>Microsoft</a>
 </div>
 </span>
 </div>
@@ -270,28 +328,29 @@ Published under <a href=/category/vmware>VMware</a>
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-Recently I installed and configured a client’s new ESXi host, they’re a small company and only require a single host. The host in question was an IBM x3650 M3, an excellent workhorse for virtualisation and one of 5 or 6 of the same model that I’ve installed in the last year. In addition to the onboard Broadcom Dual Gigabit NIC, we always install at least a second Intel PCIx Dual Gigabit card for resilience/redundancy/performance.
+I am mid-migration, in a co-existence setup with Exchange 2010, 2007 and 2003. So far the roles installed for Exchange 2010 are CAS, Hub and Mailbox on a single server. Into this mix I need to introduce an Edge Server, with message hygiene in the form of Forefront Protection for Exchange (FPE) and Threat Management Gateway (TMG) as a reverse proxy to publish OWA, ActiveSync et-al.
+Since Edge, FPE and TMG can now all exist on a single 64-bit server, I will start with a clean installation of Windows Server 2008 R2, up to date with all the latest hot fixes.
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2011/03/the-case-of-the-missing-network-adaptor-a-k-a-installing-additional-drivers-on-esxi-4-1/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2010/08/installing-exchange-2010-edge-server-with-forefront-protection-for-exchange-fpe-and-threat-management-gateway-tmg-part-1/>More</a>
 </div>
 </div>
 </div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2011/02/twitter-integration/>Twitter integration…</a>
+<a href=https://www.definit.co.uk/2010/08/unable-to-access-outlook-web-access-owa-after-installing-update-rollup-1-2-3-or-4-flogon-js-errors/>Unable to access Outlook Web Access (OWA) after installing Update Rollup 1, 2, 3 or 4 – flogon.js errors</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 28/2/2011
+on 10/8/2010
 </div>
 <div class=clr-card-authors>
-Published under
+Published under <a href=/category/microsoft>Microsoft</a>
 </div>
 </span>
 </div>
@@ -299,72 +358,15 @@ Published under
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-Not as easy as it seems!
+If you’re having trouble accessing OWA after updating Exchange 2010 with any of the Rollup packages, try this:
+Uninstall the update package from the Programs and Features control panel
+Download the package file directly from Microsoft, don’t use Windows Update
+Open a command prompt or PowerShell prompt as Administrator
+Navigate to the location of the package (.msp) and run from the elevated command prompt.
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2011/02/twitter-integration/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2011/02/welcome-to-definit/>Welcome to DefinIT!</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 23/2/2011
-</div>
-<div class=clr-card-authors>
-Published under
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-If you’ve been here before, you may have noticed a couple of changes – the theme and name of this blog for example, and hopefully you’ve been redirected to a new URL! There are a couple of reasons for the changes, all of which are aimed at increasing the presence and visitor numbers on this site:
-Branding. Whether I like it or not, “McGeown” is not easy to spell or remember so I wanted to move away from it as an identity.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2011/02/welcome-to-definit/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2011/02/reporting-all-activesync-devices-and-users-in-exchange-2010/>Reporting all ActiveSync devices and their Users in Exchange 2010</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 8/2/2011
-</div>
-<div class=clr-card-authors>
-Published under
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-Recently I needed to report on the ActiveSync devices that were attached to our Exchange 2010 organisation, and which users they were accessing, and then export them to a CSV file.
-This is the script:
-$ActiveSyncDevices = @() ForEach ($Mailbox in Get-Mailbox –Server MBX01) { Get-ActiveSyncDeviceStatistics -Mailbox $Mailbox.Identity –ErrorAction SilentlyContinue | Select DeviceFriendlyName, Devicetype, DeviceUserAgent | ForEach-Object { $_ | Add-Member –MemberType NoteProperty -Name "MailboxIdentity" -value $Mailbox $ActiveSyncDevices += $_ } } $ActiveSyncDevices | Export-csv c:\Path\To\File.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2011/02/reporting-all-activesync-devices-and-users-in-exchange-2010/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2010/08/unable-to-access-outlook-web-access-owa-after-installing-update-rollup-1-2-3-or-4-flogon-js-errors/>More</a>
 </div>
 </div>
 </div>
@@ -412,8 +414,8 @@ $ActiveSyncDevices = @() ForEach ($Mailbox in Get-Mailbox –Server MBX01) { Get
 </a>
 </li>
 <li class="pagination__item pagination__item--last">
-<a class="btn btn-sm btn btn-outline" href=/authors/sam-mcgeown/page/34/>
-34
+<a class="btn btn-sm btn btn-outline" href=/authors/sam-mcgeown/page/32/>
+32
 </a>
 </li>
 </ul>
@@ -427,31 +429,31 @@ $ActiveSyncDevices = @() ForEach ($Mailbox in Get-Mailbox –Server MBX01) { Get
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">9</span></a></li>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">28</span></a></li>
+<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
 <li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">24</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">49</span></a></li>
-<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">5</span></a></li>
+<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">16</span></a></li>
+<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">42</span></a></li>
+<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li>
 <li><a href=/category/exam class=nav-link>EXAM <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/fusion class=nav-link>FUSION <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
 <li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">29</span></a></li>
+<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li>
 <li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li>
 <li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
 <li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">214</span></a></li>
+<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">207</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">14</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">47</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">74</span></a></li>
+<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
+<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
+<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">5</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">59</span></a></li>
+<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">58</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>
@@ -460,15 +462,15 @@ $ActiveSyncDevices = @() ForEach ($Mailbox in Get-Mailbox –Server MBX01) { Get
 <input id=Tags type=checkbox>
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
-<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">70</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">56</span></a></li>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">54</span></a></li>
 <li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
 <li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">34</span></a></li>
 <li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
 <li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">32</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">32</span></a></li>
+<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li>
+<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">31</span></a></li>
+<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li>
 <li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li>
 </section>
 </section>

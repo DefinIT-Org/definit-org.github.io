@@ -65,17 +65,17 @@ RSS
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2012/12/passed-the-vcp510-exam-vcp5-dv-qualified/>Passed the VCP510 exam – VCP5-DV Qualified!</a>
+<a href=https://www.definit.co.uk/2012/01/overriding-the-opsmgr-exchange-2007-test-mapi-connectivity-monitor-for-recovery-storage-groups/>Overriding the OpsMgr Exchange 2007 Test MAPI Connectivity Monitor for Recovery Storage Groups</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 31/12/2012
+on 5/1/2012
 </div>
 <div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
+Published under <a href=/category/microsoft>Microsoft</a>
 </div>
 </span>
 </div>
@@ -83,29 +83,207 @@ Published under <a href=/category/vmware>VMware</a> and <a href=/category/vspher
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-I&rsquo;m very pleased to say that as of 21st December, I passed my VCP510 exam and am now VCP5 qualified! It&rsquo;s something that I&rsquo;ve wanted to do for a long time (since VCP3) but have never been able to get funding for the required course. My current employer sent me on the vSphere 5 Fast Track course earlier this year, so I was all set to take the exam.
-My exam experience was somewhat marred by a very poor first attempt which I narrowly failed.
+The Test MAPI Connectivity monitor for the Exchange 2007 management pack will automatically generate a critical error for any Recovery Storage Groups you have on monitored Exchange Mailbox Roles. As these are generally temporary Storage Groups created for a recovery and then removed, you don&rsquo;t want an alert - but manually adding an override for every time is not a great use of your time either.
+The State Change event details are as follows:
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2012/12/passed-the-vcp510-exam-vcp5-dv-qualified/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2012/01/overriding-the-opsmgr-exchange-2007-test-mapi-connectivity-monitor-for-recovery-storage-groups/>More</a>
 </div>
 </div>
 </div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2012/12/a-good-year-with-vmware-and-better-things-to-come/>A good year with VMware and better things to come!</a>
+<a href=https://www.definit.co.uk/2012/01/troublewithscom2007r2certificates/>Trouble with SCOM 2007 R2 Certificates? Validate the entire PKI path!</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 5/1/2012
+</div>
+<div class=clr-card-authors>
+Published under
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+I learned something new today: SCOM 2007 R2 certificate based communications not only checks the validity of the certificate you use, but also the CA that issued it…let me expand:
+Like many organisations there is a root CA (we&rsquo;ll call it ROOTCA01), and then a subordinate CA (we&rsquo;ll call that SUBCA01). OPSMGM01 has a certificate to identify itself and has certificates for ROOTCA01 and SUBCA01 in it&rsquo;s Trusted Root Certificate Authorities.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2012/01/troublewithscom2007r2certificates/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2011/10/vmware-powercli-set-path-selection-policy-on-all-luns-for-a-host/>VMware PowerCLI – Set Path Selection Policy on all LUNs for a host</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 28/10/2011
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/microsoft>Microsoft</a> and <a href=/category/vmware>VMware</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+Just a quick script to set the Path Selection Policy on any LUNs on a host that do not have your target policy enabled. The script sets the server to Maintenance mode first, evacuating any VMs if you are in a full DRS automated environment. While this is not strictly necessary, it was required for my production environment just to be safe.
+param( [string] $vCenterServer = $(Read-Host -prompt "Enter vCenter Server Name"
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2011/10/vmware-powercli-set-path-selection-policy-on-all-luns-for-a-host/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2011/10/scom-2007-dfs-backlog-monitoring-%E2%80%93-distributing-a-runas-account-to-only-dfs-replication-members/>SCOM 2007 DFS Backlog Monitoring – Distributing a RunAs account to only DFS replication members</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 18/10/2011
+</div>
+<div class=clr-card-authors>
+Published under
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+The DFS monitoring tool in SCOM 2007 has some great features, which will replace many a custom VB script running in enterprises. As with a lot of Management Packs, to get the most out of it you need to have a dedicated RunAs account with local admin permissions on the servers you are monitoring (e.g. for the Backlogged Files reporting).
+The easy (and wrong) option here is to go with the less secure option and distribute a RunAs account to ALL servers.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2011/10/scom-2007-dfs-backlog-monitoring-%E2%80%93-distributing-a-runas-account-to-only-dfs-replication-members/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2011/08/more-notes-on-threat-management-gateway-arrays/>More notes on Threat Management Gateway Arrays</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 31/8/2011
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/microsoft>Microsoft</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+It seems that despite my previous experiences with TMG 2010, I still stumble when creating a TMG array. Here are some &ldquo;notes to self&rdquo;, which will hopefully stop me making the same mistakes next time
+Get the NICs right first In this case I came to a project after the initial installation of the array and there was no dedicated intra-array network installed. I added a new NIC to each VM and configured the IP addressing, VLANs and routing, but could not get the intra-array network to ping, let alone talk to each other.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2011/08/more-notes-on-threat-management-gateway-arrays/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2011/07/installing-configuring-otrs-3-0-9-windows-server-2008/>Installing and Configuring OTRS 3.0.9 on Windows Server 2008 R2</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 13/7/2011
+</div>
+<div class=clr-card-authors>
+Published under
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+OTRS is an exceptionally flexible ITIL compliant ticketing/helpdesk solution, which runs beautifully on almost any LAMP (Linux, Apache, MySQL, Perl (yes, I know it’s PHP really;-)) server, but what happens when you work in a Windows-only environment? OTRS does have a Windows installer, but it is somewhat clunky and requires almost as much work to configure as manually installing. Installing as components allows you to upgrade portions of the system and have more granular control over the setup.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2011/07/installing-configuring-otrs-3-0-9-windows-server-2008/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2011/06/configuring-guest-wireless-network-restricted-access-production-vlans/>Configuring a Guest wireless network with restricted access to Production VLANs</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 29/6/2011
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/microsoft>Microsoft</a> and <a href=/category/networking>Networking</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+It’s a fairly common requirement – setting up a guest WiFi network that is secure from the rest of your LAN. You need a secure WLAN access for the domain laptops which has full access to the Server and Client VLANs, but you also need a guest WLAN for visitors to the office which only allows internet access. Since the budget is limited, this must all be accomplished via a single Access Point – for this article, the access point is a Cisco WAP4410N.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2011/06/configuring-guest-wireless-network-restricted-access-production-vlans/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2011/06/a-worklearn-balance/>A work/learn balance</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
-on 20/12/2012
+on 23/6/2011
 </div>
 <div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a>
+Published under
 </div>
 </span>
 </div>
@@ -113,30 +291,29 @@ Published under <a href=/category/vmware>VMware</a>
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-This year for me personally has been extremely busy and eventful coupled with a great deal of learning.
-Without wishing to bore the pants off of any would be reader I shall summarize my ruminations as someone whom is still quite new to the VMware world.
-The first thing that comes to mind is a a couple of recent meetings I have had with VMware. Learning that they are now very keen to engage with &lsquo;the rest of us&rsquo; and by that I mean those of us working in SME&rsquo;s as we represent well over 50% of their business revenue.
+As with all things IT the pace of technology change is relentless and we are constantly and rightly told that change is good and that being able to evolve and move with the times is an important skill and ability.
+However I am often left wondering how we can maintain a balance. I have all to often seen IT professionals falling into the trap chasing the latest and greatest and rushing to try to implement or learn new emerging technologies without much thought to what they already have.
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2012/12/a-good-year-with-vmware-and-better-things-to-come/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2011/06/a-worklearn-balance/>More</a>
 </div>
 </div>
 </div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2012/11/vcenter-5-1-single-sign-on-multi-site-error-user-credentials-are-incorrect-or-empty/>vCenter 5.1 Single Sign On Multi-Site error: User credentials are incorrect or empty</a>
+<a href=https://www.definit.co.uk/2011/04/installing-sharepoint-foundation-2010-remote-blob-support-sql-2008-r2/>Installing SharePoint Foundation 2010 with Remote BLOB support in SQL 2008 R2</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 24/11/2012
+on 14/4/2011
 </div>
 <div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
+Published under <a href=/category/microsoft>Microsoft</a>
 </div>
 </span>
 </div>
@@ -144,31 +321,28 @@ Published under <a href=/category/vmware>VMware</a> and <a href=/category/vspher
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-While adding an additional vCenter Server to our Multi-Site Single Sign On instance I encountered a problem as I entered the details of the existing SSO.
-The error thrown was:
-User credentials are incorrect or empty. Provide correct credentials.
-After a couple of hours online with VMware support I took a guess at the problem. On the existing Single Sign On Configuration I have added the Active Directory domain DefinIT and in order to enable integrated authentication from the vSphere Client I moved it to the top of the list - this meant that System-Domain is no longer the default authentication domain.
+Configuring WSS or SharePoint Services for a small client is a pretty effective way of getting a document management solution for a reasonable cost point. One of the limitations that caused headaches was that it used to have a maximum storage of 4GB, which was the database limit. If you wanted to go larger, you would need either a) multiple SPS installations, b) a full version of SQL server, or c) the full version of MOSS.
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2012/11/vcenter-5-1-single-sign-on-multi-site-error-user-credentials-are-incorrect-or-empty/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2011/04/installing-sharepoint-foundation-2010-remote-blob-support-sql-2008-r2/>More</a>
 </div>
 </div>
 </div>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2012/11/vcp5-vsphere-5-configuration-maximums-quiz-in-powershell/>VCP5 – vSphere 5 Configuration Maximums Quiz in PowerShell</a>
+<a href=https://www.definit.co.uk/2011/03/configuring-sstp-vpn-connections-threat-management-gateway-2010/>Configuring SSTP VPN connections to Threat Management Gateway 2010</a>
 </div>
 <div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 22/11/2012
+on 24/3/2011
 </div>
 <div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
+Published under <a href=/category/microsoft>Microsoft</a> and <a href=/category/networking>Networking</a>
 </div>
 </span>
 </div>
@@ -176,191 +350,12 @@ Published under <a href=/category/vmware>VMware</a> and <a href=/category/vspher
 </div>
 <div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-I&rsquo;ve been learning my vSphere 5 config maximums before my upcoming VCP5 exam, so in a supreme effort of procrastination I thought I&rsquo;d write a PowerShell quiz script: here it is!
-Save the QuizMe.ps1 file into a folder and then place one or more text file in the same folder containing a comma delimited set of questions and answers. Then run QuizMe.ps1!
-You can choose the quiz you take (which text file it will use).
+SSTP or SSL VPN connections are great for people working on client sites or behind very restrictive firewalls – they only require HTTPS (port 443) to be open to be able to connect. Unfortunately, you need to be running Windows 7 or Server 2008 (or newer) in order to make use of them. Threat Management Gateway 2010 is one option for an SSL VPN endpoint.
+SSTP VPN Requirements Clients must be Windows 7/Server 2008 or newer Certificate – either commercial or an internal Certificate Authority Published CRL – SSTP clients check for the Certificate Revocation List of the CA If you already have an SSL listener (e.
 </div>
 </div>
 <div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2012/11/vcp5-vsphere-5-configuration-maximums-quiz-in-powershell/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2012/11/powershell-generate-microsoft-ca-signed-ssl-certificates-with-vsphere-5-1/>Powershell – Generate Microsoft CA signed SSL certificates with vSphere 5.1</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 6/11/2012
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-The process of requesting certificates for vSphere 5.1 is a fairly grim, manual process. It&rsquo;s repetitive and easy to make a mistake on any step of the way. Since I&rsquo;ve got to do this for quite a few VirtualCenter Servers, I thought I&rsquo;d script the certificate generation if nothing else. I am following the excellent documentation provided in Implementing CA signed SSL certificates with vSphere 5.1 and more specifically in Creating certificate requests and certificates for vCenter Server 5.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2012/11/powershell-generate-microsoft-ca-signed-ssl-certificates-with-vsphere-5-1/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2012/10/installing-vmware-vsphere-single-sign-on-sso-in-multi-site-mode/>Installing VMware vSphere Single Sign On (SSO) in Multi-site Mode</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 28/10/2012
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-VMware vSphere Single Sign On (SSO) can be installed in Multi-site mode to support local sign-on to vCenters that you want to be part of the same single sign on domain - for example, if you want to install Linked-Mode and have the advantage of a single pane of glass view, but can&rsquo;t risk using a single SSO instance across the WAN. In other words, from VMware&rsquo;s blog post:
-Multisite deployments are where a local replica is maintained at remote sites of the primary vCenter Single Sign-On instance.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2012/10/installing-vmware-vsphere-single-sign-on-sso-in-multi-site-mode/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2012/10/datastore-conflicts-with-an-existing-datastore-in-the-datacenter-manually-disabling-storage-io-control/>DataStore conflicts with an existing DataStore in the DataCenter – Manually disabling Storage I/O Control</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 17/10/2012
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-I ran into this issue yesterday while reconnecting hosts in our vCenter Server following a complete reinstall - the reasons for which are a long story, but suffice to say that there were new certificates and the host passwords were encrypted with the old ones.
-The LUNs had been unpresented at the hardware level by the storage team, but had not been unmounted or removed from vCenter. This is not the way to remove storage - let me re-iterate: remove storage properly.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2012/10/datastore-conflicts-with-an-existing-datastore-in-the-datacenter-manually-disabling-storage-io-control/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2012/10/host-disk-write-latency-errors-troubleshooting/>Host disk write latency errors – troubleshooting</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
-on 5/10/2012
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-So recently we upgraded our cluster monitoring suite to it&rsquo;s latest iteration (Veeam ONE), it was not long before I began to receive emails from the monitor informing me of Host disk write latency &ldquo;errors&rdquo; (Datastore write latency had exceeded the defined threshold in the monitor) on several of the Datastores on our SAN.
-Naturally I began the process of cross referencing backup routines and any heavy I/O routines that may have been running at the time the warning messages were generated.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2012/10/host-disk-write-latency-errors-troubleshooting/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2012/10/vcenter-5-1-configuring-vcenter-linked-mode/>vCenter 5.1 – Configuring vCenter Linked Mode</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 4/10/2012
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-One thing we have been meaning to do for a while but haven&rsquo;t got round to is getting our Virtual Center Servers into &ldquo;Linked&rdquo; mode - essentially to provide a single pane of glass view of our entire virtual estate. One vCenter resides on the other side of our DMZ and manages hosts isolated for security purposes. I&rsquo;ve created an IPSec server-to-server connection and allowed that through the firewall to secure traffic between the DMZ VC and LAN VC.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2012/10/vcenter-5-1-configuring-vcenter-linked-mode/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2012/09/converting-vsphere-custom-attributes-to-categories-and-tags/>Converting vSphere Custom Attributes to Categories and Tags</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 25/9/2012
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-In vSphere 5.1 &ldquo;Tags&rdquo; replace the old custom attributes to provide a way of adding metadata to vSphere objects. The &ldquo;Tags&rdquo; are organised into categories to &ldquo;define how the tags can be applied to inventory objects&rdquo;. The easiest way to think of the difference is that custom attributes are &ldquo;free text&rdquo; and the tags are statically defined properties.
-There is a wizard for converting custom attributes to tags, but it can get a bit confusing and is pretty poor - let me explain.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2012/09/converting-vsphere-custom-attributes-to-categories-and-tags/>More</a>
+<a class=card-link href=https://www.definit.co.uk/2011/03/configuring-sstp-vpn-connections-threat-management-gateway-2010/>More</a>
 </div>
 </div>
 </div>
@@ -408,8 +403,8 @@ There is a wizard for converting custom attributes to tags, but it can get a bit
 </a>
 </li>
 <li class="pagination__item pagination__item--last">
-<a class="btn btn-sm btn btn-outline" href=/page/48/>
-48
+<a class="btn btn-sm btn btn-outline" href=/page/46/>
+46
 </a>
 </li>
 </ul>
@@ -421,31 +416,31 @@ There is a wizard for converting custom attributes to tags, but it can get a bit
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">9</span></a></li>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">28</span></a></li>
+<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
 <li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">24</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">49</span></a></li>
-<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">5</span></a></li>
+<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">16</span></a></li>
+<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">42</span></a></li>
+<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li>
 <li><a href=/category/exam class=nav-link>EXAM <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/fusion class=nav-link>FUSION <span class="badge badge-1">1</span></a></li>
 <li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
 <li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">29</span></a></li>
+<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li>
 <li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li>
 <li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
 <li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">2</span></a></li>
 <li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">214</span></a></li>
+<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">207</span></a></li>
 <li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">14</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">47</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">74</span></a></li>
+<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
+<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
+<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
 <li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">5</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">59</span></a></li>
+<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">58</span></a></li>
 <li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
 <li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
 </ul>
@@ -454,15 +449,15 @@ There is a wizard for converting custom attributes to tags, but it can get a bit
 <input id=Tags type=checkbox>
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
-<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">70</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">56</span></a></li>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">54</span></a></li>
 <li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
 <li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">34</span></a></li>
 <li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
 <li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">32</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">32</span></a></li>
+<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li>
+<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">31</span></a></li>
+<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li>
 <li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li>
 </section>
 </section>
