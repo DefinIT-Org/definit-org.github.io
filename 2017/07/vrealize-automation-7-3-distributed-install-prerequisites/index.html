@@ -407,8 +407,9 @@ vra-sql
 </code></pre>
 </tr>
 </table>
-<h2 id=dns-records>DNS Records</h2>
-<p>A and PTR (forward and reverse) DNS records are required for all components deployed - appliances and IAAS servers. DNS is a critical component of the application, you must be able to resolve the FQDN and the short name of all components, as well as reverse lookups. Use nslookup to validate from each server, to all other servers.</p>
+<h2 id=dns-records>DNS Records <a class=anchor href=#dns-records>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>A and PTR (forward and reverse) DNS records are required for all components deployed - appliances and IAAS servers. DNS is a critical component of the application, you must be able to resolve the FQDN and the short name of all components, as well as reverse lookups. Use nslookup to validate from each server, to all other servers.</p>
 <p>In addition to FQDNs configured for all the components, an A record will be required for each of the load balanced URLs.</p>
 <p>The FQDNs need to be included in the Subject Alternative Names in the SSL certificates.</p>
 <ul>
@@ -452,22 +453,28 @@ vra-sql
 <p>I typically create a CNAME for the load balancer VIPs first, then move to A records later - see the Load Balancer section below.</p>
 </li>
 </ul>
-<h2 id=ntp>NTP</h2>
-<p>It&rsquo;s important to use a common time source for all components - domain joined Windows VMs for IaaS will use use the Domain Controllers. My DCs use my local NTP server, so the vRA Appliances are synchronised with the local NTP server directly too. You can use VMware Tools to set the time on each VM - if you do this ensure that the ESXi hosts have a common time source. Use one method or the other, but not a mix!</p>
+<h2 id=ntp>NTP <a class=anchor href=#ntp>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>It&rsquo;s important to use a common time source for all components - domain joined Windows VMs for IaaS will use use the Domain Controllers. My DCs use my local NTP server, so the vRA Appliances are synchronised with the local NTP server directly too. You can use VMware Tools to set the time on each VM - if you do this ensure that the ESXi hosts have a common time source. Use one method or the other, but not a mix!</p>
 <p>NTP for the vRA Appliance is configured when you run the installation wizard, and can be configured via the VAMI interface.</p>
-<h2 id=iaas-windows-servers>IaaS Windows Servers</h2>
-<p>Since it&rsquo;s introduction in vRA 7, the installation wizard does a fantastic job configuring the IaaS Windows Servers for their roles, and this massively improves the chance of a successful deployment first time. There are a few things that I always do for each Windows Server.</p>
-<h3 id=patching>Patching</h3>
-<p>Update the IaaS servers with the latest patches before doing anything - typically this means maintaining an up-to-date template and deploying from that, whatever the method, ensure that the server is patched and that no updates will interfere with the deployment.</p>
-<h3 id=reinstall-msdtc>Reinstall MSDTC</h3>
-<p>One common problem is that cloned VMs don&rsquo;t generate a unique ID for MSDTC. This causes communication issues when you&rsquo;re deploying vRA. You can either remove MSDTC from your template, then install once you&rsquo;ve deployed it, or reinstall on the cloned VM. This issue does not affect Windows servers deployed by other methods than cloning.</p>
+<h2 id=iaas-windows-servers>IaaS Windows Servers <a class=anchor href=#iaas-windows-servers>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Since it&rsquo;s introduction in vRA 7, the installation wizard does a fantastic job configuring the IaaS Windows Servers for their roles, and this massively improves the chance of a successful deployment first time. There are a few things that I always do for each Windows Server.</p>
+<h3 id=patching>Patching <a class=anchor href=#patching>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Update the IaaS servers with the latest patches before doing anything - typically this means maintaining an up-to-date template and deploying from that, whatever the method, ensure that the server is patched and that no updates will interfere with the deployment.</p>
+<h3 id=reinstall-msdtc>Reinstall MSDTC <a class=anchor href=#reinstall-msdtc>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>One common problem is that cloned VMs don&rsquo;t generate a unique ID for MSDTC. This causes communication issues when you&rsquo;re deploying vRA. You can either remove MSDTC from your template, then install once you&rsquo;ve deployed it, or reinstall on the cloned VM. This issue does not affect Windows servers deployed by other methods than cloning.</p>
 <p>[code]msdtc -uninstall && msdtc -install[/code]</p>
-<h3 id=configure-msdtc>Configure MSDTC</h3>
-<p>MSDTC should be configured on all the IaaS boxes to allow communication with the MSSQL Server. You can use the following PowerShell command, or manually set it from Component Services.</p>
+<h3 id=configure-msdtc>Configure MSDTC <a class=anchor href=#configure-msdtc>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>MSDTC should be configured on all the IaaS boxes to allow communication with the MSSQL Server. You can use the following PowerShell command, or manually set it from Component Services.</p>
 <p>[code]Set-DtcNetworkSetting -DtcName &ldquo;Local&rdquo; -RemoteAdministrationAccessEnabled:$True -RemoteClientAccessEnabled:$True -InboundTransactionsEnabled:$True -OutboundTransactionsEnabled:$True -LUTransactionsEnabled:$True -Confirm:$False[/code]</p>
 <img class="alignnone size-medium wp-image-8195" src=/images/2017/07/2017-07-20_10-15-21.png alt width=274 height=300>
-<h3 id=service-account>Service Account</h3>
-<p>Create a service account to run the IaaS components.  From the VMware documentation, it must meet the following requirements:</p>
+<h3 id=service-account>Service Account <a class=anchor href=#service-account>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Create a service account to run the IaaS components.  From the VMware documentation, it must meet the following requirements:</p>
 <ul id=GUID-6CB7D698-975D-41A4-8FC0-3EE40FE30203__ul_CB176962D91349C1B5145067C3F0AB21 class=ul>
 <li id=GUID-6CB7D698-975D-41A4-8FC0-3EE40FE30203__li_93C16DEBF0834910867E7A96A7DD54E4 class=li>
 <p id=GUID-6CB7D698-975D-41A4-8FC0-3EE40FE30203__d225t90 class=p>
@@ -508,14 +515,17 @@ If you use the installer to create the database, in SQL, add the sysadmin role t
 <p>In my lab environment, I&rsquo;ve used <a href=mailto:svc_vra@definit.local>svc_vra@definit.local</a></p>
 <p>To quickly add the service account to all Windows servers, you can run the following command:</p>
 <p>[code]net localgroup administrators <a href=mailto:svc_vra@definit.local>svc_vra@definit.local</a> /add[/code]</p>
-<h3 id=firewall>Firewall</h3>
-<p>Typically I disable the Windows Firewall on all IaaS components during installation using the following command - it&rsquo;s too easy to miss a required rule and break the installation:</p>
+<h3 id=firewall>Firewall <a class=anchor href=#firewall>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Typically I disable the Windows Firewall on all IaaS components during installation using the following command - it&rsquo;s too easy to miss a required rule and break the installation:</p>
 <p>[code]netsh advfirewall set allprofiles state off[/code]</p>
 <p>Once the deployment is complete create rules for the well defined communications, based on <a href=https://docs.vmware.com/en/vRealize-Automation/7.3/com.vmware.vra.install.upgrade.doc/GUID-497EECE9-018E-428B-9ED9-AB4B6722D2AB.html>IaaS Windows Server Ports</a> documentation</p>
-<h3 id=mssql>MSSQL</h3>
-<p>A supported version of Microsft SQL server should be installed and configured for TCP/IP communication. As specified above, the IaaS service account should have dbo permission on the IaaS database, and if you want to create the database from the installer then you also need sysadmin role, which can be revoked after installation.</p>
-<h2 id=certificates>Certificates</h2>
-<p>Certificates need to be generated for the vRA appliances, the Web service and the Manager service. There are a couple of ways to do this that will work, some are more manual than others. The method I use is to generate a Certificate Signing Request (CSR) and Private Key using OpenSSL, then sign them using my Microsoft Certificate Services Certificate Authority. Any standards compliant Certificate Authority, public or private, should be able to sign your certificates.</p>
+<h3 id=mssql>MSSQL <a class=anchor href=#mssql>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>A supported version of Microsft SQL server should be installed and configured for TCP/IP communication. As specified above, the IaaS service account should have dbo permission on the IaaS database, and if you want to create the database from the installer then you also need sysadmin role, which can be revoked after installation.</p>
+<h2 id=certificates>Certificates <a class=anchor href=#certificates>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Certificates need to be generated for the vRA appliances, the Web service and the Manager service. There are a couple of ways to do this that will work, some are more manual than others. The method I use is to generate a Certificate Signing Request (CSR) and Private Key using OpenSSL, then sign them using my Microsoft Certificate Services Certificate Authority. Any standards compliant Certificate Authority, public or private, should be able to sign your certificates.</p>
 <p>Getting the certificates minted up front and correctly is</p>
 <p>The following configuration template can be used to generate the CSRs for each component, make sure to change the subjectAltName values to match the components you&rsquo;re issuing for. The commonName can actually be anything you like, since it&rsquo;s not used for the SSL, but I prefer to keep the load balanced name.</p>
 <p>[code]</p>
@@ -554,11 +564,13 @@ If you use the installer to create the database, in SQL, add the sysadmin role t
 <p>When I&rsquo;ve generated certificates and requests, I will have the following files:</p>
 <img class="alignnone size-full wp-image-8192" src=/images/2017/07/2017-07-19_16-42-41.png alt width=185 height=278>
 <p>During the install wizard you need the .key (private key), .cer (certificate) and CA certificate files.</p>
-<h2 id=load-balancers>Load Balancers</h2>
-<p>During the installation phase of a distributed vRA deployment I always very strongly suggest using a CNAME pointed to the primary nodes for the Cafe, Web and Manager components. This is because the configuration of the load balancer is so critical to success that any misconfiguration can cause errors and a failed deployment. If you use a CNAME you can guarantee the deployment succeeds first time, and introduce the load balancer later.</p>
+<h2 id=load-balancers>Load Balancers <a class=anchor href=#load-balancers>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>During the installation phase of a distributed vRA deployment I always very strongly suggest using a CNAME pointed to the primary nodes for the Cafe, Web and Manager components. This is because the configuration of the load balancer is so critical to success that any misconfiguration can cause errors and a failed deployment. If you use a CNAME you can guarantee the deployment succeeds first time, and introduce the load balancer later.</p>
 <p>When it comes to configuring the load balancer, Jad El Zein has a great resource in his <a href=http://www.virtualjad.com/2017/02/vra-72-dig-06-1-nsx-load-balancer-config.html>Distributed Install Guide</a></p>
-<h2 id=the-install-wizard>The Install Wizard</h2>
-<p>Once the pre-requisites are in place, running the install wizard should be straightforward - I have run through the wizard below to prove that it can be done right, first time! I hope this post will save you some time and effort, and maybe help to not trip over the same mistakes I made!</p>
+<h2 id=the-install-wizard>The Install Wizard <a class=anchor href=#the-install-wizard>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Once the pre-requisites are in place, running the install wizard should be straightforward - I have run through the wizard below to prove that it can be done right, first time! I hope this post will save you some time and effort, and maybe help to not trip over the same mistakes I made!</p>
 <div class="hybgl-box hybgl-mode-slider hybgl-width-child hybgl-child-horizontal hybgl-size-adaptive hybgl-style-1 hybgl-lightbox-off hybgl-extra-animation hybgl-extra-child-animation hybgl-controls-nav-pos-1 hybgl-slider-8190-1 hybgl-clearfix" data-id=8190 data-selector=hybgl-slider-8190-1 data-thumbs-width=50 data-thumbs-height=50 data-thumbs-gap=8 data-mode=adaptive data-thumbs=true data-thumbs-vertical=false data-ratio=2-1 data-nav=true data-dots=false data-meta-animation=slideInUp data-animation-main=fadeIn data-animation-child=zoomIn data-loader-delay=300 data-design={#w_vl#:#100#,#w_un#:#pc#,#align#:#none#} data-res={#1024#:{#w#:#auto#,#w_vl#:#100#,#w_un#:#pc#,#align#:#auto#},#800#:{#w#:#auto#,#w_vl#:#100#,#w_un#:#pc#,#align#:#auto#},#768#:{#w#:#auto#,#w_vl#:#100#,#w_un#:#pc#,#align#:#auto#},#600#:{#w#:#auto#,#w_vl#:#100#,#w_un#:#pc#,#align#:#auto#},#480#:{#w#:#auto#,#w_vl#:#100#,#w_un#:#pc#,#align#:#auto#}}>
 <div class="hybgl-loader hybgl-loader-center hybgl-clearfix hybgl-prl1-bounce-loader">
 <div class=hybgl-prl1-spinner>

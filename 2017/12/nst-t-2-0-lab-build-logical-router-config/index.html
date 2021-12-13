@@ -148,16 +148,18 @@ NST-T 2.0 Lab Build: Logical Router Configuration
 </div>
 </div>
 <p><em><strong>Disclaimer! I am learning NSX-T, part of my learning is to deploy in my lab - if I contradict the official docs then go with the docs!</strong></em></p>
-<h2 id=lab-environment>Lab Environment</h2>
-<p>This NSX-T lab environment is built as a nested lab on my physical hosts. There are four physical ESXi hosts, onto which I will deploy three ESXi VMs, a vCenter Server Appliance, NSX Manager, an NSX Controller cluster, and two NSX Edge Nodes.</p>
+<h2 id=lab-environment>Lab Environment <a class=anchor href=#lab-environment>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>This NSX-T lab environment is built as a nested lab on my physical hosts. There are four physical ESXi hosts, onto which I will deploy three ESXi VMs, a vCenter Server Appliance, NSX Manager, an NSX Controller cluster, and two NSX Edge Nodes.</p>
 <div id=attachment_8522 style=width:610px class="wp-caption aligncenter">
 <a href=/images/2017/10/2017-10-24_10-44-42.png><img class="wp-image-8522 size-definit-600-wide" src=/images/2017/10/2017-10-24_10-44-42.png alt width=600 height=279></a>
 <p class=wp-caption-text>
 Physical, virtual and nested components of the NSX-T lab
 </p>
 </div>
-<h2 id=deployment-plan>Deployment Plan</h2>
-<p>I will follow the <a href=https://docs.vmware.com/en/VMware-NSX-T/2.0/com.vmware.nsxt.install.doc/GUID-414C33B3-674F-44E0-94B8-BFC0B9056B33.html>deployment plan from the NSX-T 2.0 documentation</a>:</p>
+<h2 id=deployment-plan>Deployment Plan <a class=anchor href=#deployment-plan>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>I will follow the <a href=https://docs.vmware.com/en/VMware-NSX-T/2.0/com.vmware.nsxt.install.doc/GUID-414C33B3-674F-44E0-94B8-BFC0B9056B33.html>deployment plan from the NSX-T 2.0 documentation</a>:</p>
 <ul>
 <li>Install NSX Manager.</li>
 <li>Install NSX Controllers.
@@ -184,11 +186,13 @@ The NSX-T Transport Node network configuration
 </p>
 </div>
 <p>In this post I will walk through configuring VLAN Logical Switch, Tier-0 Router, Tier-1 Router, Uplink Profiles and BGP dynamic routing to the physical router.</p>
-<h2 id=create-vlan-logical-switch>Create VLAN Logical Switch</h2>
-<p>Create a VLAN backed logical switch for the tier-0 router uplink using the Switching > Switches page and enter a name and description. Select the VLAN-backed transport zone created earlier and enter the VLAN number that you want to use to uplink to the physical routers(I am using VLAN 0 because my Edges have NICs connected to a vSphere Port Group that is tagging VLAN 201 - nested can get confusing sometimes!)</p>
+<h2 id=create-vlan-logical-switch>Create VLAN Logical Switch <a class=anchor href=#create-vlan-logical-switch>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Create a VLAN backed logical switch for the tier-0 router uplink using the Switching > Switches page and enter a name and description. Select the VLAN-backed transport zone created earlier and enter the VLAN number that you want to use to uplink to the physical routers(I am using VLAN 0 because my Edges have NICs connected to a vSphere Port Group that is tagging VLAN 201 - nested can get confusing sometimes!)</p>
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-31_14-51-29.png alt></p>
-<h2 id=create-a-tier-0-logical-router>Create a Tier-0 Logical Router</h2>
-<p>Logical routers are created from the Routing > Routers page, when you click ADD you get the option of a Tier-0 or a Tier-1 router. To start with I am creating the Tier-0 router</p>
+<h2 id=create-a-tier-0-logical-router>Create a Tier-0 Logical Router <a class=anchor href=#create-a-tier-0-logical-router>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Logical routers are created from the Routing > Routers page, when you click ADD you get the option of a Tier-0 or a Tier-1 router. To start with I am creating the Tier-0 router</p>
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-24_14-49-58-e1509461935999.png alt></p>
 <p>Enter a name and description for the Tier-0 router, then select the Edge Cluster that will host it (this is why you must create an Edge Cluster configuration, even if you only have one Edge Node). Select the High Availability mode:</p>
 <blockquote>
@@ -196,8 +200,9 @@ The NSX-T Transport Node network configuration
 </blockquote>
 <p>Click SAVE to complete the Tier-0 Router creation</p>
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-24_14-50-23.png alt></p>
-<h2 id=create-nsx-edge-uplink>Create NSX Edge Uplink</h2>
-<p>To allow traffic to flow in and out of the NSX environment, I need to connect the Tier-0 Logical Router to a VLAN Logical Switch (created earlier). This is done from the Routing > Routers page by selecting the desired Logical Router, then using the Configuration menu and selecting Router Ports.</p>
+<h2 id=create-nsx-edge-uplink>Create NSX Edge Uplink <a class=anchor href=#create-nsx-edge-uplink>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>To allow traffic to flow in and out of the NSX environment, I need to connect the Tier-0 Logical Router to a VLAN Logical Switch (created earlier). This is done from the Routing > Routers page by selecting the desired Logical Router, then using the Configuration menu and selecting Router Ports.</p>
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-24_15-13-37-e1509462915384.png alt></p>
 <p>From the Logical Router Ports page, click +ADD</p>
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-24_15-14-59.png alt></p>
@@ -207,8 +212,9 @@ The NSX-T Transport Node network configuration
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-24_16-22-34.png alt></p>
 <p>&ldquo;get route&rdquo; will show the connected network, and you should be able to ping the gateway to confirm connectivity.</p>
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-24_16-25-34.png alt></p>
-<h2 id=configure-a-tier-1-logical-router>Configure a Tier-1 Logical Router</h2>
-<p>From the Routing > Routers page, add a new Tier-1 router. Configure a name (remember you can have multiple tier-1 routers connected to a tier-0, so you might need to consider that when naming), description and the tier-0 router to uplink to. The failover mode can be configured preemptive or non-preemptive:</p>
+<h2 id=configure-a-tier-1-logical-router>Configure a Tier-1 Logical Router <a class=anchor href=#configure-a-tier-1-logical-router>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>From the Routing > Routers page, add a new Tier-1 router. Configure a name (remember you can have multiple tier-1 routers connected to a tier-0, so you might need to consider that when naming), description and the tier-0 router to uplink to. The failover mode can be configured preemptive or non-preemptive:</p>
 <blockquote>
 <p>Preemptive - If the preferred node fails and recovers, it will preempt its peer and become the active node. The peer will change its state to standby. This is the default option.</p>
 <p>Non-preemptive - If the preferred node fails and recovers, it will check if its peer is the active node. If so, the preferred node will not preempt its peer and will be the standby node.</p>
@@ -224,8 +230,9 @@ The NSX-T Transport Node network configuration
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-24_17-01-08.png alt></p>
 <p>You can validate that the routes are being distributed to the Tier-0 router from the Tier-1 router by SSHing to the Edge Node and running &ldquo;get logical-router&rdquo;. Identify the Tier-0 Service Router UUID and run &ldquo;get logical-router <tier-0 sr uuid> route static&rdquo;</p>
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-31_15-26-48.png alt></p>
-<h2 id=configure-bgp-on-the-tier-0-router>Configure BGP on the Tier-0 Router</h2>
-<p>From the Routing > Routers  page, select the Tier-0 router and then select BGP from the Routing menu</p>
+<h2 id=configure-bgp-on-the-tier-0-router>Configure BGP on the Tier-0 Router <a class=anchor href=#configure-bgp-on-the-tier-0-router>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>From the Routing > Routers  page, select the Tier-0 router and then select BGP from the Routing menu</p>
 <p><img src=https://www.definit.co.uk/images/2017/12/2017-12-19_11-00-10.png alt></p>
 <p>Add a new BGP neighbour and configure to peer with the physical router (which should be on the same subnet as the Tier-0 router).</p>
 <p>Note: <em>In my lab I&rsquo;ve modified the VLAN logical switch uplink on the Edge cluster to sit on the same VLAN as a physical router device, which is on the 192.168.100.0/24 network. The Tier-0 router is now 192.168.100.15.</em></p>

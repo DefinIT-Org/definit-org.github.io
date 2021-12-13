@@ -107,15 +107,18 @@ Tags:
 <p>Velero is an open source tool to safely backup and restore, perform disaster recovery, and migrate Kubernetes cluster resources and persistent volumes.</p>
 </blockquote>
 <p>Velero uses <a href=https://velero.io/plugins/>plugins</a> to integrate with various cloud providers, allowing you to backup to different targets - my aim is to backup my vSphere-based (CSI) Persistent Volumes to AWS S3.</p>
-<h2 id=set-up-aws>Set up AWS</h2>
-<p>You can set up all the required components using the AWS console, but my preference is to use the AWS CLI.</p>
-<h3 id=create-a-new-access-key>Create a new Access Key</h3>
-<p>To use the AWS CLI you&rsquo;ll need an Access Key. Log onto your AWS console, go to &ldquo;My Security Credentials&rdquo; and create an Access Key (if you&rsquo;ve not already got one)</p>
+<h2 id=set-up-aws>Set up AWS <a class=anchor href=#set-up-aws>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>You can set up all the required components using the AWS console, but my preference is to use the AWS CLI.</p>
+<h3 id=create-a-new-access-key>Create a new Access Key <a class=anchor href=#create-a-new-access-key>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>To use the AWS CLI you&rsquo;ll need an Access Key. Log onto your AWS console, go to &ldquo;My Security Credentials&rdquo; and create an Access Key (if you&rsquo;ve not already got one)</p>
 <p><img src=2020-10-07-14-21-12.png alt></p>
 <p><img src=2020-10-09-16-52-26.png alt></p>
 <p>Keep the details safe (I store mine in my password manager).</p>
-<h3 id=install-aws-cli>Install AWS CLI</h3>
-<p>I&rsquo;m using <a href=https://brew.sh/>homebrew</a> to install the AWS CLI, and other packages, because I&rsquo;m on a Mac - check out the <a href=https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html>official install docs</a> for other OSes.</p>
+<h3 id=install-aws-cli>Install AWS CLI <a class=anchor href=#install-aws-cli>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>I&rsquo;m using <a href=https://brew.sh/>homebrew</a> to install the AWS CLI, and other packages, because I&rsquo;m on a Mac - check out the <a href=https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html>official install docs</a> for other OSes.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -124,8 +127,9 @@ Tags:
 <pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>brew install awscli
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=configure-a-new-profile>Configure a new profile</h3>
-<blockquote>
+</div><h3 id=configure-a-new-profile>Configure a new profile <a class=anchor href=#configure-a-new-profile>
+<i class="fas fa-hashtag"></i>
+</a></h3><blockquote>
 <p>Note: <em>I&rsquo;m using a named profile as I&rsquo;ve got a few accounts - you can omit this if you are just setting up the one</em></p>
 </blockquote>
 <p>Lets set up some variables first:</p>
@@ -158,8 +162,9 @@ Tags:
 &gt; Default output format <span class=o>[</span>None<span class=o>]</span>: ENTER
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=create-an-s3-bucket-for-the-backups>Create an S3 bucket for the backups:</h3>
-<div class=highlight><div class=chroma>
+</div><h3 id=create-an-s3-bucket-for-the-backups>Create an S3 bucket for the backups: <a class=anchor href=#create-an-s3-bucket-for-the-backups>
+<i class="fas fa-hashtag"></i>
+</a></h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -175,8 +180,9 @@ Tags:
 </span><span class=se></span>    --profile <span class=nv>$PROFILE</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=create-an-iam-user>Create an IAM user</h3>
-<p>I&rsquo;m creating a user with the same name as my bucket - since this user and bucket will be used to back up a single cluster, it makes sense for me to be able to identify and link the two by name.</p>
+</div><h3 id=create-an-iam-user>Create an IAM user <a class=anchor href=#create-an-iam-user>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>I&rsquo;m creating a user with the same name as my bucket - since this user and bucket will be used to back up a single cluster, it makes sense for me to be able to identify and link the two by name.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -342,8 +348,9 @@ Tags:
 </span><span class=s>EOF</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=install-and-configure-velero>Install and Configure Velero</h2>
-<p>Once again I&rsquo;m using <a href=https://brew.sh>homebrew</a> to install Velero - <a href=https://velero.io/docs/v1.5/basic-install/#install-the-cli>other installation instructions are a here</a></p>
+</div><h2 id=install-and-configure-velero>Install and Configure Velero <a class=anchor href=#install-and-configure-velero>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Once again I&rsquo;m using <a href=https://brew.sh>homebrew</a> to install Velero - <a href=https://velero.io/docs/v1.5/basic-install/#install-the-cli>other installation instructions are a here</a></p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -376,8 +383,9 @@ Tags:
 </code></pre></td></tr></table>
 </div>
 </div><p>At this point you could use <code>velero backup create</code> to start backing things up, but Velero won&rsquo;t automatically backup your persistent volumes - you need to tell it what to backup using an annotation. Without annotating the pods the backup will complete and look successful but it won&rsquo;t include your data!</p>
-<h3 id=annotate-deployments-stateful-sets-or-pods>Annotate deployments, stateful sets or pods</h3>
-<p>Let&rsquo;s take my Vault deployment, for example. It consists of a stateful set of three pods, each pod has a persistant volume called &ldquo;data&rdquo;. Prior to deployment I can add the <code>backup.velero.io/backup-volumes: &lt;volume name></code> annotation to the template metadata in my YAML configuration:</p>
+<h3 id=annotate-deployments-stateful-sets-or-pods>Annotate deployments, stateful sets or pods <a class=anchor href=#annotate-deployments-stateful-sets-or-pods>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Let&rsquo;s take my Vault deployment, for example. It consists of a stateful set of three pods, each pod has a persistant volume called &ldquo;data&rdquo;. Prior to deployment I can add the <code>backup.velero.io/backup-volumes: &lt;volume name></code> annotation to the template metadata in my YAML configuration:</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1

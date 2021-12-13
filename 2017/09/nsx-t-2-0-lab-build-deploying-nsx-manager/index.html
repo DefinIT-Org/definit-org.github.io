@@ -146,16 +146,18 @@ NSX-T 2.0 Lab Build: Deploying NSX Manager
 </div>
 <img src=/images/2017/09/2017-09-21_16-42-40.png class=clr-post-featured-image>
 <p><em><strong>Disclaimer! I am learning NSX-T, part of my learning is to deploy in my lab - if I contradict the official docs then go with the docs!</strong></em></p>
-<h2 id=lab-environment>Lab Environment</h2>
-<p>This NSX-T lab environment is built as a nested lab on my physical hosts. There are four physical ESXi hosts, onto which I will deploy three ESXi VMs, a vCenter Server Appliance, NSX Manager, an NSX Controller cluster, and two NSX Edge Nodes.</p>
+<h2 id=lab-environment>Lab Environment <a class=anchor href=#lab-environment>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>This NSX-T lab environment is built as a nested lab on my physical hosts. There are four physical ESXi hosts, onto which I will deploy three ESXi VMs, a vCenter Server Appliance, NSX Manager, an NSX Controller cluster, and two NSX Edge Nodes.</p>
 <div id=attachment_8522 style=width:610px class="wp-caption aligncenter">
 <a href=/images/2017/10/2017-10-24_10-44-42.png><img class="wp-image-8522 size-definit-600-wide" src=/images/2017/10/2017-10-24_10-44-42.png alt width=600 height=279></a>
 <p class=wp-caption-text>
 Physical, virtual and nested components of the NSX-T lab
 </p>
 </div>
-<h2 id=deployment-plan>Deployment Plan</h2>
-<p>I will follow the <a href=https://docs.vmware.com/en/VMware-NSX-T/2.0/com.vmware.nsxt.install.doc/GUID-414C33B3-674F-44E0-94B8-BFC0B9056B33.html>deployment plan from the NSX-T 2.0 documentation</a>:</p>
+<h2 id=deployment-plan>Deployment Plan <a class=anchor href=#deployment-plan>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>I will follow the <a href=https://docs.vmware.com/en/VMware-NSX-T/2.0/com.vmware.nsxt.install.doc/GUID-414C33B3-674F-44E0-94B8-BFC0B9056B33.html>deployment plan from the NSX-T 2.0 documentation</a>:</p>
 <ul>
 <li>Install NSX Manager.</li>
 <li>Install NSX Controllers.
@@ -181,8 +183,9 @@ The NSX-T Transport Node network configuration
 </p>
 </div>
 <p>In this post I will walk through deploying and configuring the NSX Manager.</p>
-<h2 id=deploying-nsx-manager-ova>Deploying NSX Manager OVA</h2>
-<p>Deploying the NSX Manager OVA is a fairly standard affair, though I did find that once deployed some of the OVF settings had not applied and the needed re-adding by editing the VM Settings in vSphere.</p>
+<h2 id=deploying-nsx-manager-ova>Deploying NSX Manager OVA <a class=anchor href=#deploying-nsx-manager-ova>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Deploying the NSX Manager OVA is a fairly standard affair, though I did find that once deployed some of the OVF settings had not applied and the needed re-adding by editing the VM Settings in vSphere.</p>
 <ol>
 <li>Run the Deploy OVF Template wizard and select the NSX-T Manager OVA (nsx-unified-appliance-2.0.0.0.0.6522097.ova)<a style="font-family:-apple-system,BlinkMacSystemFont,segoe ui,Roboto,Oxygen-Sans,Ubuntu,Cantarell,helvetica neue,sans-serif" href=/images/2017/09/2017-09-21_15-31-45.png><img class="size-definit-600-wide wp-image-8374 aligncenter" src=/images/2017/09/2017-09-21_15-31-45.png alt width=600 height=351></a></li>
 <li>Enter the name for the NSX-T Manager appliance (pod-200-nsx-t)<a style="font-family:-apple-system,BlinkMacSystemFont,segoe ui,Roboto,Oxygen-Sans,Ubuntu,Cantarell,helvetica neue,sans-serif" href=/images/2017/09/2017-09-21_15-32-29.png><img class="size-definit-600-wide wp-image-8375 aligncenter" src=/images/2017/09/2017-09-21_15-32-29.png alt width=600 height=351></a></li>
@@ -208,8 +211,9 @@ The NSX-T Transport Node network configuration
 <p><img src=https://www.definit.co.uk/images/2017/09/2017-09-21_16-53-15.png alt></p>
 <p>My Pod200 folder now contains 3 ESXi hosts, a vCenter Server Appliance and the NSX-T Manager</p>
 <p><img src=https://www.definit.co.uk/images/2017/09/pod-state.png alt></p>
-<h2 id=references>References</h2>
-<ul>
+<h2 id=references>References <a class=anchor href=#references>
+<i class="fas fa-hashtag"></i>
+</a></h2><ul>
 <li><a href=https://docs.vmware.com/en/VMware-NSX-T/2.0/com.vmware.nsxt.install.doc/GUID-FA0ABBBD-34D8-4DA9-882D-085E7E0D269E.html>Install NSX Manager on ESXi Using vSphere Web Client</a></li>
 </ul>
 <h6>Share this post</h6>

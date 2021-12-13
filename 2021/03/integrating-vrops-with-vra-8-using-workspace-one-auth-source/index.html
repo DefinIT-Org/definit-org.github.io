@@ -99,19 +99,24 @@ Tags:
 </div>
 <br clear=all>
 <img src=/images/logos/vmware-vra.png class=clr-post-featured-image>
-<h1 id=integrating-vrops-with-vra-8-using-workspace-one-auth-source>Integrating vROps with vRA 8 using Workspace One Auth Source</h1>
-<h2 id=product-version---vrealize-automation-8x>Product Version - vRealize Automation 8.x</h2>
-<h2 id=why-integrate-vrops-with-vra-8>Why integrate vROps with vRA 8?</h2>
-<p><em>vRealize Automation can work with vRealize Operations Manager to perform advanced workload placement, provide deployment health and virtual machine metrics, and display pricing.</em></p>
-<h3 id=so-what-is-the-problem>So what is the problem?</h3>
-<p>When configuring the integration, you will input the vROps URL and it will also ask you to input a username and password of the service account you wish to use. This is no problem if the accouint is a locally created account in vROps itself but most enterprises will want to use AD created service accounts which are then imported into vROps via WorkSpace One (vIDM)</p>
+<h1 id=integrating-vrops-with-vra-8-using-workspace-one-auth-source>Integrating vROps with vRA 8 using Workspace One Auth Source <a class=anchor href=#integrating-vrops-with-vra-8-using-workspace-one-auth-source>
+<i class="fas fa-hashtag"></i>
+</a></h1><h2 id=product-version---vrealize-automation-8x>Product Version - vRealize Automation 8.x <a class=anchor href=#product-version---vrealize-automation-8x>
+<i class="fas fa-hashtag"></i>
+</a></h2><h2 id=why-integrate-vrops-with-vra-8>Why integrate vROps with vRA 8? <a class=anchor href=#why-integrate-vrops-with-vra-8>
+<i class="fas fa-hashtag"></i>
+</a></h2><p><em>vRealize Automation can work with vRealize Operations Manager to perform advanced workload placement, provide deployment health and virtual machine metrics, and display pricing.</em></p>
+<h3 id=so-what-is-the-problem>So what is the problem? <a class=anchor href=#so-what-is-the-problem>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>When configuring the integration, you will input the vROps URL and it will also ask you to input a username and password of the service account you wish to use. This is no problem if the accouint is a locally created account in vROps itself but most enterprises will want to use AD created service accounts which are then imported into vROps via WorkSpace One (vIDM)</p>
 <p>However you would expect to just input the username in vRA in the following format.</p>
 <p><a href=mailto:serviceaccount@bigcompany.com>serviceaccount@bigcompany.com</a></p>
 <p>You will quickly find this will not work, vROps will return an error saying invalid username and password. After much head scratching I was directed to this solution by someone helpful within VMware. You must use the following format for it to be successfull.</p>
 <p><a href=mailto:serviceaccount@bigcompany.com>serviceaccount@bigcompany.com</a>@vIDMAuthSource</p>
 <p>This is actually called out in the documentation in a slightly less clear fashion. Here - <a href=https://docs.vmware.com/en/vRealize-Automation/8.3/Using-and-Managing-Cloud-Assembly/GUID-0C20F25F-EB98-4335-9D8C-4C16BB847C37.html>https://docs.vmware.com/en/vRealize-Automation/8.3/Using-and-Managing-Cloud-Assembly/GUID-0C20F25F-EB98-4335-9D8C-4C16BB847C37.html</a></p>
-<h2 id=summary>Summary</h2>
-<p>vROps integration with vRA 8 offers a lot of value so dont let this deter you.</p>
+<h2 id=summary>Summary <a class=anchor href=#summary>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>vROps integration with vRA 8 offers a lot of value so dont let this deter you.</p>
 <p>You can learn more about creating service accounts and the correct permission required in vROPs here - <a href=https://docs.vmware.com/en/VMware-Validated-Design/services/deployment-of-vrealize-suite-2019-on-vmware-cloud-foundation-310/GUID-F50AFE8F-3BB3-4DCB-87E6-D489D7079CEF.html>https://docs.vmware.com/en/VMware-Validated-Design/services/deployment-of-vrealize-suite-2019-on-vmware-cloud-foundation-310/GUID-F50AFE8F-3BB3-4DCB-87E6-D489D7079CEF.html</a></p>
 <h6>Share this post</h6>
 <span class=share-box>

@@ -126,16 +126,18 @@ Tags:
 </p>
 </blockquote>
 <p>The Log Insight appliance comes in four sizes: an Extra Small, for use in labs or PoC, through to Large, which can consume a whopping 112.5GB of logs per day. Those figures scale in a linear fashion for clusters, so a 3-node cluster of large instances can consume 337.5GB per day, from 2,250 syslog connections at a rate of 22,500 events a second. <a href=http://pubs.vmware.com/log-insight-25/index.jsp#com.vmware.log-insight.getting-started.doc/GUID-284FC5F4-B832-47A7-912E-D407A760CAE4.html>See more on sizing vRealize Log Insight.</a></p>
-<h3 id=load-balanced-cluster-pre-requisites>Load Balanced Cluster Pre-requisites</h3>
-<ul>
+<h3 id=load-balanced-cluster-pre-requisites>Load Balanced Cluster Pre-requisites <a class=anchor href=#load-balanced-cluster-pre-requisites>
+<i class="fas fa-hashtag"></i>
+</a></h3><ul>
 <li>Configure a minimum of three nodes in a Log Insight cluster.</li>
 <li>Verify that all Log Insight nodes and the specified Integrated Load Balancer IP address are on the same network.</li>
 <li>The Log Insight master and worker nodes must have the same certificates. Otherwise the Log Insight Agents configured to connect through SSL will reject the connection. When uploading a CA-signed certificate to Log Insight master and worker nodes, set the Common Name to ILB IP address during certificate generation request. See <a href=http://pubs.vmware.com/log-insight-25/topic/com.vmware.log-insight.administration.doc/GUID-B3B00FE0-D943-459C-9859-CB68313D9467.html#GUID-B3B00FE0-D943-459C-9859-CB68313D9467>Generate a Certificate Signing Request</a>.</li>
 <li>You must synchronize the time on the Log Insight Linux Agent virtual appliance with an NTP server. See <a href=http://pubs.vmware.com/log-insight-25/topic/com.vmware.log-insight.administration.doc/GUID-0FF772F9-8F9C-4E73-AE21-77DF1198FDEF.html>Synchronize the Time on the Log Insight Virtual Appliance</a>.</li>
 </ul>
 <p>With those in mind, I will deploy 3 nodes, VRLI-01, VRLI-02 and VRLI-03, and load balance them under the URL &ldquo;loginsight.definit.local&rdquo;.</p>
-<h3 id=generate-a-certificate-for-vrealize-log-insight>Generate a certificate for vRealize Log Insight</h3>
-<p>I am using a Microsoft Windows Server 2012 Certificate Authority, with the VMware certificate template created as per <a href="http://kb.vmware.com/selfservice/search.do?cmd=displayKC&docType=kc&docTypeID=DT_KB_1_1&externalId=2062108">Creating a Microsoft Certificate Authority Template for SSL certificate creation in vSphere 5.x (2062108)</a>.</p>
+<h3 id=generate-a-certificate-for-vrealize-log-insight>Generate a certificate for vRealize Log Insight <a class=anchor href=#generate-a-certificate-for-vrealize-log-insight>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>I am using a Microsoft Windows Server 2012 Certificate Authority, with the VMware certificate template created as per <a href="http://kb.vmware.com/selfservice/search.do?cmd=displayKC&docType=kc&docTypeID=DT_KB_1_1&externalId=2062108">Creating a Microsoft Certificate Authority Template for SSL certificate creation in vSphere 5.x (2062108)</a>.</p>
 <p>I also have OpenSSL installed to generate the CSR, and will use certreq.exe to submit and retrieve the certificate.</p>
 <p>Create a config file for OpenSSL with the following settings. Replace the values in red with your own, ensuring that the Common Name is the IP address you will assign to the load balancer.</p>
 <blockquote>
@@ -202,8 +204,9 @@ Tags:
 <p>Select your Issuing Certificate Authority and then save the certificate that is returned (I called mine LogInsight.cer).</p>
 <p>Now create a new text file and paste in, in order, the contents of the private key file (rui.key), the certificate (LogInsight.cer) and the Issuing CA certificate. Save the new file as LogInsight.pem.</p>
 <p>This certificate will need to be added to all of the LogInsight instances later.</p>
-<h3 id=deploy-the-master-vrealize-log-insight-node>Deploy the Master vRealize Log Insight node</h3>
-<p>The OVF deploy is simple:</p>
+<h3 id=deploy-the-master-vrealize-log-insight-node>Deploy the Master vRealize Log Insight node <a class=anchor href=#deploy-the-master-vrealize-log-insight-node>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>The OVF deploy is simple:</p>
 <table border=0 width=600 cellspacing=0 cellpadding=2>
 <tr>
 <td valign=top width=300>

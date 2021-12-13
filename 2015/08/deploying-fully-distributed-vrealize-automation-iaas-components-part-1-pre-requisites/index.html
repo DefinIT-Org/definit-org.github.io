@@ -145,13 +145,16 @@ Deploying fully distributed vRealize Automation IaaS components – Part 1: Pre-
 </ul>
 <p>Keeping the web components separate ensures your users' experience is snappy and isn&rsquo;t degraded during deployments. The manager service is load balanced, but has an active and a passive side which needs to be manually started in the event of a failover. The DEM Orchestrator roles orchestrate the tasks given to the DEM Workers and don&rsquo;t put much load on the servers. Finally, the DEM Workers and Agents are placed on two more servers - the DEM Orchestrators load balance the workloads sent to each DEM Worker and in the case of a failed DEM Worker will resume the workload on the other Worker. The vSphere agents are configured identically and provide high availability for the service, workloads will just use whichever agent is available for a particular resource.</p>
 <p>I have already deployed and configured a Microsoft SQL Server 2008 R2 Failover Cluster, with a local MSDTC configured on each node. I hope to publish a blog post on this in the near future - for this article it&rsquo;s not important, just that there&rsquo;s a MSSQL database available and MSDTC is configured on the database server.</p>
-<h3 id=pre-requisites>Pre-requisites</h3>
-<p>The pre-requisites here are for ALL the IaaS components.</p>
-<h4 id=create-dns-records>Create DNS records</h4>
-<p>Create an A and PTR DNS record for the two load balanced URLS</p>
+<h3 id=pre-requisites>Pre-requisites <a class=anchor href=#pre-requisites>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>The pre-requisites here are for ALL the IaaS components.</p>
+<h4 id=create-dns-records>Create DNS records <a class=anchor href=#create-dns-records>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Create an A and PTR DNS record for the two load balanced URLS</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb1.png alt></p>
-<h4 id=deploy-six-windows-servers>Deploy six Windows Servers</h4>
-<p>I&rsquo;m using Windows Server 2012 R2, deployed from my basic template and joined to the domain. Each is assigned a static IP address and because they&rsquo;re domain joined their DNS records are updated.</p>
+<h4 id=deploy-six-windows-servers>Deploy six Windows Servers <a class=anchor href=#deploy-six-windows-servers>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>I&rsquo;m using Windows Server 2012 R2, deployed from my basic template and joined to the domain. Each is assigned a static IP address and because they&rsquo;re domain joined their DNS records are updated.</p>
 <ul>
 <li>VRA-WEB-01</li>
 <li>VRA-WEB-02</li>
@@ -160,8 +163,9 @@ Deploying fully distributed vRealize Automation IaaS components – Part 1: Pre-
 <li>VRA-IAS-01</li>
 <li>VRA-IAS-02</li>
 </ul>
-<h4 id=configure-backconnectionhostnames-or-set-disableloopbackcheck>Configure BackConnectionHostNames or set DisableLoopbackCheck</h4>
-<p><strong>This step is required on the servers hosting the  Web component of IaaS.</strong></p>
+<h4 id=configure-backconnectionhostnames-or-set-disableloopbackcheck>Configure BackConnectionHostNames or set DisableLoopbackCheck <a class=anchor href=#configure-backconnectionhostnames-or-set-disableloopbackcheck>
+<i class="fas fa-hashtag"></i>
+</a></h4><p><strong>This step is required on the servers hosting the  Web component of IaaS.</strong></p>
 <p>There&rsquo;s a known issue with accessing websites hosted by IIS using NTLM authentication via a different name than the server&rsquo;s DNS hostname, which results in a &ldquo;HTTP 401.1 - Unauthorized: Logon Failed&rdquo; error. This is one of the most common reasons the IaaS installation fails, and can be solved by setting BackConnectionHostNames, or DisableLoopbackCheck, which is the least secure option as it completely disables the protection. Using BackConnectionHostNames is a much better option as it selectively disables the protection.</p>
 <p>There are two steps to this - set &ldquo;DisableStrictNameChecking&rdquo; to &ldquo;1&rdquo;, then add a multi-string value BackConnectionHostNames with the load balancer URL as the value.</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb2.png alt></p>
@@ -179,18 +183,21 @@ Deploying fully distributed vRealize Automation IaaS components – Part 1: Pre-
 <p>Set-ItemProperty &ldquo;HKLM:\SYSTEM\CurrentControlSet\Control\LSA\MSV1_0&rdquo; -Name &ldquo;BackConnectionHostNames&rdquo; -Value $existingHosts</p>
 <p>}</p>
 <p><strong>Note</strong>: It&rsquo;s important to reboot the web server after this step to ensure the settings are in effect.</p>
-<h4 id=create-a-service-account>Create a service account</h4>
-<p>vRealize Automation IaaS requires a service account is created to run the services and provide access to the database. Create an account and add it to each of the 6 Windows Servers as a local administrator.</p>
+<h4 id=create-a-service-account>Create a service account <a class=anchor href=#create-a-service-account>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>vRealize Automation IaaS requires a service account is created to run the services and provide access to the database. Create an account and add it to each of the 6 Windows Servers as a local administrator.</p>
 <p>My service account is  <a href=mailto:svc_vra@definit.local>svc_vra@definit.local</a>.</p>
-<h4 id=create-a-build-folder>Create a build folder</h4>
-<p>For simplicity&rsquo;s sake I tend to build a folder on the first Web server (typically c:\vRA) and gather all the components required.</p>
+<h4 id=create-a-build-folder>Create a build folder <a class=anchor href=#create-a-build-folder>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>For simplicity&rsquo;s sake I tend to build a folder on the first Web server (typically c:\vRA) and gather all the components required.</p>
 <ul>
 <li>Download the <a href=https://github.com/vtagion/Scripts/blob/master/vRA%206.2%20PreReq%20Automation%20Script.ps1 target=_blank>awesome vRA Pre-req Automation Script</a> written by Brian Graf and save in the build folder.</li>
 <li>Obtain a copy of ntrights.exe from the <a href="http://www.microsoft.com/download/en/details.aspx?displaylang=en&id=17657" target=_blank>Windows Server 2003 Resource Kit Tools</a> and save it in the build folder.</li>
 <li>Download the IaaS installer from the first vRealize Automation Appliance (<a href=https://vra-app-1.definit.local:5480/i/>https://vra-app-1.definit.local:5480/i/</a>) and save it in the build folder.</li>
 </ul>
-<h4 id=generate-certificates-for-iaas-components>Generate Certificates for IaaS Components</h4>
-<p>To try and keep this blog post to a reasonable size, I won&rsquo;t go through the process of requesting certificates. I have generated two certificates using the vSphere certificate template as detailed below:</p>
+<h4 id=generate-certificates-for-iaas-components>Generate Certificates for IaaS Components <a class=anchor href=#generate-certificates-for-iaas-components>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>To try and keep this blog post to a reasonable size, I won&rsquo;t go through the process of requesting certificates. I have generated two certificates using the vSphere certificate template as detailed below:</p>
 <table border=1 width=600 cellspacing=0 cellpadding=2>
 <tr>
 <td valign=top width=300>
@@ -221,11 +228,13 @@ vra-iaas-man.definit.local
 </tr>
 </table>
 <p>Each of the web and manager servers should have the relevant certificate (including the private key) installed in the Computer > Personal certificate store, and should be visible in IIS manager when it&rsquo;s installed. It&rsquo;s also worth ensuring a &ldquo;Friendly Name&rdquo; is set in the certificate store - this makes it easier to find in the installation process.</p>
-<h4 id=run-the-prerequisite-script>Run the prerequisite script</h4>
-<p>At this point I run <a href=http://blogs.vmware.com/PowerCLI/2014/12/vrealize-automation-vra-6-2-pre-req-automation-script-formerly-vcac.html target=_blank>Brian Graf&rsquo;s excellent vRealize Automation prerequisite script</a> on the IaaS Web and Manager servers. The requirements for the DEM and Agents are different (e.g. no IIS installed) so I&rsquo;ll cover them at a later point.</p>
+<h4 id=run-the-prerequisite-script>Run the prerequisite script <a class=anchor href=#run-the-prerequisite-script>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>At this point I run <a href=http://blogs.vmware.com/PowerCLI/2014/12/vrealize-automation-vra-6-2-pre-req-automation-script-formerly-vcac.html target=_blank>Brian Graf&rsquo;s excellent vRealize Automation prerequisite script</a> on the IaaS Web and Manager servers. The requirements for the DEM and Agents are different (e.g. no IIS installed) so I&rsquo;ll cover them at a later point.</p>
 <p>Make sure you reboot the Web/Manager servers after running the script.</p>
-<h4 id=configure-netscaler-load-balancer-for-iaas-web>Configure NetScaler Load Balancer for IaaS Web</h4>
-<p>The IaaS web load balancer is a relatively simple affair, load balancing the two active web services on HTTPS/443. The health check should look for the presence of &ldquo;REGISTERED&rdquo; on the URL /WAPI/api/status - however the initial check should be set to a basic HTTPS/443 connection during the installation phase.</p>
+<h4 id=configure-netscaler-load-balancer-for-iaas-web>Configure NetScaler Load Balancer for IaaS Web <a class=anchor href=#configure-netscaler-load-balancer-for-iaas-web>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>The IaaS web load balancer is a relatively simple affair, load balancing the two active web services on HTTPS/443. The health check should look for the presence of &ldquo;REGISTERED&rdquo; on the URL /WAPI/api/status - however the initial check should be set to a basic HTTPS/443 connection during the installation phase.</p>
 <p>Create the Servers</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb4.png alt></p>
 <p>Create the Services</p>
@@ -234,10 +243,13 @@ vra-iaas-man.definit.local
 <p><img src=https://www.definit.co.uk/images/2015/08/image65_thumb.png alt></p>
 <p>Ensure the persistence is set to &ldquo;SOURCEIP&rdquo; with a timeout of 2 minutes.</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb7.png alt></p>
-<h4 id=configure-netscaler-load-balancer-for-iaas-manager>Configure NetScaler Load Balancer for IaaS Manager</h4>
-<h4 id=heading></h4>
-<h4 id=heading-1></h4>
-<p>The load balancer requirements for the Manager service are pretty simple, it&rsquo;s basically an active/passive service and should be configured to point to both and test the /VMPS2 address for a &ldquo;ProxyAgentService&rdquo; response - however the initial check should be set to a basic HTTPS/443 connection during the installation phase and the secondary passive server should be disabled to ensure it doesn&rsquo;t come up during the install process.</p>
+<h4 id=configure-netscaler-load-balancer-for-iaas-manager>Configure NetScaler Load Balancer for IaaS Manager <a class=anchor href=#configure-netscaler-load-balancer-for-iaas-manager>
+<i class="fas fa-hashtag"></i>
+</a></h4><h4 id=heading> <a class=anchor href=#heading>
+<i class="fas fa-hashtag"></i>
+</a></h4><h4 id=heading-1> <a class=anchor href=#heading-1>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>The load balancer requirements for the Manager service are pretty simple, it&rsquo;s basically an active/passive service and should be configured to point to both and test the /VMPS2 address for a &ldquo;ProxyAgentService&rdquo; response - however the initial check should be set to a basic HTTPS/443 connection during the installation phase and the secondary passive server should be disabled to ensure it doesn&rsquo;t come up during the install process.</p>
 <p>Create the Servers (be sure to disable the passive one!)</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb8.png alt></p>
 <p>Create the Services</p>

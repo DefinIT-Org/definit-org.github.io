@@ -156,14 +156,16 @@ Now 6 has been GA a while and I have a little bit of time, I have begun the lab 
 </div>
 </div>
 </div>
-<h3 id=checking-for-driver-compatibility>Checking for driver compatibility</h3>
-<p>In vSphere 5.5, VMware dropped the drivers for quite a few consumer grade NICs - in 6 they&rsquo;ve gone a step further and actually blocked quite a few of these using a VIB package. For more information, see this <a href=http://www.v-front.de/2015/03/vsphere-6-is-ga-ultimate-guide-to.html target=_blank>excellent article by Andreas Peetz</a>.</p>
+<h3 id=checking-for-driver-compatibility>Checking for driver compatibility <a class=anchor href=#checking-for-driver-compatibility>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>In vSphere 5.5, VMware dropped the drivers for quite a few consumer grade NICs - in 6 they&rsquo;ve gone a step further and actually blocked quite a few of these using a VIB package. For more information, see this <a href=http://www.v-front.de/2015/03/vsphere-6-is-ga-ultimate-guide-to.html target=_blank>excellent article by Andreas Peetz</a>.</p>
 <p>To list the NIC drivers you&rsquo;re using on your ESXi hosts, use the following command:</p>
 <p>esxcli network nic list | awk &lsquo;{print $1}'|grep [0-9]|while read a;do ethtool -i $a;done</p>
 <p><img src=https://www.definit.co.uk/images/2015/04/image_thumb32.png alt></p>
 <p>As you can see from the results, my HP N54Ls are running 3 NICs, a Broadcom onboard and two Intel PCI NICs. Fortunately the Broadcom chip is supported and the e1000e driver I&rsquo;m using is compatible with vSphere 6 and is in fact superseded by a native driver package.</p>
-<h1 id=upgrade-to-esxi-6-using-vsphere-update-manager-vum>Upgrade to ESXi 6 using vSphere Update Manager (VUM)</h1>
-<p>Open the VUM administration console in the vSphere Client - you can&rsquo;t do this in the Web Client yet. If you&rsquo;re in Compliance view, use the link in the top right hand corner to get to the Admin view.</p>
+<h1 id=upgrade-to-esxi-6-using-vsphere-update-manager-vum>Upgrade to ESXi 6 using vSphere Update Manager (VUM) <a class=anchor href=#upgrade-to-esxi-6-using-vsphere-update-manager-vum>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>Open the VUM administration console in the vSphere Client - you can&rsquo;t do this in the Web Client yet. If you&rsquo;re in Compliance view, use the link in the top right hand corner to get to the Admin view.</p>
 <p>Select the ESXi Images tab, and then select the Import ESXi Image… link</p>
 <p><img src=https://www.definit.co.uk/images/2015/04/image_thumb33.png alt></p>
 <p>Select the dowloaded ESXi 6 ISO image (VMware-VMvisor-Installer-6.0.0-2494585.x86_64.iso) and click next</p>
@@ -199,8 +201,9 @@ esxcli software vib remove -n=esx-vxlan</pre>
 <p><img src=https://www.definit.co.uk/images/2015/04/image_thumb50.png alt></p>
 <p>It took a good hour or so, but my three hosts were updated successfully!</p>
 <p><img src=https://www.definit.co.uk/images/2015/04/image_thumb51.png alt></p>
-<h3 id=update-an-esxi-hosts-using-the-offline-bundle>Update an ESXi hosts using the offline bundle</h3>
-<p>I only have one server in my Management &ldquo;cluster&rdquo; at the moment, so I need to upgrade that with my vSphere management components offline. To do this, I&rsquo;ll use the ESXi Offline Bundle</p>
+<h3 id=update-an-esxi-hosts-using-the-offline-bundle>Update an ESXi hosts using the offline bundle <a class=anchor href=#update-an-esxi-hosts-using-the-offline-bundle>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>I only have one server in my Management &ldquo;cluster&rdquo; at the moment, so I need to upgrade that with my vSphere management components offline. To do this, I&rsquo;ll use the ESXi Offline Bundle</p>
 <p>Download the offline bundle (VMware-ESXi-6.0.0-2494585-depot.zip) and upload it to a datastore that&rsquo;s accessible by the host to upgrade.</p>
 <p>Power down any running VMs and put the host into maintenance mode</p>
 <p><img src=https://www.definit.co.uk/images/2015/04/image_thumb52.png alt></p>

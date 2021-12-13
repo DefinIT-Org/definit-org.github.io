@@ -99,16 +99,20 @@ Tags:
 </div>
 <br clear=all>
 <img src=/images/vRealize-Operations-Logo.png class=clr-post-featured-image>
-<h1 id=vrops-cluster-without-a-load-balancer-gotchas>vROps Cluster without a Load Balancer (gotchas)</h1>
-<h2 id=product-version---vrealize-operations-75>Product Version - vRealize Operations 7.5</h2>
-<p>While it is far from recomended to deploy a vROps Cluster without a loadbalancer there are circumstances where this is done.</p>
+<h1 id=vrops-cluster-without-a-load-balancer-gotchas>vROps Cluster without a Load Balancer (gotchas) <a class=anchor href=#vrops-cluster-without-a-load-balancer-gotchas>
+<i class="fas fa-hashtag"></i>
+</a></h1><h2 id=product-version---vrealize-operations-75>Product Version - vRealize Operations 7.5 <a class=anchor href=#product-version---vrealize-operations-75>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>While it is far from recomended to deploy a vROps Cluster without a loadbalancer there are circumstances where this is done.</p>
 <p>Recently helping a customer deploy a couple of simple issues cropped up that were not immediately obvious as to why they were issues.</p>
-<h3 id=unable-to-connect-to-master-node-when-expanding-the-cluster>Unable to connect to Master Node when expanding the cluster</h3>
-<p>We hit this issue and initialy it was a question mark moment there were no firewalls in the way and network connectivity was good end to end.</p>
+<h3 id=unable-to-connect-to-master-node-when-expanding-the-cluster>Unable to connect to Master Node when expanding the cluster <a class=anchor href=#unable-to-connect-to-master-node-when-expanding-the-cluster>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>We hit this issue and initialy it was a question mark moment there were no firewalls in the way and network connectivity was good end to end.</p>
 <p>The issue turned out to be that the Master Node had moved to another node (unexpectedly) so when putting in the FQDN for the Master Node we were in fact putting in the FQDN for the Replica Node.</p>
 <p>Moral of the story, check the FQDN you are using is indeed the Master Node.</p>
-<h3 id=unable-to-upload-a-new-management-pack>Unable to upload a new Management Pack</h3>
-<p>We also hit another odd issue where we could not upload a New Management Pack</p>
+<h3 id=unable-to-upload-a-new-management-pack>Unable to upload a new Management Pack <a class=anchor href=#unable-to-upload-a-new-management-pack>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>We also hit another odd issue where we could not upload a New Management Pack</p>
 <div class=clr-content-image-wrap>
 <a href=2020-03-14_092737.png data-lightbox=2020-03-14_092737.png data-title="Operation Failed, if the error persists, Contact VMware Support" class=lb>
 <img class=lb src=2020-03-14_092737.png alt="Operation Failed, if the error persists, Contact VMware Support">
@@ -117,8 +121,9 @@ Tags:
 </div>
 <p>This turned out to be the same problem as the first issue we were connected another node which was not the Master node.</p>
 <p>Once we connected to the Master Node and tried to upload the new Management Pack everything went smoothly</p>
-<h2 id=summary>Summary</h2>
-<p>While these are fringe issues when I did a quick search online there was nothing out there so I thought it worthwhile to blog about them to help speed up the RCA for anyone else that may be in the same position.</p>
+<h2 id=summary>Summary <a class=anchor href=#summary>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>While these are fringe issues when I did a quick search online there was nothing out there so I thought it worthwhile to blog about them to help speed up the RCA for anyone else that may be in the same position.</p>
 <p>Once again, deploying a vROps Cluster without a Load Balancer is not a recommended approach at all. Nevertheless there maybe circumstances where you need to do this, whether it be time constraints or other factors.</p>
 <h6>Share this post</h6>
 <span class=share-box>

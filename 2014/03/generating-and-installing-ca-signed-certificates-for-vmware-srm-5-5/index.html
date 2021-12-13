@@ -124,8 +124,9 @@ Tags:
 <li>There are 2 SRM servers, SRM-01 and SRM-02</li>
 <li>DNS is configured and resolving correctly – forward (A) and reverse (PTR) – for each server</li>
 </ul>
-<h2 id=generate-a-certificate-request-using-mmc>Generate a certificate request using MMC</h2>
-<p>The first step is to generate a custom request from the Certificates snap-in on each SRM server. Open MMC and add the Certificates snap-in for the local computer.</p>
+<h2 id=generate-a-certificate-request-using-mmc>Generate a certificate request using MMC <a class=anchor href=#generate-a-certificate-request-using-mmc>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The first step is to generate a custom request from the Certificates snap-in on each SRM server. Open MMC and add the Certificates snap-in for the local computer.</p>
 <p><img src=https://www.definit.co.uk/images/2014/03/image_thumb1.png alt></p>
 <p>Run through the wizard</p>
 <p><img src=https://www.definit.co.uk/images/2014/03/image_thumb2.png alt> <img src=https://www.definit.co.uk/images/2014/03/image_thumb3.png alt></p>
@@ -137,8 +138,9 @@ Tags:
 <p>Select the Private Key tab and expand the “Key Options”. Check “Make private key exportable”. Expand “Select Hash Algorithm” and change it to sha512.</p>
 <p><img src=https://www.definit.co.uk/images/2014/03/image_thumb8.png alt></p>
 <p>Finally, export the request file to the local hard drive – I saved mine as C:\SRM-02.req.</p>
-<h2 id=submit-the-request-using-certreqexe>Submit the request using certreq.exe</h2>
-<p>The next step is to submit the request file to your CA using the certreq.exe tool using the following command:</p>
+<h2 id=submit-the-request-using-certreqexe>Submit the request using certreq.exe <a class=anchor href=#submit-the-request-using-certreqexe>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The next step is to submit the request file to your CA using the certreq.exe tool using the following command:</p>
 <blockquote>
 <p>certreq –submit SRM-02.req</p>
 </blockquote>
@@ -146,15 +148,17 @@ Tags:
 <p>You’re then prompted to select your CA</p>
 <p><img src=https://www.definit.co.uk/images/2014/03/image_thumb10.png alt></p>
 <p>After this you’re prompted to save the certificate response – I saved my under c:\SRM-02.cer</p>
-<h2 id=import-the-certificate>Import the certificate</h2>
-<p>It’s important to import the certificate response to the machine certificate store in order to “pair” it with the private key that was generated with the request, so import the file into the Personal certificate store for the machine.</p>
+<h2 id=import-the-certificate>Import the certificate <a class=anchor href=#import-the-certificate>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>It’s important to import the certificate response to the machine certificate store in order to “pair” it with the private key that was generated with the request, so import the file into the Personal certificate store for the machine.</p>
 <p><img src=https://www.definit.co.uk/images/2014/03/image_thumb11.png alt></p>
 <p>Check that you have the little key symbol, indicating that there’s a private key for this certificate. You can also use certeq to do this, but I do it via MMC to check the private key is there.</p>
 <blockquote>
 <p>certreq –accept SRM-02.cer</p>
 </blockquote>
-<h2 id=export-the-certificate>Export the certificate</h2>
-<p>The certificate needs to be exported as a PKCS#12 format certificate, with the private key – but it’s important not to export the chain, just the certificate, as SRM will not accept a chain.</p>
+<h2 id=export-the-certificate>Export the certificate <a class=anchor href=#export-the-certificate>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The certificate needs to be exported as a PKCS#12 format certificate, with the private key – but it’s important not to export the chain, just the certificate, as SRM will not accept a chain.</p>
 <p><img src=https://www.definit.co.uk/images/2014/03/image_thumb12.png alt></p>
 <p>Back in MMC, right click the certificate and select Export…</p>
 <p><img src=https://www.definit.co.uk/images/2014/03/image_thumb13.png alt> <img src=https://www.definit.co.uk/images/2014/03/image_thumb14.png alt></p>
@@ -167,8 +171,9 @@ Tags:
 <blockquote>
 <p>move SRM-02.pfx SRM-02.p12</p>
 </blockquote>
-<h2 id=reconfigure-srm>Reconfigure SRM</h2>
-<p>Run the SRM installer executable to reconfigure SRM with the new certificate. Select the “Modify” option.</p>
+<h2 id=reconfigure-srm>Reconfigure SRM <a class=anchor href=#reconfigure-srm>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Run the SRM installer executable to reconfigure SRM with the new certificate. Select the “Modify” option.</p>
 <p><img src=https://www.definit.co.uk/images/2014/03/image_thumb19.png alt> <img src=https://www.definit.co.uk/images/2014/03/image_thumb20.png alt></p>
 <p>Re-enter the credentials for your vCenter server, then at the Certificate selection screen selct to use a PKCS#12 certificate</p>
 <p><img src=https://www.definit.co.uk/images/2014/03/image_thumb21.png alt> <img src=https://www.definit.co.uk/images/2014/03/image_thumb22.png alt></p>
@@ -194,8 +199,9 @@ Tags:
 <p><img src=https://www.definit.co.uk/images/2014/03/image_thumb28.png alt> <img src=https://www.definit.co.uk/images/2014/03/image_thumb29.png alt></p>
 <p>Once this is completed on both SRM servers I was then able to successfully establish the connection between the SRM servers:</p>
 <p><img src=https://www.definit.co.uk/images/2014/03/image_thumb30.png alt></p>
-<h2 id=references>References</h2>
-<ul>
+<h2 id=references>References <a class=anchor href=#references>
+<i class="fas fa-hashtag"></i>
+</a></h2><ul>
 <li><a href="http://pubs.vmware.com/srm-55/index.jsp#com.vmware.srm.install_config.doc/GUID-A5B0D636-157D-4601-A5EA-D0B1A533CE6D.html?resultof=%2522%2563%2565%2572%2574%2569%2566%2569%2563%2561%2574%2565%2573%2522%2520%2522%2563%2565%2572%2574%2569%2566%2522%2520" target=_blank>Requirements when using Public Key Certificates with SRM</a></li>
 <li><a href="http://pubs.vmware.com/srm-55/index.jsp#com.vmware.srm.install_config.doc/GUID-4FBC345A-F3CA-4A0A-9FC2-970BBFB293CD.html?resultof=%2522%2563%2565%2572%2574%2569%2566%2569%2563%2561%2574%2565%2573%2522%2520%2522%2563%2565%2572%2574%2569%2566%2522%2520" target=_blank>SRM Authentication</a></li>
 </ul>

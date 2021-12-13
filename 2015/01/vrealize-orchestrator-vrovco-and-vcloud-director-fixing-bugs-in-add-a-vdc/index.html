@@ -124,8 +124,9 @@ Tags:
 <li>vRealize Orchestrator Appliance 5.5.2.1</li>
 <li>vCloud Director plugin 5.5.1.2</li>
 </ul>
-<h3 id=cpu-allocations-are-incorrect-for-both-add-a-vdc>CPU allocations are incorrect for both &ldquo;Add a VDC&rdquo;</h3>
-<p>When you provide the CPU allocation model properties for the Allocation Pool model the first problem is decrypting the naming - it doesn&rsquo;t match the names in the vCloud Director interface!</p>
+<h3 id=cpu-allocations-are-incorrect-for-both-add-a-vdc>CPU allocations are incorrect for both &ldquo;Add a VDC&rdquo; <a class=anchor href=#cpu-allocations-are-incorrect-for-both-add-a-vdc>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>When you provide the CPU allocation model properties for the Allocation Pool model the first problem is decrypting the naming - it doesn&rsquo;t match the names in the vCloud Director interface!</p>
 <p>The &ldquo;CPU (GHz)&rdquo; value is the vCPU speed, and the &ldquo;CPU Quota (GHz)&rdquo; value is the CPU allocation</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb60.png alt></p>
 <p>The equivalent in the vCloud Director interface is:</p>
@@ -147,8 +148,9 @@ Tags:
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb63.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb64.png alt></p>
 <p>Now when the new workflow runs, the CPU allocation and vCPU speed are set correctly.</p>
-<h3 id=storage-allocation-is-incorrect-for-add-a-vdc>Storage allocation is incorrect for &ldquo;Add a VDC&rdquo;</h3>
-<p>There is also a problem with the size of the storage profile limit when creating a VDC with the default &ldquo;Add a VDC&rdquo; workflow - you can see from the screenshot below I am allocating a 5GB profile limit.</p>
+<h3 id=storage-allocation-is-incorrect-for-add-a-vdc>Storage allocation is incorrect for &ldquo;Add a VDC&rdquo; <a class=anchor href=#storage-allocation-is-incorrect-for-add-a-vdc>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>There is also a problem with the size of the storage profile limit when creating a VDC with the default &ldquo;Add a VDC&rdquo; workflow - you can see from the screenshot below I am allocating a 5GB profile limit.</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb65.png alt></p>
 <p>However, when you check the storage allocation it is incorrect - allocating 4.88GB rather than 5GB.</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb66.png alt></p>

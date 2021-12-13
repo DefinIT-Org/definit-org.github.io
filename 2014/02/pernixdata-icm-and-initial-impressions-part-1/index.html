@@ -106,22 +106,25 @@ Tags:
 </div>
 </div>
 <p><img src=https://www.definit.co.uk/images/2014/02/pernixdata1.png alt>Since the keynote by Frank Denneman at the LonVMUG many months ago the PernixData product has been something I wanted to test to see what benefits it may or may not bring to our SQL environment, I did have the good fortune to briefly beta test it last year but this blog post will cover the current full version (FVP 1.0.2.0). I am aware that 1.5 is just around the corner and with it comes full support for vSphere 5.5 whereas the current version that I will be installing supports ESXi hosts on 5.0 or 5.1 and vCenter 5.5 (not mentioned in the minimum requirements)</p>
-<h2 id=environment>Environment</h2>
-<ul>
+<h2 id=environment>Environment <a class=anchor href=#environment>
+<i class="fas fa-hashtag"></i>
+</a></h2><ul>
 <li>3x Dell R715</li>
 <li>3x Dell SSD (1 installed in each host)</li>
 <li>iSCSI connected SAN</li>
 </ul>
-<h2 id=esxi-host-preparation>ESXi Host preparation</h2>
-<p>The first job is to install the PernixData host extensions to the hosts, I opted to copy the extension to a data store that was accessible to all the hosts. After putting the first host into maintenance mode I quickly encounter my first issue.</p>
+<h2 id=esxi-host-preparation>ESXi Host preparation <a class=anchor href=#esxi-host-preparation>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The first job is to install the PernixData host extensions to the hosts, I opted to copy the extension to a data store that was accessible to all the hosts. After putting the first host into maintenance mode I quickly encounter my first issue.</p>
 <p><img src=https://www.definit.co.uk/images/2014/02/2014-02-27_135234.png alt></p>
 <p> </p>
 <p> </p>
 <p> </p>
 <p>This was simply as a result of not removing the previous install from this particular host so it was easy enough to fix by simply removing the previous installation with the following command <em>"<span style=color:green>cp /opt/pernixdata/bin/prnxuninstall.sh /tmp/ && /tmp/prnxuninstall.sh</span>"</em> (as outlined in the PernixData FVP install guide)</p>
 <p>After a reboot of the host (just to make sure) I reran the installation with success.</p>
-<h2 id=management-server-install>Management server install</h2>
-<p>As per the PernixData documentation I created a new AD account which had the appropriate admin permissions on vCenter and  local admin rights on the dedicated VM for the FVP management server.</p>
+<h2 id=management-server-install>Management server install <a class=anchor href=#management-server-install>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>As per the PernixData documentation I created a new AD account which had the appropriate admin permissions on vCenter and  local admin rights on the dedicated VM for the FVP management server.</p>
 <p>Because this environment uses a vCenter 5.5 Appliance I created a small dedicated VM (Server 2008 R2) for the FVP management server, I installed SQL Express 2008 R2 and then the SQL Express management studio. Once SQL was installed I proceeded to install the FVP Management server, the installation went ahead with no problems. I rebooted the VM (just to be sure) and then once back up I reopened my vSphere client hoping to see the Management plugin listed in the Plugins, however it was not there. I checked the PernixData Windows service which had indeed started successfully.</p>
 <p>Checking the logs (<installdir>\server\log\prnxms.log) there was clearly a problem.</p>
 <p><em>"<span style=color:red>2014-02-28 11:50:53,371 [pool-3-thread-1] ERROR Context - Logging by SSPI failed</span></em></p>

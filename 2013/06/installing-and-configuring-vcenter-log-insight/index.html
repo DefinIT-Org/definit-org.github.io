@@ -114,10 +114,12 @@ Tags:
 </div>
 </div>
 <p><img class="alignright size-full wp-image-609" alt="vmware logo" src=/images/2010/11/VMware3.jpg width=213 height=62>With the release of vCenter Log Insight Public Beta (<a href=http://communities.vmware.com/community/vmtn/vcenter/vcenter-log-insight title=http://communities.vmware.com/community/vmtn/vcenter/vcenter-log-insight>http://communities.vmware.com/community/vmtn/vcenter/vcenter-log-insight</a>) I thought I’d strike while the iron is hot and run through the installation and configuration.</p>
-<h2 id=deploying-the-ovf>Deploying the OVF</h2>
-<p>This is such a bread and butter task that it doesn’t require more than a few words – it’s definitely worth looking at the Sizing PDF before you deploy (<a href=http://communities.vmware.com/servlet/JiveServlet/downloadBody/23714-102-1-31648/VMware-vCenter-Log-Insight-1.0-Beta-Virtual-Appliance-Sizing.pdf>VMware-vCenter-Log-Insight-1.0-Beta-Virtual-Appliance-Sizing.pdf</a>) as it’s not small even for a test installation. If you’re using less than the recommended 8GB RAM there are additional steps to change the heap size for performance.</p>
-<h2 id=initial-configuration>Initial Configuration</h2>
-<p>Run through the installation wizard and configure the admin credentials – this is the admin for the vCenter Log Insight application NOT a root password for the Linux box it runs on – different to the one set earlier.</p>
+<h2 id=deploying-the-ovf>Deploying the OVF <a class=anchor href=#deploying-the-ovf>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>This is such a bread and butter task that it doesn’t require more than a few words – it’s definitely worth looking at the Sizing PDF before you deploy (<a href=http://communities.vmware.com/servlet/JiveServlet/downloadBody/23714-102-1-31648/VMware-vCenter-Log-Insight-1.0-Beta-Virtual-Appliance-Sizing.pdf>VMware-vCenter-Log-Insight-1.0-Beta-Virtual-Appliance-Sizing.pdf</a>) as it’s not small even for a test installation. If you’re using less than the recommended 8GB RAM there are additional steps to change the heap size for performance.</p>
+<h2 id=initial-configuration>Initial Configuration <a class=anchor href=#initial-configuration>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Run through the installation wizard and configure the admin credentials – this is the admin for the vCenter Log Insight application NOT a root password for the Linux box it runs on – different to the one set earlier.</p>
 <p><img src=https://www.definit.co.uk/images/2013/06/image_thumb12.png alt> <img src=https://www.definit.co.uk/images/2013/06/image_thumb13.png alt></p>
 <p>Given that it’s a beta, the license runs until 30th September this year. Set an email for the admininistrative messages to go to, and as you’re participating in a beta it’d be nice of you to send your usage stats back to VMware.</p>
 <p><img src=https://www.definit.co.uk/images/2013/06/image_thumb14.png alt> <img src=https://www.definit.co.uk/images/2013/06/image_thumb15.png alt></p>
@@ -129,8 +131,9 @@ Tags:
 <p><img src=https://www.definit.co.uk/images/2013/06/image_thumb20.png alt></p>
 <p>Once rebooted, you can log onto the appliance and view your dashboard – you can see some data coming in from the vCenter I added, but still pretty sparse:</p>
 <p><img src=https://www.definit.co.uk/images/2013/06/image_thumb21.png alt></p>
-<h2 id=configure-syslog-on-esxi-hosts>Configure Syslog on ESXi hosts</h2>
-<p>There are several ways to configure Syslog on ESXi hosts – my preferred method is using my PowerCLI configuration script, but you can also set it manually using the Advanced Settings for the host and adding the IP and port to “Syslog.global.logHost”. The below PowerCLI will update the settings for a whole cluster, folder or datacenter depending on the –Location parameter.</p>
+<h2 id=configure-syslog-on-esxi-hosts>Configure Syslog on ESXi hosts <a class=anchor href=#configure-syslog-on-esxi-hosts>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>There are several ways to configure Syslog on ESXi hosts – my preferred method is using my PowerCLI configuration script, but you can also set it manually using the Advanced Settings for the host and adding the IP and port to “Syslog.global.logHost”. The below PowerCLI will update the settings for a whole cluster, folder or datacenter depending on the –Location parameter.</p>
 <pre class="brush: powershell; gutter: true">Get-VMHost -Location "DefinIT-Lab" | % { 
 	Set-VMHostSysLogServer &#039;192.168.1.20&#039; -SysLogServerPort 514 -VMHost (Get-VMHost $_.Name);
 	(Get-EsxCli -VMHost (Get-VMHost $_.Name)).system.syslog.reload()

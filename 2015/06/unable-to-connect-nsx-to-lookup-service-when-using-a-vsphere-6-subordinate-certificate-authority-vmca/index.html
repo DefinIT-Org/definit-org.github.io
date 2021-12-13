@@ -129,8 +129,9 @@ Tags:
 <p>…the vCenter Server system uses a new certificate, but the service registration information on the Platform Services Controller is not updated</p>
 </blockquote>
 <p>To resolve this issue, we need to use the ls_update_certs.py script to register the services correctly.</p>
-<h3 id=retrieve-the-old-ssl-certificates-thumbprint>Retrieve the old SSL certificate&rsquo;s thumbprint</h3>
-<p>If you haven&rsquo;t updated the VCSA certificate yet, you can just view the vCenter certificate and find the sha1 thumbprint value. If, like me, you&rsquo;ve already updated it, you&rsquo;ll need to use the Managed Object Browser (MOB) to view it.</p>
+<h3 id=retrieve-the-old-ssl-certificates-thumbprint>Retrieve the old SSL certificate&rsquo;s thumbprint <a class=anchor href=#retrieve-the-old-ssl-certificates-thumbprint>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>If you haven&rsquo;t updated the VCSA certificate yet, you can just view the vCenter certificate and find the sha1 thumbprint value. If, like me, you&rsquo;ve already updated it, you&rsquo;ll need to use the Managed Object Browser (MOB) to view it.</p>
 <p>Open a web browser and go to:</p>
 <p>https://<vcsa fqdn or ip>/lookupservice/mob?moid=ServiceRegistration&method=List</p>
 <p>e.g. <a href="https://mgmt-vcsa.definit.local/lookupservice/mob?moid=ServiceRegistration&method=List">https://mgmt-vcsa.definit.local/lookupservice/mob?moid=ServiceRegistration&method=List</a></p>
@@ -144,8 +145,9 @@ Tags:
 <p><img src=https://www.definit.co.uk/images/2015/06/image_thumb4.png alt></p>
 <p>Copy the thumbprint back to your text editor and edit string to replace the spaces:</p>
 <p><img src=https://www.definit.co.uk/images/2015/06/image_thumb5.png alt></p>
-<h3 id=update-the-lookup-service-registration-certificates>Update the Lookup Service registration certificates</h3>
-<p>You need to have a copy of your PEM encoded certificate chain on your VCSA. If you followed <a href=http://www.derekseaman.com/2015/04/vsphere-6-0-install-pt-11-vmca-as-subordinate.html target=_blank>Derek Seaman&rsquo;s excellent guide</a>, you&rsquo;ve already enabled bash and changed the root user&rsquo;s default shell, and you also have the certificate chain in PEM format (under /root/ssl). If you haven&rsquo;t, check out the &ldquo;Install VMCA Certificate (VCSA PSC)&rdquo; step on the linked article.</p>
+<h3 id=update-the-lookup-service-registration-certificates>Update the Lookup Service registration certificates <a class=anchor href=#update-the-lookup-service-registration-certificates>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>You need to have a copy of your PEM encoded certificate chain on your VCSA. If you followed <a href=http://www.derekseaman.com/2015/04/vsphere-6-0-install-pt-11-vmca-as-subordinate.html target=_blank>Derek Seaman&rsquo;s excellent guide</a>, you&rsquo;ve already enabled bash and changed the root user&rsquo;s default shell, and you also have the certificate chain in PEM format (under /root/ssl). If you haven&rsquo;t, check out the &ldquo;Install VMCA Certificate (VCSA PSC)&rdquo; step on the linked article.</p>
 <p>Connect to the VCSA with your SSH client and use the following command to update the lookup service certificate:</p>
 <p>/usr/lib/vmidentity/tools/scripts/ls_update_certs.py -url <span style=color:red><lookup service url></span> -fingerprint <span style=color:red><sha1 thumbprint of old certificate></span> -certfile <span style=color:red><path to new certificate chain pem></span> -user <span style=color:red><admin user></span> -password <span style=color:red><admin password></span></p>
 <blockquote>

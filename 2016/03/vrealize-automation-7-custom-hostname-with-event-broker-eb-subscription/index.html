@@ -114,8 +114,9 @@ Tags:
 <p>This, as it turns out, Event Broker extensibility is not the simplest to get your head around - there is a very large (>100 page) <a href=http://pubs.vmware.com/vra-70/topic/com.vmware.ICbase/PDF/vrealize-automation-70-extensibility.pdf target=_blank>extensibility document</a> to parse!</p>
 <p>For the purposes of this post, I will be using the BuildingMachine lifecycle state. This is because I want to modify the hostname before the VM is built - in much the same way as you would with the old <strong>ExternalWFStubs.BuildingMachine</strong> method.</p>
 <p>One of the key differences between using the old WFStubs method and the new EB method is that it does not pass the same objects, there is no <strong>vCAC:Entity</strong> or <strong>vCAC:VirtualMachine</strong> - only a Properties object which holds the request properties. These include any custom properties from the blueprint.</p>
-<h2 id=my-naming-problem>My naming problem</h2>
-<p>I have a Machine Prefix setup for my lab which names machines &ldquo;DefinIT-&rdquo; and a three digit identifier. I want to be able to name my VMs based on properties in my blueprint, so  lets say I want to include a value for location, type of VM, application and then have the three digit unique ID that is generated from the Machine Prefix.</p>
+<h2 id=my-naming-problem>My naming problem <a class=anchor href=#my-naming-problem>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>I have a Machine Prefix setup for my lab which names machines &ldquo;DefinIT-&rdquo; and a three digit identifier. I want to be able to name my VMs based on properties in my blueprint, so  lets say I want to include a value for location, type of VM, application and then have the three digit unique ID that is generated from the Machine Prefix.</p>
 <p>In my blueprint, I have created three custom Properties:</p>
 <ul>
 <li>DefinIT.Hostname.Location = &ldquo;LAB&rdquo;</li>
@@ -123,11 +124,13 @@ Tags:
 <li>DefinIT.Hostname.Application = &ldquo;WEB</li>
 </ul>
 <p>My desired outcome is that the machine that would be DefinIT-001 gets renamed as LAB-VM-WEB-001.</p>
-<h2 id=create-an-action>Create an Action</h2>
-<p>Not wishing to reinvent the wheel, I&rsquo;ll use the <strong>renameVirtualMachine</strong> action from Ted Spinks' blog article &ldquo;<a href=http://blogs.vmware.com/management/2015/09/manage-hostnames-with-vrealize-automation-part-2.html target=_blank>Manage Hostnames with vRealize Automation – Part 2: Use a small vRO workflow</a>&rdquo;. Create the action as described in the article and then drag it onto the canvas. You can see that it requires two inputs - a <strong>vCAC:Entity</strong> representing the Virtual Machine, and a string for the <strong>newHostname</strong>.</p>
+<h2 id=create-an-action>Create an Action <a class=anchor href=#create-an-action>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Not wishing to reinvent the wheel, I&rsquo;ll use the <strong>renameVirtualMachine</strong> action from Ted Spinks' blog article &ldquo;<a href=http://blogs.vmware.com/management/2015/09/manage-hostnames-with-vrealize-automation-part-2.html target=_blank>Manage Hostnames with vRealize Automation – Part 2: Use a small vRO workflow</a>&rdquo;. Create the action as described in the article and then drag it onto the canvas. You can see that it requires two inputs - a <strong>vCAC:Entity</strong> representing the Virtual Machine, and a string for the <strong>newHostname</strong>.</p>
 <img class="alignnone size-full wp-image-7002" src=/images/2016/03/2016-03-09_16-32-02.png alt=2016-03-09_16-32-02 width=442 height=63>
-<h2 id=creating-the-main-workflow>Creating the main workflow</h2>
-<p>I created a new workflow - <strong>updateVirtualMachineName</strong> and created a &ldquo;<strong>payload</strong>&rdquo; input of type &ldquo;<strong>Properties</strong>&rdquo; - this is the properties object that the vRA EB will pass to Orchestrator.</p>
+<h2 id=creating-the-main-workflow>Creating the main workflow <a class=anchor href=#creating-the-main-workflow>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>I created a new workflow - <strong>updateVirtualMachineName</strong> and created a &ldquo;<strong>payload</strong>&rdquo; input of type &ldquo;<strong>Properties</strong>&rdquo; - this is the properties object that the vRA EB will pass to Orchestrator.</p>
 <img class="alignnone size-full wp-image-6974" src=/images/2016/03/2016-03-08_12-03-12.png alt=2016-03-08_12-03-12 width=457 height=104>
 <p>Move to the schema tab and drag a new scriptable task onto the canvas. Edit it and name it &ldquo;<strong>getVirtualMachineID</strong>&rdquo;. Using the Visual Binding tab, drag the <strong>payload</strong> in parameter to the input pane so we get the Properties as an input to this task. Create two OUT parameters that map to Attributes in the main workflow. These are both strings &ldquo;<strong>newHostname</strong>&rdquo; and &ldquo;<strong>virtualMachineID</strong>":</p>
 <img class="alignnone size-full wp-image-7020" src=/images/2016/03/2016-03-09_16-41-57.png alt=2016-03-09_16-41-57 width=974 height=523>
@@ -166,8 +169,9 @@ System.log(workflow.currentWorkflow.name+" New hostname will be "+newHostname);<
 <p>Next bind the input parameters for the &ldquo;<strong>renameVirtualMachine</strong> action&rdquo;, mapping the &ldquo;<strong>newHostname</strong>&rdquo; and &ldquo;<strong>vCACVMEntity</strong>&rdquo; attributes.</p>
 <img class="alignnone size-full wp-image-7095" src=/images/2016/03/2016-03-09_17-25-26.png alt=2016-03-09_17-25-26.png width=824 height=445>
 <p>Save and close the workflow.</p>
-<h2 id=creating-the-event-subscription>Creating the event subscription</h2>
-<p>Log into vRealize Automation and navigate Administration > Events > Subscriptions, then click for a new Subscription. Select the &ldquo;Machine provisioning&rdquo; topic and click next.</p>
+<h2 id=creating-the-event-subscription>Creating the event subscription <a class=anchor href=#creating-the-event-subscription>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Log into vRealize Automation and navigate Administration > Events > Subscriptions, then click for a new Subscription. Select the &ldquo;Machine provisioning&rdquo; topic and click next.</p>
 <img class="alignnone size-full wp-image-7105" src=/images/2016/03/2016-03-09_17-29-00.png alt=2016-03-09_17-29-00.png width=939 height=563>
 <p>As discussed, we need the workflow to run at BuildingMachine, before any work has been done with the VM. There&rsquo;s a bug in the EB subscription wizard that won&rsquo;t let you create an &ldquo;All of the following&rdquo; condition without adding three clauses (you can add three, then remove two of them later, it&rsquo;s just the initial creation that fails!).</p>
 <p>Add the following conditions:</p>
@@ -182,16 +186,19 @@ System.log(workflow.currentWorkflow.name+" New hostname will be "+newHostname);<
 <p>Next, name the subscription, leave the priority as default and make sure you check the &ldquo;<strong>Blocking</strong>&rdquo; option. If we don&rsquo;t create a blocking subscription, the workflow won&rsquo;t wait for the result of the Orchestrator workflow and will continue to the next state. When the workflow attempts to rename the <strong>vCAC:Entity</strong>, it will be too late. Click finish to complete the subscription.</p>
 <img class="alignnone size-full wp-image-7126" src=/images/2016/03/2016-03-09_17-37-44.png alt=2016-03-09_17-37-44.png width=586 height=323>
 <p>Select the subscription in the list and click the &ldquo;<strong>Publish</strong>&rdquo; button.</p>
-<h2 id=prepare-the-blueprint>Prepare the blueprint</h2>
-<p>Finally, we need to add the custom properties to the blueprint to ensure the &ldquo;payload&rdquo; is passed through to orchestrator from the Event Broker.</p>
+<h2 id=prepare-the-blueprint>Prepare the blueprint <a class=anchor href=#prepare-the-blueprint>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Finally, we need to add the custom properties to the blueprint to ensure the &ldquo;payload&rdquo; is passed through to orchestrator from the Event Broker.</p>
 <p>Edit the blueprint and add the three properties from before, as well as the following:</p>
 <p><strong>Extensibility.Lifecycle.Properties.VMPSMasterWorkflow32.BuildingMachine</strong></p>
 <p>This property is critical because it tells the EB to pass through all of the properties related to the BuildingMachine lifecycle state. The value of &ldquo;*&rdquo; is a wildcard and allows us to inject all the values relating to BuildingMachine.</p>
 <img class="alignnone size-full wp-image-7134" src=/images/2016/03/2016-03-09_17-43-28.png alt=2016-03-09_17-43-28.png width=932 height=241>
-<h2 id=download>Download</h2>
-<p>You can download the <a href=http://vexpert.me/N0 target=_blank>org.definit.eventbroker package</a> from my GitHub page, including the action and workflow example.</p>
-<h2 id=conclusion>Conclusion</h2>
-<p>Getting my head around how the Event Broker passes information to the Orchestrator workflow has been a very steep learning curve, but I know that there are some excellent resources soon to be published from VMware that will make adoption of the EB subscription model much easier to consume.</p>
+<h2 id=download>Download <a class=anchor href=#download>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>You can download the <a href=http://vexpert.me/N0 target=_blank>org.definit.eventbroker package</a> from my GitHub page, including the action and workflow example.</p>
+<h2 id=conclusion>Conclusion <a class=anchor href=#conclusion>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Getting my head around how the Event Broker passes information to the Orchestrator workflow has been a very steep learning curve, but I know that there are some excellent resources soon to be published from VMware that will make adoption of the EB subscription model much easier to consume.</p>
 <p>For me the Event Broker is the single biggest leap forward for vRealize Automation 7 - the sheer flexibility and power of the tool is huge. It&rsquo;s well worth drudging through the documentation and scant examples out there to learn this tool.</p>
 <p>I hope this example allows others to get their head around it all quicker!</p>
 <p> </p>

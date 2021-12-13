@@ -153,14 +153,16 @@ vCAC deployment with clustered and load balanced vCAC Appliances
 <li>Install and configure additional IaaS server</li>
 <li>Deploy vCenter Orchestrator Appliance cluster</li>
 </ul>
-<h2 id=deploying-a-secondary-vcac-appliance-ovf>Deploying a secondary vCAC Appliance OVF</h2>
-<p>I’m not going to run through the steps required to deploy the OVF as they’re really quite simple, and I am assuming you’ve already done it! Some point to double check though</p>
+<h2 id=deploying-a-secondary-vcac-appliance-ovf>Deploying a secondary vCAC Appliance OVF <a class=anchor href=#deploying-a-secondary-vcac-appliance-ovf>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>I’m not going to run through the steps required to deploy the OVF as they’re really quite simple, and I am assuming you’ve already done it! Some point to double check though</p>
 <ul>
 <li>Create DNS A and PTR records for the IP address assigned to the new appliance (e.g. vCAC-App-02.definit.local)</li>
 <li>Configure NTP to sync with the same source as all other components.</li>
 </ul>
-<h2 id=configure-the-primary-vcac-appliance-for-clustering>Configure the primary vCAC Appliance for Clustering</h2>
-<p>First step should be to double-check that NTP is configured – time sync is critical for distributed applications, especially those doing encryption and authentication. This is easily configured using the web admin console on port 5480.</p>
+<h2 id=configure-the-primary-vcac-appliance-for-clustering>Configure the primary vCAC Appliance for Clustering <a class=anchor href=#configure-the-primary-vcac-appliance-for-clustering>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>First step should be to double-check that NTP is configured – time sync is critical for distributed applications, especially those doing encryption and authentication. This is easily configured using the web admin console on port 5480.</p>
 <p>Log onto the primary appliance using SSH, and the root user.</p>
 <p>Edit the /etc/vcac/setenv-core file using vi – ignore the read only warnings for now.</p>
 <pre class="brush: bash; gutter: false">vi /etc/vcac/setenc-core</pre>
@@ -178,8 +180,9 @@ VCAC_OPTS="$VCAC_OPTS -Dcluster.cache.invalidation.poll.enabled=true"</pre>
 <p>The VMware documentation is not exactly clear here, the next step isn’t an optional test, it’s an important step to ensure that the encryption key value is correct. My first reading of the document was that it was a verification test – that’s not the case.</p>
 <pre class="brush: bash; gutter: false">test -s /etc/vcac/encryption.key || dd if=/dev/random of=/etc/vcac/encryption.key bs=48 count=1</pre>
 <p><img src=https://www.definit.co.uk/images/2014/06/image_thumb57.png alt></p>
-<h2 id=configure-the-cafe-hostname-and-re-register-with-sso>Configure the CAFE Hostname and re-register with SSO</h2>
-<p>The CAFE hostname needs to be modified to ensure that when the vCAC Appliance hands off to the Identity Appliance for authentication it knows to come back to the load balanced URL rather than the vCAC appliance’s FQDN. E.g. if the CAFE name is vcac-app-01.definit.local, when you log onto the /shell-ui-app it passes you to the ID appliance, which then authenticates you and hands you back to vcac-app-01.definit.local – not the load balancer. If you hit vcac-app-01 from the load balanced URL, the same thing will happen – unless you change the CAFE hostname to the load balanced URL. Simples right?!</p>
+<h2 id=configure-the-cafe-hostname-and-re-register-with-sso>Configure the CAFE Hostname and re-register with SSO <a class=anchor href=#configure-the-cafe-hostname-and-re-register-with-sso>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The CAFE hostname needs to be modified to ensure that when the vCAC Appliance hands off to the Identity Appliance for authentication it knows to come back to the load balanced URL rather than the vCAC appliance’s FQDN. E.g. if the CAFE name is vcac-app-01.definit.local, when you log onto the /shell-ui-app it passes you to the ID appliance, which then authenticates you and hands you back to vcac-app-01.definit.local – not the load balancer. If you hit vcac-app-01 from the load balanced URL, the same thing will happen – unless you change the CAFE hostname to the load balanced URL. Simples right?!</p>
 <p>Log onto the web management console of your primary appliance (<a href=https://vcac-app-01.definit.local:5480>https://vcac-app-01.definit.local:5480</a>) and navigate to vCAC Settings > Host Settings. Enter the load balanced URL (e.g. vcloud.definit.local) and click Save Settings.</p>
 <p><img src=https://www.definit.co.uk/images/2014/06/image_thumb58.png alt></p>
 <p>Since we’ve already installed a wildcard SSL certificate, we don’t need to update the SSL settings – but we do need to re-register with the SSO, updating the CAFE hostname that’s registered. Click SSO and enter the SSO Admin User and Password, then click “Save Settings” to re-register. Check the presented certificate and OK any warnings.</p>
@@ -187,8 +190,9 @@ VCAC_OPTS="$VCAC_OPTS -Dcluster.cache.invalidation.poll.enabled=true"</pre>
 <p><img src=https://www.definit.co.uk/images/2014/06/image_thumb59.png alt></p>
 <p>At this point we can log into the /shell-ui-app via the load balanced URL and test that it hands back to the load balancer after SSO authentication.</p>
 <p><img src=https://www.definit.co.uk/images/2014/06/image_thumb60.png alt></p>
-<h2 id=configure-secondary-vcac-appliance-for-clustering>Configure secondary vCAC Appliance for clustering</h2>
-<p>Next we need to copy the configuration files from the primary server to the secondary server to ensure they’re set up identically. This negates the need to do any configuration of database settings, SSO,</p>
+<h2 id=configure-secondary-vcac-appliance-for-clustering>Configure secondary vCAC Appliance for clustering <a class=anchor href=#configure-secondary-vcac-appliance-for-clustering>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Next we need to copy the configuration files from the primary server to the secondary server to ensure they’re set up identically. This negates the need to do any configuration of database settings, SSO,</p>
 <p>While still logged into the primary vCAC Appliance via SSH, and in the /etc/vcac directory:</p>
 <p class="brush: bash; gutter: false">
 scp encryption.key security.properties server.xml setenv-core solution-users.properties vcac.keystore vcac.properties root@vcac-app-02.definit.local:/etc/vcac/
@@ -217,8 +221,9 @@ chmod 400 /etc/apache2/server.pem</pre>
 chkconfig vpostgres off
 service vco-server stop
 chkconfig vco-server off</pre>
-<h2 id=testing-the-clustered-vcac-appliances>Testing the clustered vCAC Appliances</h2>
-<p>Before we move on, it’s a good idea to test the clustering of the appliances to ensure we’re not building on shaky ground.</p>
+<h2 id=testing-the-clustered-vcac-appliances>Testing the clustered vCAC Appliances <a class=anchor href=#testing-the-clustered-vcac-appliances>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Before we move on, it’s a good idea to test the clustering of the appliances to ensure we’re not building on shaky ground.</p>
 <ul>
 <li>Edit the settings for the primary vCAC appliance and disconnect the vNIC</li>
 <li>Log onto the load balanced URL (e.g. <a href=https://vcloud.definit.local/shell-ui-app>https://vcloud.definit.local/shell-ui-app</a>)</li>

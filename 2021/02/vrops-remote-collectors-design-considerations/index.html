@@ -95,18 +95,23 @@ Tags:
 </div>
 <br clear=all>
 <img src=/images/vRealize-Operations-Logo.png class=clr-post-featured-image>
-<h1 id=vrops-remote-collectors---design-considerations>vROps Remote Collectors - Design Considerations</h1>
-<h2 id=product-version---vrealize-operations-7x-and-8x>Product Version - vRealize Operations 7.x and 8.x</h2>
-<p>As part of VMware Validated Designs tyically you would use Remote Collectors not just in different DCs but also local to the analytics cluster. However there are a circumstances where the rules &ldquo;change&rdquo;.</p>
-<h3 id=when-using-recoverpoint-or-site-recovery-manager>When using RecoverPoint or Site Recovery Manager</h3>
-<p>Design Assumption - you have Remote Collectors on your Primary Site and on your Failover Site.</p>
+<h1 id=vrops-remote-collectors---design-considerations>vROps Remote Collectors - Design Considerations <a class=anchor href=#vrops-remote-collectors---design-considerations>
+<i class="fas fa-hashtag"></i>
+</a></h1><h2 id=product-version---vrealize-operations-7x-and-8x>Product Version - vRealize Operations 7.x and 8.x <a class=anchor href=#product-version---vrealize-operations-7x-and-8x>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>As part of VMware Validated Designs tyically you would use Remote Collectors not just in different DCs but also local to the analytics cluster. However there are a circumstances where the rules &ldquo;change&rdquo;.</p>
+<h3 id=when-using-recoverpoint-or-site-recovery-manager>When using RecoverPoint or Site Recovery Manager <a class=anchor href=#when-using-recoverpoint-or-site-recovery-manager>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Design Assumption - you have Remote Collectors on your Primary Site and on your Failover Site.</p>
 <p>vRealize Operations supports re-IPing and therefore can be used with DR/BC tools such as Site Recovery Manager. However if you are using Remote Collectors when you failover and want to bring the vROps Cluster back online you will not be able to bring the cluster online as it will be looking for the Remote Collectors on the now offline Primary Site. The only way to remedy this is to remove the Primary Site Remote Collectors from the Cluster and then bring the cluster online.</p>
 <p>With the above in mind, it may well be better to have no Remote Collectors on your Primary Site if you are using SRM or anyother similar tooling.</p>
-<h3 id=vcfvrealize-suite-lifecycle-manager>VCF/vRealize Suite Lifecycle Manager</h3>
-<p>To date VCF/vRSLCM still does not automatically take into account Remote Collectors. It will allow you to deploy the cluster but you will need to then manually deploy Remote Collectors in other DCs which (very important note) sit under other vCenters in vRSLCM. This is important to know as when you go to patch or upgrade vROps in vRSLCM it will fail as it will tell you that there are components in vROps that sit outside of the vCenters in the Logical DC within vRSLCM. This is an annoying limitation with vRSLCM.</p>
+<h3 id=vcfvrealize-suite-lifecycle-manager>VCF/vRealize Suite Lifecycle Manager <a class=anchor href=#vcfvrealize-suite-lifecycle-manager>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>To date VCF/vRSLCM still does not automatically take into account Remote Collectors. It will allow you to deploy the cluster but you will need to then manually deploy Remote Collectors in other DCs which (very important note) sit under other vCenters in vRSLCM. This is important to know as when you go to patch or upgrade vROps in vRSLCM it will fail as it will tell you that there are components in vROps that sit outside of the vCenters in the Logical DC within vRSLCM. This is an annoying limitation with vRSLCM.</p>
 <p>Essentially for any upgrades/patches to work, all the components of a vRealize Product have to be in the same logical vRSLCM DC (not vSphere DC). VMware advise that you create an additional DC in vRSLCM. A cross-region-dc where all of the VCs from the various sites you have Remote Collectors deployed to. From here you can then manage the vROps deployment effectively.</p>
-<h2 id=summary>Summary</h2>
-<p>Remote Collectors are super useful, but through no fault of their own there use can given you a headache with regards to design decisions. None of the above is ideal, so you will need to assess what best works for the customer and envirneoment and meets the requirements given.</p>
+<h2 id=summary>Summary <a class=anchor href=#summary>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Remote Collectors are super useful, but through no fault of their own there use can given you a headache with regards to design decisions. None of the above is ideal, so you will need to assess what best works for the customer and envirneoment and meets the requirements given.</p>
 <h6>Share this post</h6>
 <span class=share-box>
 <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2021%2f02%2fvrops-remote-collectors-design-considerations%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-facebook-official"></i></a>

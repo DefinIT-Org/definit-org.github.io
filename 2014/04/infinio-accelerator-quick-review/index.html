@@ -106,8 +106,9 @@ Tags:
 <p><img src=https://www.definit.co.uk/images/2014/04/infinio_logo.jpg alt>I recently came across Infinio and after reading about the unique way it tackled the problem of increasing I/O and reducing latency I was curious to see how it would perform in my lab.</p>
 <p>A few things I would like to point out. First of all Infinio works <span style=color:red>only with NFS storage</span>, secondly it <span style=color:red>does not require flash storage</span> as it utilizes the host RAM instead however it provides <span style=color:#396><span style=color:red>only</span> <span style=color:red>read acceleration</span></span>.</p>
 <p>I chose to setup 1 NFS store per array (RAID1 & RAID0) to see if there were any discernible differences. I had several existing lab VMs (DC and other general VMs) but for additional I/O load I added 3 I/O intensive VMs for each NFS volume.</p>
-<h2 id=raid1>RAID1</h2>
-<p>You can see distinct increases to I/O when switched on</p>
+<h2 id=raid1>RAID1 <a class=anchor href=#raid1>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>You can see distinct increases to I/O when switched on</p>
 <p><img src=https://www.definit.co.uk/images/2014/04/raid1-io-1024x326.png alt></p>
 <p> </p>
 <p> </p>
@@ -121,8 +122,9 @@ Tags:
 <p> </p>
 <p> </p>
 <p> </p>
-<h2 id=raid0> RAID0</h2>
-<p>Again you can see you can see distinct increases to I/O when switched on</p>
+<h2 id=raid0> RAID0 <a class=anchor href=#raid0>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Again you can see you can see distinct increases to I/O when switched on</p>
 <p><img src=https://www.definit.co.uk/images/2014/04/raid0-io-1024x331.png alt></p>
 <p> </p>
 <p> </p>
@@ -138,8 +140,9 @@ Tags:
 <p> </p>
 <p> </p>
 <p> </p>
-<h2 id=required-infinio-vm-resource-usage>Required Infinio VM resource usage</h2>
-<p><img src=https://www.definit.co.uk/images/2014/04/infinio-memory-usage.png alt></p>
+<h2 id=required-infinio-vm-resource-usage>Required Infinio VM resource usage <a class=anchor href=#required-infinio-vm-resource-usage>
+<i class="fas fa-hashtag"></i>
+</a></h2><p><img src=https://www.definit.co.uk/images/2014/04/infinio-memory-usage.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2014/04/infinio-memory-legend.png alt></p>
 <p> </p>
 <p> </p>

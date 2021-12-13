@@ -113,8 +113,9 @@ Tags:
 </div>
 <p><img style="margin:0 0 10px 10px;display:inline" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRtpP50Mt6WX_zxXZC2aCKy2bIKfcfY3fBA42e7JwSMCaQACqjv" alt width=180 height=100 align=right>With the release of vCAC 6.1 there have been some great improvements in the setup of the clustered vCAC appliances - none of the previous copying of configuration files between appliances - just a simple wizard to do it all for you. In my opinion this is superb.</p>
 <p>You&rsquo;ll need to have deployed a load balancer of some sort - <a href=https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-3-1-configure-load-balancing-with-vcns/>vCAC 6.0 build-out to distributed model – Part 3.1: Configure Load Balancing with vCNS</a> or <a href=https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-3-2-configure-load-balancing-with-nsx/>vCAC 6.0 build-out to distributed model – Part 3.2: Configure load balancing with NSX</a></p>
-<h2 id=deploy-vcac-appliances>Deploy vCAC Appliances</h2>
-<p>Deploy three vCAC appliances by running through the OVF deployment wizard, two to be configured as vCAC Appliance nodes and one to be the external vPostgres database.</p>
+<h2 id=deploy-vcac-appliances>Deploy vCAC Appliances <a class=anchor href=#deploy-vcac-appliances>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Deploy three vCAC appliances by running through the OVF deployment wizard, two to be configured as vCAC Appliance nodes and one to be the external vPostgres database.</p>
 <ul>
 <li>vCAC-61-PG-01.definit.local</li>
 <li>vCAC-61-VA-01.definit.local</li>
@@ -122,13 +123,16 @@ Tags:
 </ul>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb35.png alt> <img src=https://www.definit.co.uk/images/2014/09/image_thumb36.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb37.png alt> <img src=https://www.definit.co.uk/images/2014/09/image_thumb38.png alt></p>
-<h2 id=initial-configuration-of-vcac-appliance-used-as-external-vpostgres>Initial configuration of vCAC Appliance used as external vPostgres</h2>
-<p>Before powering on the appliance I reduce the RAM down to 4GB - this is more than enough when you&rsquo;re just running vPostgres.</p>
-<h3 id=configure-ntp>Configure NTP</h3>
-<p>Log on to the administration interface (<a href=https://ApplianceFQDNorIP:5480>https://ApplianceFQDNorIP:5480</a>) using root and navigate Admin > Time Settings and configure NTP to use the same settings as your Identity Appliance and vCAC Appliances.</p>
+<h2 id=initial-configuration-of-vcac-appliance-used-as-external-vpostgres>Initial configuration of vCAC Appliance used as external vPostgres <a class=anchor href=#initial-configuration-of-vcac-appliance-used-as-external-vpostgres>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Before powering on the appliance I reduce the RAM down to 4GB - this is more than enough when you&rsquo;re just running vPostgres.</p>
+<h3 id=configure-ntp>Configure NTP <a class=anchor href=#configure-ntp>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Log on to the administration interface (<a href=https://ApplianceFQDNorIP:5480>https://ApplianceFQDNorIP:5480</a>) using root and navigate Admin > Time Settings and configure NTP to use the same settings as your Identity Appliance and vCAC Appliances.</p>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb39.png alt></p>
-<h3 id=disable-un-used-services>Disable un-used services</h3>
-<p>SSH to the deployed and running appliance and log in using root and disable un-used services:</p>
+<h3 id=disable-un-used-services>Disable un-used services <a class=anchor href=#disable-un-used-services>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>SSH to the deployed and running appliance and log in using root and disable un-used services:</p>
 <pre class="brush: bash; gutter: true">service apache2 stop
 chkconfig apache2 off
 service rabbitmq-server stop
@@ -137,8 +141,9 @@ service vcac-server stop
 chkconfig vcac-server off
 service vco-server stop
 chkconfig vco-server off</pre>
-<h3 id=configure-vpostgres-to-accept-external-connections>Configure vPostgres to accept external connections</h3>
-<p>In the same SSH session, use the following to configure vPostgres</p>
+<h3 id=configure-vpostgres-to-accept-external-connections>Configure vPostgres to accept external connections <a class=anchor href=#configure-vpostgres-to-accept-external-connections>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>In the same SSH session, use the following to configure vPostgres</p>
 <p>Accept connections from anywhere:</p>
 <pre class="brush: bash; gutter: false">sed -i -re &#039;s/^#(listen_addresses=.\*.)/\1/&#039; /var/vmware/vpostgres/current/pgdata/postgresql.conf</pre>
 <p>Set the max connections to 400:</p>
@@ -146,8 +151,9 @@ chkconfig vco-server off</pre>
 <p>And restart vPostgres</p>
 <pre class="brush: bash; gutter: false">service vpostgres restart</pre>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb40.png alt></p>
-<h3 id=configure-the-vpostgres-user-for-vcac>Configure the vPostgres user for vCAC</h3>
-<p>Finally, we need to set the password for the vPostgres user &lsquo;vcac&rsquo;</p>
+<h3 id=configure-the-vpostgres-user-for-vcac>Configure the vPostgres user for vCAC <a class=anchor href=#configure-the-vpostgres-user-for-vcac>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Finally, we need to set the password for the vPostgres user &lsquo;vcac&rsquo;</p>
 <pre class="brush: bash; gutter: false">su - vcac
 cd /opt/vmware/vpostgres/9.2/bin
 ./psql
@@ -155,16 +161,20 @@ ALTER  USER vcac WITH PASSWORD &#039;password here&#039;;
 \q
 exit</pre>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb41.png alt></p>
-<h2 id=configure-the-primary-vcac-appliance>Configure the Primary vCAC Appliance</h2>
-<h3 id=configure-ntp-1>Configure NTP</h3>
-<p>Log on to the administration interface (<a href=https://ApplianceFQDNorIP:5480>https://ApplianceFQDNorIP:5480</a>) using root and navigate Admin > Time Settings and configure NTP to use the same settings as your Identity Appliance and vCAC Appliances.</p>
+<h2 id=configure-the-primary-vcac-appliance>Configure the Primary vCAC Appliance <a class=anchor href=#configure-the-primary-vcac-appliance>
+<i class="fas fa-hashtag"></i>
+</a></h2><h3 id=configure-ntp-1>Configure NTP <a class=anchor href=#configure-ntp-1>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Log on to the administration interface (<a href=https://ApplianceFQDNorIP:5480>https://ApplianceFQDNorIP:5480</a>) using root and navigate Admin > Time Settings and configure NTP to use the same settings as your Identity Appliance and vCAC Appliances.</p>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb42.png alt></p>
-<h3 id=configure-the-external-vpostgres-database>Configure the external vPostgres Database</h3>
-<p>Go to the vCAC Settings tab > Database and enter the details for the appliance we just converted to vPostgres only, then save your settings:</p>
+<h3 id=configure-the-external-vpostgres-database>Configure the external vPostgres Database <a class=anchor href=#configure-the-external-vpostgres-database>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Go to the vCAC Settings tab > Database and enter the details for the appliance we just converted to vPostgres only, then save your settings:</p>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb43.png alt></p>
 <p>A nice new feature of the VAMI in 6.1 is that it disables the local vPostgres DB if you configure an external one - that saves a manual step!</p>
-<h3 id=configure-vcac-settings>Configure vCAC Settings</h3>
-<p>Select the vCAC Settings > Host Settings tab and enter the URL for the load balancer and Save:</p>
+<h3 id=configure-vcac-settings>Configure vCAC Settings <a class=anchor href=#configure-vcac-settings>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Select the vCAC Settings > Host Settings tab and enter the URL for the load balancer and Save:</p>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb44.png alt></p>
 <p>Go to the SSL tab and import the SSL certificate:</p>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb45.png alt> <img src=https://www.definit.co.uk/images/2014/09/image_thumb46.png alt></p>
@@ -178,8 +188,9 @@ exit</pre>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb49.png alt></p>
 <p>All being well, you can now log into your new vCAC Appliance using the new /vcac instead of /shell-ui-app (massive improvement for usability there, thanks VMware!) using the <a href=mailto:administrator@vsphere.local>administrator@vsphere.local</a> account.</p>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb50.png alt></p>
-<h2 id=configure-the-secondary-vcac-appliance>Configure the secondary vCAC Appliance</h2>
-<p>Log into the admin console of the second appliance and configure the NTP settings to use the same time servers as the first appliance under Admin > Time Settings</p>
+<h2 id=configure-the-secondary-vcac-appliance>Configure the secondary vCAC Appliance <a class=anchor href=#configure-the-secondary-vcac-appliance>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Log into the admin console of the second appliance and configure the NTP settings to use the same time servers as the first appliance under Admin > Time Settings</p>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb42.png alt></p>
 <p>This is where the biggest improvement for clustering vCAC appliances comes into play - to configure this secondary node into the cluster we just go to vCAC Settings > HA and join the secondary appliance to the primary:</p>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb51.png alt></p>

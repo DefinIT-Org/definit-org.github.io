@@ -125,8 +125,9 @@ Tags:
 <p>But as you have SCOM already installed, you’ve either set up a Gateway server, or used <a href=/2010/06/25/requesting-scom-2007-gateway-or-agent-certificates-for-server-2008-from-a-server-2003-enterprise-certificate-authority/>Certificates to secure communication between the server and your Management Server</a> – so it should be OK, right?</p>
 <p>Nope.</p>
 <p>To reduce the possibility of interference between Forwarder and Collector, routing through a Gateway is not allowed. Communication must be direct between the two, which means that even your remote domain featuring a Gateway server must allow ALL servers you wish to collect security data from to communicate with ACS directly.</p>
-<h4 id=configuring-the-acs-collector-to-use-certificates>Configuring the ACS Collector to use Certificates</h4>
-<p>I’m going to assume that you’ve already configured <a href=/2010/06/25/requesting-scom-2007-gateway-or-agent-certificates-for-server-2008-from-a-server-2003-enterprise-certificate-authority/>SCOM to communicate using Certificates</a> and that your ACS Collector is on the same server as your Management Server.</p>
+<h4 id=configuring-the-acs-collector-to-use-certificates>Configuring the ACS Collector to use Certificates <a class=anchor href=#configuring-the-acs-collector-to-use-certificates>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>I’m going to assume that you’ve already configured <a href=/2010/06/25/requesting-scom-2007-gateway-or-agent-certificates-for-server-2008-from-a-server-2003-enterprise-certificate-authority/>SCOM to communicate using Certificates</a> and that your ACS Collector is on the same server as your Management Server.</p>
 <ul>
 <li>On the ACS Collection Server, open up a command prompt (as administrator, if you’re Server 2008) and navigate to the %systemroot%\system32\security\adtserver</li>
 </ul>
@@ -135,8 +136,9 @@ Tags:
 <ul>
 <li>Start the ADTServer “net start adtserver”</li>
 </ul>
-<h4 id=configure-dummy-computer-accounts-with-x509-certificate-mapping>Configure Dummy Computer Accounts with X.509 certificate mapping</h4>
-<ul>
+<h4 id=configure-dummy-computer-accounts-with-x509-certificate-mapping>Configure Dummy Computer Accounts with X.509 certificate mapping <a class=anchor href=#configure-dummy-computer-accounts-with-x509-certificate-mapping>
+<i class="fas fa-hashtag"></i>
+</a></h4><ul>
 <li>
 <p>You need a copy of the SCOM certificate from your Forwarder servers on a domain member server with Active Directory Users and Computers access. If you don’t have a copy of the certificate, you can export it from the Forwarder server itself using the Certificates snap-in in MMC, but make sure you save it in DER encoded X.509 format. I use the machine name to name the certificate file so it’s easy to identify.</p>
 </li>
@@ -147,8 +149,9 @@ Tags:
 <p>Right click in the new OU and create a new Computer object with the same NETBIOS name as the Forwarder server you wish to collect. Under the View menu, make sure “Advanced” is selected. Right click the new computer object and select “Name Mappings…”. Under the X.509 Certificates tab, click Add and import the SCOM Certificate you exported earlier.</p>
 </li>
 </ul>
-<h4 id=configure-the-acs-forwarders>Configure the ACS Forwarders</h4>
-<p>On each server that will be forwarding to the Collector, log onto the server and open a command prompt. For Server 2008, run as administrator.</p>
+<h4 id=configure-the-acs-forwarders>Configure the ACS Forwarders <a class=anchor href=#configure-the-acs-forwarders>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>On each server that will be forwarding to the Collector, log onto the server and open a command prompt. For Server 2008, run as administrator.</p>
 <ul>
 <li>
 <p>navigate to &ldquo;%systemroot%\system32\”</p>

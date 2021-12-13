@@ -120,8 +120,9 @@ Tags:
 <li>You have installed OpenSSL v1.0.1c or later.</li>
 </ol>
 <p>You will need to modify the configuration section to suit your environment and the $WorkingDir folder should exist before you run the script.</p>
-<h2 id=creating-the-certificate-template>Creating the Certificate Template</h2>
-<p>You need to modify the standard Microsoft Web Server template to allow the encryption of user data. Since you can&rsquo;t edit these templates, you have to duplicate the  template and modify the settings.</p>
+<h2 id=creating-the-certificate-template>Creating the Certificate Template <a class=anchor href=#creating-the-certificate-template>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>You need to modify the standard Microsoft Web Server template to allow the encryption of user data. Since you can&rsquo;t edit these templates, you have to duplicate the  template and modify the settings.</p>
 <div id=gallery-2 class="gallery galleryid-1401 gallery-columns-4 gallery-size-thumbnail">
 <dl class=gallery-item>
 <dt class="gallery-icon portrait">
@@ -211,8 +212,9 @@ Save the export at C:\[Your $WorkingDir]\Root64.cer and click <strong>Next</stro
 </li>
 </ul>
 </blockquote>
-<h2 id=running-the-script>Running the script</h2>
-<p>The script itself is fairly simple, creating a folder structure for the individual certificates, wrestling with OpenSSL and handling the requests to the CA using CertReq. You can view the debug output by setting the $DebugPreference to &lsquo;Continue&rsquo;</p>
+<h2 id=running-the-script>Running the script <a class=anchor href=#running-the-script>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The script itself is fairly simple, creating a folder structure for the individual certificates, wrestling with OpenSSL and handling the requests to the CA using CertReq. You can view the debug output by setting the $DebugPreference to &lsquo;Continue&rsquo;</p>
 <p> </p>
 <pre class="brush: powershell; gutter: true"># The "short" name of the Virtual Center Server
 $vC_NETBIOS = "DefinIT-VC01"

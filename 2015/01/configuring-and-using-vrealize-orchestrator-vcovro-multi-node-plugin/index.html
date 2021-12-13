@@ -122,8 +122,9 @@ Tags:
 <p>The Multi-Node plug-in also makes it easier for administrators to manage workflow packages. From a single Orchestrator server, administrators can push packages to one or more remote Orchestrator servers and ensure that all instances are in sync with the same workflow versions.</p>
 </blockquote>
 <p>Installation of the plugin is a really simple affair, just download and import the plugin file on your &ldquo;master&rdquo; node, then add the &ldquo;slave&rdquo; vCO servers to the inventory.</p>
-<h2 id=add-a-vco-server>Add a vCO server</h2>
-<p>Adding a new remote vCO server is really simple - just run the &ldquo;Add a vCO server&rdquo; workflow from your Library:</p>
+<h2 id=add-a-vco-server>Add a vCO server <a class=anchor href=#add-a-vco-server>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Adding a new remote vCO server is really simple - just run the &ldquo;Add a vCO server&rdquo; workflow from your Library:</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb.png alt></p>
 <p>Enter the FQDN and port of your vRO/vCO instance - I found the wording of this form a bit confusing, stick with the FQDN and port and you&rsquo;ll be fine. Decide whether you want to silently accept the SSL certificate (if you chose No then you need to make sure that your &ldquo;master&rdquo; vCO/vRO instance trusts the certificate presented by the &ldquo;slave&rdquo; vCO/vRO node).</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb1.png alt></p>
@@ -133,8 +134,9 @@ Tags:
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb3.png alt></p>
 <p>Submit the workflow, and hopefully you should see the magical green tick of happiness.</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb4.png alt></p>
-<h2 id=creating-a-proxy-workflow>Creating a proxy workflow</h2>
-<p>Creating a proxy workflow is what allows you to execute the remote workflow on the &ldquo;slave&rdquo; instance - and it&rsquo;s pretty easy to do using the &ldquo;Create a proxy workflow&rdquo; workflow!</p>
+<h2 id=creating-a-proxy-workflow>Creating a proxy workflow <a class=anchor href=#creating-a-proxy-workflow>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Creating a proxy workflow is what allows you to execute the remote workflow on the &ldquo;slave&rdquo; instance - and it&rsquo;s pretty easy to do using the &ldquo;Create a proxy workflow&rdquo; workflow!</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb5.png alt></p>
 <p>Run the workflow and then use the chooser to select the remote workflow you want to run. I&rsquo;m just going to use a basic workflow from the vCenter plugin because I know that it&rsquo;s simple, and it works locally.</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb6.png alt></p>
@@ -142,8 +144,9 @@ Tags:
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb7.png alt></p>
 <p>Submit, and wait for the green tick. Once it&rsquo;s completed you should have a new folder structure for the remote &ldquo;slave&rdquo; vCO/vRO instance and a workflow named exactly the same as the one we just generated a proxy for.</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb8.png alt> <img src=https://www.definit.co.uk/images/2015/01/image_thumb9.png alt></p>
-<h2 id=taking-a-closer-look-at-a-proxy-workflow>Taking a closer look at a proxy workflow</h2>
-<p>The first thing to note is that the remote vCO/vRO server object is added as a protected Attribute for the workflow</p>
+<h2 id=taking-a-closer-look-at-a-proxy-workflow>Taking a closer look at a proxy workflow <a class=anchor href=#taking-a-closer-look-at-a-proxy-workflow>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The first thing to note is that the remote vCO/vRO server object is added as a protected Attribute for the workflow</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb10.png alt></p>
 <p>The inputs for the &ldquo;Get virtual machines by name&rdquo; have been replicated (there&rsquo;s only one):</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb11.png alt></p>
@@ -158,8 +161,9 @@ Tags:
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb15.png alt>The WaitEvent takes the &ldquo;trigger&rdquo; object as an input a simply waits for the workflow to report it&rsquo;s completed.</p>
 <p>Then, the final scripting block uses the &ldquo;remoteToken&rdquo; object to retrieve the workflow&rsquo;s state, and throws an error if the workflow state is anything other than &ldquo;completed&rdquo;. Finally, it gets the output from the remotely executed workflow (&ldquo;vms&rdquo;) and assigns it to the output of the proxy workflow.</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb16.png alt></p>
-<h2 id=improving-the-stock-remote-workflow-execution>Improving the stock remote workflow execution</h2>
-<p>In my experience, there are a couple of easy wins to improve the proxy workflow that is generated - here&rsquo;s how:</p>
+<h2 id=improving-the-stock-remote-workflow-execution>Improving the stock remote workflow execution <a class=anchor href=#improving-the-stock-remote-workflow-execution>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>In my experience, there are a couple of easy wins to improve the proxy workflow that is generated - here&rsquo;s how:</p>
 <p>The first is sort of hinted at when you validate the workflow - the &ldquo;remoteVCOServer&rdquo; attribute is never used.</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb17.png alt></p>
 <p>As I mentioned before, the ID represented by a string in the first script block is actually a property of the &ldquo;remoteVCOServer&rdquo; object, so we could use that rather than hard coding the ID. This would allow for greater flexibility if the remote workflow changed - we could always just point the attribute at a new object rather than having to manually put in the new GUID.</p>

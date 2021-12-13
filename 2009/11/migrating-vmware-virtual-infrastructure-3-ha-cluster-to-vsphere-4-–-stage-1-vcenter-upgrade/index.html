@@ -117,15 +117,17 @@ Tags:
 <div>
 [more]
 </div>
-<h2 id=backing-up-virtualcenter-server>Backing up VirtualCenter Server</h2>
-<p>My VirtualCenter server is installed on a Virtual Machine, so this makes things a lot simpler – I&rsquo;ll just take a snapshot to start. Being a belt-and-braces kind of situation (live HA cluster), I&rsquo;m also going to do the database and configuration backup too.</p>
+<h2 id=backing-up-virtualcenter-server>Backing up VirtualCenter Server <a class=anchor href=#backing-up-virtualcenter-server>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>My VirtualCenter server is installed on a Virtual Machine, so this makes things a lot simpler – I&rsquo;ll just take a snapshot to start. Being a belt-and-braces kind of situation (live HA cluster), I&rsquo;m also going to do the database and configuration backup too.</p>
 <p><strong>Databases</strong> - I&rsquo;m using SQL Server 2005 express which is supported for vSphere vCenter, so there will be no database upgrades, however the schema will be changed. First off, I&rsquo;ve connected to SQL with SQL Management Studio and run a full backup. As I have VMware Update Manager installed too, I&rsquo;m backing up that database as well.</p>
 <p><strong>Configuration file</strong> – Make a copy of your vpxd.cfg file, which is stored in the C:\Documents and Settings\All Users\Application Data\VMware\VMware VirtualCenter folder.</p>
 <p><strong>SSL Certificates</strong> – In the same folder as the vpxd.cfg file there&rsquo;s a folder called SSL, which you&rsquo;ll want to backup too.</p>
 <p>If you&rsquo;re not using integrated authentication for the database access, you need to ensure you have the user name and password for the DB access.</p>
 <p>Once all that&rsquo;s gathered together and safely backed up, you can move on to the installation.</p>
-<h2 id=installing-vsphere-vcenter>Installing vSphere vCenter</h2>
-<p>Open services.msc and stop the VMware VirtualCenter Server service.</p>
+<h2 id=installing-vsphere-vcenter>Installing vSphere vCenter <a class=anchor href=#installing-vsphere-vcenter>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Open services.msc and stop the VMware VirtualCenter Server service.</p>
 <p>Insert your vCenter installation CD, the installer pops up:</p>
 <p><a rel=lightbox href=/images/vCenterInstall1.png><img style=border-bottom:0;border-left:0;display:inline;border-top:0;border-right:0 title=vCenterInstall1 src=/images/vCenterInstall1_thumb.png border=0 alt=vCenterInstall1 width=244 height=191></a> Click vCenter Server.</p>
 <p><a rel=lightbox href=/images/vCenterInstall2.png><img style=border-bottom:0;border-left:0;display:inline;border-top:0;border-right:0 title=vCenterInstall2 src=/images/vCenterInstall2_thumb.png border=0 alt=vCenterInstall2 width=244 height=185></a>Notice it&rsquo;s detected the earlier version of vCenter server and is going to upgrade.</p>

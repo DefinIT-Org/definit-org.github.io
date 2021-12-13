@@ -139,14 +139,17 @@ Lab Notes – vCloud Director 9.1 for Service Providers – Part 1: Pre-requisit
 </div>
 </div>
 <p><span style=color:red>This series was originally going to be a more polished endeavour, but unfortunately time got in the way. A prod from James Kilby (@jameskilbynet) has convinced me to publish as is, as a series of lab notes. Maybe one day I&rsquo;ll loop back and finish them…</span></p>
-<h1 id=requirements>Requirements</h1>
-<h2 id=routing>Routing</h2>
-<p>Because I’m backing my vCloud Director installation with NSX-T, I will be using my existing Tier-0 router, which interfaces with my physical router via BGP. The Tier-0 router will be connected to the Tier-1 router, the NSX-T logical switches will be connected to the Tier-1, and the IP networks advertised to the Tier-0 (using NSX-T’s internal routing mechanism) and up via eBGP to the physical router.</p>
+<h1 id=requirements>Requirements <a class=anchor href=#requirements>
+<i class="fas fa-hashtag"></i>
+</a></h1><h2 id=routing>Routing <a class=anchor href=#routing>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Because I’m backing my vCloud Director installation with NSX-T, I will be using my existing Tier-0 router, which interfaces with my physical router via BGP. The Tier-0 router will be connected to the Tier-1 router, the NSX-T logical switches will be connected to the Tier-1, and the IP networks advertised to the Tier-0 (using NSX-T’s internal routing mechanism) and up via eBGP to the physical router.</p>
 <p>The Tier-1 router will be created in Active-Standby mode because it will also provide the load balancing services later.</p>
 <img title=t1vcd.png src=/images/2018/07/t1vcd.png alt="Tier1 vCloud Director" width=591 height=617 border=0>
 <img title=t1vcdadvertised.png src=/images/2018/07/t1vcdadvertised.png alt="Tier 1 vCloud Director advertised routes" width=444 height=324 border=0>
-<h2 id=logical-switches>Logical Switches</h2>
-<p>I want to build vCloud Director as many Service Provider customers do, with different traffic types separated by logical switches. I will be using 10.12.0.0/24 and subnetting into some smaller /27 networks to avoid wasting IPs (a typical Service Provider requirement) To that end, I am deploying four NSX-T logical switches:</p>
+<h2 id=logical-switches>Logical Switches <a class=anchor href=#logical-switches>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>I want to build vCloud Director as many Service Provider customers do, with different traffic types separated by logical switches. I will be using 10.12.0.0/24 and subnetting into some smaller /27 networks to avoid wasting IPs (a typical Service Provider requirement) To that end, I am deploying four NSX-T logical switches:</p>
 <ul>
 <li>vCloud Director API/UI/Console</li>
 <li>vCloud Director SQL</li>
@@ -155,8 +158,9 @@ Lab Notes – vCloud Director 9.1 for Service Providers – Part 1: Pre-requisit
 </ul>
 <p>The four logical switches have been connected to the Tier1 router created for vCloud Director, and have router ports configured in the correct subnet</p>
 <img title=vcdrps.png src=/images/2018/07/vcdrps.png alt="vCD Router Ports" width=776 height=479 border=0>
-<h2 id=load-balancing>Load Balancing</h2>
-<p>There are various load balancing requirements for the full vCloud Director installation, which will be fulfilled by the NSX-T Logical Load Balancer on the Tier-1 router:</p>
+<h2 id=load-balancing>Load Balancing <a class=anchor href=#load-balancing>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>There are various load balancing requirements for the full vCloud Director installation, which will be fulfilled by the NSX-T Logical Load Balancer on the Tier-1 router:</p>
 <ul>
 <li>vCloud Director API/UI</li>
 <li>vCloud Director Console</li>
@@ -164,22 +168,27 @@ Lab Notes – vCloud Director 9.1 for Service Providers – Part 1: Pre-requisit
 <li> vRealize Orchestrator</li>
 </ul>
 <p>The actually load balancer configuration will be done later on when I have the components deployed.</p>
-<h2 id=dns-a-and-ptr>DNS A and PTR</h2>
-<p>All the VMs that are part of the vCloud Director installation will require A and PTR (forward and reverse) lookup records</p>
+<h2 id=dns-a-and-ptr>DNS A and PTR <a class=anchor href=#dns-a-and-ptr>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>All the VMs that are part of the vCloud Director installation will require A and PTR (forward and reverse) lookup records</p>
 <img title=vcddnsrecords.png src=/images/2018/07/vcddnsrecords.png alt="Required DNS Records" width=663 height=271 border=0>
 <p>Notice that the VCD cells have two IPs per VM, one for the UI/API, and one for the Console traffic. Two records are also created for the load balancer URLs for vRealize Orchestrator, and RabbitMQ.</p>
-<h2 id=vm-sizing>VM Sizing</h2>
-<p>The vCloud Director cells, PostgreSQL database and RabbitMQ will be deployed using a standard CentOS7 template. vRealize Orchestrator is deployed as an appliance. The open-vm-tools package is installed on the template.</p>
+<h2 id=vm-sizing>VM Sizing <a class=anchor href=#vm-sizing>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The vCloud Director cells, PostgreSQL database and RabbitMQ will be deployed using a standard CentOS7 template. vRealize Orchestrator is deployed as an appliance. The open-vm-tools package is installed on the template.</p>
 <p>Vcd-sql-1. 2cpu. 4gb. 40gb</p>
-<h2 id=updates>Updates</h2>
-<p>All VMs have been updated using yum update -y</p>
-<h2 id=ntp>NTP</h2>
-<p>All VMs are configured to use a default NTP source:</p>
+<h2 id=updates>Updates <a class=anchor href=#updates>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>All VMs have been updated using yum update -y</p>
+<h2 id=ntp>NTP <a class=anchor href=#ntp>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>All VMs are configured to use a default NTP source:</p>
 <p>yum install -y ntp</p>
 <p>systemctl enable ntpd</p>
 <p>systemctl start ntpd</p>
-<h2 id=disable-selinux>Disable SELINUX</h2>
-<p>Replace SELINUX=enforcing with SELINUX=disabled in /etc/selinux/config and reboot</p>
+<h2 id=disable-selinux>Disable SELINUX <a class=anchor href=#disable-selinux>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Replace SELINUX=enforcing with SELINUX=disabled in /etc/selinux/config and reboot</p>
 <p><code>sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config && cat /etc/selinux/config && reboot</code></p>
 <h6>Share this post</h6>
 <span class=share-box>

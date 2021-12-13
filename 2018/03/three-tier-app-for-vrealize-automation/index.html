@@ -133,11 +133,13 @@ Tags:
 <!--[if lt IE 9]><![endif]--><video class=wp-video-shortcode id=video-8754-1 width=720 height=613 preload=metadata controls><source type=video/mp4 src="/images/2018/03/2018-03-26_11-48-23.mp4?_=1">
 <p><a href=/images/2018/03/2018-03-26_11-48-23.mp4>/images/2018/03/2018-03-26_11-48-23.mp4</a></video></p>
 </div>
-<h2 id=centos-7-template>CentOS 7 Template</h2>
-<p>At the core of my three tier application is the CentOS 7 template, which has been prepared with open-vm-tools and the vRealize Automation Guest Agent (gugent). The installation was completed by following the <a href=https://docs.vmware.com/en/vRealize-Automation/7.3/com.vmware.vra.prepare.use.doc/GUID-530ABF4D-E0EA-4266-BEB2-C507CCCDAA9D.html>Install the Guest Agent on a Linux Reference Machine</a> document. The Guest Agent can be tricky to install, so use the prepare_vra_template.sh script and validate the downloaded IaaS Manager Service Host certificate.</p>
+<h2 id=centos-7-template>CentOS 7 Template <a class=anchor href=#centos-7-template>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>At the core of my three tier application is the CentOS 7 template, which has been prepared with open-vm-tools and the vRealize Automation Guest Agent (gugent). The installation was completed by following the <a href=https://docs.vmware.com/en/vRealize-Automation/7.3/com.vmware.vra.prepare.use.doc/GUID-530ABF4D-E0EA-4266-BEB2-C507CCCDAA9D.html>Install the Guest Agent on a Linux Reference Machine</a> document. The Guest Agent can be tricky to install, so use the prepare_vra_template.sh script and validate the downloaded IaaS Manager Service Host certificate.</p>
 <p>I also have a software component that performs infrastructure tasks on my CentOS VMs, such as updating when they are first deployed.</p>
-<h2 id=database-server-installer-scriptimg-stylefloat-right-titlemariadbpng-srcimages201803mariadbpng-altmariadb-width91-height47-border0->Database Server Installer Script<img style=float:right title=mariaDB.png src=/images/2018/03/mariaDB.png alt=MariaDB width=91 height=47 border=0></h2>
-<p>The Database installer script (<a href=https://github.com/sammcgeown/vRA-3-Tier-Application/blob/master/DBServer.sh>DBServer.sh</a>) performs the following tasks:</p>
+<h2 id=database-server-installer-scriptimg-stylefloat-right-titlemariadbpng-srcimages201803mariadbpng-altmariadb-width91-height47-border0->Database Server Installer Script<img style=float:right title=mariaDB.png src=/images/2018/03/mariaDB.png alt=MariaDB width=91 height=47 border=0> <a class=anchor href=#database-server-installer-scriptimg-stylefloat-right-titlemariadbpng-srcimages201803mariadbpng-altmariadb-width91-height47-border0->
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The Database installer script (<a href=https://github.com/sammcgeown/vRA-3-Tier-Application/blob/master/DBServer.sh>DBServer.sh</a>) performs the following tasks:</p>
 <ul>
 <li>Install the mariaDB server</li>
 <li>Generates a secure password for the application to use</li>
@@ -202,8 +204,9 @@ Tags:
 
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=application-server-installer-scriptimg-stylefloat-right-titleapache2png-srcimages201803apache2png-altapache2-width91-height59-border0->Application Server Installer Script<img style=float:right title=Apache2.png src=/images/2018/03/Apache2.png alt=Apache2 width=91 height=59 border=0></h2>
-<p>The Application installer script (<a href=https://github.com/sammcgeown/vRA-3-Tier-Application/blob/master/AppServer.sh>AppServer.sh</a>) performs the following tasks</p>
+</div><h2 id=application-server-installer-scriptimg-stylefloat-right-titleapache2png-srcimages201803apache2png-altapache2-width91-height59-border0->Application Server Installer Script<img style=float:right title=Apache2.png src=/images/2018/03/Apache2.png alt=Apache2 width=91 height=59 border=0> <a class=anchor href=#application-server-installer-scriptimg-stylefloat-right-titleapache2png-srcimages201803apache2png-altapache2-width91-height59-border0->
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The Application installer script (<a href=https://github.com/sammcgeown/vRA-3-Tier-Application/blob/master/AppServer.sh>AppServer.sh</a>) performs the following tasks</p>
 <ul>
 <li>Install Apache2, PHP and various PHP libraries required for the application</li>
 <li>Download the App files and place them in the default web server location</li>
@@ -276,8 +279,9 @@ Tags:
 /usr/sbin/setsebool httpd_can_network_connect_db on -P
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=web-server-installer-scriptimg-stylefloat-right-titlenginxpng-srcimages201803nginxpng-altnginx-width54-height53-border0->Web Server Installer Script<img style=float:right title=nginx.png src=/images/2018/03/nginx.png alt=NGINX width=54 height=53 border=0></h2>
-<p>The Web installer script (WebServer.sh) performs the following tasks</p>
+</div><h2 id=web-server-installer-scriptimg-stylefloat-right-titlenginxpng-srcimages201803nginxpng-altnginx-width54-height53-border0->Web Server Installer Script<img style=float:right title=nginx.png src=/images/2018/03/nginx.png alt=NGINX width=54 height=53 border=0> <a class=anchor href=#web-server-installer-scriptimg-stylefloat-right-titlenginxpng-srcimages201803nginxpng-altnginx-width54-height53-border0->
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The Web installer script (WebServer.sh) performs the following tasks</p>
 <ul>
 <li>Install the EPEL repository</li>
 <li>Install NGINX</li>
@@ -432,10 +436,12 @@ Tags:
 DNS.1 <span class=o>=</span> WEBSERVERNAME
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=creating-the-vrealize-automation-software-components>Creating the vRealize Automation Software Components</h2>
-<p>The next step is to create three Software Components, one for each tier of the application.</p>
-<h3 id=demo-app-database>Demo App Database</h3>
-<p>The Database Script has five properties, four of which will be inputs for the end user, one of which is computed.</p>
+</div><h2 id=creating-the-vrealize-automation-software-components>Creating the vRealize Automation Software Components <a class=anchor href=#creating-the-vrealize-automation-software-components>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The next step is to create three Software Components, one for each tier of the application.</p>
+<h3 id=demo-app-database>Demo App Database <a class=anchor href=#demo-app-database>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>The Database Script has five properties, four of which will be inputs for the end user, one of which is computed.</p>
 <ul>
 <li><strong>mysql_app_database</strong> - the name of the MySQL database to create</li>
 <li><strong>mysql_root_password</strong> - the password to set for the MySQL root user</li>
@@ -444,8 +450,9 @@ DNS.1 <span class=o>=</span> WEBSERVERNAME
 <li><strong>mysql_user_name</strong> - the name of the MySQL user to be created for the app</li>
 </ul>
 <img title=demoappdatabase.png src=/images/2018/03/demoappdatabase.png alt="Demo App Database Properties" width=600 height=147 border=0>
-<h3 id=demo-app-application>Demo App Application</h3>
-<p>The application tier install component has four inputs, which will be directly mapped to the properties for the database component</p>
+<h3 id=demo-app-application>Demo App Application <a class=anchor href=#demo-app-application>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>The application tier install component has four inputs, which will be directly mapped to the properties for the database component</p>
 <ul>
 <li><strong>demo_app_mysql_server</strong> - the IP address of the MySQL database server</li>
 <li><strong>demo_app_mysql_user</strong> - the MySQL user created for the application</li>
@@ -453,15 +460,17 @@ DNS.1 <span class=o>=</span> WEBSERVERNAME
 <li><strong>demo_app_mysql_database</strong> - the name of the MySQL databsae</li>
 </ul>
 <img title=demoappapplication.png src=/images/2018/03/demoappapplication.png alt="demo app application" width=596 height=135 border=0>
-<h3 id=demo-app-web>Demo App Web</h3>
-<p>The web tier install component has two inputs for the script, which can be either mapped to the tier server IP addresses (for single node deploys) or to the load balancer IP addresses (for multi-node deploys).</p>
+<h3 id=demo-app-web>Demo App Web <a class=anchor href=#demo-app-web>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>The web tier install component has two inputs for the script, which can be either mapped to the tier server IP addresses (for single node deploys) or to the load balancer IP addresses (for multi-node deploys).</p>
 <ul>
 <li><strong>web_server_name</strong> - the name or IP of the web tier (server or load balancer)</li>
 <li><strong>app_server_name</strong> - the DNS name or IP of the app tier (server or load balancer)</li>
 </ul>
 <img title=demoappwebserver.png src=/images/2018/03/demoappwebserver.png alt="Demo App Web Server" width=597 height=117 border=0>
-<h2 id=creating-the-vrealize-automation-blueprints>Creating the vRealize Automation Blueprints</h2>
-<p>Now that all of the building blocks are in place, I can create the Blueprints that will tie it all together.</p>
+<h2 id=creating-the-vrealize-automation-blueprints>Creating the vRealize Automation Blueprints <a class=anchor href=#creating-the-vrealize-automation-blueprints>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Now that all of the building blocks are in place, I can create the Blueprints that will tie it all together.</p>
 <p>For the multi-node deployment, the blueprint looks like this (running from left to right):</p>
 <ul>
 <li>
@@ -511,15 +520,17 @@ DNS.1 <span class=o>=</span> WEBSERVERNAME
 <img title=webtierproperties.png src=/images/2018/03/webtierproperties.png alt="Web Tier Properties" width=469 height=89 border=0>
 <p>To create a single-node blueprint of the application there’s only one difference - the web tier properties are mapped directly to the web_tier and app_tier IP addresses.</p>
 <img title=singlenodeapp.png src=/images/2018/03/singlenodeapp.png alt="Single Node App" width=469 height=262 border=0>
-<h2 id=deploying-and-testing-the-three-tier-demo-app>Deploying and testing the three tier Demo App</h2>
-<p>Once the blueprint has been published and assigned to a catalog, service and entitlement, it’s time to deploy and test the app! Below you can see the deployment form, and the configuration of the database install script.</p>
+<h2 id=deploying-and-testing-the-three-tier-demo-app>Deploying and testing the three tier Demo App <a class=anchor href=#deploying-and-testing-the-three-tier-demo-app>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Once the blueprint has been published and assigned to a catalog, service and entitlement, it’s time to deploy and test the app! Below you can see the deployment form, and the configuration of the database install script.</p>
 <img title=deploy3tierapp.png src=/images/2018/03/deploy3tierapp.png alt="Deploying the three-tier Demo App" width=600 height=193 border=0>
 <p>The deployed blueprint looks something like this - you can see that the web tier load balancer has an IP address of 10.0.0.210.</p>
 <img title=deployedblueprint.png src=/images/2018/03/deployedblueprint.png alt="Deployed blueprint" width=598 height=294 border=0>
 <p>And when I hit the load balancer IP, the application loads!</p>
 <img title=workingapplication.png src=/images/2018/03/workingapplication.png alt="Working application" width=599 height=163 border=0>
-<h2 id=and-finally8230>And finally…</h2>
-<p>All of the vRA components have been exported using CloudClient and are also on the GitHub repo if you want to import them. Since this post is getting pretty long, I’ll draw it to a close here - hopefully this is of some use to you - please feel free to leave me a comment or ping me on twitter if you have any questions!</p>
+<h2 id=and-finally8230>And finally… <a class=anchor href=#and-finally8230>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>All of the vRA components have been exported using CloudClient and are also on the GitHub repo if you want to import them. Since this post is getting pretty long, I’ll draw it to a close here - hopefully this is of some use to you - please feel free to leave me a comment or ping me on twitter if you have any questions!</p>
 <h6>Share this post</h6>
 <span class=share-box>
 <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2018%2f03%2fthree-tier-app-for-vrealize-automation%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-facebook-official"></i></a>

@@ -106,18 +106,21 @@ Tags:
 </div>
 </div>
 <p><img src=https://www.definit.co.uk/images/2015/11/vRealize-Operations-Manager-Logo_thumb.jpg alt>I was asked recently if there were any materials I could direct people to with regards to expanding existing vROps deployments. I did a brief search on the web to see what material was &ldquo;out there&rdquo; on how to perform what is a straight forward task. To my surprise very little came up. So I have decided to create this guide with all the things you need to consider when you are going to either expand or need to remove a node from one of your active vROps deployments.</p>
-<h3 id=why-would-you-want-to-add-a-node>Why would you want to add a node?</h3>
-<ul>
+<h3 id=why-would-you-want-to-add-a-node>Why would you want to add a node? <a class=anchor href=#why-would-you-want-to-add-a-node>
+<i class="fas fa-hashtag"></i>
+</a></h3><ul>
 <li>Your environment has grown in size to the extent your existing vROps cluster is too small. (very typical)</li>
 <li>Your PoC build is now required (for whatever reason) in production.</li>
 <li>You need to load balance admin/user access to the vROps UI and therefore need more nodes. (unusual but I have seen this)</li>
 </ul>
-<h3 id=know-the-limits-correctly-size-your-clusters>Know the Limits (correctly size your clusters)</h3>
-<p>So how do you size your cluster to suit your environment needs? (you don&rsquo;t want to go too large, but you definitely do not want to be undersized.)</p>
+<h3 id=know-the-limits-correctly-size-your-clusters>Know the Limits (correctly size your clusters) <a class=anchor href=#know-the-limits-correctly-size-your-clusters>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>So how do you size your cluster to suit your environment needs? (you don&rsquo;t want to go too large, but you definitely do not want to be undersized.)</p>
 <p>You will be glad to know this is not a painful thing to work out and VMware have done most of the work for you by creating a very useful sizing guide (spreadsheet)</p>
 <p><a href="https://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2130551">vRealize Operations Manager Sizing Guidelines</a></p>
-<h3 id=prerequisites>Prerequisites</h3>
-<p>DNS DNS DNS, did I mention DNS? Make sure your new node has a DNS entry (and reverse lookup)</p>
+<h3 id=prerequisites>Prerequisites <a class=anchor href=#prerequisites>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>DNS DNS DNS, did I mention DNS? Make sure your new node has a DNS entry (and reverse lookup)</p>
 <p>vROps relies on DNS (if you use VMware products regularly this will not be a new thing to you) if you have not already got DNS records in place for your vROps cluster get it done. vROps will not play nice if you get problems in this area and you have more than just one node.</p>
 <p>Make sure the node you will add is using the same version as the existing cluster.</p>
 <p>You can check the version by logging into the vROps instance and clicking the &ldquo;about&rdquo; button on the top right corner of the vROps UI.</p>
@@ -130,8 +133,9 @@ Tags:
 <li>Medium - 8x vCPU - 32GB Memory</li>
 <li>Large - 16x vCPU - 48GB Memory</li>
 </ul>
-<h3 id=deploying-a-node-and-adding-it-to-your-cluster>Deploying a node and adding it to your cluster</h3>
-<p>Once you have determined the correct node size go ahead and deploy the OVA (I am assuming you are deploying the appliance but the same rules apply to a windows deployment) and then start the VM up for the first time.</p>
+<h3 id=deploying-a-node-and-adding-it-to-your-cluster>Deploying a node and adding it to your cluster <a class=anchor href=#deploying-a-node-and-adding-it-to-your-cluster>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Once you have determined the correct node size go ahead and deploy the OVA (I am assuming you are deploying the appliance but the same rules apply to a windows deployment) and then start the VM up for the first time.</p>
 <p>Go to the FQDN or IP address of your new node in your preferred web browser.</p>
 <p>You will be presented with the following</p>
 <p><img src=https://www.definit.co.uk/images/2016/10/2.png alt></p>
@@ -158,8 +162,9 @@ Tags:
 <p><img src=https://www.definit.co.uk/images/2016/10/11.png alt></p>
 <p>After a while you will be taken to the normal vROps login page, enter your admin creds and go to administration and then to cluster management and you will see your new node up and running and a member of the cluster.</p>
 <p>Nice and easy eh?</p>
-<h3 id=removing-a-node-safely-from-an-existing-vrops-cluster>Removing a node safely from an existing vROps Cluster</h3>
-<p><span style=color:red>Important notice - this process will restart your vROps cluster.</span></p>
+<h3 id=removing-a-node-safely-from-an-existing-vrops-cluster>Removing a node safely from an existing vROps Cluster <a class=anchor href=#removing-a-node-safely-from-an-existing-vrops-cluster>
+<i class="fas fa-hashtag"></i>
+</a></h3><p><span style=color:red>Important notice - this process will restart your vROps cluster.</span></p>
 <p>If the node you want to remove is the Replica node you will need to disable HA first and then go ahead with the following steps.</p>
 <p>Login to vROps on the admin URL. (not the node you are going to remove)</p>
 <p><em>https://master-node-fqdn-or-IP/admin</em></p>

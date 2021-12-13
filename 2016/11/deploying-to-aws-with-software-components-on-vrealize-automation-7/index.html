@@ -111,21 +111,26 @@ Tags:
 </div>
 </div>
 </div>
-<h2 id=httpswwwdefinitcoukimages201611aws-vrapng><img src=https://www.definit.co.uk/images/2016/11/AWS-vRA.png alt></h2>
-<p>Recently I&rsquo;ve been working on some ideas in my lab to leverage the AWS endpoint on vRealize Automation. One of the things I needed to get working was getting Software Components working on my AWS deployed instances.</p>
+<h2 id=httpswwwdefinitcoukimages201611aws-vrapng><img src=https://www.definit.co.uk/images/2016/11/AWS-vRA.png alt> <a class=anchor href=#httpswwwdefinitcoukimages201611aws-vrapng>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Recently I&rsquo;ve been working on some ideas in my lab to leverage the AWS endpoint on vRealize Automation. One of the things I needed to get working was getting Software Components working on my AWS deployed instances.</p>
 <p>The diagram to the right shows my end-stage network - the instance deployed by vRA into AWS should be in a private subnet in my VPC, and should use my local lab DNS server and be able to access my vRA instance. This allows me to make use of the vRA guest agent for software components on the deployed VMs. I also wanted to have the deployed VMs use their local NAT gateway for internet traffic, rather than paying for the data over my VPN connection.</p>
-<h2 id=configure-a-vpn-connection>Configure a VPN connection</h2>
-<p>As I wrote in my previous article, the vRealize Automation Guest Agent requires a connection back to the vRealize Appliance in order to be able to receive tasks. Make sure you have a <a href=https://www.definit.co.uk/2016/11/creating-an-aws-hardware-vpn-connection-with-ubiquiti-edgerouterx/>VPN connection configured</a> and you can communicate back and forth with your internal network.</p>
-<h2 id=create-dhcp-option-set>Create DHCP Option Set</h2>
-<p>A custom DHCP Option set allows you to specify the DNS domain name and DNS servers that are set by the DHCP server when handing out IPs to your Instance. It&rsquo;s needed here because the vRA Guest Agent will need to use my lab DNS server to resolve my lab vRealize Automation deployment.</p>
+<h2 id=configure-a-vpn-connection>Configure a VPN connection <a class=anchor href=#configure-a-vpn-connection>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>As I wrote in my previous article, the vRealize Automation Guest Agent requires a connection back to the vRealize Appliance in order to be able to receive tasks. Make sure you have a <a href=https://www.definit.co.uk/2016/11/creating-an-aws-hardware-vpn-connection-with-ubiquiti-edgerouterx/>VPN connection configured</a> and you can communicate back and forth with your internal network.</p>
+<h2 id=create-dhcp-option-set>Create DHCP Option Set <a class=anchor href=#create-dhcp-option-set>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>A custom DHCP Option set allows you to specify the DNS domain name and DNS servers that are set by the DHCP server when handing out IPs to your Instance. It&rsquo;s needed here because the vRA Guest Agent will need to use my lab DNS server to resolve my lab vRealize Automation deployment.</p>
 <p>VPC -> DHCP Option Sets > Create DHCP options set</p>
 <p><img src=https://www.definit.co.uk/images/2016/11/2016-11-14_16-04-24.png alt></p>
-<h2 id=assign-dhcp-option-set-to-vpc>Assign DHCP Option Set to VPC</h2>
-<p>Assign the newly created DHCP option set to the VPC so that it&rsquo;s used whenever an Instance is deployed.</p>
+<h2 id=assign-dhcp-option-set-to-vpc>Assign DHCP Option Set to VPC <a class=anchor href=#assign-dhcp-option-set-to-vpc>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Assign the newly created DHCP option set to the VPC so that it&rsquo;s used whenever an Instance is deployed.</p>
 <p>VPC > Your VPCs > Action > Edit DHCP Options Set</p>
 <p><img src=https://www.definit.co.uk/images/2016/11/2016-11-14_16-07-12.png alt></p>
-<h2 id=launch-a-new-ami-and-prepare-for-vrealize-automation>Launch a new AMI and prepare for vRealize Automation</h2>
-<p>Test DNS resolution</p>
+<h2 id=launch-a-new-ami-and-prepare-for-vrealize-automation>Launch a new AMI and prepare for vRealize Automation <a class=anchor href=#launch-a-new-ami-and-prepare-for-vrealize-automation>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Test DNS resolution</p>
 <p><img src=https://www.definit.co.uk/images/2016/11/2016-11-16_12-13-56.png alt></p>
 <p>Download and execute the template script:</p>
 <pre class="brush: bash; gutter: false">wget --no-check-certificate https://vra7.definit.local/software/download/prepare_vra_template.sh
@@ -141,8 +146,9 @@ Follow the scripted install, making sure to pick ec2 as the cloud provider
 One final step for RHEL6 is to remove the following line from /etc/sudoers. Without this any Software Component that uses a sudo command (e.g. sudo yum install something) will fail.
 </p>
 <pre class="brush: bash; gutter: false">sed -i -e &#039;s/Defaults requiretty.*/ #Defaults requiretty/g&#039; /etc/sudoers</pre>
-<h2 class=p1 id=create-a-custom-ami>Create a custom AMI</h2>
-<p class=p1>
+<h2 id=create-a-custom-ami>Create a custom AMI <a class=anchor href=#create-a-custom-ami>
+<i class="fas fa-hashtag"></i>
+</a></h2><p class=p1>
 Shutdown the AMI instance that was just configured and then from the Instance actions, select Image, Create Image.
 </p>
 <p class=p1>
@@ -160,8 +166,9 @@ Check that the new AMI is available - <strong>EC2 > AMIs</strong>
 <p class=p1>
 <a href=/images/2016/11/2016-11-14_16-24-55.png><img class="alignnone wp-image-7832" src=/images/2016/11/2016-11-14_16-24-55.png alt="New AMI" width=600 height=69></a>
 </p>
-<h2 class=p1 id=configure-vrealize-automation>Configure vRealize Automation</h2>
-<p class=p1>
+<h2 id=configure-vrealize-automation>Configure vRealize Automation <a class=anchor href=#configure-vrealize-automation>
+<i class="fas fa-hashtag"></i>
+</a></h2><p class=p1>
 At this point the AMI should be collectable in vRealize Automation, so we need to trigger a data collection from the AWS Compute Resource:
 </p>
 <p class=p1>
@@ -203,8 +210,9 @@ Drag a Software Component onto the Amazon Machine - I'm using a simple test one 
 <p class=p1>
 Save, publish and entitle the new Blueprint.
 </p>
-<h2 class=p1 id=requesting-the-amazon-blueprint>Requesting the Amazon Blueprint</h2>
-<p class=p1>
+<h2 id=requesting-the-amazon-blueprint>Requesting the Amazon Blueprint <a class=anchor href=#requesting-the-amazon-blueprint>
+<i class="fas fa-hashtag"></i>
+</a></h2><p class=p1>
 <a href=/images/2016/11/2016-11-16_10-58-52.png><img class="alignnone size-medium wp-image-7844" src=/images/2016/11/2016-11-16_10-58-52.png alt="Request Blueprint" width=300 height=173></a>
 </p>
 <p class=p1>

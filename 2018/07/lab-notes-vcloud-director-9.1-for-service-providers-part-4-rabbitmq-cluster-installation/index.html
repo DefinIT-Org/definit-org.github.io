@@ -139,9 +139,11 @@ Lab Notes – vCloud Director 9.1 for Service Providers – Part 4: RabbitMQ Clu
 </div>
 </div>
 <p><span style=color:red>This series was originally going to be a more polished endeavour, but unfortunately time got in the way. A prod from James Kilby (@jameskilbynet) has convinced me to publish as is, as a series of lab notes. Maybe one day I&rsquo;ll loop back and finish them…</span></p>
-<h1 id=rabbitmq-for-vcloud-director>RabbitMQ for vCloud Director</h1>
-<h2 id=rabbitmq-high-availability-and-load-balancing>RabbitMQ High Availability and Load Balancing</h2>
-<p>The vCloud Architecture Toolkit states</p>
+<h1 id=rabbitmq-for-vcloud-director>RabbitMQ for vCloud Director <a class=anchor href=#rabbitmq-for-vcloud-director>
+<i class="fas fa-hashtag"></i>
+</a></h1><h2 id=rabbitmq-high-availability-and-load-balancing>RabbitMQ High Availability and Load Balancing <a class=anchor href=#rabbitmq-high-availability-and-load-balancing>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The vCloud Architecture Toolkit states</p>
 <blockquote>
 <p>RabbitMQ scales up to thousands of messages per second, which is much more than vCloud Director is able to publish. Therefore, there is no need to load balance RabbitMQ nodes for performance reasons.</p>
 </blockquote>
@@ -158,8 +160,9 @@ Lab Notes – vCloud Director 9.1 for Service Providers – Part 4: RabbitMQ Clu
 <li>vRealize Orchestrator will subscribe as a consumer to the load balancer</li>
 </ul>
 <img title=rabbitmqcluster.png src=/images/2018/07/rabbitmqcluster.png alt="RabbitMQ HA Cluster" width=336 height=456 border=0>
-<h2 id=prerequisites>Prerequisites</h2>
-<p>I’ve deployed two CentOS7 VMs from my standard template, and configured the pre-requisites as per my pre-requisites post. Updates, NTP, DNS and  SELinux have all been configured.</p>
+<h2 id=prerequisites>Prerequisites <a class=anchor href=#prerequisites>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>I’ve deployed two CentOS7 VMs from my standard template, and configured the pre-requisites as per my pre-requisites post. Updates, NTP, DNS and  SELinux have all been configured.</p>
 <p>RabbitMQ needs the exact same Erlang version installed on each node, the easiest way to do this is to enable the EPEL repository:</p>
 <p>yum install epel-release -y</p>
 <p>yum install erlang -y</p>
@@ -176,8 +179,9 @@ Lab Notes – vCloud Director 9.1 for Service Providers – Part 4: RabbitMQ Clu
 <p>firewall-cmd -zone=public -permanent -add-port=1883/tcp</p>
 <p>firewall-cmd -zone=public -permanent -add-port=8883/tcp</p>
 <p>firewall-cmd -reload</p>
-<h2 id=rabbitmq-installation>RabbitMQ Installation</h2>
-<p>The following steps should be completed on BOTH RabbitMQ nodes</p>
+<h2 id=rabbitmq-installation>RabbitMQ Installation <a class=anchor href=#rabbitmq-installation>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The following steps should be completed on BOTH RabbitMQ nodes</p>
 <p>Install the RabbitMQ RPM</p>
 <p>yum install rabbitmq-server-3.6.16-1.el7.noarch.rpm -y</p>
 <p>Enable, and start the RabbitMQ server:</p>
@@ -193,15 +197,18 @@ Lab Notes – vCloud Director 9.1 for Service Providers – Part 4: RabbitMQ Clu
 <p>sudo rabbitmqctl set_permissions -p / vcloud &ldquo;.*&rdquo; &ldquo;.*&rdquo; &ldquo;.*&rdquo;</p>
 <p>Validate that the RabbitMQ admin page is accessible on <a href=http://vcd-rmq-1.definit.local:15672>http://vcd-rmq-1.definit.local:15672</a></p>
 <img title=rmqadmin.png src=/images/2018/07/rmqadmin.png alt="RabbitMQ Admin Interface" width=1233 height=659 border=0>
-<h2 id=clustering-rabbitmq-nodes>Clustering RabbitMQ nodes</h2>
-<p>Now I have two independent, stand-alone RabbitMQ nodes running, it’s time to cluster them. Firstly the Erlang cookie needs to be copied from the first node to the second, which allows them to join the same cluster.</p>
+<h2 id=clustering-rabbitmq-nodes>Clustering RabbitMQ nodes <a class=anchor href=#clustering-rabbitmq-nodes>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Now I have two independent, stand-alone RabbitMQ nodes running, it’s time to cluster them. Firstly the Erlang cookie needs to be copied from the first node to the second, which allows them to join the same cluster.</p>
 <p><strong>IMPORTANT</strong>: Make sure both nodes can resolve each other using their short names (e.g. vcd-rmq-1 and vcd-rmq-2). If they cannot, create entries in the HOSTS file to ensure that they can.</p>
-<h3 id=on-the-first-node-only-vdc-rmq-1>On the first node only (vdc-rmq-1)</h3>
-<p>Read the Erlang cookie from the file:</p>
+<h3 id=on-the-first-node-only-vdc-rmq-1>On the first node only (vdc-rmq-1) <a class=anchor href=#on-the-first-node-only-vdc-rmq-1>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Read the Erlang cookie from the file:</p>
 <p>cat /var/lib/rabbitmq/.erlang.cookie</p>
 <p>Copy the cookie contents (e.g. “FAPNMJZLNOCUTWXTNJOG”) to the clipboard.</p>
-<h3 id=on-the-second-node-only-vcd-rmq-2>On the second node only (vcd-rmq-2)</h3>
-<p>Stop the RabbitMQ service:</p>
+<h3 id=on-the-second-node-only-vcd-rmq-2>On the second node only (vcd-rmq-2) <a class=anchor href=#on-the-second-node-only-vcd-rmq-2>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Stop the RabbitMQ service:</p>
 <p>Systemctl stop rabbitmq-server</p>
 <p>Then replace the existing cookie file with the cookie from the first node</p>
 <p>Echo “FAPNMJZLNOCUTWXTNJOG” > /var/lib/rabbitmq/.erlang.cookie</p>
@@ -216,15 +223,19 @@ Lab Notes – vCloud Director 9.1 for Service Providers – Part 4: RabbitMQ Clu
 <p>rabbitmqctl start_app</p>
 <p>Validate the cluster status, using rabbitmqctl cluster_status, or by refreshing the management interface:</p>
 <img title=rmqcluster.png src=/images/2018/07/rmqcluster.png alt="RabbitMQ Cluster Status" width=1250 height=708 border=0>
-<h2 id=configuring-rabbitmq-for-vcloud-director>Configuring RabbitMQ for vCloud Director</h2>
-<h3 id=queue-ha-policy>Queue HA Policy</h3>
-<p>Now that the RabbitMQ nodes are clustered, we can configure the Queue mirroring with a HA policy. The below command creates a policy called “ha-all”, which applies to all queues (matching “”), then sets the ha-mode to “all” (replicate to all nodes in cluster) and the ha-sync-mode to “automatic” (if a new node joins, sync automatically). You can read more about RabbitMQ HA configuration here https://www.rabbitmq.com/ha.html</p>
+<h2 id=configuring-rabbitmq-for-vcloud-director>Configuring RabbitMQ for vCloud Director <a class=anchor href=#configuring-rabbitmq-for-vcloud-director>
+<i class="fas fa-hashtag"></i>
+</a></h2><h3 id=queue-ha-policy>Queue HA Policy <a class=anchor href=#queue-ha-policy>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Now that the RabbitMQ nodes are clustered, we can configure the Queue mirroring with a HA policy. The below command creates a policy called “ha-all”, which applies to all queues (matching “”), then sets the ha-mode to “all” (replicate to all nodes in cluster) and the ha-sync-mode to “automatic” (if a new node joins, sync automatically). You can read more about RabbitMQ HA configuration here https://www.rabbitmq.com/ha.html</p>
 <p>rabbitmqctl set_policy ha-all "" &lsquo;{&ldquo;ha-mode&rdquo;:&ldquo;all&rdquo;,&ldquo;ha-sync-mode&rdquo;:&ldquo;automatic&rdquo;}&rsquo;</p>
-<h3 id=create-a-topic-exchange>Create a Topic Exchange</h3>
-<p>Using the RabbitMQ management interface, log on with the “vcloud” user created earlier and select the “Exchanges” tab. Expand the “Add a new exchange” box and enter a name for the exchange. The remaining settings can be left at default. Once the new Exchange has been created, you can see that the “ha-all” policy has applied to it.</p>
+<h3 id=create-a-topic-exchange>Create a Topic Exchange <a class=anchor href=#create-a-topic-exchange>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Using the RabbitMQ management interface, log on with the “vcloud” user created earlier and select the “Exchanges” tab. Expand the “Add a new exchange” box and enter a name for the exchange. The remaining settings can be left at default. Once the new Exchange has been created, you can see that the “ha-all” policy has applied to it.</p>
 <img title=topicexchange.png src=/images/2018/07/topicexchange.png alt="Create Topic Exchange" width=1258 height=855 border=0>
-<h2 id=configuring-the-rabbitmq-load-balancer>Configuring the RabbitMQ Load Balancer</h2>
-<p>The final configuration step is to load balance the two RabbitMQ nodes in the cluster - as described in the opening of this post, this will steer the publisher (vCloud Director) and subscriber (vRealize Orchestrator) to the node with the active queue.</p>
+<h2 id=configuring-the-rabbitmq-load-balancer>Configuring the RabbitMQ Load Balancer <a class=anchor href=#configuring-the-rabbitmq-load-balancer>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The final configuration step is to load balance the two RabbitMQ nodes in the cluster - as described in the opening of this post, this will steer the publisher (vCloud Director) and subscriber (vRealize Orchestrator) to the node with the active queue.</p>
 <p>I will be configuring an NSX-T load balancer, on the Tier-1 router that all the vCloud Director components are connected to. However the basic configuration should apply across most load balancer vendors. The load balancer should direct all traffic to vcd-rmq-1, unless the health check API does not return the expected status.</p>
 <ul>
 <li>
@@ -288,8 +299,9 @@ Lab Notes – vCloud Director 9.1 for Service Providers – Part 4: RabbitMQ Clu
 <p>Response body: {“status”:”ok”}</p>
 </li>
 </ul>
-<h2 id=next-steps>Next Steps</h2>
-<p>Later, once the vCloud Director installation is completed, I will configured vCloud Director to use notifications to this RabbitMQ cluster.</p>
+<h2 id=next-steps>Next Steps <a class=anchor href=#next-steps>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Later, once the vCloud Director installation is completed, I will configured vCloud Director to use notifications to this RabbitMQ cluster.</p>
 <h6>Share this post</h6>
 <span class=share-box>
 <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2018%2f07%2flab-notes-vcloud-director-9.1-for-service-providers-part-4-rabbitmq-cluster-installation%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-facebook-official"></i></a>

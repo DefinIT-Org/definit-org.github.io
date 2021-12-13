@@ -129,8 +129,9 @@ who deserves most of the credit. Again I am lucky to be able to poke Myles on
 our corporate slack, but you can also check out his <a href=https://blah.cloud/kubernetes/creating-an-ubuntu-18-04-lts-cloud-image-for-cloning-on-vmware/>Kubernetes on
 vSphere</a>
 series which was immensely helpful.</p>
-<h1 id=vm-pre-requisites>VM Pre-requisites</h1>
-<p>All the Kubernetes Node VMs need to be placed in a VM folder that’s used to
+<h1 id=vm-pre-requisites>VM Pre-requisites <a class=anchor href=#vm-pre-requisites>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>All the Kubernetes Node VMs need to be placed in a VM folder that’s used to
 identify them. I’ve created folder <code>/kubernetes/k8s-01</code> to reflect the name of
 the Kubernetes cluster</p>
 <div class=clr-content-image-wrap>
@@ -155,9 +156,11 @@ the VM, thus allowing the disk to be mounted properly.</p>
 </a>
 <figcaption class=clr-caption></figcaption>
 </div>
-<h1 id=create-roles-and-service-account>Create Roles and Service Account</h1>
-<h3 id=create-the-required-roles>Create the required Roles</h3>
-<p>The <a href=https://vmware.github.io/vsphere-storage-for-kubernetes/documentation/vcp-roles.html#dynamic-provisioning>roles and permissions required for dynamic provisioning can be found
+<h1 id=create-roles-and-service-account>Create Roles and Service Account <a class=anchor href=#create-roles-and-service-account>
+<i class="fas fa-hashtag"></i>
+</a></h1><h3 id=create-the-required-roles>Create the required Roles <a class=anchor href=#create-the-required-roles>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>The <a href=https://vmware.github.io/vsphere-storage-for-kubernetes/documentation/vcp-roles.html#dynamic-provisioning>roles and permissions required for dynamic provisioning can be found
 here</a>.</p>
 <table>
 <thead>
@@ -205,15 +208,17 @@ here</a>.</p>
 </a>
 <figcaption class=clr-caption>vSphere Roles</figcaption>
 </div>
-<h3 id=create-a-service-account>Create a service account</h3>
-<p>Create a vsphere.local user, or add a domain user, to provide access and assign
+<h3 id=create-a-service-account>Create a service account <a class=anchor href=#create-a-service-account>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Create a vsphere.local user, or add a domain user, to provide access and assign
 the new roles to.</p>
 <ul>
 <li><a href=mailto:vcp-k8s-svc@vsphere.local>vcp-k8s-svc@vsphere.local</a></li>
 <li>VMware1!</li>
 </ul>
-<h3 id=configure-account-roles-and-permissions>Configure account roles and permissions</h3>
-<p>Assign the role <em>vcp-manage-k8s-node-vms</em> to the <em>vcp-k8s-svc</em> account on the
+<h3 id=configure-account-roles-and-permissions>Configure account roles and permissions <a class=anchor href=#configure-account-roles-and-permissions>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Assign the role <em>vcp-manage-k8s-node-vms</em> to the <em>vcp-k8s-svc</em> account on the
 Cluster and VM folder in which your Kubernetes nodes run, ensure the “Propagate
 to children” is ticked.</p>
 <div class=clr-content-image-wrap>
@@ -257,8 +262,9 @@ Datastore Folder, if you have them).</p>
 </a>
 <figcaption class=clr-caption></figcaption>
 </div>
-<h1 id=create-a-kubernetes-secret>Create a Kubernetes Secret</h1>
-<p>To secure the vSphere credentials they can be stored as a <a href=https://kubernetes.io/docs/concepts/configuration/secret/>Kubernetes
+<h1 id=create-a-kubernetes-secret>Create a Kubernetes Secret <a class=anchor href=#create-a-kubernetes-secret>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>To secure the vSphere credentials they can be stored as a <a href=https://kubernetes.io/docs/concepts/configuration/secret/>Kubernetes
 Secret</a>. First,
 covert the credentials to base64:</p>
 <div class=highlight><div class=chroma>
@@ -338,8 +344,9 @@ vcsa.definit.local.username:  <span class=m>25</span> bytes
 </div>
 </div><p>#Configuring the Kubernetes vSphere Cloud Provider
 ##On the Kubernetes Master node</p>
-<h3 id=create-vsphereconf>Create vsphere.conf</h3>
-<p>Create the vSphere configuration file in /etc/kubernetes/vcp/vsphere.conf -
+<h3 id=create-vsphereconf>Create vsphere.conf <a class=anchor href=#create-vsphereconf>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Create the vSphere configuration file in /etc/kubernetes/vcp/vsphere.conf -
 you’ll need to create the folder.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -385,8 +392,9 @@ you’ll need to create the folder.</p>
         <span class=nv>scsicontrollertype</span> <span class=o>=</span> pvscsi
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=modify-the-kubelet-service>Modify the kubelet service</h3>
-<p>The vSphere Storage for Kubernetes docs are a little out of date on this - you
+</div><h3 id=modify-the-kubelet-service>Modify the kubelet service <a class=anchor href=#modify-the-kubelet-service>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>The vSphere Storage for Kubernetes docs are a little out of date on this - you
 don’t modify the systemd unit file directly (which is likely to be overwritten
 in upgrades). Instead there’s an environment file referenced in the</p>
 <p>Append the <code>--cloud-provider</code> and <code>--cloud-config</code> flags to
@@ -399,8 +407,9 @@ in upgrades). Instead there’s an environment file referenced in the</p>
 <pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=nv>KUBELET_KUBEADM_ARGS</span><span class=o>=</span>--cgroup-driver<span class=o>=</span>cgroupfs --network-plugin<span class=o>=</span>cni --pod-infra-container-image<span class=o>=</span>k8s.gcr.io/pause:3.1 --cloud-provider<span class=o>=</span>vsphere --cloud-config<span class=o>=</span>/etc/kubernetes/vcp/vsphere.conf
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=modify-container-manifests>Modify container manifests</h3>
-<p>The container manifests for the Kubernetes API server and controller also need
+</div><h3 id=modify-container-manifests>Modify container manifests <a class=anchor href=#modify-container-manifests>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>The container manifests for the Kubernetes API server and controller also need
 to be updated with the <code>--cloud-provider</code> and <code>--cloud-config</code> flags. These are
 located in the <code>/etc/kubernetes/manifests</code> folder.</p>
 <p>Add the following to the <code>spec:containers:command</code> array, paying attention to
@@ -444,9 +453,11 @@ whitespace (it is yaml, after all!)</p>
     name: vcp
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=on-the-kubernetes-worker-nodes>On the Kubernetes Worker nodes</h2>
-<h3 id=modify-the-kubelet-service-1>Modify the kubelet service</h3>
-<p>Append the <code>--cloud-provider</code> flag to <code>/var/lib/kubelet/kubeadm-flags.env</code></p>
+</div><h2 id=on-the-kubernetes-worker-nodes>On the Kubernetes Worker nodes <a class=anchor href=#on-the-kubernetes-worker-nodes>
+<i class="fas fa-hashtag"></i>
+</a></h2><h3 id=modify-the-kubelet-service-1>Modify the kubelet service <a class=anchor href=#modify-the-kubelet-service-1>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Append the <code>--cloud-provider</code> flag to <code>/var/lib/kubelet/kubeadm-flags.env</code></p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -455,8 +466,9 @@ whitespace (it is yaml, after all!)</p>
 <pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=nv>KUBELET_KUBEADM_ARGS</span><span class=o>=</span>--cgroup-driver<span class=o>=</span>cgroupfs --network-plugin<span class=o>=</span>cni --pod-infra-container-image<span class=o>=</span>k8s.gcr.io/pause:3.1 --cloud-provider<span class=o>=</span>vsphere
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=update-the-node-provide-ids>Update the Node Provide IDs</h2>
-<p>Each Kubernetes node will need a *providerId *set so that the the created
+</div><h2 id=update-the-node-provide-ids>Update the Node Provide IDs <a class=anchor href=#update-the-node-provide-ids>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Each Kubernetes node will need a *providerId *set so that the the created
 volumes are mounted to the correct node. The manual method for doing this is to
 look up the VM’s UUID in vSphere, then patch the node configuration with
 <code>kubectl</code> with the providerId spec. You can check if the providerId is set by
@@ -487,9 +499,11 @@ what you need.</p>
 </a>
 <figcaption class=clr-caption></figcaption>
 </div>
-<h2 id=consuming-vsphere-storage>Consuming vSphere Storage</h2>
-<h3 id=create-storage-class>Create Storage Class</h3>
-<p>To consume the new storage provider, we need to create some storage classes.
+<h2 id=consuming-vsphere-storage>Consuming vSphere Storage <a class=anchor href=#consuming-vsphere-storage>
+<i class="fas fa-hashtag"></i>
+</a></h2><h3 id=create-storage-class>Create Storage Class <a class=anchor href=#create-storage-class>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>To consume the new storage provider, we need to create some storage classes.
 I’ve got two vSphere Storage Policies configured - one for vSAN “<em>One-node vSAN
 Policy</em>", and one for NFS “<em>NFS-Storage</em>". The vSAN policy is the default policy
 for my vSAN provider on the host the nodes run on, and the NFS policy is a
@@ -547,8 +561,9 @@ tag-based policy that will allow placement on any datastore tagged with the
 </div>
 </div><p>The policies are imported using the <code>kubectl apply -f sc-vsan-policy.yaml</code>
 command, and we can check the policy is created by using the <code>kubectl describe storageclaim fast</code> command.</p>
-<h3 id=create-a-persistent-volume-claim>Create a Persistent Volume Claim</h3>
-<p>To be able to consume the Storage Class we need to create a persistent volume
+<h3 id=create-a-persistent-volume-claim>Create a Persistent Volume Claim <a class=anchor href=#create-a-persistent-volume-claim>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>To be able to consume the Storage Class we need to create a persistent volume
 claim, or pvc, that uses the storage class:</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>

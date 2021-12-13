@@ -113,20 +113,23 @@ Tags:
 </div>
 <p>As a proof of concept I recently tried to virtualize OS X (Mountain Lion) - It is important to note that VMware is now licensed to do so and you can <a href="http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1000131" title="Virtualizing Apple Mac OS X - KB Article">read more here</a>.</p>
 <p>The following is an overview of the steps I followed to achieve my goal in some cases it was trial an error as I am not a regular Mac user.</p>
-<h2 id=the-hardware>The Hardware</h2>
-<p>As OS X requires Apple hardware to run you will have to find yourself a Mac that will install and run ESXi. You can check <a href=http://www.vmware.com/resources/compatibility/search.php title="Hardware compatibility list">VMware&rsquo;s HCL</a> even though the results only listed MacPro5,1 I was able to run ESXi 5.1 on a MacPro4,1. I did try it on an earlier MacPro but no joy. For this proof of concept test i have the following hardware.</p>
+<h2 id=the-hardware>The Hardware <a class=anchor href=#the-hardware>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>As OS X requires Apple hardware to run you will have to find yourself a Mac that will install and run ESXi. You can check <a href=http://www.vmware.com/resources/compatibility/search.php title="Hardware compatibility list">VMware&rsquo;s HCL</a> even though the results only listed MacPro5,1 I was able to run ESXi 5.1 on a MacPro4,1. I did try it on an earlier MacPro but no joy. For this proof of concept test i have the following hardware.</p>
 <ul>
 <li>2x 4core MacPro4,1</li>
 <li>7GB Ram</li>
 <li>Single 1TB SATA Drive</li>
 </ul>
 <p>I am also aware others have used Mac mini&rsquo;s as Lab machines but I will not cover that here.</p>
-<h2 id=esxi-installation>ESXi installation</h2>
-<p>The installation is simple, by burning an ISO with ESXi 5.1 and booting the MacPro from the CD and then follow the usual steps to deploy ESXi.</p>
+<h2 id=esxi-installation>ESXi installation <a class=anchor href=#esxi-installation>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The installation is simple, by burning an ISO with ESXi 5.1 and booting the MacPro from the CD and then follow the usual steps to deploy ESXi.</p>
 <p>Note - if you find nothing happens and you end up with a black screen with &ldquo;Select CD-ROM boot type&rdquo; its likely your MacPro cannot run ESXi though I have read a few article where individuals have performed firmware updates etc.</p>
 <p>Once you have have ESXi installed configure it in what ever fashion you wish (a static IP is never a bad idea)</p>
-<h2 id=osx-install--media>OSX install & media</h2>
-<p>Before you go about deploying the VM you will need the OSX install media, after a good deal of searching for the &ldquo;best&rdquo; way to deployed OSX I found a <a href=http://www.idownloadblog.com/2012/09/03/create-os-x-mountain-lion-usb-installation-drive/ title="How to create an OS X Mountain Lion USB installation drive">great little article</a> that creates a bootable USB memory stick. This worked for me first time and continues to work with no issues.</p>
+<h2 id=osx-install--media>OSX install & media <a class=anchor href=#osx-install--media>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Before you go about deploying the VM you will need the OSX install media, after a good deal of searching for the &ldquo;best&rdquo; way to deployed OSX I found a <a href=http://www.idownloadblog.com/2012/09/03/create-os-x-mountain-lion-usb-installation-drive/ title="How to create an OS X Mountain Lion USB installation drive">great little article</a> that creates a bootable USB memory stick. This worked for me first time and continues to work with no issues.</p>
 <p>Once you connect to your ESXi host with your vSphere client you will need to create your new OSX VM this process is the same as creating any other VM but ensure you select the following from the wizard</p>
 <p><img src=https://www.definit.co.uk/images/2014/01/guestos.jpg alt></p>
 <p>Once your VM has been created you will need to select the bootable USB memory stick you created earlier, right click on your VM and select &ldquo;edit settings&rdquo; then click add at the top of the newly opened window as seen below.</p>

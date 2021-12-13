@@ -113,8 +113,9 @@ Tags:
 </div>
 <p><img src=https://www.definit.co.uk/images/2011/03/TMG2010.png alt>This is my current scenario: there are two existing servers in a stand-alone array - TMG01 and TMG02, and over in a DR site there is a new server (TMG03) that is in the process of being built. To comply with DR, all 3 servers must have their configurations up to date, however there is no direct communication allowed between the two DMZs, so simply adding to the new server as an array member is not possible.</p>
 <p>Fortunately, IPSec is allowed between each DMZ and the management DMZ so the plan is to configure IPSec between a new Enterprise Management Server in the Management DMZ (we"ll call it EMS01) and each of the three TMG servers.</p>
-<h2 id=configuring-the-ipsec-connection>Configuring the IPSec connection</h2>
-<p>There&rsquo;s nothing fancy about this, just a plain ol' IPSec setup:</p>
+<h2 id=configuring-the-ipsec-connection>Configuring the IPSec connection <a class=anchor href=#configuring-the-ipsec-connection>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>There&rsquo;s nothing fancy about this, just a plain ol' IPSec setup:</p>
 <p>Create a new IPSec Policy using the wizard</p>
 <p><img src=https://www.definit.co.uk/images/2012/05/2012-05-18-009.png alt> <img src=https://www.definit.co.uk/images/2012/05/2012-05-18-010.png alt></p>
 <p>The policy does not specify a tunnel (it&rsquo;s host-to-host) and we can keep it set to all network connections</p>
@@ -138,8 +139,9 @@ Tags:
 <p>Finally, we are ready to &ldquo;Assign&rdquo; the IPSec policies on all TMG servers - I assigned it on EMS01 and TMG01 first and fired a ping to check the IPSec communication was working.</p>
 <p> <img src=https://www.definit.co.uk/images/2012/05/2012-05-18-025.png alt></p>
 <p><em>Troubleshooting note: you can add &ldquo;IP Security Monitor&rdquo; snap-in to an MMC console to monitor the IPSec communication.</em></p>
-<h2 id=installing-the-tmg-enterprise-management-server> Installing the TMG Enterprise Management Server</h2>
-<p>Run the Preparation Tool, selecting the Enterprise Management Server option and ensure all the pre-requisites are installed.</p>
+<h2 id=installing-the-tmg-enterprise-management-server> Installing the TMG Enterprise Management Server <a class=anchor href=#installing-the-tmg-enterprise-management-server>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Run the Preparation Tool, selecting the Enterprise Management Server option and ensure all the pre-requisites are installed.</p>
 <p><img src=https://www.definit.co.uk/images/2012/05/Image-002.png alt></p>
 <p>Accept the EULA and enter your license and company details. Set the installation path and then select the option to Create a new enterprise configuration.</p>
 <p><img src=https://www.definit.co.uk/images/2012/05/2012-05-18-000.png alt></p>
@@ -157,8 +159,9 @@ Tags:
 <p><img src=https://www.definit.co.uk/images/2012/05/2012-05-18-028.png alt> <img src=https://www.definit.co.uk/images/2012/05/2012-05-18-029.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2012/05/2012-05-18-030.png alt> <img src=https://www.definit.co.uk/images/2012/05/2012-05-18-031.png alt></p>
 <p>Copy the exported config file over to EMS01, log on to the server and open the TMG console.</p>
-<h2 id=importing-the-tmg-array-configuration-to-the-enterprise-management-server>Importing the TMG Array Configuration to the Enterprise Management Server</h2>
-<p>Right click Arrays and select &ldquo;New Array…&rdquo;  and then match the array name exactly to the existing array</p>
+<h2 id=importing-the-tmg-array-configuration-to-the-enterprise-management-server>Importing the TMG Array Configuration to the Enterprise Management Server <a class=anchor href=#importing-the-tmg-array-configuration-to-the-enterprise-management-server>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Right click Arrays and select &ldquo;New Array…&rdquo;  and then match the array name exactly to the existing array</p>
 <p><img src=https://www.definit.co.uk/images/2012/05/2012-05-18-032.png alt>  <img src=https://www.definit.co.uk/images/2012/05/2012-05-18-033.png alt></p>
 <p><em>Match the Array DNS name exactly</em>, and select the Default Policy</p>
 <p><img src=https://www.definit.co.uk/images/2012/05/2012-05-18-034.png alt> <img src=https://www.definit.co.uk/images/2012/05/2012-05-18-035.png alt></p>
@@ -177,8 +180,9 @@ Tags:
 <p><img src=https://www.definit.co.uk/images/2012/05/2012-05-29-018.png alt></p>
 <p>At this point the stand-alone array will not be affected - it&rsquo;s still pointing at it&rsquo;s own configuration storage on the array servers. If you look at the System tab, the connection to the servers will either have an hour glass, or a red cross - this is to be expected, they are not configured to talk to the EMS yet. The Config Management field will be set to &ldquo;EMS-Managed Array&rdquo;</p>
 <p><img src=https://www.definit.co.uk/images/2012/05/2012-05-29-019.png alt></p>
-<h2 id=disjoining-servers-from-the-stand-alone-array-and-joining-the-ems-managed-array>Disjoining Servers from the Stand-alone Array and joining the EMS Managed Array</h2>
-<p>Disjoining the servers will erase the config on the servers, so it needs to be done carefully and out of business hours. Disjoining the non-CSS server first will leave the current array manager in a working state while the other is disjoined and joined to the EMS. If you are using NLB, both servers will remain as part of the NLB while this happens - this can mean that traffic will be directed to the disjoined array but denied by the default rule.</p>
+<h2 id=disjoining-servers-from-the-stand-alone-array-and-joining-the-ems-managed-array>Disjoining Servers from the Stand-alone Array and joining the EMS Managed Array <a class=anchor href=#disjoining-servers-from-the-stand-alone-array-and-joining-the-ems-managed-array>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Disjoining the servers will erase the config on the servers, so it needs to be done carefully and out of business hours. Disjoining the non-CSS server first will leave the current array manager in a working state while the other is disjoined and joined to the EMS. If you are using NLB, both servers will remain as part of the NLB while this happens - this can mean that traffic will be directed to the disjoined array but denied by the default rule.</p>
 <p>Log directly onto the TMG server that is not the array manager, and open the TMG Console. Select the top node and in the actions pane, click the &ldquo;Disjoin Server from Array&rdquo; link.</p>
 <p><img src=https://www.definit.co.uk/images/2012/05/2012-05-29-020.png alt> <img src=https://www.definit.co.uk/images/2012/05/2012-05-29-021.png alt></p>
 <p> <img src=https://www.definit.co.uk/images/2012/05/2012-05-29-022.png alt><img src=https://www.definit.co.uk/images/2012/05/2012-05-29-023.png alt></p>

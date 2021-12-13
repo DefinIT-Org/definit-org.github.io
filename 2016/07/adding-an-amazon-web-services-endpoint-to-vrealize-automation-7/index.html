@@ -98,8 +98,9 @@ Tags:
 </div>
 </div>
 <p><img class="alignright wp-image-7598 size-full" src=/images/2016/07/amazon.com_web_services-e1469699168314.png alt="Amazon Web Services" width=195 height=108>Although it&rsquo;s fairly limited, you can add AWS as an endpoint for vRealize Automation 7  and consume EC2 AMIs as part of a blueprint. You can even add the deployed instances to an existing Elastic Load Balancer at deploy time. In this post I&rsquo;ll run through the basics to get up and running and deploy your first highly available (multiple Availability Zone, load balanced) blueprint.</p>
-<h1 id=preparing-aws-for-use-as-a-vra-endpoint>Preparing AWS for use as a vRA endpoint</h1>
-<p>There are some obvious pre-requisites for attaching an AWS endpoint - for example, you need to have a VPC configured. There are plenty of resources out there for creating a VPC, so I won&rsquo;t extend this post by replicating them. This is what I&rsquo;m using:</p>
+<h1 id=preparing-aws-for-use-as-a-vra-endpoint>Preparing AWS for use as a vRA endpoint <a class=anchor href=#preparing-aws-for-use-as-a-vra-endpoint>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>There are some obvious pre-requisites for attaching an AWS endpoint - for example, you need to have a VPC configured. There are plenty of resources out there for creating a VPC, so I won&rsquo;t extend this post by replicating them. This is what I&rsquo;m using:</p>
 <ul>
 <li>A VPC with a network CIDR of 10.0.0.0/16
 <ul>
@@ -115,24 +116,28 @@ Tags:
 </ul>
 <p>AWS endpoints are not configured using a user name and password, instead you need to create a user within AWS&rsquo;s Identity & Access Management console. You can find it on your AWS console under Security and Identity:</p>
 <p><img src=https://www.definit.co.uk/images/2016/06/2016-06-15_14-02-13.png alt></p>
-<h2 id=create-a-group-and-assign-policy>Create a group and assign policy</h2>
-<p>AWS best practice is to assign permissions at a group level, rather than at the user level, so lets create a group for vRA. Select the Groups page and then &ldquo;Create new Group&rdquo;. I&rsquo;ve called my group &ldquo;DefinIT-Lab&rdquo;, then click Next Step.</p>
+<h2 id=create-a-group-and-assign-policy>Create a group and assign policy <a class=anchor href=#create-a-group-and-assign-policy>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>AWS best practice is to assign permissions at a group level, rather than at the user level, so lets create a group for vRA. Select the Groups page and then &ldquo;Create new Group&rdquo;. I&rsquo;ve called my group &ldquo;DefinIT-Lab&rdquo;, then click Next Step.</p>
 <p><img src=https://www.definit.co.uk/images/2016/06/2016-06-15_14-25-48.png alt></p>
 <p> </p>
 <p>If you look at the AWS User Roles and Credentials Required in the vRA7 documentation, you&rsquo;ll see that we need to assign the Power User role to our user. To do this we can filter the list of policies and attach the PowerUserAccess policy to the new group.</p>
 <p><img src=https://www.definit.co.uk/images/2016/06/2016-06-15_14-28-43.png alt></p>
 <p>Review the group name and attached polices, then click create group.</p>
-<h2 id=create-a-user-and-an-access-key-for-vra>Create a user and an access key for vRA</h2>
-<p> </p>
+<h2 id=create-a-user-and-an-access-key-for-vra>Create a user and an access key for vRA <a class=anchor href=#create-a-user-and-an-access-key-for-vra>
+<i class="fas fa-hashtag"></i>
+</a></h2><p> </p>
 <p>Select the Users page and then &ldquo;Create New Users&rdquo;. You can bulk add users, but for my purposes I need just the one for my vRA instance. I&rsquo;m creating a user called DefinIT-vRA. Ensure the &ldquo;Generate an access key for each user&rdquo; option is ticked.</p>
 <p><img src=https://www.definit.co.uk/images/2016/06/2016-06-15_14-14-28.png alt></p>
 <p>Once successfully created, the user&rsquo;s credentials are also available - and before you try and access my AWS account, the user in this post has been deleted 🙂 Be sure to make a note of the credentials - once you finish the create wizard you won&rsquo;t see the Secret Access Key again. You can also download the credentials as a CSV file if needed.</p>
 <p><img src=https://www.definit.co.uk/images/2016/06/2016-06-15_14-19-56.png alt></p>
 <p>At this point the user has no permissions, so we need to assign a group and some permissions. Fortunately, we created a group for that purpose just now! Select the newly created user and click &ldquo;Add User to Groups&rdquo; under the Groups tab.</p>
 <p><img src=https://www.definit.co.uk/images/2016/06/2016-06-15_14-35-32.png alt></p>
-<h1 id=configuring-vra-for-aws>Configuring vRA for AWS</h1>
-<h2 id=creating-an-aws-endpoint-in-vra>Creating an AWS Endpoint in vRA</h2>
-<p>Firstly, lets set up some credentials based on the user we created earlier. Log into vRA with a user that has Infrastructure Admin permissions, select Infrastructure > Endpoints > Credentials. Click &ldquo;New&rdquo; to create a new credential, then enter a Name and Description that suits you. Enter the Access Key ID generated for your user as the User Name, and the Secret Access Key as the password.</p>
+<h1 id=configuring-vra-for-aws>Configuring vRA for AWS <a class=anchor href=#configuring-vra-for-aws>
+<i class="fas fa-hashtag"></i>
+</a></h1><h2 id=creating-an-aws-endpoint-in-vra>Creating an AWS Endpoint in vRA <a class=anchor href=#creating-an-aws-endpoint-in-vra>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Firstly, lets set up some credentials based on the user we created earlier. Log into vRA with a user that has Infrastructure Admin permissions, select Infrastructure > Endpoints > Credentials. Click &ldquo;New&rdquo; to create a new credential, then enter a Name and Description that suits you. Enter the Access Key ID generated for your user as the User Name, and the Secret Access Key as the password.</p>
 <p><img src=https://www.definit.co.uk/images/2016/06/2016-06-15_14-49-54.png alt></p>
 <p>Next select Endpoints and click New > Cloud > Amazon EC2</p>
 <p><img src=https://www.definit.co.uk/images/2016/06/2016-06-15_14-57-05.png alt></p>
@@ -141,11 +146,13 @@ Tags:
 <p>vRA will now kick off a data collection against AWS using your credentials. To check on it&rsquo;s progress you can select Data Collection from the contextual menu.</p>
 <p><img src=https://www.definit.co.uk/images/2016/06/2016-06-15_15-00-04.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2016/06/2016-06-15_15-03-00.png alt></p>
-<h2 id=create-a-fabric-group-for-aws>Create a Fabric Group for AWS</h2>
-<p>Next, create a new fabric group for the AWS regions. You need to be logged in with a user that has Fabric Administrator rights. Select Infrastructure > Endpoints > Fabric Groups > New and enter a Name, Description and select the Fabric Administrators. I want to make use of the EU regions, so I called mine &ldquo;AWS Free Tier EU&rdquo;, and I used my existing AD group &ldquo;vRA Fabric Admins&rdquo;. Next select the regions you want to be able to deploy to - bearing in mind you will need a VPC in each to be able to deploy to them.</p>
+<h2 id=create-a-fabric-group-for-aws>Create a Fabric Group for AWS <a class=anchor href=#create-a-fabric-group-for-aws>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Next, create a new fabric group for the AWS regions. You need to be logged in with a user that has Fabric Administrator rights. Select Infrastructure > Endpoints > Fabric Groups > New and enter a Name, Description and select the Fabric Administrators. I want to make use of the EU regions, so I called mine &ldquo;AWS Free Tier EU&rdquo;, and I used my existing AD group &ldquo;vRA Fabric Admins&rdquo;. Next select the regions you want to be able to deploy to - bearing in mind you will need a VPC in each to be able to deploy to them.</p>
 <p><img src=https://www.definit.co.uk/images/2016/06/2016-06-15_15-18-08.png alt></p>
-<h2 id=create-a-reservation-for-aws>Create a Reservation for AWS</h2>
-<p>Select Infrastructure > Reservations > Reservations > New > Amazon to begin configuring the AWS reservation.</p>
+<h2 id=create-a-reservation-for-aws>Create a Reservation for AWS <a class=anchor href=#create-a-reservation-for-aws>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Select Infrastructure > Reservations > Reservations > New > Amazon to begin configuring the AWS reservation.</p>
 <p><img src=https://www.definit.co.uk/images/2016/06/2016-06-15_15-50-52.png alt></p>
 <p>The General tab is configured as you would any other Reservation in vRA. Create a Name, assign to a Tenant, Business Group and Reservation Policy (optional), and assign a Priority.<img src=https://www.definit.co.uk/images/2016/06/2016-06-15_15-53-11.png alt></p>
 <p>On the Resources tab it gets a little more in depth. I have a VPC configured in eu-west-1, so I&rsquo;m going to create a reservation there -  I select the AWS Free Tier-eu-west-1 compute resource. I&rsquo;m going to set the Machine Quota to 10, for my own peace of mind. Next specify how you&rsquo;d like to handle the key pairs for the deployed VMs - you can select:</p>

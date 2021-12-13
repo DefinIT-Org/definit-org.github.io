@@ -120,8 +120,9 @@ Tags:
 <p>Online and offline license activation via the new standalone UI.</p>
 </blockquote>
 <p>Obviously support for vSphere 6.0 was the big one I was waiting for, but don&rsquo;t discount the rather understated &ldquo;Performance and scalability improvements&rdquo;. Not sure if renaming the database is a headline for release, but I&rsquo;ll let that go. I&rsquo;m really, really, REALLY hoping the license activation has improved because I found it a little clunky and frustrating before…we&rsquo;ll see…</p>
-<h2 id=prerequisites>Prerequisites</h2>
-<ul>
+<h2 id=prerequisites>Prerequisites <a class=anchor href=#prerequisites>
+<i class="fas fa-hashtag"></i>
+</a></h2><ul>
 <li>
 <p>You need to be running ESXi 5.1, 5.5 or 6.0 (no 5.0 support)</p>
 </li>
@@ -153,8 +154,9 @@ Tags:
 <p>I have also granted admin rights on my SQL server (this can be dropped to DBO rights on the Pernix database after installation).</p>
 </li>
 </ul>
-<h2 id=installing-the-pernixdata-host-extension>Installing the PernixData Host Extension</h2>
-<p>The PernixData Host Extension needs to be installed on all hosts in the cluster that you are activating FVP. You can install using esxcli or using VMware Update Manager. Since I&rsquo;m only installing on 3 hosts, I&rsquo;ll use esxcli, but I think that&rsquo;s probably the threshold for installing manually, any more and I&rsquo;d go with VUM. Make sure you download the correct package for manual or VUM install.</p>
+<h2 id=installing-the-pernixdata-host-extension>Installing the PernixData Host Extension <a class=anchor href=#installing-the-pernixdata-host-extension>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The PernixData Host Extension needs to be installed on all hosts in the cluster that you are activating FVP. You can install using esxcli or using VMware Update Manager. Since I&rsquo;m only installing on 3 hosts, I&rsquo;ll use esxcli, but I think that&rsquo;s probably the threshold for installing manually, any more and I&rsquo;d go with VUM. Make sure you download the correct package for manual or VUM install.</p>
 <p>Copy the extension zip to somewhere accessible by your ESXi hosts. I&rsquo;ve dropped it on an NFS share that&rsquo;s mounted on all my hosts.</p>
 <p>SSH or console onto the hosts and check there are no old FVP extensions installed</p>
 <pre class="brush: bash; gutter: false">esxcli software vib list | grep pernix</pre>
@@ -166,8 +168,9 @@ e.g. esxcli software vib install -d /vmfs/volumes/IX200-Temp/FVP3.0/PernixData-h
 <p>Exit maintenance mode on the host</p>
 <pre class="brush: bash; gutter: false">esxcli system maintenanceMode set -e false</pre>
 <p>Rinse and repeat for all the hosts in the cluster.</p>
-<h2 id=installing-the-pernixdata-management-server>Installing the PernixData Management Server</h2>
-<p>Run the installer and accept the license agreement</p>
+<h2 id=installing-the-pernixdata-management-server>Installing the PernixData Management Server <a class=anchor href=#installing-the-pernixdata-management-server>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Run the installer and accept the license agreement</p>
 <p><img src=https://www.definit.co.uk/images/2015/09/image_thumb.png alt><img src=https://www.definit.co.uk/images/2015/09/image_thumb1.png alt></p>
 <p>I was unable to change the location of the install - not sure why, but I&rsquo;ll be reporting it back to Pernix. Select the &ldquo;Complete&rdquo; installation to install the Management server and the CLI tools. If you just want the Management Server or CLI tools you can do a custom install.</p>
 <p><img src=https://www.definit.co.uk/images/2015/09/image_thumb2.png alt><img src=https://www.definit.co.uk/images/2015/09/image_thumb3.png alt></p>
@@ -184,8 +187,9 @@ e.g. esxcli software vib install -d /vmfs/volumes/IX200-Temp/FVP3.0/PernixData-h
 <p><img src=https://www.definit.co.uk/images/2015/09/image_thumb9.png alt></p>
 <p>And finish!</p>
 <p><img src=https://www.definit.co.uk/images/2015/09/image_thumb10.png alt></p>
-<h2 id=configuring-fvp>Configuring FVP</h2>
-<p>So far the install process has been identical to previous versions of FVP - now here comes that new management interface mentioned in the release notes!</p>
+<h2 id=configuring-fvp>Configuring FVP <a class=anchor href=#configuring-fvp>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>So far the install process has been identical to previous versions of FVP - now here comes that new management interface mentioned in the release notes!</p>
 <p>Log onto the PernixData Management Console using the HTTP address we configured earlier. Remember, if you changed ports during the install then you need to change them here:</p>
 <p><a href=http://manager-server.domain.local:60001/login>http://manager-server.domain.local:60001/login</a></p>
 <p>You&rsquo;ll be redirected automatically the HTTPS port and the login page will load. Log in using the account you configured for vCenter access - in my case definit\svc_pernix.</p>
@@ -193,8 +197,9 @@ e.g. esxcli software vib install -d /vmfs/volumes/IX200-Temp/FVP3.0/PernixData-h
 <p>Once you&rsquo;ve logged on, select the &ldquo;Licensing&rdquo; tab, then select your vCenter Server. Click &ldquo;Enter FVP License Key&rdquo; and enter your license key:</p>
 <p><img src=https://www.definit.co.uk/images/2015/09/image_thumb12.png alt></p>
 <p>FVP will then go online and authorise your license…and that&rsquo;s it, done! This is a MASSIVE improvement on the old method which involve license servers and downloading response files. It&rsquo;s how it should work - well done Pernix!</p>
-<h3 id=creating-fvp-clusters>Creating FVP Clusters</h3>
-<p>Next, select FVP from the drop down and you can see an overview of your FVP clusters - I&rsquo;ve not got anything configured yet.</p>
+<h3 id=creating-fvp-clusters>Creating FVP Clusters <a class=anchor href=#creating-fvp-clusters>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Next, select FVP from the drop down and you can see an overview of your FVP clusters - I&rsquo;ve not got anything configured yet.</p>
 <p><img src=https://www.definit.co.uk/images/2015/09/image_thumb13.png alt></p>
 <p>Click &ldquo;Create&rdquo; under FVP Clusters to begin the creation of your first FVP cluster (or use the FVP Clusters dropdown)</p>
 <p><img src=https://www.definit.co.uk/images/2015/09/image_thumb14.png alt></p>
@@ -203,17 +208,20 @@ e.g. esxcli software vib install -d /vmfs/volumes/IX200-Temp/FVP3.0/PernixData-h
 <p>Click on the new cluster to open the cluster details</p>
 <p><img src=https://www.definit.co.uk/images/2015/09/image_thumb16.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2015/09/image_thumb17.png alt></p>
-<h3 id=configuring-acceleration-resources>Configuring Acceleration Resources</h3>
-<p>Select &ldquo;Configuration&rdquo; to begin configuring acceleration resources. Click &ldquo;Add…&rdquo; to select the flash (or RAM) you wish to use. In this cluster I have a 40GB SSD in each host that I will be using to accelerate Read/Write performance. If you wish to use RAM to accelerate your storage then you can allocate a minimum of 4GB, in 4GB intervals, up to 1TB of RAM per host. You cannot use RAM and flash together to accelerate on the same host.</p>
+<h3 id=configuring-acceleration-resources>Configuring Acceleration Resources <a class=anchor href=#configuring-acceleration-resources>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Select &ldquo;Configuration&rdquo; to begin configuring acceleration resources. Click &ldquo;Add…&rdquo; to select the flash (or RAM) you wish to use. In this cluster I have a 40GB SSD in each host that I will be using to accelerate Read/Write performance. If you wish to use RAM to accelerate your storage then you can allocate a minimum of 4GB, in 4GB intervals, up to 1TB of RAM per host. You cannot use RAM and flash together to accelerate on the same host.</p>
 <p><img src=https://www.definit.co.uk/images/2015/09/image_thumb18.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2015/09/image_thumb19.png alt></p>
-<h3 id=add-datastores-to-be-accelerated>Add Datastores to be accelerated</h3>
-<p>Select the Datastores/VMs tab and click &ldquo;Add Datastores&rdquo; to open the datastore dialogue. Select the datastores you wish to accelerate - in my case two NFS datastores on my Synology NAS. Adding the datastore automatically adds all VMs associated with that datastore to the FVP cluster, and any new VMs added to the datastore will receive the datastore&rsquo;s default policy.</p>
+<h3 id=add-datastores-to-be-accelerated>Add Datastores to be accelerated <a class=anchor href=#add-datastores-to-be-accelerated>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Select the Datastores/VMs tab and click &ldquo;Add Datastores&rdquo; to open the datastore dialogue. Select the datastores you wish to accelerate - in my case two NFS datastores on my Synology NAS. Adding the datastore automatically adds all VMs associated with that datastore to the FVP cluster, and any new VMs added to the datastore will receive the datastore&rsquo;s default policy.</p>
 <p>Next select the Write policy - the two options are Write Through, or Write Back. I won&rsquo;t go into detail on the differences because 1) that would be a blog post in itself, and 2) the legendenary Frank Denneman has already done so <a href=http://frankdenneman.nl/2013/07/19/write-back-and-write-through-policies-in-fvp/ target=_blank>here</a> and I&rsquo;m likely to fall far short of his explanations. I&rsquo;m going to select &ldquo;Write Back&rdquo; with a local and 1 peer copy, to provide write acceleration as well as some data protection.</p>
 <p><img src=https://www.definit.co.uk/images/2015/09/image_thumb20.png alt></p>
 <p>To add only specific VMs, or to change the Write Policy for individual VMs, you can add VMs individually to the cluster using the &ldquo;Add VMs…&rdquo; button. This works in the same way so I won&rsquo;t go into details, but I like the idea of setting a datastore policy that fits most VMs - e.g. Write Back with Local host and 1 peer - then assigning more peers to VMs where the data is more critical, or Write through to VMs that aren&rsquo;t in need of write acceleration.</p>
-<h3 id=other-configuration>Other configuration</h3>
-<p><strong>Fault Domains</strong> - configuring a fault domain allows you to replicate write data intelligently - e.g. to ensure a copy of each write is replicated to a different rack, or blade chassis to protect against the failure of such. For my lab, there&rsquo;s no point in doing that, so I will leave the default Fault Domain in place, with all hosts in it.</p>
+<h3 id=other-configuration>Other configuration <a class=anchor href=#other-configuration>
+<i class="fas fa-hashtag"></i>
+</a></h3><p><strong>Fault Domains</strong> - configuring a fault domain allows you to replicate write data intelligently - e.g. to ensure a copy of each write is replicated to a different rack, or blade chassis to protect against the failure of such. For my lab, there&rsquo;s no point in doing that, so I will leave the default Fault Domain in place, with all hosts in it.</p>
 <p><strong>Blacklist</strong> - if you want to ensure a VM is never accelerated, you can add it to the black list</p>
 <p><strong>VADP</strong> - Specify VADP VMs in your environment so that FVP works seamlessly with relevant backup processes. VADP VMs won&rsquo;t be accelerated by FVP.</p>
 <p><strong>Network Configuration</strong> - by default FVP will chose the vMotion network for all of it&rsquo;s replication traffic, but you can specify a network dedicated just to FVP. Since my lab is all on 1GB networking, I like to dedicate a single 1GB NIC just for FVP rather than sharing with vMotion. To do this, ensure you have a VMkernel on each ESXi host on the network you wish to use, and ensure they can all communicate with each other.</p>

@@ -137,23 +137,26 @@ vCAC 6.0/6.1 build out to distributed model: Deploy the Identity Appliance
 </div>
 <p><img style="margin:0 0 10px 10px;display:inline" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRtpP50Mt6WX_zxXZC2aCKy2bIKfcfY3fBA42e7JwSMCaQACqjv" alt width=180 height=100 align=right>SSO is a fundamental requirement when deploying vCAC, whether for a distributed or simple installation. This walk through goes through the deployment and configuration of the vCAC Identity Appliance, which provides a stand alone SSO instance for vCAC.</p>
 <p>Some of the posts in this series are completed with vCAC 6.0.1, others will be with 6.1. Where there are differences I will aim to point them out!</p>
-<h2 id=deploying-the-ovf>Deploying the OVF</h2>
-<p>Deploying the OVF is very simple, just run through the wizard:</p>
+<h2 id=deploying-the-ovf>Deploying the OVF <a class=anchor href=#deploying-the-ovf>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Deploying the OVF is very simple, just run through the wizard:</p>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb18.png alt> <img src=https://www.definit.co.uk/images/2014/09/image_thumb19.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb20.png alt> <img src=https://www.definit.co.uk/images/2014/09/image_thumb21.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb22.png alt> <img src=https://www.definit.co.uk/images/2014/09/image_thumb23.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb24.png alt> <img src=https://www.definit.co.uk/images/2014/09/image_thumb25.png alt></p>
 <p>The appliance will perform a reverse lookup to get it&rsquo;s hostname - if you have pre-staged a DNS A and PTR record, and have a reservation set for the VM. If you statically assign an IP address, make sure you use the FQDN in the hostname field - not doing so will cause issues with the self-signed certificates and also when you join the Active Directory domain.</p>
-<h2 id=initial-appliance-configuration>Initial Appliance Configuration</h2>
-<p>Log on to your new appliance using https://<hostname or ip>:5480</p>
+<h2 id=initial-appliance-configuration>Initial Appliance Configuration <a class=anchor href=#initial-appliance-configuration>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Log on to your new appliance using https://<hostname or ip>:5480</p>
 <p>Set the time zone - ensure this is consistent across all components of vCAC.</p>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb26.png alt></p>
 <p>Configure your time source - again make sure it&rsquo;s consistent throughout your vCAC deployment.</p>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb27.png alt></p>
 <p>If the time doesn&rsquo;t update, force a re-sync with &ldquo;rcntp ntptimeset&rdquo; via SSH.</p>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb28.png alt></p>
-<h2 id=configuring-sso>Configuring SSO</h2>
-<p>Initialise the SSO by entering an SSO admin password - this might take a few minutes to configure while it initialises</p>
+<h2 id=configuring-sso>Configuring SSO <a class=anchor href=#configuring-sso>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Initialise the SSO by entering an SSO admin password - this might take a few minutes to configure while it initialises</p>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb29.png alt></p>
 <p>Modify the host settings and ensure you have the FQDN for the appliance (the domain should match the AD you want to join)</p>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb30.png alt></p>
@@ -188,8 +191,9 @@ vCAC 6.0/6.1 build out to distributed model: Deploy the Identity Appliance
 <p>Open the private key file (.key) and copy the contents - paste it into the private key field in the SSL certificate page of the Identity Appliance.</p>
 <p>Next copy the contents of the signed certificate (.cer) to the Certificate chain field. Then copy any intermediate CA certificate contents, then the root CA certificate contents.</p>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb31.png alt> <img src=https://www.definit.co.uk/images/2014/09/image_thumb32.png alt></p>
-<h2 id=join-the-active-directory-domain>Join the Active Directory domain</h2>
-<p>Enter the domain&rsquo;s FQDN, a user account with permissions to join the appliance to active directory and the password, and then click &ldquo;Join Domain&rdquo; - if your appliance hostname is not an FQDN or doesn&rsquo;t match the domain that you&rsquo;re joining, the operation will fail.</p>
+<h2 id=join-the-active-directory-domain>Join the Active Directory domain <a class=anchor href=#join-the-active-directory-domain>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Enter the domain&rsquo;s FQDN, a user account with permissions to join the appliance to active directory and the password, and then click &ldquo;Join Domain&rdquo; - if your appliance hostname is not an FQDN or doesn&rsquo;t match the domain that you&rsquo;re joining, the operation will fail.</p>
 <p><img src=https://www.definit.co.uk/images/2014/09/image_thumb33.png alt> <img src=https://www.definit.co.uk/images/2014/09/image_thumb34.png alt></p>
 <h6>Share this post</h6>
 <span class=share-box>

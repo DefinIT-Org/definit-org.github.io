@@ -116,8 +116,9 @@ Tags:
 <p>The array will be a Network Load Balanced proxy server for all LAN clients to access the internet; it will provide content caching and malware protection. It will also reverse proxy Outlook Web Access, ActiveSync, Outlook Anywhere, SharePoint and some internal static HTTP resources. It will also provide SSL VPN (SSTP) access for remote clients, but that will be the subject of a later post.</p>
 <p>The network diagram for this setup looks like this:</p>
 <p><img src=https://www.definit.co.uk/images/2010/11/image_thumb11.png alt></p>
-<h2 id=nic-configuration>NIC Configuration</h2>
-<p>Prior to installation, it’s important to get the network adaptors configured correctly, the reasons for which are discussed later in more detail, but the basic rule is that there should only be one default gateway and one adaptor configured to provide DNS resolution to the internal network.</p>
+<h2 id=nic-configuration>NIC Configuration <a class=anchor href=#nic-configuration>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Prior to installation, it’s important to get the network adaptors configured correctly, the reasons for which are discussed later in more detail, but the basic rule is that there should only be one default gateway and one adaptor configured to provide DNS resolution to the internal network.</p>
 <p><strong>TMG01</strong></p>
 <table border=1 cellspacing=0 cellpadding=0>
 <tr>
@@ -420,8 +421,9 @@ DNS 2
 </code></pre>
 </tr>
 </table>
-<h2 id=installing-tmg01-and-tmg02>Installing TMG01 and TMG02</h2>
-<p><em>Run the following procedure on BOTH servers.</em></p>
+<h2 id=installing-tmg01-and-tmg02>Installing TMG01 and TMG02 <a class=anchor href=#installing-tmg01-and-tmg02>
+<i class="fas fa-hashtag"></i>
+</a></h2><p><em>Run the following procedure on BOTH servers.</em></p>
 <p>Configure all 3 NICs with their assigned IP addresses.</p>
 <p>Run the TMG 2010 installer, ensure you’ve run Windows Update and you’re fully patched.</p>
 <p>Run the Preparation Tool, which basically installs pre-requisites and checks for required Roles and Features. Correct anything that’s not installed.</p>
@@ -445,8 +447,9 @@ DNS 2
 <p><img src=https://www.definit.co.uk/images/2010/11/clip_image012_thumb.png alt></p>
 <p>After about 40 minutes, you reach the completion screen.</p>
 <p><img src=https://www.definit.co.uk/images/2010/11/clip_image013_thumb.png alt></p>
-<h2 id=configure-internal-dns-records>Configure Internal DNS records</h2>
-<p>While that’s installing, you can set up the required DNS records.</p>
+<h2 id=configure-internal-dns-records>Configure Internal DNS records <a class=anchor href=#configure-internal-dns-records>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>While that’s installing, you can set up the required DNS records.</p>
 <table border=1 cellspacing=0 cellpadding=0>
 <tr>
 <td valign=top width=308>
@@ -516,8 +519,9 @@ TMG02-IA
 </table>
 <p>*created automatically as they’re domain joined with AD integrated DNS</p>
 <p>The additional records here are for the NLB virtual IP address (proxy.domain.com) and for the Intra-array communications network. The intra-array DNS records are required because of the Kerberos dependency to access the Array Configuration Storage Server (CSS); it requires a SPN (Service Principle Name) to be configured, which in turn requires DNS resolution.</p>
-<h2 id=update-tmg-to-latest-sp-level-sp1-at-time-of-writing>Update TMG to latest SP level (SP1 at time of writing)</h2>
-<p>Both TMG servers should be updated to the latest SP level.</p>
+<h2 id=update-tmg-to-latest-sp-level-sp1-at-time-of-writing>Update TMG to latest SP level (SP1 at time of writing) <a class=anchor href=#update-tmg-to-latest-sp-level-sp1-at-time-of-writing>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Both TMG servers should be updated to the latest SP level.</p>
 <p>The service pack installer must be run from an elevated command prompt, otherwise it will fail.</p>
 <p>Run the SP installation</p>
 <p><img src=https://www.definit.co.uk/images/2010/11/clip_image014_thumb.png alt></p>
@@ -530,8 +534,9 @@ TMG02-IA
 <p>If you receive any errors or warnings, the chances are you’ve not run the installation from an elevated command prompt. You need to re-run the SP to install correctly.</p>
 <p><img src=https://www.definit.co.uk/images/2010/11/clip_image018_thumb.png alt></p>
 <p>Restart the server (it now seems to take <em>a lot</em> longer to reboot the servers – be patient!)</p>
-<h2 id=run-the-tmg-configuration-wizard>Run the TMG configuration Wizard</h2>
-<p>When you run the Forefront Threat Management Console for the first time it will run the Getting Started Wizard</p>
+<h2 id=run-the-tmg-configuration-wizard>Run the TMG configuration Wizard <a class=anchor href=#run-the-tmg-configuration-wizard>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>When you run the Forefront Threat Management Console for the first time it will run the Getting Started Wizard</p>
 <p><img src=https://www.definit.co.uk/images/2010/11/clip_image019_thumb.png alt></p>
 <p>Click, Configure network settings – start the network setup wizard</p>
 <p><img src=https://www.definit.co.uk/images/2010/11/clip_image020_thumb.png alt></p>
@@ -565,8 +570,9 @@ TMG02-IA
 <p> <img src=https://www.definit.co.uk/images/2010/11/clip_image034_thumb.png alt></p>
 <p>Check “Save the changes and restart the services”</p>
 <p><img src=https://www.definit.co.uk/images/2010/11/clip_image035_thumb.png alt></p>
-<h2 id=routing-configuration>Routing Configuration</h2>
-<p>With the additional subnets in the network, the TMG servers need to know where to route traffic, which interface they are to route the traffic on, and how to treat the network. The routing is easiest to configure at the server level using the ROUTE command.</p>
+<h2 id=routing-configuration>Routing Configuration <a class=anchor href=#routing-configuration>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>With the additional subnets in the network, the TMG servers need to know where to route traffic, which interface they are to route the traffic on, and how to treat the network. The routing is easiest to configure at the server level using the ROUTE command.</p>
 <p>View the routing table using the “route print” command from an elevated command prompt.</p>
 <p><img src=https://www.definit.co.uk/images/2010/11/clip_image037_thumb.jpg alt></p>
 <p>You can see the default route, or gateway of last resort is set to 192.168.10.1 – the DMZ gateway. You can also see the server has a route for the networks it has an IP address on; namely the LAN and Intra-array networks (192.168.8.0/24 and 10.20.200.0/29). These are “On-Link”, meaning anything for those networks will be sent via the NIC with the IP address on the same subnet.</p>
@@ -580,8 +586,9 @@ TMG02-IA
 <p><font face=courier>route add –p 10.20.110.0 mask 255.255.254.0 192.168.8.1 metric 20 if 11</font></p>
 </blockquote>
 <p>You can now test the route by pinging a host on the new subnet. Add routes for all internal networks you want routed through the LAN interface.</p>
-<h2 id=configure-service-principle-names-for-intra-array-communications>Configure Service Principle Names for Intra-array communications</h2>
-<p>CSS access over the Intra-array network requires Kerberos, which requires SPNs. To create the SPNs, run a command prompt and issue these commands (per server):</p>
+<h2 id=configure-service-principle-names-for-intra-array-communications>Configure Service Principle Names for Intra-array communications <a class=anchor href=#configure-service-principle-names-for-intra-array-communications>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>CSS access over the Intra-array network requires Kerberos, which requires SPNs. To create the SPNs, run a command prompt and issue these commands (per server):</p>
 <blockquote>
 <p><font face=courier>setspn -a ldap/<i>[Intra-array DNS Name]</i> <i>[NETBIOS Name] </i></font></p>
 <p><font face=courier>setspn -a ldap/<i>[Intra-array DNS Name]</i> :2171 <i>[NETBIOS Name]</i></font></p>
@@ -593,8 +600,9 @@ TMG02-IA
 </blockquote>
 <p>To check the SPNs are correctly configured, use “setspn –L <em>[NETBIOS Name]</em>”</p>
 <p>This needs to be configured on each array member.</p>
-<h2 id=preparing-and-configuring-the-standalone-array>Preparing and configuring the Standalone Array</h2>
-<p>On TMG01 - In the Threat Management Gateway console, under Firewall Policy > Toolbox (on the right hand pane), expand Computer Sets and add TMG01 and TMG02 to the groups “Managed Server Computers” and “Remote Management Computers”</p>
+<h2 id=preparing-and-configuring-the-standalone-array>Preparing and configuring the Standalone Array <a class=anchor href=#preparing-and-configuring-the-standalone-array>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>On TMG01 - In the Threat Management Gateway console, under Firewall Policy > Toolbox (on the right hand pane), expand Computer Sets and add TMG01 and TMG02 to the groups “Managed Server Computers” and “Remote Management Computers”</p>
 <p><img src=https://www.definit.co.uk/images/2010/11/image_thumb5.png alt></p>
 <p>On TMG02 – open the Threat Management Console, select the server and select “Join Array” from the Tasks tab</p>
 <p><img src=https://www.definit.co.uk/images/2010/11/clip_image039_thumb.png alt></p>
@@ -616,8 +624,9 @@ TMG02-IA
 <p><img src=https://www.definit.co.uk/images/2010/11/image_thumb9.png alt></p>
 <p>You can also check the synchronisation status under the monitoring tab</p>
 <p><img src=https://www.definit.co.uk/images/2010/11/image_thumb10.png alt></p>
-<h2 id=creating-a-rule-enabling-nlb-communication-on-intra-array-network>Creating a rule Enabling NLB communication on Intra-array Network</h2>
-<p>Under the Firewall Policy tab, go to the Toolbox and expand the Protocols pane. Launch the New Protocol Definition Wizard</p>
+<h2 id=creating-a-rule-enabling-nlb-communication-on-intra-array-network>Creating a rule Enabling NLB communication on Intra-array Network <a class=anchor href=#creating-a-rule-enabling-nlb-communication-on-intra-array-network>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Under the Firewall Policy tab, go to the Toolbox and expand the Protocols pane. Launch the New Protocol Definition Wizard</p>
 <p><img src=https://www.definit.co.uk/images/2010/11/clip_image052_thumb.png alt></p>
 <p>Create new protocol as follows (some places recommend port 10000-11000 but the firewall logs show connection attempts up to port 14000)</p>
 <p><img src=https://www.definit.co.uk/images/2010/11/clip_image053_thumb.png alt></p>
@@ -635,8 +644,9 @@ TMG02-IA
 <p><img src=https://www.definit.co.uk/images/2010/11/clip_image059_thumb.png alt></p>
 <p>Apply the new rule to all users, finish the wizard and apply to the server – wait for the array to converge again before moving on</p>
 <p><img src=https://www.definit.co.uk/images/2010/11/clip_image060_thumb.png alt></p>
-<h2 id=enabling-network-load-balancing>Enabling Network Load Balancing</h2>
-<p>From the networking tab, click the “Enable Network Load Balancing Integration”</p>
+<h2 id=enabling-network-load-balancing>Enabling Network Load Balancing <a class=anchor href=#enabling-network-load-balancing>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>From the networking tab, click the “Enable Network Load Balancing Integration”</p>
 <p><img src=https://www.definit.co.uk/images/2010/11/clip_image061_thumb.png alt></p>
 <p>Enable load balancing for the internal and perimeter networks</p>
 <p><img src=https://www.definit.co.uk/images/2010/11/clip_image062_thumb.png alt></p>

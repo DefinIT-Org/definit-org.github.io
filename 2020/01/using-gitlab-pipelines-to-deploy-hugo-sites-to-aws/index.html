@@ -115,8 +115,9 @@ Tags:
 <li>Invalidate the AWS CloudFront cache</li>
 </ol>
 <p>The reason for pushing drafts and future posts to staging is to provide a bit of a preview without needing to have hugo running locally. I tend to use <code>hugo server</code> while I&rsquo;m writing to preview changes, but others (<em>cough</em> <a href=/authors/simon-eady/>Simon</a> <em>cough</em>) don&rsquo;t necessarily have the same setup or knowledge as me - and that&rsquo;s fair enough, he knows plenty of stuff that I don&rsquo;t, that&rsquo;s why he&rsquo;s a great co-author on this blog.</p>
-<h2 id=configuring-the-hugo-build-pipeline-in-gitlab>Configuring the Hugo Build Pipeline in GitLab</h2>
-<p>GitLab CI/CD pipelines are configured using a <code>.gitlab-ci.yml</code> file in the root of the repository. This file is used to describe the various stages of the build, and is automatically triggered when changes are committed to the repository. Although it&rsquo;s just a YAML file, I found the syntax to be a little daunting at first, but fortunately there&rsquo;s an extensive <a href=https://docs.gitlab.com/ee/ci/yaml/README.html>Pipeline Configuration Reference</a> and plenty of templates to get you started. I started with the Hugo template provided.</p>
+<h2 id=configuring-the-hugo-build-pipeline-in-gitlab>Configuring the Hugo Build Pipeline in GitLab <a class=anchor href=#configuring-the-hugo-build-pipeline-in-gitlab>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>GitLab CI/CD pipelines are configured using a <code>.gitlab-ci.yml</code> file in the root of the repository. This file is used to describe the various stages of the build, and is automatically triggered when changes are committed to the repository. Although it&rsquo;s just a YAML file, I found the syntax to be a little daunting at first, but fortunately there&rsquo;s an extensive <a href=https://docs.gitlab.com/ee/ci/yaml/README.html>Pipeline Configuration Reference</a> and plenty of templates to get you started. I started with the Hugo template provided.</p>
 <p><img src=images/SetupGitlabCI.png alt="Setting up the GitLab CI/CD Pipeline"></p>
 <p>In the <strong>definit-hugo</strong> repository, I have created some variables (Settings > CI/CD > Variables) to hold the more sensitive data:</p>
 <table>

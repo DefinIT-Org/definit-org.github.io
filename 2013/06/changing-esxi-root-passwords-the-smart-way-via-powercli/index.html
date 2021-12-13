@@ -102,16 +102,18 @@ Tags:
 </div>
 </div>
 <p><img class="alignright size-full wp-image-1391" style="margin:10px 20px" alt="PowerCLI Logo" src=/images/2012/11/PCLI_128x.png width=128 height=128>If you work in company with strict password compliance rules, for example under SOX, you might well have to change administrator passwords every month. Doing this on any more than a few hosts is tedious work – even on two hosts it seems like a waste of time logging on the host via SSH (or even enabling it first) before changing the password. Then we also need to audit the change, there’s no point making it for compliance reasons if we can’t then prove we did it!</p>
-<h2 id=changing-esxi-passwords-the-manual-way>Changing ESXi passwords the manual way</h2>
-<p>Steps taken from <a href="http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1004659" target=_blank>VM KB 1004659</a></p>
+<h2 id=changing-esxi-passwords-the-manual-way>Changing ESXi passwords the manual way <a class=anchor href=#changing-esxi-passwords-the-manual-way>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Steps taken from <a href="http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1004659" target=_blank>VM KB 1004659</a></p>
 <ol>
 <li>Log on to SSH as root, or log on and use “su –“ to get root level access</li>
 <li>Use “passwd root” to change the root password</li>
 <li>Log off and log back on using the new password to test access</li>
 </ol>
 <p>Rinse and repeat</p>
-<h2 id=changing-esxi-root-passwords-the-smart-way-via-powercli>Changing ESXi root passwords the smart way (via PowerCLI)</h2>
-<p>The script is fairly heavily commented, usage is as follows:</p>
+<h2 id=changing-esxi-root-passwords-the-smart-way-via-powercli>Changing ESXi root passwords the smart way (via PowerCLI) <a class=anchor href=#changing-esxi-root-passwords-the-smart-way-via-powercli>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The script is fairly heavily commented, usage is as follows:</p>
 <p>.\Change-HostPasswords.ps1 -vCenter VC-01.definit.local -Location &ldquo;DefinIT Lab&rdquo;</p>
 <p>Source code for this has moved to GitHub to allow a bit more structured collaboration:</p>
 <p><a href=https://github.com/sammcgeown/Change-HostPasswords/blob/master/Change-HostPasswords.ps1>https://github.com/sammcgeown/Change-HostPasswords/blob/master/Change-HostPasswords.ps1</a></p>

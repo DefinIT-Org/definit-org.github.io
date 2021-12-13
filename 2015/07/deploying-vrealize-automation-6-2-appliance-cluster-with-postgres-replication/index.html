@@ -146,19 +146,24 @@ Deploying vRealize Automation 6.2 Appliance Cluster with Postgres Replication
 <p><img style=float:right;display:inline src=http://blogs.vmware.com/management/files/2015/02/vRA-Product-Icon-Mac_0.png alt width=150 height=150 align=right>The recommendations for the vRealize Appliance have changed with 6.2, the published reference architecture now does not recommend using an external Postgres database (either vPostgres appliance, a 3rd party Postgres deployment or using a third vRealize Appliance as a stand-alone database installation). Instead the recommended layout is shown in the diagram below. One instance of postgres on the primary node becomes an active instance, replicating to the second node which is passive. In front of these a load balancer or DNS entry points to the active node only. Fail-over is still a manual task, but it does provide better protection than a single instance.</p>
 <p>The cafe portal and APIs are still load balanced in an active/active configuration and are clustered together.</p>
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb49.png alt></p>
-<h3 id=prerequisites>Prerequisites</h3>
-<p>The following pre-requisites should be configured before deploying</p>
-<h4 id=single-sign-on>Single Sign On</h4>
-<p>As I discussed in my previous post, there are now three options for single sign on in vRealize Automation 6.2, the trusty old Identity Appliance, whose availability is based solely on vSphere HA. There is also vSphere 5.5 SSO and vSphere 6 Platform Services Controllers, which can both be clustered behind a load balancer to provide high availability.</p>
+<h3 id=prerequisites>Prerequisites <a class=anchor href=#prerequisites>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>The following pre-requisites should be configured before deploying</p>
+<h4 id=single-sign-on>Single Sign On <a class=anchor href=#single-sign-on>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>As I discussed in my previous post, there are now three options for single sign on in vRealize Automation 6.2, the trusty old Identity Appliance, whose availability is based solely on vSphere HA. There is also vSphere 5.5 SSO and vSphere 6 Platform Services Controllers, which can both be clustered behind a load balancer to provide high availability.</p>
 <p>For this deployment, I am using the <a href=http://vexpert.me/DW target=_blank>HA vSphere 6 Platform Services Controller</a> I created in my previous article.</p>
-<h4 id=ip-addressing-and-dns-records>IP Addressing and DNS Records</h4>
-<p>Four IP addresses and DNS records are required - one for each node, and one for each load balanced service. My DNS records are configured as below:</p>
+<h4 id=ip-addressing-and-dns-records>IP Addressing and DNS Records <a class=anchor href=#ip-addressing-and-dns-records>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Four IP addresses and DNS records are required - one for each node, and one for each load balanced service. My DNS records are configured as below:</p>
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb50.png alt></p>
-<h4 id=load-balancing>Load Balancing</h4>
-<p>Load balancing vRealize Appliance web (HTTPS) and postgres traffic is a very simple affair and doesn&rsquo;t require a lot of advanced configuration - most load balancers will be fine. As I&rsquo;ve already deployed the NetScaler VPX Express for the HA PSC setup, I will continue using that.</p>
+<h4 id=load-balancing>Load Balancing <a class=anchor href=#load-balancing>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Load balancing vRealize Appliance web (HTTPS) and postgres traffic is a very simple affair and doesn&rsquo;t require a lot of advanced configuration - most load balancers will be fine. As I&rsquo;ve already deployed the NetScaler VPX Express for the HA PSC setup, I will continue using that.</p>
 <p>Typically I prefer to use NSX Edge Gateways, however these are not supported for the PSC configuration.</p>
-<h4 id=vrealize-appliance-ssl-certificate>vRealize Appliance SSL Certificate</h4>
-<p>A certificate must be generated with with both appliance short names, FQDNs and IP addresses, as well as the short name, FQDN and IP address of the load balanced URL.</p>
+<h4 id=vrealize-appliance-ssl-certificate>vRealize Appliance SSL Certificate <a class=anchor href=#vrealize-appliance-ssl-certificate>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>A certificate must be generated with with both appliance short names, FQDNs and IP addresses, as well as the short name, FQDN and IP address of the load balanced URL.</p>
 <p>Create an openSSL cfg file (mine is saved as Z:\Certificates\vra-app\vra-app.cfg):</p>
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb51.png alt></p>
 <p>Use the following as an example:</p>
@@ -190,8 +195,9 @@ commonName = cloud.definit.local</pre>
 <p>Submit your request to your Certificate Authority using an advanced certificate request, copy the contents of the rui.csr file and paste it into the request form, selecting your VMware template.</p>
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb54.png alt></p>
 <p>Download the base 64 encoded certificate and save it in the same folder as the key. Also download any root and subordinate CA certificates in the chain in base 64 format.</p>
-<h3 id=configure-the-netscaler-load-balancer>Configure the NetScaler Load Balancer</h3>
-<p>Log onto the NetScaler admin console and go to Configuration, Traffic Management, Load Balancing, Servers and click Add to enter the first vRA Appliance node’s IP. Repeat for the second node.</p>
+<h3 id=configure-the-netscaler-load-balancer>Configure the NetScaler Load Balancer <a class=anchor href=#configure-the-netscaler-load-balancer>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Log onto the NetScaler admin console and go to Configuration, Traffic Management, Load Balancing, Servers and click Add to enter the first vRA Appliance node’s IP. Repeat for the second node.</p>
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb55.png alt><img src=https://www.definit.co.uk/images/2015/07/image_thumb56.png alt></p>
 <p>Go to Configuration, Traffic Management, Load Balancing, Services and click Add to configure a service on TCP port 5432, and SSL port 443 on each appliance node (they will show as down for now - that&rsquo;s fine)</p>
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb57.png alt> <img src=https://www.definit.co.uk/images/2015/07/image_thumb58.png alt> <img src=https://www.definit.co.uk/images/2015/07/image_thumb59.png alt> <img src=https://www.definit.co.uk/images/2015/07/image_thumb60.png alt></p>
@@ -207,8 +213,9 @@ commonName = cloud.definit.local</pre>
 <p><img src=https://www.definit.co.uk/images/2015/07/2015-07-14-20_46_19-Citrix-NetScaler-VPX-Configuration-1024x314.png alt></p>
 <p>For the TCP/5432 server, only add the first node (failover is manual). No certificates are required, and no persistence.</p>
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb65.png alt></p>
-<h3 id=deploy-the-two-vrealize-appliance-nodes>Deploy the two vRealize Appliance nodes</h3>
-<p>Deploy two appliances using the OVF deploy wizard, ensure you enable SSH on each node. I&rsquo;ve configured my nodes as below.</p>
+<h3 id=deploy-the-two-vrealize-appliance-nodes>Deploy the two vRealize Appliance nodes <a class=anchor href=#deploy-the-two-vrealize-appliance-nodes>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Deploy two appliances using the OVF deploy wizard, ensure you enable SSH on each node. I&rsquo;ve configured my nodes as below.</p>
 <table border=1 width=600 cellspacing=0 cellpadding=2>
 <tr>
 <td valign=top width=200>
@@ -294,8 +301,9 @@ DNS Name
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb70.png alt> <img src=https://www.definit.co.uk/images/2015/07/image_thumb71.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb72.png alt> <img src=https://www.definit.co.uk/images/2015/07/image_thumb73.png alt></p>
 <p>Finish the wizard but do not power on the appliance after completion.</p>
-<h3 id=configure-vrealize-appliance-nodes>Configure vRealize Appliance nodes</h3>
-<p>Edit both vRealize Appliance virtual machines using the vSphere Web Client, and add a 20GB disk to each before powering them on:</p>
+<h3 id=configure-vrealize-appliance-nodes>Configure vRealize Appliance nodes <a class=anchor href=#configure-vrealize-appliance-nodes>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Edit both vRealize Appliance virtual machines using the vSphere Web Client, and add a 20GB disk to each before powering them on:</p>
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb74.png alt></p>
 <p>Download the scripts attached to <a href="http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2108923#appendixB" target=_blank>KB2108923</a> and copy them to the /tmp folder on the first appliance using WinSCP or similar.</p>
 <p>SSH to the first appliance node using PuTTY and move to the /tmp folder. Unzip the file:</p>
@@ -348,35 +356,43 @@ DNS Name
 <p>Secondary:</p>
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb82.png alt></p>
 <p><a href="http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2108923#appendixB" target=_blank>KB2108923</a> also has procedures for testing failover, which I strongly suggest doing before deploying in production.</p>
-<h3 id=configure-the-primary-vrealize-appliance-node>Configure the primary vRealize Appliance node</h3>
-<p>Open the vRealize Appliance administrative interface (<a href=https://vra-app-1.definit.local:5480>https://vra-app-1.definit.local:5480</a>) and log in using root and the password you specified during the deploy.</p>
-<h4 id=configure-ntp-settings>Configure NTP settings</h4>
-<p>Select the admin tab, then Time Settings, then select &ldquo;Use Time Server&rdquo; and specify the time servers. For a lab environment just using one is OK, but for production it&rsquo;s recommended to use 3-5. Click Save Settings to apply.</p>
+<h3 id=configure-the-primary-vrealize-appliance-node>Configure the primary vRealize Appliance node <a class=anchor href=#configure-the-primary-vrealize-appliance-node>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Open the vRealize Appliance administrative interface (<a href=https://vra-app-1.definit.local:5480>https://vra-app-1.definit.local:5480</a>) and log in using root and the password you specified during the deploy.</p>
+<h4 id=configure-ntp-settings>Configure NTP settings <a class=anchor href=#configure-ntp-settings>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Select the admin tab, then Time Settings, then select &ldquo;Use Time Server&rdquo; and specify the time servers. For a lab environment just using one is OK, but for production it&rsquo;s recommended to use 3-5. Click Save Settings to apply.</p>
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb83.png alt></p>
-<h4 id=verify-database-settings>Verify Database Settings</h4>
-<p>The database settings should have been updated to use the load balanced URL configured earlier, click on the vRA Settings tab, then Database to check:</p>
+<h4 id=verify-database-settings>Verify Database Settings <a class=anchor href=#verify-database-settings>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>The database settings should have been updated to use the load balanced URL configured earlier, click on the vRA Settings tab, then Database to check:</p>
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb84.png alt></p>
-<h4 id=install-ssl-certificates>Install SSL Certificates</h4>
-<p>Return to the administrative interface on the first vRealize Appliance node, select vRA Settings and then Host Settings. Select &ldquo;Update Host&rdquo; and enter the load balancer FQDN under &ldquo;Host Name&rdquo;.</p>
+<h4 id=install-ssl-certificates>Install SSL Certificates <a class=anchor href=#install-ssl-certificates>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Return to the administrative interface on the first vRealize Appliance node, select vRA Settings and then Host Settings. Select &ldquo;Update Host&rdquo; and enter the load balancer FQDN under &ldquo;Host Name&rdquo;.</p>
 <p>Select &ldquo;Import&rdquo; under SSL Configuration and paste the contents of &ldquo;rui-orig.key&rdquo; in the RSA Private Key field. Open the downloaded certificate in notepad and paste the contents into the &ldquo;Certificate Chain&rdquo; field. Immediately underneath, paste the next certificate in the chain. If you have an intermediate CA, paste that first, then the root CA.</p>
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb85.png alt></p>
 <p>Click Save Settings to submit - both the host name and the SSL configuration should be updated with the FQDN of the load balancer.</p>
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb86.png alt></p>
-<h4 id=configure-single-sign-on>Configure Single Sign On</h4>
-<p><strong>Note</strong>: I am using the <a href=http://vexpert.me/DW target=_blank>HA Platform Services Controller</a> I created in my previous article.</p>
+<h4 id=configure-single-sign-on>Configure Single Sign On <a class=anchor href=#configure-single-sign-on>
+<i class="fas fa-hashtag"></i>
+</a></h4><p><strong>Note</strong>: I am using the <a href=http://vexpert.me/DW target=_blank>HA Platform Services Controller</a> I created in my previous article.</p>
 <p>Click on vRA Settings and then SSO and configure the FQDN of the load balancer URL for the HA PSC server. Change the SSO Port to 443 (7444 is correct vSphere 5.5 or Identity Appliance). Enter the SSO admin password. If you check the &ldquo;Apply branding&rdquo; box it will change the SSO sign on from &ldquo;VMware vCenter Single Sign-On&rdquo; to vRealize Automation Single Sign-On, so if it&rsquo;s a shared SSO platform you need to think about the implications for the users - they may get confused!</p>
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb87.png alt></p>
 <p>Click Save Settings, and then (after quite a few minutes) SSO will be initialized.</p>
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb88.png alt></p>
 <p>Click on &ldquo;Services&rdquo; tab and wait until all 23 services are initialized - you can monitor progress by SSHing to the first appliance and running &ldquo;tail -f /var/log/vcac/catalina.out&rdquo; to view progress. This can take 15-30 minutes - be patient!</p>
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb89.png alt></p>
-<h3 id=add-the-second-vrealize-appliance-to-the-cluster>Add the second vRealize Appliance to the cluster</h3>
-<p>Open the vRealize Appliance administrative interface on the second node (<a href=https://vra-app-2.definit.local:5480>https://vra-app-2.definit.local:5480</a>) and log in using root and the password you specified during the deploy.</p>
-<h4 id=configure-ntp-settings-1>Configure NTP settings</h4>
-<p>Select the admin tab, then Time Settings, then select &ldquo;Use Time Server&rdquo; and specify the time servers. For a lab environment just using one is OK, but for production it&rsquo;s recommended to use 3-5. Click Save Settings to apply.</p>
+<h3 id=add-the-second-vrealize-appliance-to-the-cluster>Add the second vRealize Appliance to the cluster <a class=anchor href=#add-the-second-vrealize-appliance-to-the-cluster>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Open the vRealize Appliance administrative interface on the second node (<a href=https://vra-app-2.definit.local:5480>https://vra-app-2.definit.local:5480</a>) and log in using root and the password you specified during the deploy.</p>
+<h4 id=configure-ntp-settings-1>Configure NTP settings <a class=anchor href=#configure-ntp-settings-1>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Select the admin tab, then Time Settings, then select &ldquo;Use Time Server&rdquo; and specify the time servers. For a lab environment just using one is OK, but for production it&rsquo;s recommended to use 3-5. Click Save Settings to apply.</p>
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb90.png alt></p>
-<h4 id=configure-cluster>Configure Cluster</h4>
-<p>Select the vRA Settings tab, Cluster and enter the name of the first node and the root password.</p>
+<h4 id=configure-cluster>Configure Cluster <a class=anchor href=#configure-cluster>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Select the vRA Settings tab, Cluster and enter the name of the first node and the root password.</p>
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb91.png alt></p>
 <p>Click &ldquo;Join Cluster&rdquo; and accept the certificate.</p>
 <p><img src=https://www.definit.co.uk/images/2015/07/image_thumb92.png alt></p>

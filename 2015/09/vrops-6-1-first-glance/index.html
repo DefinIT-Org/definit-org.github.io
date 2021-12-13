@@ -111,8 +111,9 @@ Tags:
 <li>Dashboards</li>
 <li>Automated actions (ON?)</li>
 </ul>
-<h2 id=upgrading-from-60>Upgrading from 6.0</h2>
-<p>Ensure you upgrade the OS of the appliance first (if you have one) - vRealize Operations Manager - Virtual Appliance Operating System upgrade (vRealize_Operations_Manager-VA-OS-6.1.0.3038037.pak )</p>
+<h2 id=upgrading-from-60>Upgrading from 6.0 <a class=anchor href=#upgrading-from-60>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Ensure you upgrade the OS of the appliance first (if you have one) - vRealize Operations Manager - Virtual Appliance Operating System upgrade (vRealize_Operations_Manager-VA-OS-6.1.0.3038037.pak )</p>
 <p><a href=http://pubs.vmware.com/Release_Notes/en/vrops/61/vrops-61-release-notes.html>vROps release notes</a></p>
 <p>Then perform the vROps upgrade..</p>
 <p>This was successful but the staging process took a while (at least 10-15 minutes for me)</p>
@@ -137,8 +138,9 @@ Tags:
 <p> </p>
 <p> </p>
 <p>Once the upgrade was completed and validated the first thing I wanted to check out was the inclusion of Hyperic functionality and while its not like for like just yet, its a big step forward and not too soon, Hyperic is really starting to look jaded and dated.</p>
-<h2 id=ep-ops-adapter>EP Ops Adapter</h2>
-<p>A few things to note for the agent installation.</p>
+<h2 id=ep-ops-adapter>EP Ops Adapter <a class=anchor href=#ep-ops-adapter>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>A few things to note for the agent installation.</p>
 <p>The new EPO agent cannot run alongside a hyperic agent on any given OS, I installed the agent onto a windows server which had an existing Hyperic agent and while it installs &ldquo;successfully&rdquo; it conflicts with the hyperic agent (even if you disable the hyperic agent). So if you are going to run some tests bear this in mind. I found it worked perfectly if you removed the Hyperic agent first of all then installed the EPO agent (no reboot required)</p>
 <p>You will need the SSL certificate thumb print for your vROps instance, this can be obtained from the http://vrops-url/admin and clicking golden coin icon on the top right of the UI.</p>
 <p><img src=https://www.definit.co.uk/images/2015/09/thumb.jpg alt></p>
@@ -165,8 +167,9 @@ Tags:
 <p> </p>
 <p> </p>
 <p>I was lucky enough to have a late preview 6.1 before it went GA and one of the bits I really liked was a new Widget for dashboards</p>
-<h2 id=capacity-utilization-dashboards>Capacity Utilization Dashboards</h2>
-<p>I will allow the screenshot to speak for itself pretty flipping awesome..</p>
+<h2 id=capacity-utilization-dashboards>Capacity Utilization Dashboards <a class=anchor href=#capacity-utilization-dashboards>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>I will allow the screenshot to speak for itself pretty flipping awesome..</p>
 <p><img src=https://www.definit.co.uk/images/2015/09/cap-util.jpg alt></p>
 <p> </p>
 <p> </p>

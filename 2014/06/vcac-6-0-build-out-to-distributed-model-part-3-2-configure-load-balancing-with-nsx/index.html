@@ -157,8 +157,9 @@ vCAC Simple Install with vPostgres deployed and load balancers prepared
 </ul>
 <p>I’ve previously configured 3 DNS records for the load balanced services (see part 3.1), this only covers the steps required to configure NSX load balancers.</p>
 <p><img src=https://www.definit.co.uk/images/2014/06/2014062414_53_05dc01.definit.localRemoteDesktopConnectionManagerv2.2_thumb.png alt></p>
-<h2 id=deploy-nsx-edge-load-balancer-for-vcac>Deploy NSX Edge load balancer for vCAC</h2>
-<p>Deploying an NSX Edge device is (not surprisingly) very similar to deploying a vShield Edge appliance.</p>
+<h2 id=deploy-nsx-edge-load-balancer-for-vcac>Deploy NSX Edge load balancer for vCAC <a class=anchor href=#deploy-nsx-edge-load-balancer-for-vcac>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Deploying an NSX Edge device is (not surprisingly) very similar to deploying a vShield Edge appliance.</p>
 <p>Log on to the vSphere Web Client and select the “Networking and Security” page to open the NSX management. Select the “NSX Edges” pane and then click the little green + symbol to start deploying a new Edge device.</p>
 <p><img src=https://www.definit.co.uk/images/2014/06/2014062509_09_31vSphereWebClient_thumb.png alt></p>
 <p>Look familiar? Yes, thought it might! Check “Edge Services Gateway”, the “Enable High Availability” box, and then give a Name and Hostname for the new edge – I’m using vCAC-NSX-LB. Enter a description and click next. Enter credentials for your NSX edge device – at least 12 characters and complex, and enable SSH if required (tip – useful for troubleshooting NSX!)</p>
@@ -171,8 +172,9 @@ vCAC Simple Install with vPostgres deployed and load balancers prepared
 <p><img src=https://www.definit.co.uk/images/2014/06/2014062509_25_27vSphereWebClient_thumb.png alt></p>
 <p>And much the same as vShield, wait for the Edge to deploy.</p>
 <p><img src=https://www.definit.co.uk/images/2014/06/2014062509_27_21vSphereWebClient_thumb.png alt></p>
-<h2 id=configure-nsx-load-balancing>Configure NSX Load Balancing</h2>
-<p>Once deployed, double click on the NSX Edge to open the configuration, then click “Manage” and select “Load Balancer”.</p>
+<h2 id=configure-nsx-load-balancing>Configure NSX Load Balancing <a class=anchor href=#configure-nsx-load-balancing>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Once deployed, double click on the NSX Edge to open the configuration, then click “Manage” and select “Load Balancer”.</p>
 <p><img src=https://www.definit.co.uk/images/2014/06/2014062509_36_47vSphereWebClient_thumb.png alt></p>
 <p>Here’s where things differ from vShield, it’s a LOT more configurable! First off, create a new Application Profile with a relevant name and a type of HTTPS. Select “Enable SSL Passthrough” unless you plan to offload the SSL termination at the load balancer – for simplicity I’m going to make it as close to the vShield setup in the previous article. Select “SSL Session ID” as the persistence method. This will only load balance HTTPS, so we also need to create an HTTP profile using COOKIE for persistence, name the cookie SESSIONID and use “Insert” as the cookie mode.</p>
 <p><img src=https://www.definit.co.uk/images/2014/06/2014062509_49_25vSphereWebClient_thumb.png alt>  <img src=https://www.definit.co.uk/images/2014/06/image_thumb46.png alt></p>

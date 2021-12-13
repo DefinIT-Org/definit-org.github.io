@@ -146,16 +146,18 @@ NSX-T 2.0 Lab Build: Edge Installation
 </div>
 </div>
 <p><em><strong>Disclaimer! I am learning NSX-T, part of my learning is to deploy in my lab - if I contradict the official docs then go with the docs!</strong></em></p>
-<h2 id=lab-environment>Lab Environment</h2>
-<p>This NSX-T lab environment is built as a nested lab on my physical hosts. There are four physical ESXi hosts, onto which I will deploy three ESXi VMs, a vCenter Server Appliance, NSX Manager, an NSX Controller cluster, and two NSX Edge Nodes.</p>
+<h2 id=lab-environment>Lab Environment <a class=anchor href=#lab-environment>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>This NSX-T lab environment is built as a nested lab on my physical hosts. There are four physical ESXi hosts, onto which I will deploy three ESXi VMs, a vCenter Server Appliance, NSX Manager, an NSX Controller cluster, and two NSX Edge Nodes.</p>
 <div id=attachment_8522 style=width:610px class="wp-caption aligncenter">
 <a href=/images/2017/10/2017-10-24_10-44-42.png><img class="wp-image-8522 size-definit-600-wide" src=/images/2017/10/2017-10-24_10-44-42.png alt width=600 height=279></a>
 <p class=wp-caption-text>
 Physical, virtual and nested components of the NSX-T lab
 </p>
 </div>
-<h2 id=deployment-plan>Deployment Plan</h2>
-<p>I will follow the <a href=https://docs.vmware.com/en/VMware-NSX-T/2.0/com.vmware.nsxt.install.doc/GUID-414C33B3-674F-44E0-94B8-BFC0B9056B33.html>deployment plan from the NSX-T 2.0 documentation</a>:</p>
+<h2 id=deployment-plan>Deployment Plan <a class=anchor href=#deployment-plan>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>I will follow the <a href=https://docs.vmware.com/en/VMware-NSX-T/2.0/com.vmware.nsxt.install.doc/GUID-414C33B3-674F-44E0-94B8-BFC0B9056B33.html>deployment plan from the NSX-T 2.0 documentation</a>:</p>
 <ul>
 <li>Install NSX Manager.</li>
 <li>Install NSX Controllers.
@@ -181,8 +183,9 @@ The NSX-T Transport Node network configuration
 </p>
 </div>
 <p>In this post I will walk through configuring the Transport Zone, Transport Nodes, Edge Cluster and other configuration required to support the deployment.</p>
-<h2 id=deploying-a-vm-edge-node>Deploying a VM Edge Node</h2>
-<p>Deploying a new Edge onto ESXi can be done via an OVA, or through the NSX Manager interface. Since I am deploying the Edge to my physical hosts (managed by my lab vCenter, not the nested hosts managed by the pod vCenter) I can&rsquo;t deploy from the NSX interface.</p>
+<h2 id=deploying-a-vm-edge-node>Deploying a VM Edge Node <a class=anchor href=#deploying-a-vm-edge-node>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Deploying a new Edge onto ESXi can be done via an OVA, or through the NSX Manager interface. Since I am deploying the Edge to my physical hosts (managed by my lab vCenter, not the nested hosts managed by the pod vCenter) I can&rsquo;t deploy from the NSX interface.</p>
 <p>Deploying the edge needs some understanding of the role the edge plays and it&rsquo;s connectivity. I strongly suggest reading and understanding the <a class=xref href=https://docs.vmware.com/en/VMware-NSX-T/2.0/com.vmware.nsxt.install.doc/GUID-370D06E1-1BB6-4144-A654-7AF2542C3136.html#GUID-370D06E1-1BB6-4144-A654-7AF2542C3136 name="&lpos=Tech Pub : content link : GUID-370D06E1-1BB6-4144-A654-7AF2542C3136 : 102">NSX Edge Networking Setup</a> article in the documentation before even thinking about deploying.</p>
 <p>The configuration I am using is shown in the diagram below. The ESXi host has two NICs connected to the Management network (VLAN 200), and two NICs connected to the Underlay network (VLAN 202). The Edge VM has one NIC connected to the Management network (VLAN 200), one NIC connected to the Uplink network (VLAN 201) and two NICs connected to the Underlay network (VLAN 202).</p>
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-23_16-01-20.png alt></p>
@@ -198,8 +201,9 @@ The NSX-T Transport Node network configuration
 <p>Network and Services configuration</p>
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-23_15-35-19.png alt></p>
 <p>Once the OVF deployment has completed, power on the VM Edge Node.</p>
-<h2 id=joinspan-idguid-414c33b3-674f-44e0-94b8-bfc0b9056b33__productname_8e8192889a1d48628cf2fd722d67728a-classph-productnamensx-edgespans-with-the-management-plane>Join <span id=GUID-414C33B3-674F-44E0-94B8-BFC0B9056B33__productname_8E8192889A1D48628CF2FD722D67728A class="ph productname">NSX Edge</span>s with the management plane</h2>
-<p>If you enabled SSH (as I did) you can connect with the newly deployed Edge on it&rsquo;s management IP address. If not you should be able to use the console to configure it. Once on the console/SSH, authenticate as the admin user with the password you specified during deploy time.</p>
+<h2 id=joinspan-idguid-414c33b3-674f-44e0-94b8-bfc0b9056b33__productname_8e8192889a1d48628cf2fd722d67728a-classph-productnamensx-edgespans-with-the-management-plane>Join <span id=GUID-414C33B3-674F-44E0-94B8-BFC0B9056B33__productname_8E8192889A1D48628CF2FD722D67728A class="ph productname">NSX Edge</span>s with the management plane <a class=anchor href=#joinspan-idguid-414c33b3-674f-44e0-94b8-bfc0b9056b33__productname_8e8192889a1d48628cf2fd722d67728a-classph-productnamensx-edgespans-with-the-management-plane>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>If you enabled SSH (as I did) you can connect with the newly deployed Edge on it&rsquo;s management IP address. If not you should be able to use the console to configure it. Once on the console/SSH, authenticate as the admin user with the password you specified during deploy time.</p>
 <p>Validate the management IP address using &ldquo;get interface eth0&rdquo;</p>
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-23_16-26-22.png alt></p>
 <p>Retrieve the Manager API thumbprint using &ldquo;get certificate api thumbprint&rdquo; from the NSX Manager console/SSH, or using the web interface</p>

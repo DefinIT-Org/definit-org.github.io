@@ -112,8 +112,9 @@ Tags:
 <img class="alignnone size-full wp-image-7313" src=/images/2016/04/2016-04-15_16-29-53.png alt=2016-04-15_16-29-53 width=658 height=156>
 <p>If you happen to have a license for BIG-IP there&rsquo;s also a Bring Your Own License version, which would be handy. You can view all the options on <a href="https://aws.amazon.com/marketplace/seller-profile?id=74d946f0-fa54-4d9f-99e8-ff3bd8eb2745" target=_blank>F5 Network&rsquo;s AWS Marketplace page</a>.</p>
 <p>Here&rsquo;s how you set up your F5-in-AWS!</p>
-<h1 id=prepare-a-vpc>Prepare a VPC</h1>
-<p>First of all, we need a VPC with three networks configured -  Management, Internal and External. Log into the AWS Console and select the VPC Dashboard. You can either configure a new VPC, or configure the networks required in an existing VPC. For this post I&rsquo;m going to use the &ldquo;Start VPC Wizard&rdquo; to create a new one.</p>
+<h1 id=prepare-a-vpc>Prepare a VPC <a class=anchor href=#prepare-a-vpc>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>First of all, we need a VPC with three networks configured -  Management, Internal and External. Log into the AWS Console and select the VPC Dashboard. You can either configure a new VPC, or configure the networks required in an existing VPC. For this post I&rsquo;m going to use the &ldquo;Start VPC Wizard&rdquo; to create a new one.</p>
 <img class="alignnone size-full wp-image-7328" src=/images/2016/04/2016-04-15_16-42-19.png alt=2016-04-15_16-42-19 width=580 height=140>
 <p>Select the &ldquo;VPC with a Single Public Subnet&rdquo; and click Select. Next we configure the first subnet - Management. AWS veterans will probably want to skim this bit, but for the uninitiated, here&rsquo;s what we&rsquo;re doing:</p>
 <ul>
@@ -126,8 +127,9 @@ Tags:
 </ul>
 <p>Hit &ldquo;Create VPC&rdquo; to finish.</p>
 <img class="alignnone size-full wp-image-7344" src=/images/2016/04/2016-04-15_16-45-27.png alt=2016-04-15_16-45-27 width=575 height=405>
-<h2 id=configuring-networks>Configuring Networks</h2>
-<p>Select the &ldquo;Subnets&rdquo; page from the VPC Dashboard - you&rsquo;ll see the Management network we just created. Hit the &ldquo;Create Subnet&rdquo; button and create two more subnets (don&rsquo;t forget to select the same Availability Zone!):</p>
+<h2 id=configuring-networks>Configuring Networks <a class=anchor href=#configuring-networks>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Select the &ldquo;Subnets&rdquo; page from the VPC Dashboard - you&rsquo;ll see the Management network we just created. Hit the &ldquo;Create Subnet&rdquo; button and create two more subnets (don&rsquo;t forget to select the same Availability Zone!):</p>
 <p>External</p>
 <img class="alignnone size-full wp-image-7351" src=/images/2016/04/2016-04-15_17-09-14.png alt=2016-04-15_17-09-14.png width=651 height=318>
 <p>Internal</p>
@@ -136,17 +138,20 @@ Tags:
 <img class="alignnone size-full wp-image-7358" style="margin:0 0 12px" src=/images/2016/04/2016-04-15_17-11-46.png alt=2016-04-15_17-11-46.png width=640 height=80>
 <p>Next, we need to check the configuration of our Management network to use the Internet Gateway that is created by default with our VPC. Select the &ldquo;Route Tables&rdquo; page from the VPC Dashboard, then select the route table that has &ldquo;1 Subnet&rdquo; in the &ldquo;Explicitly Associated&rdquo; column. Select the &ldquo;Subnet Associations&rdquo; tab and ensure the Management subnet is associated:</p>
 <img class="alignnone size-full wp-image-7367" style="margin:0 0 12px" src=/images/2016/04/2016-04-15_17-16-04.png alt=2016-04-15_17-16-04.png width=640 height=377>
-<h2 id=configure-security-groups>Configure Security Groups</h2>
-<p>Select the &ldquo;Security Groups&rdquo; page from the VPC Dashboard - you should see a single default group has been created. Click &ldquo;Create Security Group&rdquo; and create a new security group:</p>
+<h2 id=configure-security-groups>Configure Security Groups <a class=anchor href=#configure-security-groups>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Select the &ldquo;Security Groups&rdquo; page from the VPC Dashboard - you should see a single default group has been created. Click &ldquo;Create Security Group&rdquo; and create a new security group:</p>
 <p>allow-ssh-https</p>
 <img class="alignnone size-full wp-image-7374" src=/images/2016/04/2016-04-15_17-23-16.png alt=2016-04-15_17-23-16 width=652 height=241>
 <p>Select the new group, then select the &ldquo;Inbound Rules&rdquo; tab and configure to allow SSH and HTTPS:</p>
 <img class="alignnone size-full wp-image-7377" style="margin:0 0 12px" src=/images/2016/04/2016-04-15_17-24-34.png alt=2016-04-15_17-24-34 width=640 height=303>
-<h1 id=configuring-ec2>Configuring EC2</h1>
-<p>The final pre-requisite is to create a Key Pair to be used for authentication with the F5 instance. Open the EC2 dashboard and select the &ldquo;Key Pairs&rdquo; page. You can import your own Key Pair if preferred, but for ease of use we&rsquo;ll hit &ldquo;Create Key Pair&rdquo;. Name the Key Pair something sensible, and save the resulting .pem file somewhere safe - losing it will mean losing access to your VM.</p>
+<h1 id=configuring-ec2>Configuring EC2 <a class=anchor href=#configuring-ec2>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>The final pre-requisite is to create a Key Pair to be used for authentication with the F5 instance. Open the EC2 dashboard and select the &ldquo;Key Pairs&rdquo; page. You can import your own Key Pair if preferred, but for ease of use we&rsquo;ll hit &ldquo;Create Key Pair&rdquo;. Name the Key Pair something sensible, and save the resulting .pem file somewhere safe - losing it will mean losing access to your VM.</p>
 <img class="alignnone size-full wp-image-7384" src=/images/2016/04/2016-04-15_17-28-54.png alt=2016-04-15_17-28-54.png width=485 height=183>
-<h2 id=launching-f5-big-ip-virtual-edition>Launching F5 BIG-IP Virtual Edition</h2>
-<p>I elected to use the &ldquo;F5 BIG-IP Virtual Edition 200Mbps - Good&rdquo; option and signed in to my AWS account, selected the option and clicked continue. From there you can &ldquo;Launch with EC2 Console. Launch it in the same Region as your newly created/configured VPC.</p>
+<h2 id=launching-f5-big-ip-virtual-edition>Launching F5 BIG-IP Virtual Edition <a class=anchor href=#launching-f5-big-ip-virtual-edition>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>I elected to use the &ldquo;F5 BIG-IP Virtual Edition 200Mbps - Good&rdquo; option and signed in to my AWS account, selected the option and clicked continue. From there you can &ldquo;Launch with EC2 Console. Launch it in the same Region as your newly created/configured VPC.</p>
 <img class="alignnone size-full wp-image-7324" src=/images/2016/04/2016-04-15_16-36-02.png alt=2016-04-15_16-36-02 width=549 height=903>
 <p>Next, we choose an Instance Type. From the previous page, we can see the minimum supported EC2 Instance Type is an m3.large ($0.146/hr), but there are plenty of options to go bigger:</p>
 <img class="alignnone size-full wp-image-7395" src=/images/2016/04/2016-04-15_17-36-01.png alt=2016-04-15_17-36-01.png width=377 height=433>
@@ -162,8 +167,9 @@ Tags:
 <p><img src=https://www.definit.co.uk/images/2016/04/image_thumb-3.png alt></p>
 <p>Review the settings again before finally hitting “Launch” – you’ll be prompted for your key pair – select the key pair created earlier and check the box to say you’ve got it!</p>
 <p><img src=https://www.definit.co.uk/images/2016/04/image_thumb-4.png alt></p>
-<h2 id=configure-external-access>Configure External Access</h2>
-<p>While the instance is starting we can add the final network card by selecting the Network Interfaces tab from the EC2 console page, then using the “Create Network Interface” button. Name the interface something relevant like “Internal”, select the Internal network subnet we created earlier, let the IP assign automatically and select the default VPC security group for the interface.</p>
+<h2 id=configure-external-access>Configure External Access <a class=anchor href=#configure-external-access>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>While the instance is starting we can add the final network card by selecting the Network Interfaces tab from the EC2 console page, then using the “Create Network Interface” button. Name the interface something relevant like “Internal”, select the Internal network subnet we created earlier, let the IP assign automatically and select the default VPC security group for the interface.</p>
 <p><img src=https://www.definit.co.uk/images/2016/04/image_thumb-5.png alt></p>
 <p>Once it’s created we need to attach it to the F5 instance – select the network and use the actions menu to  attach the network interface to the F5 instance:</p>
 <p><img src=https://www.definit.co.uk/images/2016/04/image_thumb-6.png alt></p>

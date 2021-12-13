@@ -105,8 +105,9 @@ Tags:
 </div>
 <p><img style=margin-left:0;display:inline;margin-right:0;border:0 title=vCOps alt=vCOps src=/images/2014/01/image.png width=88 height=80 align=right border=0>There’s no doubt that vCOps is a great product for proactively monitoring your vSphere environment, but it’s a hefty package for the lab. The minimum recommended RAM is a whopping 16GB – in my lab that’s the whole of my management host! I recently needed to do some testing so I wanted to get it running in the lab with the barest minimum I could get working, and it turns out you can get working with just 4GB and 2 CPU…albeit you wouldn’t want to monitor much! I also want to use vFlash Read Cache to accelerate I/O in the lab – this requires upgrading VMtools and the VM hardware to version 10.</p>
 <p>Bear in mind that this is a lab install, and production environments should follow the recommended minimums and configurations!</p>
-<h2 id=preparing-to-install>Preparing to install</h2>
-<p>If you’re using DHCP in your lab environment then you don’t actually need to set up an IP pool – I’m going down that route, but just for completeness, here’s how you do it.</p>
+<h2 id=preparing-to-install>Preparing to install <a class=anchor href=#preparing-to-install>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>If you’re using DHCP in your lab environment then you don’t actually need to set up an IP pool – I’m going down that route, but just for completeness, here’s how you do it.</p>
 <table width=550 border=0 cellspacing=5 cellpadding=2>
 <tr>
 <td valign=top width=275>
@@ -187,8 +188,9 @@ Tags:
 </tr>
 </table>
 <p>Other vCOps pre-requisites are pretty basic, enough disk space (344GB) – I’m thin provisioning as it’s in the Lab, so I’m not overly concerned about that. For a small deployment the VMware minimum RAM requirement is a whopping 16GB – that’s more than I can spare, so I’m going to configure this for just 4GB once it’s deployed. Similarly, even the small environment requires 2 vCPUs per VM – I’ll drop it to 1 when the vApp is deployed.</p>
-<h2 id=deploying-the-ovf>Deploying the OVF</h2>
-<p>Deploying an appliance in the form of an OVF is dead simple – as it should be!</p>
+<h2 id=deploying-the-ovf>Deploying the OVF <a class=anchor href=#deploying-the-ovf>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Deploying an appliance in the form of an OVF is dead simple – as it should be!</p>
 <div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/20140108001.png><img style=display:inline;border:0 title="vCOps 5.8 - Deploy OVF - Select source" alt="vCOps 5.8 - Deploy OVF - Select source" src=/images/2014/01/20140108001_thumb.png width=644 height=379 border=0></a>
 <p class=wp-caption-text>
@@ -250,8 +252,9 @@ Review and finish the wizard - but don't power on at this point!
 </p>
 </div>
 <p>Once deployed I selected each VM in turn and reduced the memory to 2GB and CPUs to 1 – this is the same as you would do for any other VM, edit the settings and decrease each.</p>
-<h2 id=powering-on-and-configuring-the-vapp>Powering On and Configuring the vApp</h2>
-<p>You can just power on the vApp using the vApp actions, and if you’ve given the vApp enough resources I’d say that’s definitely the way to go about it…</p>
+<h2 id=powering-on-and-configuring-the-vapp>Powering On and Configuring the vApp <a class=anchor href=#powering-on-and-configuring-the-vapp>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>You can just power on the vApp using the vApp actions, and if you’ve given the vApp enough resources I’d say that’s definitely the way to go about it…</p>
 <p>…unfortunately I’ve only given a fraction of the recommended RAM, so I’ll power on the Analytics VM first (ignoring the warning about it being part of a vApp) and then wait for it to be 100% guaranteed up – I gave it a good 20 minutes. Then I powered on the UI VM – this seems to avoid the problem I encountered where the UI VM displays</p>
 <blockquote>
 <p>trust.sh: failed to setup trust to <em>AnalyticsIP</em></p>
@@ -267,14 +270,16 @@ Review and finish the wizard - but don't power on at this point!
 Powering on the vApp
 </p>
 </div>
-<h2 id=probably-unsupportedbut-sos-the-rest-of-my-lab>Probably unsupported…but so’s the rest of my Lab!</h2>
-<p>At this point I wanted to update the VMtools version for the two deployed VMs – post vSphere 5.1 there’s no reboot requirement for VMtools updates, so I went ahead and hit the update tools link and selected automatic update.</p>
+<h2 id=probably-unsupportedbut-sos-the-rest-of-my-lab>Probably unsupported…but so’s the rest of my Lab! <a class=anchor href=#probably-unsupportedbut-sos-the-rest-of-my-lab>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>At this point I wanted to update the VMtools version for the two deployed VMs – post vSphere 5.1 there’s no reboot requirement for VMtools updates, so I went ahead and hit the update tools link and selected automatic update.</p>
 <p><img src=https://www.definit.co.uk/images/2014/01/image4_thumb.png alt></p>
 <p>That takes a couple of minutes to complete, once that’s done I went on to update the VM hardware. Shut down the vApp and wait for both machines to fully power off. This isn’t necessary, but I’m using a local SSD as vFlash Read Cache so an upgrade to VM hardware v10 is required. Just tick the “Schedule VM Compatibility Upgrade…” box and it’ll do it on first boot.</p>
 <p><img src=https://www.definit.co.uk/images/2014/01/image_thumb1.png alt></p>
 <p>Now, boot everything back up and you *should* get to the stage where you can begin configuring vCOps!</p>
-<h2 id=initial-configuration>Initial Configuration</h2>
-<p>Open your browser of choice and point it the the UI VM’s IP address using https (e.g <a href=https://192.168.1.117/ title=https://192.168.1.117/>https://192.16 8.1.117/</a>) – you should be able to log into the appliance’s admin console using the default username (admin) and password (admin)</p>
+<h2 id=initial-configuration>Initial Configuration <a class=anchor href=#initial-configuration>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Open your browser of choice and point it the the UI VM’s IP address using https (e.g <a href=https://192.168.1.117/ title=https://192.168.1.117/>https://192.16 8.1.117/</a>) – you should be able to log into the appliance’s admin console using the default username (admin) and password (admin)</p>
 <div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/20140108024.png><img style=display:inline;border:0 title="vCOps 5.8 - Initial configuration - Analytics VM IP" alt="vCOps 5.8 - Initial configuration - Analytics VM IP" src=/images/2014/01/20140108024_thumb.png width=644 height=361 border=0></a>
 <p class=wp-caption-text>
@@ -319,8 +324,9 @@ Once the wizard has completed you should be presented with the administration co
 </div>
 <p>At this point the VMs are running fairly responsively, and granted they are not doing a lot of work, but it shows that you can actually run a vCOps instance with 4GB RAM and 2 vCPUs:</p>
 <p><img src=https://www.definit.co.uk/images/2014/01/image_thumb3.png alt></p>
-<h2 id=licensing-vcops>Licensing vCOps</h2>
-<div style=width:654px class="wp-caption alignnone">
+<h2 id=licensing-vcops>Licensing vCOps <a class=anchor href=#licensing-vcops>
+<i class="fas fa-hashtag"></i>
+</a></h2><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/image6.png><img style=display:inline;border:0 title="vCOps 5.8 - Licensing" alt="vCOps 5.8 - Licensing" src=/images/2014/01/image_thumb4.png width=644 height=184 border=0></a>
 <p class=wp-caption-text>
 To assign a license to vCOps you need to go to the Licenses page under Administration, then select the Solutions tab. Select your vCOps instance and then click “Assign License Key…”

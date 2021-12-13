@@ -111,8 +111,9 @@ Published under <a href=/category/powercli>PowerCLI</a>, <a href=/category/vmwar
 <li>Create a DRS rule separating all the nodes</li>
 </ol>
 <p>All in, it takes about 50 minutes to deploy and configure (on my lab hardware, YMMV). I&rsquo;ve broken each step up so it can be ran separately (using the switches) or all at once (no switches). Configuration is in the form of a JSON file which is loaded into the $podConfig variable. A verbose log file contains all the output that is supressed in the console when running, for debugging - again the file is defined in the JSON config.</p>
-<h2 id=json-config-file>JSON Config File</h2>
-<p>The configuration file should be (hopefully) fairly self explanatory, with the following sections:</p>
+<h2 id=json-config-file>JSON Config File <a class=anchor href=#json-config-file>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The configuration file should be (hopefully) fairly self explanatory, with the following sections:</p>
 <ul>
 <li>
 <p>target - the destination vCenter instance, including credentials, locations, network port groups and network details</p>
@@ -191,37 +192,47 @@ Published under <a href=/category/powercli>PowerCLI</a>, <a href=/category/vmwar
 }</p>
 </li>
 </ul>
-<h2 id=deploy-the-active-vcenter-server-appliance>Deploy the Active vCenter Server Appliance</h2>
-<p>Deploying a VCSA</p>
+<h2 id=deploy-the-active-vcenter-server-appliance>Deploy the Active vCenter Server Appliance <a class=anchor href=#deploy-the-active-vcenter-server-appliance>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Deploying a VCSA</p>
 <pre><code>.\ha-vcenter-deploy.ps1 -configFile .\ha-vcenter-deploy.json -deployActive
 </code></pre>
 <p><img src=https://www.definit.co.uk/images/2017/06/2017-06-30_12-26-25.png alt></p>
-<h2 id=assign-a-license-to-vcenter-required-to-enable-ha>Assign a license to vCenter (required to enable HA)</h2>
-<p><code>.\ha-vcenter-deploy.ps1 -configFile .\ha-vcenter-deploy.json -licenseVCSA</code></p>
+<h2 id=assign-a-license-to-vcenter-required-to-enable-ha>Assign a license to vCenter (required to enable HA) <a class=anchor href=#assign-a-license-to-vcenter-required-to-enable-ha>
+<i class="fas fa-hashtag"></i>
+</a></h2><p><code>.\ha-vcenter-deploy.ps1 -configFile .\ha-vcenter-deploy.json -licenseVCSA</code></p>
 <p><img src=https://www.definit.co.uk/images/2017/06/2017-06-30_12-57-55.png alt></p>
-<h2 id=add-a-2nd-nic-for-the-private-heartbeat-network>Add a 2nd NIC for the Private heartbeat network</h2>
-<p><code>.\ha-vcenter-deploy.ps1 -configFile .\ha-vcenter-deploy.json -addSecondaryNic</code></p>
+<h2 id=add-a-2nd-nic-for-the-private-heartbeat-network>Add a 2nd NIC for the Private heartbeat network <a class=anchor href=#add-a-2nd-nic-for-the-private-heartbeat-network>
+<i class="fas fa-hashtag"></i>
+</a></h2><p><code>.\ha-vcenter-deploy.ps1 -configFile .\ha-vcenter-deploy.json -addSecondaryNic</code></p>
 <p><img src=https://www.definit.co.uk/images/2017/06/2017-06-30_12-58-14.png alt></p>
-<h2 id=prepare-vcsa-for-ha>Prepare VCSA for HA</h2>
-<p><code>.\ha-vcenter-deploy.ps1 -configFile .\ha-vcenter-deploy.json -licenseVCSA</code></p>
+<h2 id=prepare-vcsa-for-ha>Prepare VCSA for HA <a class=anchor href=#prepare-vcsa-for-ha>
+<i class="fas fa-hashtag"></i>
+</a></h2><p><code>.\ha-vcenter-deploy.ps1 -configFile .\ha-vcenter-deploy.json -licenseVCSA</code></p>
 <p><img src=https://www.definit.co.uk/images/2017/06/2017-06-30_12-58-53.png alt></p>
-<h2 id=clone-the-passive-node>Clone the Passive node</h2>
-<p><code>.\ha-vcenter-deploy.ps1 -configFile .\ha-vcenter-deploy.json -clonePassiveVM</code></p>
+<h2 id=clone-the-passive-node>Clone the Passive node <a class=anchor href=#clone-the-passive-node>
+<i class="fas fa-hashtag"></i>
+</a></h2><p><code>.\ha-vcenter-deploy.ps1 -configFile .\ha-vcenter-deploy.json -clonePassiveVM</code></p>
 <p><img src=https://www.definit.co.uk/images/2017/06/2017-06-30_12-59-40.png alt></p>
-<h2 id=clone-the-witness-node>Clone the Witness node</h2>
-<p><code>.\ha-vcenter-deploy.ps1 -configFile .\ha-vcenter-deploy.json -cloneWitnessVM</code></p>
+<h2 id=clone-the-witness-node>Clone the Witness node <a class=anchor href=#clone-the-witness-node>
+<i class="fas fa-hashtag"></i>
+</a></h2><p><code>.\ha-vcenter-deploy.ps1 -configFile .\ha-vcenter-deploy.json -cloneWitnessVM</code></p>
 <p><img src=https://www.definit.co.uk/images/2017/06/2017-06-30_13-00-06.png alt></p>
-<h2 id=configure-vcsa-for-ha>Configure VCSA for HA</h2>
-<p><code>.\ha-vcenter-deploy.ps1 -configFile .\ha-vcenter-deploy.json -configureVCHA</code></p>
+<h2 id=configure-vcsa-for-ha>Configure VCSA for HA <a class=anchor href=#configure-vcsa-for-ha>
+<i class="fas fa-hashtag"></i>
+</a></h2><p><code>.\ha-vcenter-deploy.ps1 -configFile .\ha-vcenter-deploy.json -configureVCHA</code></p>
 <p><img src=https://www.definit.co.uk/images/2017/06/2017-06-30_13-00-42.png alt></p>
-<h2 id=resize-the-witness-node>Resize the Witness node</h2>
-<p><code>.\ha-vcenter-deploy.ps1 -configFile .\ha-vcenter-deploy.json -resizeWitness</code></p>
+<h2 id=resize-the-witness-node>Resize the Witness node <a class=anchor href=#resize-the-witness-node>
+<i class="fas fa-hashtag"></i>
+</a></h2><p><code>.\ha-vcenter-deploy.ps1 -configFile .\ha-vcenter-deploy.json -resizeWitness</code></p>
 <p><img src=https://www.definit.co.uk/images/2017/06/2017-06-30_13-12-15.png alt></p>
-<h2 id=create-a-drs-rule-separating-all-the-nodes>Create a DRS rule separating all the nodes</h2>
-<p><code>.\ha-vcenter-deploy.ps1 -configFile .\ha-vcenter-deploy.json -createDRSRule</code></p>
+<h2 id=create-a-drs-rule-separating-all-the-nodes>Create a DRS rule separating all the nodes <a class=anchor href=#create-a-drs-rule-separating-all-the-nodes>
+<i class="fas fa-hashtag"></i>
+</a></h2><p><code>.\ha-vcenter-deploy.ps1 -configFile .\ha-vcenter-deploy.json -createDRSRule</code></p>
 <p><img src=https://www.definit.co.uk/images/2017/06/2017-06-30_13-13-11.png alt></p>
-<h2 id=validating-the-deployment>Validating the deployment</h2>
-<p>Validating the deployment is as simple as logging onto the new highly available vCenter and checking the Configuration > vCenter HA tab - as you can see below, the Active, Passive and Witness are all up.</p>
+<h2 id=validating-the-deployment>Validating the deployment <a class=anchor href=#validating-the-deployment>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Validating the deployment is as simple as logging onto the new highly available vCenter and checking the Configuration > vCenter HA tab - as you can see below, the Active, Passive and Witness are all up.</p>
 <p><img src=https://www.definit.co.uk/images/2017/06/2017-06-30_14-54-32.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2017/06/2017-06-30_16-14-13.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2017/06/2017-06-30_16-08-26.png alt></p>

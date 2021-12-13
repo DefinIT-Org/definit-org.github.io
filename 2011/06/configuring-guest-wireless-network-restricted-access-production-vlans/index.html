@@ -116,8 +116,9 @@ Tags:
 </div>
 </div>
 <p>It’s a fairly common requirement – setting up a guest WiFi network that is secure from the rest of your LAN. You need a secure WLAN access for the domain laptops which has full access to the Server and Client VLANs, but you also need a guest WLAN for visitors to the office which only allows internet access. Since the budget is limited, this must all be accomplished via a single Access Point – for this article, the access point is a Cisco WAP4410N.</p>
-<h4 id=existing-network-layout-and-design>Existing Network layout and Design</h4>
-<p>Assuming there is a core network switch and that it is a Layer 3 enabled switch which has inter-VLAN routing configured. By default all the VLANs can talk to each other, routed through the switch. The switch also is configured with a gateway of last resort pointing to the firewall’s internal IP – this allows internet access.</p>
+<h4 id=existing-network-layout-and-design>Existing Network layout and Design <a class=anchor href=#existing-network-layout-and-design>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Assuming there is a core network switch and that it is a Layer 3 enabled switch which has inter-VLAN routing configured. By default all the VLANs can talk to each other, routed through the switch. The switch also is configured with a gateway of last resort pointing to the firewall’s internal IP – this allows internet access.</p>
 <p><img src=https://www.definit.co.uk/images/2011/06/Wireless_thumb.png alt></p>
 <p>So the headlines are:</p>
 <ul>
@@ -134,8 +135,9 @@ Tags:
 <li><strong>Public Key Infrastructure</strong> – DefinIT-CA</li>
 <li><strong>Windows Server 2003 IAS</strong> – DefinIT-IAS</li>
 </ul>
-<h4 id=preparing-the-network-core>Preparing the Network Core</h4>
-<p>All commands are from the Configure prompt (config t)</p>
+<h4 id=preparing-the-network-core>Preparing the Network Core <a class=anchor href=#preparing-the-network-core>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>All commands are from the Configure prompt (config t)</p>
 <p>The first task is to configure the new Guest VLAN13 using the commands below. The IP address assigned to the vlan13 interface acts as the gateway for VLAN13 on the core switch. (VTP will propagate the VLAN settings to the access switches, if configured).</p>
 <pre escaped=true lang=dos line=1>vlan1
 name DefinITGuest
@@ -169,8 +171,9 @@ permit ip any any</pre>
 <pre escaped=true lang=dos line=1>interface Vlan13
 ip access-group DefinIT_GUEST in</pre>
 <p>That’s it, core network configured!</p>
-<h4 id=configure-ias-to-provide-radius-authentication>Configure IAS to provide RADIUS authentication</h4>
-<p>Create a new RADIUS client by selecting the RADIUS Clients folder and right-click – new. Configure a friendly name for the Wireless Access Point, and the IP you’re using for the WAP (for me, DefinIT-WAP and 10.1.13.20). Configure the Client-Vendor to Cisco – or the vendor you’re using, and a strong shared secret (random, 13 characters upper/lower/alpha/numeric/special will do nicely).</p>
+<h4 id=configure-ias-to-provide-radius-authentication>Configure IAS to provide RADIUS authentication <a class=anchor href=#configure-ias-to-provide-radius-authentication>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Create a new RADIUS client by selecting the RADIUS Clients folder and right-click – new. Configure a friendly name for the Wireless Access Point, and the IP you’re using for the WAP (for me, DefinIT-WAP and 10.1.13.20). Configure the Client-Vendor to Cisco – or the vendor you’re using, and a strong shared secret (random, 13 characters upper/lower/alpha/numeric/special will do nicely).</p>
 <p><img src=https://www.definit.co.uk/images/2011/06/image_thumb.png alt> <img src=https://www.definit.co.uk/images/2011/06/image_thumb1.png alt></p>
 <p>Create an new Remote Access Policy using the Remote Access Policy wizard (right-click Remote Access Policies and select new…):</p>
 <p><img src=https://www.definit.co.uk/images/2011/06/image_thumb2.png alt> <img src=https://www.definit.co.uk/images/2011/06/image_thumb3.png alt></p>
@@ -178,8 +181,9 @@ ip access-group DefinIT_GUEST in</pre>
 <p><img src=https://www.definit.co.uk/images/2011/06/image_thumb4.png alt> <img src=https://www.definit.co.uk/images/2011/06/image_thumb5.png alt></p>
 <p>Select PEAP as the Authentication method, and configure the server certificate for identification, and the EAP type to use MSCHAP-v2. If you have issued client certificates to all users, you can add Smart Card or other Certificate to the EAP authentication methods.</p>
 <p><img src=https://www.definit.co.uk/images/2011/06/image_thumb6.png alt></p>
-<h4 id=configuring-the-access-point>Configuring the Access Point</h4>
-<p>I’m assuming you can manage to turn the thing on, access it’s web interface and assign the static IP you picked earlier to the AP, now we can configure the authentication and VLANs for the guest and secure WLANs.</p>
+<h4 id=configuring-the-access-point>Configuring the Access Point <a class=anchor href=#configuring-the-access-point>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>I’m assuming you can manage to turn the thing on, access it’s web interface and assign the static IP you picked earlier to the AP, now we can configure the authentication and VLANs for the guest and secure WLANs.</p>
 <p>Open the Wireless > Basic settings and configure your two SSIDs, save and then open the Security page.</p>
 <p><img src=https://www.definit.co.uk/images/2011/06/image_thumb7.png alt> <img src=https://www.definit.co.uk/images/2011/06/image_thumb8.png alt></p>
 <p>Here you can configure WPA2-Personal for the Guest SSID, and WPA2-Enterprise Mixed for the Secure SSID. Configure the IP address of you RADIUS server and the Share Secret you configured earlier.</p>

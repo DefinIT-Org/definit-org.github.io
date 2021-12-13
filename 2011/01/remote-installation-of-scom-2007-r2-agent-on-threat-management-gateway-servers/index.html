@@ -117,8 +117,9 @@ Tags:
 </div>
 <p><img src=https://www.definit.co.uk/images/2011/01/MSFT-System-Center-logo_thumb.png alt>Getting a SCOM 2007 R2 SCOM agent on TMG is a useful way of monitoring TMG, especially with the SCOM TMG Management Pack – it’s not exactly “out-of-the-box” functionality though, with many sources I’ve read simply stating that it can’t be done. There are some half-working solutions I’ve seen, but nothing that worked for me.</p>
 <p>The process involves simply opening the correct ports and protocols between the TMG servers and the SCOM management servers, which after a few attempts watching the live logs, I found.</p>
-<h5 id=creating-the-scom-2007-r2-agent-push-install-rule>Creating the SCOM 2007 R2 Agent Push Install Rule</h5>
-<p>From the Threat Management Gateway Server, Launch the New Access Rule Wizard</p>
+<h5 id=creating-the-scom-2007-r2-agent-push-install-rule>Creating the SCOM 2007 R2 Agent Push Install Rule <a class=anchor href=#creating-the-scom-2007-r2-agent-push-install-rule>
+<i class="fas fa-hashtag"></i>
+</a></h5><p>From the Threat Management Gateway Server, Launch the New Access Rule Wizard</p>
 <p><img src=https://www.definit.co.uk/images/2011/01/image_thumb.png alt></p>
 <p>Obviously we need to allow protocols</p>
 <p><img src=https://www.definit.co.uk/images/2011/01/image_thumb1.png alt></p>
@@ -273,12 +274,14 @@ SMB over IP
 <p>Keep the default user set “All Users”</p>
 <p><img src=https://www.definit.co.uk/images/2011/01/image_thumb5.png alt></p>
 <p>Create and apply the rule.</p>
-<h5 id=creating-a-scom-2007-r2-agent-communications-rule>Creating a SCOM 2007 R2 Agent Communications Rule</h5>
-<p>To allow the Agent to communicate back to the management server, start another Access Rule wizard from the TMG console to allow “System Center Operation Manager Agent” and “System Manager Operation Manager Agent Installation” from “Local Host” to your “SCOM 2007 R2 Servers” computer set, applicable to “All Users”.</p>
+<h5 id=creating-a-scom-2007-r2-agent-communications-rule>Creating a SCOM 2007 R2 Agent Communications Rule <a class=anchor href=#creating-a-scom-2007-r2-agent-communications-rule>
+<i class="fas fa-hashtag"></i>
+</a></h5><p>To allow the Agent to communicate back to the management server, start another Access Rule wizard from the TMG console to allow “System Center Operation Manager Agent” and “System Manager Operation Manager Agent Installation” from “Local Host” to your “SCOM 2007 R2 Servers” computer set, applicable to “All Users”.</p>
 <p>Create and apply the rule, and you should have something like this:</p>
 <p><img src=https://www.definit.co.uk/images/2011/01/image_thumb6.png alt></p>
-<h5 id=pushing-the-scom-2007-r2-agent-to-threat-management-gateway-servers>Pushing the SCOM 2007 R2 Agent to Threat Management Gateway Servers</h5>
-<p>You should now be able to “Discover” your TMG servers in the normal way from the SCOM console – if you have issues I would highly recommend setting a filter on the IP addresses for your SCOM and TMG servers while you do the discovery and installation of the agent – investigate any blocked connections that you might see.</p>
+<h5 id=pushing-the-scom-2007-r2-agent-to-threat-management-gateway-servers>Pushing the SCOM 2007 R2 Agent to Threat Management Gateway Servers <a class=anchor href=#pushing-the-scom-2007-r2-agent-to-threat-management-gateway-servers>
+<i class="fas fa-hashtag"></i>
+</a></h5><p>You should now be able to “Discover” your TMG servers in the normal way from the SCOM console – if you have issues I would highly recommend setting a filter on the IP addresses for your SCOM and TMG servers while you do the discovery and installation of the agent – investigate any blocked connections that you might see.</p>
 <p>Don’t forget to <a href=http://blogs.technet.com/b/isablog/archive/2009/06/29/tmg-scom-pack-monitor-tmg-with-system-center-2007-r2.aspx target=_blank>install the SCOM 2007 R2 Management Pack for TMG</a>. Another useful page is <a href=http://technet.microsoft.com/en-us/library/ff358634.aspx target=_blank>Troubleshooting Issues When You Use the Discovery Wizard to Install an Agent</a>, as is <a href=http://blogs.technet.com/b/kevinholman/archive/2007/12/12/agent-discovery-and-push-troubleshooting-in-opsmgr-2007.aspx target=_blank>Agent discovery and push troubleshooting in OpsMgr 2007</a>.</p>
 <h6>Share this post</h6>
 <span class=share-box>

@@ -101,8 +101,9 @@ Tags:
 </div>
 <p><img src=https://www.definit.co.uk/images/2010/11/VMware2.jpg alt>A problem reared it&rsquo;s head over the weekend with one of our hosts' Fibre Channel HBAs negotiating it&rsquo;s way down to 2GB, and consequently introducing massive latency for the LUNs behind it. Analysis showed that the drivers for the HBA were over a year out of date so the suggested fix from VMware was to update the drivers. This is fine to do manually for a few hosts, but would be a real pain for the 300+ hosts in the environment I manage.</p>
 <p>Enter VMware Update Manager - we already use it to patch and upgrade our hosts, but it can also apply host extensions - driver packages as well.</p>
-<h1 id=identify-the-hba-and-driver-package-required>Identify the HBA and driver package required</h1>
-<p>First, we need to determine the exact hardware ID of the HBA and then get the latest supported driver package from the VMware Hardware Compatibility List. To do this</p>
+<h1 id=identify-the-hba-and-driver-package-required>Identify the HBA and driver package required <a class=anchor href=#identify-the-hba-and-driver-package-required>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>First, we need to determine the exact hardware ID of the HBA and then get the latest supported driver package from the VMware Hardware Compatibility List. To do this</p>
 <p>Log on to the host via SSH and issue an &ldquo;<em>esxcfg-scsidevs -a</em>&rdquo; to list installed SCSI devices. You&rsquo;ll see output similar to below - the currently loaded driver is the second column, highlighted in red.</p>
 <blockquote>
 <p>vmhba1  <strong><span style=color:red>qla2xxx          </span></strong> link-up   fc.20000024ff25da1c:21000024ff25da1c    (0:2              1:0.0) QLogic Corp ISP2532-based 8Gb Fibre Channel to PCI Express HBA</p>
@@ -117,15 +118,17 @@ Tags:
 </blockquote>
 <p>Plug those device details along with the version of ESXi you&rsquo;re running into the HCL and you should get the correct device identification - the host I&rsquo;m using is running ESXi 5.1 so I can see that qla2xxx version 934.5.10.0-1vmw is the correct driver. Once you&rsquo;ve identified the correct package, download and unzip it.</p>
 <p><img src=https://www.definit.co.uk/images/2013/05/2013-05-07-12_23_39-VMware-Compatibility-Guide_-I_O-Device-Search.png alt></p>
-<h1 id=importing-the-package-into-vmware-update-manager>Importing the package into VMware Update Manager</h1>
-<p>Unzip the package you&rsquo;ve downloaded and locate the &ldquo;offline_bundle.zip&rdquo; - in my case this was a &ldquo;qla2xxx-934.5.10.0-offline_bundle-1031464.zip&rdquo;</p>
+<h1 id=importing-the-package-into-vmware-update-manager>Importing the package into VMware Update Manager <a class=anchor href=#importing-the-package-into-vmware-update-manager>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>Unzip the package you&rsquo;ve downloaded and locate the &ldquo;offline_bundle.zip&rdquo; - in my case this was a &ldquo;qla2xxx-934.5.10.0-offline_bundle-1031464.zip&rdquo;</p>
 <p><img src=https://www.definit.co.uk/images/2013/05/2013-05-07-12_34_11-qla2xxx-934.5.10.0-1031464.png alt></p>
 <p>Open the Update Manager administration view from your vSphere client and go to the Patch Repository tab, then click &ldquo;Import Patches&rdquo;</p>
 <p><img src=https://www.definit.co.uk/images/2013/05/2013-05-07-14_21_17-uk01pvic001.aceins.com-vSphere-Client.png alt></p>
 <p>Import the offline bundle and confirm the details of the import:</p>
 <p><img src=https://www.definit.co.uk/images/2013/05/2013-05-07-12_34_27-uk01pvic001.aceins.com-vSphere-Client.png alt> <img src=https://www.definit.co.uk/images/2013/05/2013-05-07-12_34_40-uk01pvic001.aceins.com-vSphere-Client.png alt></p>
-<h1 id=create-and-apply-thebaseline>Create and apply the baseline</h1>
-<p>Once the import is completed, search for the package using the Patch Repository page, and then click &ldquo;Add to baseline&rdquo; if you want to add it to an existing baseline, or head over to &ldquo;Baselines and Groups&rdquo; if you want to create a new baseline. I need to apply this to specific test hosts first, so I don&rsquo;t want to add to my existing baselines.</p>
+<h1 id=create-and-apply-thebaseline>Create and apply the baseline <a class=anchor href=#create-and-apply-thebaseline>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>Once the import is completed, search for the package using the Patch Repository page, and then click &ldquo;Add to baseline&rdquo; if you want to add it to an existing baseline, or head over to &ldquo;Baselines and Groups&rdquo; if you want to create a new baseline. I need to apply this to specific test hosts first, so I don&rsquo;t want to add to my existing baselines.</p>
 <p><img src=https://www.definit.co.uk/images/2013/05/2013-05-07-14_28_00-uk01pvic001.aceins.com-vSphere-Client.png alt></p>
 <p>From the Baselines and Groups tab, click &ldquo;Create…&rdquo; and then name your baseline - it&rsquo;s good practice to include a decent description too. Make sure you select &ldquo;Host Extension&rdquo; as the baseline type.</p>
 <p><img src=https://www.definit.co.uk/images/2013/05/2013-05-07-14_31_44-uk01pvic001.aceins.com-vSphere-Client1.png alt></p>
@@ -134,8 +137,9 @@ Tags:
 <p>You can now scan, stage and remediate with the baseline as you would any other.</p>
 <p><img src=https://www.definit.co.uk/images/2013/05/2013-05-07-14_39_45-uk01pvic001.aceins.com-vSphere-Client.png alt></p>
 <p>Hope this helps!</p>
-<h2 id=sources>Sources</h2>
-<ul>
+<h2 id=sources>Sources <a class=anchor href=#sources>
+<i class="fas fa-hashtag"></i>
+</a></h2><ul>
 <li><a href="http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1027206" target=_blank>Determining Network/Storage firmware and driver version in ESXi/ESX 4.x and 5.x (1027206)</a></li>
 <li><a href="http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2005205" target=_blank>Installing async drivers on ESXi 5.x (2005205)</a></li>
 <li><a href="http://www.vmware.com/resources/compatibility/search.php?deviceCategory=io&productid=12630&deviceCategory=io&releases=171&VID=1077&DID=2532&SVID=1077&SSID=0166&page=1&display_interval=10&sortColumn=Partner&sortOrder=Asc" target=_blank>VMware Compatibility Guide</a></li>

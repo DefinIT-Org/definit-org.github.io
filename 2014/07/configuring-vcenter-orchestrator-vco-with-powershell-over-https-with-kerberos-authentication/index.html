@@ -112,8 +112,9 @@ Tags:
 </div>
 </div>
 <p><img class="alignright size-thumbnail wp-image-4264" src=/images/2014/03/20140313-043.png alt="vCenter Orchestrator (vCO)" width=142 height=150>As a PowerShell fan I find using the vCO PowerShell plugin makes my life a whole lot easier. What isn&rsquo;t easy however, is  the configuration of vCO and a PowerShell jump host. Having done it a few times, this is my method for ensuring a secure working connection using HTTPS and Kerberos.</p>
-<h2 id=configure-the-orchestrator-appliance>Configure the Orchestrator Appliance</h2>
-<p>Since we’re planning on using Kerberos authentication, we’d better ensure that the time is correct AND syncs to the same source as the domain.</p>
+<h2 id=configure-the-orchestrator-appliance>Configure the Orchestrator Appliance <a class=anchor href=#configure-the-orchestrator-appliance>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Since we’re planning on using Kerberos authentication, we’d better ensure that the time is correct AND syncs to the same source as the domain.</p>
 <p><img src=https://www.definit.co.uk/images/2014/07/image_thumb1.png alt></p>
 <p>In order to configure Kerberos on the Orchestrator appliance you need to SSH in to the box and log in using your root credentials.</p>
 <p>Create a new krb5.conf file under /usr/java/jre-vmware/lib/security/ using the following command:</p>
@@ -135,8 +136,9 @@ Tags:
         default = SYSLOG:NOTICE:DAEMON</pre>
 <p>If the krb5.conf file did not exist, change the permissions to allow the system to read the file:</p>
 <pre class="brush: bash; gutter: false">chmod 644 /usr/java/jre-vmware/lib/security/krb5.conf</pre>
-<h2 id=configure-the-powershell-host>Configure the PowerShell host</h2>
-<p>I’m configuring to use HTTPS with Kerberos authentication, so the first thing I need is a certificate with the Server Authentication (1.3.6.1.5.5.7.3.1) key usage. If you’re running a Microsoft PKI, the default Computer certificate template is perfect for this.</p>
+<h2 id=configure-the-powershell-host>Configure the PowerShell host <a class=anchor href=#configure-the-powershell-host>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>I’m configuring to use HTTPS with Kerberos authentication, so the first thing I need is a certificate with the Server Authentication (1.3.6.1.5.5.7.3.1) key usage. If you’re running a Microsoft PKI, the default Computer certificate template is perfect for this.</p>
 <p>Open MMC and add the Certificates snap in for the Computer account, find your certificate and double-click to open. Select the Details tab and scroll to the bottom – copy the thumbprint value to use in the below command.</p>
 <p><img src=https://www.definit.co.uk/images/2014/07/image_thumb2.png alt></p>
 <p>Enable WinRM with the following command:</p>
@@ -151,12 +153,14 @@ Tags:
 <p>Finally, enable Kerberos authentication:</p>
 <pre class="brush: powershell; gutter: false">winrm set winrm/config/service/auth @{Kerberos="true"}</pre>
 <p>The PowerShell host is now listening on port HTTPS 5986 authenticated by Kerberos!</p>
-<h2 id=test-the-winrm-connection>Test the WinRM connection</h2>
-<p>Using another computer on the same domain, run the following command to execute NSLookup on the PowerShell host:</p>
+<h2 id=test-the-winrm-connection>Test the WinRM connection <a class=anchor href=#test-the-winrm-connection>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Using another computer on the same domain, run the following command to execute NSLookup on the PowerShell host:</p>
 <pre class="brush: powershell; gutter: false">winrs –r:https://mgmt-01.definit.local:5986 nslookup google.com</pre>
 <p><img src=https://www.definit.co.uk/images/2014/07/image_thumb4.png alt></p>
-<h2 id=adding-a-powershell-host>Adding a PowerShell host</h2>
-<p>The final step is to add a PowerShell host to Orchestrator. Open (or install first and then open) the Orchestrator client and connect to your vCO appliance. Make sure you’re connecting using your domain account (i.e. you need to pass your domain identity to the vCO appliance to use for authentication to the PowerShell host).</p>
+<h2 id=adding-a-powershell-host>Adding a PowerShell host <a class=anchor href=#adding-a-powershell-host>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The final step is to add a PowerShell host to Orchestrator. Open (or install first and then open) the Orchestrator client and connect to your vCO appliance. Make sure you’re connecting using your domain account (i.e. you need to pass your domain identity to the vCO appliance to use for authentication to the PowerShell host).</p>
 <p>Specify a name for the PowerShell host (the hostname of the server is fine), the FQDN (best to use FQDN with Kerberos) and the port that we created the listener on – 5986 by default.</p>
 <p><img src=https://www.definit.co.uk/images/2014/07/image_thumb5.png alt></p>
 <p>Select WinRM as the host type, HTTPS and do not accept all certificates, finally select Kerberos authentication.</p>
@@ -166,8 +170,9 @@ Tags:
 <p>Finish the wizard and wait until the workflow completes:</p>
 <p><img src=https://www.definit.co.uk/images/2014/07/image_thumb8.png alt></p>
 <p>Now we have a PowerShell host added to vCO, we can run a PowerShell script against it over HTTPS and authenticated with Kerberos.</p>
-<h2 id=running-a-hello-world-powershell-script-in-vco>Running a Hello World PowerShell script in vCO</h2>
-<p>Firstly, lets create “Say-HelloWorld.ps1” script and save it in c:\SCRIPTS on the PowerShell host.</p>
+<h2 id=running-a-hello-world-powershell-script-in-vco>Running a Hello World PowerShell script in vCO <a class=anchor href=#running-a-hello-world-powershell-script-in-vco>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Firstly, lets create “Say-HelloWorld.ps1” script and save it in c:\SCRIPTS on the PowerShell host.</p>
 <pre class="brush: powershell; gutter: false">return “Hello World”</pre>
 <p>Next switch back to the Orchestrator client and select “Design” mode. Create a new folder to contain your workflows (mine is called “DefinIT”) and then create a new workflow (“Test-PowerShell-Hello-World”).</p>
 <p>Select the “Workflow” tab and then expand “All Workflows” > Library > PowerShell, then drag the “Invoke an external script” onto the workflow editor:</p>

@@ -103,23 +103,28 @@ Tags:
 </div>
 </div>
 </div>
-<h2 id=problem>Problem</h2>
-<p>Fairly recently I came across this error message on one of my hosts &ldquo;esx.problem.visorfs.ramdisk.full&rdquo;</p>
-<h2 id=fallout>Fallout</h2>
-<p>While trying to address the issue I had the following problems when the ramdisk did indeed &ldquo;fill up&rdquo;</p>
+<h2 id=problem>Problem <a class=anchor href=#problem>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Fairly recently I came across this error message on one of my hosts &ldquo;esx.problem.visorfs.ramdisk.full&rdquo;</p>
+<h2 id=fallout>Fallout <a class=anchor href=#fallout>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>While trying to address the issue I had the following problems when the ramdisk did indeed &ldquo;fill up&rdquo;</p>
 <ul>
 <li>PSOD (worst case happened only once in my experience)</li>
 <li>VM&rsquo;s struggling to vMotion from the affected host when putting into maintenance mode.</li>
 </ul>
-<h2 id=temporary-workaround>Temporary workaround</h2>
-<p>A reboot of the host would clear the problem (clear out the ramdisk) for a short while but the problem will return if not addressed properly.</p>
-<h2 id=environment>Environment</h2>
-<ul>
+<h2 id=temporary-workaround>Temporary workaround <a class=anchor href=#temporary-workaround>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>A reboot of the host would clear the problem (clear out the ramdisk) for a short while but the problem will return if not addressed properly.</p>
+<h2 id=environment>Environment <a class=anchor href=#environment>
+<i class="fas fa-hashtag"></i>
+</a></h2><ul>
 <li>Clustered ESXi hosts (version 5.1)</li>
 <li>vCenter 5.1</li>
 </ul>
-<h2 id=steps-taken>Steps taken</h2>
-<p>First of all I had to see just how bad things were so I connected to the affected host via SSH ( you may need to start the SSH service on the host as by default it is usually stopped)</p>
+<h2 id=steps-taken>Steps taken <a class=anchor href=#steps-taken>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>First of all I had to see just how bad things were so I connected to the affected host via SSH ( you may need to start the SSH service on the host as by default it is usually stopped)</p>
 <p>Using the following command I could determine what used state the ramdisk was in.</p>
 <p>vdf -h</p>
 <p><img src=https://www.definit.co.uk/images/2014/02/ramdisk_full.png alt></p>
@@ -135,8 +140,9 @@ Tags:
 </ul>
 <p>Unlike many of the other articles I had read which all seemed to point to /var/log being the cause the culprit in this instance was the /scratch disk</p>
 <p>After doing some quick reading it was clear I could set a separate persistent location for the /scratch disk. So I followed the VMware <a href="http://kb.vmware.com/selfservice/microsites/search.do?cmd=displayKC&docType=kc&docTypeID=DT_KB_1_1&externalId=1033696" title="Creating a persistent scratch location for ESXi 4.x and 5.x">KB article</a> on this process and rebooted the host to apply the changes.</p>
-<h2 id=the-gotcha>The gotcha</h2>
-<p>Even though I had followed the article to the letter and rebooted the host the changes did not apply on this host as when I double checked the ramdisk and this was the output as you can see the used space was already growing and when I put the console window side by side with the other hosts it was growing rapidly whereas the other hosts were quite static in used space.</p>
+<h2 id=the-gotcha>The gotcha <a class=anchor href=#the-gotcha>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Even though I had followed the article to the letter and rebooted the host the changes did not apply on this host as when I double checked the ramdisk and this was the output as you can see the used space was already growing and when I put the console window side by side with the other hosts it was growing rapidly whereas the other hosts were quite static in used space.</p>
 <p><img src=https://www.definit.co.uk/images/2014/02/street.jpg alt></p>
 <p> </p>
 <p> </p>
@@ -144,8 +150,9 @@ Tags:
 <p> </p>
 <p> </p>
 <p>It was not until I rebooted the host again did the changes I made apply, I will point out that this was the only time this little issue occurred the other hosts only required one reboot after changing the /scratch location.</p>
-<h2 id=finally>Finally</h2>
-<p>After the second reboot I could see the host was as it should be</p>
+<h2 id=finally>Finally <a class=anchor href=#finally>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>After the second reboot I could see the host was as it should be</p>
 <p><img src=https://www.definit.co.uk/images/2014/02/2014-02-04_1352441.jpg alt></p>
 <h6>Share this post</h6>
 <span class=share-box>

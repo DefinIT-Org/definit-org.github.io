@@ -155,8 +155,9 @@ vCAC simple configuration with vPostgres and Load Balancers prepared
 <li>Install and configure additional IaaS server</li>
 <li>Deploy vCenter Orchestrator Appliance cluster</li>
 </ul>
-<h2 id=deploy-a-vshield-edge-appliance>Deploy a vShield Edge appliance</h2>
-<p>Log in to your vShield Manager and select your Datacenter, then the Network Virtualisation tab</p>
+<h2 id=deploy-a-vshield-edge-appliance>Deploy a vShield Edge appliance <a class=anchor href=#deploy-a-vshield-edge-appliance>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Log in to your vShield Manager and select your Datacenter, then the Network Virtualisation tab</p>
 <p><img src=https://www.definit.co.uk/images/2014/06/image_thumb24.png alt></p>
 <p>Click the green + symbol to add a new configuration, then give it a good name, hostname and description. Tick the “Enable HA” button to enable high availability. Configure the credentials and enable SSH access if required.</p>
 <p><img src=https://www.definit.co.uk/images/2014/06/image_thumb25.png alt> <img src=https://www.definit.co.uk/images/2014/06/image_thumb26.png alt></p>
@@ -169,15 +170,17 @@ vCAC simple configuration with vPostgres and Load Balancers prepared
 <p>Finish the Wizard and wait for the Edge appliances to deploy…</p>
 <p><img src=https://www.definit.co.uk/images/2014/06/image_thumb33.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2014/06/image_thumb34.png alt></p>
-<h2 id=configuring-dns-for-load-balancing>Configuring DNS for load balancing</h2>
-<p>We require three DNS aliases for the load balanced services, one for the vCAC appliances, one for the IaaS web components and one for the IaaS Manager Service. If you’re creating certificates for vCAC and choose to use the SAN based certificate, you’ll need to make sure these DNS names are in the SAN list.</p>
+<h2 id=configuring-dns-for-load-balancing>Configuring DNS for load balancing <a class=anchor href=#configuring-dns-for-load-balancing>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>We require three DNS aliases for the load balanced services, one for the vCAC appliances, one for the IaaS web components and one for the IaaS Manager Service. If you’re creating certificates for vCAC and choose to use the SAN based certificate, you’ll need to make sure these DNS names are in the SAN list.</p>
 <p>vCAC Appliance: since this is the main user interface, I’m going with vcloud.definit.local</p>
 <p>vCAC IaaS Web: this is a system URL, so I will go with vcac-web.definit.local</p>
 <p>vCAC IaaS Manager Service: another system URL, so vcac-manager.definit.local</p>
 <p>Create A records and PTRs for all 3, using the IPs created earlier for the Edge appliance:</p>
 <p><img src=https://www.definit.co.uk/images/2014/06/image_thumb35.png alt></p>
-<h2 id=configure-load-balancing-pools>Configure Load Balancing pools</h2>
-<p>Jump back onto the vShield Manager web interface and double click on the Edge appliance you deployed previously. Click on the Load Balancer button to configure Load Balancing</p>
+<h2 id=configure-load-balancing-pools>Configure Load Balancing pools <a class=anchor href=#configure-load-balancing-pools>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Jump back onto the vShield Manager web interface and double click on the Edge appliance you deployed previously. Click on the Load Balancer button to configure Load Balancing</p>
 <p><img src=https://www.definit.co.uk/images/2014/06/image_thumb36.png alt></p>
 <p>Click on the green + symbol to add a new pool of servers to load balance. Enter a name for the pool (e.g. vCAC-App-Load-Balance) and click next. For the vCAC appliances we need to load balance port 80 and 443. It is <strong>CRITICAL</strong> that you use the IP_HASH Balancing Method.</p>
 <p><img src=https://www.definit.co.uk/images/2014/06/image_thumb37.png alt> <img src=https://www.definit.co.uk/images/2014/06/image_thumb38.png alt></p>
@@ -187,8 +190,9 @@ vCAC simple configuration with vPostgres and Load Balancers prepared
 <p>vCAC-Web-Load-Balancer, HTTP, HTTPS using IP_HASH, default checks and the IP addresses of my two IaaS Web Servers</p>
 <p>vCAC-Manager-Load-Balancer, HTTP, HTTPS using IP_HASH, default checks and the IP addresses of my two IaaS Manager Servers</p>
 <p>At this point, make sure you hit the “Publish Changes” button at the top!</p>
-<h2 id=configure-virtual-servers>Configure Virtual Servers</h2>
-<p>Now we’ve configured the pools we can move on to the virtual servers – the “listening” part of the Load Balancers. Click on the Virtual Servers link under Load Balancer and click the green + to create a new Virtual Server.</p>
+<h2 id=configure-virtual-servers>Configure Virtual Servers <a class=anchor href=#configure-virtual-servers>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Now we’ve configured the pools we can move on to the virtual servers – the “listening” part of the Load Balancers. Click on the Virtual Servers link under Load Balancer and click the green + to create a new Virtual Server.</p>
 <p>Configure all three Virtual Servers to use the IP addresses we added to DNS earlier, using COOKIE persistence for HTTP and SSL_SESSION_ID for HTTPS. Select the existing pool we created in the previous step, making sure they match the load balanced service.</p>
 <p><img src=https://www.definit.co.uk/images/2014/06/image_thumb41.png alt></p>
 <p>Publish your changes – you should now have 3 virtual servers:</p>

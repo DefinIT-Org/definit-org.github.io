@@ -111,8 +111,9 @@ Tags:
 <img src=/images/2014/03/20140313-043.png class=clr-post-featured-image>
 <p><img class="alignright size-full wp-image-4264" src=/images/2014/03/20140313-043.png alt="vRealize Orchestrator" width=142 height=152>Back in January 2015 I wrote an article on <a href=https://www.definit.co.uk/2015/01/performance-tweak-increasing-max-heap-size-for-the-vrealize-orchestrator-vrovco-client/>how to modify the Java heap settings for the vCenter Orchestrator client</a> when working with very large workflows. Since vRealize Orchestrator 7.x has been released, we no longer have an installable client, just a Java WebStart file (.jnlp) that you run, or a package that you can download - but nothing that installs.</p>
 <p><span style=color:#930>Note that none of this is official or supported by VMware as far as I know - it&rsquo;s the results of my experimentation which has shown some performance improvement by increasing the configured memory pool. Use it at your own risk!</span></p>
-<h2 id=modifying-the-java-webstart-application-jnlp>Modifying the Java WebStart application .jnlp</h2>
-<p>A Java WebStart file is basically just an XML specification that tells Java WebStart how to run the app - all of the components are downloaded at run time. However, because it&rsquo;s an XML file, it&rsquo;s dead easy to read the configuration, and sure enough, there&rsquo;s a configured memory pool setting:</p>
+<h2 id=modifying-the-java-webstart-application-jnlp>Modifying the Java WebStart application .jnlp <a class=anchor href=#modifying-the-java-webstart-application-jnlp>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>A Java WebStart file is basically just an XML specification that tells Java WebStart how to run the app - all of the components are downloaded at run time. However, because it&rsquo;s an XML file, it&rsquo;s dead easy to read the configuration, and sure enough, there&rsquo;s a configured memory pool setting:</p>
 <p><img src=https://www.definit.co.uk/images/2016/12/2016-12-16_09-36-52-1024x296.png alt></p>
 <p>I modified it to &ldquo;-Xmx1024m&rdquo; and restarted the client - and sure enough, the memory usage increased:</p>
 <div id=attachment_7885 style=width:310px class="wp-caption alignnone">
@@ -127,8 +128,9 @@ Before the config change, 512Mb RAM is in use
 After the config change, 1GB of RAM is used
 </p>
 </div>
-<h2 id=modifying-the-vro-workflow-designer-application>Modifying the vRO Workflow Designer application</h2>
-<p>So, what about the downloadable applications? Well, on MacOS the application is easy to explore, just download and unzip the application, then right click and &ldquo;Show Package Contents&rdquo;</p>
+<h2 id=modifying-the-vro-workflow-designer-application>Modifying the vRO Workflow Designer application <a class=anchor href=#modifying-the-vro-workflow-designer-application>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>So, what about the downloadable applications? Well, on MacOS the application is easy to explore, just download and unzip the application, then right click and &ldquo;Show Package Contents&rdquo;</p>
 <p><img src=https://www.definit.co.uk/images/2016/12/2016-12-16_10-04-35.png alt></p>
 <p>Within the package is &ldquo;Info.plist&rdquo;, which is the equivalent of the XML jnlp file, and sure enough there are some JVMOptions specified, one of which is the memory pool, which is already set to 1GB &ldquo;-Xmx1024m&rdquo;</p>
 <p><img src=https://www.definit.co.uk/images/2016/12/2016-12-16_10-07-19.png alt></p>

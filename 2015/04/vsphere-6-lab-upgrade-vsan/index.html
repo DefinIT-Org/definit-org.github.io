@@ -138,8 +138,9 @@ vSphere 6 Lab Upgrade – VSAN
 </div>
 <p><img src=https://www.definit.co.uk/images/2014/07/vSphereLogo.png alt>I tested vSphere 6 quite intensively when it was in beta, but I didn’t ever upgrade my lab – basically because I need a stable environment to work on and I wasn’t sure that I could maintain that with the beta.</p>
 <p>Now 6 has been GA a while and I have a little bit of time, I have begun the lab upgrade process. You can see a bit more about my lab hardware over on my <a href=https://www.definit.co.uk/lab/>lab page</a>.</p>
-<h3 id=upgrading-to-vsan-60>Upgrading to VSAN 6.0</h3>
-<p>The upgrade process for VSAN 5.5 to 6.0 is fairly straight forward</p>
+<h3 id=upgrading-to-vsan-60>Upgrading to VSAN 6.0 <a class=anchor href=#upgrading-to-vsan-60>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>The upgrade process for VSAN 5.5 to 6.0 is fairly straight forward</p>
 <ul>
 <li>Upgrade vCenter Server</li>
 <li>Upgrade ESXi hosts</li>
@@ -152,8 +153,9 @@ vSphere 6 Lab Upgrade – VSAN
 <p>When I put each host in maintenance mode, I need to make sure that I have enough capacity in the other VSAN nodes to accommodate the data being moved around.</p>
 <p>I also need to use an option to allow reduced redundancy while doing the upgrade, which again exposes me to data loss IF I lose hardware while doing the upgrade.</p>
 <p>Having said all of that, I have a good backup of my lab and actually, I don&rsquo;t care that much if I lose them 🙂</p>
-<h3 id=checking-vsan-status>Checking VSAN status</h3>
-<p>Anyone familiar with managing VSAN at more than a cursory level will have seen and heard of the RVC tool, if you haven&rsquo;t I would strongly suggest the excellent <a href=http://www.virten.net/2013/12/manage-vsan-with-rvc-part-1-basic-configuration-tasks/ target=_blank>Manage VSAN with RVC series over at virten.net</a> to learn the basics. Another good read before doing the upgrade is Rawlinson Rivera&rsquo;s <a href=http://blogs.vmware.com/vsphere/2015/03/upgrading-vmware-virtual-san-6-0.html target=_blank>upgrading VMware Virtual SAN 6 post</a>, and the <a href=http://pubs.vmware.com/vsphere-60/index.jsp#com.vmware.vsphere.virtualsan.doc/GUID-ABABC0DF-2519-4C8F-A5B1-2AECF86247AB.html target=_blank>vSphere 6 Upgrading the Virtual SAN cluster</a> documentation.</p>
+<h3 id=checking-vsan-status>Checking VSAN status <a class=anchor href=#checking-vsan-status>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Anyone familiar with managing VSAN at more than a cursory level will have seen and heard of the RVC tool, if you haven&rsquo;t I would strongly suggest the excellent <a href=http://www.virten.net/2013/12/manage-vsan-with-rvc-part-1-basic-configuration-tasks/ target=_blank>Manage VSAN with RVC series over at virten.net</a> to learn the basics. Another good read before doing the upgrade is Rawlinson Rivera&rsquo;s <a href=http://blogs.vmware.com/vsphere/2015/03/upgrading-vmware-virtual-san-6-0.html target=_blank>upgrading VMware Virtual SAN 6 post</a>, and the <a href=http://pubs.vmware.com/vsphere-60/index.jsp#com.vmware.vsphere.virtualsan.doc/GUID-ABABC0DF-2519-4C8F-A5B1-2AECF86247AB.html target=_blank>vSphere 6 Upgrading the Virtual SAN cluster</a> documentation.</p>
 <p>SSH onto the vCSA and log onto the RVC tool</p>
 <pre class="brush: text; gutter: false">rvc administrator@vsphere.local@vcsa-01</pre>
 <p><img src=https://www.definit.co.uk/images/2015/04/image_thumb56.png alt></p>
@@ -183,8 +185,9 @@ vSphere 6 Lab Upgrade – VSAN
 <p>My lightly used VSAN would not have a capacity problem if I lost a host:</p>
 <p><img src=https://www.definit.co.uk/images/2015/04/image_thumb63.png alt></p>
 <p>So, from the results above I can conclude that my VSAN cluster is healthy, and I can move on to the disk upgrade.</p>
-<h3 id=performing-the-disk-format-upgrade>Performing the disk format upgrade</h3>
-<p>Upgrading the disk format is a single command for the whole cluster, using the option I mentioned before to proceed even with reduced redundancy (required for a 3-host VSAN)</p>
+<h3 id=performing-the-disk-format-upgrade>Performing the disk format upgrade <a class=anchor href=#performing-the-disk-format-upgrade>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Upgrading the disk format is a single command for the whole cluster, using the option I mentioned before to proceed even with reduced redundancy (required for a 3-host VSAN)</p>
 <pre class="brush: text; gutter: false">vsan.v2_ondisk_upgrade --allow-reduced-redundancy /vcsa-01/DefinIT\ Lab/computers/HPN54L/</pre>
 <p>This goes through the process of updating all the disks in the cluster and can take quite a while depending on the number and size of disks, and the number of objects stored on them. The first time I ran the upgrade, it failed because one object did not upgrade successfully, even though all the disks were correctly upgraded.</p>
 <p><img src=https://www.definit.co.uk/images/2015/04/image_thumb64.png alt></p>

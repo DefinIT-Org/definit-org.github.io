@@ -107,8 +107,9 @@ Tags:
 </div>
 <p><img class="alignright size-full wp-image-7908" src=/images/2016/12/2016-12-19_15-25-30.png alt width=312 height=142>One of the cool new features released with vRealize Automation 7.2 was the integration of VMware Admiral (container management) into the product, and recently VMware made version 1 of vSphere Integrated Containers generally available (GA), so I thought it was time I started playing around with the two.</p>
 <p>In this article I&rsquo;m going to cover deploying VIC to my vSphere environment and then adding that host to the vRA 7.2 container management.</p>
-<h2 id=deploying-vsphere-integrated-containers>Deploying vSphere Integrated Containers</h2>
-<p>VIC is deployed using a command line interface, which deploys a vApp and a container host VM onto your ESXi host or vSphere cluster. There are a LOT of different ways to configure VIC so I strongly suggest you read and digest the <a href=https://vmware.github.io/vic-product/assets/files/html/0.8/vic_installation/index.html>VIC Installation Guide</a>. For the sake of simplicity, I&rsquo;m going to deploy as basic a setup as I can figure out.</p>
+<h2 id=deploying-vsphere-integrated-containers>Deploying vSphere Integrated Containers <a class=anchor href=#deploying-vsphere-integrated-containers>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>VIC is deployed using a command line interface, which deploys a vApp and a container host VM onto your ESXi host or vSphere cluster. There are a LOT of different ways to configure VIC so I strongly suggest you read and digest the <a href=https://vmware.github.io/vic-product/assets/files/html/0.8/vic_installation/index.html>VIC Installation Guide</a>. For the sake of simplicity, I&rsquo;m going to deploy as basic a setup as I can figure out.</p>
 <p>The following command is broken down into multiple lines for readability:</p>
 <p class="brush: bash; gutter: false">
 ./vic-machine-darwin create<br> -target 'Administrator@vsphere.local':'VMware1!'@vcsa.definit.local/Lab<br> -compute-resource Workload<br> -image-store vsanDatastore<br> -volume-store vsanDatastore:Default<br> -bridge-network '100-VIC-Bridge'<br> -management-network '1-Management'<br> -client-network '1-Management'<br> -public-network '1-Management'<br> -name 'vic.definit.local'<br> -no-tlsverify<br> -force
@@ -163,8 +164,9 @@ Here you can see the new container, evil_williams is running:
 <p class="brush: bash; gutter: false">
 <a href=/images/2016/12/2016-12-16_17-27-06.png><img class="alignnone size-full wp-image-7902" src=/images/2016/12/2016-12-16_17-27-06.png alt width=256 height=141></a>
 </p>
-<h2 id=adding-vsphere-integrated-containers-to-vrealize-automation-72-brushbashgutterfalse> Adding vSphere Integrated Containers to vRealize Automation 7.2 {.brush:.bash;.gutter:.false}</h2>
-<p class="brush: bash; gutter: false">
+<h2 id=adding-vsphere-integrated-containers-to-vrealize-automation-72-brushbashgutterfalse> Adding vSphere Integrated Containers to vRealize Automation 7.2 {.brush:.bash;.gutter:.false} <a class=anchor href=#adding-vsphere-integrated-containers-to-vrealize-automation-72-brushbashgutterfalse>
+<i class="fas fa-hashtag"></i>
+</a></h2><p class="brush: bash; gutter: false">
 Adding the new VIC host to the Admiral interface that's baked into vRealize Automation is really child's play - enter the address and port. If you remember that we specified -no-tlsverify, this means that we don't need a login credential (i.e. a client certificate) to use the API. We'll also get a certificate not trusted warning when we verify, that's because we self-signed the VIC certificate.
 </p>
 <p class="brush: bash; gutter: false">

@@ -119,8 +119,9 @@ Tags:
 <p>If you&rsquo;re unfamiliar with <a href=https://www.ravellosystems.com/solutions/cloud-test-dev/nested-virtualization-technology target=_blank>Ravello&rsquo;s offering</a> (where have you been?!) then it&rsquo;s basically a custom hypervisor (HVX) running on either AWS or Google Cloud that allows you to run nested environments on those platforms. I did say it&rsquo;s awesome.</p>
 <p>As an avid home-lab enthusiast Ravello initially felt weird, but having used it for a while I can definitely see the potential to augment, and in some cases completely replace the home lab. I spent some time going through Nigel Poulton&rsquo;s AWS course on Pluralsight to get a better understanding of the AWS platform and I think that helped, but it&rsquo;s definitely not required to get started on Ravello.</p>
 <p>One more thing to add before I start the setup - even if I didn&rsquo;t have 1000 hours free, the pricing model means that you could run your lab on Ravello for a fraction of the cost of a higher spec home lab. It&rsquo;s definitely an option to consider unless you&rsquo;re running your lab 24/7.</p>
-<h1 id=building-autolab-in-ravello>Building AutoLab in Ravello</h1>
-<p>I used the <a href="https://www.youtube.com/watch?v=kvGFgLr8V2g&feature=youtu.be" target=_blank>vBrownbag walkthrough video to build AutoLab 2.6 on Ravello</a>, below is a quick run through based on this</p>
+<h1 id=building-autolab-in-ravello>Building AutoLab in Ravello <a class=anchor href=#building-autolab-in-ravello>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>I used the <a href="https://www.youtube.com/watch?v=kvGFgLr8V2g&feature=youtu.be" target=_blank>vBrownbag walkthrough video to build AutoLab 2.6 on Ravello</a>, below is a quick run through based on this</p>
 <p>Add the AutoLab 2.6 Final blueprint to your library - log in and click on &ldquo;Ravello Repo&rdquo;, then add it to your library</p>
 <p><img src=https://www.definit.co.uk/images/2015/09/image_thumb23.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2015/09/image_thumb24.png alt></p>
@@ -160,8 +161,9 @@ Tags:
 <p><img src=https://www.definit.co.uk/images/2015/09/image_thumb41.png alt></p>
 <p>The vCenter should now be available - use the vSphere Client to connect to connect and you can view the standard AutoLabs setup</p>
 <p><img src=https://www.definit.co.uk/images/2015/09/image_thumb42.png alt></p>
-<h1 id=deploying-nsx-manager-to-ravello>Deploying NSX Manager to Ravello</h1>
-<p>The extended OVA functionality to deploy the NSX manager to Ravello is not available directly, so you can&rsquo;t just upload the OVA and expect it to work. The easiest method I found was to extract the NSX ova using 7-Zip and use the upload tool to upload the OVF</p>
+<h1 id=deploying-nsx-manager-to-ravello>Deploying NSX Manager to Ravello <a class=anchor href=#deploying-nsx-manager-to-ravello>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>The extended OVA functionality to deploy the NSX manager to Ravello is not available directly, so you can&rsquo;t just upload the OVA and expect it to work. The easiest method I found was to extract the NSX ova using 7-Zip and use the upload tool to upload the OVF</p>
 <p><img src=https://www.definit.co.uk/images/2015/09/image_thumb43.png alt></p>
 <p>Once the appliance has been uploaded it needs to be verified, I&rsquo;ll be using the below settings:</p>
 <ul>
@@ -181,8 +183,9 @@ Tags:
 <p>Once rebooted, check you can access the NSX admin console via the DC or VC:</p>
 <p><img src=https://www.definit.co.uk/images/2015/09/image_thumb51.png alt></p>
 <p>From here, the NSX install/deploy is as you would do it in a physical environment.</p>
-<h1 id=deploying-vrealize-automation-to-ravello>Deploying vRealize Automation to Ravello</h1>
-<p>Using the same method as the NSX manager deployment, extract the Identity Appliance and vRealize Automation Appliance and upload the OVF appliances directly to Ravello using the import tool.</p>
+<h1 id=deploying-vrealize-automation-to-ravello>Deploying vRealize Automation to Ravello <a class=anchor href=#deploying-vrealize-automation-to-ravello>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>Using the same method as the NSX manager deployment, extract the Identity Appliance and vRealize Automation Appliance and upload the OVF appliances directly to Ravello using the import tool.</p>
 <table border=0 width=600 cellspacing=0 cellpadding=2>
 <tr>
 <td valign=top width=300>

@@ -97,17 +97,23 @@ Tags:
 </div>
 <br clear=all>
 <img src=/images/logos/vmware-vra.png class=clr-post-featured-image>
-<h1 id=why-use-content-libraries-with-vra-8>Why use Content Libraries with vRA 8</h1>
-<h2 id=product-version---vrealize-automation-8x>Product Version - vRealize Automation 8.x</h2>
-<h2 id=what-are-vsphere-content-libraries>What are vSphere Content Libraries?</h2>
-<p><em>A content library stores and manages content in the form of library items. A single library item can consist of one file or multiple files. For example, the OVF template is a set of files (.ovf, .vmdk, and .mf). When you upload an OVF template to the library, you upload the entire set of files, but the result is a single library item of the OVF Template type.</em></p>
-<h3 id=why-are-they-great>Why are they great?</h3>
-<p>You can have a central &ldquo;master&rdquo; library from which other content libraries in your infrastructure can subscribe to and will then pull from therefore giving a single source of truth for VM templates. This can dramatically help reduce clutter and assist with version control.</p>
-<h3 id=why-are-they-useful-for-vra-8>Why are they useful for vRA 8?</h3>
-<p>vRA 8 can use templates from vSphere by way of image mappings, however if you have many of them across several locations and for the sake of an example you have one called &ldquo;server-2016-master&rdquo;. When you browse for the image when trying to map an image you will get a list of images all with the same name with no idea which one is correct or in which location. While this may not be a massive problem if you have fast LAN/WAN connectivity it is ineffcient to say the least and will increase deployment times or worse, it could be an incorrect image with the same name.</p>
+<h1 id=why-use-content-libraries-with-vra-8>Why use Content Libraries with vRA 8 <a class=anchor href=#why-use-content-libraries-with-vra-8>
+<i class="fas fa-hashtag"></i>
+</a></h1><h2 id=product-version---vrealize-automation-8x>Product Version - vRealize Automation 8.x <a class=anchor href=#product-version---vrealize-automation-8x>
+<i class="fas fa-hashtag"></i>
+</a></h2><h2 id=what-are-vsphere-content-libraries>What are vSphere Content Libraries? <a class=anchor href=#what-are-vsphere-content-libraries>
+<i class="fas fa-hashtag"></i>
+</a></h2><p><em>A content library stores and manages content in the form of library items. A single library item can consist of one file or multiple files. For example, the OVF template is a set of files (.ovf, .vmdk, and .mf). When you upload an OVF template to the library, you upload the entire set of files, but the result is a single library item of the OVF Template type.</em></p>
+<h3 id=why-are-they-great>Why are they great? <a class=anchor href=#why-are-they-great>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>You can have a central &ldquo;master&rdquo; library from which other content libraries in your infrastructure can subscribe to and will then pull from therefore giving a single source of truth for VM templates. This can dramatically help reduce clutter and assist with version control.</p>
+<h3 id=why-are-they-useful-for-vra-8>Why are they useful for vRA 8? <a class=anchor href=#why-are-they-useful-for-vra-8>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>vRA 8 can use templates from vSphere by way of image mappings, however if you have many of them across several locations and for the sake of an example you have one called &ldquo;server-2016-master&rdquo;. When you browse for the image when trying to map an image you will get a list of images all with the same name with no idea which one is correct or in which location. While this may not be a massive problem if you have fast LAN/WAN connectivity it is ineffcient to say the least and will increase deployment times or worse, it could be an incorrect image with the same name.</p>
 <p>If you use vSphere Content Libraries, while creating imagine mappings and when you browse for the VM image you will get the name of the content library before the name of the image &ldquo;content-libary-name/server-2016-master&rdquo; this will ensure you are selecting the correct image from the correct location.</p>
-<h2 id=summary>Summary</h2>
-<p>vSphere Content Libraries are very useful and have more use cases than the one I outlined above. If you want more information about them check out the following link.</p>
+<h2 id=summary>Summary <a class=anchor href=#summary>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>vSphere Content Libraries are very useful and have more use cases than the one I outlined above. If you want more information about them check out the following link.</p>
 <p><a href=https://blogs.vmware.com/vsphere/2020/01/creating-and-using-content-library.html>https://blogs.vmware.com/vsphere/2020/01/creating-and-using-content-library.html</a></p>
 <h6>Share this post</h6>
 <span class=share-box>

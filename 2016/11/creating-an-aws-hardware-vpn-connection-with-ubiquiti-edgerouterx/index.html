@@ -119,31 +119,36 @@ Tags:
 <p>To get a bit of a background on my AWS setup for vRealize Automation, take a look at this post - <a href=https://www.definit.co.uk/2016/07/adding-an-amazon-web-services-endpoint-to-vrealize-automation-7/>Adding an AWS endpoint to vRealize Automation 7</a>. The VPCs and configuration described in this article are my starting point.</p>
 <p>For my hardware VPN I am running a <a href=https://www.ubnt.com/edgemax/edgerouter-x/>Ubiquiti EdgeRouterX</a>, which is a fantastic little router, highly recommended. It has a tiny form factor, runs on Vyatta OS and even provides a PoE port for my <a href=https://www.ubnt.com/unifi/unifi-ap-ac-lite/>Ubiquiti Unifi AP AC Lite</a>.</p>
 <p>Enough theory for now, lets configure a Customer Gateway!</p>
-<h2 id=createa-customer-gateway>Create a Customer Gateway</h2>
-<p>A customer gateway defines your VPN endpoint from AWS&rsquo;s point of view. Create a new one from the VPC Management console</p>
+<h2 id=createa-customer-gateway>Create a Customer Gateway <a class=anchor href=#createa-customer-gateway>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>A customer gateway defines your VPN endpoint from AWS&rsquo;s point of view. Create a new one from the VPC Management console</p>
 <p><img src=https://www.definit.co.uk/images/2016/11/2016-11-07_16-40-31-1.png alt></p>
-<h2 id=create-a-virtual-private-gateway>Create a Virtual Private Gateway</h2>
-<p>A Virtual Private Gateway is needed to provide a VPN concentrator on the Amazon side of things. It must be attached to the VPC you&rsquo;re using for AWS in vRealize Automation.</p>
+<h2 id=create-a-virtual-private-gateway>Create a Virtual Private Gateway <a class=anchor href=#create-a-virtual-private-gateway>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>A Virtual Private Gateway is needed to provide a VPN concentrator on the Amazon side of things. It must be attached to the VPC you&rsquo;re using for AWS in vRealize Automation.</p>
 <p><img src=https://www.definit.co.uk/images/2016/11/2016-11-07_16-46-11.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2016/11/2016-11-07_16-48-41.png alt></p>
 <p>Now we can see the VPG is attached to the DefinIT-vRA VPC</p>
 <p><img src=https://www.definit.co.uk/images/2016/11/2016-11-07_16-50-15.png alt></p>
-<h2 id=create-avpn-connection>Create a VPN Connection</h2>
-<p>Now we have the components configured, we can link it together with a VPN connection. Note that once you complete the connection configuration your VPN charges apply.</p>
+<h2 id=create-avpn-connection>Create a VPN Connection <a class=anchor href=#create-avpn-connection>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Now we have the components configured, we can link it together with a VPN connection. Note that once you complete the connection configuration your VPN charges apply.</p>
 <p>Select the VPG and Customer Gateway we just configured, ensure you select Dynamic routing and give it a good name.</p>
 <p><img src=https://www.definit.co.uk/images/2016/11/2016-11-07_16-53-24-1.png alt></p>
 <p>Creating the VPN connection took a couple of minutes to deploy - wait until you see the &ldquo;available&rdquo; state</p>
 <p><img src=https://www.definit.co.uk/images/2016/11/2016-11-07_16-59-12.png alt></p>
-<h2 id=download-the-vpn-configuration>Download the VPN Configuration</h2>
-<p>Since the EdgeRouter range are based on Vyatta, we can download the VPN configuration for Vyatta gateways. Hit the &ldquo;Download Configuration&rdquo; button and select Vyatta:</p>
+<h2 id=download-the-vpn-configuration>Download the VPN Configuration <a class=anchor href=#download-the-vpn-configuration>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Since the EdgeRouter range are based on Vyatta, we can download the VPN configuration for Vyatta gateways. Hit the &ldquo;Download Configuration&rdquo; button and select Vyatta:</p>
 <p><img src=https://www.definit.co.uk/images/2016/11/2016-11-07_17-03-29.png alt>:</p>
 <p>By default the configuration file will include a line to advertise 0.0.0.0/0 via BGP, which isn&rsquo;t really desirable. Modify BOTH instances of this line:</p>
 <pre class="brush: shell; gutter: false">set protocols bgp 64512 network 0.0.0.0/0</pre>
 <p>And added the network that I want to advertise:</p>
 <pre class="brush: bash; gutter: false">set protocols bgp 64512 network 192.168.1.0/24</pre>
 <p>This subnet (192.168.1.0/24) is the subnet I have my vRA infrastructure on - the deployed VMs need to talk back to the vRA infrastructure to do my Application Components. If you want to advertise multiple subnets, simply duplicate this line and change the subnet.</p>
-<h2 id=configuring-the-edgerouter>Configuring the EdgeRouter</h2>
-<p>Firstly, take a backup of your configuration in case you need to roll back.</p>
+<h2 id=configuring-the-edgerouter>Configuring the EdgeRouter <a class=anchor href=#configuring-the-edgerouter>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Firstly, take a backup of your configuration in case you need to roll back.</p>
 <p>SSH to your EdgeRouter, enter configuration more (type configure) and paste in the modified configuration script from AWS:</p>
 <p><img src=https://www.definit.co.uk/images/2016/11/2016-11-07_17-15-33.png alt></p>
 <p>Commit and save your new configuration</p>
@@ -154,13 +159,15 @@ save
 <p><img src=https://www.definit.co.uk/images/2016/11/2016-11-07_17-27-25-1.png alt></p>
 <p>Logging on to my VPC console, I can see that the VPN connection&rsquo;s tunnel details are also up.</p>
 <p><img src=https://www.definit.co.uk/images/2016/11/2016-11-07_17-31-48.png alt></p>
-<h2 id=enable-route-propagation>Enable route propagation</h2>
-<p>The final step is to enable route propagation on the Route Tables tab in the VPC dashboard. Select the route table and then select the Route Propagation tab, click Edit and then check the Propagate box:</p>
+<h2 id=enable-route-propagation>Enable route propagation <a class=anchor href=#enable-route-propagation>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The final step is to enable route propagation on the Route Tables tab in the VPC dashboard. Select the route table and then select the Route Propagation tab, click Edit and then check the Propagate box:</p>
 <p><img src=https://www.definit.co.uk/images/2016/11/2016-11-07_17-25-09.png alt></p>
 <p>In a second or two, the subnet behind the EdgeRouter should be in the Routes table:</p>
 <p><img src=https://www.definit.co.uk/images/2016/11/2016-11-07_17-38-01.png alt></p>
-<h2 id=testing-connectivity>Testing Connectivity</h2>
-<p>Now when I spin up a new EC2 instance in the DefinIT-vRA VPC, I can configure the Security Group to allow ICMP and SSH from my local subnet</p>
+<h2 id=testing-connectivity>Testing Connectivity <a class=anchor href=#testing-connectivity>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Now when I spin up a new EC2 instance in the DefinIT-vRA VPC, I can configure the Security Group to allow ICMP and SSH from my local subnet</p>
 <p><img src=https://www.definit.co.uk/images/2016/11/2016-11-07_21-55-33.png alt></p>
 <p>And testing I can ping and SSH to the instance.</p>
 <p><img src=https://www.definit.co.uk/images/2016/11/2016-11-07_18-06-42.png alt></p>

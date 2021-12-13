@@ -139,10 +139,12 @@ Lab Notes – vCloud Director 9.1 for Service Providers – Part 2: PostgreSQL I
 </div>
 </div>
 <p><span style=color:red>This series was originally going to be a more polished endeavour, but unfortunately time got in the way. A prod from James Kilby (@jameskilbynet) has convinced me to publish as is, as a series of lab notes. Maybe one day I&rsquo;ll loop back and finish them…</span></p>
-<h1 id=installing-postgresql-10-server>Installing PostgreSQL 10 Server</h1>
-<p>The base OS for the PostgreSQL server is CentOS7, deployed from the same template and with the same preparation as detailed in the prerequisites post.</p>
-<h2 id=install-postgresql-and-configure>Install PostgreSQL and configure</h2>
-<p>Add the correct repository (OS and processor) for the base VM - for my CentOS7 64-bit installation, based on the <a href=https://www.postgresql.org/download/linux/redhat/>PostgreSQL web site</a>. I used the following command:</p>
+<h1 id=installing-postgresql-10-server>Installing PostgreSQL 10 Server <a class=anchor href=#installing-postgresql-10-server>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>The base OS for the PostgreSQL server is CentOS7, deployed from the same template and with the same preparation as detailed in the prerequisites post.</p>
+<h2 id=install-postgresql-and-configure>Install PostgreSQL and configure <a class=anchor href=#install-postgresql-and-configure>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Add the correct repository (OS and processor) for the base VM - for my CentOS7 64-bit installation, based on the <a href=https://www.postgresql.org/download/linux/redhat/>PostgreSQL web site</a>. I used the following command:</p>
 <p>rpm -Uvh <a href=https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm>https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm</a></p>
 <p>Install PostgreSQL server and client tools:</p>
 <p>yum install -y postgresql10-server postgresql10</p>
@@ -154,8 +156,9 @@ Lab Notes – vCloud Director 9.1 for Service Providers – Part 2: PostgreSQL I
 <p>systemctl start postgresql-10</p>
 <p>systemctl enable postgresql-10</p>
 <p>systemctl status postgresql-10</p>
-<h2 id=create-the-vcloud-director-and-vro-database>Create the vCloud Director and vRO Database</h2>
-<p>To create a database for vCloud Director to use, switch to the postgres user and open the psql command line:</p>
+<h2 id=create-the-vcloud-director-and-vro-database>Create the vCloud Director and vRO Database <a class=anchor href=#create-the-vcloud-director-and-vro-database>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>To create a database for vCloud Director to use, switch to the postgres user and open the psql command line:</p>
 <p>sudo -u postgres -i</p>
 <p>psql</p>
 <p>Then create the databases and users required - one for vCloud Director, and one for the vRealize Orchestrator cluster:</p>
@@ -170,8 +173,9 @@ Lab Notes – vCloud Director 9.1 for Service Providers – Part 2: PostgreSQL I
 <p>create database vro;</p>
 <p>grant all privileges on database vro to vro;</p>
 <p>Quit psql with \q, then exit back to the root prompt.</p>
-<h2 id=configure-remote-postgresql-access>Configure remote PostgreSQL access</h2>
-<p>In order to allow remote access from the vCloud Director Cells, and vRealize Orchestrator, we need to add some configuration to the PostgreSQL configuration files.</p>
+<h2 id=configure-remote-postgresql-access>Configure remote PostgreSQL access <a class=anchor href=#configure-remote-postgresql-access>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>In order to allow remote access from the vCloud Director Cells, and vRealize Orchestrator, we need to add some configuration to the PostgreSQL configuration files.</p>
 <p>These two commands add a line to the pg_hba.conf file, allowing the user vcloud access to the database vcloud, and the user vro to access the database vro from the vcd-sql subnet. You could specify individual hosts to increase security, but I’m going to be using the NSX distributed firewall to secure these connections too, so the subnet will suffice.</p>
 <p>echo &ldquo;host vcloud vcloud 10.12.0.64/27 md5&rdquo; &#187; /var/lib/pgsql/10/data/pg_hba.conf</p>
 <p>echo &ldquo;host vro vro 10.12.0.64/27 md5&rdquo; &#187; /var/lib/pgsql/10/data/pg_hba.conf</p>
@@ -184,10 +188,12 @@ Lab Notes – vCloud Director 9.1 for Service Providers – Part 2: PostgreSQL I
 <p>firewall-cmd -reload</p>
 <p>Restart PostgreSQL</p>
 <p>Systemctl restart postgresql-10</p>
-<h2 id=configure-postgresql-performance-tuning>Configure PostgreSQL Performance Tuning</h2>
-<p>For production deployments, there are some recommended tuning settings specified in the following KB. These settings are specifically tuned for the size of PostgreSQL server deployed in my lab, so I have implemented them - <a href=https://kb.vmware.com/s/article/2151464>https://kb.vmware.com/s/article/2151464</a></p>
-<h2 id=testing-remote-access>Testing Remote Access</h2>
-<p>In order to validate the PostgreSQL configuration, database setup, network, and firewall configuration, connect to the PostgreSQL database from one of the vCloud Director cell VMs to ensure access:</p>
+<h2 id=configure-postgresql-performance-tuning>Configure PostgreSQL Performance Tuning <a class=anchor href=#configure-postgresql-performance-tuning>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>For production deployments, there are some recommended tuning settings specified in the following KB. These settings are specifically tuned for the size of PostgreSQL server deployed in my lab, so I have implemented them - <a href=https://kb.vmware.com/s/article/2151464>https://kb.vmware.com/s/article/2151464</a></p>
+<h2 id=testing-remote-access>Testing Remote Access <a class=anchor href=#testing-remote-access>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>In order to validate the PostgreSQL configuration, database setup, network, and firewall configuration, connect to the PostgreSQL database from one of the vCloud Director cell VMs to ensure access:</p>
 <h6>Share this post</h6>
 <span class=share-box>
 <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2018%2f07%2flab-notes-vcloud-director-9-1-for-service-providers-part-2-postgresql-installation%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-facebook-official"></i></a>

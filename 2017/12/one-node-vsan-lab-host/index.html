@@ -101,8 +101,9 @@ Tags:
 </div>
 <p>A little while ago I replaced my three ageing Intel NUC hosts with a single (still ageing) Dell T7500 workstation. The workstation provides 24 processor cores and 96GB RAM for a really reasonable price, while still being quiet enough to sit in my home office. One of the driving factors in retiring the old NUCs was vSAN - I know in the newer generations of NUC you can get an M2 and a SATA SSD in, but my 1st gen. models could only do a single M2.</p>
 <p>This new single host presents a challenge though - a single node vSAN is not a supported configuration! To get it working, we have to force vSAN to do things it doesn’t want to do. To this end, let me be very clear: <strong>this is not a supported configuration. It is not for production. Don’t do it without understanding the consequences - and don’t put data you can’t afford to lose on it. Back up everything.</strong></p>
-<h3 id=enabling-vsan-on-a-single-host>Enabling vSAN on a single host</h3>
-<p>Firstly, enable vSAN on either the existing VMKernel interface, or create a new VMKernel interface for vSAN. If the host is currently standalone (and you’ll deploy vCenter to vSAN later, for example), you can use an esxcli command to “tick the box” using the VMKernel ID (e.g. vmk0):</p>
+<h3 id=enabling-vsan-on-a-single-host>Enabling vSAN on a single host <a class=anchor href=#enabling-vsan-on-a-single-host>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Firstly, enable vSAN on either the existing VMKernel interface, or create a new VMKernel interface for vSAN. If the host is currently standalone (and you’ll deploy vCenter to vSAN later, for example), you can use an esxcli command to “tick the box” using the VMKernel ID (e.g. vmk0):</p>
 <pre>esxcli vsan network ipv4 add -i vmk0</pre>
 <img title=NewImage.png src=/images/2018/03/NewImage.png alt=NewImage width=303 height=168 border=0>
 <p>Next, we need to update the default vSAN policy to allow us to use a single host vSAN. Querying the default policy via esxcli shows that the <em>cluster</em>, <em>vdisk</em>, <em>vmnamespace</em>, <em>vmswap</em> and <em>vmem</em> classes are all configured with a <em>hostFailuresToTolerate</em> (FTT) value of 1, and only <em>vmswap</em> and <em>vmem</em> are configured to _forceProvisioning _(that is, provision if policy is not met).</p>
@@ -124,8 +125,9 @@ esxcli vsan policy setdefault -c vmswap -p "((\"hostFailuresToTolerate\" i0) (\"
 <pre>esxcli vsan cluster new
 esxcli vsan vsan storage add -s &lt;SSD identifier&gt; -d &lt;HDD identifier&gt;</pre>
 <p>The vSAN storage is now available, and you can deploy your vCenter (or other VMs) to the datastore.</p>
-<h3 id=and-finally8230>And finally…</h3>
-<p>If you are running a single node vSAN under vCenter, you’ll want to enable vSAN from within vCenter, and also update the default vSAN policy to match the settings:</p>
+<h3 id=and-finally8230>And finally… <a class=anchor href=#and-finally8230>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>If you are running a single node vSAN under vCenter, you’ll want to enable vSAN from within vCenter, and also update the default vSAN policy to match the settings:</p>
 <img title=NewImage.png src=/images/2018/03/NewImage-1.png alt="Create vSAN One Node Policy" width=479 height=279 border=0>
 <h6>Share this post</h6>
 <span class=share-box>

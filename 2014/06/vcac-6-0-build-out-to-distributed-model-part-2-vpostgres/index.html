@@ -155,15 +155,18 @@ vCAC deploymnent with vPostgres deployed
 <li>Install and configure additional IaaS server</li>
 <li>Deploy vCenter Orchestrator Appliance cluster</li>
 </ul>
-<h2 id=create-the-required-dns-records>Create the required DNS records</h2>
-<p>First of all, create DNS records for your vPostgres database server – you need both an A and PTR record. Most VMware appliances will check for a reverse DNS lookup when they boot and will set the hostname accordingly.</p>
+<h2 id=create-the-required-dns-records>Create the required DNS records <a class=anchor href=#create-the-required-dns-records>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>First of all, create DNS records for your vPostgres database server – you need both an A and PTR record. Most VMware appliances will check for a reverse DNS lookup when they boot and will set the hostname accordingly.</p>
 <p>I’m calling mine vcac-pg-01:</p>
 <p><img src=https://www.definit.co.uk/images/2014/06/2014061315_10_32dc01.definit.localRemoteDesktopConnectionManagerv2.2_thumb.png alt></p>
-<h2 id=deploy-the-vpostgres-ovf>Deploy the vPostgres OVF</h2>
-<p>Deploying the OVF is really very simple and really doesn’t take any explaining! vPostgres is free for non-production use so there’s no problem having a play in your lab.</p>
+<h2 id=deploy-the-vpostgres-ovf>Deploy the vPostgres OVF <a class=anchor href=#deploy-the-vpostgres-ovf>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Deploying the OVF is really very simple and really doesn’t take any explaining! vPostgres is free for non-production use so there’s no problem having a play in your lab.</p>
 <p><img src=https://www.definit.co.uk/images/2014/06/2014061314_52_05vSphereWebClient_thumb.png alt><img src=https://www.definit.co.uk/images/2014/06/2014061314_52_24vSphereWebClient_thumb.png alt><img src=https://www.definit.co.uk/images/2014/06/2014061314_52_29vSphereWebClient_thumb.png alt><img src=https://www.definit.co.uk/images/2014/06/2014061314_53_06vSphereWebClient_thumb.png alt><img src=https://www.definit.co.uk/images/2014/06/2014061314_53_09vSphereWebClient_thumb.png alt><img src=https://www.definit.co.uk/images/2014/06/2014061314_53_14vSphereWebClient_thumb.png alt><img src=https://www.definit.co.uk/images/2014/06/2014061314_53_53vSphereWebClient_thumb.png alt><img src=https://www.definit.co.uk/images/2014/06/2014061314_56_01vSphereWebClient_thumb.png alt><img src=https://www.definit.co.uk/images/2014/06/2014061314_56_12vSphereWebClient_thumb.png alt></p>
-<h2 id=initial-configuration>Initial Configuration</h2>
-<p>Once the appliance has finished booting (wait for the below screen) log onto the web management console using the DNS FQDN on port 5480 – e.g. mine is on <a href=https://vcac-pg-01.definit.local:5480>https://vcac-pg-01.definit.local:5480</a></p>
+<h2 id=initial-configuration>Initial Configuration <a class=anchor href=#initial-configuration>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Once the appliance has finished booting (wait for the below screen) log onto the web management console using the DNS FQDN on port 5480 – e.g. mine is on <a href=https://vcac-pg-01.definit.local:5480>https://vcac-pg-01.definit.local:5480</a></p>
 <p><img src=https://www.definit.co.uk/images/2014/06/2014061315_16_56VCACPG01_thumb.png alt></p>
 <p>Log on using the password you specified in the OVF deployment and check that the appliance has picked up the hostname correctly. There’s no need to change anything else here (though, if you’re reading VMware, an NTP section the same as the rest of your appliances would be nice!)</p>
 <p>Open the VM console on the DB server and edit the NTP configuration using “vi /etc/ntp.conf” and insert the same NTP servers you’ve configured for your VCAC appliance – e.g.</p>
@@ -173,8 +176,9 @@ server 2.uk.pool.ntp.org</pre>
 <p>Save and exit the vi editor, then start the NTP server using “<em>rcntp start</em>” (use <em>reload</em> if NTP is already running). Check the sync using “<em>rcntp ntptimeset</em>”, and “<em>rcntp status</em>”.</p>
 <p><img src=https://www.definit.co.uk/images/2014/06/image_thumb12.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2014/06/image_thumb13.png alt></p>
-<h2 id=configure-vpostgres-for-vcac>Configure vPostgres for VCAC</h2>
-<p>Log onto the vPostgres instance using <a href=https://vcac-pg-01.definit.local:8443>https://vcac-pg-01.definit.local:8443</a> – use the password configured in the OVF deployment.</p>
+<h2 id=configure-vpostgres-for-vcac>Configure vPostgres for VCAC <a class=anchor href=#configure-vpostgres-for-vcac>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Log onto the vPostgres instance using <a href=https://vcac-pg-01.definit.local:8443>https://vcac-pg-01.definit.local:8443</a> – use the password configured in the OVF deployment.</p>
 <p><img src=https://www.definit.co.uk/images/2014/06/image_thumb14.png alt></p>
 <p>Once logged on, expand the Databases node and select the postgres database. In the top right, you can now click on the “Enter SQL” button:</p>
 <p><img src=https://www.definit.co.uk/images/2014/06/image_thumb15.png alt></p>
@@ -188,8 +192,9 @@ server 2.uk.pool.ntp.org</pre>
 <pre class="brush: sql; gutter: false">CREATE EXTENSION "hstore";
 CREATE EXTENSION "uuid-ossp";</pre>
 <p><img src=https://www.definit.co.uk/images/2014/06/image_thumb17.png alt></p>
-<h2 id=migrate-the-vcac-appliance-database>Migrate the vCAC Appliance Database</h2>
-<p>Open PuTTY and connect to the vCAC Appliance – log in using the root credentials.</p>
+<h2 id=migrate-the-vcac-appliance-database>Migrate the vCAC Appliance Database <a class=anchor href=#migrate-the-vcac-appliance-database>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Open PuTTY and connect to the vCAC Appliance – log in using the root credentials.</p>
 <p>Change to the user “vcac” which has permissions to the embedded PostgreSQL databse.</p>
 <pre class="brush: bash; gutter: false">su – vcac</pre>
 <p>Move to the PostgreSQL install folder</p>
@@ -199,11 +204,13 @@ CREATE EXTENSION "uuid-ossp";</pre>
 <p> </p>
 <pre class="brush: bash; gutter: false">./pg_dump vcac | ./psql -h vcac-pg-01.definit.local vcacdb</pre>
 <p>Enter the password for the user “vcac” on the new server (the password from the query in the previous section). There will be a whole load of SQL commands on screen, including some warnings about “public”  at the end – you can safely ignore those.</p>
-<h2 id=configure-the-vcac-appliance-to-point-to-the-vpostgres-instance>Configure the vCAC Appliance to point to the vPostgres instance</h2>
-<p>The database is now migrated, but vCAC needs to know where to look, so log into the management console (e.g. <a href=https://vcac-app-01.definit.local:5480>https://vcac-app-01.definit.local:5480</a>) and go to the vCAC Settings > Database tab. Enter the details for the new instance and click “Save Settings” – you should see a message saying “Database configuration is updated, vCAC is restarted”</p>
+<h2 id=configure-the-vcac-appliance-to-point-to-the-vpostgres-instance>Configure the vCAC Appliance to point to the vPostgres instance <a class=anchor href=#configure-the-vcac-appliance-to-point-to-the-vpostgres-instance>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The database is now migrated, but vCAC needs to know where to look, so log into the management console (e.g. <a href=https://vcac-app-01.definit.local:5480>https://vcac-app-01.definit.local:5480</a>) and go to the vCAC Settings > Database tab. Enter the details for the new instance and click “Save Settings” – you should see a message saying “Database configuration is updated, vCAC is restarted”</p>
 <p><img src=https://www.definit.co.uk/images/2014/06/image_thumb18.png alt></p>
-<h2 id=tidy-up-behind-you>Tidy up behind you</h2>
-<p>Since the embedded database is no longer required, we should now turn that off – as well as the embedded vCO services, which cannot be configured to run on an external database. Jump back on the SSH session to the vCAC Appliance and issue the following commands</p>
+<h2 id=tidy-up-behind-you>Tidy up behind you <a class=anchor href=#tidy-up-behind-you>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Since the embedded database is no longer required, we should now turn that off – as well as the embedded vCO services, which cannot be configured to run on an external database. Jump back on the SSH session to the vCAC Appliance and issue the following commands</p>
 <pre class="brush: bash; gutter: false">service vpostgres stop
 service vco-server stop
 chkconfig vpostgres off

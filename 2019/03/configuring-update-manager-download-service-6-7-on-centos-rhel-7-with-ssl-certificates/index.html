@@ -116,8 +116,9 @@ Tags:
 <li>Install NGINX</li>
 <li>Configure vCenter</li>
 </ul>
-<h2 id=deploy-the-umds-server>Deploy the UMDS server</h2>
-<p>I’ve deployed a CentOS7 VM from a template and added a big data drive for the UMDS data (this makes it easier to extend later if I need to). Check out the currently supported Linux operating systems for UMDS for <a href=https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.update_manager.doc/GUID-C79C1454-779B-4CDE-BC97-F2BBFDF5BB7A.html>6.5</a> and <a href=https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.update_manager.doc/GUID-C79C1454-779B-4CDE-BC97-F2BBFDF5BB7A.html>6.7</a>.</p>
+<h2 id=deploy-the-umds-server>Deploy the UMDS server <a class=anchor href=#deploy-the-umds-server>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>I’ve deployed a CentOS7 VM from a template and added a big data drive for the UMDS data (this makes it easier to extend later if I need to). Check out the currently supported Linux operating systems for UMDS for <a href=https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.update_manager.doc/GUID-C79C1454-779B-4CDE-BC97-F2BBFDF5BB7A.html>6.5</a> and <a href=https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.update_manager.doc/GUID-C79C1454-779B-4CDE-BC97-F2BBFDF5BB7A.html>6.7</a>.</p>
 <p><em>Note: for vSphere 6.7u1, VMware dropped the requirement for a PostgreSQL database</em></p>
 <ul>
 <li>Format the data drive and mount to /umds</li>
@@ -244,8 +245,9 @@ host    all             all             ::1/128                 md5
 </div><ul>
 <li>Validate the connection using <code>isql -v UMDS_DSN &amp;lt;database_username&amp;gt; &lt;database_password>;</code></li>
 </ul>
-<h2 id=install-umds>Install UMDS</h2>
-<p>Next, mount the vCenter Server Appliance ISO file, copy the UMDS installer tar.gz file into the /umds folder and extract the installer. When this is complete there should be a vmware-umds-distrib folder.</p>
+<h2 id=install-umds>Install UMDS <a class=anchor href=#install-umds>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Next, mount the vCenter Server Appliance ISO file, copy the UMDS installer tar.gz file into the /umds folder and extract the installer. When this is complete there should be a vmware-umds-distrib folder.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -272,8 +274,9 @@ umount /mnt/cdrom
 <li>Enter the patch location (/umds/vmware-umds-patches)</li>
 <li>Configure database connection using &lt;dsn_name>, &lt;database_username> and &lt;database_password></li>
 </ul>
-<h2 id=configure-umds>Configure UMDS</h2>
-<ul>
+<h2 id=configure-umds>Configure UMDS <a class=anchor href=#configure-umds>
+<i class="fas fa-hashtag"></i>
+</a></h2><ul>
 <li>View the current configuration</li>
 </ul>
 <div class=highlight><div class=chroma>
@@ -332,8 +335,9 @@ ln -s /usr/lib64/libcurl.so.4 /usr/local/vmware-umds/lib/libcurl.so.4
 <pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>/umds/vmware-umds/bin/vmware-umds -D
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=install-nginx>Install NGINX</h2>
-<ul>
+</div><h2 id=install-nginx>Install NGINX <a class=anchor href=#install-nginx>
+<i class="fas fa-hashtag"></i>
+</a></h2><ul>
 <li>Install and start nginx</li>
 </ul>
 <div class=highlight><div class=chroma>
@@ -417,8 +421,9 @@ openssl req -x509 -nodes -days <span class=m>365</span> -newkey rsa:2048 -keyout
 </div><ul>
 <li>Restart NGINX - <code>systemctl restart nginx</code></li>
 </ul>
-<h2 id=configure-vcenter-update-manager>Configure vCenter Update Manager</h2>
-<ul>
+<h2 id=configure-vcenter-update-manager>Configure vCenter Update Manager <a class=anchor href=#configure-vcenter-update-manager>
+<i class="fas fa-hashtag"></i>
+</a></h2><ul>
 <li>Add the certificate to vCenter trust - log in to vCenter and navigate to Administration > Certificate Management</li>
 <li>Log in as <a href=mailto:administrator@vsphere.local>administrator@vsphere.local</a></li>
 </ul>

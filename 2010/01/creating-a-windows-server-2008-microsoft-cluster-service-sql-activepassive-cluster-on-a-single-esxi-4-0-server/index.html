@@ -109,8 +109,9 @@ Tags:
 </div>
 </div>
 </div>
-<h2 id=configuring-the-virtual-environment-and-virtual-machines>Configuring the Virtual Environment and Virtual Machines</h2>
-<p>Note – this configuration will work for ESXi 4 upwards due to the server 2008 MSCS requirement for persistent SCSI-3 reservations.</p>
+<h2 id=configuring-the-virtual-environment-and-virtual-machines>Configuring the Virtual Environment and Virtual Machines <a class=anchor href=#configuring-the-virtual-environment-and-virtual-machines>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Note – this configuration will work for ESXi 4 upwards due to the server 2008 MSCS requirement for persistent SCSI-3 reservations.</p>
 <p>The first step is to create a new vSwitch for the host-only cluster heartbeat network, don’t assign any network adaptors to the switch as it’s going to be local only.</p>
 <p>Create a new virtual machine with a single hard disk. For the purposes of this test, I’ve assigned 2 vProcessors, 1GB RAM, 30GB drive for the OS, 1 vNIC in the default vSwitch0.</p>
 <p>Add a second vNIC and assign it to the cluster network vSwitch created in step 1.</p>
@@ -124,8 +125,9 @@ Tags:
 <p>_scsi1:0.mode = &ldquo;independent-persistent&rdquo;</p>
 <p>scsi1:0.shared = &ldquo;TRUE&rdquo;_</p>
 <p>Create a disk for some shared storage for the cluster too, it will be needed for the DTC application as well as the SQL server – in a production environment you may want to separate logs and data, but for my test, I’m just adding another two 10GB disks. Use the same process as for creating the Quorum disk.</p>
-<h2 id=configuring-sqlcluster01-and-sqlcluster02-for-microsoft-cluster-services>Configuring SQLCluster01 and SQLCluster02 for Microsoft Cluster Services</h2>
-<p>Once the two VMs are booted, we need to do a number of things:</p>
+<h2 id=configuring-sqlcluster01-and-sqlcluster02-for-microsoft-cluster-services>Configuring SQLCluster01 and SQLCluster02 for Microsoft Cluster Services <a class=anchor href=#configuring-sqlcluster01-and-sqlcluster02-for-microsoft-cluster-services>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Once the two VMs are booted, we need to do a number of things:</p>
 <p><strong>Activate and format the Quorum disk</strong>. In SQLCluster01, open the disk management snap-in and activate the new Quorum disk, create a new partition and format it to NTFS. I mounted it at Q. In SQLCluster02, open the snap-in and activate the Quorum disk – it should pick up the partition and formatting automatically. I re-assigned the disk letter to Q.</p>
 <p><img src=https://www.definit.co.uk/images/image_thumb.png alt></p>
 <p><strong>Configure the Access Network</strong>. I’ve assigned a static IP within the servers range, 192.168.8.0/24 for both servers. They have full network connectivity.</p>
@@ -137,8 +139,9 @@ Tags:
 <p><strong>Configure the Cluster</strong>. Open the Failover Cluster Management console from Administrative Tools and run the “Validate a Configuration” wizard. Add both servers into the wizard and run all the defaults.</p>
 <p><img src=https://www.definit.co.uk/images/image_thumb_2.png alt></p>
 <p><strong>Create the cluster.</strong> Run the “Create a Cluster…” wizard, select the servers as you did with the validation wizard, enter the cluster name and IP address that you created earlier (vm-cluster for me). Review the summary and create the cluster. The cluster service should automatically select the best disk for the quorum.</p>
-<h2 id=installing-the-distributed-transaction-coordinator-on-the-mscs>Installing the Distributed Transaction Coordinator on the MSCS</h2>
-<p>Open the Failover Cluster Management console and right click Services and Applications and select “Configure a service or application”. Select the DTC and click next.</p>
+<h2 id=installing-the-distributed-transaction-coordinator-on-the-mscs>Installing the Distributed Transaction Coordinator on the MSCS <a class=anchor href=#installing-the-distributed-transaction-coordinator-on-the-mscs>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Open the Failover Cluster Management console and right click Services and Applications and select “Configure a service or application”. Select the DTC and click next.</p>
 <p><img src=https://www.definit.co.uk/images/image_thumb_3.png alt></p>
 <p>Enter the DNS name you configured earlier for the DTC and the IP address you assigned and click next.</p>
 <p><img src=https://www.definit.co.uk/images/image_thumb_4.png alt></p>
@@ -146,8 +149,9 @@ Tags:
 <p><img src=https://www.definit.co.uk/images/image_thumb_5.png alt></p>
 <p>Complete the wizard and then verify that the DTC is running by selecting it in the Services and Applications window – the Server Name, MSDTC and Drive should all be online.</p>
 <p><img src=https://www.definit.co.uk/images/image_thumb_6.png alt></p>
-<h2 id=installing-sql-server-2008-on-a-windows-server-2008-cluster>Installing SQL Server 2008 on a Windows Server 2008 cluster</h2>
-<p>Assuming you updated the server earlier, you should already have the .Net Framework 3.5 SP1 which is a pre-requisite for SQL Server 2008. I’ll move on to the installation at this point, so open the installed and select a “New SQL Server failover cluster installation”.</p>
+<h2 id=installing-sql-server-2008-on-a-windows-server-2008-cluster>Installing SQL Server 2008 on a Windows Server 2008 cluster <a class=anchor href=#installing-sql-server-2008-on-a-windows-server-2008-cluster>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Assuming you updated the server earlier, you should already have the .Net Framework 3.5 SP1 which is a pre-requisite for SQL Server 2008. I’ll move on to the installation at this point, so open the installed and select a “New SQL Server failover cluster installation”.</p>
 <p><img src=https://www.definit.co.uk/images/image_thumb_7.png alt></p>
 <p>Click through the wizard, enter key and license info and install the Setup Support Files. Check and resolve any issues in the setup support rules.</p>
 <p><img src=https://www.definit.co.uk/images/image_thumb_8.png alt></p>

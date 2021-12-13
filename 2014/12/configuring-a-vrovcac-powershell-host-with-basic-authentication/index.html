@@ -119,8 +119,9 @@ Tags:
 <p>Finally, allow unencrypted data to be sent:</p>
 <pre class="brush: text; gutter: false">winrm set winrm/config/service @{AllowUnencrypted="true"}</pre>
 <p><img src=https://www.definit.co.uk/images/2014/12/image_thumb1.png alt></p>
-<h2 id=testing-winrm-configuration>Testing WinRM configuration</h2>
-<p><em>Note: you can do these steps locally on the PowerShell host, or from a remote machine - remote is a truer test.</em></p>
+<h2 id=testing-winrm-configuration>Testing WinRM configuration <a class=anchor href=#testing-winrm-configuration>
+<i class="fas fa-hashtag"></i>
+</a></h2><p><em>Note: you can do these steps locally on the PowerShell host, or from a remote machine - remote is a truer test.</em></p>
 <p>On the PowerShell host, check that the port is open/listening:</p>
 <pre class="brush: text; gutter: false">netstat -an | find "5985"</pre>
 <p><img src=https://www.definit.co.uk/images/2014/12/image_thumb2.png alt></p>
@@ -133,8 +134,9 @@ Tags:
 <pre class="brush: text; gutter: false">winrm identify -r:http://man-01.definit.local:5985 -auth:basic -u:testuser -p:testpassword -encoding:utf-8</pre>
 <p><img src=https://www.definit.co.uk/images/2014/12/image_thumb4.png alt></p>
 <p>Now we know that the WinRM service is in fact listening and responding, we can move on to vRO/vCO</p>
-<h2 id=adding-the-powershell-host-to-vco>Adding the PowerShell host to vCO</h2>
-<p>Firstly, make sure you have the latest plugin from the vRO/vCO site (<a href=https://www.vmware.com/support/pubs/vco_plugins_pubs.html title=https://www.vmware.com/support/pubs/vco_plugins_pubs.html>https://www.vmware.com/support/pubs/vco_plugins_pubs.html</a>). At the time of writing this is 1.0.4 which supports PowerShell 1.0, 2.0, 3.0 and 4.0 - so Windows Server 2012 R2 is supported. Previous versions didn&rsquo;t support 4.0.</p>
+<h2 id=adding-the-powershell-host-to-vco>Adding the PowerShell host to vCO <a class=anchor href=#adding-the-powershell-host-to-vco>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Firstly, make sure you have the latest plugin from the vRO/vCO site (<a href=https://www.vmware.com/support/pubs/vco_plugins_pubs.html title=https://www.vmware.com/support/pubs/vco_plugins_pubs.html>https://www.vmware.com/support/pubs/vco_plugins_pubs.html</a>). At the time of writing this is 1.0.4 which supports PowerShell 1.0, 2.0, 3.0 and 4.0 - so Windows Server 2012 R2 is supported. Previous versions didn&rsquo;t support 4.0.</p>
 <p>Run the &ldquo;Add a PowerShell host&rdquo; workflow:</p>
 <p><img src=https://www.definit.co.uk/images/2014/12/image_thumb5.png alt></p>
 <p>Configure the name of the host, the FQDN or IP address and the port - remember for HTTP it&rsquo;s 5985.</p>

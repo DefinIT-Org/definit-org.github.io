@@ -110,18 +110,22 @@ Tags:
 <p>The Provider Logical Router (PLR) provides the North/South traffic to my NSX deployment - anything coming in to or out of the NSX networks goes through the PLR. As I want to provide multiple routes in and out for scalability and resilience, I&rsquo;ve got two NSX Edges deployed. For ECMP you need to configure a different VLAN for each PLR to connect to the upstream router, so one has an uplink interface to VLAN1, the other to VLAN100. Both have an internal interface to VXLAN5001, which is a Logical Switch supporting my Provider Transit Network.</p>
 <p>The Tenant Logical Router (TLR) is the boundary of my tenant&rsquo;s networks. This is deployed as an NSX Edge with an uplink interface in the Provider Transit Network and an internal interface to my Tenant Transit Network. Each tenant has a TLR, and a Transit Network that is not shared by any other tenants.</p>
 <p>Finally, there&rsquo;s a Tenant Distributed Logical Router (TDLR), which has an uplink interface on the Tenant Transit Network, and as many Tenant Networks (Logical Switches) as are supported - that&rsquo;s slightly less than 1000 networks. The TDLR is required for scalability purposes, as the TLR is an NSX Edge and limited to 10 vNICs.</p>
-<h3 id=ospf-configuration>OSPF Configuration</h3>
-<p><img src=https://www.definit.co.uk/images/2017/01/OSPF-Areas.png alt></p>
+<h3 id=ospf-configuration>OSPF Configuration <a class=anchor href=#ospf-configuration>
+<i class="fas fa-hashtag"></i>
+</a></h3><p><img src=https://www.definit.co.uk/images/2017/01/OSPF-Areas.png alt></p>
 <p>Both the Physical Router and the Provider Logical Router NSX Edges are configured to be in OSPF Area 0. This is my network backbone area, to which all other Areas must be connected. Area 100 encompasses the Provider Logical Router (which become the Area Border Router in OSPF), the Tenant Logical Router and the Tenant&rsquo;s Distributed Logical Router. The Provider Logical Router is configured with it&rsquo;s Uplink interface in Area 0 and it&rsquo;s Internal interface in Area 100.</p>
-<h2 id=deploying-the-solution>Deploying the solution</h2>
-<p>I have pre-deployed the Logical Switches required for this testing:</p>
+<h2 id=deploying-the-solution>Deploying the solution <a class=anchor href=#deploying-the-solution>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>I have pre-deployed the Logical Switches required for this testing:</p>
 <img class="alignnone wp-image-7940" src=/images/2017/01/2017-01-30_10-26-36.png width=600 height=134>
-<h3 id=physical-router>Physical router</h3>
-<p>Obviously the physical router configuration is going to be different depending on what physical upstream router you&rsquo;re using. In my lab I have the very capable Ubiquiti EdgeRouter X, so I configured this with interfaces in my two VLANs (1 and 100) and configured OSPF Area 0. As per the diagram above, the ERX has two addresses, 192.168.1.1 and 192.168.100.1.</p>
+<h3 id=physical-router>Physical router <a class=anchor href=#physical-router>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Obviously the physical router configuration is going to be different depending on what physical upstream router you&rsquo;re using. In my lab I have the very capable Ubiquiti EdgeRouter X, so I configured this with interfaces in my two VLANs (1 and 100) and configured OSPF Area 0. As per the diagram above, the ERX has two addresses, 192.168.1.1 and 192.168.100.1.</p>
 <p><img src=https://www.definit.co.uk/images/2017/01/2017-01-30_13-44-23-1024x289.png alt></p>
 <p>At this point, there are no OSPF routes configured, so the EdgeRouter only knows about some connected, and some static routes.</p>
-<h3 id=configuring-the-provider-logical-router>Configuring the Provider Logical Router</h3>
-<p>The first NSX Edge (PLR-1) is deployed with an uplink in VLAN 100 and internal on the Provider Transport network.</p>
+<h3 id=configuring-the-provider-logical-router>Configuring the Provider Logical Router <a class=anchor href=#configuring-the-provider-logical-router>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>The first NSX Edge (PLR-1) is deployed with an uplink in VLAN 100 and internal on the Provider Transport network.</p>
 <p>Under Global Configuration you can see that the default gateway is the physical router interface on VLAN 100, and that OSPF is enabled. In the OSPF settings, Area 0  is configured, and an Area to Interface Mapping links Area 0 to the Uplink. Area 100 is configured and mapped to the Internal interface. Under Route Redistribution, you can see that any Connected network (as well as OSPF learned networks) will be redistributed.</p>
 <p><img src=https://www.definit.co.uk/images/2017/01/2017-01-30_10-36-28.png alt> <img src=https://www.definit.co.uk/images/2017/01/2017-01-30_10-32-59.png alt> <img src=https://www.definit.co.uk/images/2017/01/2017-01-30_10-34-44.png alt></p>
 <p>Now if we look at the OSPF routes on the physical router, we can see that the subnet for the Provider Transit network (10.0.0.0/24) has been learned, and has a next hop to TLR-1 on 192.168.100.100.</p>
@@ -130,8 +134,9 @@ Tags:
 <p><img src=https://www.definit.co.uk/images/2017/01/2017-01-30_10-52-04-e1485773685254.png alt></p>
 <p>At this point, I&rsquo;ve deployed just the one PLR NSX Edge, and both the Physical Router and the Provider Logical Router know about the connected networks.</p>
 <p><img src=https://www.definit.co.uk/images/2017/01/Step-1.png alt></p>
-<h3 id=configuring-the-second-plr-nsx-edge>Configuring the second PLR NSX Edge</h3>
-<p>The second NSX Edge in the PLR (PLR-2) is deployed in the same way as the first, except this time it uses the second VLAN to talk to the upstream router. When it&rsquo;s configured you can  the output of the physical router&rsquo;s &ldquo;show ip ospf neighbour&rdquo; and &ldquo;show ip route&rdquo; commands.</p>
+<h3 id=configuring-the-second-plr-nsx-edge>Configuring the second PLR NSX Edge <a class=anchor href=#configuring-the-second-plr-nsx-edge>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>The second NSX Edge in the PLR (PLR-2) is deployed in the same way as the first, except this time it uses the second VLAN to talk to the upstream router. When it&rsquo;s configured you can  the output of the physical router&rsquo;s &ldquo;show ip ospf neighbour&rdquo; and &ldquo;show ip route&rdquo; commands.</p>
 <div id=attachment_7949 style=width:610px class="wp-caption alignnone">
 <img class=wp-image-7949 src=/images/2017/01/2017-01-30_13-51-31.png width=600 height=392>
 <p class=wp-caption-text>
@@ -141,8 +146,9 @@ The Physical Router now has two equal cost routes to the Provider Transit Networ
 <p>You can also see that both PLR NSX Edges have formed a relationship with the router, and the router now has two routes to 10.0.0.0/24 (Provider Transit network) that have an equal cost, one going over VLAN1 (via 192.168.1.50) and the other over VLAN100 (via 192.168.100.100).</p>
 <p>So, now on my diagram you can see that I have deployed the second PLR, and that they are all aware of the connected networks.</p>
 <p><img src=https://www.definit.co.uk/images/2017/01/Step-2.png alt></p>
-<h2 id=adding-a-tenant-logical-router>Adding a Tenant Logical Router</h2>
-<p>The Tenant Logical Router NSX Edge (TLR-1) is deployed and an uplink connected to the Provider Transport network, and an internal interface to the Tenant Transport network. OSPF Area 100 is configured and mapped to both interfaces. No default gateway is configured.</p>
+<h2 id=adding-a-tenant-logical-router>Adding a Tenant Logical Router <a class=anchor href=#adding-a-tenant-logical-router>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The Tenant Logical Router NSX Edge (TLR-1) is deployed and an uplink connected to the Provider Transport network, and an internal interface to the Tenant Transport network. OSPF Area 100 is configured and mapped to both interfaces. No default gateway is configured.</p>
 <p><img src=https://www.definit.co.uk/images/2017/01/2017-01-31_15-44-30.png alt> <img src=https://www.definit.co.uk/images/2017/01/2017-01-31_15-42-49.png alt> <img src=https://www.definit.co.uk/images/2017/01/2017-01-31_15-42-25.png alt></p>
 <p>With this configured the physical router learns the following routes:</p>
 <div id=attachment_7960 style=width:517px class="wp-caption alignnone">

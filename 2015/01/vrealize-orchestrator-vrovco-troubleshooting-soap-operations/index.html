@@ -116,8 +116,9 @@ Tags:
 <p><img class="alignright size-thumbnail wp-image-4264" src=/images/2014/03/20140313-043.png alt="vRealize Orchestrator" width=142 height=150>Recently, I&rsquo;ve had a bit of a SOAP baptism of fire - the project I am working on makes hundreds of SOAP calls to multiple SOAP APIs on multiple hosts. During this time I&rsquo;ve encountered some common and rare problems and troubleshooting them seems to be a bit of a black art, if the number of results in Google is any measure.</p>
 <p>To demonstrate some of these troubleshooting methods I will use a global weather SOAP service, <a href=http://www.webservicex.com/globalweather.asmx?WSDL title=http://www.webservicex.com/globalweather.asmx?WSDL>http://www.webservicex.com/globalweather.asmx?WSDL</a>. I&rsquo;ve added the web service to vRO using the &ldquo;Add a SOAP host&rdquo; workflow, and then used the &ldquo;Generate a new workflow from a SOAP operation&rdquo; workflow to create a new workflow: GetWeather. This simple workflow runs successfully:</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb71.png alt></p>
-<h3 id=using-the-soap-interceptor>Using the SOAP Interceptor</h3>
-<p>The SOAP Interceptor allows you to both examine, and manipulate the body of the XML SOAP request sent to the SOAP host, and the response returned to Orchestrator.</p>
+<h3 id=using-the-soap-interceptor>Using the SOAP Interceptor <a class=anchor href=#using-the-soap-interceptor>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>The SOAP Interceptor allows you to both examine, and manipulate the body of the XML SOAP request sent to the SOAP host, and the response returned to Orchestrator.</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb72.png alt></p>
 <p>The SOAPInterceptor class has four methods that you can use to assign a function to process the request head/body, or the response head/body. It&rsquo;s worth noting that you can use just one of the methods at once if required - you don&rsquo;t have to define all of them.</p>
 <pre class="brush: javascript; gutter: true">var objInterceptor = new SOAPInterceptor(); 
@@ -146,29 +147,35 @@ function responseBodyHandler(content) {
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb75.png alt></p>
 <p>I can see the XML output from the SOAP host that is returned to me:</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb76.png alt></p>
-<h3 id=using-fiddler-to-see-the-whole-soap-message>Using Fiddler to see the whole SOAP message</h3>
-<p>Viewing the SOAP body is useful, and allows a certain amount of troubleshooting - but sometimes you need to see the bigger picture, and that&rsquo;s where I use Fiddler. Fiddler is described by themselves as &ldquo;The free web debugging proxy for any browser, system or platform&rdquo; - it basically allows you to intercept and analyse local traffic a-la-WireShark, but also create a local proxy server to monitor remote traffic through.</p>
+<h3 id=using-fiddler-to-see-the-whole-soap-message>Using Fiddler to see the whole SOAP message <a class=anchor href=#using-fiddler-to-see-the-whole-soap-message>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Viewing the SOAP body is useful, and allows a certain amount of troubleshooting - but sometimes you need to see the bigger picture, and that&rsquo;s where I use Fiddler. Fiddler is described by themselves as &ldquo;The free web debugging proxy for any browser, system or platform&rdquo; - it basically allows you to intercept and analyse local traffic a-la-WireShark, but also create a local proxy server to monitor remote traffic through.</p>
 <p>Using Fiddler as a proxy allows you to see the full SOAP request and response.</p>
-<h4 id=configuring-fiddler-as-a-proxy-server>Configuring Fiddler as a proxy server</h4>
-<p>Configuring Fiddler is really easy - once it&rsquo;s downloaded and installed you can simply go through Tools > Fiddler Options… and then select the Connections tab. Tick &ldquo;Allow remote computers to connect&rdquo; and then specify the port you want your proxy to listen on - simple as that!</p>
+<h4 id=configuring-fiddler-as-a-proxy-server>Configuring Fiddler as a proxy server <a class=anchor href=#configuring-fiddler-as-a-proxy-server>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Configuring Fiddler is really easy - once it&rsquo;s downloaded and installed you can simply go through Tools > Fiddler Options… and then select the Connections tab. Tick &ldquo;Allow remote computers to connect&rdquo; and then specify the port you want your proxy to listen on - simple as that!</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb77.png alt></p>
 <p>Next, add your SOAP host again, but this time specify a proxy when you do:</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb78.png alt></p>
 <p>Recreate the workflow from the new SOAP host&rsquo;s operation, or modify the existing workflow to use the new proxied SOAP host.</p>
-<h4 id=viewing-the-full-soap-conversation>Viewing the full SOAP conversation</h4>
-<p>Now in the Fiddler console, you should be able to locate the call to the SOAP host - labelled 1 - then once it&rsquo;s selected you can see the XML sent to the host (I like the SyntaxView) - labelled 2 - and the response from the SOAP host - labelled 3.</p>
+<h4 id=viewing-the-full-soap-conversation>Viewing the full SOAP conversation <a class=anchor href=#viewing-the-full-soap-conversation>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Now in the Fiddler console, you should be able to locate the call to the SOAP host - labelled 1 - then once it&rsquo;s selected you can see the XML sent to the host (I like the SyntaxView) - labelled 2 - and the response from the SOAP host - labelled 3.</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb79.png alt></p>
-<h3 id=problems-encountered-with-orchestrator-and-soap>Problems encountered with Orchestrator and SOAP</h3>
-<p>Below are some of the problems I encountered while working with SOAP hosts - I hope to add a few more later.</p>
-<h4 id=wsdl-and-the-response-do-not-match>WSDL and the response do not match</h4>
-<p>Orchestrator is strict about parsing responses from a SOAP host - if it does not match the WSDL it will throw all sorts of spurious errors. The chances are that if there&rsquo;s a problem, it&rsquo;s to do with the WSDL.</p>
+<h3 id=problems-encountered-with-orchestrator-and-soap>Problems encountered with Orchestrator and SOAP <a class=anchor href=#problems-encountered-with-orchestrator-and-soap>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Below are some of the problems I encountered while working with SOAP hosts - I hope to add a few more later.</p>
+<h4 id=wsdl-and-the-response-do-not-match>WSDL and the response do not match <a class=anchor href=#wsdl-and-the-response-do-not-match>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Orchestrator is strict about parsing responses from a SOAP host - if it does not match the WSDL it will throw all sorts of spurious errors. The chances are that if there&rsquo;s a problem, it&rsquo;s to do with the WSDL.</p>
 <p>One such misleading message is below - SOAP host is not available:</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb80.png alt></p>
 <p>By using the SOAP Interceptor to process the responseBody, I found another cryptic message which allowed me to track down the real problem &ldquo;Invalid XML request body&rdquo;:</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb81.png alt></p>
 <p>Finally, after comparing the WSDL to the response (viewed using Fiddler) I found that the response contained an item that was not defined in the WSDL.</p>
-<h4 id=xml-generated-by-orchestrator-isnt-interpreted-properly>XML generated by Orchestrator isn&rsquo;t interpreted properly</h4>
-<p>The XML generated by Orchestrator is always valid - but sometimes the SOAP host does not like the way it&rsquo;s shaped - for example I had a problem with the XML namespace definitions.</p>
+<h4 id=xml-generated-by-orchestrator-isnt-interpreted-properly>XML generated by Orchestrator isn&rsquo;t interpreted properly <a class=anchor href=#xml-generated-by-orchestrator-isnt-interpreted-properly>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>The XML generated by Orchestrator is always valid - but sometimes the SOAP host does not like the way it&rsquo;s shaped - for example I had a problem with the XML namespace definitions.</p>
 <p>Orchestrator likes to define namespaces in the nodes - e.g. the below code defines the namespace &ldquo;tns&rdquo; on each attribute sent to the Weather service:</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb82.png alt></p>
 <p>One of the APIs I used was not expecting the namespace in this format, so I was able to use the SOAP interceptor object again to modify the namespace code using the String.replace() function to strip out the definition in the &ldquo;tns&rdquo; tags themselves, and add it to the &ldquo;axis2ns&rdquo; tag:</p>

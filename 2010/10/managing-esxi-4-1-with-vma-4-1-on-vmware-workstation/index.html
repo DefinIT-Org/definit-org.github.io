@@ -122,8 +122,9 @@ Tags:
 <p>sudo ./wmware-vma-netconf.pl</p>
 </blockquote>
 <p>After this, I was able to access my vMA by SSH – PuTTY is my client of choice.</p>
-<h2 id=joining-the-vma-to-the-domain-for-ad-authentication>Joining the vMA to the domain for AD authentication</h2>
-<p>If you want to use AD authentication with your ESXi hosts, you can join them to the domain – it’s the same with the vMA. To join the vMA use the following command:</p>
+<h2 id=joining-the-vma-to-the-domain-for-ad-authentication>Joining the vMA to the domain for AD authentication <a class=anchor href=#joining-the-vma-to-the-domain-for-ad-authentication>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>If you want to use AD authentication with your ESXi hosts, you can join them to the domain – it’s the same with the vMA. To join the vMA use the following command:</p>
 <blockquote>
 <p>sudo domainjoin-cli join <domain-name> <domain-admin-user></p>
 </blockquote>
@@ -172,8 +173,9 @@ Tags:
 <p><strong>Note:</strong> We&rsquo;re escaping both the initial back slash and the space – the group is “DOMAIN\VMware Admins”</p>
 <p>I’m now able to log in as a domain user, and SUDO:</p>
 <p><img src=https://www.definit.co.uk/images/2010/10/image_thumb5.png alt></p>
-<h3 id=adding-an-esxi-server-to-the-vma>Adding an ESXi Server to the vMA</h3>
-<p>To add an ESXi server to vMA is dead simple, especially if your ESXi server is using AD integration too.</p>
+<h3 id=adding-an-esxi-server-to-the-vma>Adding an ESXi Server to the vMA <a class=anchor href=#adding-an-esxi-server-to-the-vma>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>To add an ESXi server to vMA is dead simple, especially if your ESXi server is using AD integration too.</p>
 <blockquote>
 <p>sudo vifp addserver <server fqdn> -authpolicy adauth -username DOMAIN\user</p>
 </blockquote>
@@ -182,8 +184,9 @@ Tags:
 <p>Test the connection, and list the NICs</p>
 <p><img src=https://www.definit.co.uk/images/2010/10/image_thumb7.png alt></p>
 <p>Success!</p>
-<h3 id=conclusion>Conclusion</h3>
-<p>The vMA Config guide is great for getting to know and configure the vMA – as is the vma-help command. I’ve linked to articles that helped me along the way, but it’s worth going through the rest of <a href=http://www.simonlong.co.uk/blog/2010/05/28/using-vma-as-your-esxi-syslog-server/ target=_blank>Simon Long’s article and configuring the vMA as a syslog server for your ESXi hosts</a> – they lose their logs on reboot!</p>
+<h3 id=conclusion>Conclusion <a class=anchor href=#conclusion>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>The vMA Config guide is great for getting to know and configure the vMA – as is the vma-help command. I’ve linked to articles that helped me along the way, but it’s worth going through the rest of <a href=http://www.simonlong.co.uk/blog/2010/05/28/using-vma-as-your-esxi-syslog-server/ target=_blank>Simon Long’s article and configuring the vMA as a syslog server for your ESXi hosts</a> – they lose their logs on reboot!</p>
 <h6>Share this post</h6>
 <span class=share-box>
 <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2010%2f10%2fmanaging-esxi-4-1-with-vma-4-1-on-vmware-workstation%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-facebook-official"></i></a>

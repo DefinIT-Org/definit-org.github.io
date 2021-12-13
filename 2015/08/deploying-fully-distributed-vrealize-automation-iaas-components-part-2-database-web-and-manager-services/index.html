@@ -144,15 +144,17 @@ Deploying fully distributed vRealize Automation IaaS components – Part 2: Data
 </div>
 </div>
 <p><img src=https://www.definit.co.uk/images/2015/07/vRA-Product-Icon-Mac_0.png alt>Now that the prerequisites for the IaaS layer have been completed, it&rsquo;s time to move on to the actual installation of the IaaS components, starting with the database. We then move onto the first Web server, which also imports the ModelManagerData configuration to the database, populating the database with all of the info the IaaS layer needs out of the box. We then install the second Web server before moving on to the active Manager server. The second Manager server is passive and the service should be disabled - I&rsquo;ll cover installing DEM Orchestrators, Workers and the vSphere Agents in the next article.</p>
-<h1 id=install-iaas-database>Install IaaS Database</h1>
-<p>There are three methods of creating the IaaS database, depending on your setup and security model you can</p>
+<h1 id=install-iaas-database>Install IaaS Database <a class=anchor href=#install-iaas-database>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>There are three methods of creating the IaaS database, depending on your setup and security model you can</p>
 <ul>
 <li>Point the installer at the MSSQL server and let it create the database and populate it for you. This is the simplest option but requires the service account to have <strong>sysadmin</strong> privileges on the MSSQL instance. These can be pared back after install though; this is my preferred option and the one I&rsquo;ll cover in this article.</li>
 <li>Create an empty database using scripts provided, then use the installer to populate it for you. This is relatively simple and normally works for environments where database administrators are responsible for a shared MSSQL cluster and don&rsquo;t want to delegate control. The service account needs <strong>dbo</strong> permissions on the created database for this option.</li>
 <li>Create and populate the database using the scripts provided. This option is for database admins who want full control and want to verify the configuration before it&rsquo;s deployed. The service account still needs <strong>dbo</strong> permissions to run, but the installer does not do any of the configuration.</li>
 </ul>
-<h2 id=create-the-database>Create the database</h2>
-<p>Log onto the first IaaS server as your service account and run the IaaS installer file that we downloaded to c:\vRA in the pre-requisites.</p>
+<h2 id=create-the-database>Create the database <a class=anchor href=#create-the-database>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Log onto the first IaaS server as your service account and run the IaaS installer file that we downloaded to c:\vRA in the pre-requisites.</p>
 <p>Click Next, accept the EULA and click Next.</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb_thumb.png alt> <img src=https://www.definit.co.uk/images/2015/08/image_thumb1_thumb.png alt></p>
 <p>Enter the root credentials for the vRealize Appliance and accept the certificate, then click Next. Select the Custom Install option and select IaaS Server. Change the install location if required and click Next</p>
@@ -161,12 +163,14 @@ Deploying fully distributed vRealize Automation IaaS components – Part 2: Data
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb4_thumb.png alt> <img src=https://www.definit.co.uk/images/2015/08/image_thumb5_thumb.png alt></p>
 <p>Review the summary, then click Install. Once the install is complete, click Next, then finish the wizard.</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb6_thumb.png alt> <img src=https://www.definit.co.uk/images/2015/08/image_thumb7_thumb.png alt></p>
-<h3 id=configure-msdtc>Configure MSDTC</h3>
-<p>MSDTC needs to be configured on the SQL server as well as the IaaS Web/Manager servers (where the pre-requisite script handily configures it for you). I will be publishing an article on MSSQL and MSDTC clustering for vRealize Automation soon, this covers the basic configuration of MSDTC in a stand-alone SQL box.</p>
+<h3 id=configure-msdtc>Configure MSDTC <a class=anchor href=#configure-msdtc>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>MSDTC needs to be configured on the SQL server as well as the IaaS Web/Manager servers (where the pre-requisite script handily configures it for you). I will be publishing an article on MSSQL and MSDTC clustering for vRealize Automation soon, this covers the basic configuration of MSDTC in a stand-alone SQL box.</p>
 <p>Open Component Services, expand Computers, My Computer, Distributed Transaction Coordinator, then right click Local DTC and select Properties. Select the Security tab and configure the settings as below:</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb9_thumb.png alt></p>
-<h2 id=install-the-primary-web-server>Install the primary Web Server</h2>
-<p>Run the IaaS installer again and this time select the Website and ModelManagerData options.</p>
+<h2 id=install-the-primary-web-server>Install the primary Web Server <a class=anchor href=#install-the-primary-web-server>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Run the IaaS installer again and this time select the Website and ModelManagerData options.</p>
 <p>On the &ldquo;Administration & Model Manager Web Site&rdquo; tab you can normally accept the defaults for everything except the certificate, which should be the one you generated and imported earlier. If you can&rsquo;t see your certificate, try unchecking the &ldquo;Display Certificates using certificate-friendly names.&rdquo; or adding a friendly name using mmc.exe, then clicking Refresh.</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb12_thumb.png alt></p>
 <p>Under the Model Manager Data tab, configure the load balanced URL for the vRealize Appliances, then load the default tenant and download the certificate. Check it&rsquo;s correct, then tick the Accept Certificate box. Enter your SSO administrator credentials and test them. Finally, enter the load balanced URL for the IaaS Web Server.</p>
@@ -175,15 +179,17 @@ Deploying fully distributed vRealize Automation IaaS components – Part 2: Data
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb17_thumb.png alt></p>
 <p>Enter the credentials for the service account to run the vRealize services. Create an encryption passphrase to protect the data at rest (in the database). Use 8 or more alphanumeric characters, but avoid special characters which can cause problems during the installation. Configure the MSSQL database server and name.</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb19_thumb.png alt> <img src=https://www.definit.co.uk/images/2015/08/image_thumb20_thumb.png alt></p>
-<h2 id=install-the-secondary-web-server>Install the secondary Web Server</h2>
-<p>Before doing this step, log onto your load balancer and ensure that the Web service is up and running:</p>
+<h2 id=install-the-secondary-web-server>Install the secondary Web Server <a class=anchor href=#install-the-secondary-web-server>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Before doing this step, log onto your load balancer and ensure that the Web service is up and running:</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb13.png alt></p>
 <p>Log onto the secondary web server as the service account and run the IaaS installer as before, this time though we are only installing the Website component. Everything else is configured as the first web server.</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb14.png alt> <img src=https://www.definit.co.uk/images/2015/08/image_thumb15.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb18.png alt> <img src=https://www.definit.co.uk/images/2015/08/image_thumb22.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb23.png alt> <img src=https://www.definit.co.uk/images/2015/08/image_thumb24.png alt></p>
-<h2 id=install-the-active-manager-server>Install the active Manager server</h2>
-<p>Before doing this step, log onto your load balancer and ensure that the Web service is up and running:</p>
+<h2 id=install-the-active-manager-server>Install the active Manager server <a class=anchor href=#install-the-active-manager-server>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Before doing this step, log onto your load balancer and ensure that the Web service is up and running:</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb25.png alt></p>
 <p>Log onto the active Manager server using the service account and run the IaaS installer. Run through until you get to the custom IaaS server install and select &ldquo;ManagerService&rdquo;. Enter the FQDN of the IaaS Web server load balancer and ensure the &ldquo;Active node&rdquo; option is selected. Select the Iaas Manager certificate and test that nothing is using the 443 binding. Click next.</p>
 <p>The prerequisite checker will run - ensure that any problems detected are resolved, then click Next.</p>
@@ -192,8 +198,9 @@ Deploying fully distributed vRealize Automation IaaS components – Part 2: Data
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb28.png alt> <img src=https://www.definit.co.uk/images/2015/08/image_thumb29.png alt></p>
 <p>Once the install is completed, click Next, untick the &ldquo;Guide me..&rdquo; box and click Finish.</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb30.png alt></p>
-<h2 id=install-the-passive-manager-server>Install the passive Manager server</h2>
-<p>Before doing this step, log onto your load balancer and ensure that the Web and Manager services are up and running:</p>
+<h2 id=install-the-passive-manager-server>Install the passive Manager server <a class=anchor href=#install-the-passive-manager-server>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Before doing this step, log onto your load balancer and ensure that the Web and Manager services are up and running:</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb32.png alt></p>
 <p>Log onto the active Manager server using the service account and run the IaaS installer. Run through until you get to the custom IaaS server install and select &ldquo;ManagerService&rdquo;. Enter the FQDN of the IaaS Web server load balancer and ensure the &ldquo;Disaster recovery cold standby node&rdquo; option is selected. Select the Iaas Manager certificate and test that nothing is using the 443 binding. Click next.</p>
 <p>The prerequisite checker will run - ensure that any problems detected are resolved, then click Next.</p>

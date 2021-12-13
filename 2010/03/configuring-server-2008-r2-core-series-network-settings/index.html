@@ -102,8 +102,9 @@ Tags:
 </div>
 </div>
 <p>So, you’ve installed a new server with Server 2008 R2 Core – what next? Logging on, you’re presented with a shiny command prompt, you can run notepad or regedit…but aside from that, where do you go from there? In the next few series of posts I’ll hopefully point out the basics, and some not so basics!</p>
-<h2 id=using-the-server-configuration-tool>Using the Server Configuration Tool</h2>
-<p>The server configuration tool (sconfig.cmd) is provided in R2 for some of the basic setup tasks, so you can run that by issuing the “sconfig” command. Out of the box, it looks something like this:</p>
+<h2 id=using-the-server-configuration-tool>Using the Server Configuration Tool <a class=anchor href=#using-the-server-configuration-tool>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The server configuration tool (sconfig.cmd) is provided in R2 for some of the basic setup tasks, so you can run that by issuing the “sconfig” command. Out of the box, it looks something like this:</p>
 <p><img src=https://www.definit.co.uk/images/image_thumb_33.png alt></p>
 <p>As you can see, this interactive tool will step you through configuring the network settings (Option 8), Computer Name (Option 2) or Domain/Workgroup (Option 1).</p>
 <div style=padding-bottom:0;margin:0;padding-left:0;padding-right:0;display:inline;float:none;padding-top:0 id=scid:f32c3428-b7e9-4f15-a8ea-c502c7ff2e88:aa824d5e-5e6f-4854-9267-ae1e95179760 class=wlWriterEditableSmartContent>
@@ -201,8 +202,9 @@ Specify an authorized domain\user:  MCGEOWN\sam.mcgeown</p>
 <p>Enter the password of the authorized user:</pre></p>
 </div>
 <p> </p>
-<h2 id=command-line-configuration-with-netshnetdom>Command Line Configuration with Netsh/Netdom</h2>
-<p>There’s also a manual method (e.g. for a scripted installation and config) using Netsh and Netdom commands that most Windows admins will be familiar with.</p>
+<h2 id=command-line-configuration-with-netshnetdom>Command Line Configuration with Netsh/Netdom <a class=anchor href=#command-line-configuration-with-netshnetdom>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>There’s also a manual method (e.g. for a scripted installation and config) using Netsh and Netdom commands that most Windows admins will be familiar with.</p>
 <p>List the interfaces (network adaptors):</p>
 <div style=padding-bottom:0;margin:0;padding-left:0;padding-right:0;display:inline;float:none;padding-top:0 id=scid:f32c3428-b7e9-4f15-a8ea-c502c7ff2e88:14841ffe-281d-433d-9c24-bc22681a8c4b class=wlWriterEditableSmartContent>
 <pre class="brush: text;">netsh interface ipv4 show interfaces</pre>
@@ -235,8 +237,9 @@ Specify an authorized domain\user:  MCGEOWN\sam.mcgeown</p>
 <pre class="brush: text;">netdom /join /domain:&lt;domain&gt; /UserO:&lt;domain\user to join with&gt; /PasswordO:&lt;Password&gt; /reboot</pre>
 </div>
 <p> </p>
-<h2 id=not-so-different-after-all>Not so different after all?</h2>
-<p>At the end of all that, you can see that configuring basic network settings with sconfig.cmd is pretty straight forward, and configuring basic network settings for scripts, or a more command-line based admin, is also quite do-able.</p>
+<h2 id=not-so-different-after-all>Not so different after all? <a class=anchor href=#not-so-different-after-all>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>At the end of all that, you can see that configuring basic network settings with sconfig.cmd is pretty straight forward, and configuring basic network settings for scripts, or a more command-line based admin, is also quite do-able.</p>
 <div style=padding-bottom:0;margin:0;padding-left:0;padding-right:0;display:inline;float:none;padding-top:0 id=scid:f32c3428-b7e9-4f15-a8ea-c502c7ff2e88:a22cf512-fd26-4716-8e14-96a39bba0ba8 class=wlWriterEditableSmartContent>
 <pre class="brush: text;">
 C:\Users\Administrator&gt;ipconfig /all

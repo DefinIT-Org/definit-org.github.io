@@ -108,15 +108,17 @@ Tags:
 </div>
 </div>
 <p>Here&rsquo;s the setup. We have a core switch of 2 Cisco 3750s, connected together for fault tolerance as a single logical switch; we also have several ESX 3.5 hosts with 4 Gigabit Ethernet NICs installed each. The Virtual Machines will all be on VLAN 8 (reserved for internal servers) and the VMKernel will be on VLAN 107 (reserved for VMKernel traffic like VMotion).  I want to create a load balanced, fault tolerant aggregate of these four NICs over the Core Switch.</p>
-<h2 id=configure-esx-servers-vswitch>Configure ESX server&rsquo;s vSwitch</h2>
-<p>Configuring the vSwitch is actually pretty simple, but there are a couple of gotchas, so don&rsquo;t skip this bit! First thing to note is that if you are making changes to the vSwitch and the Service Console is on that vSwitch you can quite easily lock yourself out. Make sure you configure this correctly, first time! In this setup, I am adding all 4 NICs to vSwitch0, which will be the only vSwitch. I&rsquo;ll then use Port Groups to assign VLANs and Active/Passive configurations to the VMKernel/Service Console.</p>
+<h2 id=configure-esx-servers-vswitch>Configure ESX server&rsquo;s vSwitch <a class=anchor href=#configure-esx-servers-vswitch>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Configuring the vSwitch is actually pretty simple, but there are a couple of gotchas, so don&rsquo;t skip this bit! First thing to note is that if you are making changes to the vSwitch and the Service Console is on that vSwitch you can quite easily lock yourself out. Make sure you configure this correctly, first time! In this setup, I am adding all 4 NICs to vSwitch0, which will be the only vSwitch. I&rsquo;ll then use Port Groups to assign VLANs and Active/Passive configurations to the VMKernel/Service Console.</p>
 <p>First things first then - assign the four NICs to the vSwitch. This is done in the Configuration Tab in VMware Infrastructure Client, then the Networking page. Edit the properties of your vSwitch, then select the Network Adaptor tab. Add all the NICs you wish to team in there (they may already be in there, depending on your setup). You should end up with something that looks like this (note that I&rsquo;ve not assigned any VLAN yet):</p>
 <p> <img src="/BlogEngine/image.axd?picture=2009%2f9%2fESXvSwitch.png" alt width=459 height=333></p>
 <p>Now you need to configure the NIC teaming, so edit the vSwitch Properties and under the Ports tab select the vSwitch. Click edit, and then go to the NIC teaming tab. Configure the teaming options like this:</p>
 <img src="/BlogEngine/image.axd?picture=2009%2f9%2fvSwitchTeam.png" alt width=296 height=374>
 <p>That&rsquo;s the easy part over and done with! Time to move onto the Cisco!</p>
-<h2 id=configuring-the-cisco-core-switch>Configuring the Cisco Core Switch</h2>
-<p>Firstly, we need to log on to the switch and enter enable mode; I&rsquo;m going to assume you know how to do this - if not, you really shouldn&rsquo;t be attempting this setup!</p>
+<h2 id=configuring-the-cisco-core-switch>Configuring the Cisco Core Switch <a class=anchor href=#configuring-the-cisco-core-switch>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Firstly, we need to log on to the switch and enter enable mode; I&rsquo;m going to assume you know how to do this - if not, you really shouldn&rsquo;t be attempting this setup!</p>
 <p>Determine the switches trunk load balancing setup by using the command &ldquo;show etherchannel load-balance&rdquo;. It should look something like this:</p>
 <p><img src="/BlogEngine/image.axd?picture=2009%2f9%2fShEthLoad.png" alt></p>
 <p>If the protocol is NOT src-dst-ip, then you won&rsquo;t be able to establish a trunk connection with the ESX server. If your protocol is not src-dst-ip, change it with the command &ldquo;port-channel load-balance src-dst-ip&rdquo;. This now matches the &ldquo;Route based on IP hash&rdquo; setting you configured in ESX. Although ESX has a setting for MAC based hashing, as does the Cisco, I was unable to get it to work.</p>

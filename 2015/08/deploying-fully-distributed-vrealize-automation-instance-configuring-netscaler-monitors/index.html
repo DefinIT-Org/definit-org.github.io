@@ -140,8 +140,9 @@ Deploying fully distributed vRealize Automation instance – Configuring NetScal
 <pre class="brush: text; gutter: false">GET /websso/HealthStatus</pre>
 <p>For the receive string, enter the expected response (&ldquo;GREEN&rdquo;). Click Create.</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb40.png alt></p>
-<h1 id=assigning-a-netscaler-monitor-to-a-service>Assigning a NetScaler Monitor to a Service</h1>
-<p>Assign the monitor to the PSC Services (or Service Groups) configured for PSC by opening the Configuration > Traffic Management > Load Balancing > Services page and selecting the PSC service for HTTPS/443 and clicking Edit.</p>
+<h1 id=assigning-a-netscaler-monitor-to-a-service>Assigning a NetScaler Monitor to a Service <a class=anchor href=#assigning-a-netscaler-monitor-to-a-service>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>Assign the monitor to the PSC Services (or Service Groups) configured for PSC by opening the Configuration > Traffic Management > Load Balancing > Services page and selecting the PSC service for HTTPS/443 and clicking Edit.</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb42.png alt></p>
 <p>Click on &ldquo;1 Service to Load Balancing Monitor Binding&rdquo; under Monitors</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb43.png alt></p>
@@ -152,28 +153,33 @@ Deploying fully distributed vRealize Automation instance – Configuring NetScal
 <p>All being well, you should now see the new monitor bound and with a state of &ldquo;Up&rdquo; - the last response should be a success.</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb46.png alt></p>
 <p>Repeat this for each Service or Service group you need to configure that monitor for.</p>
-<h1 id=vrealize-automation-load-balancer-monitors>vRealize Automation Load Balancer Monitors</h1>
-<p>The following monitors can be used for a distributed vRealize Automation installation.</p>
-<h2 id=vsphere-6-psc-sso-monitor>vSphere 6 PSC (SSO) Monitor</h2>
-<p>The status of the SSO service on each PSC node can be monitored using the following address:</p>
+<h1 id=vrealize-automation-load-balancer-monitors>vRealize Automation Load Balancer Monitors <a class=anchor href=#vrealize-automation-load-balancer-monitors>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>The following monitors can be used for a distributed vRealize Automation installation.</p>
+<h2 id=vsphere-6-psc-sso-monitor>vSphere 6 PSC (SSO) Monitor <a class=anchor href=#vsphere-6-psc-sso-monitor>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The status of the SSO service on each PSC node can be monitored using the following address:</p>
 <pre class="brush: text; gutter: false">https://&lt;psc-node-fqdn&gt;/websso/HealthStatus</pre>
 <p>As you can see below, the desired response is &ldquo;GREEN&rdquo;.</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb47.png alt></p>
-<h2 id=vrealize-appliance-cafe-monitor>vRealize Appliance (cafe) Monitor</h2>
-<p>The status of the Cafe service on each vRealize Appliance can be monitored using the following address:</p>
+<h2 id=vrealize-appliance-cafe-monitor>vRealize Appliance (cafe) Monitor <a class=anchor href=#vrealize-appliance-cafe-monitor>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The status of the Cafe service on each vRealize Appliance can be monitored using the following address:</p>
 <pre class="brush: text; gutter: false">https://&lt;vra-appliance-node&gt;/vcac/services/api/status</pre>
 <p>The desired response is &ldquo;REGISTERED&rdquo;</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb48.png alt></p>
 <p><span style=color:#c0504d><strong>Warning</strong>: In the case of all vRealize Appliances being shut down, this load balancer configuration will cause the appliances to fail on start-up unless you add the load balancer URL to the /etc/hosts file or temporarily change the monitor back to tcp-default. This is because start-up process refers to the services based on the load balanced URL - which won&rsquo;t be available until at least one appliance has initialised. Rebooting one appliance at a time will be fine. Thanks to <a href=https://twitter.com/carlprahl target=_blank>Carl Prahl</a></span><span style=color:#c0504d>, <a href=https://twitter.com/GreggRobertson5 target=_blank>Gregg Robertson</a></span> <span style=color:#c0504d>and <a href=https://twitter.com/elastic_skies target=_blank>Omer Kushmaro</a></span> <span style=color:#c0504d>for help working this out!</span></p>
 <p><span style=color:#c0504d>Be sure to add the line outside of the &ldquo;# VAMI_EDIT&rdquo; section, otherwise it will not persist past the next reboot.</span></p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb49.png alt></p>
-<h2 id=vrealize-iaas-web-monitor>vRealize IaaS Web Monitor</h2>
-<p>The status of the Web service on each vRealize IaaS Web role can be monitored using the following address:</p>
+<h2 id=vrealize-iaas-web-monitor>vRealize IaaS Web Monitor <a class=anchor href=#vrealize-iaas-web-monitor>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The status of the Web service on each vRealize IaaS Web role can be monitored using the following address:</p>
 <pre class="brush: text; gutter: false">https://&lt;vra-iaas-web-server&gt;/WAPI/api/status</pre>
 <p>The desired response is &ldquo;REGISTERED&rdquo;</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb50.png alt></p>
-<h2 id=vrealize-iaas-manager-monitor>vRealize IaaS Manager Monitor</h2>
-<p>The status of the Web service on each vRealize IaaS Web role can be monitored using the following address:</p>
+<h2 id=vrealize-iaas-manager-monitor>vRealize IaaS Manager Monitor <a class=anchor href=#vrealize-iaas-manager-monitor>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The status of the Web service on each vRealize IaaS Web role can be monitored using the following address:</p>
 <pre class="brush: text; gutter: false">https://&lt;vra-iaas-manager-server&gt;/VMPS2</pre>
 <p>The desired response is &ldquo;BasicHttpBinding_VMPSProxyAgent_policy&rdquo;</p>
 <p><img src=https://www.definit.co.uk/images/2015/08/image_thumb52.png alt></p>

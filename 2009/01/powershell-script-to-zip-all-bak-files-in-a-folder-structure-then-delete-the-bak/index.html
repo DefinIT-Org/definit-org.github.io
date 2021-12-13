@@ -105,8 +105,9 @@ Tags:
 <p>This all adds up to a bit of an administrative nightmare, especially since the backups eat away at my storage at a phenomonal rate. Zipping the .bak files is great, but since each DB has it&rsquo;s own backup folder, it can become a bit of a nightmare to go through, zip and delete the .baks. For my first real foray into using PowerShell, I decided I&rsquo;d write a script to take the legwork out of it for me.</p>
 <p>`<br>
 <span style="font-family:courier new,courier"># Powershell Script to recurse input path looking for .bak files, Zip them<br></p>
-<h1 id=and-delete-the-bakbr->and delete the .bak.<br></h1>
-<p>function out-zip {<br>
+<h1 id=and-delete-the-bakbr->and delete the .bak.<br> <a class=anchor href=#and-delete-the-bakbr->
+<i class="fas fa-hashtag"></i>
+</a></h1><p>function out-zip {<br>
 Param([string]$path)<br>
 if (-not $path.EndsWith('.zip')) {$path += &lsquo;.zip&rsquo;}<br>
 if (-not (test-path $path)) {<br>

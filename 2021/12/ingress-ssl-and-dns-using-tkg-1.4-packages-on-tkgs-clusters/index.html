@@ -114,8 +114,9 @@ Tags:
 </ul>
 <p>My Tanzu Kubernetes Grid service (TKGs) on vSphere 7 is configured to use NSX-T to provide load balancing, but you could just as easily do this using NSX Advanced Load Balancer (Avi) or using HA-Proxy as the load balancer. You can do this on Tanzu Kubernetes Grid multi-cloud (TKGm) too, and if you&rsquo;ve got Tanzu Mission Control you can deploy the Packages using that.</p>
 <p>What if you&rsquo;ve not got access to Tanzu Kubernetes Grid multi-cloud or services? These packages are also available as part of <a href=https://tanzucommunityedition.io/>Tanzu Community Edition</a> - for free&mldr;</p>
-<h1 id=pre-requisites-for-tkg-packages>Pre-requisites for TKG Packages</h1>
-<p>I&rsquo;m going to assume you&rsquo;ve got a TKG cluster deployed, you have authenticated using the <code>kubectl vsphere login</code> commands and your current <code>kubctl</code> context is set to the cluster you&rsquo;re working on. You&rsquo;ll also need to have the <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-install-cli.html>Tanzu CLI installed</a>.</p>
+<h1 id=pre-requisites-for-tkg-packages>Pre-requisites for TKG Packages <a class=anchor href=#pre-requisites-for-tkg-packages>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>I&rsquo;m going to assume you&rsquo;ve got a TKG cluster deployed, you have authenticated using the <code>kubectl vsphere login</code> commands and your current <code>kubctl</code> context is set to the cluster you&rsquo;re working on. You&rsquo;ll also need to have the <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-install-cli.html>Tanzu CLI installed</a>.</p>
 <p>Before anything is deployed, you need to configure a storage class as default - I&rsquo;m going to set <code>vsan-default-storage-policy</code> as mine.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -136,8 +137,9 @@ $ kubectl patch storageclass vsan-default-storage-policy -p <span class=s1>&#39;
 <pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ kubectl create clusterrolebinding default-tkg-admin-privileged-binding --clusterrole<span class=o>=</span>psp:vmware-system-privileged --group<span class=o>=</span>system:authenticated
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=install-the-kapp-controller>Install the <code>kapp-controller</code></h2>
-<p>Part of Carvel is <code>kapp</code>, which allows you to bundle multiple kubernetes objects together into a single application definition, then deploy them in a dependency-aware fashion. The <code>kapp-controller</code> is a Kubernetes Controller that will watch the state of your cluster, then make or request changes where needed - reconciling the desired state defined in the <code>kapp</code> bundle with the current state on the cluster.</p>
+</div><h2 id=install-the-kapp-controller>Install the <code>kapp-controller</code> <a class=anchor href=#install-the-kapp-controller>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Part of Carvel is <code>kapp</code>, which allows you to bundle multiple kubernetes objects together into a single application definition, then deploy them in a dependency-aware fashion. The <code>kapp-controller</code> is a Kubernetes Controller that will watch the state of your cluster, then make or request changes where needed - reconciling the desired state defined in the <code>kapp</code> bundle with the current state on the cluster.</p>
 <p>Create a new file <code>kapp-controller.yaml</code> and paste the manifest from the <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-prep-tkgs-kapp.html#kapp-controller-manifest>Tanzu Packages documentation</a>.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -194,8 +196,9 @@ $ tanzu package available list
 </div><ul>
 <li>Ref: <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-prep-tkgs-kapp.html>Prepare a Tanzu Kubernetes Cluster Created by Using the Tanzu Kubernetes Grid Service to Run Packages</a></li>
 </ul>
-<h1 id=install-cert-manager>Install Cert Manager</h1>
-<p>The first package I&rsquo;m going to install is <code>cert-manager</code>, which provides &ldquo;certificates as a service&rdquo; inside of Kubernetes. I&rsquo;m going to install a CA certificate generated on my local machine to sign certificates, since the DNS domain I&rsquo;m using (cmbu.local) is not public. This means I can trust the CA created on my local machine to produce valid certificates for me - this is obviously not something you&rsquo;d do in a production environment!</p>
+<h1 id=install-cert-manager>Install Cert Manager <a class=anchor href=#install-cert-manager>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>The first package I&rsquo;m going to install is <code>cert-manager</code>, which provides &ldquo;certificates as a service&rdquo; inside of Kubernetes. I&rsquo;m going to install a CA certificate generated on my local machine to sign certificates, since the DNS domain I&rsquo;m using (cmbu.local) is not public. This means I can trust the CA created on my local machine to produce valid certificates for me - this is obviously not something you&rsquo;d do in a production environment!</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -269,8 +272,9 @@ replicaset.apps/cert-manager-webhook-79fd9fcbf       <span class=m>1</span>     
 </div><ul>
 <li>Ref: <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-cert-manager.html>Install Cert Manager</a></li>
 </ul>
-<h2 id=configuring-ca-signed-certificates>Configuring CA signed certificates</h2>
-<p>To create the CA certificates, I followed the steps documented by Jorge Morales Pou here - <a href=https://tanzu.vmware.com/developer/blog/securely-connect-with-your-local-kubernetes-environment/>Create your own local CA</a>, and exported the private key as <a href=https://cormachogan.com/2021/11/02/securing-application-access-on-tkg-v1-4-with-cert-manager-and-contour/>noted by Cormac Hogan here</a>.</p>
+<h2 id=configuring-ca-signed-certificates>Configuring CA signed certificates <a class=anchor href=#configuring-ca-signed-certificates>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>To create the CA certificates, I followed the steps documented by Jorge Morales Pou here - <a href=https://tanzu.vmware.com/developer/blog/securely-connect-with-your-local-kubernetes-environment/>Create your own local CA</a>, and exported the private key as <a href=https://cormachogan.com/2021/11/02/securing-application-access-on-tkg-v1-4-with-cert-manager-and-contour/>noted by Cormac Hogan here</a>.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -308,8 +312,9 @@ $ kubectl create secret tls autotmm-ca-secret --key autotmm-ca.unprotected.key -
 </span><span class=w>    </span><span class=nt>secretName</span><span class=p>:</span><span class=w> </span><span class=l>autotmm-ca-secret</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
-</div><h1 id=install-contour>Install Contour</h1>
-<p>At this point <code>cert-manager</code> should be ready to issue certificates, so we can install <code>contour</code> to begin consuming them. I&rsquo;ve created <code>contour-data-values.yaml</code> based on the &ldquo;workload cluster with NSX ALB&rdquo; example to contain the configuration for the <code>contour</code> deployment, which will customize the package deployment to use a <code>LoadBalancer</code> for Envoy.</p>
+</div><h1 id=install-contour>Install Contour <a class=anchor href=#install-contour>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>At this point <code>cert-manager</code> should be ready to issue certificates, so we can install <code>contour</code> to begin consuming them. I&rsquo;ve created <code>contour-data-values.yaml</code> based on the &ldquo;workload cluster with NSX ALB&rdquo; example to contain the configuration for the <code>contour</code> deployment, which will customize the package deployment to use a <code>LoadBalancer</code> for Envoy.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -448,8 +453,9 @@ replicaset.apps/contour-cd965689f   <span class=m>2</span>         <span class=m
 </div><ul>
 <li>Ref: <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-ingress-contour.html>Implement Ingress Control with Contour</a></li>
 </ul>
-<h1 id=external-dns>External DNS</h1>
-<p>The final step in linking this all together is configuring <code>external-dns</code> to register and manage DNS records for the <code>ingress</code> objects created in <code>contour</code>. Since I&rsquo;m using Active Directory DNS servers, I need to configure kerberos authentication to make use of RFC3645 for secure updates.</p>
+<h1 id=external-dns>External DNS <a class=anchor href=#external-dns>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>The final step in linking this all together is configuring <code>external-dns</code> to register and manage DNS records for the <code>ingress</code> objects created in <code>contour</code>. Since I&rsquo;m using Active Directory DNS servers, I need to configure kerberos authentication to make use of RFC3645 for secure updates.</p>
 <p>DNS-side configuration</p>
 <ul>
 <li>Create a DNS zone</li>
@@ -640,8 +646,9 @@ tanzu package install external-dns --package-name external-dns.tanzu.vmware.com 
 <li>Ref: <a href=https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/rfc2136.md#secure-updates-using-rfc3645-gss-tsig>Secure Updates Using RFC3645 (GSS-TSIG)</a></li>
 <li>Ref: <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-external-dns.html>Implement Service Discovery with ExternalDNS</a></li>
 </ul>
-<h1 id=putting-it-all-together>Putting it all together</h1>
-<p>With this configuration I can now deploy an application and have that application URL be auto-magically signed with an SSL certificate using cert-manager, contour will steer traffic to the correct service based on the URL, and the DNS name of that service will be automatically registered in DNS!</p>
+<h1 id=putting-it-all-together>Putting it all together <a class=anchor href=#putting-it-all-together>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>With this configuration I can now deploy an application and have that application URL be auto-magically signed with an SSL certificate using cert-manager, contour will steer traffic to the correct service based on the URL, and the DNS name of that service will be automatically registered in DNS!</p>
 <p>The below manifest for Kubernetes Up And Running Demo app (KUARD) is all pretty standard - the magic happens when we call the ingress object. Firstly, the annotation to use the CA issuer configuration <code>cert-manager.io/cluster-issuer: "autotmm-issuer"</code> and the <code>tls</code> configuration block means that Contour will request an SSL certificate from Cert Manager. External DNS will pick up the <code>host: kuard.cmbu.local</code> value and register it in DNS.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>

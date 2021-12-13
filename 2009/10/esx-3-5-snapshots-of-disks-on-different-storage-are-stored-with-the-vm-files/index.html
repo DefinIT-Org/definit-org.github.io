@@ -103,14 +103,16 @@ Tags:
 </div>
 </div>
 </div>
-<h2 id=aka-why-not-to-use-snapshots>A.K.A Why not to use snapshots</h2>
-<p>I ran into a slightly confusing problem today - our SQL servers are all created with 4 disks on 4 separate LUNs (System, Swap, SQL Data and SQL Logs). When viewing the server through Virtual Center I couldn&rsquo;t see all of the LUNs, just the System LUN. It&rsquo;s not a major problem as the VM can see the storage, but a little annoying when you have to remember what LUN the disks are on.</p>
+<h2 id=aka-why-not-to-use-snapshots>A.K.A Why not to use snapshots <a class=anchor href=#aka-why-not-to-use-snapshots>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>I ran into a slightly confusing problem today - our SQL servers are all created with 4 disks on 4 separate LUNs (System, Swap, SQL Data and SQL Logs). When viewing the server through Virtual Center I couldn&rsquo;t see all of the LUNs, just the System LUN. It&rsquo;s not a major problem as the VM can see the storage, but a little annoying when you have to remember what LUN the disks are on.</p>
 <p>Slightly more distressing was the fact that the System-LUN was running out of space - fast. A LUN that should have had about 150GB free was running dangerously low. On investigation I found various snapshot files were being stored in with the System-LUN, which is where the VM&rsquo;s VMX, vswap etc are situated. These were the snapshot delta files of the <em>additional</em> disks, which were on other storage! This isn&rsquo;t first apparent at first as the disk snapshots have been named sequentially by ESX, so a VM with 4 disks on separate LUNs will in fact create 4 snapshot files on the SYSTEM-LUN named VM01-00001.vmdk, VM01-00002.vmdk, VM01-00003.vmdk and VM01-00004.vmdk. 00001 is for the System disk, 00002 is for the Swap disk etc etc. This means that the IO on that LUN has been multiplied, and the storage space is shrinking <em>very</em> rapidly.</p>
 <p>A little more digging and it seems that this is by design - snapshots are not meant to be kept for very long, and I think VMware made a deliberate decision to make it difficult to do so. Any virtual disks created for a VM, lets call it VM01, were named VM01.vmdk. When additional virtual disks were created through vCenter on a different LUN, they were still named VM01.vmdk - there&rsquo;s no conflict because they&rsquo;re in different locations. However, when vCenter takes a snapshot it places them with the original disk, and because it&rsquo;s got the same name as the existing disk it starts to enumerate them.</p>
 <p>This is bad for a number of reasons - most prominent of which is that if the snapshot file grows large, vCenter does not handle the commit well. In fact, neither does ESX, but I&rsquo;ll get to that. vCenter will time out on any operation that takes more than 15 minutes, so a commit of a 10GB snapshot will look for all intents and purposes in vCenter like it&rsquo;s failed. On top of that, the enumeration of snapshot delta files can cause confusion as to which disk it actualy belongs to, and if that happens, commiting</p>
 <p>We all know snapshots are performance killers, but the functionality they provide is not insignificant, and as with most things a balance has to be struck between the functionality and the performance.</p>
-<h2 id=so-the-headlines>So the headlines</h2>
-<ul>
+<h2 id=so-the-headlines>So the headlines <a class=anchor href=#so-the-headlines>
+<i class="fas fa-hashtag"></i>
+</a></h2><ul>
 <li>
 <p>VMs created with disks on multiple LUNs in vCenter use the SAME DISK NAME (eg; for VM01 the disks were created in /vmfs/volumes/SYSTEM-LUN/VM01.vmdk, /vmfs/volumes/SWAP-LUN/VM01.vmdk etc etc).</p>
 <ul>
@@ -139,8 +141,9 @@ Tags:
 <p>when I say there&rsquo;s no other way, I mean, there&rsquo;s no other practical way. There are methods to move the snapshot files to another LUN but they bring some serious problems with them.</p>
 </li>
 </ul>
-<h3 id=create-a-vmdk-virtual-disk-using-vmkfstools>Create a vmdk (virtual disk) using vmkfstools</h3>
-<ul>
+<h3 id=create-a-vmdk-virtual-disk-using-vmkfstools>Create a vmdk (virtual disk) using vmkfstools <a class=anchor href=#create-a-vmdk-virtual-disk-using-vmkfstools>
+<i class="fas fa-hashtag"></i>
+</a></h3><ul>
 <li>Log in to your server console.</li>
 <li>Type <span style="font-family:courier new,courier">su -</span> (to log in as root, enter root password, note the &ldquo;-&rdquo; to load the root user environment variables)</li>
 <li>Navigate to the storage that you wish to use. E.g. <span style="font-family:courier new,courier">cd /vmfs/volumes/System-LUN/</span></li>
@@ -149,8 +152,9 @@ Tags:
 <li>Create the disk: <span style="font-family:courier new,courier">vmkfstools -c <size> <filename> -a &lt;buslogic|lsilogic></span></li>
 <li>For help just type <span style="font-family:courier new,courier">vmkfstools</span></li>
 </ul>
-<h3 id=renamenbspvmdk-files-using-vmkfstools>Rename vmdk files using vmkfstools</h3>
-<ul>
+<h3 id=renamenbspvmdk-files-using-vmkfstools>Rename vmdk files using vmkfstools <a class=anchor href=#renamenbspvmdk-files-using-vmkfstools>
+<i class="fas fa-hashtag"></i>
+</a></h3><ul>
 <li>Shut down the VM in vCenter.</li>
 <li>Edit the VM settings and remove the disk you wish to change. Do not delete the file!</li>
 <li>Log in to your server console.</li>
@@ -158,8 +162,9 @@ Tags:
 <li>use the command: <span style="font-family:courier new,courier">vmkfstools -E /vmfs/volumes/<lun>/<server name>/<disk name>.vmdk /vmfs/volumes/<lun>/<server name>/<new disk name>.vmdk</span></li>
 <li>Go back to the vCenter and re-add the disk, using the new name.</li>
 </ul>
-<h2 id=commit-your-snapshots-using-vmware-cmd>Commit your snapshots using vmware-cmd</h2>
-<ul>
+<h2 id=commit-your-snapshots-using-vmware-cmd>Commit your snapshots using vmware-cmd <a class=anchor href=#commit-your-snapshots-using-vmware-cmd>
+<i class="fas fa-hashtag"></i>
+</a></h2><ul>
 <li>Log in to your server console.</li>
 <li>Type su - (to log in as root, enter root password, note the &ldquo;-&rdquo; to load the root user environment variables).</li>
 <li>Use the <span style="font-family:courier new,courier">vmware-cmd -l</span> command to list your VMs. Note the path to the VM you want to deal with.</li>

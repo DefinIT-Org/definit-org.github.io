@@ -104,19 +104,22 @@ Tags:
 </div>
 </div>
 <p><img src=https://www.definit.co.uk/images/2010/09/image27_thumb.png alt> Exchange SP1 has now been released, so I thought I’d document the upgrade process for my small Exchange 2010 organisation, consisting of one CAS/Transport/Mailbox server, and an Edge Transport server.</p>
-<h3 id=references><strong>References</strong></h3>
-<p>The starting point is always working out if you *need* to upgrade – what’s the business argument. For that you need to look at what’s <a href=http://technet.microsoft.com/en-us/library/ff459257.aspx target=_blank>new in Exchange 2010 SP1</a>, the <a href=http://technet.microsoft.com/en-us/library/ff728620.aspx target=_blank>release notes</a> and <a href=http://technet.microsoft.com/en-us/library/bb691354.aspx target=_blank>prerequisites</a>. Finally, the installation <a href=http://technet.microsoft.com/en-us/library/bb629560.aspx target=_blank>instructions for upgrading from Exchange 2010 RTM to SP1</a>.</p>
+<h3 id=references><strong>References</strong> <a class=anchor href=#references>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>The starting point is always working out if you *need* to upgrade – what’s the business argument. For that you need to look at what’s <a href=http://technet.microsoft.com/en-us/library/ff459257.aspx target=_blank>new in Exchange 2010 SP1</a>, the <a href=http://technet.microsoft.com/en-us/library/ff728620.aspx target=_blank>release notes</a> and <a href=http://technet.microsoft.com/en-us/library/bb691354.aspx target=_blank>prerequisites</a>. Finally, the installation <a href=http://technet.microsoft.com/en-us/library/bb629560.aspx target=_blank>instructions for upgrading from Exchange 2010 RTM to SP1</a>.</p>
 <p>It’s important to note, as mentioned in the upgrade doc:</p>
 <blockquote>
 <p><strong>Note</strong>: After you upgrade to Exchange 2010 SP1, you can&rsquo;t uninstall the service pack to revert to Exchange 2010 RTM. If you uninstall Exchange 2010 SP1, you will remove Exchange from the server.</p>
 </blockquote>
-<h3 id=high-level-plan>High level plan</h3>
-<p>Back up Active Directory and Mailbox Stores</p>
+<h3 id=high-level-plan>High level plan <a class=anchor href=#high-level-plan>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Back up Active Directory and Mailbox Stores</p>
 <p>Install the Exchange 2010 SP1 prerequisites</p>
 <p>Upgrade the Edge Transport server</p>
 <p>Upgrade the Hub/CAS/Mailbox server</p>
-<h3 id=installing-the-prerequisites>Installing the prerequisites</h3>
-<p>All the advice I’ve seen so far is that the installer does a bad job at detecting and installing the prerequisites for SP1, with complaints about it leaving the server in an inconsistent state, and incorrect links, so I will install the prerequisites manually. There is an easy matrix to work out what hotfixes are required on the Exchange team blog -  <a href=http://msexchangeteam.com/archive/2010/09/01/456094.aspx title=http://msexchangeteam.com/archive/2010/09/01/456094.aspx>http://msexchangeteam.com/archive/2010/09/01/456094.aspx</a>.</p>
+<h3 id=installing-the-prerequisites>Installing the prerequisites <a class=anchor href=#installing-the-prerequisites>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>All the advice I’ve seen so far is that the installer does a bad job at detecting and installing the prerequisites for SP1, with complaints about it leaving the server in an inconsistent state, and incorrect links, so I will install the prerequisites manually. There is an easy matrix to work out what hotfixes are required on the Exchange team blog -  <a href=http://msexchangeteam.com/archive/2010/09/01/456094.aspx title=http://msexchangeteam.com/archive/2010/09/01/456094.aspx>http://msexchangeteam.com/archive/2010/09/01/456094.aspx</a>.</p>
 <p>Both my servers are running Windows Server 2008 R2, so the hotfixes requires are</p>
 <p><a href="http://go.microsoft.com/fwlink/?linkid=3052&kbid=979744" title="http://go.microsoft.com/fwlink/?linkid=3052&kbid=979744">http://go.microsoft.com/fwlink/?linkid=3052&kbid=979744</a></p>
 <p><a href="http://go.microsoft.com/fwlink/?linkid=3052&kbid=983440" title="http://go.microsoft.com/fwlink/?linkid=3052&kbid=983440">http://go.microsoft.com/fwlink/?linkid=3052&kbid=983440</a></p>
@@ -125,8 +128,9 @@ Tags:
 <p>Some of these may well have been installed on the server already, but I downloaded them all to the same location as the SP1 file too so that the resources were available should I need them. Then I just went through the list installing, first on the Edge, then the Hub/CAS/Mailbox. Each hotfix does request a restart, but you can install them all and restart once.</p>
 <p><img src=https://www.definit.co.uk/images/2010/09/image_thumb2.png alt></p>
 <p>Now is also a good point to install the MSMQ Server component on your CAS server, and also the Microsoft Office 2010 Filter Pack – you’ll see why when you get to my experiences installing the update to my Hub/CAS/Mailbox server.</p>
-<h3 id=upgrading-the-exchange-2010-edge-transport-server><strong>Upgrading the Exchange 2010 Edge Transport Server</strong></h3>
-<p>There is a little bit of confusion in the docs around the order in which to install the roles – the clearest explanation in the Exchange blog says:</p>
+<h3 id=upgrading-the-exchange-2010-edge-transport-server><strong>Upgrading the Exchange 2010 Edge Transport Server</strong> <a class=anchor href=#upgrading-the-exchange-2010-edge-transport-server>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>There is a little bit of confusion in the docs around the order in which to install the roles – the clearest explanation in the Exchange blog says:</p>
 <blockquote>
 <p>The Edge Transport server role can be upgraded at any time; however, we recommend upgrading Edge Transport either before all other server roles have been upgraded or after all other server roles have been upgraded</p>
 </blockquote>
@@ -144,8 +148,9 @@ Tags:
 <p>And if all goes well, you’ll get the confirmation</p>
 <p><img src=https://www.definit.co.uk/images/2010/09/image_thumb9.png alt></p>
 <p>I didn’t need to restart after the installation, I tested mail flow in and out of the server just to make sure everything was OK – it was.</p>
-<h3 id=upgrading-the-hubcasmailbox-server>Upgrading the Hub/CAS/Mailbox server</h3>
-<p>Having used the Edge server as a bit of a test installation, running through the installer for Hub/CAS/Mailbox was just that, running through.</p>
+<h3 id=upgrading-the-hubcasmailbox-server>Upgrading the Hub/CAS/Mailbox server <a class=anchor href=#upgrading-the-hubcasmailbox-server>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Having used the Edge server as a bit of a test installation, running through the installer for Hub/CAS/Mailbox was just that, running through.</p>
 <p>The prerequisites did fail on this hotfix (<a href="http://go.microsoft.com/fwlink/?linkid=3052&kbid=977020" title="http://go.microsoft.com/fwlink/?linkid=3052&kbid=977020">http://go.microsoft.com/fwlink/?linkid=3052&kbid=977020</a>) and the <a href="http://www.microsoft.com/downloads/en/details.aspx?FamilyID=5cd4dcd7-d3e6-4970-875e-aba93459fbee&displaylang=en" target=_blank>Microsoft Office 2010 Filter Packs</a>, both of which annoyingly did require a restart.</p>
 <p><img src=https://www.definit.co.uk/images/2010/09/image_thumb10.png alt></p>
 <p>Once all prerequisites were fulfilled, the upgrade runs…and ran happily for 51 minutes, until I recieved this:</p>
@@ -159,8 +164,9 @@ Tags:
 <p><img src=https://www.definit.co.uk/images/2010/09/image_thumb12.png alt></p>
 <p>Once the Microsoft Message Queuing Server component is installed (and another restart later), I re-ran the upgrade, which thankfully restarts almost where it stopped off. Finally, another 38 minutes later – success!</p>
 <p><img src=https://www.definit.co.uk/images/2010/09/image_thumb13.png alt></p>
-<h3 id=bonus-section--upgrading-management-tools>Bonus section – upgrading Management tools</h3>
-<p>I thought after all that my upgrade saga was over – not quite! While upgrading the management tools on my local Windows 7 box, I hit another mysterious error:</p>
+<h3 id=bonus-section--upgrading-management-tools>Bonus section – upgrading Management tools <a class=anchor href=#bonus-section--upgrading-management-tools>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>I thought after all that my upgrade saga was over – not quite! While upgrading the management tools on my local Windows 7 box, I hit another mysterious error:</p>
 <p><img src=https://www.definit.co.uk/images/2010/09/image_thumb14.png alt></p>
 <p>A Google search based on this error was not helpful at all, the one or two relevant posts were to do with the execution policy for PowerShell. Since I develop PowerShell scripts on this machine the policy is already set to “unrestricted” (Set-ExecutionPolicy unrestricted -  Get-ExecutionPolicy to check). I checked that I had the prerequisites and tried again – only to fail with the same error.</p>
 <p>Digging through the setup log, I found references to “tmlisten”</p>

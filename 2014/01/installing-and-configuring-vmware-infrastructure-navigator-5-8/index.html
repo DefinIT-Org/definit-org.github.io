@@ -116,14 +116,17 @@ Tags:
 <p>Effectively it takes a look at the network connections that are running between your VMs (and physical servers) and works out which applications and services are running on each, and the dependencies – both upstream and downstream – for each VM.</p>
 <p>This is particularly useful in large enterprise environments where perhaps application developers have not (shock) documented the dependencies for a particular application. I can think of several times when I’ve been 100% confident that (according to all the documentation provided) I can decommission a server, or the service running on a server, only to have to turn it back on due to a production outage – because an un-documented dependency exists.</p>
 <p>Effectively, Infrastructure Navigator leverages VMware Tools to run a netstat command on each VM and work out what connections are being used. It comes with a library of already classified services – e.g. MSSQL running on port 1433 is a pretty obvious service. Non-classified services (or services configured for running on a non-standard port) can be easily added to the library to build up a detailed picture of which VMs depend on each other (as well as “unmanaged” servers/services that are out of the scope of vCenter).</p>
-<h2 id=licensing>Licensing</h2>
-<p>Infrastructure Navigator comes as part of vCenter Operations Management Suite Advanced or Enterprise editions, which may put it out of reach of many SMEs. That said, for me it’s ideal use is the mapping of really complex enterprise environments where VMs and applications can number in the thousands and tens of thousands.</p>
-<h2 id=prerequisites>Prerequisites</h2>
-<p>Infrastructure Navigator comes in the form of an OVA which deploys a single VM, this has 2 vCPUs and 4GB of RAM (though I’m running it in my lab with just 2GB). It requires about 20GB of disk (but can be thin provisioned) and a Gigabit Ethernet connection.</p>
+<h2 id=licensing>Licensing <a class=anchor href=#licensing>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Infrastructure Navigator comes as part of vCenter Operations Management Suite Advanced or Enterprise editions, which may put it out of reach of many SMEs. That said, for me it’s ideal use is the mapping of really complex enterprise environments where VMs and applications can number in the thousands and tens of thousands.</p>
+<h2 id=prerequisites>Prerequisites <a class=anchor href=#prerequisites>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Infrastructure Navigator comes in the form of an OVA which deploys a single VM, this has 2 vCPUs and 4GB of RAM (though I’m running it in my lab with just 2GB). It requires about 20GB of disk (but can be thin provisioned) and a Gigabit Ethernet connection.</p>
 <p>vCenter Infrastructure Navigator is supported on vCenter Server 5.1 U1 and 5.5, with the vSphere Web Client 5.5.</p>
 <p>In addition to all builds of ESXi 5.x, a lot of previous ESX/ESXi versions are supported, check the product interop matrix for specifics.</p>
-<h2 id=deploying-the-vapp>Deploying the vApp</h2>
-<div style=width:654px class="wp-caption alignnone">
+<h2 id=deploying-the-vapp>Deploying the vApp <a class=anchor href=#deploying-the-vapp>
+<i class="fas fa-hashtag"></i>
+</a></h2><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/20140114001.png><img style=display:inline;border:0 title="VIN 5.8 Deploy Wizard - Select the OVA" alt="VIN 5.8 Deploy Wizard - Select the OVA" src=/images/2014/01/20140114001_thumb.png width=644 height=379 border=0></a>
 <p class=wp-caption-text>
 Select the OVA file
@@ -184,17 +187,20 @@ Review all your settings and finish.
 The VM is deployed
 </p>
 </div>
-<h2 id=some-initial-configuration-steps>Some Initial Configuration Steps</h2>
-<p>Once the VM was booted, I opened the console and it tells you where to go to manage the VM – in my case <a href=https://192.168.1.109:5480>https://192.168.1.109:5480</a>. I duly opened the web page.</p>
+<h2 id=some-initial-configuration-steps>Some Initial Configuration Steps <a class=anchor href=#some-initial-configuration-steps>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Once the VM was booted, I opened the console and it tells you where to go to manage the VM – in my case <a href=https://192.168.1.109:5480>https://192.168.1.109:5480</a>. I duly opened the web page.</p>
 <p><img src=https://www.definit.co.uk/images/2014/01/20140114010_thumb.png alt></p>
 <p>You can log in using the user name “root” and the password that you specified in the vApp deployment. You get a fairly familiar looking web interface for some basic appliance management:</p>
 <p><img src=https://www.definit.co.uk/images/2014/01/image_thumb7.png alt></p>
 <p>I went to the network tab and updated the network settings to use a static IP that I’ve pre-defined for the appliance. If you re-IP the appliance after you connect to vCenter, you’ll need a reboot to continue working with it.</p>
 <p>If you want to change the hostname for the appliance, you can’t use the hostname command, or edit the /etc/HOSTNAME or /etc/hosts files – they will not persist across reboots. There’s a script that runs when the appliance reboots that checks the reverse DNS lookup for the primary IP address, and sets the hostname accordingly. If the script can’t see a DNS entry for the IP it will rename it to localhost.localdomain. (<a href=http://jreypo.wordpress.com/2013/11/20/infrastructure-navigator-lose-configured-hostname-after-a-reboot/ target=_blank>Credit to Juan Rey for this info</a>)</p>
-<h2 id=configuring-vcenter-infrastructure-navigator-in-vcenter-web-client>Configuring vCenter Infrastructure Navigator in vCenter Web Client</h2>
-<p>If you’re still logged into the vCenter Web Client, you’ll need to log out and back in again to see the Infrastructure Navigator components.</p>
-<h3 id=assign-a-license-key>Assign a license key</h3>
-<div style=width:654px class="wp-caption alignnone">
+<h2 id=configuring-vcenter-infrastructure-navigator-in-vcenter-web-client>Configuring vCenter Infrastructure Navigator in vCenter Web Client <a class=anchor href=#configuring-vcenter-infrastructure-navigator-in-vcenter-web-client>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>If you’re still logged into the vCenter Web Client, you’ll need to log out and back in again to see the Infrastructure Navigator components.</p>
+<h3 id=assign-a-license-key>Assign a license key <a class=anchor href=#assign-a-license-key>
+<i class="fas fa-hashtag"></i>
+</a></h3><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/20140114012.png><img style=display:inline;border:0 title="VIN 5.8 - Licensing tab" alt="VIN 5.8 - Licensing tab" src=/images/2014/01/20140114012_thumb.png width=644 height=177 border=0></a>
 <p class=wp-caption-text>
 From the Web Client home, click on the Licensing icon, then select the Solutions tab. You can see that VIN is unlicensed. Select it and click "Assign License Key&#8230;"
@@ -206,8 +212,9 @@ From the Web Client home, click on the Licensing icon, then select the Solutions
 Select your license key (mine is a vCloud Suite license and covers vCenter Operations Suite too) and apply it
 </p>
 </div>
-<h3 id=configure-infrastructure-navigators-access-to-vms>Configure Infrastructure Navigator’s access to VMs</h3>
-<div style=width:654px class="wp-caption alignnone">
+<h3 id=configure-infrastructure-navigators-access-to-vms>Configure Infrastructure Navigator’s access to VMs <a class=anchor href=#configure-infrastructure-navigators-access-to-vms>
+<i class="fas fa-hashtag"></i>
+</a></h3><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/20140114014.png><img style=display:inline;border:0 title="VIN 5.8 - Configuring VIN" alt="VIN 5.8 - Configuring VIN" src=/images/2014/01/20140114014_thumb.png width=644 height=322 border=0></a>
 <p class=wp-caption-text>
 From the vSphere Web Client home page, click on the Infrastructure Navigator icon, you get presented with another annoying getting started page!
@@ -243,8 +250,9 @@ If you now select a VM in your inventory, you'll see that theres a new box for V
 This is the completed discovery of the VM - in this case my vCloud Director VM. You can see that the information is less than an hour old and that it's detected vCloud Director as an Application Service running on the VM. You can also see that it's detected 2 dependencies.
 </p>
 </div>
-<h2 id=viewing-dependencies>Viewing Dependencies</h2>
-<p>Now that it’s installed and running, I couldn’t finish without a really quick view of it working, and how to add a definition for an unknown service.</p>
+<h2 id=viewing-dependencies>Viewing Dependencies <a class=anchor href=#viewing-dependencies>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Now that it’s installed and running, I couldn’t finish without a really quick view of it working, and how to add a definition for an unknown service.</p>
 <div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/image11.png><img style=display:inline;border:0 title="VIN 5.8 - Viewing dependency maps" alt="VIN 5.8 - Viewing dependency maps" src=/images/2014/01/image_thumb9.png width=644 height=425 border=0></a>
 <p class=wp-caption-text>
@@ -257,8 +265,9 @@ You can click on "View Dependencies" from a VM overview page, or select the "Man
 Now I've expanded out the dependencies to a second level, you can see more links and more services that are used within this application dependency map.
 </p>
 </div>
-<h2 id=defining-custom-services>Defining Custom Services</h2>
-<div style=width:654px class="wp-caption alignnone">
+<h2 id=defining-custom-services>Defining Custom Services <a class=anchor href=#defining-custom-services>
+<i class="fas fa-hashtag"></i>
+</a></h2><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/image13.png><img style=display:inline;border:0 title="VIN 5.8 - Define a custom service" alt="VIN 5.8 - Define a custom service" src=/images/2014/01/image_thumb11.png width=644 height=130 border=0></a>
 <p class=wp-caption-text>
 In the services tab, from the Application Dependencies view, you can see an undefined service talking on port 445. I happen to know that it's an SMB share on my NAS which is mapped from my DC and SQL VMs. Click on the + symbol to define the service.

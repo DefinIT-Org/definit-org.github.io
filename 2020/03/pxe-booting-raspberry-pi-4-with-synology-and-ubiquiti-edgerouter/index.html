@@ -109,8 +109,9 @@ Tags:
 <li>Configure the NFS and TFTP Server</li>
 <li>Configure the Raspberry Pi</li>
 </ol>
-<h2 id=configure-dhcp-server>Configure DHCP Server</h2>
-<p>In order for the Raspberry Pi to know where to boot from, we need too configure the DHCP server with some specific options. In my home network DHCP is running from my Ubiquiti EdgeRouter Pro 8. DHCP Option 43 is used to exchange &ldquo;vendor-specific information&rdquo; - in this case we need to tell the Raspbery Pi that we have a PXE boot available for it. On my network I&rsquo;ve configured a DHCP server for RPi called VLAN020.</p>
+<h2 id=configure-dhcp-server>Configure DHCP Server <a class=anchor href=#configure-dhcp-server>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>In order for the Raspberry Pi to know where to boot from, we need too configure the DHCP server with some specific options. In my home network DHCP is running from my Ubiquiti EdgeRouter Pro 8. DHCP Option 43 is used to exchange &ldquo;vendor-specific information&rdquo; - in this case we need to tell the Raspbery Pi that we have a PXE boot available for it. On my network I&rsquo;ve configured a DHCP server for RPi called VLAN020.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -138,8 +139,9 @@ Tags:
 </a>
 <figcaption class=clr-caption>EdgeRouter DHCP Options</figcaption>
 </div>
-<h2 id=configure-nfs-and-tftp-server>Configure NFS and TFTP Server</h2>
-<p>I&rsquo;ve configured two shared folders on my Synology NAS - <code>rpi-pxe</code> and <code>rpi-tftpboot</code>.</p>
+<h2 id=configure-nfs-and-tftp-server>Configure NFS and TFTP Server <a class=anchor href=#configure-nfs-and-tftp-server>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>I&rsquo;ve configured two shared folders on my Synology NAS - <code>rpi-pxe</code> and <code>rpi-tftpboot</code>.</p>
 <p><code>rpi-pxe</code> is shared as an NFS export, with read/write permissions to mount from my Raspbery Pi subnet. Since we&rsquo;re using this as a Linux boot device, we must not enable root squash (No mapping) and it should be synchronous.</p>
 <div class=clr-content-image-wrap>
 <a href=2020-03-07-13-45-30.png data-lightbox=2020-03-07-13-45-30.png data-title="Export NFS Options" class=lb>
@@ -161,8 +163,9 @@ Tags:
 </a>
 <figcaption class=clr-caption>TFTP Share</figcaption>
 </div>
-<h2 id=configure-raspberry-pi-boot>Configure Raspberry Pi Boot</h2>
-<p>Now that the infrastucture is in place to PXE boot the Pis, it&rsquo;s time to configure the Pis themselves. I&rsquo;m assuming you&rsquo;ve got a Pi already running and configured - this can be a fresh install of Rasbian or one that&rsquo;s been running a while - it doesn&rsquo;t much matter. I performed these steps on all of my Pis, from the SD booted install.</p>
+<h2 id=configure-raspberry-pi-boot>Configure Raspberry Pi Boot <a class=anchor href=#configure-raspberry-pi-boot>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Now that the infrastucture is in place to PXE boot the Pis, it&rsquo;s time to configure the Pis themselves. I&rsquo;m assuming you&rsquo;ve got a Pi already running and configured - this can be a fresh install of Rasbian or one that&rsquo;s been running a while - it doesn&rsquo;t much matter. I performed these steps on all of my Pis, from the SD booted install.</p>
 <p>Several of the steps need to use the Pi&rsquo;s serial number, so make a note of the output:</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -176,8 +179,9 @@ vcgencmd otp_dump <span class=p>|</span> grep 28: <span class=p>|</span> sed s/.
 <span class=c1># output was: c42356f3</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=configure-eeprom>Configure EEPROM</h3>
-<p>Firstly, we need to configure the EEPROM to boot from the network - by default it will only boot from the SD card.</p>
+</div><h3 id=configure-eeprom>Configure EEPROM <a class=anchor href=#configure-eeprom>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Firstly, we need to configure the EEPROM to boot from the network - by default it will only boot from the SD card.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -233,8 +237,9 @@ sudo rpi-eeprom-update -d -f ./pieeprom-new.bin
 sudo reboot
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=copy-root-to-nfs-server>Copy Root to NFS server</h3>
-<p>Once the Pi has rebooted we need to copy the root partition to the NFS server. I created a directory in the <code>rpi-pxe</code> share for the Pi <code>rpi4-01</code> and ensured the write permissions were 777. You might need to install <code>rsync</code> using <code>sudo apt-get install rsync</code>.</p>
+</div><h3 id=copy-root-to-nfs-server>Copy Root to NFS server <a class=anchor href=#copy-root-to-nfs-server>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Once the Pi has rebooted we need to copy the root partition to the NFS server. I created a directory in the <code>rpi-pxe</code> share for the Pi <code>rpi4-01</code> and ensured the write permissions were 777. You might need to install <code>rsync</code> using <code>sudo apt-get install rsync</code>.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -260,8 +265,9 @@ sudo rsync -xa --progress --exclude /nfs / /nfs/rpi4-01/
 192.168.4.10:/volume1/rpi-tftpboot/c42356f3 /boot nfs defaults,vers<span class=o>=</span>3,proto<span class=o>=</span>tcp <span class=m>0</span> <span class=m>0</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=copy-boot-files-to-tftp-server>Copy Boot files to TFTP server</h3>
-<p>To create a bootable TFTP folder, we need to copy the contents of <code>/boot</code> to the TFTP server. To do this I simply mounted the <code>rpi-tftpboot</code> folder as an NFS share in my Pi. The Raspberry Pi 4 bootloader will look for bootable files in a folder corresponding to its serial in the TFTP root directory. In the example below I am creating a folder based on the serial and copying the boot files there. This allows a <code>cmdline.txt</code> for each Pi, which lets me specify where the root of the OS is. It also means that I can update the boot files for each Pi individually.</p>
+</div><h3 id=copy-boot-files-to-tftp-server>Copy Boot files to TFTP server <a class=anchor href=#copy-boot-files-to-tftp-server>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>To create a bootable TFTP folder, we need to copy the contents of <code>/boot</code> to the TFTP server. To do this I simply mounted the <code>rpi-tftpboot</code> folder as an NFS share in my Pi. The Raspberry Pi 4 bootloader will look for bootable files in a folder corresponding to its serial in the TFTP root directory. In the example below I am creating a folder based on the serial and copying the boot files there. This allows a <code>cmdline.txt</code> for each Pi, which lets me specify where the root of the OS is. It also means that I can update the boot files for each Pi individually.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -283,8 +289,9 @@ sudo cp -r /boot/* /nfs/pxe-tftpboot/c42356f3
 <pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=nv>console</span><span class=o>=</span>serial0,115200 <span class=nv>console</span><span class=o>=</span>tty1 <span class=nv>root</span><span class=o>=</span>/dev/nfs <span class=nv>nfsroot</span><span class=o>=</span>192.168.4.10:/volume1/rpi-pxe/rpi4-01,vers<span class=o>=</span><span class=m>3</span> rw <span class=nv>ip</span><span class=o>=</span>dhcp <span class=nv>elevator</span><span class=o>=</span>deadline rootwait
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=boot-your-pi>Boot your Pi!</h2>
-<p>All being well, you can now shutdown the Pi, remove the SD card and boot via PXE!</p>
+</div><h2 id=boot-your-pi>Boot your Pi! <a class=anchor href=#boot-your-pi>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>All being well, you can now shutdown the Pi, remove the SD card and boot via PXE!</p>
 <div class=clr-content-image-wrap>
 <a href=2020-03-09-11-19-52.png data-lightbox=2020-03-09-11-19-52.png data-title="Both root '/' and boot '/boot' are mount NFS" class=lb>
 <img class=lb src=2020-03-09-11-19-52.png alt="Both root '/' and boot '/boot' are mount NFS">

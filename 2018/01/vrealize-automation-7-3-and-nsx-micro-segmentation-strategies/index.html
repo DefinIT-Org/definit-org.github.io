@@ -162,15 +162,17 @@ Tags:
 </code></pre>
 </tr>
 </table>
-<h2 id=heading></h2>
-<p>These are some generic considerations when deploying micro-segmentation with vRealize Automation.</p>
+<h2 id=heading> <a class=anchor href=#heading>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>These are some generic considerations when deploying micro-segmentation with vRealize Automation.</p>
 <ul>
 <li>An application blueprint is designed to be deployed multiple times from vRealize Automation, the automation shouldn’t break any micro-segmentation or firewall policy when that happens.</li>
 <li>vRealize Automation blueprints can scale in and out – this should be accommodated within the micro-segmentation strategy to ensure that required micro-segmentation is the same as implemented micro-segmentation.</li>
 <li>vRealize Automation is a shared platform, so the micro-segmentation of one deployment should be limited in scope, but should also consider intra-deployment communications between applications, for example, of the same business group or tenant.</li>
 </ul>
-<h3 id=application-xyz-requirements>Application XYZ requirements</h3>
-<p>For illustration purposes, an example 3-tier application deployment is shown below &ldquo;<strong>Application XYZ</strong>&rdquo;. It consists of a Web, App and DB tier and a load balancer for the Web and App tiers.</p>
+<h3 id=application-xyz-requirements>Application XYZ requirements <a class=anchor href=#application-xyz-requirements>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>For illustration purposes, an example 3-tier application deployment is shown below &ldquo;<strong>Application XYZ</strong>&rdquo;. It consists of a Web, App and DB tier and a load balancer for the Web and App tiers.</p>
 <div id=attachment_8645 style=width:610px class="wp-caption aligncenter">
 <a href=/images/2018/01/XYZ-App.png><img class="wp-image-8645 size-definit-600-wide" src=/images/2018/01/XYZ-App.png alt="Application XYZ Allowed Flows" width=600 height=191></a>
 <p class=wp-caption-text>
@@ -370,14 +372,16 @@ Application XYZ Allowed Flows
 </tr>
 </table>
 <p>In my examples below, the application is deployed with an on-demand routed network that is backed by an NSX Logical Switch, however it should be noted that the underlying network will not affect the micro-segmentation strategy. This can be implemented on existing VLAN backed networks, on multiple routed or NAT networks within a single deployment.</p>
-<h1 id=out-of-the-box-micro-segmentation-with-vrealize-automation>Out-of-the-box micro-segmentation with vRealize Automation</h1>
-<p>Configuring micro-segmentation to be deployed as part of a blueprint and using the existing vRealize Automation integration requires the use of pre-created Security Groups and Security Policies. If an application’s network rules are well known at authoring time, is unlikely to need to be changed, and is likely to be deployed many times, this method may be a good fit.</p>
+<h1 id=out-of-the-box-micro-segmentation-with-vrealize-automation>Out-of-the-box micro-segmentation with vRealize Automation <a class=anchor href=#out-of-the-box-micro-segmentation-with-vrealize-automation>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>Configuring micro-segmentation to be deployed as part of a blueprint and using the existing vRealize Automation integration requires the use of pre-created Security Groups and Security Policies. If an application’s network rules are well known at authoring time, is unlikely to need to be changed, and is likely to be deployed many times, this method may be a good fit.</p>
 <p>Because this method pre-defines the micro-segmentation for an application, it has the advantage of being able to be pre-approved by a security team (if required) before being published.</p>
 <p>The diagram below, visualizes the strategy that will be employed to meet the micro-segmentation requirements for this particular application when deployed by vRealize Automation using out-of-the-box integration only.</p>
 <p><img src=https://www.definit.co.uk/images/2018/01/OOTB-overview.png alt></p>
 <p> </p>
-<h2 id=implementing-with-out-of-the-box-nsx-integration>Implementing with “out-of-the-box” NSX integration</h2>
-<p>Based on the out-of-the-box integration with NSX, vRealize Automation can deploy the three tiers connected to a single on-demand routed network, with the load balancer contexts on a single ESG. On top of that we can attach an on-demand Security Group (to provide the unique “deployment Security Group”) which is associated with the Global Security Policy (providing the “birth-right” infrastructure rules for VMs). We can also tag the VM tiers with existing Security Tags, allowing dynamic inclusion into tier-specific security groups.</p>
+<h2 id=implementing-with-out-of-the-box-nsx-integration>Implementing with “out-of-the-box” NSX integration <a class=anchor href=#implementing-with-out-of-the-box-nsx-integration>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Based on the out-of-the-box integration with NSX, vRealize Automation can deploy the three tiers connected to a single on-demand routed network, with the load balancer contexts on a single ESG. On top of that we can attach an on-demand Security Group (to provide the unique “deployment Security Group”) which is associated with the Global Security Policy (providing the “birth-right” infrastructure rules for VMs). We can also tag the VM tiers with existing Security Tags, allowing dynamic inclusion into tier-specific security groups.</p>
 <p>There is no out-of-the-box method to control access to the Load Balancer IPs – you cannot apply Security Tags or Groups to the Load Balancer using the Blueprint Designer. When you create an On-demand Security Group, vRealize Automation will place the Load Balancer’s IP address into a IPSet – however there is no way to add these IPSets to the Security Policies dynamically. This means that manual intervention, or automation post deployment, is required to add the IPSet to the correct load balancer.</p>
 <p>The following settings and components must be pre-created:</p>
 <ul>
@@ -386,8 +390,9 @@ Application XYZ Allowed Flows
 <li>A Security Tag for each application tier (excluding load balancers)</li>
 <li>A Security Policy for each application tier<a name=_Toc501097107></a></li>
 </ul>
-<h3 id=configure-security-tags-and-groups>Configure Security Tags and Groups</h3>
-<p>The Security Tags and Groups to manage the intra-tier communication must be pre-created prior to deploying the blueprint. The application tier Security Groups dynamically include the relevant Security Tag.</p>
+<h3 id=configure-security-tags-and-groups>Configure Security Tags and Groups <a class=anchor href=#configure-security-tags-and-groups>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>The Security Tags and Groups to manage the intra-tier communication must be pre-created prior to deploying the blueprint. The application tier Security Groups dynamically include the relevant Security Tag.</p>
 <p>The Load Balancer Security Groups shown below will be used later to identify the Load Balancer VIPs.</p>
 <div id=attachment_8648 style=width:278px class="wp-caption aligncenter">
 <a href=/images/2018/01/OOTB-SecurityGroups.png><img class="wp-image-8648 size-full" src=/images/2018/01/OOTB-SecurityGroups.png alt="Application XYZ's Security Groups" width=268 height=136></a>
@@ -407,8 +412,9 @@ Application XYZ's Security Tags
 XYZ - Web Security Group dynamic membership
 </p>
 </div>
-<h3 id=configure-security-policies>Configure Security Policies</h3>
-<p>A Security Policy with Firewall Rules defined for each application tier needs to be created, to control the traffic between application tiers.</p>
+<h3 id=configure-security-policies>Configure Security Policies <a class=anchor href=#configure-security-policies>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>A Security Policy with Firewall Rules defined for each application tier needs to be created, to control the traffic between application tiers.</p>
 <p>The order that the Security Policies are configured is important, as the firewall rules of lower ranked policies will be processed before higher ranked ones.</p>
 <div id=attachment_8652 style=width:610px class="wp-caption aligncenter">
 <a href=/images/2018/01/OOTB-SecurityPolicies.png><img class="wp-image-8652 size-definit-600-wide" src=/images/2018/01/OOTB-SecurityPolicies.png alt="Application XYZ's Security Policies" width=600 height=93></a>
@@ -481,8 +487,9 @@ XYZ - App Tier Security Policy - Firewall Rules
 XYZ - DB Tier Security Policy - Firewall Rules
 </p>
 </div>
-<h3 id=configure-app-isolation>Configure App Isolation</h3>
-<p>Enabling App Isolation for the blueprint ensures that a default policy isolates the deployment by creating an App Isolation Security Policy which applies some default firewall rules.</p>
+<h3 id=configure-app-isolation>Configure App Isolation <a class=anchor href=#configure-app-isolation>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Enabling App Isolation for the blueprint ensures that a default policy isolates the deployment by creating an App Isolation Security Policy which applies some default firewall rules.</p>
 <div id=attachment_8658 style=width:610px class="wp-caption aligncenter">
 <a href=/images/2018/01/OOTB-AppIsolation.png><img class="size-definit-600-wide wp-image-8658" src=/images/2018/01/OOTB-AppIsolation.png alt="Configuring App Isolation on a Blueprint" width=600 height=183></a>
 <p class=wp-caption-text>
@@ -498,8 +505,9 @@ App Isolation Firewall Rules
 <p style=padding-left:30px>
 <span style=color:#999><strong>Note</strong>: The App Isolation rules block traffic to and from the deployed VMs and load balancers in the deployment, but does not block traffic between the members of the application deployment. To ensure micro-segmentation, the additional rules configured in the Security Policies above are required to block traffic between members.</span>
 </p>
-<h3 id=on-demand-security-group>On-demand Security Group</h3>
-<p>To enable the global infrastructure rules, an on-demand Security Group is added to the blueprint and associated with the “Global” Security Policy, which defines the rules which will apply to all servers in the deployment. Different Security Policies could be used for particular environments (such as Production, Development etc.) or for specific Tenants or Business Groups.</p>
+<h3 id=on-demand-security-group>On-demand Security Group <a class=anchor href=#on-demand-security-group>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>To enable the global infrastructure rules, an on-demand Security Group is added to the blueprint and associated with the “Global” Security Policy, which defines the rules which will apply to all servers in the deployment. Different Security Policies could be used for particular environments (such as Production, Development etc.) or for specific Tenants or Business Groups.</p>
 <div id=attachment_8660 style=width:610px class="wp-caption aligncenter">
 <a href=/images/2018/01/OOTB-OnDemandSecurityGroup.png><img class="size-definit-600-wide wp-image-8660" src=/images/2018/01/OOTB-OnDemandSecurityGroup.png alt="On-demand security group XYZ added to the blueprint" width=600 height=159></a>
 <p class=wp-caption-text>
@@ -512,8 +520,9 @@ On-demand security group XYZ added to the blueprint
 On-demand security group XYZ with the Global security policy assigned
 </p>
 </div>
-<h3 id=assigning-security-tags>Assigning Security Tags</h3>
-<p>The Security Tags that were pre-created for each tier are added to the blueprint: when VMs are deployed from each tier they will be tagged with the appropriate tag, and can be dynamically included into a Security Group.</p>
+<h3 id=assigning-security-tags>Assigning Security Tags <a class=anchor href=#assigning-security-tags>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>The Security Tags that were pre-created for each tier are added to the blueprint: when VMs are deployed from each tier they will be tagged with the appropriate tag, and can be dynamically included into a Security Group.</p>
 <div id=attachment_8662 style=width:610px class="wp-caption aligncenter">
 <a href=/images/2018/01/OOTB-BlueprintWithTags.png><img class="size-definit-600-wide wp-image-8662" src=/images/2018/01/OOTB-BlueprintWithTags.png alt="Existing security tags assigned to the blueprint" width=600 height=166></a>
 <p class=wp-caption-text>
@@ -526,8 +535,9 @@ Existing security tags assigned to the blueprint
 Web tier VM security configuration
 </p>
 </div>
-<h3 id=requirements-met-by-ootb-nsx-integration>Requirements met by OOTB NSX integration</h3>
-<p>When the blueprint is deployed by vRealize Automation, the following is configured:</p>
+<h3 id=requirements-met-by-ootb-nsx-integration>Requirements met by OOTB NSX integration <a class=anchor href=#requirements-met-by-ootb-nsx-integration>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>When the blueprint is deployed by vRealize Automation, the following is configured:</p>
 <ul>
 <li>Five tier VMs are deployed (Figure 20)
 <ul>
@@ -583,16 +593,19 @@ vRealize created Security Groups
 Security Policy deployed rules
 </p>
 </div>
-<h3 id=manualautomation-steps-to-complete-the-solution>Manual/Automation steps to complete the solution</h3>
-<p>To complete the solution and meet the Application XYZ firewall requirements, the following step needs to be completed, either manually or through automation:</p>
+<h3 id=manualautomation-steps-to-complete-the-solution>Manual/Automation steps to complete the solution <a class=anchor href=#manualautomation-steps-to-complete-the-solution>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>To complete the solution and meet the Application XYZ firewall requirements, the following step needs to be completed, either manually or through automation:</p>
 <ul>
 <li>The IPSets created for the Web Load Balancer and App Load Balancer need to be added to the respective Security Groups.</li>
 </ul>
-<h3 id=caveat-emptor>Caveat Emptor</h3>
-<p>Using <strong>just</strong> the out of the box automation has an issue, allowed traffic between tiers is not segmented when the blueprint is deployed multiple times - strictly speaking it is <strong>not</strong> micro-segmented because there is nothing preventing, for example, the Web tier servers in Deployment 1 acccessing the App Load Balancer in Deployment 2. This can be easily mitigated using Edge Firewall, or additional Distributed Firewall rules, just not using the ”out-of-the-box” integrations.</p>
+<h3 id=caveat-emptor>Caveat Emptor <a class=anchor href=#caveat-emptor>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Using <strong>just</strong> the out of the box automation has an issue, allowed traffic between tiers is not segmented when the blueprint is deployed multiple times - strictly speaking it is <strong>not</strong> micro-segmented because there is nothing preventing, for example, the Web tier servers in Deployment 1 acccessing the App Load Balancer in Deployment 2. This can be easily mitigated using Edge Firewall, or additional Distributed Firewall rules, just not using the ”out-of-the-box” integrations.</p>
 <p><img src=https://www.definit.co.uk/images/2018/01/OOTB-Issues.png alt></p>
-<h1 id=day-2-micro-segmentation-with-vrealize-automation>Day-2 Micro-segmentation with vRealize Automation</h1>
-<p>Enabling micro-segmentation as a day 2 resource action assumes that the deployment does not have Security Groups or Tags applied as part of the blueprint. The firewall policy is then applied using a series of resource actions to configure the necessary Security Groups and Distributed Firewall Rules.</p>
+<h1 id=day-2-micro-segmentation-with-vrealize-automation>Day-2 Micro-segmentation with vRealize Automation <a class=anchor href=#day-2-micro-segmentation-with-vrealize-automation>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>Enabling micro-segmentation as a day 2 resource action assumes that the deployment does not have Security Groups or Tags applied as part of the blueprint. The firewall policy is then applied using a series of resource actions to configure the necessary Security Groups and Distributed Firewall Rules.</p>
 <p>This approach has the advantage of being flexible, each deployment can be configured with unique firewall rules and those rules can be reconfigured at any point without affecting other deployments.</p>
 <div id=attachment_8676 style=width:610px class="wp-caption aligncenter">
 <a href=/images/2018/01/Day2-Blueprint.png><img class="size-definit-600-wide wp-image-8676" src=/images/2018/01/Day2-Blueprint.png alt="Application XYZ blueprint with no security configured" width=600 height=130></a>
@@ -607,16 +620,18 @@ Application XYZ blueprint with no security configured
 Day 2 Actions Micro-segmentation Strategy
 </p>
 </div>
-<h2 id=implementing-micro-segmentation-with-resource-actions> Implementing micro-segmentation with Resource Actions</h2>
-<p>The automation workflows detailed below would enable a “minimally viable product” for authorised end users to configure micro-segmentation for a deployment.</p>
+<h2 id=implementing-micro-segmentation-with-resource-actions> Implementing micro-segmentation with Resource Actions <a class=anchor href=#implementing-micro-segmentation-with-resource-actions>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The automation workflows detailed below would enable a “minimally viable product” for authorised end users to configure micro-segmentation for a deployment.</p>
 <div id=attachment_8678 style=width:610px class="wp-caption aligncenter">
 <a href=/images/2018/01/Day2-Actions.png><img class="size-definit-600-wide wp-image-8678" src=/images/2018/01/Day2-Actions.png alt="Example Actions configured on a Deployment" width=600 height=147></a>
 <p class=wp-caption-text>
 Example Actions configured on a Deployment
 </p>
 </div>
-<h3 id=configure-security-policy>Configure Security Policy</h3>
-<p>A Security Policy needs to be manually created, with Firewall Rules defined to allow access to infrastructure services. To ensure that the firewall policies are placed above the rules deployed using resource actions, the Security Policy should be configured with a high weight (under Advanced Options).</p>
+<h3 id=configure-security-policy>Configure Security Policy <a class=anchor href=#configure-security-policy>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>A Security Policy needs to be manually created, with Firewall Rules defined to allow access to infrastructure services. To ensure that the firewall policies are placed above the rules deployed using resource actions, the Security Policy should be configured with a high weight (under Advanced Options).</p>
 <div id=attachment_8651 style=width:610px class="wp-caption aligncenter">
 <a href=/images/2018/01/GlobalSecurityPolicy.png><img class="size-definit-600-wide wp-image-8651" src=/images/2018/01/GlobalSecurityPolicy.png alt="Firewall rules defined in the Global security policy" width=600 height=146></a>
 <p class=wp-caption-text>
@@ -626,8 +641,9 @@ Firewall rules defined in the Global security policy
 <p style=padding-left:30px>
 <span style=color:gray><strong>Note</strong>: In Service Composer under Security Polices, Global Settings, the Firewall Rules Applied To setting should specify “Policy’s Security Groups” to ensure the Policy is not applied to the entire Distributed Firewall. It should also be noted that with the use of Service Composer, either the source or destination <strong>must be</strong> “Policy’s Security Groups”</span>
 </p>
-<h3 id=prepare-deployment-for-micro-segmentation>Prepare Deployment for Micro-segmentation</h3>
-<p>This action sets up all of the components for the micro-segmentation.</p>
+<h3 id=prepare-deployment-for-micro-segmentation>Prepare Deployment for Micro-segmentation <a class=anchor href=#prepare-deployment-for-micro-segmentation>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>This action sets up all of the components for the micro-segmentation.</p>
 <ul>
 <li>Creates an IPSet for all load balancer IPs</li>
 <li>Creates the deployment Security Group, and adds all VMs and load balancer IPSets</li>
@@ -665,8 +681,9 @@ Distributed Firewall Section with Default Deny
 Security Policy firewall rules applied to the deployment group
 </p>
 </div>
-<h3 id=create-security-groups>Create Security Groups</h3>
-<p>This action creates the application tier Security Groups and adds VMs - it&rsquo;s run multiple times to create the required Security Groups</p>
+<h3 id=create-security-groups>Create Security Groups <a class=anchor href=#create-security-groups>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>This action creates the application tier Security Groups and adds VMs - it&rsquo;s run multiple times to create the required Security Groups</p>
 <ul>
 <li>Create a new Security Group</li>
 <li>Add selected VMs and Load Balancer IPs from the deployment to the Security Group</li>
@@ -677,8 +694,9 @@ Security Policy firewall rules applied to the deployment group
 Application tier and load balancer Security Groups created
 </p>
 </div>
-<h3 id=create-firewall-rules>Create Firewall Rules</h3>
-<p>This action creates a new firewall rule at the top of the deployment’s distributed firewall section. It can be run many times to build up the rule sets and uses the Security Groups created by the previous workflow, as well as other pre-existing Security Groups.</p>
+<h3 id=create-firewall-rules>Create Firewall Rules <a class=anchor href=#create-firewall-rules>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>This action creates a new firewall rule at the top of the deployment’s distributed firewall section. It can be run many times to build up the rule sets and uses the Security Groups created by the previous workflow, as well as other pre-existing Security Groups.</p>
 <ul>
 <li>Create a new distributed firewall rule</li>
 </ul>
@@ -688,8 +706,9 @@ Application tier and load balancer Security Groups created
 Created rule set
 </p>
 </div>
-<h3 id=enabledisable-micro-segmentation>Enable/Disable Micro-segmentation</h3>
-<p>This action toggles the default Deny rule between enabled and disabled.</p>
+<h3 id=enabledisable-micro-segmentation>Enable/Disable Micro-segmentation <a class=anchor href=#enabledisable-micro-segmentation>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>This action toggles the default Deny rule between enabled and disabled.</p>
 <ul>
 <li>Update the default deny rule with the enabled flag</li>
 </ul>
@@ -699,23 +718,29 @@ Created rule set
 Default Deny rule enabled
 </p>
 </div>
-<h3 id=additional-automation>Additional Automation</h3>
-<p>In addition to the automation required for an MVP, the following functionality would be required to allow an end user to manage the micro-segmentation and enable &ldquo;firewall-as-a-service&rdquo;</p>
-<h4 id=resource-actions>Resource Actions</h4>
-<ul>
+<h3 id=additional-automation>Additional Automation <a class=anchor href=#additional-automation>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>In addition to the automation required for an MVP, the following functionality would be required to allow an end user to manage the micro-segmentation and enable &ldquo;firewall-as-a-service&rdquo;</p>
+<h4 id=resource-actions>Resource Actions <a class=anchor href=#resource-actions>
+<i class="fas fa-hashtag"></i>
+</a></h4><ul>
 <li>Edit, Update and Delete a Security Group</li>
 <li>Edit, Update and Delete a Firewall Rule</li>
 <li>Create IPSets</li>
 <li>Remove Micro-segmentation</li>
 </ul>
-<h4 id=scale-inout>Scale in/out</h4>
-<p>In order to facilitate the scale in and out of deployments the Prepare Deployment for Micro-Segmentation workflow would need to be run again, this would ensure all components are added to the Deployment Security Group. In addition to this, the components would need to be added to the relevant application tier groups using the edit/update functionality described above.</p>
-<h4 id=post-destroy-clean-up>Post destroy clean-up</h4>
-<p>Using the Event Broker to subscribe to the Deployment “Destroy” operation the “Remove Micro-segmentation” workflow can be triggered to clean up any created NSX objects before destroying the deployment.</p>
-<h1 id=conclusions>Conclusions</h1>
-<p>The distributed firewall strategy should be applied consistently, whether it’s implemented at deploy-time through the vRealize Automation blueprint and XaaS components, or implemented as a day 2 actions. However, there are advantages and dis-advantages to both methods. There are undoubtedly many variations of these two strategies, and in reality a mixture of both are likely to be required. Careful planning and testing should be carried out to ensure the outcome matches the requirements.</p>
-<h2 id=comparing-out-of-the-box-and-day-2-micro-segmentation>Comparing “out of the box” and Day 2 micro-segmentation</h2>
-<p>Below is a non-exhausive comparison of some of the advantages and disadvantages of these methods.</p>
+<h4 id=scale-inout>Scale in/out <a class=anchor href=#scale-inout>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>In order to facilitate the scale in and out of deployments the Prepare Deployment for Micro-Segmentation workflow would need to be run again, this would ensure all components are added to the Deployment Security Group. In addition to this, the components would need to be added to the relevant application tier groups using the edit/update functionality described above.</p>
+<h4 id=post-destroy-clean-up>Post destroy clean-up <a class=anchor href=#post-destroy-clean-up>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Using the Event Broker to subscribe to the Deployment “Destroy” operation the “Remove Micro-segmentation” workflow can be triggered to clean up any created NSX objects before destroying the deployment.</p>
+<h1 id=conclusions>Conclusions <a class=anchor href=#conclusions>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>The distributed firewall strategy should be applied consistently, whether it’s implemented at deploy-time through the vRealize Automation blueprint and XaaS components, or implemented as a day 2 actions. However, there are advantages and dis-advantages to both methods. There are undoubtedly many variations of these two strategies, and in reality a mixture of both are likely to be required. Careful planning and testing should be carried out to ensure the outcome matches the requirements.</p>
+<h2 id=comparing-out-of-the-box-and-day-2-micro-segmentation>Comparing “out of the box” and Day 2 micro-segmentation <a class=anchor href=#comparing-out-of-the-box-and-day-2-micro-segmentation>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Below is a non-exhausive comparison of some of the advantages and disadvantages of these methods.</p>
 <table width=100%>
 <tr>
 <td width=315>
@@ -808,8 +833,9 @@ Configuration is on a “per blueprint” basis, and changing the Security Polic
 </code></pre>
 </tr>
 </table>
-<h2 id=performance-and-scale>Performance and Scale</h2>
-<p>There are performance and scale limitations that need to be considered when deciding on the micro-segmentation strategy – particular attention should be paid to the configuration maximums published for NSX 6.3 (<a href=https://docs.vmware.com/en/VMware-NSX-for-vSphere/6.3/NSX%20for%20vSphere%20Recommended%20Configuration%20Maximums_63.pdf)>https://docs.vmware.com/en/VMware-NSX-for-vSphere/6.3/NSX%20for%20vSphere%20Recommended%20Configuration%20Maximums_63.pdf)</a>. Due to the nature of automation the configuration maximums could be exceeded.</p>
+<h2 id=performance-and-scale>Performance and Scale <a class=anchor href=#performance-and-scale>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>There are performance and scale limitations that need to be considered when deciding on the micro-segmentation strategy – particular attention should be paid to the configuration maximums published for NSX 6.3 (<a href=https://docs.vmware.com/en/VMware-NSX-for-vSphere/6.3/NSX%20for%20vSphere%20Recommended%20Configuration%20Maximums_63.pdf)>https://docs.vmware.com/en/VMware-NSX-for-vSphere/6.3/NSX%20for%20vSphere%20Recommended%20Configuration%20Maximums_63.pdf)</a>. Due to the nature of automation the configuration maximums could be exceeded.</p>
 <p>For example, with a single deployment of a single application blueprint the out-of-the-box method using Security Policies generates a lot more firewall rules than the Day 2 method. The Day 2 method will generate the same number of rules for every deployment and could quickly multiply. The out-of-the-box method only adds a single rule to the App Isolation policy for each subsequent deployment.</p>
 <h6>Share this post</h6>
 <span class=share-box>

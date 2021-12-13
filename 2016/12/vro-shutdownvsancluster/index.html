@@ -117,8 +117,9 @@ Tags:
 <li>All the running VMs on the cluster should be shut down before the hosts attempt to go into maintenance mode.</li>
 <li>I want a &ldquo;what if&rdquo; option, to see what the workflow would do if I ran it, without actually executing the shutdown - it&rsquo;s largely for development purposes, but the power down/power on cycle takes a good half hour and I don&rsquo;t want to waste time on a typo!</li>
 </ul>
-<h2 id=shutdownvsancluster-workflowhttpswwwdefinitcoukimages2016122016-12-30_12-56-26-1024x330png>shutdownVSANCluster workflow<img src=https://www.definit.co.uk/images/2016/12/2016-12-30_12-56-26-1024x330.png alt></h2>
-<p>The single input for the workflow is the cluster name, as a string. I&rsquo;ll step through each of the items in the workflow and just give a brief overview - most of the items are from the vCenter or generic libraries, with a few custom steps (in red) of my own.</p>
+<h2 id=shutdownvsancluster-workflowhttpswwwdefinitcoukimages2016122016-12-30_12-56-26-1024x330png>shutdownVSANCluster workflow<img src=https://www.definit.co.uk/images/2016/12/2016-12-30_12-56-26-1024x330.png alt> <a class=anchor href=#shutdownvsancluster-workflowhttpswwwdefinitcoukimages2016122016-12-30_12-56-26-1024x330png>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The single input for the workflow is the cluster name, as a string. I&rsquo;ll step through each of the items in the workflow and just give a brief overview - most of the items are from the vCenter or generic libraries, with a few custom steps (in red) of my own.</p>
 <ul>
 <li><span style=color:red><strong>getClusterByName</strong></span> - this is a custom action I have written that takes a string name of the cluster and returns a VC:ClusterComputeResource object of the cluster.</li>
 <li><strong>getAllVMsOfCluster</strong> - takes the cluster object and returns an array of VC:VirtualMachines that are hosted by the cluster.</li>
@@ -140,13 +141,16 @@ Tags:
 <li><strong>Send notification</strong> - sends an email notification of success</li>
 <li><strong>Default error handler</strong> - sends an email notification of failure</li>
 </ul>
-<h2 id=orgdefinitlabmanagement-package-contents>org.definit.labManagement Package Contents</h2>
-<p>The package is available on my github page, along with the individual workflows and actions</p>
+<h2 id=orgdefinitlabmanagement-package-contents>org.definit.labManagement Package Contents <a class=anchor href=#orgdefinitlabmanagement-package-contents>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The package is available on my github page, along with the individual workflows and actions</p>
 <p><a href=https://github.com/sammcgeown/org.definit.labmanagement>org.definit.labmanagement</a></p>
-<h3 id=workflows>Workflows</h3>
-<img class="size-full wp-image-7923 alignnone" src=/images/2016/12/2016-12-30_13-11-17.png alt width=454 height=81>
-<h3 id=actions>Actions</h3>
-<img class="size-full wp-image-7924 alignnone" src=/images/2016/12/2016-12-30_13-12-43.png alt width=549 height=50>
+<h3 id=workflows>Workflows <a class=anchor href=#workflows>
+<i class="fas fa-hashtag"></i>
+</a></h3><img class="size-full wp-image-7923 alignnone" src=/images/2016/12/2016-12-30_13-11-17.png alt width=454 height=81>
+<h3 id=actions>Actions <a class=anchor href=#actions>
+<i class="fas fa-hashtag"></i>
+</a></h3><img class="size-full wp-image-7924 alignnone" src=/images/2016/12/2016-12-30_13-12-43.png alt width=549 height=50>
 <h6>Share this post</h6>
 <span class=share-box>
 <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2016%2f12%2fvro-shutdownvsancluster%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-facebook-official"></i></a>

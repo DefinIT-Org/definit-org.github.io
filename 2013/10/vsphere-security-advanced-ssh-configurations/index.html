@@ -115,17 +115,20 @@ Tags:
 </div>
 <p><img src=https://www.definit.co.uk/images/2013/10/Security-Guard_thumb2_thumb.png alt>There are different schools of thought as to whether you should have SSH enabled on your hosts. VMware recommend it is disabled. With SSH disabled there is no possibility of attack, so that’s the “most secure” option. Of course in the real world there’s a balance between “most secure” and “usability” (e.g. the most secure host is powered off and physically isolated from the network, but you can’t run any workloads <img class="wlEmoticon wlEmoticon-winkingsmile" alt="Winking smile" src=/images/2013/10/wlEmoticon-winkingsmile.png>). My preferred route is to have it enabled but locked down.</p>
 <p><strong>Note</strong>: VMware use the term “ESXi Shell”, most of us would term it “SSH” – the two are used interchangeably in this article although there is a slight difference. You can have the ESXi Shell enabled but SSH disabled – this means you can access the shell via the DCUI. For the sake of this article assume ESXi Shell and SSH are the same.</p>
-<h4 id=enable-or-disable-ssh>Enable or disable SSH</h4>
-<p>This is by far the most blogged about topic on SSH with ESXi - I’ll refer you to the documentation rather than repeat!</p>
+<h4 id=enable-or-disable-ssh>Enable or disable SSH <a class=anchor href=#enable-or-disable-ssh>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>This is by far the most blogged about topic on SSH with ESXi - I’ll refer you to the documentation rather than repeat!</p>
 <p><a href="http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2004746" target=_blank>Using ESXi Shell in ESXi 5.x</a></p>
-<h4 id=disable-the-ssh-for-the-host-has-been-enabled-warning>Disable the “SSH for the host has been enabled” warning</h4>
-<p><a href=/images/2013/10/image5.png rel=lightbox><img style=background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border:0 title=image alt=image src=/images/2013/10/image_thumb5.png width=644 height=33 border=0></a></p>
+<h4 id=disable-the-ssh-for-the-host-has-been-enabled-warning>Disable the “SSH for the host has been enabled” warning <a class=anchor href=#disable-the-ssh-for-the-host-has-been-enabled-warning>
+<i class="fas fa-hashtag"></i>
+</a></h4><p><a href=/images/2013/10/image5.png rel=lightbox><img style=background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border:0 title=image alt=image src=/images/2013/10/image_thumb5.png width=644 height=33 border=0></a></p>
 <p>VMware don’t want you to leave SSH enabled, so by default vSphere will alert you to the fact that it is. If your design decision is to enable SSH but you don’t want the warning, set the advanced setting “SuppressShellWarning”  to a value of 1.</p>
 <p><a href=/images/2013/10/image6.png rel=lightbox><img style=background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border:0 title=image alt=image src=/images/2013/10/image_thumb6.png width=591 height=109 border=0></a></p>
 <p>To configure via PowerCLI:</p>
 <pre class="brush: powershell; gutter: false">Get-VMHost esxi01.definit.local | Get-AdvancedSetting -Name &#039;UserVars.SuppressShellWarning’ | Set-AdvancedSetting -Value "1" -Confirm:$false</pre>
-<h4 id=restrict-ssh-access-by-ip-address>Restrict SSH access by IP address</h4>
-<p>Using the ESXi firewall it’s possible to restrict access to SSH (and other services) based on the IP address of the client. You can enter IP addresses in the following formats: 192.168.0.0/24, 192.168.1.2, 2001::1/64, or fd3e:29a6:0a81:e478::/64. From Manage tab on a host you can open the Security Profile page and edit the firewall. Select the SSH Server rule and modify the allowed connections:</p>
+<h4 id=restrict-ssh-access-by-ip-address>Restrict SSH access by IP address <a class=anchor href=#restrict-ssh-access-by-ip-address>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Using the ESXi firewall it’s possible to restrict access to SSH (and other services) based on the IP address of the client. You can enter IP addresses in the following formats: 192.168.0.0/24, 192.168.1.2, 2001::1/64, or fd3e:29a6:0a81:e478::/64. From Manage tab on a host you can open the Security Profile page and edit the firewall. Select the SSH Server rule and modify the allowed connections:</p>
 <p><a href=/images/2013/10/image7.png rel=lightbox><img style=background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border:0 title=image alt=image src=/images/2013/10/image_thumb7.png width=644 height=438 border=0></a></p>
 <p>To configure this via PowerCLI you need to use the Get-EsxCli command:</p>
 <pre class="brush: powershell; gutter: false">$EsxCli = Get-EsxCli –VMhost esx01.definit.local
@@ -133,13 +136,15 @@ $EsxCli.network.firewall.ruleset.allowedip.list(“sshServer”) # Returns the c
 $EsxCli.network.firewall.ruleset.set($false, $true, "sshServer") # Sets “AllowedAll” to $false, “Enabled” to $true on rule set “sshServer”
 $EsxCli.network.firewall.ruleset.allowedip.add("192.168.1.20", "sshServer") # Adds “192.168.1.20” to the AllowedIPAddresses ruleset – if you have multiple IPs to add you can repeat this line
 $EsxCli.network.firewall.refresh() # Reloads the firewall rules</pre>
-<h4 id=ssh-timeouts>SSH Timeouts</h4>
-<p>From ESXi 5.1 up there you can configure two timeout settings for the ESXi Shell (SSH). The first “ESXiShellTimeOut” controls the service, and is useful if you enable SSH temporarily, but then forget to disable it (because we’re all busy, right?) The second setting, “ESXiShellInteractiveTimeOut” sets the session timeout for SSH – so if you leave your SSH client logged in and the timeout is set it will end your session and disconnect you. By default, both of these settings have a value of “0” which disables the timeout. The value is in seconds.</p>
+<h4 id=ssh-timeouts>SSH Timeouts <a class=anchor href=#ssh-timeouts>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>From ESXi 5.1 up there you can configure two timeout settings for the ESXi Shell (SSH). The first “ESXiShellTimeOut” controls the service, and is useful if you enable SSH temporarily, but then forget to disable it (because we’re all busy, right?) The second setting, “ESXiShellInteractiveTimeOut” sets the session timeout for SSH – so if you leave your SSH client logged in and the timeout is set it will end your session and disconnect you. By default, both of these settings have a value of “0” which disables the timeout. The value is in seconds.</p>
 <p><a href=/images/2013/10/image8.png rel=lightbox><img style=background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border:0 title=image alt=image src=/images/2013/10/image_thumb8.png width=593 height=140 border=0></a>__</p>
 <p>To set these by PowerCLI use the Set-AdvancedSetting cmdlet – in the below example I set the ESXiShellInteractiveTimeout to 5 minutes on the host esx01:</p>
 <pre class="brush: powershell; gutter: false">Get-VMHost esxi01.definit.local | Get-AdvancedSetting -Name &#039;UserVars.ESXiShellInteractiveTimeout&#039; | Set-AdvancedSetting -Value "300" -Confirm:$false</pre>
-<h4 id=use-publicprivate-keys-to-authenticate-ssh>Use public/private keys to authenticate SSH</h4>
-<p>It’s possible to use a public/private key pair to authenticate SSH connections to an ESXi host and allow password-less connections. Just because it’s possible, doesn’t mean you should! Bear in mind that if your private key is compromised then an attacker can gain full root access to a host without needing a password.</p>
+<h4 id=use-publicprivate-keys-to-authenticate-ssh>Use public/private keys to authenticate SSH <a class=anchor href=#use-publicprivate-keys-to-authenticate-ssh>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>It’s possible to use a public/private key pair to authenticate SSH connections to an ESXi host and allow password-less connections. Just because it’s possible, doesn’t mean you should! Bear in mind that if your private key is compromised then an attacker can gain full root access to a host without needing a password.</p>
 <p>I used PuTTYGen to generate an SSH-2 RSA public/private key pair without a passphrase and save the public and private keys. I now have two files, id_rsa.pub (the public key) and id_rsa.ppk (the private key). You need to edit the id_rsa.pub file to remove the first two lines, the last line, and remove any line breaks. You also need to insert “ssh-rsa “ at the beginning (<a href=http://www.walkernews.net/2009/03/22/how-to-fix-server-refused-our-key-error-that-caused-by-putty-generated-rsa-public-key/ target=_blank>credit to Walkernews.net for this</a>)</p>
 <p>It’s easier to show you the file goes from this format:</p>
 <p><a href=/images/2013/10/image9.png rel=lightbox><img style=background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border:0 title=image alt=image src=/images/2013/10/image_thumb9.png width=527 height=132 border=0></a></p>
@@ -150,8 +155,9 @@ $EsxCli.network.firewall.refresh() # Reloads the firewall rules</pre>
 <pre class="brush: bash; gutter: false">cat /tmp/id_rsa.pub &gt;&gt; /etc/ssh/keys-root/authorized_keys</pre>
 <p><strong>Note</strong>: the /keys-root/ folder could be any other user ID on the host, so if you had a user “sam” then you would use /keys-sam/</p>
 <p>If you create the private key with a password, then you will get prompted for the password when you connect. This could be used to create more secure connections to the host (i.e. you need the username, private key and the password to connect rather than just a username and password), but would create quite an administrative burden.</p>
-<h4 id=my-ssh-settings>My SSH Settings</h4>
-<p>How you configure your hosts for SSH is entirely down to you and your security policy – these are the settings that I use based off of my security policy and accepted risks (I in no way provide guarantee or warrantee for these settings! Do your research – I accept no liability!)</p>
+<h4 id=my-ssh-settings>My SSH Settings <a class=anchor href=#my-ssh-settings>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>How you configure your hosts for SSH is entirely down to you and your security policy – these are the settings that I use based off of my security policy and accepted risks (I in no way provide guarantee or warrantee for these settings! Do your research – I accept no liability!)</p>
 <p>These settings can all be manually set, built into host profiles, or you could use a PowerCLI script to configure them if licensing doesn’t allow.</p>
 <ul>
 <li>Enable SSH – the ease of access when troubleshooting or repairing a host.</li>

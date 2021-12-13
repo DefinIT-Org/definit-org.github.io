@@ -117,22 +117,25 @@ Tags:
 <p>Import-Module –Name WebAdministration</p>
 <p>Get-Command –PSSnapin WebAdministration</p>
 </blockquote>
-<h3 id=creating-a-new-ftp-site>Creating a new FTP site</h3>
-<p>This is very, very simple with PowerShell</p>
+<h3 id=creating-a-new-ftp-site>Creating a new FTP site <a class=anchor href=#creating-a-new-ftp-site>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>This is very, very simple with PowerShell</p>
 <blockquote>
 <p>New-WebFtpSite -Name &lsquo;FTP Site&rsquo; -IPAddress &lsquo;192.168.10.22&rsquo; -HostHeader &lsquo;ftp.mcgeown.co.uk&rsquo; -PhysicalPath &rsquo;d:\FTP\</p>
 </blockquote>
 <p><img src=https://www.definit.co.uk/images/2010/11/image_thumb26.png alt></p>
 <p>A good start then!</p>
 <p>By default, the site will allow any IP address to access the server – it’s time to start locking it down.</p>
-<h3 id=allow-authorised-users>Allow Authorised Users</h3>
-<blockquote>
+<h3 id=allow-authorised-users>Allow Authorised Users <a class=anchor href=#allow-authorised-users>
+<i class="fas fa-hashtag"></i>
+</a></h3><blockquote>
 <ol>
 <li><a href=http://technet.microsoft.com/en-us/library/ee807834.aspx target=_blank>Add-WebConfiguration</a> -Filter <span style=color:#004000>/system.ftpserver</span><span style=color:green>/security</span><span style=color:#80ff00>/authorization</span> -PSPath &lsquo;IIS:' -<span style=color:#8000ff>Value @{accessType=&lsquo;Allow&rsquo;;users='*';permissions=3}</span> <span style=color:#f0f>-Location &lsquo;FTP Site&rsquo;</span></li>
 </ol>
 </blockquote>
-<h3 id=restricting-ip-access>Restricting IP Access</h3>
-<p>Unfortunately the IP Address Restrictions part of the configuration isn’t exposed directly by a cmdlet so I thought I’d use one or two of the lower level IIS configuration cmdlets – <a href=http://technet.microsoft.com/en-us/library/ee807834.aspx target=_blank>Add-WebConfiguration</a>, and <a href=http://technet.microsoft.com/en-us/library/ee807821.aspx target=_blank>Set-WebConfigurationProperty</a>. And after a lot of fiddling and a lot of help by a colleague, I stumbled upon the correct syntax:</p>
+<h3 id=restricting-ip-access>Restricting IP Access <a class=anchor href=#restricting-ip-access>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Unfortunately the IP Address Restrictions part of the configuration isn’t exposed directly by a cmdlet so I thought I’d use one or two of the lower level IIS configuration cmdlets – <a href=http://technet.microsoft.com/en-us/library/ee807834.aspx target=_blank>Add-WebConfiguration</a>, and <a href=http://technet.microsoft.com/en-us/library/ee807821.aspx target=_blank>Set-WebConfigurationProperty</a>. And after a lot of fiddling and a lot of help by a colleague, I stumbled upon the correct syntax:</p>
 <blockquote>
 <ol start=2>
 <li>
@@ -158,8 +161,9 @@ Tags:
 &lt;/<span style=color:#004000>system.ftpServer</span>><br>
 &lt;/<span style=color:#f0f>location</span>></p>
 </blockquote>
-<h3 id=scripting-the-whole-thing>Scripting the whole thing</h3>
-<p>I’ve created two files, Add-AllowedIPs.ps1 and AllowedIPs.config. The config file is just an XML structure with the allowed IPs and Site name:</p>
+<h3 id=scripting-the-whole-thing>Scripting the whole thing <a class=anchor href=#scripting-the-whole-thing>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>I’ve created two files, Add-AllowedIPs.ps1 and AllowedIPs.config. The config file is just an XML structure with the allowed IPs and Site name:</p>
 <blockquote>
 <configuration>
 <site name="FTP Site">

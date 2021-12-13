@@ -130,8 +130,9 @@ Tags:
 <p><img src=https://www.definit.co.uk/images/2012/10/2012-10-17-000.png alt></p>
 <p>The only way to remove them from this would be to remove them from the Storage Cluster. This would work if the hosts were connected to vCenter, but they were not - and I couldn&rsquo;t get them into vCenter BECAUSE of this condition! Catch22.</p>
 <p>Googleing &ldquo;manually disable sioc esxi&rdquo; led me to a virtuallyGhetto article about <a href=http://www.virtuallyghetto.com/2010/10/does-sioc-actually-require-enterprise.html>enabling SIOC without vCenter</a> in which the solution was found!</p>
-<h2 id=manually-disable-sioc-on-a-disconnected-lun-and-remove-from-host>Manually Disable SIOC on a disconnected LUN and Remove from host</h2>
-<p>I connected to a host via SSH and began…</p>
+<h2 id=manually-disable-sioc-on-a-disconnected-lun-and-remove-from-host>Manually Disable SIOC on a disconnected LUN and Remove from host <a class=anchor href=#manually-disable-sioc-on-a-disconnected-lun-and-remove-from-host>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>I connected to a host via SSH and began…</p>
 <p>First, I needed to find the Device Name of the missing storage using the following command:</p>
 <pre class="brush: text; gutter: false">esxcli storage vmfs extent list | grep &#039;Definit-006&#039;</pre>
 <p>Armed with the naa (or eui) name for the device I could then get the iormState value for the device:</p>

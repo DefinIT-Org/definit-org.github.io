@@ -108,15 +108,17 @@ Tags:
 <p><img class="alignright wp-image-6186" src=/images/logos/vmware-vra.png alt width=150 height=150>Just a quick post today, as I was working with a customer recently and we were trying to retrieve the Custom Properties assigned to a vRealize Automation 7.3 deployed Virtual Machine, similar to the one in the image below. It’s not as intuitive as you’d like it to be because of the split between IaaS APIs and Cafe APIs. Below you can see I’ve deployed a simple CentOS blueprint with a custom property at the Blueprint level (called “BlueprintLevel” with a value of “CustomProperty”) and a custom property at the VM level (called “CustomProperty” and a value of “Test123”).</p>
 <img title=vra-bp-custom-prop.png src=/images/2018/02/vra-bp-custom-prop.png alt="vRA Blueprint Custom Property" width=282 height=141 border=0>
 <img title=vra-custom-property.png src=/images/2018/02/vra-custom-property.png alt="vRA VM Custom Property" width=475 height=202 border=0>
-<h2 id=authenticating-with-the-vra-api>Authenticating with the vRA API</h2>
-<p>The first step when working with the vRA API is to get the bearer token by sending the username, password and tenant to the token service:</p>
+<h2 id=authenticating-with-the-vra-api>Authenticating with the vRA API <a class=anchor href=#authenticating-with-the-vra-api>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The first step when working with the vRA API is to get the bearer token by sending the username, password and tenant to the token service:</p>
 <blockquote>
 <p>https://{{vra-fqdn}}/identity/api/tokens</p>
 </blockquote>
 <img title=vra-bearer-token.png src=/images/2018/02/vra-bearer-token.png alt="vRA API Get Bearer Token" width=446 height=265 border=0>
 <p>I have stored the value of the bearer token in a Postman variable {{token}}.</p>
-<h2 id=finding-the-blueprints-custom-property>Finding the Blueprint’s Custom Property</h2>
-<p>It’s an odd quirk with the vRA API that even through you return the Catalog Resource with the resources API, you can’t see the property directly. There is a little trick to finding it though, by retrieving the form for the resource.</p>
+<h2 id=finding-the-blueprints-custom-property>Finding the Blueprint’s Custom Property <a class=anchor href=#finding-the-blueprints-custom-property>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>It’s an odd quirk with the vRA API that even through you return the Catalog Resource with the resources API, you can’t see the property directly. There is a little trick to finding it though, by retrieving the form for the resource.</p>
 <p>Query the resource and filter by the resource by the deployment name - &ldquo;CentOS6-ExternalNetwork-58506054&rdquo;</p>
 <blockquote>
 <p>https://{{vra-fqdn}}/catalog-service/api/consumer/resources?$filter=name eq &lsquo;CentOS6-ExternalNetwork-58506054&rsquo;</p>
@@ -128,8 +130,9 @@ Tags:
 </blockquote>
 <img title=vra-bp-level-custom-property.png src=/images/2018/02/vra-bp-level-custom-property.png alt="vRA API Blueprint Level Custom Property" width=442 height=424 border=0>
 <p>There is an id assigned to the custom property (provider-PROP_BlueprintLevel), which you can use to find the value in the “values” array below. Not ideal, but workable.</p>
-<h2 id=finding-the-virtual-machines-custom-property>Finding the Virtual Machine’s Custom Property</h2>
-<p>Next we can query the resource and filter by the resource by the Virtual Machine name - &ldquo;lab00143&rdquo;</p>
+<h2 id=finding-the-virtual-machines-custom-property>Finding the Virtual Machine’s Custom Property <a class=anchor href=#finding-the-virtual-machines-custom-property>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Next we can query the resource and filter by the resource by the Virtual Machine name - &ldquo;lab00143&rdquo;</p>
 <blockquote>
 <p>https://{{vra-fqdn}}/catalog-service/api/consumer/resources?$filter=name eq &lsquo;lab00143&rsquo;</p>
 </blockquote>

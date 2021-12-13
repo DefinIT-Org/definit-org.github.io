@@ -146,16 +146,18 @@ NSX-T 2.0 Lab Build: Deploying Controller Cluster
 </div>
 <img src=/images/2017/09/2017-09-22_09-37-02.png class=clr-post-featured-image>
 <p><em><strong>Disclaimer! I am learning NSX-T, part of my learning is to deploy in my lab - if I contradict the official docs then go with the docs!</strong></em></p>
-<h2 id=lab-environment>Lab Environment</h2>
-<p>This NSX-T lab environment is built as a nested lab on my physical hosts. There are four physical ESXi hosts, onto which I will deploy three ESXi VMs, a vCenter Server Appliance, NSX Manager, an NSX Controller cluster, and two NSX Edge Nodes.</p>
+<h2 id=lab-environment>Lab Environment <a class=anchor href=#lab-environment>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>This NSX-T lab environment is built as a nested lab on my physical hosts. There are four physical ESXi hosts, onto which I will deploy three ESXi VMs, a vCenter Server Appliance, NSX Manager, an NSX Controller cluster, and two NSX Edge Nodes.</p>
 <div id=attachment_8522 style=width:610px class="wp-caption aligncenter">
 <a href=/images/2017/10/2017-10-24_10-44-42.png><img class="wp-image-8522 size-definit-600-wide" src=/images/2017/10/2017-10-24_10-44-42.png alt width=600 height=279></a>
 <p class=wp-caption-text>
 Physical, virtual and nested components of the NSX-T lab
 </p>
 </div>
-<h2 id=deployment-plan>Deployment Plan</h2>
-<p>I will follow the <a href=https://docs.vmware.com/en/VMware-NSX-T/2.0/com.vmware.nsxt.install.doc/GUID-414C33B3-674F-44E0-94B8-BFC0B9056B33.html>deployment plan from the NSX-T 2.0 documentation</a>:</p>
+<h2 id=deployment-plan>Deployment Plan <a class=anchor href=#deployment-plan>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>I will follow the <a href=https://docs.vmware.com/en/VMware-NSX-T/2.0/com.vmware.nsxt.install.doc/GUID-414C33B3-674F-44E0-94B8-BFC0B9056B33.html>deployment plan from the NSX-T 2.0 documentation</a>:</p>
 <ul>
 <li>Install NSX Manager.</li>
 <li>Install NSX Controllers.
@@ -182,14 +184,17 @@ The NSX-T Transport Node network configuration
 </div>
 <p>In this post I will walk through deploying the NSX Controllers and creating the NSX Controller Cluster.</p>
 <p><img src=https://www.definit.co.uk/images/2017/09/2017-09-21_17-02-12.png alt></p>
-<h2 id=configuring-the-controller-cluster>Configuring the Controller Cluster</h2>
-<h3 id=retrieve-the-nsx-manager-api-thumbprint>Retrieve the NSX Manager API thumbprint</h3>
-<ol>
+<h2 id=configuring-the-controller-cluster>Configuring the Controller Cluster <a class=anchor href=#configuring-the-controller-cluster>
+<i class="fas fa-hashtag"></i>
+</a></h2><h3 id=retrieve-the-nsx-manager-api-thumbprint>Retrieve the NSX Manager API thumbprint <a class=anchor href=#retrieve-the-nsx-manager-api-thumbprint>
+<i class="fas fa-hashtag"></i>
+</a></h3><ol>
 <li>Log onto the NSX Manager via SSH using the admin credentials.</li>
 <li>Use &ldquo;<em>get certificate api thumbprint</em>&rdquo; to retrieve the SSL certificate thumbprint. Copy the output to use in commands later<a style="font-family:-apple-system,BlinkMacSystemFont,segoe ui,Roboto,Oxygen-Sans,Ubuntu,Cantarell,helvetica neue,sans-serif" href=/images/2017/09/2017-09-22_15-01-38-1.png><img class="wp-image-8427 size-definit-600-wide aligncenter" src=/images/2017/09/2017-09-22_15-01-38-1.png alt width=600 height=30></a></li>
 </ol>
-<h3 id=join-the-nsx-controllers-to-the-nsx-manager>Join the NSX Controllers to the NSX Manager</h3>
-<ol>
+<h3 id=join-the-nsx-controllers-to-the-nsx-manager>Join the NSX Controllers to the NSX Manager <a class=anchor href=#join-the-nsx-controllers-to-the-nsx-manager>
+<i class="fas fa-hashtag"></i>
+</a></h3><ol>
 <li><span style="font-family:-apple-system,BlinkMacSystemFont,segoe ui,Roboto,Oxygen-Sans,Ubuntu,Cantarell,helvetica neue,sans-serif">Log onto each of the NSX Controllers via SSH using the admin credentials.</span></li>
 <li>Use &ldquo;<em>join management-plane <nsx manager> username admin thumbprint <api thumbprint></em>"<a style="font-family:-apple-system,BlinkMacSystemFont,segoe ui,Roboto,Oxygen-Sans,Ubuntu,Cantarell,helvetica neue,sans-serif" href=/images/2017/09/2017-09-21_17-21-58-1.png><img class="size-definit-600-wide wp-image-8428 aligncenter" src=/images/2017/09/2017-09-21_17-21-58-1.png alt width=600 height=30></a></li>
 <li>Enter the admin password when prompted</li>
@@ -201,8 +206,9 @@ The NSX-T Transport Node network configuration
 <p><img src=https://www.definit.co.uk/images/2017/09/2017-09-22_09-37-02-1.png alt></p>
 <p>From the command line, you can see the same details reflected - all three Controllers are listed in the control cluster, but the custer status is &ldquo;UNSTABLE&rdquo;.</p>
 <p><img src=https://www.definit.co.uk/images/2017/09/2017-09-22_09-48-33.png alt></p>
-<h3 id=initialise-the-controller-cluster>Initialise the Controller Cluster</h3>
-<p>To configure the Controller cluster we need to log onto any of the Controllers and initialise the cluster. This can be any one of the Controllers, but it will make the controller the master node in the cluster. I opted to use pod-200-controller-1 for simplicity. Initialising the cluster requires a shared secret to be used on each node.</p>
+<h3 id=initialise-the-controller-cluster>Initialise the Controller Cluster <a class=anchor href=#initialise-the-controller-cluster>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>To configure the Controller cluster we need to log onto any of the Controllers and initialise the cluster. This can be any one of the Controllers, but it will make the controller the master node in the cluster. I opted to use pod-200-controller-1 for simplicity. Initialising the cluster requires a shared secret to be used on each node.</p>
 <ol>
 <li>Log onto the Controller node via SSH using the admin credentials.</li>
 <li>Use &ldquo;<em>set control-cluster security-model shared-secret</em>&rdquo; to configure the shared secret</li>
@@ -212,8 +218,9 @@ The NSX-T Transport Node network configuration
 <p><img src=https://www.definit.co.uk/images/2017/09/2017-09-22_09-56-23.png alt></p>
 <p>Notice in the web interface that the first node (pod-200-controller-1) has a Cluster Status of &ldquo;Up&rdquo;</p>
 <p><img src=https://www.definit.co.uk/images/2017/09/2017-09-22_09-55-38.png alt></p>
-<h3 id=join-the-remaining-controller-nodes-to-the-cluster>Join the remaining Controller nodes to the Cluster</h3>
-<p>Now that pod-200-controller-1 has been successfully initialised, we can join the additional nodes to the cluster. The following steps need to be done for each remaining Controller</p>
+<h3 id=join-the-remaining-controller-nodes-to-the-cluster>Join the remaining Controller nodes to the Cluster <a class=anchor href=#join-the-remaining-controller-nodes-to-the-cluster>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Now that pod-200-controller-1 has been successfully initialised, we can join the additional nodes to the cluster. The following steps need to be done for each remaining Controller</p>
 <ol>
 <li>Log onto the Controller node via SSH using the admin credentials.</li>
 <li>Use &ldquo;<em>set control-cluster security-model shared-secret <shared secret></em>&rdquo; to configure the shared secret <img src=https://www.definit.co.uk/images/2017/09/2017-09-22_10-00-09.png alt></li>
@@ -227,13 +234,15 @@ The NSX-T Transport Node network configuration
 <p><img src=https://www.definit.co.uk/images/2017/09/2017-09-22_10-11-06.png alt></p>
 <p>Notice that all three nodes have a Cluster Status of &ldquo;Up&rdquo;</p>
 <p><img src=https://www.definit.co.uk/images/2017/09/2017-09-22_10-16-00.png alt></p>
-<h3 id=create-drs-anti-affinity-rules>Create DRS Anti-affinity Rules</h3>
-<p>One final step is to create an anti-affinity rule for the three Controllers to ensure they run on different hosts, should a host fail, we don&rsquo;t want a majority loss in the Control Cluster</p>
+<h3 id=create-drs-anti-affinity-rules>Create DRS Anti-affinity Rules <a class=anchor href=#create-drs-anti-affinity-rules>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>One final step is to create an anti-affinity rule for the three Controllers to ensure they run on different hosts, should a host fail, we don&rsquo;t want a majority loss in the Control Cluster</p>
 <p><img src=https://www.definit.co.uk/images/2017/09/2017-09-22_15-57-53.png alt></p>
 <p>Having completed these steps, my pod now has to following components:</p>
 <p><img src=https://www.definit.co.uk/images/2017/09/2017-09-22_15-44-10.png alt></p>
-<h2 id=references>References</h2>
-<ul>
+<h2 id=references>References <a class=anchor href=#references>
+<i class="fas fa-hashtag"></i>
+</a></h2><ul>
 <li><a href=https://docs.vmware.com/en/VMware-NSX-T/2.0/com.vmware.nsxt.install.doc/GUID-447C0417-A37B-4C2E-965E-499F52587160.html>NSX Controller Installation and Clustering</a>
 <ul>
 <li><a href=https://docs.vmware.com/en/VMware-NSX-T/2.0/com.vmware.nsxt.install.doc/GUID-24428FD4-EC8F-4063-9CF9-D8136740963A.html>Install NSX Controller on ESXi Using a GUI</a></li>

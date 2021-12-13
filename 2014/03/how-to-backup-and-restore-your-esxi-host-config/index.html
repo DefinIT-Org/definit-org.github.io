@@ -109,8 +109,9 @@ Tags:
 </div>
 <p><img src=https://www.definit.co.uk/images/2010/11/VMware.jpg alt>There are many ways to tackle the problem of quickly redeploying or recovering ESXi hosts, Host profiles, Auto deploy etc.. however such options are either out of reach for SME/SMB users where their license does not cover such features or they have very small clusters of which Auto deploy etc would perhaps be considered overkill.</p>
 <p>So how can we backup the config of our ESXi hosts? There is a great command you can use in <a href="https://my.vmware.com/web/vmware/details?productId=285&downloadGroup=VSP510-VCLI-510" title="vSphere CLI download">vSphere CLI</a> &ldquo;<span style=color:green>vicfg-cfgbackup.pl</span>&rdquo;, which when used with certain switches can either back up or restore your ESXi host config.</p>
-<h2 id=backing-up-a-host>Backing up a host</h2>
-<p>Quite simply you fire up your vSphere CLI client and run the command as shown below, make sure you define a file name as well as the destination folder or it will error.</p>
+<h2 id=backing-up-a-host>Backing up a host <a class=anchor href=#backing-up-a-host>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Quite simply you fire up your vSphere CLI client and run the command as shown below, make sure you define a file name as well as the destination folder or it will error.</p>
 <p><img src=https://www.definit.co.uk/images/2014/03/1.jpg alt></p>
 <p> </p>
 <p> </p>
@@ -122,8 +123,9 @@ Tags:
 <p> </p>
 <p> </p>
 <p><em>You may notice on my example I saved the file type as .tgz, you can drill into the .tgz file and see all of the config this process saves which is kind of handy if you want to be doubly sure it did the job correctly.</em></p>
-<h2 id=restoring-a-host>Restoring a host</h2>
-<p>So now you want to restore a host from a backup you have taken, we can use the same command but with the -l switch.</p>
+<h2 id=restoring-a-host>Restoring a host <a class=anchor href=#restoring-a-host>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>So now you want to restore a host from a backup you have taken, we can use the same command but with the -l switch.</p>
 <p><img src=https://www.definit.co.uk/images/2014/03/3.jpg alt></p>
 <p> </p>
 <p> </p>

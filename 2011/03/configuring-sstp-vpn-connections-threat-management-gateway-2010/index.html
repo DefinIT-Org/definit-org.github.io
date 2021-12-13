@@ -110,8 +110,9 @@ Tags:
 </div>
 </div>
 <p><img src=https://www.definit.co.uk/images/2011/03/TMG2010_thumb.png alt>SSTP or SSL VPN connections are great for people working on client sites or behind very restrictive firewalls – they only require HTTPS (port 443) to be open to be able to connect. Unfortunately, you need to be running Windows 7 or Server 2008 (or newer) in order to make use of them. Threat Management Gateway 2010 is one option for an SSL VPN endpoint.</p>
-<h3 id=sstp-vpn-requirements>SSTP VPN Requirements</h3>
-<ul>
+<h3 id=sstp-vpn-requirements>SSTP VPN Requirements <a class=anchor href=#sstp-vpn-requirements>
+<i class="fas fa-hashtag"></i>
+</a></h3><ul>
 <li>Clients must be Windows 7/Server 2008 or newer</li>
 <li>Certificate – either commercial or an internal Certificate Authority</li>
 <li>Published CRL – SSTP clients check for the Certificate Revocation List of the CA</li>
@@ -119,8 +120,9 @@ Tags:
 </ul>
 <p>TMG is configured as a “back-firewall” in this environment, with an adaptor in the LAN and one in the Perimeter (DMZ). The DMZ has a NAT relationship to the External public IPs.</p>
 <p><img src=https://www.definit.co.uk/images/2011/03/back-firewall_thumb.jpg alt></p>
-<h4 id=requesting-a-certificate-from-a-certificate-authority-from-certificate-services-2003>Requesting a Certificate from a Certificate Authority from Certificate Services 2003</h4>
-<p>Create a sstp.inf file to define the request. The subject CN MUST be the exact URL you’re going to use to access the SSL VPN, you can’t use a Subject Alternative Name (SAN):</p>
+<h4 id=requesting-a-certificate-from-a-certificate-authority-from-certificate-services-2003>Requesting a Certificate from a Certificate Authority from Certificate Services 2003 <a class=anchor href=#requesting-a-certificate-from-a-certificate-authority-from-certificate-services-2003>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Create a sstp.inf file to define the request. The subject CN MUST be the exact URL you’re going to use to access the SSL VPN, you can’t use a Subject Alternative Name (SAN):</p>
 <p> </p>
 <pre escaped=true lang=text line=1>[NewRequest]
 
@@ -153,19 +155,22 @@ CertificateTemplate = WebServer</pre>
 <p> </p>
 <pre escaped=true lang=dos line=1>certreq –accept c:\sstp.cer</pre>
 <p>If you need to, also install the CA&rsquo;s Root Certificate in the Trusted Root Certification Authorities.</p>
-<h3 id=configuring-vpn-client-access>Configuring VPN Client Access</h3>
-<p>There are 6 steps in the Remote Access Policy (VPN) panel of the TMG console for setting up VPN connections, not all of them required.</p>
+<h3 id=configuring-vpn-client-access>Configuring VPN Client Access <a class=anchor href=#configuring-vpn-client-access>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>There are 6 steps in the Remote Access Policy (VPN) panel of the TMG console for setting up VPN connections, not all of them required.</p>
 <p><img src=https://www.definit.co.uk/images/2011/03/image_thumb1.png alt></p>
-<h4 id=configure-address-assignment-method-and-enable-vpn-client-access>Configure Address Assignment Method and Enable VPN Client Access</h4>
-<p>So, click the first link and configure the Address Assignment. Since this TMG server has a leg in the LAN, it can use the DHCP server there, select the Internal Network. You can configure a static pool of IPs if you want – e.g. to put the clients on a more secure VLAN or to control access to resources based on a subnet:</p>
+<h4 id=configure-address-assignment-method-and-enable-vpn-client-access>Configure Address Assignment Method and Enable VPN Client Access <a class=anchor href=#configure-address-assignment-method-and-enable-vpn-client-access>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>So, click the first link and configure the Address Assignment. Since this TMG server has a leg in the LAN, it can use the DHCP server there, select the Internal Network. You can configure a static pool of IPs if you want – e.g. to put the clients on a more secure VLAN or to control access to resources based on a subnet:</p>
 <p><img src=https://www.definit.co.uk/images/2011/03/image_thumb2.png alt></p>
 <p>Select the Access Networks tab, and you can configure which networks the VPN clients can connect to. I’ve selected External and Perimeter for obivious reasons – that’s where my clients will be coming from. For testing purposes I’ve also selected the Internal network so I can test the SSL VPN from my desktop.</p>
 <p><img src=https://www.definit.co.uk/images/2011/03/image_thumb3.png alt></p>
 <p>On the Authentication tab, select MS-CHAPv2 – this will allow the most secure username and password authentication method without issuing client certificates or smart cards (EAP). CHAP and PAP are basically a no-go.</p>
 <p><img src=https://www.definit.co.uk/images/2011/03/image_thumb4.png alt></p>
 <p>I haven’t configured a RADIUS server for this connection to keep it simple. The “Enable VPN Client Access” link will enable the System Policy firewall rule.</p>
-<h4 id=specify-windows-users-or-select-a-radius-server>Specify Windows Users or select a RADIUS Server</h4>
-<p>Click on the Specify Windows Users link and select a group from your Active Directory to allow VPN access.</p>
+<h4 id=specify-windows-users-or-select-a-radius-server>Specify Windows Users or select a RADIUS Server <a class=anchor href=#specify-windows-users-or-select-a-radius-server>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Click on the Specify Windows Users link and select a group from your Active Directory to allow VPN access.</p>
 <p><img src=https://www.definit.co.uk/images/2011/03/image_thumb5.png alt></p>
 <p>Under the General tab you can enable or disable VPN access and set a limit on the number of users allowed at the same time.</p>
 <p><img src=https://www.definit.co.uk/images/2011/03/image_thumb6.png alt></p>
@@ -177,21 +182,27 @@ CertificateTemplate = WebServer</pre>
 <p><img src=https://www.definit.co.uk/images/2011/03/image_thumb9.png alt></p>
 <p>Select the Certificate you created earlier for the Listener and complete the wizard</p>
 <p><img src=https://www.definit.co.uk/images/2011/03/image_thumb10.png alt></p>
-<h4 id=verify-vpn-properties-and-remote-access-configuration>Verify VPN Properties and Remote Access Configuration</h4>
-<p>Essentially, that means check what you’ve just done…not sure why this warrants a step MS?</p>
-<h4 id=view-firewall-policy-for-the-vpn-clients-network>View Firewall Policy for the VPN Clients Network</h4>
-<p>Create a rule to control where you want your VPN Clients to access – for me the VPN clients are trusted and therefore I created a rule to allow “All outbound traffic” to “All Networks”:</p>
+<h4 id=verify-vpn-properties-and-remote-access-configuration>Verify VPN Properties and Remote Access Configuration <a class=anchor href=#verify-vpn-properties-and-remote-access-configuration>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Essentially, that means check what you’ve just done…not sure why this warrants a step MS?</p>
+<h4 id=view-firewall-policy-for-the-vpn-clients-network>View Firewall Policy for the VPN Clients Network <a class=anchor href=#view-firewall-policy-for-the-vpn-clients-network>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Create a rule to control where you want your VPN Clients to access – for me the VPN clients are trusted and therefore I created a rule to allow “All outbound traffic” to “All Networks”:</p>
 <p><img src=https://www.definit.co.uk/images/2011/03/image_thumb11.png alt></p>
-<h4 id=view-network-rules>View Network Rules</h4>
-<p>Similarly, check that you’re happy with the Network Rules for the VPN clients – I didn’t need to change anything here.</p>
+<h4 id=view-network-rules>View Network Rules <a class=anchor href=#view-network-rules>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Similarly, check that you’re happy with the Network Rules for the VPN clients – I didn’t need to change anything here.</p>
 <p><img src=https://www.definit.co.uk/images/2011/03/image_thumb12.png alt></p>
-<h4 id=configure-quarantine-optional>Configure Quarantine (Optional)</h4>
-<p>As this is optional and I only want a simple setup so this will be a later post, hopefully!</p>
-<h3 id=publishing-your-certificate-revocation-list>Publishing your Certificate Revocation List</h3>
-<p>My CA is configured to add an external URL to the Certificates it creates – crl.definit.co.uk. This means that the CRL can be made publicly available, this is a requirement for SSTP clients which by default will check a certificate’s validity.</p>
+<h4 id=configure-quarantine-optional>Configure Quarantine (Optional) <a class=anchor href=#configure-quarantine-optional>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>As this is optional and I only want a simple setup so this will be a later post, hopefully!</p>
+<h3 id=publishing-your-certificate-revocation-list>Publishing your Certificate Revocation List <a class=anchor href=#publishing-your-certificate-revocation-list>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>My CA is configured to add an external URL to the Certificates it creates – crl.definit.co.uk. This means that the CRL can be made publicly available, this is a requirement for SSTP clients which by default will check a certificate’s validity.</p>
 <p>Using the Web Publishing Rule Wizard I created a rule called “CRL Publishing”  to “allow” access to a <em>single Web site or load balancer</em> using HTTP connections to the internal site name and with a path of /CertEnroll/* on the Public name is the external URL – crl.definit.co.uk. I created a new HTTP only listener, set the rule to “No Authentication” and allowed “All users” access.</p>
-<h3 id=configuring-the-sstp-client>Configuring the SSTP client</h3>
-<p>Configuring the clients is very simple – on Windows 7 and Server 2008 it’s the same. First of all, ensure that you trust the certificate authority that issued the SSTP certificate created earlier, then open the “Set up a Connection or Network” wizard and select “Connect to a workplace”:</p>
+<h3 id=configuring-the-sstp-client>Configuring the SSTP client <a class=anchor href=#configuring-the-sstp-client>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Configuring the clients is very simple – on Windows 7 and Server 2008 it’s the same. First of all, ensure that you trust the certificate authority that issued the SSTP certificate created earlier, then open the “Set up a Connection or Network” wizard and select “Connect to a workplace”:</p>
 <p><img src=https://www.definit.co.uk/images/2011/03/image_thumb13.png alt><img src=https://www.definit.co.uk/images/2011/03/image_thumb14.png alt></p>
 <p>Connect via your internet connection and enter the url (sstp.definit.co.uk) and a nice name for it:</p>
 <p><img src=https://www.definit.co.uk/images/2011/03/image_thumb15.png alt><img src=https://www.definit.co.uk/images/2011/03/image_thumb16.png alt></p>

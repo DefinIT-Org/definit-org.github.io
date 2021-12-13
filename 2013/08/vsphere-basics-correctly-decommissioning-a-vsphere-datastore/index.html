@@ -110,24 +110,30 @@ Tags:
 <li>Storage I/O control is disabled for this datastore</li>
 <li>The datastore is not used for vSphere HA heartbeat</li>
 </ul>
-<h2 id=check-the-datastore-for-requirements>Check the datastore for requirements</h2>
-<h4 id=datastore-clusters-and-storage-drs>Datastore Clusters and Storage DRS</h4>
-<p>If the datastore is part of a Datastore Cluster then you can simply drag it out of the cluster to remove it. Once outside of the cluster Storage DRS will be disabled since you can’t use SDRS without being part of a cluster. Not sure why the requirements state both of these, but that sorts “<strong>The datastore is not part of a Datastore Cluster</strong>” and “<strong>The datastore is not managed by storage DRS</strong>”</p>
-<h4 id=storage-io-control>Storage I/O Control</h4>
-<p>If Storage I/O is enabled you’ll see a folder with the LUN ID in the root of the datastore:</p>
+<h2 id=check-the-datastore-for-requirements>Check the datastore for requirements <a class=anchor href=#check-the-datastore-for-requirements>
+<i class="fas fa-hashtag"></i>
+</a></h2><h4 id=datastore-clusters-and-storage-drs>Datastore Clusters and Storage DRS <a class=anchor href=#datastore-clusters-and-storage-drs>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>If the datastore is part of a Datastore Cluster then you can simply drag it out of the cluster to remove it. Once outside of the cluster Storage DRS will be disabled since you can’t use SDRS without being part of a cluster. Not sure why the requirements state both of these, but that sorts “<strong>The datastore is not part of a Datastore Cluster</strong>” and “<strong>The datastore is not managed by storage DRS</strong>”</p>
+<h4 id=storage-io-control>Storage I/O Control <a class=anchor href=#storage-io-control>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>If Storage I/O is enabled you’ll see a folder with the LUN ID in the root of the datastore:</p>
 <p><a href=/images/2013/08/image.png rel=lightbox><img style=background-image:none;padding-top:0;padding-left:0;margin:0;display:inline;padding-right:0;border:0 title=image alt=image src=/images/2013/08/image_thumb.png width=261 height=28 border=0></a></p>
 <p>Storage I/O Control can be manually enabled on a datastore without actually using SDRS or Datastore Clusters, so check that it is disabled by selecting the datastore in the Datastores and Datastore Clusters and going to the Configuration tab. Click properties to open the properties of the datastore and you’ll see the Storage I/O Control checkbox. Make sure it’s un-ticked and this will take care of the “<strong>Storage I/O control is disabled for this datastore</strong>” pre-requisite.</p>
 <p><a href=/images/2013/08/image1.png rel=lightbox><img style=background-image:none;padding-top:0;padding-left:0;margin:0;display:inline;padding-right:0;border:0 title=image alt=image src=/images/2013/08/image_thumb1.png width=382 height=218 border=0></a></p>
 <p> </p>
-<h4 id=vsphere-ha-heartbeat-and-dvsdata>vSphere HA Heartbeat and dvsData</h4>
-<p>If you right-click and browse a datastore to be decommissioned you can see that there are potentially several components stored on a datastore, in my screenshot below “.dvsData” is the Distributed Switch configuration data (for more detail see <a href=http://www.virtual-blog.com/2010/07/what-is-the-purpose-of-dvsdata/ title=http://www.virtual-blog.com/2010/07/what-is-the-purpose-of-dvsdata/>http://www.virtual-blog.com/2010/07/what-is-the-purpose-of-dvsdata/</a>), “.vSphere-HA” contains HA configuration (for more detail see <a href=http://www.vladan.fr/what-is-vmware-vsphere-ha-folder-for/ title=http://www.vladan.fr/what-is-vmware-vsphere-ha-folder-for/>http://www.vladan.fr/what-is-vmware-vsphere-ha-folder-for/</a>).</p>
+<h4 id=vsphere-ha-heartbeat-and-dvsdata>vSphere HA Heartbeat and dvsData <a class=anchor href=#vsphere-ha-heartbeat-and-dvsdata>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>If you right-click and browse a datastore to be decommissioned you can see that there are potentially several components stored on a datastore, in my screenshot below “.dvsData” is the Distributed Switch configuration data (for more detail see <a href=http://www.virtual-blog.com/2010/07/what-is-the-purpose-of-dvsdata/ title=http://www.virtual-blog.com/2010/07/what-is-the-purpose-of-dvsdata/>http://www.virtual-blog.com/2010/07/what-is-the-purpose-of-dvsdata/</a>), “.vSphere-HA” contains HA configuration (for more detail see <a href=http://www.vladan.fr/what-is-vmware-vsphere-ha-folder-for/ title=http://www.vladan.fr/what-is-vmware-vsphere-ha-folder-for/>http://www.vladan.fr/what-is-vmware-vsphere-ha-folder-for/</a>).</p>
 <p>In the case of vSphere HA it will depend on your clusters’ settings (vSphere HA > Datastore Heartbeating) as to which datastores it uses – if you manually select datastores using “Select only my preferred datastores” then you need to go in and select new datastores. As far as I can tell the only way you will fail the “<strong>The datastore is not used for vSphere HA heartbeat</strong>” check is if you manually specify only 2 datastores then try and decommission one of them. Personally, I’ve yet to see a really good argument for specifying datastores to be used with HA.</p>
 <p>The .vdsData folder is created on any VMFS store that has a Virtual Machine on it that also participates in the VDS – so by migrating your VMs off the datastore you’ll be ensuring the configuration data is elsewhere.</p>
-<h4 id=vms-and-templates>VMs and Templates</h4>
-<p>You can also see in my screenshot below a template folder and two virtual machines that haven’t been migrated across to a new datastore. An easy step is to migrate the VMs and move the template – pretty standard Storage vMotions. That qualifies you for the “<strong>No virtual machine resides on the datastore</strong>” pre-requisite. <em>VMs or Templates that have been removed from Inventory will not block an unmount of a datastore - so move it or lose it!.</em></p>
+<h4 id=vms-and-templates>VMs and Templates <a class=anchor href=#vms-and-templates>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>You can also see in my screenshot below a template folder and two virtual machines that haven’t been migrated across to a new datastore. An easy step is to migrate the VMs and move the template – pretty standard Storage vMotions. That qualifies you for the “<strong>No virtual machine resides on the datastore</strong>” pre-requisite. <em>VMs or Templates that have been removed from Inventory will not block an unmount of a datastore - so move it or lose it!.</em></p>
 <p><a href=/images/2013/08/image2.png rel=lightbox><img style=background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border:0 title=image alt=image src=/images/2013/08/image_thumb2.png width=477 height=232 border=0></a></p>
-<h2 id=unmounting-the-datastore>Unmounting the Datastore</h2>
-<p>Once the datastore is fully evacuated you can browse to “Datastores and Datastore Clusters”, right click the datastore and select Unmount</p>
+<h2 id=unmounting-the-datastore>Unmounting the Datastore <a class=anchor href=#unmounting-the-datastore>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Once the datastore is fully evacuated you can browse to “Datastores and Datastore Clusters”, right click the datastore and select Unmount</p>
 <p><a href=/images/2013/08/image3.png rel=lightbox><img style=background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border:0 title=image alt=image src=/images/2013/08/image_thumb3.png width=348 height=202 border=0></a></p>
 <p>The wizard then presents you with a list of hosts that can access the datastore, and the option to remove access from some or all of them. This datastore needs to be decommissioned, so remove access from all hosts:</p>
 <p><a href=/images/2013/08/image4.png rel=lightbox><img style=background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border:0 title=image alt=image src=/images/2013/08/image_thumb4.png width=244 height=198 border=0></a></p>
@@ -137,8 +143,9 @@ Tags:
 <p><a href=/images/2013/08/image6.png rel=lightbox><img style=background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border:0 title=image alt=image src=/images/2013/08/image_thumb6.png width=468 height=161 border=0></a></p>
 <p>And the datastore is marked as inactive:</p>
 <p><a href=/images/2013/08/image7.png rel=lightbox><img style=background-image:none;padding-top:0;padding-left:0;margin:0;display:inline;padding-right:0;border:0 title=image alt=image src=/images/2013/08/image_thumb7.png width=185 height=35 border=0></a></p>
-<h2 id=detaching-the-unmounted-datastores>Detaching the unmounted datastores</h2>
-<p>This can be a bit of a manual process, going to each host in turn and detaching the storage device that backs the datastore (select the host > Configuration > Storage > Devices > Select device and right click > Detach). Or you could download @alanrenouf’s PowerCLI script to help make it a bit easier! It’s available here - <a href=https://communities.vmware.com/docs/DOC-18008 title=https://communities.vmware.com/docs/DOC-18008>https://communities.vmware.com/docs/DOC-18008</a>.</p>
+<h2 id=detaching-the-unmounted-datastores>Detaching the unmounted datastores <a class=anchor href=#detaching-the-unmounted-datastores>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>This can be a bit of a manual process, going to each host in turn and detaching the storage device that backs the datastore (select the host > Configuration > Storage > Devices > Select device and right click > Detach). Or you could download @alanrenouf’s PowerCLI script to help make it a bit easier! It’s available here - <a href=https://communities.vmware.com/docs/DOC-18008 title=https://communities.vmware.com/docs/DOC-18008>https://communities.vmware.com/docs/DOC-18008</a>.</p>
 <p>Using the Detach-Datastore function is dead easy:</p>
 <p>Get-Datastore “Datastore Name” | Detach-Datastore</p>
 <p><a href=/images/2013/08/image8.png rel=lightbox><img style=background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border:0 title=image alt=image src=/images/2013/08/image_thumb8.png width=644 height=273 border=0></a></p>

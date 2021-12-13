@@ -152,16 +152,18 @@ NSX-T 2.0 Lab Build: Transport Zones and Transport Nodes
 </div>
 <img src=/images/2017/01/vmware-nsx-logo-square-e1485878022112.jpg class=clr-post-featured-image>
 <p><em><strong>Disclaimer! I am learning NSX-T, part of my learning is to deploy in my lab - if I contradict the official docs then go with the docs!</strong></em></p>
-<h2 id=lab-environment>Lab Environment</h2>
-<p>This NSX-T lab environment is built as a nested lab on my physical hosts. There are four physical ESXi hosts, onto which I will deploy three ESXi VMs, a vCenter Server Appliance, NSX Manager, an NSX Controller cluster, and two NSX Edge Nodes.</p>
+<h2 id=lab-environment>Lab Environment <a class=anchor href=#lab-environment>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>This NSX-T lab environment is built as a nested lab on my physical hosts. There are four physical ESXi hosts, onto which I will deploy three ESXi VMs, a vCenter Server Appliance, NSX Manager, an NSX Controller cluster, and two NSX Edge Nodes.</p>
 <div id=attachment_8522 style=width:610px class="wp-caption aligncenter">
 <a href=/images/2017/10/2017-10-24_10-44-42.png><img class="wp-image-8522 size-definit-600-wide" src=/images/2017/10/2017-10-24_10-44-42.png alt width=600 height=279></a>
 <p class=wp-caption-text>
 Physical, virtual and nested components of the NSX-T lab
 </p>
 </div>
-<h2 id=deployment-plan>Deployment Plan</h2>
-<p>I will follow the <a href=https://docs.vmware.com/en/VMware-NSX-T/2.0/com.vmware.nsxt.install.doc/GUID-414C33B3-674F-44E0-94B8-BFC0B9056B33.html>deployment plan from the NSX-T 2.0 documentation</a>:</p>
+<h2 id=deployment-plan>Deployment Plan <a class=anchor href=#deployment-plan>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>I will follow the <a href=https://docs.vmware.com/en/VMware-NSX-T/2.0/com.vmware.nsxt.install.doc/GUID-414C33B3-674F-44E0-94B8-BFC0B9056B33.html>deployment plan from the NSX-T 2.0 documentation</a>:</p>
 <ul>
 <li>Install NSX Manager.</li>
 <li>Install NSX Controllers.
@@ -187,23 +189,27 @@ The NSX-T Transport Node network configuration
 </p>
 </div>
 <p>In this post I will walk through configuring the Transport Zone, Transport Nodes, Edge Cluster and other configuration required to support the deployment.</p>
-<h2 id=create-an-ip-pool-for-the-tunnel-endpoints-teps>Create an IP Pool for the Tunnel Endpoints (TEPs)</h2>
-<p>Both the hosts and edges will require an IP address for the GENEVE tunnel endpoints, so in order to address these without using DHCP or static IPs I have created an IP Pool.</p>
+<h2 id=create-an-ip-pool-for-the-tunnel-endpoints-teps>Create an IP Pool for the Tunnel Endpoints (TEPs) <a class=anchor href=#create-an-ip-pool-for-the-tunnel-endpoints-teps>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Both the hosts and edges will require an IP address for the GENEVE tunnel endpoints, so in order to address these without using DHCP or static IPs I have created an IP Pool.</p>
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-23_17-03-24.png alt></p>
-<h2 id=create-an-uplink-profile-for-vm-edge-nodes>Create an Uplink Profile for VM Edge Nodes</h2>
-<p>The NSX-T documentation states:</p>
+<h2 id=create-an-uplink-profile-for-vm-edge-nodes>Create an Uplink Profile for VM Edge Nodes <a class=anchor href=#create-an-uplink-profile-for-vm-edge-nodes>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The NSX-T documentation states:</p>
 <blockquote>
 <p>Standby uplinks are not supported with VM/appliance-based <span id=GUID-50FDFDFB-F660-4269-9503-39AE2BBA95B4__productname_8E8192889A1D48628CF2FD722D67728A class="ph productname">NSX Edge</span>. When you install <span id=GUID-50FDFDFB-F660-4269-9503-39AE2BBA95B4__productname_8E8192889A1D48628CF2FD722D67728A class="ph productname">NSX Edge</span> as a virtual appliance, you must create a custom uplink profile rather than use the default uplink profile. For each uplink profile created for a VM-based <span id=GUID-50FDFDFB-F660-4269-9503-39AE2BBA95B4__productname_8E8192889A1D48628CF2FD722D67728A class="ph productname">NSX Edge</span>, the profile must specify only one active uplink and no standby uplink.</p>
 </blockquote>
 <p>Based on this, we need to create a new uplink profile that only includes a single uplink. Enter a name, description, teaming policy (it makes no difference with one uplink!) and enter &ldquo;uplink-1&rdquo; in the Active Uplinks. My Edge Nodes will be connected to port groups that already have the VLAN tagging by default, so I don&rsquo;t need to configure the Transport VLAN setting, but if you were using trunks and VGT you could specify here. MTU is set to 1600 by default.</p>
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-23_17-24-08.png alt></p>
-<h2 id=creating-the-transport-zones>Creating the Transport Zones</h2>
-<p>For my lab environment I need two Transport Zones - one for the Overlay traffic, and one for the VLAN uplinks. Transport Zones are created from the Fabric > Transport Zones page and are simple to configure - enter a name, description, host switch name and traffic type.</p>
+<h2 id=creating-the-transport-zones>Creating the Transport Zones <a class=anchor href=#creating-the-transport-zones>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>For my lab environment I need two Transport Zones - one for the Overlay traffic, and one for the VLAN uplinks. Transport Zones are created from the Fabric > Transport Zones page and are simple to configure - enter a name, description, host switch name and traffic type.</p>
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-23_16-52-40.png alt></p>
 <p>Once created, you can view the two Transport Zones</p>
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-23_21-20-34.png alt></p>
-<h2 id=creating-host-transport-nodes>Creating Host Transport Nodes</h2>
-<p>A Transport Node participates in the GENEVE overlay network as well as the VLAN networking - however for my lab configuration the Host Transport Nodes will actually only participate in overlay.</p>
+<h2 id=creating-host-transport-nodes>Creating Host Transport Nodes <a class=anchor href=#creating-host-transport-nodes>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>A Transport Node participates in the GENEVE overlay network as well as the VLAN networking - however for my lab configuration the Host Transport Nodes will actually only participate in overlay.</p>
 <p>Adding a Transport Node manually (as opposed to doing it via the Compute Manager) is configured from the Fabric > Nodes > Transport Nodes page.</p>
 <p>Add the Transport Node and configure a name, select the host to use and the Overlay Transport Zone configured before.</p>
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-23_21-47-28.png alt></p>
@@ -215,8 +221,9 @@ The NSX-T Transport Node network configuration
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-23_21-59-39.png alt></p>
 <p>The Host Transport Nodes are now visible from the Transport Nodes page.</p>
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-23_22-10-40.png alt></p>
-<h2 id=creating-edge-transport-nodes>Creating Edge Transport Nodes</h2>
-<p>A Transport Node participates in the GENEVE overlay network as well as the VLAN uplinks and provides transport between the two. The previously configured VM Edge Nodes will be configured as Edge Transport Nodes, using the Uplink Profile and Transport Zones configured above.</p>
+<h2 id=creating-edge-transport-nodes>Creating Edge Transport Nodes <a class=anchor href=#creating-edge-transport-nodes>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>A Transport Node participates in the GENEVE overlay network as well as the VLAN uplinks and provides transport between the two. The previously configured VM Edge Nodes will be configured as Edge Transport Nodes, using the Uplink Profile and Transport Zones configured above.</p>
 <p>Add a Transport Node from the Fabric > Nodes > Transport Nodes page. Define the Transport Node name, the Node (Edge) that the Transport Node should be configured for, then select at least two Transport Zones (one Overlay and one or more VLAN).</p>
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-23_17-04-54.png alt></p>
 <p>On the Host Switches tab, configure the VLAN Uplink host switch with the Uplink Profile configured earlier. Note that no IP address is required - this is because there is no tunnel endpoint on this interface - we are just passing VLAN traffic. From the Virtual NICs drop down, select the Virtual NIC that matches the MAC address of the VM NIC attached to the uplink port group (e.g. I am using VLAN 201 for the uplink so I selected the matching MAC address). This Virtual NIC is matched to the &ldquo;uplink-1&rdquo; active NIC defined in the Uplink Profile.</p>
@@ -225,8 +232,9 @@ The NSX-T Transport Node network configuration
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-23_17-29-11.png alt></p>
 <p>I configured both Edge Transport Nodes</p>
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-23_21-34-11.png alt></p>
-<h2 id=creating-an-edge-cluster>Creating an Edge Cluster</h2>
-<p>An Edge Cluster provides availability for the tier-0 router and tier-1 router with stateful services. Even a single Edge Transport Node needs to be part of a cluster to be useful.</p>
+<h2 id=creating-an-edge-cluster>Creating an Edge Cluster <a class=anchor href=#creating-an-edge-cluster>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>An Edge Cluster provides availability for the tier-0 router and tier-1 router with stateful services. Even a single Edge Transport Node needs to be part of a cluster to be useful.</p>
 <p>The Edge Cluster is configured from the Fabric > Nodes > Edge Clusters page and is defined using a name, description, an Edge Cluster Profile (which configures things like BFD timers for HA) and the Transport Nodes</p>
 <p><img src=https://www.definit.co.uk/images/2017/10/2017-10-23_21-37-31.png alt></p>
 <p>Add both of the Transport nodes (select Type first or none will be visible!) to the Edge cluster, click OK and then Save</p>

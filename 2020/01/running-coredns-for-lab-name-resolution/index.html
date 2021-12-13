@@ -103,8 +103,9 @@ Tags:
 <li>Deployment - deployment specification of the CoreDNS pods</li>
 <li>Services - MetalLb load balancer to provide a HA access for my network</li>
 </ul>
-<h2 id=namespace>Namespace</h2>
-<p>The namespace is pretty self explanatory&mldr;</p>
+<h2 id=namespace>Namespace <a class=anchor href=#namespace>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The namespace is pretty self explanatory&mldr;</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -119,8 +120,9 @@ Tags:
 </span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>coredns</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
-</div><h2 id=configmaps>ConfigMaps</h2>
-<p>I played about with various configurations of ConfigMaps in the setup, and in the end decided to separate the Corefile (which is the central CoreDNS configuration file) and the DNS Zones into separate ConfigMaps.</p>
+</div><h2 id=configmaps>ConfigMaps <a class=anchor href=#configmaps>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>I played about with various configurations of ConfigMaps in the setup, and in the end decided to separate the Corefile (which is the central CoreDNS configuration file) and the DNS Zones into separate ConfigMaps.</p>
 <p>The <code>coredns-config</code> ConfigMap tells CoreDNS how to run, and what plugins to load. It is mounted into the /etc/coredns folder later in the <code>deployment</code> configuration. Since I don&rsquo;t really want to restart my CoreDNS servers every time I make a change to a DNS zone, I am using the <code>auto</code> plugin to automatically load zone files (either new, or with a SOA Serial change) that are mounted in the <code>/etc/core/zones</code> folder. The second ConfigMap <code>coredns-zones</code> is mounted into the <code>/etc/core/zones</code> folder and provides the actual DNS zone information.</p>
 <p>The <code>log</code> and <code>errors</code> plugins are self-explanatory, they tell CoreDNS to write the log and errors to STDOUT. The <code>reload</code> plugin allows me to reload configuration from the <code>Corefile</code> whenever changes are made, it will check every 30 seconds. The <code>loadbalance</code> module will round-robin dns A, AAAA, and PTR records.</p>
 <p>Finally, the <code>health</code> and <code>ready</code> plugins will provide HTTP responses for the <code>deployment</code> health and ready probes.</p>
@@ -237,8 +239,9 @@ Tags:
 </span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>coredns</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
-</div><h2 id=deployment>Deployment</h2>
-<p>The <code>deployment</code> spec is pretty simple, it calls for 3 replicas of the CoreDNS container image to be running (one per worker node in my Kubernetes cluster). There is a <code>-conf</code> argument telling CoreDNS where to look for the <code>Corefile</code> configuration file. The containers allow both TCP and UDP connections on port 53 (though CoreDNS can run other protocols for DNS, such as TLS, HTTP, RPC). Both the <code>livenessProbe</code> and <code>readinessProbe</code> point to the <code>/health</code> and <code>/ready</code> plugins configured in the Corefile. Finally, the <code>Volumes</code> and <code>VolumeMounts</code> map the contents of the ConfigMaps (shown above) as files in the /etc/core folder.</p>
+</div><h2 id=deployment>Deployment <a class=anchor href=#deployment>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The <code>deployment</code> spec is pretty simple, it calls for 3 replicas of the CoreDNS container image to be running (one per worker node in my Kubernetes cluster). There is a <code>-conf</code> argument telling CoreDNS where to look for the <code>Corefile</code> configuration file. The containers allow both TCP and UDP connections on port 53 (though CoreDNS can run other protocols for DNS, such as TLS, HTTP, RPC). Both the <code>livenessProbe</code> and <code>readinessProbe</code> point to the <code>/health</code> and <code>/ready</code> plugins configured in the Corefile. Finally, the <code>Volumes</code> and <code>VolumeMounts</code> map the contents of the ConfigMaps (shown above) as files in the /etc/core folder.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -381,8 +384,9 @@ Tags:
 </span><span class=w>            </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>coredns-zones</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
-</div><h2 id=services>Services</h2>
-<p>Finally, in order to allow clients on my network to query the CoreDNS servers, and to provide a little bit of resilience, I have a MetalLb load balancer configured to provide access to the nodes. Because Kubernetes can&rsquo;t yet support multi-protocol load balancers, I have to configure both a TCP and UDP service. By specifying the same <code>loadBalancerIp</code>, MetalLb will use the same external IP address for both. From there, MetalLb peers with my physical routers via BGP and advertises the address via a /32 route.</p>
+</div><h2 id=services>Services <a class=anchor href=#services>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Finally, in order to allow clients on my network to query the CoreDNS servers, and to provide a little bit of resilience, I have a MetalLb load balancer configured to provide access to the nodes. Because Kubernetes can&rsquo;t yet support multi-protocol load balancers, I have to configure both a TCP and UDP service. By specifying the same <code>loadBalancerIp</code>, MetalLb will use the same external IP address for both. From there, MetalLb peers with my physical routers via BGP and advertises the address via a /32 route.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1

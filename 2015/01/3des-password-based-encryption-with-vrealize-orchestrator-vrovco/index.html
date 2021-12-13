@@ -125,29 +125,34 @@ Tags:
 </blockquote>
 <p>Importantly for me, the collection includes a 3DES library. Unfortunately, this is where I stalled for a long time - I could not manage to get the CryptoJS library to work, and it became clear that it was likely to be beyond my skill set. Falling back on Google with a vengeance, I found this VMware Communities post - <a href=https://communities.vmware.com/docs/DOC-24991>CryptoJS Hashers and Cyphers</a>, and in it a package created by Dan Linsley (<a href=https://twitter.com/danlinsley>@danlinsley</a>) which contained an encrypt and decrypt action for 3DES, based on CryptoJS. The package also contains actions for generating random <a href=http://en.wikipedia.org/wiki/Initialization_vector>initialisation vectors</a> and base64 encoding. In short, exactly what I needed!</p>
 <p>Based on this excellent work, I created two workflows, Encrypt-3DESPassword and Decrypt-3DESPassword.</p>
-<h2 id=encrypt-3despassword>Encrypt-3DESPassword</h2>
-<h3 id=inputs>Inputs</h3>
-<ul>
+<h2 id=encrypt-3despassword>Encrypt-3DESPassword <a class=anchor href=#encrypt-3despassword>
+<i class="fas fa-hashtag"></i>
+</a></h2><h3 id=inputs>Inputs <a class=anchor href=#inputs>
+<i class="fas fa-hashtag"></i>
+</a></h3><ul>
 <li>password - the password that will be encrypted (SecureString)</li>
 <li>encryptionPassphrase - a passphrase that will be used to encrypt and decrypt the password (SecureString)</li>
 </ul>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb43.png alt></p>
 <p>The use of the SecureString type means that it won&rsquo;t be displayed in the GUI of vRO/vCO - it&rsquo;s a very slight improvement in security, and can be used anywhere a String would be.</p>
-<h3 id=outputs>Outputs</h3>
-<ul>
+<h3 id=outputs>Outputs <a class=anchor href=#outputs>
+<i class="fas fa-hashtag"></i>
+</a></h3><ul>
 <li><strong>encryptedPassword</strong> - the encrypted password (SecureString)</li>
 <li><strong>initialisationVector</strong> - the initialisation vector used in the encryption (SecureString)</li>
 </ul>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb44.png alt></p>
 <p>The use of the SecureString type means that it won&rsquo;t be displayed in the GUI of vRO/vCO - it&rsquo;s a very slight improvement in security, and can be used anywhere a String would be.</p>
-<h3 id=attributes>Attributes</h3>
-<ul>
+<h3 id=attributes>Attributes <a class=anchor href=#attributes>
+<i class="fas fa-hashtag"></i>
+</a></h3><ul>
 <li><strong>generatedInitialisationVector</strong> - variable to hold the randomly generated IV (SecureString)</li>
 <li><strong>base64Key</strong> - variable to hold the <strong>encryptionPassphrase</strong> converted to a base64 key</li>
 </ul>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb45.png alt></p>
-<h3 id=schema>Schema</h3>
-<p><img src=https://www.definit.co.uk/images/2015/01/image_thumb46.png alt></p>
+<h3 id=schema>Schema <a class=anchor href=#schema>
+<i class="fas fa-hashtag"></i>
+</a></h3><p><img src=https://www.definit.co.uk/images/2015/01/image_thumb46.png alt></p>
 <p>The schema is very linear, consisting of 3 actions from Dan&rsquo;s library, and a script block.</p>
 <ul>
 <li>generateRandomIV takes no inputs and spits out a random initialisation vector to the <strong>generatedInitialisationVector</strong> attribute</li>
@@ -155,8 +160,9 @@ Tags:
 <li>tripleDesEncrypt takes the <strong>password</strong> input parameter, the <strong>base64Key</strong> attribute and the <strong>generatedInitialisationVector</strong> attribute and returns the encrypted password to the <strong>encryptedPassword</strong> out parameter</li>
 <li>outParam simply takes the <strong>generatedInitialisationVector</strong> attribute and assigns it to the <strong>initialisationVector</strong> output parameter</li>
 </ul>
-<h2 id=sample-execution>Sample Execution</h2>
-<p>These are not designed to be used by an operator, but consumed as part of another workflow - as such there&rsquo;s no output that is human readable - to show the values generated I have to wrap them within another workflow and use System.log() to print the values.</p>
+<h2 id=sample-execution>Sample Execution <a class=anchor href=#sample-execution>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>These are not designed to be used by an operator, but consumed as part of another workflow - as such there&rsquo;s no output that is human readable - to show the values generated I have to wrap them within another workflow and use System.log() to print the values.</p>
 <p>The wrapper workflow simply calls the Encrypt-3DESPassword workflow and then prints the outputs:</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb47.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb48.png alt></p>
@@ -164,29 +170,35 @@ Tags:
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb49.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb50.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb51.png alt></p>
-<h2 id=decrypt-3despassword>Decrypt-3DESPassword</h2>
-<h3 id=inputs-1>Inputs</h3>
-<ul>
+<h2 id=decrypt-3despassword>Decrypt-3DESPassword <a class=anchor href=#decrypt-3despassword>
+<i class="fas fa-hashtag"></i>
+</a></h2><h3 id=inputs-1>Inputs <a class=anchor href=#inputs-1>
+<i class="fas fa-hashtag"></i>
+</a></h3><ul>
 <li><strong>encryptedPassword</strong> - the encrypted password (SecureString)</li>
 <li><strong>decryptionPassphrase</strong> - the passphrase used to encrypt the password (SecureString)</li>
 <li><strong>initialisationVector</strong> - the initialisation vector used to encrypt the password (SecureString)</li>
 </ul>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb52.png alt></p>
-<h3 id=outputs-1>Outputs</h3>
-<ul>
+<h3 id=outputs-1>Outputs <a class=anchor href=#outputs-1>
+<i class="fas fa-hashtag"></i>
+</a></h3><ul>
 <li><strong>decryptedPassword</strong> - the decrypted password (SecureString)</li>
 </ul>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb53.png alt></p>
-<h3 id=attributes-1>Attributes</h3>
-<p>None</p>
-<h3 id=schema-1>Schema</h3>
-<p><img src=https://www.definit.co.uk/images/2015/01/image_thumb54.png alt></p>
+<h3 id=attributes-1>Attributes <a class=anchor href=#attributes-1>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>None</p>
+<h3 id=schema-1>Schema <a class=anchor href=#schema-1>
+<i class="fas fa-hashtag"></i>
+</a></h3><p><img src=https://www.definit.co.uk/images/2015/01/image_thumb54.png alt></p>
 <p>The schema couldn&rsquo;t be simpler - the one action is the decrypt action.</p>
 <ul>
 <li>tripleDesDecrypt takes the <strong>encryptedPassword</strong>, <strong>decryptionPassphrase</strong> and <strong>initialisationVector</strong> input parameters and sets the <strong>decryptedPassword</strong> output parameter</li>
 </ul>
-<h3 id=sample-execution-1>Sample Execution</h3>
-<p>Once again, these are not designed to be used by an operator, but consumed as part of another workflow - as such there&rsquo;s no output that is human readable - to demonstrate I&rsquo;ve written a workflow that encrypts, then decrypts the values.</p>
+<h3 id=sample-execution-1>Sample Execution <a class=anchor href=#sample-execution-1>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Once again, these are not designed to be used by an operator, but consumed as part of another workflow - as such there&rsquo;s no output that is human readable - to demonstrate I&rsquo;ve written a workflow that encrypts, then decrypts the values.</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb55.png alt></p>
 <ul>
 <li>logInputs - writes the password and passphrase to the system log</li>
@@ -199,12 +211,14 @@ Tags:
 <p>No variables are human readable</p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb57.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2015/01/image_thumb58.png alt></p>
-<h2 id=notes-for-using-these-workflows>Notes for using these workflows</h2>
-<p>The initialisation vector is generated randomly each time to minimise the possibility of an inference attack. If you use the same IV and a hacker is able to obtain enough encrypted passwords and the IV, then blocks could be inferred and the passwords decrypted (this is how WEP encryption is typically broken).</p>
+<h2 id=notes-for-using-these-workflows>Notes for using these workflows <a class=anchor href=#notes-for-using-these-workflows>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The initialisation vector is generated randomly each time to minimise the possibility of an inference attack. If you use the same IV and a hacker is able to obtain enough encrypted passwords and the IV, then blocks could be inferred and the passwords decrypted (this is how WEP encryption is typically broken).</p>
 <p>Storing the encrypted password, IV and pass phrase in the same location would render the encryption pointless, so think carefully about what you store where.</p>
 <p>Finally, use this at your own risk - I do not offer any guarantee or hold any responsibility if it pickles your grandmother.</p>
-<h2 id=download>Download</h2>
-<p>You can download the CryptoJS package from <a href=https://communities.vmware.com/docs/DOC-24991>CryptoJS Hashers and Cyphers</a>.</p>
+<h2 id=download>Download <a class=anchor href=#download>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>You can download the CryptoJS package from <a href=https://communities.vmware.com/docs/DOC-24991>CryptoJS Hashers and Cyphers</a>.</p>
 <p>You can download my workflows from here: <a href=https://github.com/sammcgeown/org.definit.passwords>local.definit.passwords.package</a> (zip)</p>
 <h6>Share this post</h6>
 <span class=share-box>

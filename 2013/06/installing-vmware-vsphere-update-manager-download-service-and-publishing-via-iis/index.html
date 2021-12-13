@@ -132,15 +132,17 @@ Tags:
 </div>
 </div>
 <p>The vSphere UMDS provides a way to download patches for VMware servers that have an air-gap, or for some reason aren’t allowed to go out to the internet themselves – in my case a security policy prevented a DMZ vCenter Server from connecting to the internet directly. The solution is to use UMDS to download the updates to a 2nd server that was hosted in the DMZ and then update the vCenter Server from there. It also can save on bandwidth if you’re running multiple vCenter Servers, which again was the case (though bandwidth isn’t really a constraint).</p>
-<h2 id=installing-umds>Installing UMDS</h2>
-<p>Installing UMDS is a really simple affair – run the <installer location>\umds\VMware-UMDS.exe installer and click through the options. The simplest option is to run the in-build SQL 2008 R2 Express database for the metadata, though you can create a 32-bit DSN and use an existing DB server if required. I set the patch download location to a D:\ that was attached to this VM and finished the install:</p>
+<h2 id=installing-umds>Installing UMDS <a class=anchor href=#installing-umds>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Installing UMDS is a really simple affair – run the <installer location>\umds\VMware-UMDS.exe installer and click through the options. The simplest option is to run the in-build SQL 2008 R2 Express database for the metadata, though you can create a 32-bit DSN and use an existing DB server if required. I set the patch download location to a D:\ that was attached to this VM and finished the install:</p>
 <p><img src=https://www.definit.co.uk/images/2013/06/image_thumb.png alt> <img src=https://www.definit.co.uk/images/2013/06/image_thumb1.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2013/06/image_thumb2.png alt> <img src=https://www.definit.co.uk/images/2013/06/image_thumb3.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2013/06/image_thumb4.png alt> <img src=https://www.definit.co.uk/images/2013/06/image_thumb5.png alt></p>
 <p><img src=https://www.definit.co.uk/images/2013/06/image_thumb6.png alt></p>
 <p>It takes a little while to install largely because of the SQL Express installation.</p>
-<h2 id=configuring-umds-and-downloading-the-patches>Configuring UMDS and downloading the patches</h2>
-<p>Once you’ve got it installed, it’s a bit of a tumbleweed moment…what next?! There’s no application or GUI installed – you need to <a href="http://pubs.vmware.com/vsphere-51/index.jsp?topic=%2Fcom.vmware.vsphere.update_manager.doc%2FGUID-AB1032CF-2C9A-44E5-94BA-216396F167F9.html#com.vmware.vsphere.update_manager.doc/GUID-CDC275B9-F4CD-4502-82AF-B127319CA28F.html" target=_blank>read the documentation</a> (or this blog :-)) to see what’s next!</p>
+<h2 id=configuring-umds-and-downloading-the-patches>Configuring UMDS and downloading the patches <a class=anchor href=#configuring-umds-and-downloading-the-patches>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Once you’ve got it installed, it’s a bit of a tumbleweed moment…what next?! There’s no application or GUI installed – you need to <a href="http://pubs.vmware.com/vsphere-51/index.jsp?topic=%2Fcom.vmware.vsphere.update_manager.doc%2FGUID-AB1032CF-2C9A-44E5-94BA-216396F167F9.html#com.vmware.vsphere.update_manager.doc/GUID-CDC275B9-F4CD-4502-82AF-B127319CA28F.html" target=_blank>read the documentation</a> (or this blog :-)) to see what’s next!</p>
 <p>If you’ve installed it in the default location, run a command prompt and navigate to: c:\Program Files (x86)\VMware\Infrastructure\Update Manager</p>
 <p>If you run the “vmware-umds.exe –H” command, you’ll see the the full help output - I think the examples are the easiest way to work out what you want to do!</p>
 <blockquote>
@@ -210,16 +212,19 @@ Tags:
 <p>vmware-umds –E –export-store D:\UMDS\Export</p>
 </blockquote>
 <p>You can verify your configuration using the –G option.</p>
-<h2 id=configuring-iis-to-publish-the-umds-export>Configuring IIS to publish the UMDS Export</h2>
-<p>Assuming you already have IIS installed (or are capable of managing this feat) you can go ahead and configure your IIS to publish the export folder.</p>
+<h2 id=configuring-iis-to-publish-the-umds-export>Configuring IIS to publish the UMDS Export <a class=anchor href=#configuring-iis-to-publish-the-umds-export>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Assuming you already have IIS installed (or are capable of managing this feat) you can go ahead and configure your IIS to publish the export folder.</p>
 <p><img src=https://www.definit.co.uk/images/2013/06/image_thumb9.png alt></p>
 <p>Configure a MIME type for .sig and .vib to use “application/octet-stream”, and check that .xml is “text/xml”.</p>
 <p><img src=https://www.definit.co.uk/images/2013/06/image_thumb10.png alt></p>
-<h2 id=configure-upstream-vmware-update-manger-servers>Configure upstream VMware Update Manger Servers</h2>
-<p>Configuring the upstream servers is as simple as providing the URL of the site you’ve just published under the Update Manager Administration Console in the vSphere Client. Go to the Configuration tab, click Download Settings and then select “Use a shared repository”. Enter the URL and click “Validate URL”. Then click “Apply”. If you want to do the initial sync, click “Download Now”, if not wait for the scheduled download.</p>
+<h2 id=configure-upstream-vmware-update-manger-servers>Configure upstream VMware Update Manger Servers <a class=anchor href=#configure-upstream-vmware-update-manger-servers>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Configuring the upstream servers is as simple as providing the URL of the site you’ve just published under the Update Manager Administration Console in the vSphere Client. Go to the Configuration tab, click Download Settings and then select “Use a shared repository”. Enter the URL and click “Validate URL”. Then click “Apply”. If you want to do the initial sync, click “Download Now”, if not wait for the scheduled download.</p>
 <p><img src=https://www.definit.co.uk/images/2013/06/image_thumb11.png alt></p>
-<h2 id=optional-extras>Optional extras</h2>
-<p>For extra credit…</p>
+<h2 id=optional-extras>Optional extras <a class=anchor href=#optional-extras>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>For extra credit…</p>
 <ul>
 <li>Install an SSL certificate to secure your IIS server</li>
 <li>Schedule the download of patches using Task Scheduler</li>

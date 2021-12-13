@@ -99,8 +99,9 @@ Tags:
 </div>
 <p><img src=https://www.definit.co.uk/images/2010/11/VMware3.jpg alt>One thing we have been meaning to do for a while but haven&rsquo;t got round to is getting our Virtual Center Servers into &ldquo;Linked&rdquo; mode - essentially to provide a single pane of glass view of our entire virtual estate. One vCenter resides on the other side of our DMZ and manages hosts isolated for security purposes. I&rsquo;ve created an IPSec server-to-server connection and allowed that through the firewall to secure traffic between the DMZ VC and LAN VC.</p>
 <p>For the purposes of this, let&rsquo;s call them DefinIT-VC01.definit.co.uk and DefinIT-VC02.definit.test.</p>
-<h4 id=linked-mode-pre-requisites>Linked Mode Pre-requisites</h4>
-<p>As well as the normal vCenter Server pre-requisites, there are certain criteria you have to fulfil to be able to use linked mode too. These are taken from the docs here: <a href="http://pubs.vmware.com/vsphere-51/index.jsp?topic=%2Fcom.vmware.vsphere.install.doc%2FGUID-7C9A1E23-7FCD-4295-9CB1-C932F2423C63.html">http://pubs.vmware.com/vsphere-51/index.jsp?topic=%2Fcom.vmware.vsphere.install.doc%2FGUID-7C9A1E23-7FCD-4295-9CB1-C932F2423C63.html</a></p>
+<h4 id=linked-mode-pre-requisites>Linked Mode Pre-requisites <a class=anchor href=#linked-mode-pre-requisites>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>As well as the normal vCenter Server pre-requisites, there are certain criteria you have to fulfil to be able to use linked mode too. These are taken from the docs here: <a href="http://pubs.vmware.com/vsphere-51/index.jsp?topic=%2Fcom.vmware.vsphere.install.doc%2FGUID-7C9A1E23-7FCD-4295-9CB1-C932F2423C63.html">http://pubs.vmware.com/vsphere-51/index.jsp?topic=%2Fcom.vmware.vsphere.install.doc%2FGUID-7C9A1E23-7FCD-4295-9CB1-C932F2423C63.html</a></p>
 <blockquote>
 <p><em>Linked Mode groups that contain both vCenter Server 5.x and versions of vCenter Server earlier than 5.0 are not supported. The vSphere Client does not function correctly with vCenter Servers in groups that have both version 5.x and pre-5.0 versions of vCenter Server. Do not join a version 5.x vCenter Server to pre-5.0 versions of vCenter Server, or pre-5.0 version of vCenter Server to a version 5.x vCenter Server. Upgrade any vCenter Server instance to version 5.0 or later before joining it to a version 5.x vCenter Server.</em></p>
 </blockquote>
@@ -129,8 +130,9 @@ Tags:
 <p><em>All vCenter Server instances must have network time synchronization. The vCenter Server installer validates that the machine clocks are not more than five minutes apart. See Synchronizing Clocks on the vSphere Network.</em></p>
 </blockquote>
 <p>Finally, check you&rsquo;re in time sync - 5 minutes is a big difference though, more tolerant than most applications!</p>
-<h4 id=configuring-linked-mode>Configuring Linked Mode</h4>
-<p>Running the Linked Mode Configuration tool was pretty straightforward, though it did get confused in the middle reporting errors that didn&rsquo;t exist. The steps are self-explanatory:</p>
+<h4 id=configuring-linked-mode>Configuring Linked Mode <a class=anchor href=#configuring-linked-mode>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Running the Linked Mode Configuration tool was pretty straightforward, though it did get confused in the middle reporting errors that didn&rsquo;t exist. The steps are self-explanatory:</p>
 <div id=gallery-1 class="gallery galleryid-1265 gallery-columns-3 gallery-size-thumbnail">
 <dl class=gallery-item>
 <dt class="gallery-icon landscape">

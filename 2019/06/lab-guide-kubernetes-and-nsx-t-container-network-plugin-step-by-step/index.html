@@ -124,9 +124,11 @@ process - I can’t guarantee it’s perfect, but I’ve tried to write these st
 a logical order, validate them and add some explanation as I go through. If you
 spot a mistake, or an error, please feel free to get in touch (for my learning,
 and so I can correct it!)</p>
-<h1 id=preparing-the-nodes>Preparing the Nodes</h1>
-<h2 id=software-versions>Software Versions</h2>
-<table>
+<h1 id=preparing-the-nodes>Preparing the Nodes <a class=anchor href=#preparing-the-nodes>
+<i class="fas fa-hashtag"></i>
+</a></h1><h2 id=software-versions>Software Versions <a class=anchor href=#software-versions>
+<i class="fas fa-hashtag"></i>
+</a></h2><table>
 <thead>
 <tr>
 <th><strong>Component</strong></th>
@@ -164,8 +166,9 @@ and so I can correct it!)</p>
 </table>
 <p>Be sure to check compatibility requirements for the NSX Container Plug-in
 <a href=https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-AD7BA088-2A51-4D5F-BC86-6EE14CE17665.html>https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-AD7BA088-2A51-4D5F-BC86-6EE14CE17665.html</a></p>
-<h2 id=ubuntu-vms>Ubuntu VMs</h2>
-<p>Three Ubuntu 16.04 virtual machines deployed with 2 vCPU and 4GB RAM each. The
+<h2 id=ubuntu-vms>Ubuntu VMs <a class=anchor href=#ubuntu-vms>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Three Ubuntu 16.04 virtual machines deployed with 2 vCPU and 4GB RAM each. The
 VMs have been deployed as default installations, and this guide assumes the
 same.</p>
 <p>DNS records have been created for each VM.</p>
@@ -199,8 +202,9 @@ same.</p>
 </tr>
 </tbody>
 </table>
-<h4 id=network-adapters>Network adapters</h4>
-<p>Each node is configured with three network adapters.</p>
+<h4 id=network-adapters>Network adapters <a class=anchor href=#network-adapters>
+<i class="fas fa-hashtag"></i>
+</a></h4><p>Each node is configured with three network adapters.</p>
 <table>
 <thead>
 <tr>
@@ -282,10 +286,12 @@ iface ens224 inet manual
     up ip link <span class=nb>set</span> ens224 up
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=install-docker-and-kubernetes>Install Docker and Kubernetes</h2>
-<p>Disable swap (required for kubelet to run), install Docker, and install Kubernetes 1.13.</p>
-<h4 id=master-and-worker-nodes><strong>Master and Worker Nodes</strong></h4>
-<div class=highlight><div class=chroma>
+</div><h2 id=install-docker-and-kubernetes>Install Docker and Kubernetes <a class=anchor href=#install-docker-and-kubernetes>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Disable swap (required for kubelet to run), install Docker, and install Kubernetes 1.13.</p>
+<h4 id=master-and-worker-nodes><strong>Master and Worker Nodes</strong> <a class=anchor href=#master-and-worker-nodes>
+<i class="fas fa-hashtag"></i>
+</a></h4><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -354,10 +360,12 @@ sudo apt-mark hold kubelet kubeadm kubectl
 <span class=c1>#/dev/mapper/ubuntu--1604--k8s--vg-swap_1 none            swap    sw              0       0</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=install-the-cni-plugin>Install the CNI Plugin</h2>
-<p>Download the NSX Container zip package to the home folder</p>
-<h4 id=master-and-worker-nodes-1><strong>Master and Worker Nodes</strong></h4>
-<div class=highlight><div class=chroma>
+</div><h2 id=install-the-cni-plugin>Install the CNI Plugin <a class=anchor href=#install-the-cni-plugin>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Download the NSX Container zip package to the home folder</p>
+<h4 id=master-and-worker-nodes-1><strong>Master and Worker Nodes</strong> <a class=anchor href=#master-and-worker-nodes-1>
+<i class="fas fa-hashtag"></i>
+</a></h4><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -375,10 +383,12 @@ unzip nsx-container-2.4.1.13515827.zip
 sudo dpkg -i nsx-container-2.4.1.13515827/Kubernetes/ubuntu_amd64/nsx-cni_2.4.1.13515827_amd64.deb
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=install-open-vswitch>Install Open vSwitch</h2>
-<p>You must install the Open vSwitch package bundled with the NSX Container plugin</p>
-<h4 id=master-and-worker-nodes-2><strong>Master and Worker Nodes</strong></h4>
-<div class=highlight><div class=chroma>
+</div><h2 id=install-open-vswitch>Install Open vSwitch <a class=anchor href=#install-open-vswitch>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>You must install the Open vSwitch package bundled with the NSX Container plugin</p>
+<h4 id=master-and-worker-nodes-2><strong>Master and Worker Nodes</strong> <a class=anchor href=#master-and-worker-nodes-2>
+<i class="fas fa-hashtag"></i>
+</a></h4><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -392,10 +402,12 @@ sudo apt-get install -y dkms libc6-dev make python python-six python-argparse
 sudo dpkg -i nsx-container-2.4.1.13515827/OpenvSwitch/xenial_amd64/openvswitch-datapath-dkms_2.10.2.13185890-1_all.deb nsx-container-2.4.1.13515827/OpenvSwitch/xenial_amd64/openvswitch-common_2.10.2.13185890-1_amd64.deb nsx-container-2.4.1.13515827/OpenvSwitch/xenial_amd64/openvswitch-switch_2.10.2.13185890-1_amd64.deb nsx-container-2.4.1.13515827/OpenvSwitch/xenial_amd64/libopenvswitch_2.10.2.13185890-1_amd64.deb
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=configure-open-vswitch>Configure Open vSwitch</h2>
-<p>Open vSwitch should be configured to use the network interface</p>
-<h4 id=master-and-worker-nodes-3><strong>Master and Worker Nodes</strong></h4>
-<div class=highlight><div class=chroma>
+</div><h2 id=configure-open-vswitch>Configure Open vSwitch <a class=anchor href=#configure-open-vswitch>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Open vSwitch should be configured to use the network interface</p>
+<h4 id=master-and-worker-nodes-3><strong>Master and Worker Nodes</strong> <a class=anchor href=#master-and-worker-nodes-3>
+<i class="fas fa-hashtag"></i>
+</a></h4><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -415,27 +427,32 @@ sudo ip link <span class=nb>set</span> br-int up
 sudo ip link <span class=nb>set</span> ens224 up
 </code></pre></td></tr></table>
 </div>
-</div><h1 id=configure-nsx-t-resources>Configure NSX-T Resources</h1>
-<p>NSX-T 2.4 introduces a new intent-based policy API, which is reflected in the
+</div><h1 id=configure-nsx-t-resources>Configure NSX-T Resources <a class=anchor href=#configure-nsx-t-resources>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>NSX-T 2.4 introduces a new intent-based policy API, which is reflected in the
 changes in the user interface. Unfortunately the NCP does not use the new policy
 API, so the objects created for consumption by NCP must be created using the
 &ldquo;Advanced Networking and Security&rdquo; tab.</p>
 <p>For all components, collect the object ID for later use.</p>
-<h2 id=overlay-transport-zone>Overlay Transport Zone</h2>
-<p>Create, or use an existing overlay transport zone</p>
+<h2 id=overlay-transport-zone>Overlay Transport Zone <a class=anchor href=#overlay-transport-zone>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Create, or use an existing overlay transport zone</p>
 <div class=clr-content-image-wrap>
 <a href=index.images/XGZRmk.png data-lightbox=index.images/XGZRmk.png data-title class=lb>
 <img class=lb src=index.images/XGZRmk.png alt>
 </a>
 <figcaption class=clr-caption></figcaption>
 </div>
-<h2 id=routers>Routers</h2>
-<h3 id=tier-0>Tier 0</h3>
-<p>Deploy and configure a tier 0 router, this will be the point of ingress/egress
+<h2 id=routers>Routers <a class=anchor href=#routers>
+<i class="fas fa-hashtag"></i>
+</a></h2><h3 id=tier-0>Tier 0 <a class=anchor href=#tier-0>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Deploy and configure a tier 0 router, this will be the point of ingress/egress
 to the NSX-T networks. The router must be created in active/standby mode, since
 stateful services are required (NAT).</p>
-<h3 id=tier-1>Tier 1</h3>
-<p>Deploy and configure a tier 1 router, this router will provide access to the
+<h3 id=tier-1>Tier 1 <a class=anchor href=#tier-1>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Deploy and configure a tier 1 router, this router will provide access to the
 Kubernetes cluster via the <em>k8s-access</em> segment created below. The tier 1 router
 should be connected to the tier 0 router, and a router port configured for the
 <em>k8s-access</em> segment.</p>
@@ -445,9 +462,11 @@ should be connected to the tier 0 router, and a router port configured for the
 </a>
 <figcaption class=clr-caption></figcaption>
 </div>
-<h2 id=segments>Segments</h2>
-<h3 id=k8s-transport>k8s-transport</h3>
-<p>The switch ports for the kubernetes nodes on the transport need to be tagged so
+<h2 id=segments>Segments <a class=anchor href=#segments>
+<i class="fas fa-hashtag"></i>
+</a></h2><h3 id=k8s-transport>k8s-transport <a class=anchor href=#k8s-transport>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>The switch ports for the kubernetes nodes on the transport need to be tagged so
 that the NCP can identify them.</p>
 <table>
 <thead>
@@ -467,11 +486,13 @@ that the NCP can identify them.</p>
 </tr>
 </tbody>
 </table>
-<h3 id=k8s-access>k8s-access</h3>
-<p>The k8s-access segment will be the API access to the Kubernetes cluster. It
+<h3 id=k8s-access>k8s-access <a class=anchor href=#k8s-access>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>The k8s-access segment will be the API access to the Kubernetes cluster. It
 should be created and connected to the a router port on the tier 1 router.</p>
-<h2 id=ip-blocks>IP Blocks</h2>
-<table>
+<h2 id=ip-blocks>IP Blocks <a class=anchor href=#ip-blocks>
+<i class="fas fa-hashtag"></i>
+</a></h2><table>
 <thead>
 <tr>
 <th><strong>Name</strong></th>
@@ -487,8 +508,9 @@ should be created and connected to the a router port on the tier 1 router.</p>
 </tr>
 </tbody>
 </table>
-<h2 id=ip-pool-for-snat>IP Pool for SNAT</h2>
-<p>Create an IP pool in NSX Manager that is for allocating IP addresses for
+<h2 id=ip-pool-for-snat>IP Pool for SNAT <a class=anchor href=#ip-pool-for-snat>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Create an IP pool in NSX Manager that is for allocating IP addresses for
 translating Pod IPs and Ingress controllers using SNAT/DNAT rules. These IP
 addresses are also referred to as external IPs.</p>
 <table>
@@ -514,8 +536,9 @@ addresses are also referred to as external IPs.</p>
 </a>
 <figcaption class=clr-caption></figcaption>
 </div>
-<h2 id=firewall>Firewall</h2>
-<p>The NCP plugin creates firewall rules for pod isolation and policy for access
+<h2 id=firewall>Firewall <a class=anchor href=#firewall>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The NCP plugin creates firewall rules for pod isolation and policy for access
 between a “top” and “bottom” marker section. By default, if these marker
 sections are not created, all isolation rules will be created at the bottom of
 the list, and all access policy sections will be created at the top. If you want
@@ -570,10 +593,13 @@ markers.</p>
 </tbody>
 </table>
 <p> </p>
-<h1 id=create-the-kubernetes-cluster>Create the Kubernetes Cluster</h1>
-<h2 id=initialise-the-cluster>Initialise the Cluster</h2>
-<h4 id=master-node><strong>Master Node</strong></h4>
-<div class=highlight><div class=chroma>
+<h1 id=create-the-kubernetes-cluster>Create the Kubernetes Cluster <a class=anchor href=#create-the-kubernetes-cluster>
+<i class="fas fa-hashtag"></i>
+</a></h1><h2 id=initialise-the-cluster>Initialise the Cluster <a class=anchor href=#initialise-the-cluster>
+<i class="fas fa-hashtag"></i>
+</a></h2><h4 id=master-node><strong>Master Node</strong> <a class=anchor href=#master-node>
+<i class="fas fa-hashtag"></i>
+</a></h4><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -591,10 +617,12 @@ sudo cp -i /etc/kubernetes/admin.conf <span class=nv>$HOME</span>/.kube/config
 sudo chown <span class=k>$(</span>id -u<span class=k>)</span>:<span class=k>$(</span>id -g<span class=k>)</span> <span class=nv>$HOME</span>/.kube/config
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=join-the-cluster-from-the-worker-nodes>Join the Cluster from the worker nodes</h2>
-<p>Grab the join command from the output of the master node init command</p>
-<h4 id=worker-nodes><strong>Worker Nodes</strong></h4>
-<div class=highlight><div class=chroma>
+</div><h2 id=join-the-cluster-from-the-worker-nodes>Join the Cluster from the worker nodes <a class=anchor href=#join-the-cluster-from-the-worker-nodes>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Grab the join command from the output of the master node init command</p>
+<h4 id=worker-nodes><strong>Worker Nodes</strong> <a class=anchor href=#worker-nodes>
+<i class="fas fa-hashtag"></i>
+</a></h4><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -604,14 +632,17 @@ sudo chown <span class=k>$(</span>id -u<span class=k>)</span>:<span class=k>$(</
 sudo kubeadm join 10.0.0.10:6443 --token u1kyen.mr7aeihrkkuz597h --discovery-token-ca-cert-hash sha256:f214d9abdadd1752405250bc99c69dee4d51d24d1940b8984948c4bee7c382a3
 </code></pre></td></tr></table>
 </div>
-</div><h1 id=configuring-ncp>Configuring NCP</h1>
-<h2 id=load-the-ncp-docker-image>Load the NCP Docker Image</h2>
-<p>Import the NCP docker image to the local repository on each Kubernetes node. The
+</div><h1 id=configuring-ncp>Configuring NCP <a class=anchor href=#configuring-ncp>
+<i class="fas fa-hashtag"></i>
+</a></h1><h2 id=load-the-ncp-docker-image>Load the NCP Docker Image <a class=anchor href=#load-the-ncp-docker-image>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>Import the NCP docker image to the local repository on each Kubernetes node. The
 image will be loaded with a long and ugly name
 &ldquo;registry.local/2.4.1.13515827/nsx-ncp-ubuntu”, so to keep the config files
 simple and to help with upgrades later, tag the image to create an alias.</p>
-<h4 id=master-and-worker-nodes-4><strong>Master and Worker Nodes</strong></h4>
-<div class=highlight><div class=chroma>
+<h4 id=master-and-worker-nodes-4><strong>Master and Worker Nodes</strong> <a class=anchor href=#master-and-worker-nodes-4>
+<i class="fas fa-hashtag"></i>
+</a></h4><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -623,8 +654,9 @@ sudo docker image tag registry.local/2.4.1.13515827/nsx-ncp-ubuntu nsx-ncp-ubunt
 </div>
 </div><p>Now you can refer to the image as nsx-ncp-ubuntu:2.4.1.13515827 in the config
 files.</p>
-<h2 id=create-a-namespace-roles-service-accounts>Create a namespace, roles, service accounts</h2>
-<p>The NCP pod can run in the <strong>default</strong> or <strong>kube-system</strong> namespaces, however
+<h2 id=create-a-namespace-roles-service-accounts>Create a namespace, roles, service accounts <a class=anchor href=#create-a-namespace-roles-service-accounts>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>The NCP pod can run in the <strong>default</strong> or <strong>kube-system</strong> namespaces, however
 creating a namespace for pods to run in is considered a best practice and allows
 more granular control over access and permissions.</p>
 <div class=highlight><div class=chroma>
@@ -1007,8 +1039,9 @@ account to the role.</p>
 </div>
 </div><p>Save the namespace, NCP and NSX Agent config as a single YAML file called
 nsx-ncp-rbac.yml, and then deploy the new resources using the following command:</p>
-<h4 id=master-node-or-admin-workstation><strong>Master Node or Admin Workstation</strong></h4>
-<div class=highlight><div class=chroma>
+<h4 id=master-node-or-admin-workstation><strong>Master Node or Admin Workstation</strong> <a class=anchor href=#master-node-or-admin-workstation>
+<i class="fas fa-hashtag"></i>
+</a></h4><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
@@ -1016,8 +1049,9 @@ nsx-ncp-rbac.yml, and then deploy the new resources using the following command:
 <pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>kubectl apply -f nsx-ncp-rbac.yml
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=prepare-the-ncp-config-file>Prepare the NCP config file</h2>
-<p>In order to deploy the NCP we use a YAML config file that’s included in the NSX
+</div><h2 id=prepare-the-ncp-config-file>Prepare the NCP config file <a class=anchor href=#prepare-the-ncp-config-file>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>In order to deploy the NCP we use a YAML config file that’s included in the NSX
 Container Plugin zip package. This consists of a
 <a href=https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/>ConfigMap</a>
 and a
@@ -1241,8 +1275,9 @@ local registry</li>
 </span><span class=w>            </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp-config</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
-</div><h2 id=prepare-the-nsx-node-agent-config-file>Prepare the NSX Node Agent config file</h2>
-<p>For the NSX Node Agent, we also need to prepare a YAML config file consisting of
+</div><h2 id=prepare-the-nsx-node-agent-config-file>Prepare the NSX Node Agent config file <a class=anchor href=#prepare-the-nsx-node-agent-config-file>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>For the NSX Node Agent, we also need to prepare a YAML config file consisting of
 a <strong>ConfigMap</strong> and <strong>Deployment</strong>.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -1520,11 +1555,13 @@ cp nsx-container-2.4.1.13515827/Kubernetes/ubuntu_amd64/nsx-node-agent-ds.yml .
 </span><span class=w>            </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/openvswitch</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
-</div><h2 id=finallydeploy-ncp-and-nsx-node-agent>Finally…deploy NCP and NSX Node Agent!</h2>
-<p>After what seems like a long journey, we’re finally at the point where we can
+</div><h2 id=finallydeploy-ncp-and-nsx-node-agent>Finally…deploy NCP and NSX Node Agent! <a class=anchor href=#finallydeploy-ncp-and-nsx-node-agent>
+<i class="fas fa-hashtag"></i>
+</a></h2><p>After what seems like a long journey, we’re finally at the point where we can
 deploy the NCP and Node Agent.</p>
-<h4 id=master-node-or-admin-workstation-1><strong>Master Node or Admin Workstation</strong></h4>
-<div class=highlight><div class=chroma>
+<h4 id=master-node-or-admin-workstation-1><strong>Master Node or Admin Workstation</strong> <a class=anchor href=#master-node-or-admin-workstation-1>
+<i class="fas fa-hashtag"></i>
+</a></h4><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -1539,28 +1576,36 @@ nsx-system namespace (check out <a href=https://github.com/ahmetb/kubectx>kubens
 this!) and view the resources using <code>kubectl get &lt;resource></code> and <code>kubectl describe &lt;resource> &lt;resource name></code></p>
 <p>NCP will create components for each Kubernetes namespace, these can be viewed
 through the Advanced Networking and Security Tab.</p>
-<h4 id=routers-1>Routers</h4>
+<h4 id=routers-1>Routers <a class=anchor href=#routers-1>
+<i class="fas fa-hashtag"></i>
+</a></h4>
 <div class=clr-content-image-wrap>
 <a href=index.images/Gs6Jut.png data-lightbox=index.images/Gs6Jut.png data-title class=lb>
 <img class=lb src=index.images/Gs6Jut.png alt>
 </a>
 <figcaption class=clr-caption></figcaption>
 </div>
-<h4 id=switches>Switches</h4>
+<h4 id=switches>Switches <a class=anchor href=#switches>
+<i class="fas fa-hashtag"></i>
+</a></h4>
 <div class=clr-content-image-wrap>
 <a href=index.images/9xMcCi.png data-lightbox=index.images/9xMcCi.png data-title class=lb>
 <img class=lb src=index.images/9xMcCi.png alt>
 </a>
 <figcaption class=clr-caption></figcaption>
 </div>
-<h4 id=load-balancer>Load Balancer</h4>
+<h4 id=load-balancer>Load Balancer <a class=anchor href=#load-balancer>
+<i class="fas fa-hashtag"></i>
+</a></h4>
 <div class=clr-content-image-wrap>
 <a href=index.images/MBD3UW.png data-lightbox=index.images/MBD3UW.png data-title class=lb>
 <img class=lb src=index.images/MBD3UW.png alt>
 </a>
 <figcaption class=clr-caption></figcaption>
 </div>
-<h4 id=firewall-rules>Firewall Rules</h4>
+<h4 id=firewall-rules>Firewall Rules <a class=anchor href=#firewall-rules>
+<i class="fas fa-hashtag"></i>
+</a></h4>
 <div class=clr-content-image-wrap>
 <a href=index.images/rtQkFK.png data-lightbox=index.images/rtQkFK.png data-title class=lb>
 <img class=lb src=index.images/rtQkFK.png alt>

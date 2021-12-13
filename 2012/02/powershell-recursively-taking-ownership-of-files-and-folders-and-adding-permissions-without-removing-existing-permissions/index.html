@@ -125,8 +125,9 @@ Tags:
 <p>Microsoft gives us 2 tools for doing this, <a href=http://technet.microsoft.com/en-us/library/cc755342(WS.10).aspx target=_blank>Takeown.exe</a> and <a href=http://support.microsoft.com/kb/919240 target=_blank>ICACLs.exe</a> - but there is a catch. To use takeown.exe to to take ownership of a tree you can use the /R recurse option, but you then have to specify a default answer - yes or no. The question that is asked is: &ldquo;you do not have permission to take ownership, do you want to?&rdquo; This will strip out existing permissions!!! If you answer yes, you delete the permissions you wish to preserve. If you answer no you do not take ownership of the folder. Without the recurse option you can take ownership of an individual file or folder, but of course this needs to be run as many times as there are folders to be sure.</p>
 <p>Engaging with Microsoft product support for this gave us a solution of sorts - namely to run a looped batch file until all the folders were owned, and then running ICACLS.exe. There would be no way of knowing whether this had completed the tree unless you knew already the number of files and folders within the tree - and if you could get that info you would already have permissions! Not a great solution.</p>
 <p>Fortunately, using PowerShell and Takeown.exe, we can work around this limitation, by exploiting Get-ChildItem in recursive mode, and changing the default error action to SilentlyContinue. Get-ChildItem will throw an error if it tries to access a folder you do not have permissions to, and you can catch this error and pass the folder to Takeown.exe to seize ownership. Trapping this error does not work because it&rsquo;s a &ldquo;stop&rdquo; error - but changing the error action means that the $error variable is populated with the exception details. This is the basis of the first function in my script.</p>
-<h1 id=function-test-folder>Function: Test-Folder</h1>
-<div class=highlight><div class=chroma>
+<h1 id=function-test-folder>Function: Test-Folder <a class=anchor href=#function-test-folder>
+<i class="fas fa-hashtag"></i>
+</a></h1><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -166,8 +167,9 @@ Tags:
 </div>
 </div><p>* <em>This section has been updated as per David&rsquo;s comments and solution below - thanks to David for his work!</em></p>
 <p>It&rsquo;s fairly simple code, running through it we clear any existing errors using $error.Clear(), recurse through the folder structure using Get-ChildItem with the errors suppressed. The select statement is for logging output - the full path of the file or folder that we DO have access to. We then check if $error is set - if it is then we had errors accessing a file or folder, so we loop through them and check if the error Fully Qualified ID matches the access denied error message. If it does we write something for the logging and call the Take-Ownership function, followed by looping back with a call to itself to re-test the folder we are working on (and anything below it).</p>
-<h1 id=function-take-ownership>Function: Take-Ownership</h1>
-<p> The Take-Ownership function simply calls Takeown.exe against the folder it is passed, then adds entries to the ACL for that folder.</p>
+<h1 id=function-take-ownership>Function: Take-Ownership <a class=anchor href=#function-take-ownership>
+<i class="fas fa-hashtag"></i>
+</a></h1><p> The Take-Ownership function simply calls Takeown.exe against the folder it is passed, then adds entries to the ACL for that folder.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -207,8 +209,9 @@ Tags:
 </code></pre></td></tr></table>
 </div>
 </div><p>Running through, it takes the folder name as a parameter, runs Takeown.exe against it using the /A option to add the administrators group. We then get the current ACL from the folder, build a new ACL permission as a string and use that to create a FileSystemAccessRule object. That object is then added to the ACL we copied from the folder. In this example I am adding two accounts, NT AUTHORITY\SYSTEM and a domian group DEFINIT\AdminGroup. The Set-ACL command applies the ACL list with the two new entries to the folder.</p>
-<h1 id=the-finalscript>The final script</h1>
-<p>Finally, we can build the script together taking a parameter for the target folder, and a log file. The Functions are called against the target folder - first taking ownership of the root, and then testing the contents. I start and stop a transcript around them to capture output, which can be crucial for proving that you have access!</p>
+<h1 id=the-finalscript>The final script <a class=anchor href=#the-finalscript>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>Finally, we can build the script together taking a parameter for the target folder, and a log file. The Functions are called against the target folder - first taking ownership of the root, and then testing the contents. I start and stop a transcript around them to capture output, which can be crucial for proving that you have access!</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1

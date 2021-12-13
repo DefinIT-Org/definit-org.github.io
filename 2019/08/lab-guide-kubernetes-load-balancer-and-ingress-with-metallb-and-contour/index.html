@@ -123,13 +123,16 @@ Tags:
 </a>
 <figcaption class=clr-caption>MetalLb and Contour</figcaption>
 </div>
-<h1 id=install-and-configure-metallb>Install and Configure MetalLB</h1>
-<h3 id=what-is-metallb>What is MetalLb?</h3>
-<blockquote>
+<h1 id=install-and-configure-metallb>Install and Configure MetalLB <a class=anchor href=#install-and-configure-metallb>
+<i class="fas fa-hashtag"></i>
+</a></h1><h3 id=what-is-metallb>What is MetalLb? <a class=anchor href=#what-is-metallb>
+<i class="fas fa-hashtag"></i>
+</a></h3><blockquote>
 <p>MetalLB hooks into your Kubernetes cluster, and provides a network load-balancer implementation. In short, it allows you to create Kubernetes services of type “LoadBalancer” in clusters that don’t run on a cloud provider, and thus cannot simply hook into paid products to provide load-balancers.</p>
 </blockquote>
-<h3 id=installing-metallb>Installing MetalLb</h3>
-<p>Installing MetalLB is really, really easy - I deployed it as a kubernetes manifest (or you can use a helm chart). It creates a Namespace, <code>metallb-system</code>, a controller <a href=https://kubernetes.io/docs/concepts/workloads/controllers/deployment/>Deployment</a> <code>metallb-system/controller</code>, a Daemonset <code>metallb-system/speaker</code> as well as ClusterRoles, ClusterRoleBindings, and ServiceAccounts to support the application.</p>
+<h3 id=installing-metallb>Installing MetalLb <a class=anchor href=#installing-metallb>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Installing MetalLB is really, really easy - I deployed it as a kubernetes manifest (or you can use a helm chart). It creates a Namespace, <code>metallb-system</code>, a controller <a href=https://kubernetes.io/docs/concepts/workloads/controllers/deployment/>Deployment</a> <code>metallb-system/controller</code>, a Daemonset <code>metallb-system/speaker</code> as well as ClusterRoles, ClusterRoleBindings, and ServiceAccounts to support the application.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -208,8 +211,9 @@ clusterrolebinding.rbac.authorization.k8s.io/metallb-system:speaker             
 </code></pre></td></tr></table>
 </div>
 </div><p>You can see that MetalLb has deployed a single controller and two speakers (one per node). Installed but unconfigured, it will sit there doing nothing, so lets configure it!</p>
-<h3 id=configuring-metallb-in-layer-2-mode>Configuring MetalLb in Layer 2 mode</h3>
-<p>As I mentioned before, MetalLb can run in two modes, Layer 2, or Layer 3 (BGP). Very simply, Layer 2 mode MetalLb uses a pool of IP addresses specified in the configuration and simply responds to ARP requests, claiming that additional IP on the &ldquo;speaker&rdquo; instance and forwarding traffic on to the kubernetes workloads.</p>
+<h3 id=configuring-metallb-in-layer-2-mode>Configuring MetalLb in Layer 2 mode <a class=anchor href=#configuring-metallb-in-layer-2-mode>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>As I mentioned before, MetalLb can run in two modes, Layer 2, or Layer 3 (BGP). Very simply, Layer 2 mode MetalLb uses a pool of IP addresses specified in the configuration and simply responds to ARP requests, claiming that additional IP on the &ldquo;speaker&rdquo; instance and forwarding traffic on to the kubernetes workloads.</p>
 <p>In my lab, Layer 2 mode is more than enough for my needs, so I&rsquo;m going to configure a pool of IPs to be consumed by kubernetes LoadBalancers.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -241,9 +245,11 @@ clusterrolebinding.rbac.authorization.k8s.io/metallb-system:speaker             
 </span><span class=sd>      - 192.168.10.200-192.168.10.240</span><span class=w>    
 </span></code></pre></td></tr></table>
 </div>
-</div><h1 id=install-and-configure-contour>Install and configure Contour</h1>
-<h3 id=what-is-contour>What is Contour?</h3>
-<blockquote>
+</div><h1 id=install-and-configure-contour>Install and configure Contour <a class=anchor href=#install-and-configure-contour>
+<i class="fas fa-hashtag"></i>
+</a></h1><h3 id=what-is-contour>What is Contour? <a class=anchor href=#what-is-contour>
+<i class="fas fa-hashtag"></i>
+</a></h3><blockquote>
 <p>Contour is an Ingress controller for Kubernetes that works by deploying the Envoy proxy as a reverse proxy and load balancer. Unlike other Ingress controllers, Contour supports dynamic configuration updates out of the box while maintaining a lightweight profile.</p>
 </blockquote>
 <blockquote>
@@ -253,8 +259,9 @@ clusterrolebinding.rbac.authorization.k8s.io/metallb-system:speaker             
 <div style=position:relative;padding-bottom:56.25%;height:0;overflow:hidden>
 <iframe src=https://www.youtube.com/embed/xUJbTnN3Dmw style=position:absolute;top:0;left:0;width:100%;height:100%;border:0 allowfullscreen title="YouTube Video"></iframe>
 </div>
-<h3 id=installing-contour>Installing Contour</h3>
-<p>Installation is as simple as applying a kubernetes manifest:</p>
+<h3 id=installing-contour>Installing Contour <a class=anchor href=#installing-contour>
+<i class="fas fa-hashtag"></i>
+</a></h3><p>Installation is as simple as applying a kubernetes manifest:</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -346,8 +353,9 @@ tlscertificatedelegations.contour.heptio.com   2019-07-31T16:29:29Z
 </code></pre></td></tr></table>
 </div>
 </div><p>Note that the contour LoadBalancer has an external IP - this is the IP address that all the external traffic will go to, and then Contour will steer that traffic to the correct application based on the Ingress configuration.</p>
-<h1 id=deploying-an-load-balanced-and-ingress-routed-application>Deploying an load balanced and ingress routed application</h1>
-<p>To test out the new load balanacer and ingress functionality, we can use the example application in the Contour docs - <a href=https://raw.githubusercontent.com/heptio/contour/master/examples/example-workload/kuard.yaml>kuard</a>. I&rsquo;ve downloaded the manifest and dropped the number of replicas to two, as I&rsquo;ve only got 2 kubernetes nodes running.</p>
+<h1 id=deploying-an-load-balanced-and-ingress-routed-application>Deploying an load balanced and ingress routed application <a class=anchor href=#deploying-an-load-balanced-and-ingress-routed-application>
+<i class="fas fa-hashtag"></i>
+</a></h1><p>To test out the new load balanacer and ingress functionality, we can use the example application in the Contour docs - <a href=https://raw.githubusercontent.com/heptio/contour/master/examples/example-workload/kuard.yaml>kuard</a>. I&rsquo;ve downloaded the manifest and dropped the number of replicas to two, as I&rsquo;ve only got 2 kubernetes nodes running.</p>
 <p>The manifest describes three kubernetes objects, a <a href=https://kubernetes.io/docs/concepts/workloads/controllers/deployment/>Deployment</a> of the kuard application with 2 replicas, a <a href=https://kubernetes.io/docs/concepts/services-networking/service/>Service</a> to expose port 80 on a ClusterIp, and an <a href=https://kubernetes.io/docs/concepts/services-networking/ingress/>Ingress</a> that describes how the Envoy proxy should pass traffic to the <a href=https://kubernetes.io/docs/concepts/services-networking/service/>Service</a>.</p>
 <p>So, when the manifest is applied, the two kuard containers are deployed and a service is configured. The Ingress is configured to pass traffic to the Service named &ldquo;kuard&rdquo; on port 80. First, we deploy the manifest:</p>
 <div class=highlight><div class=chroma>
