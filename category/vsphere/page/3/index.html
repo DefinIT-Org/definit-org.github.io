@@ -65,66 +65,6 @@ RSS
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2014/07/slow-or-failed-logon-to-vcsa-5-5-with-vcops-in-the-environment/>Slow or failed logon to VCSA 5.5 with vCOps in the environment</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 1/7/2014
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a>, <a href=/category/vrealize-operations>vRealize Operations</a> and <a href=/category/vsphere>vSphere</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-Recently I encountered this problem in a customer site whereby the logon to VCSA 5.5 would either time out, or take 3-5 minutes to actually log on.
-Running a netstat on the VCSA during the attempt to logon showed there was a SYN packet sent to the vCOps appliance on port 443 that never established a connection. Another check was attempting to connect using curl &lt;https://> –k - this would time out.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2014/07/slow-or-failed-logon-to-vcsa-5-5-with-vcops-in-the-environment/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2014/06/vcenter-5-5-certificate-toolkit-for-distributed-environments/>vCenter 5.5 Certificate Toolkit for Distributed Environments</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 9/6/2014
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-Derek Seaman’s excellent SSL toolkit. I know that there are hours and hours of work put into this script by Derek and I want to thank him for that – it’s a massive time saver. This modification is to fit a different set of circumstances – “standing on the shoulders of giants” – and should in no way be seen as me criticising or stealing Derek’s work.
-This week, while using the SSL Certificate Automation Tool and Derek’s script, I encountered a couple of things I felt could be improved for a more complex environment.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2014/06/vcenter-5-5-certificate-toolkit-for-distributed-environments/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
 <a href=https://www.definit.co.uk/2014/04/some-useful-vsphere-related-diagrams/>Some useful VMware related diagrams</a>
 </div>
 <div class=card-block>
@@ -366,6 +306,65 @@ By default, vCenter Single Sign-On passwords, including the password for adminis
 </div>
 </div>
 </div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2013/10/recover-esxi-root-password-using-ad-authentication/>Recover ESXi Root Password using AD Authentication</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 7/10/2013
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+Losing a root password isn’t something that happens often, but when it does it’s normally a really irritating time. I have to rotate the password of all hosts once a month for compliance, but sometimes a host drops out of the loop and the root password gets lost. Fortunately, as the vpxuser is still valid I can manage the host via vCenter - this lends itself to this little recovery process:
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2013/10/recover-esxi-root-password-using-ad-authentication/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2013/09/vsphere-security-understanding-esxi-5-x-lockdown-mode/>vSphere Security: Understanding ESXi 5.x Lockdown Mode</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 26/9/2013
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+This is the first article in a series of vSphere Security articles that I have planned. The majority of this article is based on vSphere/ESXi 5.1, though I will include any 5.5 information that I find relevant.
+I think lockdown mode is a feature that is rarely understood, and even more rarely used. Researching this article I’ve already encountered several different definitions that weren’t quite right. As far as I can see there are no differences between lockdown more in 5.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2013/09/vsphere-security-understanding-esxi-5-x-lockdown-mode/>More</a>
+</div>
+</div>
+</div>
 </div>
 <nav>
 <ul class=pagination>
@@ -423,33 +422,17 @@ By default, vCenter Single Sign-On passwords, including the password for adminis
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
 <li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
-<li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
-<li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">15</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">42</span></a></li>
-<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li>
-<li><a href=/category/exam class=nav-link>EXAM <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/fusion class=nav-link>FUSION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li>
+<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">16</span></a></li>
+<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">44</span></a></li>
 <li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
-<li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li>
-<li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
-<li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">2</span></a></li>
-<li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">206</span></a></li>
-<li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
-<li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">58</span></a></li>
-<li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
-<li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
+<li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">29</span></a></li>
+<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">16</span></a></li>
+<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
+<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">40</span></a></li>
+<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">70</span></a></li>
+<li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">23</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
 </ul>
 </section>
 <section class="nav-group collapsible">
@@ -457,15 +440,15 @@ By default, vCenter Single Sign-On passwords, including the password for adminis
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
 <li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">53</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">55</span></a></li>
+<li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">40</span></a></li>
 <li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
-<li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
 <li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
 <li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li>
-<li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li>
+<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">33</span></a></li>
+<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">32</span></a></li>
+<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">30</span></a></li>
+<li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">29</span></a></li>
 </section>
 </section>
 </nav>

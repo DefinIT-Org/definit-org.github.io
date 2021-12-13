@@ -74,6 +74,66 @@ Follow Sam McGeown on Twitter
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2010/11/configuring-software-iscsi-multipathing-on-esxi-4-1/>Configuring Software iSCSI multipathing on ESXi 4.1</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 12/11/2010
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/vmware>VMware</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+Recently I had cause to configure iSCSI multipathing on a test ESXi server. The production environment servers use iSCSI HBAs to connect to the back end storage, so multipathing them is a straight-forward setup.
+It’s good practice to separate VMotion, virtual machine and iSCSI traffic, it also helps you manage those logical and physical connections.
+Connect to your ESXi server using the vSphere Client and select the host. Go to the configuration tab and click “Add Networking…”.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2010/11/configuring-software-iscsi-multipathing-on-esxi-4-1/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
+<a href=https://www.definit.co.uk/2010/11/in-depth-installing-and-configuring-threat-management-gateway-2010-in-a-network-load-balanced-array/>In-depth: Installing and Configuring Threat Management Gateway 2010 in a Network Load Balanced Array</a>
+</div>
+<div class=card-block>
+<div class=card-media-block>
+<div class="card-media-desciption clr-card-authors">
+<span class="card-media-title clr-card-authors">
+<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
+on 8/11/2010
+</div>
+<div class=clr-card-authors>
+Published under <a href=/category/microsoft>Microsoft</a> and <a href=/category/networking>Networking</a>
+</div>
+</span>
+</div>
+</div>
+</div>
+<div class=card-block>
+<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
+In this post I will be installing a TMG Array as a “back firewall” behind a hardware firewall. The Array will consist of two virtual servers, TMG01 and TMG02 which each have 3 NICs. One NIC will be dedicated to the LAN network, accessible internally. One NIC will be dedicated to the DMZ network, accessible to the outside world on a static mapped IP. The third NIC will be a dedicated intra-array communications NIC as per Microsoft’s recommendation.
+</div>
+</div>
+<div class=card-footer>
+<a class=card-link href=https://www.definit.co.uk/2010/11/in-depth-installing-and-configuring-threat-management-gateway-2010-in-a-network-load-balanced-array/>More</a>
+</div>
+</div>
+</div>
+<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+<div class=card>
+<div class=card-header style=height:74px>
 <a href=https://www.definit.co.uk/2010/10/managing-esxi-4-1-with-vma-4-1-on-vmware-workstation/>Managing ESXi 4.1 with vMA 4.1 on VMware Workstation</a>
 </div>
 <div class=card-block>
@@ -308,69 +368,6 @@ Since Edge, FPE and TMG can now all exist on a single 64-bit server, I will star
 </div>
 </div>
 </div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2010/08/unable-to-access-outlook-web-access-owa-after-installing-update-rollup-1-2-3-or-4-flogon-js-errors/>Unable to access Outlook Web Access (OWA) after installing Update Rollup 1, 2, 3 or 4 – flogon.js errors</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 10/8/2010
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/microsoft>Microsoft</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-If you’re having trouble accessing OWA after updating Exchange 2010 with any of the Rollup packages, try this:
-Uninstall the update package from the Programs and Features control panel
-Download the package file directly from Microsoft, don’t use Windows Update
-Open a command prompt or PowerShell prompt as Administrator
-Navigate to the location of the package (.msp) and run from the elevated command prompt.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2010/08/unable-to-access-outlook-web-access-owa-after-installing-update-rollup-1-2-3-or-4-flogon-js-errors/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-<div class=card>
-<div class=card-header style=height:74px>
-<a href=https://www.definit.co.uk/2010/07/passed-microsoft-exams-70-662-and-70-663-now-officially-mcitp-enterprise-messaging-administrator/>Passed Microsoft Exams 70-662 and 70-663 – Now officially MCITP: Enterprise Messaging Administrator</a>
-</div>
-<div class=card-block>
-<div class=card-media-block>
-<div class="card-media-desciption clr-card-authors">
-<span class="card-media-title clr-card-authors">
-<div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
-on 29/7/2010
-</div>
-<div class=clr-card-authors>
-Published under <a href=/category/microsoft>Microsoft</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
-<div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
-On Monday I took the two Exchange 2010 exams, “70-662 TS: Microsoft Exchange Server 2010, Configuring” and “70-663 PRO: Deploying Messaging Solutions with Microsoft Exchange Server 2010” and I am pleased to say that I passed both of them, scoring an 812 on the 70-662 and 960 on the 70-663. I am especially pleased with the score on the PRO exam!
-Overall, there’s quite a lot of overlap between the two exams, with the more heavily theory and design based PRO exam being a “high-level” of the more hands-on management and cmdlet based TS exam.
-</div>
-</div>
-<div class=card-footer>
-<a class=card-link href=https://www.definit.co.uk/2010/07/passed-microsoft-exams-70-662-and-70-663-now-officially-mcitp-enterprise-messaging-administrator/>More</a>
-</div>
-</div>
-</div>
 </div>
 <nav>
 <ul class=pagination>
@@ -430,33 +427,17 @@ Overall, there’s quite a lot of overlap between the two exams, with the more h
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/automation class=nav-link>AUTOMATION <span class="badge badge-1">7</span></a></li>
 <li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
-<li><a href=/category/certification class=nav-link>CERTIFICATION <span class="badge badge-1">2</span></a></li>
-<li><a href=/category/cloud class=nav-link>CLOUD <span class="badge badge-1">8</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">15</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">42</span></a></li>
-<li><a href=/category/development class=nav-link>DEVELOPMENT <span class="badge badge-1">3</span></a></li>
-<li><a href=/category/exam class=nav-link>EXAM <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/fusion class=nav-link>FUSION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/log-insight class=nav-link>LOG-INSIGHT <span class="badge badge-1">2</span></a></li>
+<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">16</span></a></li>
+<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">44</span></a></li>
 <li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
-<li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">34</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">26</span></a></li>
-<li><a href=/category/powercli class=nav-link>POWERCLI <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/storage class=nav-link>STORAGE <span class="badge badge-1">6</span></a></li>
-<li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">2</span></a></li>
-<li><a href=/category/vcloud-director class=nav-link>VCLOUD-DIRECTOR <span class="badge badge-1">5</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">206</span></a></li>
-<li><a href=/category/vmware-cloud-foundation class=nav-link>VMWARE-CLOUD-FOUNDATION <span class="badge badge-1">1</span></a></li>
-<li><a href=/category/vmworld class=nav-link>VMWORLD <span class="badge badge-1">13</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">44</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">72</span></a></li>
-<li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/vsan class=nav-link>VSAN <span class="badge badge-1">4</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">58</span></a></li>
-<li><a href=/category/webinar class=nav-link>WEBINAR <span class="badge badge-1">17</span></a></li>
-<li><a href=/category/workstation class=nav-link>WORKSTATION <span class="badge badge-1">1</span></a></li>
+<li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">29</span></a></li>
+<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">16</span></a></li>
+<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
+<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">40</span></a></li>
+<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">70</span></a></li>
+<li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">23</span></a></li>
+<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
 </ul>
 </section>
 <section class="nav-group collapsible">
@@ -464,15 +445,15 @@ Overall, there’s quite a lot of overlap between the two exams, with the more h
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
 <li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">53</span></a></li>
+<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">55</span></a></li>
+<li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">40</span></a></li>
 <li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
-<li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">35</span></a></li>
 <li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
 <li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">31</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">29</span></a></li>
-<li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">26</span></a></li>
+<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">33</span></a></li>
+<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">32</span></a></li>
+<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">30</span></a></li>
+<li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">29</span></a></li>
 </section>
 </section>
 </nav>
