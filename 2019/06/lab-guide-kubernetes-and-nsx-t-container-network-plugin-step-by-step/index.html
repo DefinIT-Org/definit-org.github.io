@@ -1,8 +1,7 @@
 <!doctype html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class=no-js><!--<![endif]-->
 <head>
 <meta charset=utf-8>
-<title>Lab Guide - Kubernetes and NSX-T Container Network Plugin - Step by Step &#183; DefinIT</title>
-<meta http-equiv=x-ua-compatible content="IE=edge">
+<title>Lab Guide - Kubernetes and NSX-T Container Network Plugin - Step by Step &#183; DefinIT</title><meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=HandheldFriendly content="True">
 <meta name=MobileOptimized content="320">
 <meta name=viewport content="width=device-width,initial-scale=1">
@@ -32,7 +31,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.90.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.93.3"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -40,8 +39,7 @@
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
-</head>
-<body data-ng-app=myapp data-ng-controller=MyController data-ng-mouseleave=MouseLeave($event)>
+</head><body data-ng-app=myapp data-ng-controller=MyController data-ng-mouseleave=MouseLeave($event)>
 <div class=main-container>
 <header class=header-6>
 <div class=branding>
@@ -49,8 +47,7 @@
 <img alt src=/images/logos/definit-logo.png>
 <span class=title>DefinIT</span>
 </a>
-</div>
-<nav class=header-nav>
+</div><nav class=header-nav>
 <a class="nav-link nav-text" href=https://www.definit.co.uk/ title=Home>
 Home
 </a>
@@ -63,180 +60,86 @@ GitHub
 <a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml title=RSS>
 RSS
 </a>
-</nav>
-<div class=header-actions>
+</nav><div class=header-actions>
 <form class=search id=search method=get action=//google.com/search>
 <label for=search_input>
 <input id=search_input type=text name=q placeholder="Search with Google">
 <input type=hidden name=as_sitesearch value=https://www.definit.co.uk>
 </label>
-</form>
-</div>
-</header>
-<div class=content-container>
+</form></div></header><div class=content-container>
 <div class=content-area>
-<h1>Lab Guide - Kubernetes and NSX-T Container Network Plugin - Step by Step</h1>
-<div class=metas>
+<h1>Lab Guide - Kubernetes and NSX-T Container Network Plugin - Step by Step</h1><div class=metas>
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 12/6/2019
 &#183; Read in about 14 min (2790 words)
-</div>
-<div class=clr-card-authors>
+</div><div class=clr-card-authors>
 Published under <a href=/category/nsx>NSX</a>, <a href=/category/vmware>VMware</a> and <a href=/category/cloud-native>Cloud Native</a>
-</div>
-<div class=clr-card-authors>
+</div><div class=clr-card-authors>
 Tags:
 <a class=clr-tags href=https://www.definit.co.uk/tag/nsx>#nsx</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/cnp>#cnp</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/kubernetes>#kubernetes</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/ubuntu>#ubuntu</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/api>#api</a>
-</div>
-</span>
-</div>
-<br clear=all>
+</div></span>
+</div><br clear=all>
 <div class="alert alert-danger" role=alert>
 <div class=alert-items>
 <div class="alert-item static">
 <div class=alert-icon-wrapper>
 <clr-icon class=alert-icon shape=warning-standard></clr-icon>
-</div>
-<span class=alert-text>This article is now 3 years old! It is highly likely that this information is out of date and the author will have completely forgotten about it. Please take care when following any guidance to ensure you have up-to-date recommendations.</span>
-</div>
-</div>
-</div>
-<img src=/images/logos/kubernetes.svg class=clr-post-featured-image>
+</div><span class=alert-text>This article is now 3 years old! It is highly likely that this information is out of date and the author will have completely forgotten about it. Please take care when following any guidance to ensure you have up-to-date recommendations.</span>
+</div></div></div><img src=/images/logos/kubernetes.svg class=clr-post-featured-image>
 <p>I’ve done a fair amount of work learning VMware PKS and NSX-T, but I wanted to
 drop down a level and get more familiar with the inner workings for Kubernetes,
 as well as explore some of the newer features that are exposed by the NSX
-Container Plugin that are not yet in the PKS integrations.</p>
-<p>The NSX-T docs are…not great, I certainly don’t think you can work out the steps
+Container Plugin that are not yet in the PKS integrations.</p><p>The NSX-T docs are…not great, I certainly don’t think you can work out the steps
 required from the official <a href=https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-FB641321-319D-41DC-9D16-37D6BA0BC0DE.html>NCP installation
 guide</a>
 without a healthy dollop of background knowledge and familiarity with Kubernetes
 and CNI. <a href=https://networkinferno.net/preparing-a-node-for-kubernetes-and-nsx-ncp>Anthony Burke published this
 guide</a>
 which is great, and I am lucky enough to be able to pick his brains on our
-corporate slack.</p>
-<p>So, what follows is a step-by-step guide that is the product of my learning
+corporate slack.</p><p>So, what follows is a step-by-step guide that is the product of my learning
 process - I can’t guarantee it’s perfect, but I’ve tried to write these steps in
 a logical order, validate them and add some explanation as I go through. If you
 spot a mistake, or an error, please feel free to get in touch (for my learning,
-and so I can correct it!)</p>
-<h1 id=preparing-the-nodes>Preparing the Nodes <a class=anchor href=#preparing-the-nodes>
+and so I can correct it!)</p><h1 id=preparing-the-nodes>Preparing the Nodes <a class=anchor href=#preparing-the-nodes>
 <i class="fas fa-hashtag"></i>
 </a></h1><h2 id=software-versions>Software Versions <a class=anchor href=#software-versions>
 <i class="fas fa-hashtag"></i>
 </a></h2><table>
 <thead>
 <tr>
-<th><strong>Component</strong></th>
-<th><strong>Version</strong></th>
-<th><strong>Notes</strong></th>
-</tr>
-</thead>
-<tbody>
+<th><strong>Component</strong></th><th><strong>Version</strong></th><th><strong>Notes</strong></th></tr></thead><tbody>
 <tr>
-<td>NSX-T</td>
-<td>2.4.1</td>
-<td>Latest at time of writing</td>
-</tr>
-<tr>
-<td>Server OS</td>
-<td>Ubuntu 16.04</td>
-<td>16.04 is the most recent supported by NSX-T NCP</td>
-</tr>
-<tr>
-<td>Docker</td>
-<td>current</td>
-<td></td>
-</tr>
-<tr>
-<td>Kubernetes</td>
-<td>1.13.5-00</td>
-<td>Required for NSX-T NCP</td>
-</tr>
-<tr>
-<td>Open vSwitch</td>
-<td>2.9.1</td>
-<td>Must be the version packaged with NSX-T 2.4</td>
-</tr>
-</tbody>
-</table>
-<p>Be sure to check compatibility requirements for the NSX Container Plug-in
-<a href=https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-AD7BA088-2A51-4D5F-BC86-6EE14CE17665.html>https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-AD7BA088-2A51-4D5F-BC86-6EE14CE17665.html</a></p>
-<h2 id=ubuntu-vms>Ubuntu VMs <a class=anchor href=#ubuntu-vms>
+<td>NSX-T</td><td>2.4.1</td><td>Latest at time of writing</td></tr><tr>
+<td>Server OS</td><td>Ubuntu 16.04</td><td>16.04 is the most recent supported by NSX-T NCP</td></tr><tr>
+<td>Docker</td><td>current</td><td></td></tr><tr>
+<td>Kubernetes</td><td>1.13.5-00</td><td>Required for NSX-T NCP</td></tr><tr>
+<td>Open vSwitch</td><td>2.9.1</td><td>Must be the version packaged with NSX-T 2.4</td></tr></tbody></table><p>Be sure to check compatibility requirements for the NSX Container Plug-in
+<a href=https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-AD7BA088-2A51-4D5F-BC86-6EE14CE17665.html>https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-AD7BA088-2A51-4D5F-BC86-6EE14CE17665.html</a></p><h2 id=ubuntu-vms>Ubuntu VMs <a class=anchor href=#ubuntu-vms>
 <i class="fas fa-hashtag"></i>
 </a></h2><p>Three Ubuntu 16.04 virtual machines deployed with 2 vCPU and 4GB RAM each. The
 VMs have been deployed as default installations, and this guide assumes the
-same.</p>
-<p>DNS records have been created for each VM.</p>
-<table>
+same.</p><p>DNS records have been created for each VM.</p><table>
 <thead>
 <tr>
-<th><strong>Name</strong></th>
-<th><strong>Role</strong></th>
-<th><strong>FQDN</strong></th>
-<th><strong>IP</strong></th>
-</tr>
-</thead>
-<tbody>
+<th><strong>Name</strong></th><th><strong>Role</strong></th><th><strong>FQDN</strong></th><th><strong>IP</strong></th></tr></thead><tbody>
 <tr>
-<td>k8s-m01</td>
-<td>Master</td>
-<td>k8s-m01.definit.local</td>
-<td>10.0.0.10</td>
-</tr>
-<tr>
-<td>k8s-w01</td>
-<td>Worker</td>
-<td>k8s-w01.definit.local</td>
-<td>10.0.0.11</td>
-</tr>
-<tr>
-<td>k8s-w02</td>
-<td>Worker</td>
-<td>k8s-w02.definit.local</td>
-<td>10.0.0.12</td>
-</tr>
-</tbody>
-</table>
-<h4 id=network-adapters>Network adapters <a class=anchor href=#network-adapters>
+<td>k8s-m01</td><td>Master</td><td>k8s-m01.definit.local</td><td>10.0.0.10</td></tr><tr>
+<td>k8s-w01</td><td>Worker</td><td>k8s-w01.definit.local</td><td>10.0.0.11</td></tr><tr>
+<td>k8s-w02</td><td>Worker</td><td>k8s-w02.definit.local</td><td>10.0.0.12</td></tr></tbody></table><h4 id=network-adapters>Network adapters <a class=anchor href=#network-adapters>
 <i class="fas fa-hashtag"></i>
-</a></h4><p>Each node is configured with three network adapters.</p>
-<table>
+</a></h4><p>Each node is configured with three network adapters.</p><table>
 <thead>
 <tr>
-<th><strong>Network</strong></th>
-<th><strong>NIC</strong></th>
-<th><strong>IP Addressing</strong></th>
-<th><strong>Notes</strong></th>
-</tr>
-</thead>
-<tbody>
+<th><strong>Network</strong></th><th><strong>NIC</strong></th><th><strong>IP Addressing</strong></th><th><strong>Notes</strong></th></tr></thead><tbody>
 <tr>
-<td>Management</td>
-<td>ens160</td>
-<td>192.168.10.0/24</td>
-<td>VLAN backed network used for management access from the Kubernetes nodes to the NSX Manager</td>
-</tr>
-<tr>
-<td>Kubernetes Access</td>
-<td>ens192</td>
-<td>10.0.0.0/24</td>
-<td>NSX-T segment (logical switch) that’s connected to the tier 1 router (t1-kubernetes) and provides access to Kubernetes nodes. Default route.</td>
-</tr>
-<tr>
-<td>Kubernetes Transport</td>
-<td>ens224</td>
-<td>None</td>
-<td>NSX-T segment (logical switch) that provides a transport network.</td>
-</tr>
-</tbody>
-</table>
-<p>Example <code>/etc/network/interfaces</code> file:</p>
-<div class=highlight><div class=chroma>
+<td>Management</td><td>ens160</td><td>192.168.10.0/24</td><td>VLAN backed network used for management access from the Kubernetes nodes to the NSX Manager</td></tr><tr>
+<td>Kubernetes Access</td><td>ens192</td><td>10.0.0.0/24</td><td>NSX-T segment (logical switch) that’s connected to the tier 1 router (t1-kubernetes) and provides access to Kubernetes nodes. Default route.</td></tr><tr>
+<td>Kubernetes Transport</td><td>ens224</td><td>None</td><td>NSX-T segment (logical switch) that provides a transport network.</td></tr></tbody></table><p>Example <code>/etc/network/interfaces</code> file:</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -260,36 +163,32 @@ same.</p>
 </span><span class=lnt>20
 </span><span class=lnt>21
 </span><span class=lnt>22
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>iface lo inet loopback
-auto lo
-
-<span class=c1># management</span>
-auto ens160
-iface ens160 inet static
-    address 192.168.10.90
-    netmask 255.255.255.0
-
-<span class=c1># k8s-access</span>
-auto ens192
-iface ens192 inet static
-    address 10.0.0.10
-    netmask 255.255.255.0
-    gateway 10.0.0.1
-    dns-nameservers	192.168.10.17
-    dns-search	definit.local
-
-<span class=c1># k8s-transport</span>
-auto ens224
-iface ens224 inet manual
-    up ip link <span class=nb>set</span> ens224 up
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=install-docker-and-kubernetes>Install Docker and Kubernetes <a class=anchor href=#install-docker-and-kubernetes>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>iface lo inet loopback
+</span></span><span class=line><span class=cl>auto lo
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># management</span>
+</span></span><span class=line><span class=cl>auto ens160
+</span></span><span class=line><span class=cl>iface ens160 inet static
+</span></span><span class=line><span class=cl>    address 192.168.10.90
+</span></span><span class=line><span class=cl>    netmask 255.255.255.0
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># k8s-access</span>
+</span></span><span class=line><span class=cl>auto ens192
+</span></span><span class=line><span class=cl>iface ens192 inet static
+</span></span><span class=line><span class=cl>    address 10.0.0.10
+</span></span><span class=line><span class=cl>    netmask 255.255.255.0
+</span></span><span class=line><span class=cl>    gateway 10.0.0.1
+</span></span><span class=line><span class=cl>    dns-nameservers	192.168.10.17
+</span></span><span class=line><span class=cl>    dns-search	definit.local
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># k8s-transport</span>
+</span></span><span class=line><span class=cl>auto ens224
+</span></span><span class=line><span class=cl>iface ens224 inet manual
+</span></span><span class=line><span class=cl>    up ip link <span class=nb>set</span> ens224 up
+</span></span></code></pre></td></tr></table></div></div><h2 id=install-docker-and-kubernetes>Install Docker and Kubernetes <a class=anchor href=#install-docker-and-kubernetes>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>Disable swap (required for kubelet to run), install Docker, and install Kubernetes 1.13.</p>
-<h4 id=master-and-worker-nodes><strong>Master and Worker Nodes</strong> <a class=anchor href=#master-and-worker-nodes>
+</a></h2><p>Disable swap (required for kubelet to run), install Docker, and install Kubernetes 1.13.</p><h4 id=master-and-worker-nodes><strong>Master and Worker Nodes</strong> <a class=anchor href=#master-and-worker-nodes>
 <i class="fas fa-hashtag"></i>
 </a></h4><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -310,29 +209,25 @@ iface ens224 inet manual
 </span><span class=lnt>15
 </span><span class=lnt>16
 </span><span class=lnt>17
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Disable swap</span>
-sudo swapoff -a
-<span class=c1># Update and upgrade</span>
-sudo apt-get update <span class=o>&amp;&amp;</span> sudo apt-get upgrade -y
-<span class=c1># Install docker</span>
-sudo apt-get install -y docker.io apt-transport-https curl
-<span class=c1># Start and enable docker</span>
-sudo systemctl start docker.service
-sudo systemctl <span class=nb>enable</span> docker.service
-<span class=c1># Add the Kubernetes repository and key</span>
-<span class=nb>echo</span> <span class=s2>&#34;deb  http://apt.kubernetes.io/  kubernetes-xenial  main&#34;</span> <span class=p>|</span> sudo tee -a /etc/apt/sources.list.d/kubernetes.list
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg <span class=p>|</span> sudo apt-key add -
-<span class=c1># Update package lists</span>
-sudo apt-get update
-<span class=c1># Install kubernetes 1.13 and hold the packages</span>
-sudo apt-get install -y <span class=nv>kubelet</span><span class=o>=</span>1.13.5-00 <span class=nv>kubeadm</span><span class=o>=</span>1.13.5-00 <span class=nv>kubectl</span><span class=o>=</span>1.13.5-00
-sudo apt-mark hold kubelet kubeadm kubectl
-</code></pre></td></tr></table>
-</div>
-</div><p>You should also edit /etc/fstab and comment out the swap line to ensure the swap stays disabled</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Disable swap</span>
+</span></span><span class=line><span class=cl>sudo swapoff -a
+</span></span><span class=line><span class=cl><span class=c1># Update and upgrade</span>
+</span></span><span class=line><span class=cl>sudo apt-get update <span class=o>&amp;&amp;</span> sudo apt-get upgrade -y
+</span></span><span class=line><span class=cl><span class=c1># Install docker</span>
+</span></span><span class=line><span class=cl>sudo apt-get install -y docker.io apt-transport-https curl
+</span></span><span class=line><span class=cl><span class=c1># Start and enable docker</span>
+</span></span><span class=line><span class=cl>sudo systemctl start docker.service
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> docker.service
+</span></span><span class=line><span class=cl><span class=c1># Add the Kubernetes repository and key</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;deb  http://apt.kubernetes.io/  kubernetes-xenial  main&#34;</span> <span class=p>|</span> sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+</span></span><span class=line><span class=cl>curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg <span class=p>|</span> sudo apt-key add -
+</span></span><span class=line><span class=cl><span class=c1># Update package lists</span>
+</span></span><span class=line><span class=cl>sudo apt-get update
+</span></span><span class=line><span class=cl><span class=c1># Install kubernetes 1.13 and hold the packages</span>
+</span></span><span class=line><span class=cl>sudo apt-get install -y <span class=nv>kubelet</span><span class=o>=</span>1.13.5-00 <span class=nv>kubeadm</span><span class=o>=</span>1.13.5-00 <span class=nv>kubectl</span><span class=o>=</span>1.13.5-00
+</span></span><span class=line><span class=cl>sudo apt-mark hold kubelet kubeadm kubectl
+</span></span></code></pre></td></tr></table></div></div><p>You should also edit /etc/fstab and comment out the swap line to ensure the swap stays disabled</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -345,25 +240,21 @@ sudo apt-mark hold kubelet kubeadm kubectl
 </span><span class=lnt> 9
 </span><span class=lnt>10
 </span><span class=lnt>11
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># /etc/fstab: static file system information.</span>
-<span class=c1>#</span>
-<span class=c1># Use &#39;blkid&#39; to print the universally unique identifier for a</span>
-<span class=c1># device; this may be used with UUID= as a more robust way to name devices</span>
-<span class=c1># that works even if disks are added and removed. See fstab(5).</span>
-<span class=c1>#</span>
-<span class=c1># &lt;file system&gt; &lt;mount point&gt;   &lt;type&gt;  &lt;options&gt;       &lt;dump&gt;  &lt;pass&gt;</span>
-/dev/mapper/ubuntu--1604--k8s--vg-root /               ext4    <span class=nv>errors</span><span class=o>=</span>remount-ro <span class=m>0</span>       <span class=m>1</span>
-<span class=c1># /boot was on /dev/sda1 during installation</span>
-<span class=nv>UUID</span><span class=o>=</span>0caaf4eb-734a-43f0-b4ef-b7b0a012abfc /boot           ext2    defaults        <span class=m>0</span>       <span class=m>2</span>
-<span class=c1>#/dev/mapper/ubuntu--1604--k8s--vg-swap_1 none            swap    sw              0       0</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=install-the-cni-plugin>Install the CNI Plugin <a class=anchor href=#install-the-cni-plugin>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># /etc/fstab: static file system information.</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl><span class=c1># Use &#39;blkid&#39; to print the universally unique identifier for a</span>
+</span></span><span class=line><span class=cl><span class=c1># device; this may be used with UUID= as a more robust way to name devices</span>
+</span></span><span class=line><span class=cl><span class=c1># that works even if disks are added and removed. See fstab(5).</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl><span class=c1># &lt;file system&gt; &lt;mount point&gt;   &lt;type&gt;  &lt;options&gt;       &lt;dump&gt;  &lt;pass&gt;</span>
+</span></span><span class=line><span class=cl>/dev/mapper/ubuntu--1604--k8s--vg-root /               ext4    <span class=nv>errors</span><span class=o>=</span>remount-ro <span class=m>0</span>       <span class=m>1</span>
+</span></span><span class=line><span class=cl><span class=c1># /boot was on /dev/sda1 during installation</span>
+</span></span><span class=line><span class=cl><span class=nv>UUID</span><span class=o>=</span>0caaf4eb-734a-43f0-b4ef-b7b0a012abfc /boot           ext2    defaults        <span class=m>0</span>       <span class=m>2</span>
+</span></span><span class=line><span class=cl><span class=c1>#/dev/mapper/ubuntu--1604--k8s--vg-swap_1 none            swap    sw              0       0</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=install-the-cni-plugin>Install the CNI Plugin <a class=anchor href=#install-the-cni-plugin>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>Download the NSX Container zip package to the home folder</p>
-<h4 id=master-and-worker-nodes-1><strong>Master and Worker Nodes</strong> <a class=anchor href=#master-and-worker-nodes-1>
+</a></h2><p>Download the NSX Container zip package to the home folder</p><h4 id=master-and-worker-nodes-1><strong>Master and Worker Nodes</strong> <a class=anchor href=#master-and-worker-nodes-1>
 <i class="fas fa-hashtag"></i>
 </a></h4><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -373,20 +264,16 @@ sudo apt-mark hold kubelet kubeadm kubectl
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Validate apparmor is enables (expected output is &#34;Y&#34;)</span>
-sudo cat /sys/module/apparmor/parameters/enabled
-<span class=c1># Extract the NSX Container package</span>
-unzip nsx-container-2.4.1.13515827.zip
-<span class=c1># Install the CNI Plugin</span>
-sudo dpkg -i nsx-container-2.4.1.13515827/Kubernetes/ubuntu_amd64/nsx-cni_2.4.1.13515827_amd64.deb
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=install-open-vswitch>Install Open vSwitch <a class=anchor href=#install-open-vswitch>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Validate apparmor is enables (expected output is &#34;Y&#34;)</span>
+</span></span><span class=line><span class=cl>sudo cat /sys/module/apparmor/parameters/enabled
+</span></span><span class=line><span class=cl><span class=c1># Extract the NSX Container package</span>
+</span></span><span class=line><span class=cl>unzip nsx-container-2.4.1.13515827.zip
+</span></span><span class=line><span class=cl><span class=c1># Install the CNI Plugin</span>
+</span></span><span class=line><span class=cl>sudo dpkg -i nsx-container-2.4.1.13515827/Kubernetes/ubuntu_amd64/nsx-cni_2.4.1.13515827_amd64.deb
+</span></span></code></pre></td></tr></table></div></div><h2 id=install-open-vswitch>Install Open vSwitch <a class=anchor href=#install-open-vswitch>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>You must install the Open vSwitch package bundled with the NSX Container plugin</p>
-<h4 id=master-and-worker-nodes-2><strong>Master and Worker Nodes</strong> <a class=anchor href=#master-and-worker-nodes-2>
+</a></h2><p>You must install the Open vSwitch package bundled with the NSX Container plugin</p><h4 id=master-and-worker-nodes-2><strong>Master and Worker Nodes</strong> <a class=anchor href=#master-and-worker-nodes-2>
 <i class="fas fa-hashtag"></i>
 </a></h4><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -394,18 +281,14 @@ sudo dpkg -i nsx-container-2.4.1.13515827/Kubernetes/ubuntu_amd64/nsx-cni_2.4.1.
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Install dependencies</span>
-sudo apt-get install -y dkms libc6-dev make python python-six python-argparse 
-<span class=c1># Install OVS</span>
-sudo dpkg -i nsx-container-2.4.1.13515827/OpenvSwitch/xenial_amd64/openvswitch-datapath-dkms_2.10.2.13185890-1_all.deb nsx-container-2.4.1.13515827/OpenvSwitch/xenial_amd64/openvswitch-common_2.10.2.13185890-1_amd64.deb nsx-container-2.4.1.13515827/OpenvSwitch/xenial_amd64/openvswitch-switch_2.10.2.13185890-1_amd64.deb nsx-container-2.4.1.13515827/OpenvSwitch/xenial_amd64/libopenvswitch_2.10.2.13185890-1_amd64.deb
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=configure-open-vswitch>Configure Open vSwitch <a class=anchor href=#configure-open-vswitch>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Install dependencies</span>
+</span></span><span class=line><span class=cl>sudo apt-get install -y dkms libc6-dev make python python-six python-argparse 
+</span></span><span class=line><span class=cl><span class=c1># Install OVS</span>
+</span></span><span class=line><span class=cl>sudo dpkg -i nsx-container-2.4.1.13515827/OpenvSwitch/xenial_amd64/openvswitch-datapath-dkms_2.10.2.13185890-1_all.deb nsx-container-2.4.1.13515827/OpenvSwitch/xenial_amd64/openvswitch-common_2.10.2.13185890-1_amd64.deb nsx-container-2.4.1.13515827/OpenvSwitch/xenial_amd64/openvswitch-switch_2.10.2.13185890-1_amd64.deb nsx-container-2.4.1.13515827/OpenvSwitch/xenial_amd64/libopenvswitch_2.10.2.13185890-1_amd64.deb
+</span></span></code></pre></td></tr></table></div></div><h2 id=configure-open-vswitch>Configure Open vSwitch <a class=anchor href=#configure-open-vswitch>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>Open vSwitch should be configured to use the network interface</p>
-<h4 id=master-and-worker-nodes-3><strong>Master and Worker Nodes</strong> <a class=anchor href=#master-and-worker-nodes-3>
+</a></h2><p>Open vSwitch should be configured to use the network interface</p><h4 id=master-and-worker-nodes-3><strong>Master and Worker Nodes</strong> <a class=anchor href=#master-and-worker-nodes-3>
 <i class="fas fa-hashtag"></i>
 </a></h4><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -416,184 +299,96 @@ sudo dpkg -i nsx-container-2.4.1.13515827/OpenvSwitch/xenial_amd64/openvswitch-d
 </span><span class=lnt>5
 </span><span class=lnt>6
 </span><span class=lnt>7
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Create the OVS Bridge</span>
-sudo ovs-vsctl add-br br-int
-<span class=c1># Assign the k8s-transport interface for overlay traffic</span>
-sudo ovs-vsctl add-port br-int ens224 -- <span class=nb>set</span> Interface ens224 <span class=nv>ofport_request</span><span class=o>=</span><span class=m>1</span>
-<span class=c1># Bring the bridge and overlay interface up</span>
-sudo ip link <span class=nb>set</span> br-int up
-sudo ip link <span class=nb>set</span> ens224 up
-</code></pre></td></tr></table>
-</div>
-</div><h1 id=configure-nsx-t-resources>Configure NSX-T Resources <a class=anchor href=#configure-nsx-t-resources>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Create the OVS Bridge</span>
+</span></span><span class=line><span class=cl>sudo ovs-vsctl add-br br-int
+</span></span><span class=line><span class=cl><span class=c1># Assign the k8s-transport interface for overlay traffic</span>
+</span></span><span class=line><span class=cl>sudo ovs-vsctl add-port br-int ens224 -- <span class=nb>set</span> Interface ens224 <span class=nv>ofport_request</span><span class=o>=</span><span class=m>1</span>
+</span></span><span class=line><span class=cl><span class=c1># Bring the bridge and overlay interface up</span>
+</span></span><span class=line><span class=cl>sudo ip link <span class=nb>set</span> br-int up
+</span></span><span class=line><span class=cl>sudo ip link <span class=nb>set</span> ens224 up
+</span></span></code></pre></td></tr></table></div></div><h1 id=configure-nsx-t-resources>Configure NSX-T Resources <a class=anchor href=#configure-nsx-t-resources>
 <i class="fas fa-hashtag"></i>
 </a></h1><p>NSX-T 2.4 introduces a new intent-based policy API, which is reflected in the
 changes in the user interface. Unfortunately the NCP does not use the new policy
 API, so the objects created for consumption by NCP must be created using the
-&ldquo;Advanced Networking and Security&rdquo; tab.</p>
-<p>For all components, collect the object ID for later use.</p>
-<h2 id=overlay-transport-zone>Overlay Transport Zone <a class=anchor href=#overlay-transport-zone>
+&ldquo;Advanced Networking and Security&rdquo; tab.</p><p>For all components, collect the object ID for later use.</p><h2 id=overlay-transport-zone>Overlay Transport Zone <a class=anchor href=#overlay-transport-zone>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>Create, or use an existing overlay transport zone</p>
-<div class=clr-content-image-wrap>
+</a></h2><p>Create, or use an existing overlay transport zone</p><div class=clr-content-image-wrap>
 <a href=index.images/XGZRmk.png data-lightbox=index.images/XGZRmk.png data-title class=lb>
 <img class=lb src=index.images/XGZRmk.png alt>
 </a>
-<figcaption class=clr-caption></figcaption>
-</div>
-<h2 id=routers>Routers <a class=anchor href=#routers>
+<figcaption class=clr-caption></figcaption></div><h2 id=routers>Routers <a class=anchor href=#routers>
 <i class="fas fa-hashtag"></i>
 </a></h2><h3 id=tier-0>Tier 0 <a class=anchor href=#tier-0>
 <i class="fas fa-hashtag"></i>
 </a></h3><p>Deploy and configure a tier 0 router, this will be the point of ingress/egress
 to the NSX-T networks. The router must be created in active/standby mode, since
-stateful services are required (NAT).</p>
-<h3 id=tier-1>Tier 1 <a class=anchor href=#tier-1>
+stateful services are required (NAT).</p><h3 id=tier-1>Tier 1 <a class=anchor href=#tier-1>
 <i class="fas fa-hashtag"></i>
 </a></h3><p>Deploy and configure a tier 1 router, this router will provide access to the
 Kubernetes cluster via the <em>k8s-access</em> segment created below. The tier 1 router
 should be connected to the tier 0 router, and a router port configured for the
-<em>k8s-access</em> segment.</p>
-<div class=clr-content-image-wrap>
+<em>k8s-access</em> segment.</p><div class=clr-content-image-wrap>
 <a href=index.images/Qa9NvS.png data-lightbox=index.images/Qa9NvS.png data-title class=lb>
 <img class=lb src=index.images/Qa9NvS.png alt>
 </a>
-<figcaption class=clr-caption></figcaption>
-</div>
-<h2 id=segments>Segments <a class=anchor href=#segments>
+<figcaption class=clr-caption></figcaption></div><h2 id=segments>Segments <a class=anchor href=#segments>
 <i class="fas fa-hashtag"></i>
 </a></h2><h3 id=k8s-transport>k8s-transport <a class=anchor href=#k8s-transport>
 <i class="fas fa-hashtag"></i>
 </a></h3><p>The switch ports for the kubernetes nodes on the transport need to be tagged so
-that the NCP can identify them.</p>
-<table>
+that the NCP can identify them.</p><table>
 <thead>
 <tr>
-<th><strong>Tag</strong></th>
-<th><strong>Scope</strong></th>
-</tr>
-</thead>
-<tbody>
+<th><strong>Tag</strong></th><th><strong>Scope</strong></th></tr></thead><tbody>
 <tr>
-<td>&lt;node name></td>
-<td>ncp/node_name</td>
-</tr>
-<tr>
-<td>&lt;kubernetes cluster name></td>
-<td>ncp/cluster</td>
-</tr>
-</tbody>
-</table>
-<h3 id=k8s-access>k8s-access <a class=anchor href=#k8s-access>
+<td>&lt;node name></td><td>ncp/node_name</td></tr><tr>
+<td>&lt;kubernetes cluster name></td><td>ncp/cluster</td></tr></tbody></table><h3 id=k8s-access>k8s-access <a class=anchor href=#k8s-access>
 <i class="fas fa-hashtag"></i>
 </a></h3><p>The k8s-access segment will be the API access to the Kubernetes cluster. It
-should be created and connected to the a router port on the tier 1 router.</p>
-<h2 id=ip-blocks>IP Blocks <a class=anchor href=#ip-blocks>
+should be created and connected to the a router port on the tier 1 router.</p><h2 id=ip-blocks>IP Blocks <a class=anchor href=#ip-blocks>
 <i class="fas fa-hashtag"></i>
 </a></h2><table>
 <thead>
 <tr>
-<th><strong>Name</strong></th>
-<th><strong>CIDR</strong></th>
-<th><strong>Notes</strong></th>
-</tr>
-</thead>
-<tbody>
+<th><strong>Name</strong></th><th><strong>CIDR</strong></th><th><strong>Notes</strong></th></tr></thead><tbody>
 <tr>
-<td>k8s-pod-network</td>
-<td>172.16.0.0/16</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id=ip-pool-for-snat>IP Pool for SNAT <a class=anchor href=#ip-pool-for-snat>
+<td>k8s-pod-network</td><td>172.16.0.0/16</td><td></td></tr></tbody></table><h2 id=ip-pool-for-snat>IP Pool for SNAT <a class=anchor href=#ip-pool-for-snat>
 <i class="fas fa-hashtag"></i>
 </a></h2><p>Create an IP pool in NSX Manager that is for allocating IP addresses for
 translating Pod IPs and Ingress controllers using SNAT/DNAT rules. These IP
-addresses are also referred to as external IPs.</p>
-<table>
+addresses are also referred to as external IPs.</p><table>
 <thead>
 <tr>
-<th><strong>Name</strong></th>
-<th><strong>Range</strong></th>
-<th><strong>CIDR</strong></th>
-</tr>
-</thead>
-<tbody>
+<th><strong>Name</strong></th><th><strong>Range</strong></th><th><strong>CIDR</strong></th></tr></thead><tbody>
 <tr>
-<td>k8s-snat</td>
-<td>10.0.1.1-10.0.1.254</td>
-<td>10.0.1.0/24</td>
-</tr>
-</tbody>
-</table>
-<p> </p>
-<div class=clr-content-image-wrap>
+<td>k8s-snat</td><td>10.0.1.1-10.0.1.254</td><td>10.0.1.0/24</td></tr></tbody></table><p> </p><div class=clr-content-image-wrap>
 <a href=index.images/KpA6q2.png data-lightbox=index.images/KpA6q2.png data-title class=lb>
 <img class=lb src=index.images/KpA6q2.png alt>
 </a>
-<figcaption class=clr-caption></figcaption>
-</div>
-<h2 id=firewall>Firewall <a class=anchor href=#firewall>
+<figcaption class=clr-caption></figcaption></div><h2 id=firewall>Firewall <a class=anchor href=#firewall>
 <i class="fas fa-hashtag"></i>
 </a></h2><p>The NCP plugin creates firewall rules for pod isolation and policy for access
 between a “top” and “bottom” marker section. By default, if these marker
 sections are not created, all isolation rules will be created at the bottom of
 the list, and all access policy sections will be created at the top. If you want
 to control the rule positions (why wouldn’t you?!) you need to create some
-markers.</p>
-<div class=clr-content-image-wrap>
+markers.</p><div class=clr-content-image-wrap>
 <a href=index.images/MGagKG.png data-lightbox=index.images/MGagKG.png data-title class=lb>
 <img class=lb src=index.images/MGagKG.png alt>
 </a>
-<figcaption class=clr-caption></figcaption>
-</div>
-<p>Collect the component IDs to use later in the NCP configuration</p>
-<table>
+<figcaption class=clr-caption></figcaption></div><p>Collect the component IDs to use later in the NCP configuration</p><table>
 <thead>
 <tr>
-<th><strong>Component</strong></th>
-<th><strong>Name</strong></th>
-<th><strong>ID</strong></th>
-</tr>
-</thead>
-<tbody>
+<th><strong>Component</strong></th><th><strong>Name</strong></th><th><strong>ID</strong></th></tr></thead><tbody>
 <tr>
-<td>Tier 0 Router</td>
-<td>t0-kubernetes</td>
-<td>b92fbb43-b664-46e9-bd4a-d8d46dac82f8</td>
-</tr>
-<tr>
-<td>Overlay Transport Zone</td>
-<td>tz-overlay</td>
-<td>f99ba556-eafe-4c23-beaf-8df1723a354e</td>
-</tr>
-<tr>
-<td>Pod IP Block</td>
-<td>k8s-pod-network</td>
-<td>ab81892f-eb9a-4248-8606-b26f2293fa83</td>
-</tr>
-<tr>
-<td>External IP Pool</td>
-<td>k8s-snat-ip-pool</td>
-<td>dde463fb-15d9-456f-aa3d-030e24f1b1db</td>
-</tr>
-<tr>
-<td>Top Firewall Marker</td>
-<td>k8s-top</td>
-<td>f887ba4f-d634-44ff-8338-05c4a214cc93</td>
-</tr>
-<tr>
-<td>Bottom Firewall Marker</td>
-<td>k8s-bottom</td>
-<td>820da106-a35c-43c0-bcf0-edaf94004d9e</td>
-</tr>
-</tbody>
-</table>
-<p> </p>
-<h1 id=create-the-kubernetes-cluster>Create the Kubernetes Cluster <a class=anchor href=#create-the-kubernetes-cluster>
+<td>Tier 0 Router</td><td>t0-kubernetes</td><td>b92fbb43-b664-46e9-bd4a-d8d46dac82f8</td></tr><tr>
+<td>Overlay Transport Zone</td><td>tz-overlay</td><td>f99ba556-eafe-4c23-beaf-8df1723a354e</td></tr><tr>
+<td>Pod IP Block</td><td>k8s-pod-network</td><td>ab81892f-eb9a-4248-8606-b26f2293fa83</td></tr><tr>
+<td>External IP Pool</td><td>k8s-snat-ip-pool</td><td>dde463fb-15d9-456f-aa3d-030e24f1b1db</td></tr><tr>
+<td>Top Firewall Marker</td><td>k8s-top</td><td>f887ba4f-d634-44ff-8338-05c4a214cc93</td></tr><tr>
+<td>Bottom Firewall Marker</td><td>k8s-bottom</td><td>820da106-a35c-43c0-bcf0-edaf94004d9e</td></tr></tbody></table><p> </p><h1 id=create-the-kubernetes-cluster>Create the Kubernetes Cluster <a class=anchor href=#create-the-kubernetes-cluster>
 <i class="fas fa-hashtag"></i>
 </a></h1><h2 id=initialise-the-cluster>Initialise the Cluster <a class=anchor href=#initialise-the-cluster>
 <i class="fas fa-hashtag"></i>
@@ -607,89 +402,70 @@ markers.</p>
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Initialise the cluster using the master node&#39;s k8s-access IP address</span>
-sudo kubeadm init --apiserver-advertise-address<span class=o>=</span>10.0.0.10
-<span class=c1># Copy the Kubernetes config to the non-root user</span>
-mkdir -p <span class=nv>$HOME</span>/.kube
-sudo cp -i /etc/kubernetes/admin.conf <span class=nv>$HOME</span>/.kube/config
-sudo chown <span class=k>$(</span>id -u<span class=k>)</span>:<span class=k>$(</span>id -g<span class=k>)</span> <span class=nv>$HOME</span>/.kube/config
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=join-the-cluster-from-the-worker-nodes>Join the Cluster from the worker nodes <a class=anchor href=#join-the-cluster-from-the-worker-nodes>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Initialise the cluster using the master node&#39;s k8s-access IP address</span>
+</span></span><span class=line><span class=cl>sudo kubeadm init --apiserver-advertise-address<span class=o>=</span>10.0.0.10
+</span></span><span class=line><span class=cl><span class=c1># Copy the Kubernetes config to the non-root user</span>
+</span></span><span class=line><span class=cl>mkdir -p <span class=nv>$HOME</span>/.kube
+</span></span><span class=line><span class=cl>sudo cp -i /etc/kubernetes/admin.conf <span class=nv>$HOME</span>/.kube/config
+</span></span><span class=line><span class=cl>sudo chown <span class=k>$(</span>id -u<span class=k>)</span>:<span class=k>$(</span>id -g<span class=k>)</span> <span class=nv>$HOME</span>/.kube/config
+</span></span></code></pre></td></tr></table></div></div><h2 id=join-the-cluster-from-the-worker-nodes>Join the Cluster from the worker nodes <a class=anchor href=#join-the-cluster-from-the-worker-nodes>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>Grab the join command from the output of the master node init command</p>
-<h4 id=worker-nodes><strong>Worker Nodes</strong> <a class=anchor href=#worker-nodes>
+</a></h2><p>Grab the join command from the output of the master node init command</p><h4 id=worker-nodes><strong>Worker Nodes</strong> <a class=anchor href=#worker-nodes>
 <i class="fas fa-hashtag"></i>
 </a></h4><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Join each node</span>
-sudo kubeadm join 10.0.0.10:6443 --token u1kyen.mr7aeihrkkuz597h --discovery-token-ca-cert-hash sha256:f214d9abdadd1752405250bc99c69dee4d51d24d1940b8984948c4bee7c382a3
-</code></pre></td></tr></table>
-</div>
-</div><h1 id=configuring-ncp>Configuring NCP <a class=anchor href=#configuring-ncp>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Join each node</span>
+</span></span><span class=line><span class=cl>sudo kubeadm join 10.0.0.10:6443 --token u1kyen.mr7aeihrkkuz597h --discovery-token-ca-cert-hash sha256:f214d9abdadd1752405250bc99c69dee4d51d24d1940b8984948c4bee7c382a3
+</span></span></code></pre></td></tr></table></div></div><h1 id=configuring-ncp>Configuring NCP <a class=anchor href=#configuring-ncp>
 <i class="fas fa-hashtag"></i>
 </a></h1><h2 id=load-the-ncp-docker-image>Load the NCP Docker Image <a class=anchor href=#load-the-ncp-docker-image>
 <i class="fas fa-hashtag"></i>
 </a></h2><p>Import the NCP docker image to the local repository on each Kubernetes node. The
 image will be loaded with a long and ugly name
 &ldquo;registry.local/2.4.1.13515827/nsx-ncp-ubuntu”, so to keep the config files
-simple and to help with upgrades later, tag the image to create an alias.</p>
-<h4 id=master-and-worker-nodes-4><strong>Master and Worker Nodes</strong> <a class=anchor href=#master-and-worker-nodes-4>
+simple and to help with upgrades later, tag the image to create an alias.</p><h4 id=master-and-worker-nodes-4><strong>Master and Worker Nodes</strong> <a class=anchor href=#master-and-worker-nodes-4>
 <i class="fas fa-hashtag"></i>
 </a></h4><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo docker load -i nsx-container-2.4.1.13515827/Kubernetes/nsx-ncp-ubuntu-2.4.1.13515827.tar
-sudo docker image tag registry.local/2.4.1.13515827/nsx-ncp-ubuntu nsx-ncp-ubuntu:2.4.1.13515827
-</code></pre></td></tr></table>
-</div>
-</div><p>Now you can refer to the image as nsx-ncp-ubuntu:2.4.1.13515827 in the config
-files.</p>
-<h2 id=create-a-namespace-roles-service-accounts>Create a namespace, roles, service accounts <a class=anchor href=#create-a-namespace-roles-service-accounts>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo docker load -i nsx-container-2.4.1.13515827/Kubernetes/nsx-ncp-ubuntu-2.4.1.13515827.tar
+</span></span><span class=line><span class=cl>sudo docker image tag registry.local/2.4.1.13515827/nsx-ncp-ubuntu nsx-ncp-ubuntu:2.4.1.13515827
+</span></span></code></pre></td></tr></table></div></div><p>Now you can refer to the image as nsx-ncp-ubuntu:2.4.1.13515827 in the config
+files.</p><h2 id=create-a-namespace-roles-service-accounts>Create a namespace, roles, service accounts <a class=anchor href=#create-a-namespace-roles-service-accounts>
 <i class="fas fa-hashtag"></i>
 </a></h2><p>The NCP pod can run in the <strong>default</strong> or <strong>kube-system</strong> namespaces, however
 creating a namespace for pods to run in is considered a best practice and allows
-more granular control over access and permissions.</p>
-<div class=highlight><div class=chroma>
+more granular control over access and permissions.</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=c># Create Namespace for NSX resources</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Namespace</span><span class=w>
-</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
-</span></code></pre></td></tr></table>
-</div>
-</div><p>The recommended RBAC policy for the NCP pod is documented under <a href=https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-AC96C51A-052B-403F-9670-67E55C4C9170.html>Security
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=c># Create Namespace for NSX resources</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Namespace</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>The recommended RBAC policy for the NCP pod is documented under <a href=https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-AC96C51A-052B-403F-9670-67E55C4C9170.html>Security
 Considerations in the NSX-T NCP
 documentation</a>.
 We can modify this policy to create the namespace, service account and role
-resources.</p>
-<p>The first <strong>ServiceAccount</strong> we create is called <em>ncp-svc</em> along with two
+resources.</p><p>The first <strong>ServiceAccount</strong> we create is called <em>ncp-svc</em> along with two
 <strong>ClusterRoles</strong> <em>ncp-cluster-role</em> and <em>ncp-patch-role</em>. The two roles are
 assigned to the new <strong>ServiceAccount</strong> using two <strong>ClusterRoleBinding</strong>. As the
-name suggests the account is used to run processes in the NCP pod.</p>
-<p>Figuring out these YAML files can be daunting, especially when you’re just
+name suggests the account is used to run processes in the NCP pod.</p><p>Figuring out these YAML files can be daunting, especially when you’re just
 getting started like me. I found the official documentation pretty useful to
 understand how Kubernetes service accounts and roles interact - see <a href=https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/>Managing
 Service
-Accounts</a>.</p>
-<div class=highlight><div class=chroma>
+Accounts</a>.</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>  1
 </span><span class=lnt>  2
@@ -812,136 +588,132 @@ Accounts</a>.</p>
 </span><span class=lnt>119
 </span><span class=lnt>120
 </span><span class=lnt>121
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=c># Create a ServiceAccount for NCP namespace</span><span class=w>
-</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ServiceAccount</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-svc</span><span class=w>
-</span><span class=w> </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=nn>---</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=c># Create ClusterRole for NCP</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRole</span><span class=w>
-</span><span class=w></span><span class=c># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span class=w>
-</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io/v1</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-cluster-role</span><span class=w>
-</span><span class=w></span><span class=nt>rules</span><span class=p>:</span><span class=w>
-</span><span class=w> </span>- <span class=nt>apiGroups</span><span class=p>:</span><span class=w>
-</span><span class=w>   </span>- <span class=s2>&#34;&#34;</span><span class=w>
-</span><span class=w>   </span>- <span class=l>extensions</span><span class=w>
-</span><span class=w>   </span>- <span class=l>networking.k8s.io</span><span class=w>
-</span><span class=w>   </span><span class=nt>resources</span><span class=p>:</span><span class=w>
-</span><span class=w>     </span>- <span class=l>deployments</span><span class=w>
-</span><span class=w>     </span>- <span class=l>endpoints</span><span class=w>
-</span><span class=w>     </span>- <span class=l>pods</span><span class=w>
-</span><span class=w>     </span>- <span class=l>pods/log</span><span class=w>
-</span><span class=w>     </span>- <span class=l>networkpolicies</span><span class=w>
-</span><span class=w>     </span><span class=c># Move &#39;nodes&#39; to ncp-patch-role when hyperbus is disabled.</span><span class=w>
-</span><span class=w>     </span>- <span class=l>nodes</span><span class=w>
-</span><span class=w>     </span>- <span class=l>replicationcontrollers</span><span class=w>
-</span><span class=w>     </span><span class=c># Remove &#39;secrets&#39; if not using Native Load Balancer.</span><span class=w>
-</span><span class=w>     </span>- <span class=l>secrets</span><span class=w>
-</span><span class=w>   </span><span class=nt>verbs</span><span class=p>:</span><span class=w>
-</span><span class=w>     </span>- <span class=l>get</span><span class=w>
-</span><span class=w>     </span>- <span class=l>watch</span><span class=w>
-</span><span class=w>     </span>- <span class=l>list</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=nn>---</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=c># Create ClusterRole for NCP to edit resources</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRole</span><span class=w>
-</span><span class=w></span><span class=c># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span class=w>
-</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io/v1</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-patch-role</span><span class=w>
-</span><span class=w></span><span class=nt>rules</span><span class=p>:</span><span class=w>
-</span><span class=w> </span>- <span class=nt>apiGroups</span><span class=p>:</span><span class=w>
-</span><span class=w>   </span>- <span class=s2>&#34;&#34;</span><span class=w>
-</span><span class=w>   </span>- <span class=l>extensions</span><span class=w>
-</span><span class=w>   </span><span class=nt>resources</span><span class=p>:</span><span class=w>
-</span><span class=w>     </span><span class=c># NCP needs to annotate the SNAT errors on namespaces</span><span class=w>
-</span><span class=w>     </span>- <span class=l>namespaces</span><span class=w>
-</span><span class=w>     </span>- <span class=l>ingresses</span><span class=w>
-</span><span class=w>     </span>- <span class=l>services</span><span class=w>
-</span><span class=w>   </span><span class=nt>verbs</span><span class=p>:</span><span class=w>
-</span><span class=w>     </span>- <span class=l>get</span><span class=w>
-</span><span class=w>     </span>- <span class=l>watch</span><span class=w>
-</span><span class=w>     </span>- <span class=l>list</span><span class=w>
-</span><span class=w>     </span>- <span class=l>update</span><span class=w>
-</span><span class=w>     </span>- <span class=l>patch</span><span class=w>
-</span><span class=w> </span><span class=c># NCP needs permission to CRUD custom resource nsxerrors</span><span class=w>
-</span><span class=w> </span>- <span class=nt>apiGroups</span><span class=p>:</span><span class=w>
-</span><span class=w>   </span><span class=c># The api group is specified in custom resource definition for nsxerrors</span><span class=w>
-</span><span class=w>   </span>- <span class=l>nsx.vmware.com</span><span class=w>
-</span><span class=w>   </span><span class=nt>resources</span><span class=p>:</span><span class=w>
-</span><span class=w>     </span>- <span class=l>nsxerrors</span><span class=w>
-</span><span class=w>     </span>- <span class=l>nsxnetworkinterfaces</span><span class=w>
-</span><span class=w>     </span>- <span class=l>nsxlocks</span><span class=w>
-</span><span class=w>   </span><span class=nt>verbs</span><span class=p>:</span><span class=w>
-</span><span class=w>     </span>- <span class=l>create</span><span class=w>
-</span><span class=w>     </span>- <span class=l>get</span><span class=w>
-</span><span class=w>     </span>- <span class=l>list</span><span class=w>
-</span><span class=w>     </span>- <span class=l>patch</span><span class=w>
-</span><span class=w>     </span>- <span class=l>delete</span><span class=w>
-</span><span class=w>     </span>- <span class=l>watch</span><span class=w>
-</span><span class=w>     </span>- <span class=l>update</span><span class=w>
-</span><span class=w> </span>- <span class=nt>apiGroups</span><span class=p>:</span><span class=w>
-</span><span class=w>   </span>- <span class=s2>&#34;&#34;</span><span class=w>
-</span><span class=w>   </span>- <span class=l>extensions</span><span class=w>
-</span><span class=w>   </span>- <span class=l>nsx.vmware.com</span><span class=w>
-</span><span class=w>   </span><span class=nt>resources</span><span class=p>:</span><span class=w>
-</span><span class=w>     </span>- <span class=l>ingresses/status</span><span class=w>
-</span><span class=w>     </span>- <span class=l>services/status</span><span class=w>
-</span><span class=w>     </span>- <span class=l>nsxnetworkinterfaces/status</span><span class=w>
-</span><span class=w>   </span><span class=nt>verbs</span><span class=p>:</span><span class=w>
-</span><span class=w>     </span>- <span class=l>replace</span><span class=w>
-</span><span class=w>     </span>- <span class=l>update</span><span class=w>
-</span><span class=w>     </span>- <span class=l>patch</span><span class=w>
-</span><span class=w></span><span class=nn>---</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=c># Bind ServiceAccount created for NCP to its ClusterRole</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRoleBinding</span><span class=w>
-</span><span class=w></span><span class=c># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span class=w>
-</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io/v1</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-cluster-role-binding</span><span class=w>
-</span><span class=w></span><span class=nt>roleRef</span><span class=p>:</span><span class=w>
-</span><span class=w> </span><span class=c># Comment out the apiGroup while using OpenShift</span><span class=w>
-</span><span class=w> </span><span class=nt>apiGroup</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io</span><span class=w>
-</span><span class=w> </span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRole</span><span class=w>
-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-cluster-role</span><span class=w>
-</span><span class=w></span><span class=nt>subjects</span><span class=p>:</span><span class=w>
-</span><span class=w> </span>- <span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ServiceAccount</span><span class=w>
-</span><span class=w>   </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-svc</span><span class=w>
-</span><span class=w>   </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=nn>---</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=c># Bind ServiceAccount created for NCP to the patch ClusterRole</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRoleBinding</span><span class=w>
-</span><span class=w></span><span class=c># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span class=w>
-</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io/v1</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-patch-role-binding</span><span class=w>
-</span><span class=w></span><span class=nt>roleRef</span><span class=p>:</span><span class=w>
-</span><span class=w> </span><span class=nt>apiGroup</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io</span><span class=w>
-</span><span class=w> </span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRole</span><span class=w>
-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-patch-role</span><span class=w>
-</span><span class=w></span><span class=nt>subjects</span><span class=p>:</span><span class=w>
-</span><span class=w> </span>- <span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ServiceAccount</span><span class=w>
-</span><span class=w>   </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-svc</span><span class=w>
-</span><span class=w>   </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
-</span></code></pre></td></tr></table>
-</div>
-</div><p>The second <strong>ServiceAccount</strong> we need to create is called <em>nsx-agent-svc</em>, which
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=c># Create a ServiceAccount for NCP namespace</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ServiceAccount</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-svc</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nn>---</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># Create ClusterRole for NCP</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRole</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io/v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-cluster-role</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>rules</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span>- <span class=nt>apiGroups</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span>- <span class=s2>&#34;&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span>- <span class=l>extensions</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span>- <span class=l>networking.k8s.io</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>resources</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>deployments</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>endpoints</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>pods</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>pods/log</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>networkpolicies</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span><span class=c># Move &#39;nodes&#39; to ncp-patch-role when hyperbus is disabled.</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>nodes</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>replicationcontrollers</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span><span class=c># Remove &#39;secrets&#39; if not using Native Load Balancer.</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>secrets</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>verbs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>get</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>watch</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>list</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nn>---</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># Create ClusterRole for NCP to edit resources</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRole</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io/v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-patch-role</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>rules</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span>- <span class=nt>apiGroups</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span>- <span class=s2>&#34;&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span>- <span class=l>extensions</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>resources</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span><span class=c># NCP needs to annotate the SNAT errors on namespaces</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>namespaces</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>ingresses</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>services</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>verbs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>get</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>watch</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>list</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>update</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>patch</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=c># NCP needs permission to CRUD custom resource nsxerrors</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span>- <span class=nt>apiGroups</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=c># The api group is specified in custom resource definition for nsxerrors</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span>- <span class=l>nsx.vmware.com</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>resources</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>nsxerrors</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>nsxnetworkinterfaces</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>nsxlocks</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>verbs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>create</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>get</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>list</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>patch</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>delete</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>watch</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>update</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span>- <span class=nt>apiGroups</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span>- <span class=s2>&#34;&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span>- <span class=l>extensions</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span>- <span class=l>nsx.vmware.com</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>resources</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>ingresses/status</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>services/status</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>nsxnetworkinterfaces/status</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>verbs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>replace</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>update</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>patch</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nn>---</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># Bind ServiceAccount created for NCP to its ClusterRole</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRoleBinding</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io/v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-cluster-role-binding</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>roleRef</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=c># Comment out the apiGroup while using OpenShift</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>apiGroup</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRole</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-cluster-role</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>subjects</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span>- <span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ServiceAccount</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-svc</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nn>---</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># Bind ServiceAccount created for NCP to the patch ClusterRole</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRoleBinding</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io/v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-patch-role-binding</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>roleRef</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>apiGroup</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRole</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-patch-role</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>subjects</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span>- <span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ServiceAccount</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ncp-svc</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>The second <strong>ServiceAccount</strong> we need to create is called <em>nsx-agent-svc</em>, which
 is used to run the NSX Node Agent Pod. We create a <strong>ClusterRole</strong> to assign the
 required permissions, and then another <strong>ClusterRoleBinding</strong> to assign the
-account to the role.</p>
-<div class=highlight><div class=chroma>
+account to the role.</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -988,68 +760,61 @@ account to the role.</p>
 </span><span class=lnt>43
 </span><span class=lnt>44
 </span><span class=lnt>45
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=c># Create a ServiceAccount for nsx-node-agent</span><span class=w>
-</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ServiceAccount</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-agent-svc</span><span class=w>
-</span><span class=w> </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=nn>---</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=c># Create ClusterRole for nsx-node-agent</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRole</span><span class=w>
-</span><span class=w></span><span class=c># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span class=w>
-</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io/v1</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-agent-cluster-role</span><span class=w>
-</span><span class=w></span><span class=nt>rules</span><span class=p>:</span><span class=w>
-</span><span class=w> </span>- <span class=nt>apiGroups</span><span class=p>:</span><span class=w>
-</span><span class=w>   </span>- <span class=s2>&#34;&#34;</span><span class=w>
-</span><span class=w>   </span><span class=nt>resources</span><span class=p>:</span><span class=w>
-</span><span class=w>     </span>- <span class=l>endpoints</span><span class=w>
-</span><span class=w>     </span>- <span class=l>services</span><span class=w>
-</span><span class=w>     </span><span class=c># Uncomment the following resources when hyperbus is disabled</span><span class=w>
-</span><span class=w>     </span><span class=c># - nodes</span><span class=w>
-</span><span class=w>     </span><span class=c># - pods</span><span class=w>
-</span><span class=w>   </span><span class=nt>verbs</span><span class=p>:</span><span class=w>
-</span><span class=w>     </span>- <span class=l>get</span><span class=w>
-</span><span class=w>     </span>- <span class=l>watch</span><span class=w>
-</span><span class=w>     </span>- <span class=l>list</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=nn>---</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=c># Bind ServiceAccount created for nsx-node-agent to its ClusterRole</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRoleBinding</span><span class=w>
-</span><span class=w></span><span class=c># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span class=w>
-</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io/v1</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-agent-cluster-role-binding</span><span class=w>
-</span><span class=w></span><span class=nt>roleRef</span><span class=p>:</span><span class=w>
-</span><span class=w> </span><span class=nt>apiGroup</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io</span><span class=w>
-</span><span class=w> </span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRole</span><span class=w>
-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-agent-cluster-role</span><span class=w>
-</span><span class=w></span><span class=nt>subjects</span><span class=p>:</span><span class=w>
-</span><span class=w> </span>- <span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ServiceAccount</span><span class=w>
-</span><span class=w>   </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-agent-svc</span><span class=w>
-</span><span class=w>   </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
-</span></code></pre></td></tr></table>
-</div>
-</div><p>Save the namespace, NCP and NSX Agent config as a single YAML file called
-nsx-ncp-rbac.yml, and then deploy the new resources using the following command:</p>
-<h4 id=master-node-or-admin-workstation><strong>Master Node or Admin Workstation</strong> <a class=anchor href=#master-node-or-admin-workstation>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=c># Create a ServiceAccount for nsx-node-agent</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ServiceAccount</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-agent-svc</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nn>---</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># Create ClusterRole for nsx-node-agent</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRole</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io/v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-agent-cluster-role</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>rules</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span>- <span class=nt>apiGroups</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span>- <span class=s2>&#34;&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>resources</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>endpoints</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>services</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span><span class=c># Uncomment the following resources when hyperbus is disabled</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span><span class=c># - nodes</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span><span class=c># - pods</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>verbs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>get</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>watch</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span>- <span class=l>list</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nn>---</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># Bind ServiceAccount created for nsx-node-agent to its ClusterRole</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRoleBinding</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># Set the apiVersion to rbac.authorization.k8s.io/v1beta1 when k8s &lt; v1.8</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io/v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-agent-cluster-role-binding</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>roleRef</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>apiGroup</span><span class=p>:</span><span class=w> </span><span class=l>rbac.authorization.k8s.io</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterRole</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-agent-cluster-role</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>subjects</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span>- <span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ServiceAccount</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-agent-svc</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>Save the namespace, NCP and NSX Agent config as a single YAML file called
+nsx-ncp-rbac.yml, and then deploy the new resources using the following command:</p><h4 id=master-node-or-admin-workstation><strong>Master Node or Admin Workstation</strong> <a class=anchor href=#master-node-or-admin-workstation>
 <i class="fas fa-hashtag"></i>
 </a></h4><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>kubectl apply -f nsx-ncp-rbac.yml
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=prepare-the-ncp-config-file>Prepare the NCP config file <a class=anchor href=#prepare-the-ncp-config-file>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>kubectl apply -f nsx-ncp-rbac.yml
+</span></span></code></pre></td></tr></table></div></div><h2 id=prepare-the-ncp-config-file>Prepare the NCP config file <a class=anchor href=#prepare-the-ncp-config-file>
 <i class="fas fa-hashtag"></i>
 </a></h2><p>In order to deploy the NCP we use a YAML config file that’s included in the NSX
 Container Plugin zip package. This consists of a
@@ -1057,33 +822,21 @@ Container Plugin zip package. This consists of a
 and a
 <a href=https://kubernetes.io/docs/concepts/workloads/controllers/deployment/>Deployment</a>.
 These specify the configuration data required to run the application (in this
-case NCP) and the pod deployment details.</p>
-<div class=highlight><div class=chroma>
+case NCP) and the pod deployment details.</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Copy the ncp-deployment template from the NSX Container Plugin folder</span>
-cp nsx-container-2.4.1.13515827/Kubernetes/ncp-deployment.yml . 
-</code></pre></td></tr></table>
-</div>
-</div><p>Next we need to edit the settings to match our environment - the file below has
-all the comments removed for clarity but I suggest reading through them all.</p>
-<ul>
-<li>Be sure to add the <em>namespace</em></li>
-<li><em>cluster</em> must match the value created in the NSX ncp/cluster tags</li>
-<li>I’m using password authentication for NSX in my lab…don’t do this in
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Copy the ncp-deployment template from the NSX Container Plugin folder</span>
+</span></span><span class=line><span class=cl>cp nsx-container-2.4.1.13515827/Kubernetes/ncp-deployment.yml . 
+</span></span></code></pre></td></tr></table></div></div><p>Next we need to edit the settings to match our environment - the file below has
+all the comments removed for clarity but I suggest reading through them all.</p><ul>
+<li>Be sure to add the <em>namespace</em></li><li><em>cluster</em> must match the value created in the NSX ncp/cluster tags</li><li>I’m using password authentication for NSX in my lab…don’t do this in
 production! <a href=https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-6BB49AC0-2A18-4F1B-819C-4C14890F4EB2.html>Configure TLS
-Certificates</a></li>
-<li>All the component IDs below are the ones collected when we created the NSX
-components</li>
-<li>Be sure to update the <em>serviceAccountName</em> value with the ServiceAccount
-created in the RBAC</li>
-<li>Make sure the <em>image</em> value is updated with the tagged name in the docker
-local registry</li>
-</ul>
-<div class=highlight><div class=chroma>
+Certificates</a></li><li>All the component IDs below are the ones collected when we created the NSX
+components</li><li>Be sure to update the <em>serviceAccountName</em> value with the ServiceAccount
+created in the RBAC</li><li>Make sure the <em>image</em> value is updated with the tagged name in the docker
+local registry</li></ul><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -1178,126 +931,112 @@ local registry</li>
 </span><span class=lnt>91
 </span><span class=lnt>92
 </span><span class=lnt>93
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ConfigMap</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp-config</span><span class=w>
-</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
-</span><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
-</span><span class=w></span><span class=nt>data</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>ncp.ini</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
-</span><span class=sd>    [DEFAULT]
-</span><span class=sd>    [coe]
-</span><span class=sd>    cluster = k8s-01
-</span><span class=sd>    nsxlib_loglevel=INFO
-</span><span class=sd>    enable_snat = True
-</span><span class=sd>    node_type = HOSTVM
-</span><span class=sd>    [ha]
-</span><span class=sd>    [k8s]
-</span><span class=sd>    apiserver_host_ip = 10.0.0.10
-</span><span class=sd>    apiserver_host_port = 6443
-</span><span class=sd>    ca_file = /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-</span><span class=sd>    client_token_file = /var/run/secrets/kubernetes.io/serviceaccount/token
-</span><span class=sd>    [nsx_v3]
-</span><span class=sd>    nsx_api_managers = nsx-manager.definit.local
-</span><span class=sd>    nsx_api_user = admin
-</span><span class=sd>    nsx_api_password = VMware1!
-</span><span class=sd>    insecure = True
-</span><span class=sd>    top_tier_router = b92fbb43-b664-46e9-bd4a-d8d46dac82f8
-</span><span class=sd>    overlay_tz = tz-overlay
-</span><span class=sd>    subnet_prefix = 24
-</span><span class=sd>    use_native_loadbalancer = True
-</span><span class=sd>    l4_lb_auto_scaling = True
-</span><span class=sd>    default_ingress_class_nsx = True
-</span><span class=sd>    pool_algorithm = &#39;ROUND_ROBIN&#39;
-</span><span class=sd>    service_size = &#39;SMALL&#39;
-</span><span class=sd>    l7_persistence = &#39;source_ip&#39;
-</span><span class=sd>    l4_persistence = &#39;source_ip&#39;
-</span><span class=sd>    container_ip_blocks = ab81892f-eb9a-4248-8606-b26f2293fa83
-</span><span class=sd>    external_ip_pools = dde463fb-15d9-456f-aa3d-030e24f1b1db
-</span><span class=sd>    top_firewall_section_marker = f887ba4f-d634-44ff-8338-05c4a214cc93
-</span><span class=sd>    bottom_firewall_section_marker = 820da106-a35c-43c0-bcf0-edaf94004d9e</span><span class=w>    
-</span><span class=w></span><span class=nn>---</span><span class=w>
-</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>extensions/v1beta1</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Deployment</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp</span><span class=w>
-</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
-</span><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>tier</span><span class=p>:</span><span class=w> </span><span class=l>nsx-networking</span><span class=w>
-</span><span class=w>    </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp</span><span class=w>
-</span><span class=w>    </span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
-</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>replicas</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
-</span><span class=w>  </span><span class=nt>template</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span><span class=nt>tier</span><span class=p>:</span><span class=w> </span><span class=l>nsx-networking</span><span class=w>
-</span><span class=w>        </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp</span><span class=w>
-</span><span class=w>        </span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
-</span><span class=w>    </span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span><span class=nt>hostNetwork</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
-</span><span class=w>        </span><span class=nt>serviceAccountName</span><span class=p>:</span><span class=w> </span><span class=l>ncp-svc</span><span class=w>
-</span><span class=w>        </span><span class=nt>containers</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp</span><span class=w>
-</span><span class=w>          </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp-ubuntu:2.4.1.13515827</span><span class=w>
-</span><span class=w>          </span><span class=nt>imagePullPolicy</span><span class=p>:</span><span class=w> </span><span class=l>IfNotPresent</span><span class=w>
-</span><span class=w>          </span><span class=nt>env</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>NCP_NAME</span><span class=w>
-</span><span class=w>              </span><span class=nt>valueFrom</span><span class=p>:</span><span class=w>
-</span><span class=w>                </span><span class=nt>fieldRef</span><span class=p>:</span><span class=w>
-</span><span class=w>                  </span><span class=nt>fieldPath</span><span class=p>:</span><span class=w> </span><span class=l>metadata.name</span><span class=w>
-</span><span class=w>            </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>NCP_NAMESPACE</span><span class=w>
-</span><span class=w>              </span><span class=nt>valueFrom</span><span class=p>:</span><span class=w>
-</span><span class=w>                </span><span class=nt>fieldRef</span><span class=p>:</span><span class=w>
-</span><span class=w>                  </span><span class=nt>fieldPath</span><span class=p>:</span><span class=w> </span><span class=l>metadata.namespace</span><span class=w>
-</span><span class=w>          </span><span class=nt>livenessProbe</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=nt>exec</span><span class=p>:</span><span class=w>
-</span><span class=w>              </span><span class=nt>command</span><span class=p>:</span><span class=w>
-</span><span class=w>                </span>- <span class=l>/bin/sh</span><span class=w>
-</span><span class=w>                </span>- -<span class=l>c</span><span class=w>
-</span><span class=w>                </span>- <span class=l>timeout 5 check_pod_liveness nsx-ncp</span><span class=w>
-</span><span class=w>            </span><span class=nt>initialDelaySeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
-</span><span class=w>            </span><span class=nt>timeoutSeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
-</span><span class=w>            </span><span class=nt>periodSeconds</span><span class=p>:</span><span class=w> </span><span class=m>10</span><span class=w>
-</span><span class=w>            </span><span class=nt>failureThreshold</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
-</span><span class=w>          </span><span class=nt>volumeMounts</span><span class=p>:</span><span class=w>
-</span><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>config-volume</span><span class=w>
-</span><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/etc/nsx-ujo/ncp.ini</span><span class=w>
-</span><span class=w>            </span><span class=nt>subPath</span><span class=p>:</span><span class=w> </span><span class=l>ncp.ini</span><span class=w>
-</span><span class=w>            </span><span class=nt>readOnly</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
-</span><span class=w>        </span><span class=nt>volumes</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>config-volume</span><span class=w>
-</span><span class=w>          </span><span class=nt>configMap</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp-config</span><span class=w>
-</span></code></pre></td></tr></table>
-</div>
-</div><h2 id=prepare-the-nsx-node-agent-config-file>Prepare the NSX Node Agent config file <a class=anchor href=#prepare-the-nsx-node-agent-config-file>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ConfigMap</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp-config</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>data</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>ncp.ini</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>    [DEFAULT]
+</span></span></span><span class=line><span class=cl><span class=sd>    [coe]
+</span></span></span><span class=line><span class=cl><span class=sd>    cluster = k8s-01
+</span></span></span><span class=line><span class=cl><span class=sd>    nsxlib_loglevel=INFO
+</span></span></span><span class=line><span class=cl><span class=sd>    enable_snat = True
+</span></span></span><span class=line><span class=cl><span class=sd>    node_type = HOSTVM
+</span></span></span><span class=line><span class=cl><span class=sd>    [ha]
+</span></span></span><span class=line><span class=cl><span class=sd>    [k8s]
+</span></span></span><span class=line><span class=cl><span class=sd>    apiserver_host_ip = 10.0.0.10
+</span></span></span><span class=line><span class=cl><span class=sd>    apiserver_host_port = 6443
+</span></span></span><span class=line><span class=cl><span class=sd>    ca_file = /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+</span></span></span><span class=line><span class=cl><span class=sd>    client_token_file = /var/run/secrets/kubernetes.io/serviceaccount/token
+</span></span></span><span class=line><span class=cl><span class=sd>    [nsx_v3]
+</span></span></span><span class=line><span class=cl><span class=sd>    nsx_api_managers = nsx-manager.definit.local
+</span></span></span><span class=line><span class=cl><span class=sd>    nsx_api_user = admin
+</span></span></span><span class=line><span class=cl><span class=sd>    nsx_api_password = VMware1!
+</span></span></span><span class=line><span class=cl><span class=sd>    insecure = True
+</span></span></span><span class=line><span class=cl><span class=sd>    top_tier_router = b92fbb43-b664-46e9-bd4a-d8d46dac82f8
+</span></span></span><span class=line><span class=cl><span class=sd>    overlay_tz = tz-overlay
+</span></span></span><span class=line><span class=cl><span class=sd>    subnet_prefix = 24
+</span></span></span><span class=line><span class=cl><span class=sd>    use_native_loadbalancer = True
+</span></span></span><span class=line><span class=cl><span class=sd>    l4_lb_auto_scaling = True
+</span></span></span><span class=line><span class=cl><span class=sd>    default_ingress_class_nsx = True
+</span></span></span><span class=line><span class=cl><span class=sd>    pool_algorithm = &#39;ROUND_ROBIN&#39;
+</span></span></span><span class=line><span class=cl><span class=sd>    service_size = &#39;SMALL&#39;
+</span></span></span><span class=line><span class=cl><span class=sd>    l7_persistence = &#39;source_ip&#39;
+</span></span></span><span class=line><span class=cl><span class=sd>    l4_persistence = &#39;source_ip&#39;
+</span></span></span><span class=line><span class=cl><span class=sd>    container_ip_blocks = ab81892f-eb9a-4248-8606-b26f2293fa83
+</span></span></span><span class=line><span class=cl><span class=sd>    external_ip_pools = dde463fb-15d9-456f-aa3d-030e24f1b1db
+</span></span></span><span class=line><span class=cl><span class=sd>    top_firewall_section_marker = f887ba4f-d634-44ff-8338-05c4a214cc93
+</span></span></span><span class=line><span class=cl><span class=sd>    bottom_firewall_section_marker = 820da106-a35c-43c0-bcf0-edaf94004d9e</span><span class=w>    
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nn>---</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>extensions/v1beta1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Deployment</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>tier</span><span class=p>:</span><span class=w> </span><span class=l>nsx-networking</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>replicas</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>template</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>tier</span><span class=p>:</span><span class=w> </span><span class=l>nsx-networking</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>hostNetwork</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>serviceAccountName</span><span class=p>:</span><span class=w> </span><span class=l>ncp-svc</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>containers</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp-ubuntu:2.4.1.13515827</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>imagePullPolicy</span><span class=p>:</span><span class=w> </span><span class=l>IfNotPresent</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>env</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>NCP_NAME</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>valueFrom</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=nt>fieldRef</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                  </span><span class=nt>fieldPath</span><span class=p>:</span><span class=w> </span><span class=l>metadata.name</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>NCP_NAMESPACE</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>valueFrom</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=nt>fieldRef</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                  </span><span class=nt>fieldPath</span><span class=p>:</span><span class=w> </span><span class=l>metadata.namespace</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>livenessProbe</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>exec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>command</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span>- <span class=l>/bin/sh</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span>- -<span class=l>c</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span>- <span class=l>timeout 5 check_pod_liveness nsx-ncp</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>initialDelaySeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>timeoutSeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>periodSeconds</span><span class=p>:</span><span class=w> </span><span class=m>10</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>failureThreshold</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>volumeMounts</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>config-volume</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/etc/nsx-ujo/ncp.ini</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>subPath</span><span class=p>:</span><span class=w> </span><span class=l>ncp.ini</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>readOnly</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>volumes</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>config-volume</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>configMap</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp-config</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h2 id=prepare-the-nsx-node-agent-config-file>Prepare the NSX Node Agent config file <a class=anchor href=#prepare-the-nsx-node-agent-config-file>
 <i class="fas fa-hashtag"></i>
 </a></h2><p>For the NSX Node Agent, we also need to prepare a YAML config file consisting of
-a <strong>ConfigMap</strong> and <strong>Deployment</strong>.</p>
-<div class=highlight><div class=chroma>
+a <strong>ConfigMap</strong> and <strong>Deployment</strong>.</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Copy the NSX Node Agent YAML config</span>
-cp nsx-container-2.4.1.13515827/Kubernetes/ubuntu_amd64/nsx-node-agent-ds.yml .
-</code></pre></td></tr></table>
-</div>
-</div><p>Again I’ve removed the comments to make it clearer but they’re useful to read.</p>
-<ul>
-<li>Be sure to add the <em>namespace</em></li>
-<li><em>cluster</em> must match the value created in the NSX ncp/cluster tags</li>
-<li><em>ovs_bridge</em> must match the bridge created earlier</li>
-<li>Be sure to update the <em>serviceAccountName</em> value with the ServiceAccount created in the RBAC</li>
-<li>Make sure the <em>image</em> value is updated with the tagged name in the docker local registry</li>
-</ul>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Copy the NSX Node Agent YAML config</span>
+</span></span><span class=line><span class=cl>cp nsx-container-2.4.1.13515827/Kubernetes/ubuntu_amd64/nsx-node-agent-ds.yml .
+</span></span></code></pre></td></tr></table></div></div><p>Again I’ve removed the comments to make it clearer but they’re useful to read.</p><ul>
+<li>Be sure to add the <em>namespace</em></li><li><em>cluster</em> must match the value created in the NSX ncp/cluster tags</li><li><em>ovs_bridge</em> must match the bridge created earlier</li><li>Be sure to update the <em>serviceAccountName</em> value with the ServiceAccount created in the RBAC</li><li>Make sure the <em>image</em> value is updated with the tagged name in the docker local registry</li></ul><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>  1
 </span><span class=lnt>  2
@@ -1425,300 +1164,226 @@ cp nsx-container-2.4.1.13515827/Kubernetes/ubuntu_amd64/nsx-node-agent-ds.yml .
 </span><span class=lnt>124
 </span><span class=lnt>125
 </span><span class=lnt>126
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ConfigMap</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-node-agent-config</span><span class=w>
-</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
-</span><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
-</span><span class=w></span><span class=nt>data</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>ncp.ini</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
-</span><span class=sd>    [DEFAULT]
-</span><span class=sd>    [coe]
-</span><span class=sd>    cluster = k8s-01
-</span><span class=sd>    nsxlib_loglevel=INFO
-</span><span class=sd>    enable_snat = True
-</span><span class=sd>    node_type = HOSTVM
-</span><span class=sd>    [ha]
-</span><span class=sd>    [k8s]
-</span><span class=sd>    apiserver_host_ip = 10.0.0.10
-</span><span class=sd>    apiserver_host_port = 6443
-</span><span class=sd>    ca_file = /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-</span><span class=sd>    client_token_file = /var/run/secrets/kubernetes.io/serviceaccount/token
-</span><span class=sd>    [nsx_node_agent]
-</span><span class=sd>    ovs_bridge = br-int
-</span><span class=sd>    [nsx_kube_proxy]</span><span class=w>    
-</span><span class=w></span><span class=nn>---</span><span class=w>
-</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>extensions/v1beta1</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>DaemonSet</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-node-agent</span><span class=w>
-</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
-</span><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>tier</span><span class=p>:</span><span class=w> </span><span class=l>nsx-networking</span><span class=w>
-</span><span class=w>    </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>nsx-node-agent</span><span class=w>
-</span><span class=w>    </span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
-</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>updateStrategy</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>RollingUpdate</span><span class=w>
-</span><span class=w>  </span><span class=nt>template</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>annotations</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span><span class=nt>container.apparmor.security.beta.kubernetes.io/nsx-node-agent</span><span class=p>:</span><span class=w> </span><span class=l>localhost/node-agent-apparmor</span><span class=w>
-</span><span class=w>      </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span><span class=nt>tier</span><span class=p>:</span><span class=w> </span><span class=l>nsx-networking</span><span class=w>
-</span><span class=w>        </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>nsx-node-agent</span><span class=w>
-</span><span class=w>        </span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
-</span><span class=w>    </span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>hostNetwork</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
-</span><span class=w>      </span><span class=nt>serviceAccountName</span><span class=p>:</span><span class=w> </span><span class=l>nsx-agent-svc</span><span class=w>
-</span><span class=w>      </span><span class=nt>containers</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-node-agent</span><span class=w>
-</span><span class=w>          </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp-ubuntu:2.4.1.13515827</span><span class=w>
-</span><span class=w>          </span><span class=nt>imagePullPolicy</span><span class=p>:</span><span class=w> </span><span class=l>IfNotPresent</span><span class=w>
-</span><span class=w>          </span><span class=nt>command</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&#34;start_node_agent&#34;</span><span class=p>]</span><span class=w>
-</span><span class=w>          </span><span class=nt>livenessProbe</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=nt>exec</span><span class=p>:</span><span class=w>
-</span><span class=w>              </span><span class=nt>command</span><span class=p>:</span><span class=w>
-</span><span class=w>                </span>- <span class=l>/bin/sh</span><span class=w>
-</span><span class=w>                </span>- -<span class=l>c</span><span class=w>
-</span><span class=w>                </span>- <span class=l>timeout 5 check_pod_liveness nsx-node-agent</span><span class=w>
-</span><span class=w>            </span><span class=nt>initialDelaySeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
-</span><span class=w>            </span><span class=nt>timeoutSeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
-</span><span class=w>            </span><span class=nt>periodSeconds</span><span class=p>:</span><span class=w> </span><span class=m>10</span><span class=w>
-</span><span class=w>            </span><span class=nt>failureThreshold</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
-</span><span class=w>          </span><span class=nt>securityContext</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=nt>capabilities</span><span class=p>:</span><span class=w>
-</span><span class=w>              </span><span class=nt>add</span><span class=p>:</span><span class=w>
-</span><span class=w>                </span>- <span class=l>NET_ADMIN</span><span class=w>
-</span><span class=w>                </span>- <span class=l>SYS_ADMIN</span><span class=w>
-</span><span class=w>                </span>- <span class=l>SYS_PTRACE</span><span class=w>
-</span><span class=w>                </span>- <span class=l>DAC_READ_SEARCH</span><span class=w>
-</span><span class=w>          </span><span class=nt>volumeMounts</span><span class=p>:</span><span class=w>
-</span><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>config-volume</span><span class=w>
-</span><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/etc/nsx-ujo/ncp.ini</span><span class=w>
-</span><span class=w>            </span><span class=nt>subPath</span><span class=p>:</span><span class=w> </span><span class=l>ncp.ini</span><span class=w>
-</span><span class=w>            </span><span class=nt>readOnly</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
-</span><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>openvswitch</span><span class=w>
-</span><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/openvswitch</span><span class=w>
-</span><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>cni-sock</span><span class=w>
-</span><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/nsx-ujo</span><span class=w>
-</span><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>netns</span><span class=w>
-</span><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/netns</span><span class=w>
-</span><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>proc</span><span class=w>
-</span><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/host/proc</span><span class=w>
-</span><span class=w>            </span><span class=nt>readOnly</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
-</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-kube-proxy</span><span class=w>
-</span><span class=w>          </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp-ubuntu:2.4.1.13515827</span><span class=w>
-</span><span class=w>          </span><span class=nt>imagePullPolicy</span><span class=p>:</span><span class=w> </span><span class=l>IfNotPresent</span><span class=w>
-</span><span class=w>          </span><span class=nt>command</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&#34;start_kube_proxy&#34;</span><span class=p>]</span><span class=w>
-</span><span class=w>          </span><span class=nt>livenessProbe</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=nt>exec</span><span class=p>:</span><span class=w>
-</span><span class=w>              </span><span class=nt>command</span><span class=p>:</span><span class=w>
-</span><span class=w>                </span>- <span class=l>/bin/sh</span><span class=w>
-</span><span class=w>                </span>- -<span class=l>c</span><span class=w>
-</span><span class=w>                </span>- <span class=l>timeout 5 check_pod_liveness nsx-kube-proxy</span><span class=w>
-</span><span class=w>            </span><span class=nt>initialDelaySeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
-</span><span class=w>            </span><span class=nt>periodSeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
-</span><span class=w>          </span><span class=nt>securityContext</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=nt>capabilities</span><span class=p>:</span><span class=w>
-</span><span class=w>              </span><span class=nt>add</span><span class=p>:</span><span class=w>
-</span><span class=w>                </span>- <span class=l>NET_ADMIN</span><span class=w>
-</span><span class=w>                </span>- <span class=l>SYS_ADMIN</span><span class=w>
-</span><span class=w>                </span>- <span class=l>SYS_PTRACE</span><span class=w>
-</span><span class=w>                </span>- <span class=l>DAC_READ_SEARCH</span><span class=w>
-</span><span class=w>          </span><span class=nt>volumeMounts</span><span class=p>:</span><span class=w>
-</span><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>config-volume</span><span class=w>
-</span><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/etc/nsx-ujo/ncp.ini</span><span class=w>
-</span><span class=w>            </span><span class=nt>subPath</span><span class=p>:</span><span class=w> </span><span class=l>ncp.ini</span><span class=w>
-</span><span class=w>            </span><span class=nt>readOnly</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
-</span><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>openvswitch</span><span class=w>
-</span><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/openvswitch</span><span class=w>
-</span><span class=w>      </span><span class=nt>volumes</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>config-volume</span><span class=w>
-</span><span class=w>          </span><span class=nt>configMap</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-node-agent-config</span><span class=w>
-</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>cni-sock</span><span class=w>
-</span><span class=w>          </span><span class=nt>hostPath</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/nsx-ujo</span><span class=w>
-</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>netns</span><span class=w>
-</span><span class=w>          </span><span class=nt>hostPath</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/netns</span><span class=w>
-</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>proc</span><span class=w>
-</span><span class=w>          </span><span class=nt>hostPath</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/proc</span><span class=w>
-</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>openvswitch</span><span class=w>
-</span><span class=w>          </span><span class=nt>hostPath</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/openvswitch</span><span class=w>
-</span></code></pre></td></tr></table>
-</div>
-</div><h2 id=finallydeploy-ncp-and-nsx-node-agent>Finally…deploy NCP and NSX Node Agent! <a class=anchor href=#finallydeploy-ncp-and-nsx-node-agent>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ConfigMap</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-node-agent-config</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>data</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>ncp.ini</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>    [DEFAULT]
+</span></span></span><span class=line><span class=cl><span class=sd>    [coe]
+</span></span></span><span class=line><span class=cl><span class=sd>    cluster = k8s-01
+</span></span></span><span class=line><span class=cl><span class=sd>    nsxlib_loglevel=INFO
+</span></span></span><span class=line><span class=cl><span class=sd>    enable_snat = True
+</span></span></span><span class=line><span class=cl><span class=sd>    node_type = HOSTVM
+</span></span></span><span class=line><span class=cl><span class=sd>    [ha]
+</span></span></span><span class=line><span class=cl><span class=sd>    [k8s]
+</span></span></span><span class=line><span class=cl><span class=sd>    apiserver_host_ip = 10.0.0.10
+</span></span></span><span class=line><span class=cl><span class=sd>    apiserver_host_port = 6443
+</span></span></span><span class=line><span class=cl><span class=sd>    ca_file = /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+</span></span></span><span class=line><span class=cl><span class=sd>    client_token_file = /var/run/secrets/kubernetes.io/serviceaccount/token
+</span></span></span><span class=line><span class=cl><span class=sd>    [nsx_node_agent]
+</span></span></span><span class=line><span class=cl><span class=sd>    ovs_bridge = br-int
+</span></span></span><span class=line><span class=cl><span class=sd>    [nsx_kube_proxy]</span><span class=w>    
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nn>---</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>extensions/v1beta1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>DaemonSet</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-node-agent</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>tier</span><span class=p>:</span><span class=w> </span><span class=l>nsx-networking</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>nsx-node-agent</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>updateStrategy</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>RollingUpdate</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>template</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>annotations</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>container.apparmor.security.beta.kubernetes.io/nsx-node-agent</span><span class=p>:</span><span class=w> </span><span class=l>localhost/node-agent-apparmor</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>tier</span><span class=p>:</span><span class=w> </span><span class=l>nsx-networking</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>nsx-node-agent</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>hostNetwork</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>serviceAccountName</span><span class=p>:</span><span class=w> </span><span class=l>nsx-agent-svc</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>containers</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-node-agent</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp-ubuntu:2.4.1.13515827</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>imagePullPolicy</span><span class=p>:</span><span class=w> </span><span class=l>IfNotPresent</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>command</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&#34;start_node_agent&#34;</span><span class=p>]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>livenessProbe</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>exec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>command</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span>- <span class=l>/bin/sh</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span>- -<span class=l>c</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span>- <span class=l>timeout 5 check_pod_liveness nsx-node-agent</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>initialDelaySeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>timeoutSeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>periodSeconds</span><span class=p>:</span><span class=w> </span><span class=m>10</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>failureThreshold</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>securityContext</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>capabilities</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>add</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span>- <span class=l>NET_ADMIN</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span>- <span class=l>SYS_ADMIN</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span>- <span class=l>SYS_PTRACE</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span>- <span class=l>DAC_READ_SEARCH</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>volumeMounts</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>config-volume</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/etc/nsx-ujo/ncp.ini</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>subPath</span><span class=p>:</span><span class=w> </span><span class=l>ncp.ini</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>readOnly</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>openvswitch</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/openvswitch</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>cni-sock</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/nsx-ujo</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>netns</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/netns</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>proc</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/host/proc</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>readOnly</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-kube-proxy</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>nsx-ncp-ubuntu:2.4.1.13515827</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>imagePullPolicy</span><span class=p>:</span><span class=w> </span><span class=l>IfNotPresent</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>command</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&#34;start_kube_proxy&#34;</span><span class=p>]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>livenessProbe</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>exec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>command</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span>- <span class=l>/bin/sh</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span>- -<span class=l>c</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span>- <span class=l>timeout 5 check_pod_liveness nsx-kube-proxy</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>initialDelaySeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>periodSeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>securityContext</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>capabilities</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>add</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span>- <span class=l>NET_ADMIN</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span>- <span class=l>SYS_ADMIN</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span>- <span class=l>SYS_PTRACE</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span>- <span class=l>DAC_READ_SEARCH</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>volumeMounts</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>config-volume</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/etc/nsx-ujo/ncp.ini</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>subPath</span><span class=p>:</span><span class=w> </span><span class=l>ncp.ini</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>readOnly</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>openvswitch</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/openvswitch</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>volumes</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>config-volume</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>configMap</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-node-agent-config</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>cni-sock</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>hostPath</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/nsx-ujo</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>netns</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>hostPath</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/netns</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>proc</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>hostPath</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/proc</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>openvswitch</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>hostPath</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/var/run/openvswitch</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h2 id=finallydeploy-ncp-and-nsx-node-agent>Finally…deploy NCP and NSX Node Agent! <a class=anchor href=#finallydeploy-ncp-and-nsx-node-agent>
 <i class="fas fa-hashtag"></i>
 </a></h2><p>After what seems like a long journey, we’re finally at the point where we can
-deploy the NCP and Node Agent.</p>
-<h4 id=master-node-or-admin-workstation-1><strong>Master Node or Admin Workstation</strong> <a class=anchor href=#master-node-or-admin-workstation-1>
+deploy the NCP and Node Agent.</p><h4 id=master-node-or-admin-workstation-1><strong>Master Node or Admin Workstation</strong> <a class=anchor href=#master-node-or-admin-workstation-1>
 <i class="fas fa-hashtag"></i>
 </a></h4><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>kubectl apply -f ncp-deployment.yml
-kubectl apply -f nsx-node-agent-ds.yml
-</code></pre></td></tr></table>
-</div>
-</div><p>All being well, we should now have NCP configured and ready to go, switch to the
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>kubectl apply -f ncp-deployment.yml
+</span></span><span class=line><span class=cl>kubectl apply -f nsx-node-agent-ds.yml
+</span></span></code></pre></td></tr></table></div></div><p>All being well, we should now have NCP configured and ready to go, switch to the
 nsx-system namespace (check out <a href=https://github.com/ahmetb/kubectx>kubens</a> for
-this!) and view the resources using <code>kubectl get &lt;resource></code> and <code>kubectl describe &lt;resource> &lt;resource name></code></p>
-<p>NCP will create components for each Kubernetes namespace, these can be viewed
-through the Advanced Networking and Security Tab.</p>
-<h4 id=routers-1>Routers <a class=anchor href=#routers-1>
+this!) and view the resources using <code>kubectl get &lt;resource></code> and <code>kubectl describe &lt;resource> &lt;resource name></code></p><p>NCP will create components for each Kubernetes namespace, these can be viewed
+through the Advanced Networking and Security Tab.</p><h4 id=routers-1>Routers <a class=anchor href=#routers-1>
 <i class="fas fa-hashtag"></i>
-</a></h4>
-<div class=clr-content-image-wrap>
+</a></h4><div class=clr-content-image-wrap>
 <a href=index.images/Gs6Jut.png data-lightbox=index.images/Gs6Jut.png data-title class=lb>
 <img class=lb src=index.images/Gs6Jut.png alt>
 </a>
-<figcaption class=clr-caption></figcaption>
-</div>
-<h4 id=switches>Switches <a class=anchor href=#switches>
+<figcaption class=clr-caption></figcaption></div><h4 id=switches>Switches <a class=anchor href=#switches>
 <i class="fas fa-hashtag"></i>
-</a></h4>
-<div class=clr-content-image-wrap>
+</a></h4><div class=clr-content-image-wrap>
 <a href=index.images/9xMcCi.png data-lightbox=index.images/9xMcCi.png data-title class=lb>
 <img class=lb src=index.images/9xMcCi.png alt>
 </a>
-<figcaption class=clr-caption></figcaption>
-</div>
-<h4 id=load-balancer>Load Balancer <a class=anchor href=#load-balancer>
+<figcaption class=clr-caption></figcaption></div><h4 id=load-balancer>Load Balancer <a class=anchor href=#load-balancer>
 <i class="fas fa-hashtag"></i>
-</a></h4>
-<div class=clr-content-image-wrap>
+</a></h4><div class=clr-content-image-wrap>
 <a href=index.images/MBD3UW.png data-lightbox=index.images/MBD3UW.png data-title class=lb>
 <img class=lb src=index.images/MBD3UW.png alt>
 </a>
-<figcaption class=clr-caption></figcaption>
-</div>
-<h4 id=firewall-rules>Firewall Rules <a class=anchor href=#firewall-rules>
+<figcaption class=clr-caption></figcaption></div><h4 id=firewall-rules>Firewall Rules <a class=anchor href=#firewall-rules>
 <i class="fas fa-hashtag"></i>
-</a></h4>
-<div class=clr-content-image-wrap>
+</a></h4><div class=clr-content-image-wrap>
 <a href=index.images/rtQkFK.png data-lightbox=index.images/rtQkFK.png data-title class=lb>
 <img class=lb src=index.images/rtQkFK.png alt>
 </a>
-<figcaption class=clr-caption></figcaption>
-</div>
-<h6>Share this post</h6>
-<span class=share-box>
-<a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-facebook-official"></i></a>
-<a href="https://twitter.com/intent/tweet?text=Lab%20Guide%20-%20Kubernetes%20and%20NSX-T%20Container%20Network%20Plugin%20-%20Step%20by%20Step&url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-twitter"></i></a>
-<a href="https://plus.google.com/share?url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-google-plus"></i></a>
-<a href="http://www.reddit.com/submit?url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=900,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-reddit"></i></a>
-<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f&title=Lab%20Guide%20-%20Kubernetes%20and%20NSX-T%20Container%20Network%20Plugin%20-%20Step%20by%20Step" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-linkedin"></i></a>
+<figcaption class=clr-caption></figcaption></div><h6>Share this post</h6><span class=share-box>
+<a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-facebook-official"></i></a>
+<a href="https://twitter.com/intent/tweet?text=Lab%20Guide%20-%20Kubernetes%20and%20NSX-T%20Container%20Network%20Plugin%20-%20Step%20by%20Step&url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-twitter"></i></a>
+<a href="https://plus.google.com/share?url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-google-plus"></i></a>
+<a href="http://www.reddit.com/submit?url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=900,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-reddit"></i></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f&title=Lab%20Guide%20-%20Kubernetes%20and%20NSX-T%20Container%20Network%20Plugin%20-%20Step%20by%20Step" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-linkedin"></i></a>
 <a href="mailto:?subject=Lab%20Guide%20-%20Kubernetes%20and%20NSX-T%20Container%20Network%20Plugin%20-%20Step%20by%20Step&body=Check out this site https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f" data-proofer-ignore><i class="fa fa-envelope"></i></a>
 </span>
 <a class=resp-sharing-button__link href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://twitter.com/intent/tweet/?text=Lab%20Guide%20-%20Kubernetes%20and%20NSX-T%20Container%20Network%20Plugin%20-%20Step%20by%20Step&url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.44 4.83c-.8.37-1.5.38-2.22.02.93-.56.98-.96 1.32-2.02-.88.52-1.86.9-2.9 1.1-.82-.88-2-1.43-3.3-1.43-2.5.0-4.55 2.04-4.55 4.54.0.36.03.7.1 1.04-3.77-.2-7.12-2-9.36-4.75-.4.67-.6 1.45-.6 2.3.0 1.56.8 2.95 2 3.77-.74-.03-1.44-.23-2.05-.57v.06c0 2.2 1.56 4.03 3.64 4.44-.67.2-1.37.2-2.06.08.58 1.8 2.26 3.12 4.25 3.16C5.78 18.1 3.37 18.74 1 18.46c2 1.3 4.4 2.04 6.97 2.04 8.35.0 12.92-6.92 12.92-12.93.0-.2.0-.4-.02-.6.9-.63 1.96-1.22 2.56-2.14z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://www.tumblr.com/widgets/share/tool?posttype=link&title=Lab%20Guide%20-%20Kubernetes%20and%20NSX-T%20Container%20Network%20Plugin%20-%20Step%20by%20Step&caption=Lab%20Guide%20-%20Kubernetes%20and%20NSX-T%20Container%20Network%20Plugin%20-%20Step%20by%20Step&content=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f&canonicalUrl=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f&shareSource=tumblr_share_button" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--tumblr resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.5.5v5h5v4h-5V15c0 5 3.5 4.4 6 2.8v4.4c-6.7 3.2-12 0-12-4.2V9.5h-3V6.7c1-.3 2.2-.7 3-1.3.5-.5 1-1.2 1.4-2 .3-.7.6-1.7.7-3h3.8z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f&title=Lab%20Guide%20-%20Kubernetes%20and%20NSX-T%20Container%20Network%20Plugin%20-%20Step%20by%20Step&summary=Lab%20Guide%20-%20Kubernetes%20and%20NSX-T%20Container%20Network%20Plugin%20-%20Step%20by%20Step&source=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 21.5h-5v-13h5v13zM4 6.5C2.5 6.5 1.5 5.3 1.5 4s1-2.4 2.5-2.4c1.6.0 2.5 1 2.6 2.5.0 1.4-1 2.5-2.6 2.5zm11.5 6c-1 0-2 1-2 2v7h-5v-13h5V10s1.6-1.5 4-1.5c3 0 5 2.2 5 6.3v6.7h-5v-7c0-1-1-2-2-2z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://reddit.com/submit/?url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f&resubmit=true&title=Lab%20Guide%20-%20Kubernetes%20and%20NSX-T%20Container%20Network%20Plugin%20-%20Step%20by%20Step" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 11.5c0-1.65-1.35-3-3-3-.96.0-1.86.48-2.42 1.24-1.64-1-3.75-1.64-6.07-1.72.08-1.1.4-3.05 1.52-3.7.72-.4 1.73-.24 3 .5C17.2 6.3 18.46 7.5 20 7.5c1.65.0 3-1.35 3-3s-1.35-3-3-3c-1.38.0-2.54.94-2.88 2.22-1.43-.72-2.64-.8-3.6-.25-1.64.94-1.95 3.47-2 4.55-2.33.08-4.45.7-6.1 1.72C4.86 8.98 3.96 8.5 3 8.5c-1.65.0-3 1.35-3 3 0 1.32.84 2.44 2.05 2.84-.03.22-.05.44-.05.66.0 3.86 4.5 7 10 7s10-3.14 10-7c0-.22-.02-.44-.05-.66 1.2-.4 2.05-1.54 2.05-2.84zM2.3 13.37C1.5 13.07 1 12.35 1 11.5c0-1.1.9-2 2-2 .64.0 1.22.32 1.6.82-1.1.85-1.92 1.9-2.3 3.05zm3.7.13c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9.8 4.8c-1.08.63-2.42.96-3.8.96-1.4.0-2.74-.34-3.8-.95-.24-.13-.32-.44-.2-.68.15-.24.46-.32.7-.18 1.83 1.06 4.76 1.06 6.6.0.23-.13.53-.05.67.2.14.23.06.54-.18.67zm.2-2.8c-1.1.0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm5.7-2.13c-.38-1.16-1.2-2.2-2.3-3.05.38-.5.97-.82 1.6-.82 1.1.0 2 .9 2 2 0 .84-.53 1.57-1.3 1.87z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="mailto:?subject=Lab%20Guide%20-%20Kubernetes%20and%20NSX-T%20Container%20Network%20Plugin%20-%20Step%20by%20Step&body=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f" target=_self rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 4H2C.9 4 0 4.9.0 6v12c0 1.1.9 2 2 2h20c1.1.0 2-.9 2-2V6c0-1.1-.9-2-2-2zM7.25 14.43l-3.5 2c-.08.05-.17.07-.25.07-.17.0-.34-.1-.43-.25-.14-.24-.06-.55.18-.68l3.5-2c.24-.14.55-.06.68.18.14.24.06.55-.18.68zm4.75.07c-.1.0-.2-.03-.27-.08l-8.5-5.5c-.23-.15-.3-.46-.15-.7.15-.22.46-.3.7-.14L12 13.4l8.23-5.32c.23-.15.54-.08.7.15.14.23.07.54-.16.7l-8.5 5.5c-.08.04-.17.07-.27.07zm8.93 1.75c-.1.16-.26.25-.43.25-.08.0-.17-.02-.25-.07l-3.5-2c-.24-.13-.32-.44-.18-.68s.44-.32.68-.18l3.5 2c.24.13.32.44.18.68z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="whatsapp://send?text=Lab%20Guide%20-%20Kubernetes%20and%20NSX-T%20Container%20Network%20Plugin%20-%20Step%20by%20Step%20https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.1 3.9C17.9 1.7 15 .5 12 .5 5.8.5.7 5.6.7 11.9c0 2 .5 3.9 1.5 5.6L.6 23.4l6-1.6c1.6.9 3.5 1.3 5.4 1.3 6.3.0 11.4-5.1 11.4-11.4-.1-2.8-1.2-5.7-3.3-7.8zM12 21.4c-1.7.0-3.3-.5-4.8-1.3l-.4-.2-3.5 1 1-3.4L4 17c-1-1.5-1.4-3.2-1.4-5.1.0-5.2 4.2-9.4 9.4-9.4 2.5.0 4.9 1 6.7 2.8s2.8 4.2 2.8 6.7c-.1 5.2-4.3 9.4-9.5 9.4zm5.1-7.1c-.3-.1-1.7-.9-1.9-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1s-1.2-.5-2.3-1.4c-.9-.8-1.4-1.7-1.6-2s0-.5.1-.6.3-.3.4-.5c.2-.1.3-.3.4-.5s0-.4.0-.5C10 9 9.3 7.6 9 7c-.1-.4-.4-.3-.5-.3h-.6s-.4.1-.7.3c-.3.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.3-.3-.4-.6-.5z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://telegram.me/share/url?text=Lab%20Guide%20-%20Kubernetes%20and%20NSX-T%20Container%20Network%20Plugin%20-%20Step%20by%20Step&url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M.707 8.475C.275 8.64.0 9.508.0 9.508s.284.867.718 1.03l5.09 1.897 1.986 6.38a1.102 1.102.0 001.75.527l2.96-2.41a.405.405.0 01.494-.013l5.34 3.87a1.1 1.1.0 001.046.135 1.1 1.1.0 00.682-.803l3.91-18.795A1.102 1.102.0 0022.5.075L.706 8.475z"/></svg>
-</div>
-</div>
-</a>
-<div id=disqus_thread></div>
-<script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var a=document.createElement('script');a.async=!0,a.type='text/javascript',a.src='//definit.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
-<div class="clarity-prev-next col-xs-12 col-sm-12 col-md-12 col-lg-12">
+</div></div></a>
+<div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var e=document.createElement("script");e.async=!0,e.type="text/javascript",e.src="//definit.disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><div class="clarity-prev-next col-xs-12 col-sm-12 col-md-12 col-lg-12">
 <nav class=clarity-page-prev-next>
 <div class=clr-nav-previous>
 <a href=https://www.definit.co.uk/2019/05/unable-to-configure-route-redistribution-with-cross-vcenter-nsx-6.4/ title="Unable to configure route redistribution with cross-vCenter NSX 6.4" class="btn btn-sm btn-outline">
 Previous
 </a>
-</div>
-<div class=clr-nav-next>
+</div><div class=clr-nav-next>
 <a href=https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-storage-with-the-vsphere-cloud-provider-step-by-step/ title="Lab Guide - Kubernetes and Storage with the vSphere Cloud Provider - Step by Step" class="btn btn-sm btn-outline">
 Next
 </a>
-</div>
-</nav>
-</div>
-</div>
-<nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+</div></nav></div></div><nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <section class=sidenav-content>
 <section class="nav-group collapsible">
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">16</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">44</span></a></li>
-<li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
-<li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">16</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">40</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">70</span></a></li>
-<li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">23</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
-</ul>
-</section>
-<section class="nav-group collapsible">
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li><li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">16</span></a></li><li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">44</span></a></li><li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li><li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">29</span></a></li><li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">16</span></a></li><li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">1</span></a></li><li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li><li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">40</span></a></li><li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">70</span></a></li><li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">23</span></a></li><li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li></ul></section><section class="nav-group collapsible">
 <input id=Tags type=checkbox>
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
-<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">55</span></a></li>
-<li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">40</span></a></li>
-<li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
-<li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">32</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">30</span></a></li>
-<li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">29</span></a></li>
-</section>
-</section>
-</nav>
-</div>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-4368767-1"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-4368767-1')</script>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li><li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">55</span></a></li><li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">40</span></a></li><li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li><li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li><li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li><li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">33</span></a></li><li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">32</span></a></li><li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">30</span></a></li><li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">29</span></a></li></section></section></nav></div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-4368767-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-4368767-1")</script>
 <script src=/js/lightbox-plus-jquery.min.js></script>
-</div>
-</body>
-</html>
+</div></body></html>

@@ -1,8 +1,7 @@
 <!doctype html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class=no-js><!--<![endif]-->
 <head>
 <meta charset=utf-8>
-<title>Ingress, SSL and DNS using TKG 1.4 Packages on TKGs Clusters &#183; DefinIT</title>
-<meta http-equiv=x-ua-compatible content="IE=edge">
+<title>Ingress, SSL and DNS using TKG 1.4 Packages on TKGs Clusters &#183; DefinIT</title><meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=HandheldFriendly content="True">
 <meta name=MobileOptimized content="320">
 <meta name=viewport content="width=device-width,initial-scale=1">
@@ -34,7 +33,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2021/12/ingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.90.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.93.3"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -42,8 +41,7 @@
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
-</head>
-<body data-ng-app=myapp data-ng-controller=MyController data-ng-mouseleave=MouseLeave($event)>
+</head><body data-ng-app=myapp data-ng-controller=MyController data-ng-mouseleave=MouseLeave($event)>
 <div class=main-container>
 <header class=header-6>
 <div class=branding>
@@ -51,8 +49,7 @@
 <img alt src=/images/logos/definit-logo.png>
 <span class=title>DefinIT</span>
 </a>
-</div>
-<nav class=header-nav>
+</div><nav class=header-nav>
 <a class="nav-link nav-text" href=https://www.definit.co.uk/ title=Home>
 Home
 </a>
@@ -65,29 +62,22 @@ GitHub
 <a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml title=RSS>
 RSS
 </a>
-</nav>
-<div class=header-actions>
+</nav><div class=header-actions>
 <form class=search id=search method=get action=//google.com/search>
 <label for=search_input>
 <input id=search_input type=text name=q placeholder="Search with Google">
 <input type=hidden name=as_sitesearch value=https://www.definit.co.uk>
 </label>
-</form>
-</div>
-</header>
-<div class=content-container>
+</form></div></header><div class=content-container>
 <div class=content-area>
-<h1>Ingress, SSL and DNS using TKG 1.4 Packages on TKGs Clusters</h1>
-<div class=metas>
+<h1>Ingress, SSL and DNS using TKG 1.4 Packages on TKGs Clusters</h1><div class=metas>
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 9/12/2021
 &#183; Read in about 10 min (2086 words)
-</div>
-<div class=clr-card-authors>
+</div><div class=clr-card-authors>
 Published under <a href=/category/cloud-native>Cloud-Native</a> and <a href=/category/vmware>VMware</a>
-</div>
-<div class=clr-card-authors>
+</div><div class=clr-card-authors>
 Tags:
 <a class=clr-tags href=https://www.definit.co.uk/tag/kubernetes>#kubernetes</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/vpshere>#vpshere</a>
@@ -96,52 +86,28 @@ Tags:
 <a class=clr-tags href=https://www.definit.co.uk/tag/cert-manager>#cert manager</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/ingress>#ingress</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/external-dns>#external-dns</a>
-</div>
-</span>
-</div>
-<br clear=all>
+</div></span>
+</div><br clear=all>
 <img src=/images/logos/vmware-tanzu.png class=clr-post-featured-image>
-<p>So, you&rsquo;ve set up your shiny new Workload Management on vSphere, created a Namespace and deployed a cluster&mldr;now what?! When you deploy a workload cluster from Workload Management on vSphere 7, it comes with basic functionality, but in order to start running workloads you will inevitably need to install additional tools. That&rsquo;s where Tanzu&rsquo;s Packages come into play.</p>
-<p>Tanzu&rsquo;s User Managed Packages are based on a project called <a href=https://github.com/vmware-tanzu/carvel>Carvel</a> which:</p>
-<blockquote>
-<p>provides a set of reliable, single-purpose, composable tools that aid in your application building, configuration, and deployment to Kubernetes</p>
-</blockquote>
-<p>Out of the box, the Tanzu Package repository has packages for <code>cert-manager</code>, <code>multus-cni</code>, <code>harbor</code>, <code>contour</code>, <code>fluent-bit</code>, <code>grafana</code>, <code>prometheus</code>, and <code>external-dns</code>. I&rsquo;m interested in a few of these to start with -</p>
-<ul>
-<li>Ingress control using <code>contour</code>, specifically I want to limit the need for LoadBalancer IPs by using host rules to steer traffic based on DNS host names, and to use TLS to access workloads exposed through <code>ingress</code> objects</li>
-<li>Certificate managment using <code>cert-manager</code>, to automatically sign TLS certificates for my workloads</li>
-<li>Service discovery using external-dns, to register the <code>ingress</code> host names automatically with Active Directory DNS</li>
-</ul>
-<p>My Tanzu Kubernetes Grid service (TKGs) on vSphere 7 is configured to use NSX-T to provide load balancing, but you could just as easily do this using NSX Advanced Load Balancer (Avi) or using HA-Proxy as the load balancer. You can do this on Tanzu Kubernetes Grid multi-cloud (TKGm) too, and if you&rsquo;ve got Tanzu Mission Control you can deploy the Packages using that.</p>
-<p>What if you&rsquo;ve not got access to Tanzu Kubernetes Grid multi-cloud or services? These packages are also available as part of <a href=https://tanzucommunityedition.io/>Tanzu Community Edition</a> - for free&mldr;</p>
-<h1 id=pre-requisites-for-tkg-packages>Pre-requisites for TKG Packages <a class=anchor href=#pre-requisites-for-tkg-packages>
+<p>So, you&rsquo;ve set up your shiny new Workload Management on vSphere, created a Namespace and deployed a cluster&mldr;now what?! When you deploy a workload cluster from Workload Management on vSphere 7, it comes with basic functionality, but in order to start running workloads you will inevitably need to install additional tools. That&rsquo;s where Tanzu&rsquo;s Packages come into play.</p><p>Tanzu&rsquo;s User Managed Packages are based on a project called <a href=https://github.com/vmware-tanzu/carvel>Carvel</a> which:</p><blockquote>
+<p>provides a set of reliable, single-purpose, composable tools that aid in your application building, configuration, and deployment to Kubernetes</p></blockquote><p>Out of the box, the Tanzu Package repository has packages for <code>cert-manager</code>, <code>multus-cni</code>, <code>harbor</code>, <code>contour</code>, <code>fluent-bit</code>, <code>grafana</code>, <code>prometheus</code>, and <code>external-dns</code>. I&rsquo;m interested in a few of these to start with -</p><ul>
+<li>Ingress control using <code>contour</code>, specifically I want to limit the need for LoadBalancer IPs by using host rules to steer traffic based on DNS host names, and to use TLS to access workloads exposed through <code>ingress</code> objects</li><li>Certificate managment using <code>cert-manager</code>, to automatically sign TLS certificates for my workloads</li><li>Service discovery using external-dns, to register the <code>ingress</code> host names automatically with Active Directory DNS</li></ul><p>My Tanzu Kubernetes Grid service (TKGs) on vSphere 7 is configured to use NSX-T to provide load balancing, but you could just as easily do this using NSX Advanced Load Balancer (Avi) or using HA-Proxy as the load balancer. You can do this on Tanzu Kubernetes Grid multi-cloud (TKGm) too, and if you&rsquo;ve got Tanzu Mission Control you can deploy the Packages using that.</p><p>What if you&rsquo;ve not got access to Tanzu Kubernetes Grid multi-cloud or services? These packages are also available as part of <a href=https://tanzucommunityedition.io/>Tanzu Community Edition</a> - for free&mldr;</p><h1 id=pre-requisites-for-tkg-packages>Pre-requisites for TKG Packages <a class=anchor href=#pre-requisites-for-tkg-packages>
 <i class="fas fa-hashtag"></i>
-</a></h1><p>I&rsquo;m going to assume you&rsquo;ve got a TKG cluster deployed, you have authenticated using the <code>kubectl vsphere login</code> commands and your current <code>kubctl</code> context is set to the cluster you&rsquo;re working on. You&rsquo;ll also need to have the <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-install-cli.html>Tanzu CLI installed</a>.</p>
-<p>Before anything is deployed, you need to configure a storage class as default - I&rsquo;m going to set <code>vsan-default-storage-policy</code> as mine.</p>
-<div class=highlight><div class=chroma>
+</a></h1><p>I&rsquo;m going to assume you&rsquo;ve got a TKG cluster deployed, you have authenticated using the <code>kubectl vsphere login</code> commands and your current <code>kubctl</code> context is set to the cluster you&rsquo;re working on. You&rsquo;ll also need to have the <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-install-cli.html>Tanzu CLI installed</a>.</p><p>Before anything is deployed, you need to configure a storage class as default - I&rsquo;m going to set <code>vsan-default-storage-policy</code> as mine.</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># Set the default storage class</span>
-$ kubectl patch storageclass vsan-default-storage-policy -p <span class=s1>&#39;{&#34;metadata&#34;: {&#34;annotations&#34;:{&#34;storageclass.kubernetes.io/is-default-class&#34;:&#34;true&#34;}}}&#39;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>In order to run privileged pods on TKGs workload clusters, the [pod security policy needs to be updated](Using Pod Security Policies with Tanzu Kubernetes Clusters). The command below allows privileged workloads to run <em>cluster wide</em> - to restrict this privilege use a <code>RoleBinding</code> for specific <code>namespaces</code> and <code>serviceaccounts</code>.</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># Set the default storage class</span>
+</span></span><span class=line><span class=cl>$ kubectl patch storageclass vsan-default-storage-policy -p <span class=s1>&#39;{&#34;metadata&#34;: {&#34;annotations&#34;:{&#34;storageclass.kubernetes.io/is-default-class&#34;:&#34;true&#34;}}}&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><p>In order to run privileged pods on TKGs workload clusters, the [pod security policy needs to be updated](Using Pod Security Policies with Tanzu Kubernetes Clusters). The command below allows privileged workloads to run <em>cluster wide</em> - to restrict this privilege use a <code>RoleBinding</code> for specific <code>namespaces</code> and <code>serviceaccounts</code>.</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ kubectl create clusterrolebinding default-tkg-admin-privileged-binding --clusterrole<span class=o>=</span>psp:vmware-system-privileged --group<span class=o>=</span>system:authenticated
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=install-the-kapp-controller>Install the <code>kapp-controller</code> <a class=anchor href=#install-the-kapp-controller>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ kubectl create clusterrolebinding default-tkg-admin-privileged-binding --clusterrole<span class=o>=</span>psp:vmware-system-privileged --group<span class=o>=</span>system:authenticated
+</span></span></code></pre></td></tr></table></div></div><h2 id=install-the-kapp-controller>Install the <code>kapp-controller</code> <a class=anchor href=#install-the-kapp-controller>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>Part of Carvel is <code>kapp</code>, which allows you to bundle multiple kubernetes objects together into a single application definition, then deploy them in a dependency-aware fashion. The <code>kapp-controller</code> is a Kubernetes Controller that will watch the state of your cluster, then make or request changes where needed - reconciling the desired state defined in the <code>kapp</code> bundle with the current state on the cluster.</p>
-<p>Create a new file <code>kapp-controller.yaml</code> and paste the manifest from the <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-prep-tkgs-kapp.html#kapp-controller-manifest>Tanzu Packages documentation</a>.</p>
-<div class=highlight><div class=chroma>
+</a></h2><p>Part of Carvel is <code>kapp</code>, which allows you to bundle multiple kubernetes objects together into a single application definition, then deploy them in a dependency-aware fashion. The <code>kapp-controller</code> is a Kubernetes Controller that will watch the state of your cluster, then make or request changes where needed - reconciling the desired state defined in the <code>kapp</code> bundle with the current state on the cluster.</p><p>Create a new file <code>kapp-controller.yaml</code> and paste the manifest from the <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-prep-tkgs-kapp.html#kapp-controller-manifest>Tanzu Packages documentation</a>.</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -166,40 +132,34 @@ $ kubectl patch storageclass vsan-default-storage-policy -p <span class=s1>&#39;
 </span><span class=lnt>21
 </span><span class=lnt>22
 </span><span class=lnt>23
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># Deploy the kapp-controller manifest</span>
-$ kubectl apply -f kapp-controller.yaml
-<span class=c1># Add the tanzu package repo</span>
-$ tanzu package repository add tkg-packages-1-4-0 --url projects.registry.vmware.com/tkg/packages/standard/repo:v1.4.0
-<span class=c1># Check the repository has been installed and the STATUS is Reconcile succeeded</span>
-$ tanzu package repository list
-
-Retrieving repositories... 
-  NAME                REPOSITORY                                                      STATUS               DETAILS  
-  tkg-packages-1-4-0  projects.registry.vmware.com/tkg/packages/standard/repo:v1.4.0  Reconcile succeeded   
-<span class=c1># List the available packages</span>
-$ tanzu package available list
-
-- Retrieving available packages... 
-  NAME                           DISPLAY-NAME  SHORT-DESCRIPTION                                                                                           
-  cert-manager.tanzu.vmware.com  cert-manager  Certificate management                                                                                      
-  contour.tanzu.vmware.com       Contour       An ingress controller                                                                                       
-  external-dns.tanzu.vmware.com  external-dns  This package provides DNS synchronization functionality.                                                    
-  fluent-bit.tanzu.vmware.com    fluent-bit    Fluent Bit is a fast Log Processor and Forwarder                                                            
-  grafana.tanzu.vmware.com       grafana       Visualization and analytics software                                                                        
-  harbor.tanzu.vmware.com        Harbor        OCI Registry                                                                                                
-  multus-cni.tanzu.vmware.com    multus-cni    This package provides the ability <span class=k>for</span> enabling attaching multiple network interfaces to pods in Kubernetes  
-  prometheus.tanzu.vmware.com    prometheus    A <span class=nb>time</span> series database <span class=k>for</span> your metrics 
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Ref: <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-prep-tkgs-kapp.html>Prepare a Tanzu Kubernetes Cluster Created by Using the Tanzu Kubernetes Grid Service to Run Packages</a></li>
-</ul>
-<h1 id=install-cert-manager>Install Cert Manager <a class=anchor href=#install-cert-manager>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># Deploy the kapp-controller manifest</span>
+</span></span><span class=line><span class=cl>$ kubectl apply -f kapp-controller.yaml
+</span></span><span class=line><span class=cl><span class=c1># Add the tanzu package repo</span>
+</span></span><span class=line><span class=cl>$ tanzu package repository add tkg-packages-1-4-0 --url projects.registry.vmware.com/tkg/packages/standard/repo:v1.4.0
+</span></span><span class=line><span class=cl><span class=c1># Check the repository has been installed and the STATUS is Reconcile succeeded</span>
+</span></span><span class=line><span class=cl>$ tanzu package repository list
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Retrieving repositories... 
+</span></span><span class=line><span class=cl>  NAME                REPOSITORY                                                      STATUS               DETAILS  
+</span></span><span class=line><span class=cl>  tkg-packages-1-4-0  projects.registry.vmware.com/tkg/packages/standard/repo:v1.4.0  Reconcile succeeded   
+</span></span><span class=line><span class=cl><span class=c1># List the available packages</span>
+</span></span><span class=line><span class=cl>$ tanzu package available list
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>- Retrieving available packages... 
+</span></span><span class=line><span class=cl>  NAME                           DISPLAY-NAME  SHORT-DESCRIPTION                                                                                           
+</span></span><span class=line><span class=cl>  cert-manager.tanzu.vmware.com  cert-manager  Certificate management                                                                                      
+</span></span><span class=line><span class=cl>  contour.tanzu.vmware.com       Contour       An ingress controller                                                                                       
+</span></span><span class=line><span class=cl>  external-dns.tanzu.vmware.com  external-dns  This package provides DNS synchronization functionality.                                                    
+</span></span><span class=line><span class=cl>  fluent-bit.tanzu.vmware.com    fluent-bit    Fluent Bit is a fast Log Processor and Forwarder                                                            
+</span></span><span class=line><span class=cl>  grafana.tanzu.vmware.com       grafana       Visualization and analytics software                                                                        
+</span></span><span class=line><span class=cl>  harbor.tanzu.vmware.com        Harbor        OCI Registry                                                                                                
+</span></span><span class=line><span class=cl>  multus-cni.tanzu.vmware.com    multus-cni    This package provides the ability <span class=k>for</span> enabling attaching multiple network interfaces to pods in Kubernetes  
+</span></span><span class=line><span class=cl>  prometheus.tanzu.vmware.com    prometheus    A <span class=nb>time</span> series database <span class=k>for</span> your metrics 
+</span></span></code></pre></td></tr></table></div></div><ul>
+<li>Ref: <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-prep-tkgs-kapp.html>Prepare a Tanzu Kubernetes Cluster Created by Using the Tanzu Kubernetes Grid Service to Run Packages</a></li></ul><h1 id=install-cert-manager>Install Cert Manager <a class=anchor href=#install-cert-manager>
 <i class="fas fa-hashtag"></i>
-</a></h1><p>The first package I&rsquo;m going to install is <code>cert-manager</code>, which provides &ldquo;certificates as a service&rdquo; inside of Kubernetes. I&rsquo;m going to install a CA certificate generated on my local machine to sign certificates, since the DNS domain I&rsquo;m using (cmbu.local) is not public. This means I can trust the CA created on my local machine to produce valid certificates for me - this is obviously not something you&rsquo;d do in a production environment!</p>
-<div class=highlight><div class=chroma>
+</a></h1><p>The first package I&rsquo;m going to install is <code>cert-manager</code>, which provides &ldquo;certificates as a service&rdquo; inside of Kubernetes. I&rsquo;m going to install a CA certificate generated on my local machine to sign certificates, since the DNS domain I&rsquo;m using (cmbu.local) is not public. This means I can trust the CA created on my local machine to produce valid certificates for me - this is obviously not something you&rsquo;d do in a production environment!</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -233,64 +193,54 @@ $ tanzu package available list
 </span><span class=lnt>30
 </span><span class=lnt>31
 </span><span class=lnt>32
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># First, identify the latest version of the cert-manager package</span>
-tanzu package available list cert-manager.tanzu.vmware.com -A
-
-Retrieving package versions <span class=k>for</span> cert-manager.tanzu.vmware.com... 
-  NAME                           VERSION               RELEASED-AT           NAMESPACE  
-  cert-manager.tanzu.vmware.com  1.1.0+vmware.1-tkg.2  2020-11-24T18:00:00Z  default
-
-<span class=c1># Next, install the package using the tanzu cli (this will install the package itself in the default</span>
-<span class=c1># namespace, and create the cert-manager namespace)</span>
-tanzu package install cert-manager --package-name cert-manager.tanzu.vmware.com --version 1.1.0+vmware.1-tkg.2 --create-namespace
-
-<span class=c1># Once installed, we can check cert-manager is running as expected</span>
-kubectl get all -n cert-manager
-
-READY   STATUS    RESTARTS   AGE
-pod/cert-manager-5d98fc96c-ps88n               1/1     Running   <span class=m>0</span>          42s
-pod/cert-manager-cainjector-569d88547f-p6rqs   1/1     Running   <span class=m>0</span>          42s
-pod/cert-manager-webhook-79fd9fcbf-j6tvs       1/1     Running   <span class=m>0</span>          42s
-
-NAME                           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT<span class=o>(</span>S<span class=o>)</span>    AGE
-service/cert-manager           ClusterIP   10.106.223.54   &lt;none&gt;        9402/TCP   42s
-service/cert-manager-webhook   ClusterIP   10.102.63.18    &lt;none&gt;        443/TCP    43s
-
-NAME                                      READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/cert-manager              1/1     <span class=m>1</span>            <span class=m>1</span>           44s
-deployment.apps/cert-manager-cainjector   1/1     <span class=m>1</span>            <span class=m>1</span>           44s
-deployment.apps/cert-manager-webhook      1/1     <span class=m>1</span>            <span class=m>1</span>           44s
-
-NAME                                                 DESIRED   CURRENT   READY   AGE
-replicaset.apps/cert-manager-5d98fc96c               <span class=m>1</span>         <span class=m>1</span>         <span class=m>1</span>       44s
-replicaset.apps/cert-manager-cainjector-569d88547f   <span class=m>1</span>         <span class=m>1</span>         <span class=m>1</span>       44s
-replicaset.apps/cert-manager-webhook-79fd9fcbf       <span class=m>1</span>         <span class=m>1</span>         <span class=m>1</span>       44s
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Ref: <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-cert-manager.html>Install Cert Manager</a></li>
-</ul>
-<h2 id=configuring-ca-signed-certificates>Configuring CA signed certificates <a class=anchor href=#configuring-ca-signed-certificates>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># First, identify the latest version of the cert-manager package</span>
+</span></span><span class=line><span class=cl>tanzu package available list cert-manager.tanzu.vmware.com -A
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Retrieving package versions <span class=k>for</span> cert-manager.tanzu.vmware.com... 
+</span></span><span class=line><span class=cl>  NAME                           VERSION               RELEASED-AT           NAMESPACE  
+</span></span><span class=line><span class=cl>  cert-manager.tanzu.vmware.com  1.1.0+vmware.1-tkg.2  2020-11-24T18:00:00Z  default
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Next, install the package using the tanzu cli (this will install the package itself in the default</span>
+</span></span><span class=line><span class=cl><span class=c1># namespace, and create the cert-manager namespace)</span>
+</span></span><span class=line><span class=cl>tanzu package install cert-manager --package-name cert-manager.tanzu.vmware.com --version 1.1.0+vmware.1-tkg.2 --create-namespace
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Once installed, we can check cert-manager is running as expected</span>
+</span></span><span class=line><span class=cl>kubectl get all -n cert-manager
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>READY   STATUS    RESTARTS   AGE
+</span></span><span class=line><span class=cl>pod/cert-manager-5d98fc96c-ps88n               1/1     Running   <span class=m>0</span>          42s
+</span></span><span class=line><span class=cl>pod/cert-manager-cainjector-569d88547f-p6rqs   1/1     Running   <span class=m>0</span>          42s
+</span></span><span class=line><span class=cl>pod/cert-manager-webhook-79fd9fcbf-j6tvs       1/1     Running   <span class=m>0</span>          42s
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>NAME                           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT<span class=o>(</span>S<span class=o>)</span>    AGE
+</span></span><span class=line><span class=cl>service/cert-manager           ClusterIP   10.106.223.54   &lt;none&gt;        9402/TCP   42s
+</span></span><span class=line><span class=cl>service/cert-manager-webhook   ClusterIP   10.102.63.18    &lt;none&gt;        443/TCP    43s
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>NAME                                      READY   UP-TO-DATE   AVAILABLE   AGE
+</span></span><span class=line><span class=cl>deployment.apps/cert-manager              1/1     <span class=m>1</span>            <span class=m>1</span>           44s
+</span></span><span class=line><span class=cl>deployment.apps/cert-manager-cainjector   1/1     <span class=m>1</span>            <span class=m>1</span>           44s
+</span></span><span class=line><span class=cl>deployment.apps/cert-manager-webhook      1/1     <span class=m>1</span>            <span class=m>1</span>           44s
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>NAME                                                 DESIRED   CURRENT   READY   AGE
+</span></span><span class=line><span class=cl>replicaset.apps/cert-manager-5d98fc96c               <span class=m>1</span>         <span class=m>1</span>         <span class=m>1</span>       44s
+</span></span><span class=line><span class=cl>replicaset.apps/cert-manager-cainjector-569d88547f   <span class=m>1</span>         <span class=m>1</span>         <span class=m>1</span>       44s
+</span></span><span class=line><span class=cl>replicaset.apps/cert-manager-webhook-79fd9fcbf       <span class=m>1</span>         <span class=m>1</span>         <span class=m>1</span>       44s
+</span></span></code></pre></td></tr></table></div></div><ul>
+<li>Ref: <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-cert-manager.html>Install Cert Manager</a></li></ul><h2 id=configuring-ca-signed-certificates>Configuring CA signed certificates <a class=anchor href=#configuring-ca-signed-certificates>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>To create the CA certificates, I followed the steps documented by Jorge Morales Pou here - <a href=https://tanzu.vmware.com/developer/blog/securely-connect-with-your-local-kubernetes-environment/>Create your own local CA</a>, and exported the private key as <a href=https://cormachogan.com/2021/11/02/securing-application-access-on-tkg-v1-4-with-cert-manager-and-contour/>noted by Cormac Hogan here</a>.</p>
-<div class=highlight><div class=chroma>
+</a></h2><p>To create the CA certificates, I followed the steps documented by Jorge Morales Pou here - <a href=https://tanzu.vmware.com/developer/blog/securely-connect-with-your-local-kubernetes-environment/>Create your own local CA</a>, and exported the private key as <a href=https://cormachogan.com/2021/11/02/securing-application-access-on-tkg-v1-4-with-cert-manager-and-contour/>noted by Cormac Hogan here</a>.</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ openssl rsa -in autotmm-ca.key -out autotmm-ca.unprotected.key
-
-<span class=c1># Create a TLS secret in the cert-manager namespace</span>
-$ kubectl create secret tls autotmm-ca-secret --key autotmm-ca.unprotected.key --cert autotmm-ca.pem -n cert-manager
-</code></pre></td></tr></table>
-</div>
-</div><p>Next create a ClusterIssuer manifest to use the CA secret, and deploy <code>kubectl apply ca-issuer.yaml</code>:</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ openssl rsa -in autotmm-ca.key -out autotmm-ca.unprotected.key
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Create a TLS secret in the cert-manager namespace</span>
+</span></span><span class=line><span class=cl>$ kubectl create secret tls autotmm-ca-secret --key autotmm-ca.unprotected.key --cert autotmm-ca.pem -n cert-manager
+</span></span></code></pre></td></tr></table></div></div><p>Next create a ClusterIssuer manifest to use the CA secret, and deploy <code>kubectl apply ca-issuer.yaml</code>:</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -300,22 +250,18 @@ $ kubectl create secret tls autotmm-ca-secret --key autotmm-ca.unprotected.key -
 </span><span class=lnt>6
 </span><span class=lnt>7
 </span><span class=lnt>8
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>cert-manager.io/v1</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterIssuer</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>autotmm-issuer</span><span class=w>
-</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>cert-manager</span><span class=w>
-</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>ca</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>secretName</span><span class=p>:</span><span class=w> </span><span class=l>autotmm-ca-secret</span><span class=w>
-</span></code></pre></td></tr></table>
-</div>
-</div><h1 id=install-contour>Install Contour <a class=anchor href=#install-contour>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>cert-manager.io/v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterIssuer</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>autotmm-issuer</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>cert-manager</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>ca</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>secretName</span><span class=p>:</span><span class=w> </span><span class=l>autotmm-ca-secret</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h1 id=install-contour>Install Contour <a class=anchor href=#install-contour>
 <i class="fas fa-hashtag"></i>
-</a></h1><p>At this point <code>cert-manager</code> should be ready to issue certificates, so we can install <code>contour</code> to begin consuming them. I&rsquo;ve created <code>contour-data-values.yaml</code> based on the &ldquo;workload cluster with NSX ALB&rdquo; example to contain the configuration for the <code>contour</code> deployment, which will customize the package deployment to use a <code>LoadBalancer</code> for Envoy.</p>
-<div class=highlight><div class=chroma>
+</a></h1><p>At this point <code>cert-manager</code> should be ready to issue certificates, so we can install <code>contour</code> to begin consuming them. I&rsquo;ve created <code>contour-data-values.yaml</code> based on the &ldquo;workload cluster with NSX ALB&rdquo; example to contain the configuration for the <code>contour</code> deployment, which will customize the package deployment to use a <code>LoadBalancer</code> for Envoy.</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -345,40 +291,36 @@ $ kubectl create secret tls autotmm-ca-secret --key autotmm-ca.unprotected.key -
 </span><span class=lnt>26
 </span><span class=lnt>27
 </span><span class=lnt>28
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>infrastructure_provider</span><span class=p>:</span><span class=w> </span><span class=l>vsphere</span><span class=w>
-</span><span class=w></span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>tanzu-system-ingress</span><span class=w>
-</span><span class=w></span><span class=nt>contour</span><span class=p>:</span><span class=w>
-</span><span class=w> </span><span class=nt>configFileContents</span><span class=p>:</span><span class=w> </span>{}<span class=w>
-</span><span class=w> </span><span class=nt>useProxyProtocol</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
-</span><span class=w> </span><span class=nt>replicas</span><span class=p>:</span><span class=w> </span><span class=m>2</span><span class=w>
-</span><span class=w> </span><span class=nt>pspNames</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;vmware-system-restricted&#34;</span><span class=w>
-</span><span class=w> </span><span class=nt>logLevel</span><span class=p>:</span><span class=w> </span><span class=l>info</span><span class=w>
-</span><span class=w></span><span class=nt>envoy</span><span class=p>:</span><span class=w>
-</span><span class=w> </span><span class=nt>service</span><span class=p>:</span><span class=w>
-</span><span class=w>   </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>LoadBalancer</span><span class=w>
-</span><span class=w>   </span><span class=nt>annotations</span><span class=p>:</span><span class=w> </span>{}<span class=w>
-</span><span class=w>   </span><span class=nt>nodePorts</span><span class=p>:</span><span class=w>
-</span><span class=w>     </span><span class=nt>http</span><span class=p>:</span><span class=w> </span><span class=kc>null</span><span class=w>
-</span><span class=w>     </span><span class=nt>https</span><span class=p>:</span><span class=w> </span><span class=kc>null</span><span class=w>
-</span><span class=w>   </span><span class=nt>externalTrafficPolicy</span><span class=p>:</span><span class=w> </span><span class=l>Cluster</span><span class=w>
-</span><span class=w>   </span><span class=nt>disableWait</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
-</span><span class=w> </span><span class=nt>hostPorts</span><span class=p>:</span><span class=w>
-</span><span class=w>   </span><span class=nt>enable</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
-</span><span class=w>   </span><span class=nt>http</span><span class=p>:</span><span class=w> </span><span class=m>80</span><span class=w>
-</span><span class=w>   </span><span class=nt>https</span><span class=p>:</span><span class=w> </span><span class=m>443</span><span class=w>
-</span><span class=w> </span><span class=nt>hostNetwork</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
-</span><span class=w> </span><span class=nt>terminationGracePeriodSeconds</span><span class=p>:</span><span class=w> </span><span class=m>300</span><span class=w>
-</span><span class=w> </span><span class=nt>logLevel</span><span class=p>:</span><span class=w> </span><span class=l>info</span><span class=w>
-</span><span class=w> </span><span class=nt>pspNames</span><span class=p>:</span><span class=w> </span><span class=kc>null</span><span class=w>
-</span><span class=w></span><span class=nt>certificates</span><span class=p>:</span><span class=w>
-</span><span class=w> </span><span class=nt>duration</span><span class=p>:</span><span class=w> </span><span class=l>8760h</span><span class=w>
-</span><span class=w> </span><span class=nt>renewBefore</span><span class=p>:</span><span class=w> </span><span class=l>360h</span><span class=w>
-</span></code></pre></td></tr></table>
-</div>
-</div><p>With this configuration file we can deploy Contour into the cluster</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>infrastructure_provider</span><span class=p>:</span><span class=w> </span><span class=l>vsphere</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>tanzu-system-ingress</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>contour</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>configFileContents</span><span class=p>:</span><span class=w> </span>{}<span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>useProxyProtocol</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>replicas</span><span class=p>:</span><span class=w> </span><span class=m>2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>pspNames</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;vmware-system-restricted&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>logLevel</span><span class=p>:</span><span class=w> </span><span class=l>info</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>envoy</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>service</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>LoadBalancer</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>annotations</span><span class=p>:</span><span class=w> </span>{}<span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>nodePorts</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span><span class=nt>http</span><span class=p>:</span><span class=w> </span><span class=kc>null</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span><span class=nt>https</span><span class=p>:</span><span class=w> </span><span class=kc>null</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>externalTrafficPolicy</span><span class=p>:</span><span class=w> </span><span class=l>Cluster</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>disableWait</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>hostPorts</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>enable</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>http</span><span class=p>:</span><span class=w> </span><span class=m>80</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>https</span><span class=p>:</span><span class=w> </span><span class=m>443</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>hostNetwork</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>terminationGracePeriodSeconds</span><span class=p>:</span><span class=w> </span><span class=m>300</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>logLevel</span><span class=p>:</span><span class=w> </span><span class=l>info</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>pspNames</span><span class=p>:</span><span class=w> </span><span class=kc>null</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>certificates</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>duration</span><span class=p>:</span><span class=w> </span><span class=l>8760h</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>renewBefore</span><span class=p>:</span><span class=w> </span><span class=l>360h</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>With this configuration file we can deploy Contour into the cluster</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -413,67 +355,51 @@ $ kubectl create secret tls autotmm-ca-secret --key autotmm-ca.unprotected.key -
 </span><span class=lnt>31
 </span><span class=lnt>32
 </span><span class=lnt>33
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># Identify the latest version of contour</span>
-$ tanzu package available list contour.tanzu.vmware.com -A
-
-<span class=se>\ </span>Retrieving package versions <span class=k>for</span> contour.tanzu.vmware.com... 
-  NAME                      VERSION                RELEASED-AT           NAMESPACE  
-  contour.tanzu.vmware.com  1.17.1+vmware.1-tkg.1  2021-07-23T18:00:00Z  default 
-
-<span class=c1># Next, install the package using the tanzu cli (this will install the package itself in the default</span>
-<span class=c1># namespace, and create the tanzu-system-ingress namespace)</span>
-tanzu package install contour --package-name contour.tanzu.vmware.com --version 1.17.1+vmware.1-tkg.1 --values-file contour-data-values.yaml --create-namespace
-
-<span class=c1># Check the deployment</span>
-$ kubectl get all -n tanzu-system-ingress
-
-NAME                          READY   STATUS    RESTARTS   AGE
-pod/contour-cd965689f-9p4jh   1/1     Running   <span class=m>0</span>          5h2m
-pod/contour-cd965689f-gmm27   1/1     Running   <span class=m>0</span>          5h2m
-pod/envoy-67xzt               2/2     Running   <span class=m>0</span>          5h2m
-pod/envoy-vq49r               2/2     Running   <span class=m>0</span>          5h2m
-pod/envoy-x9qt4               2/2     Running   <span class=m>0</span>          5h2m
-
-NAME              TYPE           CLUSTER-IP       EXTERNAL-IP      PORT<span class=o>(</span>S<span class=o>)</span>                      AGE
-service/contour   ClusterIP      10.106.131.103   &lt;none&gt;           8001/TCP                     5h2m
-service/envoy     LoadBalancer   10.109.244.41    10.176.149.101   80:30508/TCP,443:32580/TCP   5h2m
-
-NAME                   DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
-daemonset.apps/envoy   <span class=m>3</span>         <span class=m>3</span>         <span class=m>3</span>       <span class=m>3</span>            <span class=m>3</span>           &lt;none&gt;          5h2m
-
-NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/contour   2/2     <span class=m>2</span>            <span class=m>2</span>           5h2m
-
-NAME                                DESIRED   CURRENT   READY   AGE
-replicaset.apps/contour-cd965689f   <span class=m>2</span>         <span class=m>2</span>         <span class=m>2</span>       5h2m
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Ref: <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-ingress-contour.html>Implement Ingress Control with Contour</a></li>
-</ul>
-<h1 id=external-dns>External DNS <a class=anchor href=#external-dns>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># Identify the latest version of contour</span>
+</span></span><span class=line><span class=cl>$ tanzu package available list contour.tanzu.vmware.com -A
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=se>\ </span>Retrieving package versions <span class=k>for</span> contour.tanzu.vmware.com... 
+</span></span><span class=line><span class=cl>  NAME                      VERSION                RELEASED-AT           NAMESPACE  
+</span></span><span class=line><span class=cl>  contour.tanzu.vmware.com  1.17.1+vmware.1-tkg.1  2021-07-23T18:00:00Z  default 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Next, install the package using the tanzu cli (this will install the package itself in the default</span>
+</span></span><span class=line><span class=cl><span class=c1># namespace, and create the tanzu-system-ingress namespace)</span>
+</span></span><span class=line><span class=cl>tanzu package install contour --package-name contour.tanzu.vmware.com --version 1.17.1+vmware.1-tkg.1 --values-file contour-data-values.yaml --create-namespace
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Check the deployment</span>
+</span></span><span class=line><span class=cl>$ kubectl get all -n tanzu-system-ingress
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>NAME                          READY   STATUS    RESTARTS   AGE
+</span></span><span class=line><span class=cl>pod/contour-cd965689f-9p4jh   1/1     Running   <span class=m>0</span>          5h2m
+</span></span><span class=line><span class=cl>pod/contour-cd965689f-gmm27   1/1     Running   <span class=m>0</span>          5h2m
+</span></span><span class=line><span class=cl>pod/envoy-67xzt               2/2     Running   <span class=m>0</span>          5h2m
+</span></span><span class=line><span class=cl>pod/envoy-vq49r               2/2     Running   <span class=m>0</span>          5h2m
+</span></span><span class=line><span class=cl>pod/envoy-x9qt4               2/2     Running   <span class=m>0</span>          5h2m
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>NAME              TYPE           CLUSTER-IP       EXTERNAL-IP      PORT<span class=o>(</span>S<span class=o>)</span>                      AGE
+</span></span><span class=line><span class=cl>service/contour   ClusterIP      10.106.131.103   &lt;none&gt;           8001/TCP                     5h2m
+</span></span><span class=line><span class=cl>service/envoy     LoadBalancer   10.109.244.41    10.176.149.101   80:30508/TCP,443:32580/TCP   5h2m
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>NAME                   DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+</span></span><span class=line><span class=cl>daemonset.apps/envoy   <span class=m>3</span>         <span class=m>3</span>         <span class=m>3</span>       <span class=m>3</span>            <span class=m>3</span>           &lt;none&gt;          5h2m
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+</span></span><span class=line><span class=cl>deployment.apps/contour   2/2     <span class=m>2</span>            <span class=m>2</span>           5h2m
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>NAME                                DESIRED   CURRENT   READY   AGE
+</span></span><span class=line><span class=cl>replicaset.apps/contour-cd965689f   <span class=m>2</span>         <span class=m>2</span>         <span class=m>2</span>       5h2m
+</span></span></code></pre></td></tr></table></div></div><ul>
+<li>Ref: <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-ingress-contour.html>Implement Ingress Control with Contour</a></li></ul><h1 id=external-dns>External DNS <a class=anchor href=#external-dns>
 <i class="fas fa-hashtag"></i>
-</a></h1><p>The final step in linking this all together is configuring <code>external-dns</code> to register and manage DNS records for the <code>ingress</code> objects created in <code>contour</code>. Since I&rsquo;m using Active Directory DNS servers, I need to configure kerberos authentication to make use of RFC3645 for secure updates.</p>
-<div class="alert alert-info" role=alert>
+</a></h1><p>The final step in linking this all together is configuring <code>external-dns</code> to register and manage DNS records for the <code>ingress</code> objects created in <code>contour</code>. Since I&rsquo;m using Active Directory DNS servers, I need to configure kerberos authentication to make use of RFC3645 for secure updates.</p><div class="alert alert-info" role=alert>
 <div class=alert-items>
 <div class="alert-item static">
 <div class=alert-icon-wrapper>
 <clr-icon class=alert-icon shape=info-circle></clr-icon>
-</div>
-<span class=alert-text>I previously blogged about similar functionality to external-dns <a href=/2020/12/automatically-adding-kubernetes-service-dns-records-to-microsoft-dns-using-coredns-and-k8s_gateway/>using CoreDNS and k8s_gateway to automatically register service DNS records using DNS delegation with Microsoft Active Directory</a></span>
-</div>
-</div>
-</div>
-<p>DNS-side configuration</p>
-<ul>
-<li>Create a DNS zone</li>
-<li>Enable secure dynamic updates for the zone</li>
-<li>Enable Zone Transfers to all servers</li>
-</ul>
-<p>First, create the <code>external-dns-kerberos.yaml</code>, updating to match your AD Domain:</p>
-<div class=highlight><div class=chroma>
+</div><span class=alert-text>I previously blogged about similar functionality to external-dns <a href=/2020/12/automatically-adding-kubernetes-service-dns-records-to-microsoft-dns-using-coredns-and-k8s_gateway/>using CoreDNS and k8s_gateway to automatically register service DNS records using DNS delegation with Microsoft Active Directory</a></span>
+</div></div></div><p>DNS-side configuration</p><ul>
+<li>Create a DNS zone</li><li>Enable secure dynamic updates for the zone</li><li>Enable Zone Transfers to all servers</li></ul><p>First, create the <code>external-dns-kerberos.yaml</code>, updating to match your AD Domain:</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -508,56 +434,48 @@ replicaset.apps/contour-cd965689f   <span class=m>2</span>         <span class=m
 </span><span class=hl><span class=lnt>31
 </span></span><span class=hl><span class=lnt>32
 </span></span><span class=hl><span class=lnt>33
-</span></span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ConfigMap</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>creationTimestamp</span><span class=p>:</span><span class=w> </span><span class=kc>null</span><span class=w>
-</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>krb5.conf</span><span class=w>
-</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>tanzu-system-service-discovery</span><span class=w>
-</span><span class=w></span><span class=nt>data</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>krb5.conf</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
-</span><span class=sd>    [logging]
-</span><span class=sd>    default = FILE:/var/log/krb5libs.log
-</span><span class=sd>    kdc = FILE:/var/log/krb5kdc.log
-</span><span class=sd>    admin_server = FILE:/var/log/kadmind.log
-</span><span class=sd>
-</span><span class=sd>    [libdefaults]
-</span><span class=sd>    dns_lookup_realm = false
-</span><span class=sd>    ticket_lifetime = 24h
-</span><span class=sd>    renew_lifetime = 7d
-</span><span class=sd>    forwardable = true
-</span><span class=sd>    rdns = false
-</span><span class=sd>    pkinit_anchors = /etc/pki/tls/certs/ca-bundle.crt
-</span><span class=sd>    default_ccache_name = KEYRING:persistent:%{uid}
-</span><span class=sd>
-</span><span class=hl><span class=sd>    default_realm = CMBU.LOCAL
-</span></span><span class=sd>
-</span><span class=sd>    [realms]
-</span><span class=hl><span class=sd>    CMBU.LOCAL = {
-</span></span><span class=hl><span class=sd>      kdc = domaincontroller.cmbu.local
-</span></span><span class=hl><span class=sd>      admin_server = domaincontroller.cmbu.local
-</span></span><span class=hl><span class=sd>    }
-</span></span><span class=sd>
-</span><span class=hl><span class=sd>    [domain_realm]
-</span></span><span class=hl><span class=sd>    cmbu.local = CMBU.LOCAL
-</span></span><span class=hl><span class=sd>    .cmbu.local = CMBU.LOCAL</span><span class=w>    
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Because I need the kerberos configuration to be present before deploying <code>external-dns</code>, I create the <code>namespace</code> and deploy the kerberos <code>configmap</code>:</p>
-<div class=highlight><div class=chroma>
+</span></span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ConfigMap</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>creationTimestamp</span><span class=p>:</span><span class=w> </span><span class=kc>null</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>krb5.conf</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>tanzu-system-service-discovery</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>data</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>krb5.conf</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>    [logging]
+</span></span></span><span class=line><span class=cl><span class=sd>    default = FILE:/var/log/krb5libs.log
+</span></span></span><span class=line><span class=cl><span class=sd>    kdc = FILE:/var/log/krb5kdc.log
+</span></span></span><span class=line><span class=cl><span class=sd>    admin_server = FILE:/var/log/kadmind.log
+</span></span></span><span class=line><span class=cl><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>    [libdefaults]
+</span></span></span><span class=line><span class=cl><span class=sd>    dns_lookup_realm = false
+</span></span></span><span class=line><span class=cl><span class=sd>    ticket_lifetime = 24h
+</span></span></span><span class=line><span class=cl><span class=sd>    renew_lifetime = 7d
+</span></span></span><span class=line><span class=cl><span class=sd>    forwardable = true
+</span></span></span><span class=line><span class=cl><span class=sd>    rdns = false
+</span></span></span><span class=line><span class=cl><span class=sd>    pkinit_anchors = /etc/pki/tls/certs/ca-bundle.crt
+</span></span></span><span class=line><span class=cl><span class=sd>    default_ccache_name = KEYRING:persistent:%{uid}
+</span></span></span><span class=line><span class=cl><span class=sd>
+</span></span></span><span class="line hl"><span class=cl><span class=sd>    default_realm = CMBU.LOCAL
+</span></span></span><span class=line><span class=cl><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>    [realms]
+</span></span></span><span class="line hl"><span class=cl><span class=sd>    CMBU.LOCAL = {
+</span></span></span><span class="line hl"><span class=cl><span class=sd>      kdc = domaincontroller.cmbu.local
+</span></span></span><span class="line hl"><span class=cl><span class=sd>      admin_server = domaincontroller.cmbu.local
+</span></span></span><span class="line hl"><span class=cl><span class=sd>    }
+</span></span></span><span class=line><span class=cl><span class=sd>
+</span></span></span><span class="line hl"><span class=cl><span class=sd>    [domain_realm]
+</span></span></span><span class="line hl"><span class=cl><span class=sd>    cmbu.local = CMBU.LOCAL
+</span></span></span><span class="line hl"><span class=cl><span class=sd>    .cmbu.local = CMBU.LOCAL</span><span class=w>    
+</span></span></span></code></pre></td></tr></table></div></div><p>Because I need the kerberos configuration to be present before deploying <code>external-dns</code>, I create the <code>namespace</code> and deploy the kerberos <code>configmap</code>:</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ kubectl create namespace tanzu-system-service-discovery
-$ kubectl apply -f external-dns-kerberos.yaml
-</code></pre></td></tr></table>
-</div>
-</div><p>Next, create a package configuration YAML <code>external-dns-data-values.yaml</code> to configure the package. This example is specific for Microsoft DNS, to configure for other DNS providers <a href=https://github.com/kubernetes-sigs/external-dns>check the external-dns docs</a>! The key things to note here are the three source types - this means external-dns will register DNS for <code>services</code>, <code>ingresses</code> and <code>httpproxies</code>.</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ kubectl create namespace tanzu-system-service-discovery
+</span></span><span class=line><span class=cl>$ kubectl apply -f external-dns-kerberos.yaml
+</span></span></code></pre></td></tr></table></div></div><p>Next, create a package configuration YAML <code>external-dns-data-values.yaml</code> to configure the package. This example is specific for Microsoft DNS, to configure for other DNS providers <a href=https://github.com/kubernetes-sigs/external-dns>check the external-dns docs</a>! The key things to note here are the three source types - this means external-dns will register DNS for <code>services</code>, <code>ingresses</code> and <code>httpproxies</code>.</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -590,43 +508,39 @@ $ kubectl apply -f external-dns-kerberos.yaml
 </span><span class=lnt>29
 </span><span class=lnt>30
 </span><span class=lnt>31
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>tanzu-system-service-discovery</span><span class=w>
-</span><span class=w></span><span class=nt>deployment</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>args</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span>- --<span class=l>provider=rfc2136</span><span class=w>
-</span><span class=w>    </span>- --<span class=l>rfc2136-host=cmbu-wdcdc-02.cmbu.local</span><span class=w>
-</span><span class=w>    </span>- --<span class=l>rfc2136-port=53</span><span class=w>
-</span><span class=w>    </span>- --<span class=l>rfc2136-zone=cmbu.local</span><span class=w>
-</span><span class=w>    </span>- --<span class=l>rfc2136-kerberos-realm=cmbu.local</span><span class=w>
-</span><span class=w>    </span>- --<span class=l>rfc2136-kerberos-username=service-account</span><span class=w>
-</span><span class=w>    </span>- --<span class=l>rfc2136-kerberos-password=VMware1!</span><span class=w>
-</span><span class=w>    </span>- --<span class=l>rfc2136-tsig-axfr</span><span class=w>
-</span><span class=w>    </span>- --<span class=l>rfc2136-insecure</span><span class=w>
-</span><span class=w>    </span>- --<span class=l>source=service</span><span class=w>
-</span><span class=w>    </span>- --<span class=l>source=ingress</span><span class=w>
-</span><span class=w>    </span>- --<span class=l>source=contour-httpproxy</span><span class=w>
-</span><span class=w>    </span>- --<span class=l>domain-filter=cmbu.local</span><span class=w>
-</span><span class=w>    </span>- --<span class=l>txt-owner-id=k8s</span><span class=w>
-</span><span class=w>    </span>- --<span class=l>txt-prefix=external-dns-</span><span class=w>
-</span><span class=w>    </span>- --<span class=l>registry=txt</span><span class=w>
-</span><span class=w>    </span>- --<span class=l>policy=upsert-only</span><span class=w>
-</span><span class=w>  </span><span class=nt>env</span><span class=p>:</span><span class=w> </span><span class=p>[]</span><span class=w>
-</span><span class=w>  </span><span class=nt>securityContext</span><span class=p>:</span><span class=w> </span>{}<span class=w>
-</span><span class=w>  </span><span class=nt>volumeMounts</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>kerberos-config-volume</span><span class=w>
-</span><span class=w>    </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/etc/krb5.conf</span><span class=w>
-</span><span class=w>    </span><span class=nt>subPath</span><span class=p>:</span><span class=w> </span><span class=l>krb5.conf</span><span class=w>
-</span><span class=w>  </span><span class=nt>volumes</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>kerberos-config-volume</span><span class=w>
-</span><span class=w>    </span><span class=nt>configMap</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>defaultMode</span><span class=p>:</span><span class=w> </span><span class=m>420</span><span class=w>
-</span><span class=w>      </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>krb5.conf</span><span class=w>
-</span></code></pre></td></tr></table>
-</div>
-</div><p>Finally, I can deploy the package!</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>tanzu-system-service-discovery</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>deployment</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>args</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- --<span class=l>provider=rfc2136</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- --<span class=l>rfc2136-host=cmbu-wdcdc-02.cmbu.local</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- --<span class=l>rfc2136-port=53</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- --<span class=l>rfc2136-zone=cmbu.local</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- --<span class=l>rfc2136-kerberos-realm=cmbu.local</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- --<span class=l>rfc2136-kerberos-username=service-account</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- --<span class=l>rfc2136-kerberos-password=VMware1!</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- --<span class=l>rfc2136-tsig-axfr</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- --<span class=l>rfc2136-insecure</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- --<span class=l>source=service</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- --<span class=l>source=ingress</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- --<span class=l>source=contour-httpproxy</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- --<span class=l>domain-filter=cmbu.local</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- --<span class=l>txt-owner-id=k8s</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- --<span class=l>txt-prefix=external-dns-</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- --<span class=l>registry=txt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- --<span class=l>policy=upsert-only</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>env</span><span class=p>:</span><span class=w> </span><span class=p>[]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>securityContext</span><span class=p>:</span><span class=w> </span>{}<span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>volumeMounts</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>kerberos-config-volume</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/etc/krb5.conf</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>subPath</span><span class=p>:</span><span class=w> </span><span class=l>krb5.conf</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>volumes</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>kerberos-config-volume</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>configMap</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>defaultMode</span><span class=p>:</span><span class=w> </span><span class=m>420</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>krb5.conf</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>Finally, I can deploy the package!</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -638,29 +552,21 @@ $ kubectl apply -f external-dns-kerberos.yaml
 </span><span class=lnt> 8
 </span><span class=lnt> 9
 </span><span class=lnt>10
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># Get the latest package</span>
-$ tanzu package available list external-dns.tanzu.vmware.com -A
-
-<span class=p>|</span> Retrieving package versions <span class=k>for</span> external-dns.tanzu.vmware.com... 
-  NAME                           VERSION               RELEASED-AT           NAMESPACE  
-  external-dns.tanzu.vmware.com  0.8.0+vmware.1-tkg.1  2021-06-11T18:00:00Z  default
-
-<span class=c1># Next, install the package using the tanzu cli (this will install the package itself in the default</span>
-<span class=c1># namespace, and create the tanzu-system-service-discovery namespace)</span>
-tanzu package install external-dns --package-name external-dns.tanzu.vmware.com --version 0.8.0+vmware.1-tkg.1 --values-file external-dns-data-values.yaml
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Ref: <a href=https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/rfc2136.md#secure-updates-using-rfc3645-gss-tsig>Secure Updates Using RFC3645 (GSS-TSIG)</a></li>
-<li>Ref: <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-external-dns.html>Implement Service Discovery with ExternalDNS</a></li>
-</ul>
-<h1 id=putting-it-all-together>Putting it all together <a class=anchor href=#putting-it-all-together>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># Get the latest package</span>
+</span></span><span class=line><span class=cl>$ tanzu package available list external-dns.tanzu.vmware.com -A
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>|</span> Retrieving package versions <span class=k>for</span> external-dns.tanzu.vmware.com... 
+</span></span><span class=line><span class=cl>  NAME                           VERSION               RELEASED-AT           NAMESPACE  
+</span></span><span class=line><span class=cl>  external-dns.tanzu.vmware.com  0.8.0+vmware.1-tkg.1  2021-06-11T18:00:00Z  default
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Next, install the package using the tanzu cli (this will install the package itself in the default</span>
+</span></span><span class=line><span class=cl><span class=c1># namespace, and create the tanzu-system-service-discovery namespace)</span>
+</span></span><span class=line><span class=cl>tanzu package install external-dns --package-name external-dns.tanzu.vmware.com --version 0.8.0+vmware.1-tkg.1 --values-file external-dns-data-values.yaml
+</span></span></code></pre></td></tr></table></div></div><ul>
+<li>Ref: <a href=https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/rfc2136.md#secure-updates-using-rfc3645-gss-tsig>Secure Updates Using RFC3645 (GSS-TSIG)</a></li><li>Ref: <a href=https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-external-dns.html>Implement Service Discovery with ExternalDNS</a></li></ul><h1 id=putting-it-all-together>Putting it all together <a class=anchor href=#putting-it-all-together>
 <i class="fas fa-hashtag"></i>
-</a></h1><p>With this configuration I can now deploy an application and have that application URL be auto-magically signed with an SSL certificate using cert-manager, contour will steer traffic to the correct service based on the URL, and the DNS name of that service will be automatically registered in DNS!</p>
-<p>The below manifest for Kubernetes Up And Running Demo app (KUARD) is all pretty standard - the magic happens when we call the ingress object. Firstly, the annotation to use the CA issuer configuration <code>cert-manager.io/cluster-issuer: "autotmm-issuer"</code> and the <code>tls</code> configuration block means that Contour will request an SSL certificate from Cert Manager. External DNS will pick up the <code>host: kuard.cmbu.local</code> value and register it in DNS.</p>
-<div class=highlight><div class=chroma>
+</a></h1><p>With this configuration I can now deploy an application and have that application URL be auto-magically signed with an SSL certificate using cert-manager, contour will steer traffic to the correct service based on the URL, and the DNS name of that service will be automatically registered in DNS!</p><p>The below manifest for Kubernetes Up And Running Demo app (KUARD) is all pretty standard - the magic happens when we call the ingress object. Firstly, the annotation to use the CA issuer configuration <code>cert-manager.io/cluster-issuer: "autotmm-issuer"</code> and the <code>tls</code> configuration block means that Contour will request an SSL certificate from Cert Manager. External DNS will pick up the <code>host: kuard.cmbu.local</code> value and register it in DNS.</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -726,75 +632,72 @@ tanzu package install external-dns --package-name external-dns.tanzu.vmware.com 
 </span><span class=lnt>62
 </span><span class=lnt>63
 </span><span class=lnt>64
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>apps/v1</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Deployment</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
-</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
-</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>replicas</span><span class=p>:</span><span class=w> </span><span class=m>3</span><span class=w>
-</span><span class=w>  </span><span class=nt>selector</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>matchLabels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
-</span><span class=w>  </span><span class=nt>template</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
-</span><span class=w>    </span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>containers</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span>- <span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>gcr.io/kuar-demo/kuard-amd64:1</span><span class=w>
-</span><span class=w>        </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
-</span><span class=w></span><span class=nn>---</span><span class=w>
-</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Service</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
-</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
-</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>ports</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>port</span><span class=p>:</span><span class=w> </span><span class=m>80</span><span class=w>
-</span><span class=w>    </span><span class=nt>protocol</span><span class=p>:</span><span class=w> </span><span class=l>TCP</span><span class=w>
-</span><span class=w>    </span><span class=nt>targetPort</span><span class=p>:</span><span class=w> </span><span class=m>8080</span><span class=w>
-</span><span class=w>  </span><span class=nt>selector</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
-</span><span class=w>  </span><span class=nt>sessionAffinity</span><span class=p>:</span><span class=w> </span><span class=l>None</span><span class=w>
-</span><span class=w>  </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>ClusterIP</span><span class=w>
-</span><span class=w></span><span class=nn>---</span><span class=w>  
-</span><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>networking.k8s.io/v1</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Ingress</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
-</span><span class=w>  </span><span class=nt>annotations</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>kubernetes.io/ingress.class</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;contour&#34;</span><span class=w>
-</span><span class=w>    </span><span class=nt>cert-manager.io/cluster-issuer</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;autotmm-issuer&#34;</span><span class=w>
-</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>defaultBackend</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>service</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
-</span><span class=w>      </span><span class=nt>port</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span><span class=nt>number</span><span class=p>:</span><span class=w> </span><span class=m>80</span><span class=w>
-</span><span class=w>  </span><span class=nt>rules</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>host</span><span class=p>:</span><span class=w> </span><span class=l>kuard.cmbu.local</span><span class=w>
-</span><span class=w>    </span><span class=nt>http</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>paths</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span>- <span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/</span><span class=w>
-</span><span class=w>        </span><span class=nt>pathType</span><span class=p>:</span><span class=w> </span><span class=l>Prefix</span><span class=w>
-</span><span class=w>        </span><span class=nt>backend</span><span class=p>:</span><span class=w>
-</span><span class=w>          </span><span class=nt>service</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
-</span><span class=w>            </span><span class=nt>port</span><span class=p>:</span><span class=w>
-</span><span class=w>              </span><span class=nt>number</span><span class=p>:</span><span class=w> </span><span class=m>80</span><span class=w>
-</span><span class=w>  </span><span class=nt>tls</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>hosts</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span>- <span class=l>kuard.cmbu.local</span><span class=w>
-</span><span class=w>    </span><span class=nt>secretName</span><span class=p>:</span><span class=w> </span><span class=l>kuard-cert</span><span class=w>
-</span></code></pre></td></tr></table>
-</div>
-</div><div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>apps/v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Deployment</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>replicas</span><span class=p>:</span><span class=w> </span><span class=m>3</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>selector</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>matchLabels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>template</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>containers</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>gcr.io/kuar-demo/kuard-amd64:1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nn>---</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Service</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>ports</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>port</span><span class=p>:</span><span class=w> </span><span class=m>80</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>protocol</span><span class=p>:</span><span class=w> </span><span class=l>TCP</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>targetPort</span><span class=p>:</span><span class=w> </span><span class=m>8080</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>selector</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>sessionAffinity</span><span class=p>:</span><span class=w> </span><span class=l>None</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>ClusterIP</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nn>---</span><span class=w>  
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>networking.k8s.io/v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Ingress</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>annotations</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>kubernetes.io/ingress.class</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;contour&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>cert-manager.io/cluster-issuer</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;autotmm-issuer&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>defaultBackend</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>service</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>port</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>number</span><span class=p>:</span><span class=w> </span><span class=m>80</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>rules</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>host</span><span class=p>:</span><span class=w> </span><span class=l>kuard.cmbu.local</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>http</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>paths</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>pathType</span><span class=p>:</span><span class=w> </span><span class=l>Prefix</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>backend</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>service</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>kuard</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>port</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>number</span><span class=p>:</span><span class=w> </span><span class=m>80</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>tls</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>hosts</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=l>kuard.cmbu.local</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>secretName</span><span class=p>:</span><span class=w> </span><span class=l>kuard-cert</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -819,35 +722,31 @@ tanzu package install external-dns --package-name external-dns.tanzu.vmware.com 
 </span><span class=lnt>21
 </span><span class=lnt>22
 </span><span class=lnt>23
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ kubectl apply -f kuard.yml
-deployment.apps/kuard created
-service/kuard created
-ingress.networking.k8s.io/kuard created
-
-<span class=c1># View the created objects</span>
-$ kubectl get pod,service,deployment,ingress
-
-NAME                         READY   STATUS    RESTARTS   AGE
-pod/kuard-798585497b-7n72x   1/1     Running   <span class=m>0</span>          3h40m
-pod/kuard-798585497b-mhq5c   1/1     Running   <span class=m>0</span>          3h40m
-pod/kuard-798585497b-q55v8   1/1     Running   <span class=m>0</span>          3h40m
-
-NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT<span class=o>(</span>S<span class=o>)</span>    AGE
-service/kuard        ClusterIP   10.104.230.69   &lt;none&gt;        80/TCP     3h40m
-service/kubernetes   ClusterIP   10.96.0.1       &lt;none&gt;        443/TCP    2d5h
-service/supervisor   ClusterIP   None            &lt;none&gt;        6443/TCP   2d5h
-
-NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/kuard   3/3     <span class=m>3</span>            <span class=m>3</span>           3h40m
-
-NAME                              CLASS    HOSTS              ADDRESS          PORTS     AGE
-ingress.networking.k8s.io/kuard   &lt;none&gt;   kuard.cmbu.local   10.176.149.101   80, <span class=m>443</span>   3h40m
-</code></pre></td></tr></table>
-</div>
-</div><p>Lets check the DNS registration</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ kubectl apply -f kuard.yml
+</span></span><span class=line><span class=cl>deployment.apps/kuard created
+</span></span><span class=line><span class=cl>service/kuard created
+</span></span><span class=line><span class=cl>ingress.networking.k8s.io/kuard created
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># View the created objects</span>
+</span></span><span class=line><span class=cl>$ kubectl get pod,service,deployment,ingress
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>NAME                         READY   STATUS    RESTARTS   AGE
+</span></span><span class=line><span class=cl>pod/kuard-798585497b-7n72x   1/1     Running   <span class=m>0</span>          3h40m
+</span></span><span class=line><span class=cl>pod/kuard-798585497b-mhq5c   1/1     Running   <span class=m>0</span>          3h40m
+</span></span><span class=line><span class=cl>pod/kuard-798585497b-q55v8   1/1     Running   <span class=m>0</span>          3h40m
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT<span class=o>(</span>S<span class=o>)</span>    AGE
+</span></span><span class=line><span class=cl>service/kuard        ClusterIP   10.104.230.69   &lt;none&gt;        80/TCP     3h40m
+</span></span><span class=line><span class=cl>service/kubernetes   ClusterIP   10.96.0.1       &lt;none&gt;        443/TCP    2d5h
+</span></span><span class=line><span class=cl>service/supervisor   ClusterIP   None            &lt;none&gt;        6443/TCP   2d5h
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+</span></span><span class=line><span class=cl>deployment.apps/kuard   3/3     <span class=m>3</span>            <span class=m>3</span>           3h40m
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>NAME                              CLASS    HOSTS              ADDRESS          PORTS     AGE
+</span></span><span class=line><span class=cl>ingress.networking.k8s.io/kuard   &lt;none&gt;   kuard.cmbu.local   10.176.149.101   80, <span class=m>443</span>   3h40m
+</span></span></code></pre></td></tr></table></div></div><p>Lets check the DNS registration</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -868,143 +767,84 @@ ingress.networking.k8s.io/kuard   &lt;none&gt;   kuard.cmbu.local   10.176.149.1
 </span><span class=lnt>17
 </span><span class=lnt>18
 </span><span class=lnt>19
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ nslookup
-
-&gt; kuard.cmbu.local
-
-Server:         10.16.142.68
-Address:        10.16.142.68#53
-
-Non-authoritative answer:
-Name:   kuard.cmbu.local
-Address: 10.176.149.101
-
-&gt; <span class=nb>set</span> <span class=nv>type</span><span class=o>=</span>txt
-&gt; external-dns-kuard.cmbu.local
-
-Server:         10.16.142.68
-Address:        10.16.142.68#53
-
-Non-authoritative answer:
-external-dns-kuard.cmbu.local   <span class=nv>text</span> <span class=o>=</span> <span class=s2>&#34;heritage=external-dns,external-dns/owner=k8s,external-dns/resource=HTTPProxy/default/kuard&#34;</span>
-</code></pre></td></tr></table>
-</div>
-</div>
-<div class=clr-content-image-wrap>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ nslookup
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&gt; kuard.cmbu.local
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Server:         10.16.142.68
+</span></span><span class=line><span class=cl>Address:        10.16.142.68#53
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Non-authoritative answer:
+</span></span><span class=line><span class=cl>Name:   kuard.cmbu.local
+</span></span><span class=line><span class=cl>Address: 10.176.149.101
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&gt; <span class=nb>set</span> <span class=nv>type</span><span class=o>=</span>txt
+</span></span><span class=line><span class=cl>&gt; external-dns-kuard.cmbu.local
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Server:         10.16.142.68
+</span></span><span class=line><span class=cl>Address:        10.16.142.68#53
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Non-authoritative answer:
+</span></span><span class=line><span class=cl>external-dns-kuard.cmbu.local   <span class=nv>text</span> <span class=o>=</span> <span class=s2>&#34;heritage=external-dns,external-dns/owner=k8s,external-dns/resource=HTTPProxy/default/kuard&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><div class=clr-content-image-wrap>
 <a href=2021-12-09-17-26-41.png data-lightbox=2021-12-09-17-26-41.png data-title="KUARD running with valid SSL" class=lb>
 <img class=lb src=2021-12-09-17-26-41.png alt="KUARD running with valid SSL">
 </a>
-<figcaption class=clr-caption>KUARD running with valid SSL</figcaption>
-</div>
-<h6>Share this post</h6>
-<span class=share-box>
-<a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-facebook-official"></i></a>
-<a href="https://twitter.com/intent/tweet?text=Ingress%2c%20SSL%20and%20DNS%20using%20TKG%201.4%20Packages%20on%20TKGs%20Clusters&url=https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-twitter"></i></a>
-<a href="https://plus.google.com/share?url=https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-google-plus"></i></a>
-<a href="http://www.reddit.com/submit?url=https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=900,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-reddit"></i></a>
-<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f&title=Ingress%2c%20SSL%20and%20DNS%20using%20TKG%201.4%20Packages%20on%20TKGs%20Clusters" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-linkedin"></i></a>
+<figcaption class=clr-caption>KUARD running with valid SSL</figcaption></div><h6>Share this post</h6><span class=share-box>
+<a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-facebook-official"></i></a>
+<a href="https://twitter.com/intent/tweet?text=Ingress%2c%20SSL%20and%20DNS%20using%20TKG%201.4%20Packages%20on%20TKGs%20Clusters&url=https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-twitter"></i></a>
+<a href="https://plus.google.com/share?url=https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-google-plus"></i></a>
+<a href="http://www.reddit.com/submit?url=https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=900,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-reddit"></i></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f&title=Ingress%2c%20SSL%20and%20DNS%20using%20TKG%201.4%20Packages%20on%20TKGs%20Clusters" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-linkedin"></i></a>
 <a href="mailto:?subject=Ingress%2c%20SSL%20and%20DNS%20using%20TKG%201.4%20Packages%20on%20TKGs%20Clusters&body=Check out this site https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f" data-proofer-ignore><i class="fa fa-envelope"></i></a>
 </span>
 <a class=resp-sharing-button__link href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://twitter.com/intent/tweet/?text=Ingress%2c%20SSL%20and%20DNS%20using%20TKG%201.4%20Packages%20on%20TKGs%20Clusters&url=https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.44 4.83c-.8.37-1.5.38-2.22.02.93-.56.98-.96 1.32-2.02-.88.52-1.86.9-2.9 1.1-.82-.88-2-1.43-3.3-1.43-2.5.0-4.55 2.04-4.55 4.54.0.36.03.7.1 1.04-3.77-.2-7.12-2-9.36-4.75-.4.67-.6 1.45-.6 2.3.0 1.56.8 2.95 2 3.77-.74-.03-1.44-.23-2.05-.57v.06c0 2.2 1.56 4.03 3.64 4.44-.67.2-1.37.2-2.06.08.58 1.8 2.26 3.12 4.25 3.16C5.78 18.1 3.37 18.74 1 18.46c2 1.3 4.4 2.04 6.97 2.04 8.35.0 12.92-6.92 12.92-12.93.0-.2.0-.4-.02-.6.9-.63 1.96-1.22 2.56-2.14z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://www.tumblr.com/widgets/share/tool?posttype=link&title=Ingress%2c%20SSL%20and%20DNS%20using%20TKG%201.4%20Packages%20on%20TKGs%20Clusters&caption=Ingress%2c%20SSL%20and%20DNS%20using%20TKG%201.4%20Packages%20on%20TKGs%20Clusters&content=https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f&canonicalUrl=https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f&shareSource=tumblr_share_button" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--tumblr resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.5.5v5h5v4h-5V15c0 5 3.5 4.4 6 2.8v4.4c-6.7 3.2-12 0-12-4.2V9.5h-3V6.7c1-.3 2.2-.7 3-1.3.5-.5 1-1.2 1.4-2 .3-.7.6-1.7.7-3h3.8z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f&title=Ingress%2c%20SSL%20and%20DNS%20using%20TKG%201.4%20Packages%20on%20TKGs%20Clusters&summary=Ingress%2c%20SSL%20and%20DNS%20using%20TKG%201.4%20Packages%20on%20TKGs%20Clusters&source=https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 21.5h-5v-13h5v13zM4 6.5C2.5 6.5 1.5 5.3 1.5 4s1-2.4 2.5-2.4c1.6.0 2.5 1 2.6 2.5.0 1.4-1 2.5-2.6 2.5zm11.5 6c-1 0-2 1-2 2v7h-5v-13h5V10s1.6-1.5 4-1.5c3 0 5 2.2 5 6.3v6.7h-5v-7c0-1-1-2-2-2z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://reddit.com/submit/?url=https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f&resubmit=true&title=Ingress%2c%20SSL%20and%20DNS%20using%20TKG%201.4%20Packages%20on%20TKGs%20Clusters" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 11.5c0-1.65-1.35-3-3-3-.96.0-1.86.48-2.42 1.24-1.64-1-3.75-1.64-6.07-1.72.08-1.1.4-3.05 1.52-3.7.72-.4 1.73-.24 3 .5C17.2 6.3 18.46 7.5 20 7.5c1.65.0 3-1.35 3-3s-1.35-3-3-3c-1.38.0-2.54.94-2.88 2.22-1.43-.72-2.64-.8-3.6-.25-1.64.94-1.95 3.47-2 4.55-2.33.08-4.45.7-6.1 1.72C4.86 8.98 3.96 8.5 3 8.5c-1.65.0-3 1.35-3 3 0 1.32.84 2.44 2.05 2.84-.03.22-.05.44-.05.66.0 3.86 4.5 7 10 7s10-3.14 10-7c0-.22-.02-.44-.05-.66 1.2-.4 2.05-1.54 2.05-2.84zM2.3 13.37C1.5 13.07 1 12.35 1 11.5c0-1.1.9-2 2-2 .64.0 1.22.32 1.6.82-1.1.85-1.92 1.9-2.3 3.05zm3.7.13c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9.8 4.8c-1.08.63-2.42.96-3.8.96-1.4.0-2.74-.34-3.8-.95-.24-.13-.32-.44-.2-.68.15-.24.46-.32.7-.18 1.83 1.06 4.76 1.06 6.6.0.23-.13.53-.05.67.2.14.23.06.54-.18.67zm.2-2.8c-1.1.0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm5.7-2.13c-.38-1.16-1.2-2.2-2.3-3.05.38-.5.97-.82 1.6-.82 1.1.0 2 .9 2 2 0 .84-.53 1.57-1.3 1.87z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="mailto:?subject=Ingress%2c%20SSL%20and%20DNS%20using%20TKG%201.4%20Packages%20on%20TKGs%20Clusters&body=https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f" target=_self rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 4H2C.9 4 0 4.9.0 6v12c0 1.1.9 2 2 2h20c1.1.0 2-.9 2-2V6c0-1.1-.9-2-2-2zM7.25 14.43l-3.5 2c-.08.05-.17.07-.25.07-.17.0-.34-.1-.43-.25-.14-.24-.06-.55.18-.68l3.5-2c.24-.14.55-.06.68.18.14.24.06.55-.18.68zm4.75.07c-.1.0-.2-.03-.27-.08l-8.5-5.5c-.23-.15-.3-.46-.15-.7.15-.22.46-.3.7-.14L12 13.4l8.23-5.32c.23-.15.54-.08.7.15.14.23.07.54-.16.7l-8.5 5.5c-.08.04-.17.07-.27.07zm8.93 1.75c-.1.16-.26.25-.43.25-.08.0-.17-.02-.25-.07l-3.5-2c-.24-.13-.32-.44-.18-.68s.44-.32.68-.18l3.5 2c.24.13.32.44.18.68z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="whatsapp://send?text=Ingress%2c%20SSL%20and%20DNS%20using%20TKG%201.4%20Packages%20on%20TKGs%20Clusters%20https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.1 3.9C17.9 1.7 15 .5 12 .5 5.8.5.7 5.6.7 11.9c0 2 .5 3.9 1.5 5.6L.6 23.4l6-1.6c1.6.9 3.5 1.3 5.4 1.3 6.3.0 11.4-5.1 11.4-11.4-.1-2.8-1.2-5.7-3.3-7.8zM12 21.4c-1.7.0-3.3-.5-4.8-1.3l-.4-.2-3.5 1 1-3.4L4 17c-1-1.5-1.4-3.2-1.4-5.1.0-5.2 4.2-9.4 9.4-9.4 2.5.0 4.9 1 6.7 2.8s2.8 4.2 2.8 6.7c-.1 5.2-4.3 9.4-9.5 9.4zm5.1-7.1c-.3-.1-1.7-.9-1.9-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1s-1.2-.5-2.3-1.4c-.9-.8-1.4-1.7-1.6-2s0-.5.1-.6.3-.3.4-.5c.2-.1.3-.3.4-.5s0-.4.0-.5C10 9 9.3 7.6 9 7c-.1-.4-.4-.3-.5-.3h-.6s-.4.1-.7.3c-.3.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.3-.3-.4-.6-.5z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://telegram.me/share/url?text=Ingress%2c%20SSL%20and%20DNS%20using%20TKG%201.4%20Packages%20on%20TKGs%20Clusters&url=https%3a%2f%2fwww.definit.co.uk%2f2021%2f12%2fingress-ssl-and-dns-using-tkg-1.4-packages-on-tkgs-clusters%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M.707 8.475C.275 8.64.0 9.508.0 9.508s.284.867.718 1.03l5.09 1.897 1.986 6.38a1.102 1.102.0 001.75.527l2.96-2.41a.405.405.0 01.494-.013l5.34 3.87a1.1 1.1.0 001.046.135 1.1 1.1.0 00.682-.803l3.91-18.795A1.102 1.102.0 0022.5.075L.706 8.475z"/></svg>
-</div>
-</div>
-</a>
-<div id=disqus_thread></div>
-<script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var a=document.createElement('script');a.async=!0,a.type='text/javascript',a.src='//definit.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
-<div class="clarity-prev-next col-xs-12 col-sm-12 col-md-12 col-lg-12">
+</div></div></a>
+<div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var e=document.createElement("script");e.async=!0,e.type="text/javascript",e.src="//definit.disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><div class="clarity-prev-next col-xs-12 col-sm-12 col-md-12 col-lg-12">
 <nav class=clarity-page-prev-next>
 <div class=clr-nav-previous>
 <a href=https://www.definit.co.uk/2021/12/2021-was-great-2022-will-be-even-better/ title="2021 was great 2022 will be even better!" class="btn btn-sm btn-outline">
 Previous
 </a>
-</div>
-<div class=clr-nav-next>
+</div><div class=clr-nav-next>
 <a href=https://www.definit.co.uk/2021/12/forwarding-tanzu-kubernetes-grid-logs-to-vrealize-log-insight-cloud-using-the-fluent-bit-package/ title="Forwarding Tanzu Kubernetes Grid logs to vRealize Log Insight Cloud using the Fluent-bit Package" class="btn btn-sm btn-outline">
 Next
 </a>
-</div>
-</nav>
-</div>
-</div>
-<nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+</div></nav></div></div><nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <section class=sidenav-content>
 <section class="nav-group collapsible">
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">16</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">44</span></a></li>
-<li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
-<li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">16</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">40</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">70</span></a></li>
-<li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">23</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
-</ul>
-</section>
-<section class="nav-group collapsible">
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li><li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">16</span></a></li><li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">44</span></a></li><li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li><li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">29</span></a></li><li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">16</span></a></li><li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">1</span></a></li><li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li><li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">40</span></a></li><li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">70</span></a></li><li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">23</span></a></li><li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li></ul></section><section class="nav-group collapsible">
 <input id=Tags type=checkbox>
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
-<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">55</span></a></li>
-<li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">40</span></a></li>
-<li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
-<li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">32</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">30</span></a></li>
-<li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">29</span></a></li>
-</section>
-</section>
-</nav>
-</div>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-4368767-1"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-4368767-1')</script>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li><li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">55</span></a></li><li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">40</span></a></li><li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li><li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li><li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li><li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">33</span></a></li><li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">32</span></a></li><li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">30</span></a></li><li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">29</span></a></li></section></section></nav></div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-4368767-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-4368767-1")</script>
 <script src=/js/lightbox-plus-jquery.min.js></script>
-</div>
-</body>
-</html>
+</div></body></html>

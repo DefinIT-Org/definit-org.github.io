@@ -1,8 +1,7 @@
 <!doctype html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class=no-js><!--<![endif]-->
 <head>
 <meta charset=utf-8>
-<title>What's in your Kubernetes Home Lab? &#183; DefinIT</title>
-<meta http-equiv=x-ua-compatible content="IE=edge">
+<title>What's in your Kubernetes Home Lab? &#183; DefinIT</title><meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=HandheldFriendly content="True">
 <meta name=MobileOptimized content="320">
 <meta name=viewport content="width=device-width,initial-scale=1">
@@ -32,7 +31,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2020/09/whats-in-your-kubernetes-home-lab/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.90.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.93.3"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -40,8 +39,7 @@
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
-</head>
-<body data-ng-app=myapp data-ng-controller=MyController data-ng-mouseleave=MouseLeave($event)>
+</head><body data-ng-app=myapp data-ng-controller=MyController data-ng-mouseleave=MouseLeave($event)>
 <div class=main-container>
 <header class=header-6>
 <div class=branding>
@@ -49,8 +47,7 @@
 <img alt src=/images/logos/definit-logo.png>
 <span class=title>DefinIT</span>
 </a>
-</div>
-<nav class=header-nav>
+</div><nav class=header-nav>
 <a class="nav-link nav-text" href=https://www.definit.co.uk/ title=Home>
 Home
 </a>
@@ -63,101 +60,66 @@ GitHub
 <a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml title=RSS>
 RSS
 </a>
-</nav>
-<div class=header-actions>
+</nav><div class=header-actions>
 <form class=search id=search method=get action=//google.com/search>
 <label for=search_input>
 <input id=search_input type=text name=q placeholder="Search with Google">
 <input type=hidden name=as_sitesearch value=https://www.definit.co.uk>
 </label>
-</form>
-</div>
-</header>
-<div class=content-container>
+</form></div></header><div class=content-container>
 <div class=content-area>
-<h1>What's in your Kubernetes Home Lab?</h1>
-<div class=metas>
+<h1>What's in your Kubernetes Home Lab?</h1><div class=metas>
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 21/9/2020
 &#183; Read in about 7 min (1470 words)
-</div>
-<div class=clr-card-authors>
+</div><div class=clr-card-authors>
 Published under <a href=/category/cloud-native>Cloud-Native</a>
-</div>
-<div class=clr-card-authors>
+</div><div class=clr-card-authors>
 Tags:
 <a class=clr-tags href=https://www.definit.co.uk/tag/kubernetes>#kubernetes</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/kube-vip>#kube-vip</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/raspberrypi>#raspberrypi</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/docker>#docker</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/weave>#weave</a>
-</div>
-</span>
-</div>
-<br clear=all>
+</div></span>
+</div><br clear=all>
 <img src=/images/logos/raspberrypi.png class=clr-post-featured-image>
-<p>If you&rsquo;re anything like me, your home lab is constantly changing, evolving, breaking, rebuilding. For the last year or so I&rsquo;ve been running all my home kubernetes workloads on a Raspberry Pi cluster - and it&rsquo;s been working really well!</p>
-<p>I&rsquo;ve been through several iterations - for example firstly running on SD cards (tl;dr - it&rsquo;s bad, they wear out really fast with Kubernetes on board!), then <a href=/2020/03/pxe-booting-raspberry-pi-4-with-synology-and-ubiquiti-edgerouter/>PxE booting them from my Synology</a> to it&rsquo;s now current state of booting directly from SSDs. I&rsquo;ve also moved from Raspberry Pi 3s to 4s, I&rsquo;ve played around with stacking cluster cases before landing on the current rack-mount format.</p>
-<p>Previous iterations of my setup (at least from a configuration and installation point of view) are hidden away in a private git repository, and one day I&rsquo;d like to make that public, but for now it&rsquo;s too messy and holds too many <s>skeletons</s> secrets. So this post is my &ldquo;current state&rdquo; as of September 2020, with my configuration more or less intact.</p>
-<h2 id=hardware>Hardware <a class=anchor href=#hardware>
+<p>If you&rsquo;re anything like me, your home lab is constantly changing, evolving, breaking, rebuilding. For the last year or so I&rsquo;ve been running all my home kubernetes workloads on a Raspberry Pi cluster - and it&rsquo;s been working really well!</p><p>I&rsquo;ve been through several iterations - for example firstly running on SD cards (tl;dr - it&rsquo;s bad, they wear out really fast with Kubernetes on board!), then <a href=/2020/03/pxe-booting-raspberry-pi-4-with-synology-and-ubiquiti-edgerouter/>PxE booting them from my Synology</a> to it&rsquo;s now current state of booting directly from SSDs. I&rsquo;ve also moved from Raspberry Pi 3s to 4s, I&rsquo;ve played around with stacking cluster cases before landing on the current rack-mount format.</p><p>Previous iterations of my setup (at least from a configuration and installation point of view) are hidden away in a private git repository, and one day I&rsquo;d like to make that public, but for now it&rsquo;s too messy and holds too many <s>skeletons</s> secrets. So this post is my &ldquo;current state&rdquo; as of September 2020, with my configuration more or less intact.</p><h2 id=hardware>Hardware <a class=anchor href=#hardware>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>I&rsquo;m running three raspberry Pi nodes mounted inside a 1U 19" rack case, which I modified to accomodate the Pis. I also added a large case fan, wired to USB for power, on top of the case to drive cooling air through the case. It&rsquo;s a little hacky, but it works well.</p>
-<ul>
-<li><a href="https://thepihut.com/products/raspberry-pi-4-model-b?variant=20064052740158">Raspberry Pi 4 (4GB)</a></li>
-<li><a href=https://thepihut.com/products/raspberry-pi-power-over-ethernet-poe-hat>Raspberry Pi PoE HAT v2</a></li>
-<li>Intel 120GB SSD - cheapest I could find!</li>
-<li><a href="https://www.amazon.co.uk/gp/product/B06XCV1W97/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1">ELUTENG USB 3.0 to SATA Cable</a></li>
-<li><a href="https://www.reichelt.de/de/en/19-rack-mount-box-1u-black-rnd-455-00114-p193326.html?&trstct=pol_5&nbc=1">19" Rack Mount Box 1U</a></li>
-<li>USB, Cat5 and HDMI extender cables</li>
-</ul>
-<p>The PoE hats provide all the power that&rsquo;s needed for the Pis, with the added benefit of having a temperature controlled mini-fan onboard. I am using a Cisco SG300-10 PoE switch to provide 802.3af PoE.
+</a></h2><p>I&rsquo;m running three raspberry Pi nodes mounted inside a 1U 19" rack case, which I modified to accomodate the Pis. I also added a large case fan, wired to USB for power, on top of the case to drive cooling air through the case. It&rsquo;s a little hacky, but it works well.</p><ul>
+<li><a href="https://thepihut.com/products/raspberry-pi-4-model-b?variant=20064052740158">Raspberry Pi 4 (4GB)</a></li><li><a href=https://thepihut.com/products/raspberry-pi-power-over-ethernet-poe-hat>Raspberry Pi PoE HAT v2</a></li><li>Intel 120GB SSD - cheapest I could find!</li><li><a href="https://www.amazon.co.uk/gp/product/B06XCV1W97/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1">ELUTENG USB 3.0 to SATA Cable</a></li><li><a href="https://www.reichelt.de/de/en/19-rack-mount-box-1u-black-rnd-455-00114-p193326.html?&trstct=pol_5&nbc=1">19" Rack Mount Box 1U</a></li><li>USB, Cat5 and HDMI extender cables</li></ul><p>The PoE hats provide all the power that&rsquo;s needed for the Pis, with the added benefit of having a temperature controlled mini-fan onboard. I am using a Cisco SG300-10 PoE switch to provide 802.3af PoE.
 <div class=clr-content-image-wrap>
 <a href=2020-09-21-15-38-03.png data-lightbox=2020-09-21-15-38-03.png data-title="Raspberry Pi Rack internal configuration" class=lb>
 <img class=lb src=2020-09-21-15-38-03.png alt="Raspberry Pi Rack internal configuration">
 </a>
-<figcaption class=clr-caption>Raspberry Pi Rack internal configuration</figcaption>
-</div>
-<div class=clr-content-image-wrap>
+<figcaption class=clr-caption>Raspberry Pi Rack internal configuration</figcaption></div><div class=clr-content-image-wrap>
 <a href=2020-09-21-15-38-32.png data-lightbox=2020-09-21-15-38-32.png data-title="Raspberry Pi Rack external configuration " class=lb>
 <img class=lb src=2020-09-21-15-38-32.png alt="Raspberry Pi Rack external configuration ">
 </a>
-<figcaption class=clr-caption>Raspberry Pi Rack external configuration </figcaption>
-</div>
-</p>
-<h3 id=booting-from-usb-ssd>Booting from USB SSD <a class=anchor href=#booting-from-usb-ssd>
+<figcaption class=clr-caption>Raspberry Pi Rack external configuration </figcaption></div></p><h3 id=booting-from-usb-ssd>Booting from USB SSD <a class=anchor href=#booting-from-usb-ssd>
 <i class="fas fa-hashtag"></i>
-</a></h3><p><a href=https://www.raspberrypi.org/documentation/hardware/raspberrypi/booteeprom.md>Booting the RPi4s from the USB SSD directly is now supported directly from the latest EEPROM (2020-09-03 or newer)</a>, which is a lot easier than the previous Beta versions. Simply update the bootloader and reboot</p>
-<div class=highlight><div class=chroma>
+</a></h3><p><a href=https://www.raspberrypi.org/documentation/hardware/raspberrypi/booteeprom.md>Booting the RPi4s from the USB SSD directly is now supported directly from the latest EEPROM (2020-09-03 or newer)</a>, which is a lot easier than the previous Beta versions. Simply update the bootloader and reboot</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo apt update
-sudo apt full-upgrade
-sudo rpi-eeprom-update -a -d
-sudo reboot now
-</code></pre></td></tr></table>
-</div>
-</div><p>Once you&rsquo;ve rebooted you can use <code>sudo raspi-config</code> to set the boot order, assuming you do not want a more complicated boot configuration. This sets <code>BOOT_ORDER=0xf41</code> - f = loop, 4 = USB, 1 = SD Card.
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt update
+</span></span><span class=line><span class=cl>sudo apt full-upgrade
+</span></span><span class=line><span class=cl>sudo rpi-eeprom-update -a -d
+</span></span><span class=line><span class=cl>sudo reboot now
+</span></span></code></pre></td></tr></table></div></div><p>Once you&rsquo;ve rebooted you can use <code>sudo raspi-config</code> to set the boot order, assuming you do not want a more complicated boot configuration. This sets <code>BOOT_ORDER=0xf41</code> - f = loop, 4 = USB, 1 = SD Card.
 <div class=clr-content-image-wrap>
 <a href=2020-09-21-16-16-09.png data-lightbox=2020-09-21-16-16-09.png data-title="Set the USB boot option via raspi-config" class=lb>
 <img class=lb src=2020-09-21-16-16-09.png alt="Set the USB boot option via raspi-config">
 </a>
-<figcaption class=clr-caption>Set the USB boot option via raspi-config</figcaption>
-</div>
-</p>
-<p>You can then install your desired OS flavour on the USB SSD - I&rsquo;m currently running Raspbian Buster, but I&rsquo;ve heard good things about the Ubuntu 20.04 arm64 build - it&rsquo;s on my to do list.</p>
-<h2 id=installing-kubernetes>Installing Kubernetes <a class=anchor href=#installing-kubernetes>
+<figcaption class=clr-caption>Set the USB boot option via raspi-config</figcaption></div></p><p>You can then install your desired OS flavour on the USB SSD - I&rsquo;m currently running Raspbian Buster, but I&rsquo;ve heard good things about the Ubuntu 20.04 arm64 build - it&rsquo;s on my to do list.</p><h2 id=installing-kubernetes>Installing Kubernetes <a class=anchor href=#installing-kubernetes>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>At the time of writing Kubernetes 1.19.2 is the most recent version, I&rsquo;ve found that installing on Rasbian requires a little more fettling to get working than a &ldquo;normal&rdquo; distro</p>
-<h2 id=installing-docker>Installing Docker <a class=anchor href=#installing-docker>
+</a></h2><p>At the time of writing Kubernetes 1.19.2 is the most recent version, I&rsquo;ve found that installing on Rasbian requires a little more fettling to get working than a &ldquo;normal&rdquo; distro</p><h2 id=installing-docker>Installing Docker <a class=anchor href=#installing-docker>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>Docker needs to be installed, cgroups enabled and then the docker daemon configured:</p>
-<div class=highlight><div class=chroma>
+</a></h2><p>Docker needs to be installed, cgroups enabled and then the docker daemon configured:</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -188,41 +150,37 @@ sudo reboot now
 </span><span class=lnt>27
 </span><span class=lnt>28
 </span><span class=lnt>29
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Obligatory updates</span>
-sudo apt-get update <span class=o>&amp;&amp;</span> sudo apt-get upgrade -y
-<span class=c1># Install pre-requisities</span>
-sudo apt-get install apt-transport-https ca-certificates software-properties-common vim -y
-<span class=c1># Install Docker</span>
-curl -fsSL get.docker.com -o get-docker.sh
-sh get-docker.sh
-<span class=c1># Add Pi user to Docker group</span>
-sudo usermod -aG docker pi
-
-<span class=c1># Backup the current cmdline.txt</span>
-sudo cp /boot/cmdline.txt /boot/cmdline_cgroup.txt
-<span class=c1># Enable cgroups</span>
-<span class=nv>orig</span><span class=o>=</span><span class=s2>&#34;</span><span class=k>$(</span>head -n1 /boot/cmdline.txt<span class=k>)</span><span class=s2> cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory&#34;</span>
-<span class=nb>echo</span> <span class=nv>$orig</span> <span class=p>|</span> sudo tee /boot/cmdline.txt
-
-<span class=c1># Edit Docker daemon</span>
-sudo bash -c <span class=s1>&#39;cat &lt;&lt; EOF &gt; /etc/docker/daemon.json
-</span><span class=s1>{
-</span><span class=s1>  &#34;exec-opts&#34;: [&#34;native.cgroupdriver=systemd&#34;],
-</span><span class=s1>  &#34;log-driver&#34;: &#34;json-file&#34;,
-</span><span class=s1>  &#34;log-opts&#34;: {
-</span><span class=s1>    &#34;max-size&#34;: &#34;100m&#34;
-</span><span class=s1>  },
-</span><span class=s1>  &#34;storage-driver&#34;: &#34;overlay2&#34;
-</span><span class=s1>}
-</span><span class=s1>EOF&#39;</span>
-
-sudo reboot
-</code></pre></td></tr></table>
-</div>
-</div><p>I&rsquo;ve configured legacy versions of iptables for compatibility since Raspbian Buster uses nftables by default. I&rsquo;ve also disabled swap and then added the Kubernetes repository to <code>apt</code>.</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Obligatory updates</span>
+</span></span><span class=line><span class=cl>sudo apt-get update <span class=o>&amp;&amp;</span> sudo apt-get upgrade -y
+</span></span><span class=line><span class=cl><span class=c1># Install pre-requisities</span>
+</span></span><span class=line><span class=cl>sudo apt-get install apt-transport-https ca-certificates software-properties-common vim -y
+</span></span><span class=line><span class=cl><span class=c1># Install Docker</span>
+</span></span><span class=line><span class=cl>curl -fsSL get.docker.com -o get-docker.sh
+</span></span><span class=line><span class=cl>sh get-docker.sh
+</span></span><span class=line><span class=cl><span class=c1># Add Pi user to Docker group</span>
+</span></span><span class=line><span class=cl>sudo usermod -aG docker pi
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Backup the current cmdline.txt</span>
+</span></span><span class=line><span class=cl>sudo cp /boot/cmdline.txt /boot/cmdline_cgroup.txt
+</span></span><span class=line><span class=cl><span class=c1># Enable cgroups</span>
+</span></span><span class=line><span class=cl><span class=nv>orig</span><span class=o>=</span><span class=s2>&#34;</span><span class=k>$(</span>head -n1 /boot/cmdline.txt<span class=k>)</span><span class=s2> cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=nv>$orig</span> <span class=p>|</span> sudo tee /boot/cmdline.txt
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Edit Docker daemon</span>
+</span></span><span class=line><span class=cl>sudo bash -c <span class=s1>&#39;cat &lt;&lt; EOF &gt; /etc/docker/daemon.json
+</span></span></span><span class=line><span class=cl><span class=s1>{
+</span></span></span><span class=line><span class=cl><span class=s1>  &#34;exec-opts&#34;: [&#34;native.cgroupdriver=systemd&#34;],
+</span></span></span><span class=line><span class=cl><span class=s1>  &#34;log-driver&#34;: &#34;json-file&#34;,
+</span></span></span><span class=line><span class=cl><span class=s1>  &#34;log-opts&#34;: {
+</span></span></span><span class=line><span class=cl><span class=s1>    &#34;max-size&#34;: &#34;100m&#34;
+</span></span></span><span class=line><span class=cl><span class=s1>  },
+</span></span></span><span class=line><span class=cl><span class=s1>  &#34;storage-driver&#34;: &#34;overlay2&#34;
+</span></span></span><span class=line><span class=cl><span class=s1>}
+</span></span></span><span class=line><span class=cl><span class=s1>EOF&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sudo reboot
+</span></span></code></pre></td></tr></table></div></div><p>I&rsquo;ve configured legacy versions of iptables for compatibility since Raspbian Buster uses nftables by default. I&rsquo;ve also disabled swap and then added the Kubernetes repository to <code>apt</code>.</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -252,59 +210,51 @@ sudo reboot
 </span><span class=lnt>26
 </span><span class=lnt>27
 </span><span class=lnt>28
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Ensure legacy iptables binaries are installed and used</span>
-sudo apt-get install -y iptables arptables ebtables
-sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
-sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
-sudo update-alternatives --set arptables /usr/sbin/arptables-legacy
-sudo update-alternatives --set ebtables /usr/sbin/ebtables-legacy
-
-<span class=c1># Disable swap</span>
-sudo dphys-swapfile swapoff
-sudo dphys-swapfile uninstall
-sudo update-rc.d dphys-swapfile remove
-sudo systemctl disable dphys-swapfile.service
-
-<span class=c1># If you&#39;re using flannel...</span>
-<span class=c1># sudo sysctl -w net.bridge.bridge-nf-call-iptables=1</span>
-
-<span class=c1># Add the Kubernetes repo</span>
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg <span class=p>|</span> sudo apt-key add -
-<span class=nb>echo</span> <span class=s2>&#34;deb http://apt.kubernetes.io/ kubernetes-xenial main&#34;</span> <span class=p>|</span> sudo tee /etc/apt/sources.list.d/kubernetes.list
-sudo apt-get update -q
-
-<span class=c1># Install Kubernetes binaries (v1.19.2-00) and hold any upgrades</span>
-sudo apt-mark unhold kubelet kubeadm kubectl
-sudo apt-get install -y <span class=nv>kubelet</span><span class=o>=</span>v1.19.2-00 <span class=nv>kubeadm</span><span class=o>=</span>v1.19.2-00 <span class=nv>kubectl</span><span class=o>=</span>v1.19.2-00
-sudo apt-mark hold kubelet kubeadm kubectl
-
-<span class=c1># Pre-stage the kubernetes images</span>
-sudo kubeadm config images pull
-</code></pre></td></tr></table>
-</div>
-</div><p>I always like add the members of your cluster to /etc/hosts for name resolution (especially as I use <a href=/2020/01/running-coredns-for-lab-name-resolution/>CoreDNS running on this cluster for my home DNS</a>!)</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Ensure legacy iptables binaries are installed and used</span>
+</span></span><span class=line><span class=cl>sudo apt-get install -y iptables arptables ebtables
+</span></span><span class=line><span class=cl>sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
+</span></span><span class=line><span class=cl>sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
+</span></span><span class=line><span class=cl>sudo update-alternatives --set arptables /usr/sbin/arptables-legacy
+</span></span><span class=line><span class=cl>sudo update-alternatives --set ebtables /usr/sbin/ebtables-legacy
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Disable swap</span>
+</span></span><span class=line><span class=cl>sudo dphys-swapfile swapoff
+</span></span><span class=line><span class=cl>sudo dphys-swapfile uninstall
+</span></span><span class=line><span class=cl>sudo update-rc.d dphys-swapfile remove
+</span></span><span class=line><span class=cl>sudo systemctl disable dphys-swapfile.service
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># If you&#39;re using flannel...</span>
+</span></span><span class=line><span class=cl><span class=c1># sudo sysctl -w net.bridge.bridge-nf-call-iptables=1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Add the Kubernetes repo</span>
+</span></span><span class=line><span class=cl>curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg <span class=p>|</span> sudo apt-key add -
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;deb http://apt.kubernetes.io/ kubernetes-xenial main&#34;</span> <span class=p>|</span> sudo tee /etc/apt/sources.list.d/kubernetes.list
+</span></span><span class=line><span class=cl>sudo apt-get update -q
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Install Kubernetes binaries (v1.19.2-00) and hold any upgrades</span>
+</span></span><span class=line><span class=cl>sudo apt-mark unhold kubelet kubeadm kubectl
+</span></span><span class=line><span class=cl>sudo apt-get install -y <span class=nv>kubelet</span><span class=o>=</span>v1.19.2-00 <span class=nv>kubeadm</span><span class=o>=</span>v1.19.2-00 <span class=nv>kubectl</span><span class=o>=</span>v1.19.2-00
+</span></span><span class=line><span class=cl>sudo apt-mark hold kubelet kubeadm kubectl
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Pre-stage the kubernetes images</span>
+</span></span><span class=line><span class=cl>sudo kubeadm config images pull
+</span></span></code></pre></td></tr></table></div></div><p>I always like add the members of your cluster to /etc/hosts for name resolution (especially as I use <a href=/2020/01/running-coredns-for-lab-name-resolution/>CoreDNS running on this cluster for my home DNS</a>!)</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Add to /etc/hosts</span>
-192.168.20.9    rpi-vip rpi-vip.lab.definit.co.uk
-192.168.20.12   rpi4-01 rpi4-01.lab.definit.co.uk
-192.168.20.13   rpi4-02 rpi4-02.lab.definit.co.uk
-192.168.20.14   rpi4-03 rpi4-03.lab.definit.co.uk
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=configuring-kube-vip>Configuring kube-vip <a class=anchor href=#configuring-kube-vip>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Add to /etc/hosts</span>
+</span></span><span class=line><span class=cl>192.168.20.9    rpi-vip rpi-vip.lab.definit.co.uk
+</span></span><span class=line><span class=cl>192.168.20.12   rpi4-01 rpi4-01.lab.definit.co.uk
+</span></span><span class=line><span class=cl>192.168.20.13   rpi4-02 rpi4-02.lab.definit.co.uk
+</span></span><span class=line><span class=cl>192.168.20.14   rpi4-03 rpi4-03.lab.definit.co.uk
+</span></span></code></pre></td></tr></table></div></div><h3 id=configuring-kube-vip>Configuring kube-vip <a class=anchor href=#configuring-kube-vip>
 <i class="fas fa-hashtag"></i>
-</a></h3><p>I&rsquo;m using <a href=https://kube-vip.io/control-plane>kube-vip</a> to provide control plane load balancing on my Kubernetes cluster. The latest version is much simpler to configure, requiring very little configuration to get a basic setup working. It&rsquo;s also got the option to use BGP for VIP failover rather than ARP, which I love - though I&rsquo;ve not tested it yet.</p>
-<div class=highlight><div class=chroma>
+</a></h3><p>I&rsquo;m using <a href=https://kube-vip.io/control-plane>kube-vip</a> to provide control plane load balancing on my Kubernetes cluster. The latest version is much simpler to configure, requiring very little configuration to get a basic setup working. It&rsquo;s also got the option to use BGP for VIP failover rather than ARP, which I love - though I&rsquo;ve not tested it yet.</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -325,64 +275,51 @@ sudo kubeadm config images pull
 </span><span class=lnt>17
 </span><span class=lnt>18
 </span><span class=lnt>19
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Generate the kube-vip manifest</span>
-sudo docker run --network host --rm plndr/kube-vip:0.1.8 kubeadm init <span class=se>\
-</span><span class=se></span>--interface eth0 <span class=se>\
-</span><span class=se></span>--vip 192.168.20.9 <span class=se>\
-</span><span class=se></span>--arp <span class=se>\
-</span><span class=se></span>--leaderElection <span class=p>|</span> sudo tee /etc/kubernetes/manifests/vip.yaml
-
-<span class=c1># Initialise the first node</span>
-sudo kubeadm init --control-plane-endpoint <span class=s2>&#34;192.168.20.9:6443&#34;</span> --upload-certs
-
-<span class=c1># Join other control plane nodes to cluster - if the token has expired, use</span>
-kubeadm token create --print-join-command --certificate-key <span class=k>$(</span>sudo kubeadm init phase upload-certs --upload-certs <span class=p>|</span> tail -1<span class=k>)</span>
-
-<span class=c1># Generate the kube-vip manifest on additional nodes</span>
-sudo docker run --network host --rm plndr/kube-vip:0.1.8 kubeadm init <span class=se>\
-</span><span class=se></span>--interface eth0 <span class=se>\
-</span><span class=se></span>--vip 192.168.20.9 <span class=se>\
-</span><span class=se></span>--arp <span class=se>\
-</span><span class=se></span>--leaderElection <span class=p>|</span> sudo tee /etc/kubernetes/manifests/vip.yaml
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=network-plugin---weave>Network Plugin - Weave <a class=anchor href=#network-plugin---weave>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Generate the kube-vip manifest</span>
+</span></span><span class=line><span class=cl>sudo docker run --network host --rm plndr/kube-vip:0.1.8 kubeadm init <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>--interface eth0 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>--vip 192.168.20.9 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>--arp <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>--leaderElection <span class=p>|</span> sudo tee /etc/kubernetes/manifests/vip.yaml
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Initialise the first node</span>
+</span></span><span class=line><span class=cl>sudo kubeadm init --control-plane-endpoint <span class=s2>&#34;192.168.20.9:6443&#34;</span> --upload-certs
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Join other control plane nodes to cluster - if the token has expired, use</span>
+</span></span><span class=line><span class=cl>kubeadm token create --print-join-command --certificate-key <span class=k>$(</span>sudo kubeadm init phase upload-certs --upload-certs <span class=p>|</span> tail -1<span class=k>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Generate the kube-vip manifest on additional nodes</span>
+</span></span><span class=line><span class=cl>sudo docker run --network host --rm plndr/kube-vip:0.1.8 kubeadm init <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>--interface eth0 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>--vip 192.168.20.9 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>--arp <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>--leaderElection <span class=p>|</span> sudo tee /etc/kubernetes/manifests/vip.yaml
+</span></span></code></pre></td></tr></table></div></div><h2 id=network-plugin---weave>Network Plugin - Weave <a class=anchor href=#network-plugin---weave>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>I&rsquo;ve chosen Weave to provide the network plugin for my cluster based on my requirements - but generally I would recommend Flannel for a small cluster like this. There are loads of considerations when picking a CNI - things like does it have an arm-compatible image, and whether it works with metallb were two key ones! I really recommend looking at the <a href=https://itnext.io/benchmark-results-of-kubernetes-network-plugins-cni-over-10gbit-s-network-updated-august-2020-6e1b757b9e49>ITNEXT benchmark results</a> as well, there&rsquo;s some really good information there.</p>
-<p>Be sure to run this command on the RPi - if you run it on your laptop it&rsquo;s very likely you&rsquo;ll get the wrong architecture downloaded!</p>
-<div class=highlight><div class=chroma>
+</a></h2><p>I&rsquo;ve chosen Weave to provide the network plugin for my cluster based on my requirements - but generally I would recommend Flannel for a small cluster like this. There are loads of considerations when picking a CNI - things like does it have an arm-compatible image, and whether it works with metallb were two key ones! I really recommend looking at the <a href=https://itnext.io/benchmark-results-of-kubernetes-network-plugins-cni-over-10gbit-s-network-updated-august-2020-6e1b757b9e49>ITNEXT benchmark results</a> as well, there&rsquo;s some really good information there.</p><p>Be sure to run this command on the RPi - if you run it on your laptop it&rsquo;s very likely you&rsquo;ll get the wrong architecture downloaded!</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Install Weave with NO_MASQ_LOCAL for metallb</span>
-sudo kubectl apply -f <span class=s2>&#34;https://cloud.weave.works/k8s/net?k8s-version=</span><span class=k>$(</span>kubectl version <span class=p>|</span> base64 <span class=p>|</span> tr -d <span class=s1>&#39;\n&#39;</span><span class=k>)</span><span class=s2>&amp;env.NO_MASQ_LOCAL=1&#34;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=load-balancing-with-metallb>Load Balancing with MetalLb <a class=anchor href=#load-balancing-with-metallb>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Install Weave with NO_MASQ_LOCAL for metallb</span>
+</span></span><span class=line><span class=cl>sudo kubectl apply -f <span class=s2>&#34;https://cloud.weave.works/k8s/net?k8s-version=</span><span class=k>$(</span>kubectl version <span class=p>|</span> base64 <span class=p>|</span> tr -d <span class=s1>&#39;\n&#39;</span><span class=k>)</span><span class=s2>&amp;env.NO_MASQ_LOCAL=1&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=load-balancing-with-metallb>Load Balancing with MetalLb <a class=anchor href=#load-balancing-with-metallb>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>Last year I covered using <a href=2019/08/lab-guide-kubernetes-load-balancer-and-ingress-with-metallb-and-contour/>MetalLb with Contour for ingress and load balancing</a>, and since then I&rsquo;ve moved my metallb configuration over to using BGP (layer3) to advertise load balanced VIPs to my EdgeRouter (rather than the ARP-based L2 load balancing). The installation process is really easy, install the manifests, and create a secret for encryption between nodes.</p>
-<div class=highlight><div class=chroma>
+</a></h2><p>Last year I covered using <a href=2019/08/lab-guide-kubernetes-load-balancer-and-ingress-with-metallb-and-contour/>MetalLb with Contour for ingress and load balancing</a>, and since then I&rsquo;ve moved my metallb configuration over to using BGP (layer3) to advertise load balanced VIPs to my EdgeRouter (rather than the ARP-based L2 load balancing). The installation process is really easy, install the manifests, and create a secret for encryption between nodes.</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Install metallb for ingress/load balancing</span>
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
-<span class=c1># On first install only</span>
-kubectl create secret generic -n metallb-system memberlist --from-literal<span class=o>=</span><span class=nv>secretkey</span><span class=o>=</span><span class=s2>&#34;</span><span class=k>$(</span>openssl rand -base64 128<span class=k>)</span><span class=s2>&#34;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>Once metallb is installed it will sit idle until you provide it with a configMap:</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Install metallb for ingress/load balancing</span>
+</span></span><span class=line><span class=cl>kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
+</span></span><span class=line><span class=cl>kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
+</span></span><span class=line><span class=cl><span class=c1># On first install only</span>
+</span></span><span class=line><span class=cl>kubectl create secret generic -n metallb-system memberlist --from-literal<span class=o>=</span><span class=nv>secretkey</span><span class=o>=</span><span class=s2>&#34;</span><span class=k>$(</span>openssl rand -base64 128<span class=k>)</span><span class=s2>&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p>Once metallb is installed it will sit idle until you provide it with a configMap:</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -403,34 +340,29 @@ kubectl create secret generic -n metallb-system memberlist --from-literal<span c
 </span><span class=lnt>17
 </span><span class=lnt>18
 </span><span class=lnt>19
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ConfigMap</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>metallb-system</span><span class=w>
-</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>config</span><span class=w>
-</span><span class=w></span><span class=nt>data</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>config</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
-</span><span class=sd>    peers:
-</span><span class=sd>    - peer-address: 192.168.20.1
-</span><span class=sd>      peer-asn: 65000
-</span><span class=sd>      my-asn: 65000
-</span><span class=sd>    address-pools:
-</span><span class=sd>    - name: default
-</span><span class=sd>      protocol: bgp
-</span><span class=sd>      avoid-buggy-ips: true
-</span><span class=sd>      addresses:
-</span><span class=sd>      - 192.168.21.0/24
-</span><span class=sd>      bgp-advertisements:
-</span><span class=sd>      - aggregation-length: 32</span><span class=w>    
-</span></code></pre></td></tr></table>
-</div>
-</div><h2 id=storage>Storage <a class=anchor href=#storage>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ConfigMap</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>metallb-system</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>config</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>data</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>config</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>    peers:
+</span></span></span><span class=line><span class=cl><span class=sd>    - peer-address: 192.168.20.1
+</span></span></span><span class=line><span class=cl><span class=sd>      peer-asn: 65000
+</span></span></span><span class=line><span class=cl><span class=sd>      my-asn: 65000
+</span></span></span><span class=line><span class=cl><span class=sd>    address-pools:
+</span></span></span><span class=line><span class=cl><span class=sd>    - name: default
+</span></span></span><span class=line><span class=cl><span class=sd>      protocol: bgp
+</span></span></span><span class=line><span class=cl><span class=sd>      avoid-buggy-ips: true
+</span></span></span><span class=line><span class=cl><span class=sd>      addresses:
+</span></span></span><span class=line><span class=cl><span class=sd>      - 192.168.21.0/24
+</span></span></span><span class=line><span class=cl><span class=sd>      bgp-advertisements:
+</span></span></span><span class=line><span class=cl><span class=sd>      - aggregation-length: 32</span><span class=w>    
+</span></span></span></code></pre></td></tr></table></div></div><h2 id=storage>Storage <a class=anchor href=#storage>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>From a storage perspective, I either use NFS (for persistent storage) or the local SSD (for more transient storage). Instead of creating a whole load of mount points on my Synology, I&rsquo;m making use of the <code>subPath</code> property of my <code>volumeMounts</code>. I&rsquo;m aware there are issues with using NFS around the number of connections created, but this is mitigated by the size of my cluster and the small number of persistent apps that are running.</p>
-<p>e.g. below I have a single NFS <code>PersistentVolume</code> that is mounting three different <code>subPath</code> in the container&mldr;hmm I should switch the transcode to local SSD&mldr;</p>
-<div class=highlight><div class=chroma>
+</a></h2><p>From a storage perspective, I either use NFS (for persistent storage) or the local SSD (for more transient storage). Instead of creating a whole load of mount points on my Synology, I&rsquo;m making use of the <code>subPath</code> property of my <code>volumeMounts</code>. I&rsquo;m aware there are issues with using NFS around the number of connections created, but this is mitigated by the size of my cluster and the small number of persistent apps that are running.</p><p>e.g. below I have a single NFS <code>PersistentVolume</code> that is mounting three different <code>subPath</code> in the container&mldr;hmm I should switch the transcode to local SSD&mldr;</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -467,153 +399,96 @@ kubectl create secret generic -n metallb-system memberlist --from-literal<span c
 </span><span class=lnt>33
 </span><span class=lnt>34
 </span><span class=lnt>35
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>PersistentVolume</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>plex-system-pvc</span><span class=w>
-</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>plex</span><span class=w>
-</span><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>app.kubernetes.io/name</span><span class=p>:</span><span class=w> </span><span class=l>plex-media-server</span><span class=w>
-</span><span class=w>    </span><span class=nt>app.kubernetes.io/instance</span><span class=p>:</span><span class=w> </span><span class=l>definit-plex</span><span class=w>
-</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>capacity</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>storage</span><span class=p>:</span><span class=w> </span><span class=l>100Gi</span><span class=w>
-</span><span class=w>  </span><span class=nt>accessModes</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span>- <span class=l>ReadWriteMany</span><span class=w>
-</span><span class=w>  </span><span class=nt>persistentVolumeReclaimPolicy</span><span class=p>:</span><span class=w> </span><span class=l>Retain</span><span class=w>
-</span><span class=w>  </span><span class=nt>nfs</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>server</span><span class=p>:</span><span class=w> </span><span class=m>192.168.4.10</span><span class=w> 
-</span><span class=w>    </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/volume1/kubernetes</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=nn>---</span><span class=w>
-</span><span class=w></span><span class=l>&lt;snip&gt;</span><span class=w>
-</span><span class=w>          </span><span class=nt>volumeMounts</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>system</span><span class=w>
-</span><span class=w>              </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/config</span><span class=w>
-</span><span class=w>              </span><span class=nt>subPath</span><span class=p>:</span><span class=w> </span><span class=l>plex/config</span><span class=w>
-</span><span class=w>            </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>system</span><span class=w>
-</span><span class=w>              </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/transcode</span><span class=w>
-</span><span class=w>              </span><span class=nt>subPath</span><span class=p>:</span><span class=w> </span><span class=l>plex/transcode</span><span class=w>
-</span><span class=w>            </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>system</span><span class=w>
-</span><span class=w>              </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/shared</span><span class=w>
-</span><span class=w>              </span><span class=nt>subPath</span><span class=p>:</span><span class=w> </span><span class=l>plex/shared</span><span class=w>
-</span><span class=w>      </span><span class=nt>volumes</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>system</span><span class=w>
-</span><span class=w>          </span><span class=nt>persistentVolumeClaim</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=nt>claimName</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;plex-system-pvc&#34;</span><span class=w>
-</span><span class=w></span><span class=l>&lt;/snip&gt;</span><span class=w>
-</span></code></pre></td></tr></table>
-</div>
-</div><p>So - that&rsquo;s a summary, more or less, of my current configuration and a little bit of how I got here. I hope you&rsquo;ve found it interesting, and I&rsquo;d love to hear a bit more about your setup!</p>
-<h6>Share this post</h6>
-<span class=share-box>
-<a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-facebook-official"></i></a>
-<a href="https://twitter.com/intent/tweet?text=What%27s%20in%20your%20Kubernetes%20Home%20Lab%3f&url=https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-twitter"></i></a>
-<a href="https://plus.google.com/share?url=https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-google-plus"></i></a>
-<a href="http://www.reddit.com/submit?url=https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=900,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-reddit"></i></a>
-<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f&title=What%27s%20in%20your%20Kubernetes%20Home%20Lab%3f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-linkedin"></i></a>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>PersistentVolume</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>plex-system-pvc</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>plex</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>app.kubernetes.io/name</span><span class=p>:</span><span class=w> </span><span class=l>plex-media-server</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>app.kubernetes.io/instance</span><span class=p>:</span><span class=w> </span><span class=l>definit-plex</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>capacity</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>storage</span><span class=p>:</span><span class=w> </span><span class=l>100Gi</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>accessModes</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=l>ReadWriteMany</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>persistentVolumeReclaimPolicy</span><span class=p>:</span><span class=w> </span><span class=l>Retain</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>nfs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>server</span><span class=p>:</span><span class=w> </span><span class=m>192.168.4.10</span><span class=w> 
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/volume1/kubernetes</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nn>---</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>&lt;snip&gt;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>volumeMounts</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>system</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/config</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>subPath</span><span class=p>:</span><span class=w> </span><span class=l>plex/config</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>system</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/transcode</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>subPath</span><span class=p>:</span><span class=w> </span><span class=l>plex/transcode</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>system</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=l>/shared</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>subPath</span><span class=p>:</span><span class=w> </span><span class=l>plex/shared</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>volumes</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>system</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>persistentVolumeClaim</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>claimName</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;plex-system-pvc&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>&lt;/snip&gt;</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>So - that&rsquo;s a summary, more or less, of my current configuration and a little bit of how I got here. I hope you&rsquo;ve found it interesting, and I&rsquo;d love to hear a bit more about your setup!</p><h6>Share this post</h6><span class=share-box>
+<a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-facebook-official"></i></a>
+<a href="https://twitter.com/intent/tweet?text=What%27s%20in%20your%20Kubernetes%20Home%20Lab%3f&url=https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-twitter"></i></a>
+<a href="https://plus.google.com/share?url=https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-google-plus"></i></a>
+<a href="http://www.reddit.com/submit?url=https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=900,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-reddit"></i></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f&title=What%27s%20in%20your%20Kubernetes%20Home%20Lab%3f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-linkedin"></i></a>
 <a href="mailto:?subject=What%27s%20in%20your%20Kubernetes%20Home%20Lab%3f&body=Check out this site https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f" data-proofer-ignore><i class="fa fa-envelope"></i></a>
 </span>
 <a class=resp-sharing-button__link href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://twitter.com/intent/tweet/?text=What%27s%20in%20your%20Kubernetes%20Home%20Lab%3f&url=https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.44 4.83c-.8.37-1.5.38-2.22.02.93-.56.98-.96 1.32-2.02-.88.52-1.86.9-2.9 1.1-.82-.88-2-1.43-3.3-1.43-2.5.0-4.55 2.04-4.55 4.54.0.36.03.7.1 1.04-3.77-.2-7.12-2-9.36-4.75-.4.67-.6 1.45-.6 2.3.0 1.56.8 2.95 2 3.77-.74-.03-1.44-.23-2.05-.57v.06c0 2.2 1.56 4.03 3.64 4.44-.67.2-1.37.2-2.06.08.58 1.8 2.26 3.12 4.25 3.16C5.78 18.1 3.37 18.74 1 18.46c2 1.3 4.4 2.04 6.97 2.04 8.35.0 12.92-6.92 12.92-12.93.0-.2.0-.4-.02-.6.9-.63 1.96-1.22 2.56-2.14z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://www.tumblr.com/widgets/share/tool?posttype=link&title=What%27s%20in%20your%20Kubernetes%20Home%20Lab%3f&caption=What%27s%20in%20your%20Kubernetes%20Home%20Lab%3f&content=https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f&canonicalUrl=https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f&shareSource=tumblr_share_button" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--tumblr resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.5.5v5h5v4h-5V15c0 5 3.5 4.4 6 2.8v4.4c-6.7 3.2-12 0-12-4.2V9.5h-3V6.7c1-.3 2.2-.7 3-1.3.5-.5 1-1.2 1.4-2 .3-.7.6-1.7.7-3h3.8z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f&title=What%27s%20in%20your%20Kubernetes%20Home%20Lab%3f&summary=What%27s%20in%20your%20Kubernetes%20Home%20Lab%3f&source=https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 21.5h-5v-13h5v13zM4 6.5C2.5 6.5 1.5 5.3 1.5 4s1-2.4 2.5-2.4c1.6.0 2.5 1 2.6 2.5.0 1.4-1 2.5-2.6 2.5zm11.5 6c-1 0-2 1-2 2v7h-5v-13h5V10s1.6-1.5 4-1.5c3 0 5 2.2 5 6.3v6.7h-5v-7c0-1-1-2-2-2z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://reddit.com/submit/?url=https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f&resubmit=true&title=What%27s%20in%20your%20Kubernetes%20Home%20Lab%3f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 11.5c0-1.65-1.35-3-3-3-.96.0-1.86.48-2.42 1.24-1.64-1-3.75-1.64-6.07-1.72.08-1.1.4-3.05 1.52-3.7.72-.4 1.73-.24 3 .5C17.2 6.3 18.46 7.5 20 7.5c1.65.0 3-1.35 3-3s-1.35-3-3-3c-1.38.0-2.54.94-2.88 2.22-1.43-.72-2.64-.8-3.6-.25-1.64.94-1.95 3.47-2 4.55-2.33.08-4.45.7-6.1 1.72C4.86 8.98 3.96 8.5 3 8.5c-1.65.0-3 1.35-3 3 0 1.32.84 2.44 2.05 2.84-.03.22-.05.44-.05.66.0 3.86 4.5 7 10 7s10-3.14 10-7c0-.22-.02-.44-.05-.66 1.2-.4 2.05-1.54 2.05-2.84zM2.3 13.37C1.5 13.07 1 12.35 1 11.5c0-1.1.9-2 2-2 .64.0 1.22.32 1.6.82-1.1.85-1.92 1.9-2.3 3.05zm3.7.13c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9.8 4.8c-1.08.63-2.42.96-3.8.96-1.4.0-2.74-.34-3.8-.95-.24-.13-.32-.44-.2-.68.15-.24.46-.32.7-.18 1.83 1.06 4.76 1.06 6.6.0.23-.13.53-.05.67.2.14.23.06.54-.18.67zm.2-2.8c-1.1.0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm5.7-2.13c-.38-1.16-1.2-2.2-2.3-3.05.38-.5.97-.82 1.6-.82 1.1.0 2 .9 2 2 0 .84-.53 1.57-1.3 1.87z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="mailto:?subject=What%27s%20in%20your%20Kubernetes%20Home%20Lab%3f&body=https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f" target=_self rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 4H2C.9 4 0 4.9.0 6v12c0 1.1.9 2 2 2h20c1.1.0 2-.9 2-2V6c0-1.1-.9-2-2-2zM7.25 14.43l-3.5 2c-.08.05-.17.07-.25.07-.17.0-.34-.1-.43-.25-.14-.24-.06-.55.18-.68l3.5-2c.24-.14.55-.06.68.18.14.24.06.55-.18.68zm4.75.07c-.1.0-.2-.03-.27-.08l-8.5-5.5c-.23-.15-.3-.46-.15-.7.15-.22.46-.3.7-.14L12 13.4l8.23-5.32c.23-.15.54-.08.7.15.14.23.07.54-.16.7l-8.5 5.5c-.08.04-.17.07-.27.07zm8.93 1.75c-.1.16-.26.25-.43.25-.08.0-.17-.02-.25-.07l-3.5-2c-.24-.13-.32-.44-.18-.68s.44-.32.68-.18l3.5 2c.24.13.32.44.18.68z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="whatsapp://send?text=What%27s%20in%20your%20Kubernetes%20Home%20Lab%3f%20https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.1 3.9C17.9 1.7 15 .5 12 .5 5.8.5.7 5.6.7 11.9c0 2 .5 3.9 1.5 5.6L.6 23.4l6-1.6c1.6.9 3.5 1.3 5.4 1.3 6.3.0 11.4-5.1 11.4-11.4-.1-2.8-1.2-5.7-3.3-7.8zM12 21.4c-1.7.0-3.3-.5-4.8-1.3l-.4-.2-3.5 1 1-3.4L4 17c-1-1.5-1.4-3.2-1.4-5.1.0-5.2 4.2-9.4 9.4-9.4 2.5.0 4.9 1 6.7 2.8s2.8 4.2 2.8 6.7c-.1 5.2-4.3 9.4-9.5 9.4zm5.1-7.1c-.3-.1-1.7-.9-1.9-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1s-1.2-.5-2.3-1.4c-.9-.8-1.4-1.7-1.6-2s0-.5.1-.6.3-.3.4-.5c.2-.1.3-.3.4-.5s0-.4.0-.5C10 9 9.3 7.6 9 7c-.1-.4-.4-.3-.5-.3h-.6s-.4.1-.7.3c-.3.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.3-.3-.4-.6-.5z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://telegram.me/share/url?text=What%27s%20in%20your%20Kubernetes%20Home%20Lab%3f&url=https%3a%2f%2fwww.definit.co.uk%2f2020%2f09%2fwhats-in-your-kubernetes-home-lab%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M.707 8.475C.275 8.64.0 9.508.0 9.508s.284.867.718 1.03l5.09 1.897 1.986 6.38a1.102 1.102.0 001.75.527l2.96-2.41a.405.405.0 01.494-.013l5.34 3.87a1.1 1.1.0 001.046.135 1.1 1.1.0 00.682-.803l3.91-18.795A1.102 1.102.0 0022.5.075L.706 8.475z"/></svg>
-</div>
-</div>
-</a>
-<div id=disqus_thread></div>
-<script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var a=document.createElement('script');a.async=!0,a.type='text/javascript',a.src='//definit.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
-<div class="clarity-prev-next col-xs-12 col-sm-12 col-md-12 col-lg-12">
+</div></div></a>
+<div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var e=document.createElement("script");e.async=!0,e.type="text/javascript",e.src="//definit.disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><div class="clarity-prev-next col-xs-12 col-sm-12 col-md-12 col-lg-12">
 <nav class=clarity-page-prev-next>
 <div class=clr-nav-previous>
 <a href=https://www.definit.co.uk/2020/09/vmworld-2020-and-vmware-code-connect/ title="VMworld 2020 and VMware {Code} Connect!" class="btn btn-sm btn-outline">
 Previous
 </a>
-</div>
-<div class=clr-nav-next>
+</div><div class=clr-nav-next>
 <a href=https://www.definit.co.uk/2020/10/backing-up-tanzu-kubernetes-grid-tkg-on-vsphere-workloads-to-aws-with-velero/ title="Backing up Tanzu Kubernetes Grid (TKG) on vSphere Workloads to AWS with Velero" class="btn btn-sm btn-outline">
 Next
 </a>
-</div>
-</nav>
-</div>
-</div>
-<nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+</div></nav></div></div><nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <section class=sidenav-content>
 <section class="nav-group collapsible">
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">16</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">44</span></a></li>
-<li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
-<li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">16</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">40</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">70</span></a></li>
-<li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">23</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
-</ul>
-</section>
-<section class="nav-group collapsible">
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li><li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">16</span></a></li><li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">44</span></a></li><li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li><li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">29</span></a></li><li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">16</span></a></li><li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">1</span></a></li><li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li><li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">40</span></a></li><li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">70</span></a></li><li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">23</span></a></li><li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li></ul></section><section class="nav-group collapsible">
 <input id=Tags type=checkbox>
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
-<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">55</span></a></li>
-<li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">40</span></a></li>
-<li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
-<li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">32</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">30</span></a></li>
-<li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">29</span></a></li>
-</section>
-</section>
-</nav>
-</div>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-4368767-1"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-4368767-1')</script>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li><li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">55</span></a></li><li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">40</span></a></li><li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li><li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li><li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li><li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">33</span></a></li><li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">32</span></a></li><li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">30</span></a></li><li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">29</span></a></li></section></section></nav></div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-4368767-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-4368767-1")</script>
 <script src=/js/lightbox-plus-jquery.min.js></script>
-</div>
-</body>
-</html>
+</div></body></html>

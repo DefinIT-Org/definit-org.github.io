@@ -1,8 +1,7 @@
 <!doctype html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class=no-js><!--<![endif]-->
 <head>
 <meta charset=utf-8>
-<title>Installing and configuring VMware Infrastructure Navigator 5.8 &#183; DefinIT</title>
-<meta http-equiv=x-ua-compatible content="IE=edge">
+<title>Installing and configuring VMware Infrastructure Navigator 5.8 &#183; DefinIT</title><meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=HandheldFriendly content="True">
 <meta name=MobileOptimized content="320">
 <meta name=viewport content="width=device-width,initial-scale=1">
@@ -33,7 +32,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2014/01/installing-and-configuring-vmware-infrastructure-navigator-5-8/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.90.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.93.3"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -41,8 +40,7 @@
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
-</head>
-<body data-ng-app=myapp data-ng-controller=MyController data-ng-mouseleave=MouseLeave($event)>
+</head><body data-ng-app=myapp data-ng-controller=MyController data-ng-mouseleave=MouseLeave($event)>
 <div class=main-container>
 <header class=header-6>
 <div class=branding>
@@ -50,8 +48,7 @@
 <img alt src=/images/logos/definit-logo.png>
 <span class=title>DefinIT</span>
 </a>
-</div>
-<nav class=header-nav>
+</div><nav class=header-nav>
 <a class="nav-link nav-text" href=https://www.definit.co.uk/ title=Home>
 Home
 </a>
@@ -64,29 +61,22 @@ GitHub
 <a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml title=RSS>
 RSS
 </a>
-</nav>
-<div class=header-actions>
+</nav><div class=header-actions>
 <form class=search id=search method=get action=//google.com/search>
 <label for=search_input>
 <input id=search_input type=text name=q placeholder="Search with Google">
 <input type=hidden name=as_sitesearch value=https://www.definit.co.uk>
 </label>
-</form>
-</div>
-</header>
-<div class=content-container>
+</form></div></header><div class=content-container>
 <div class=content-area>
-<h1>Installing and configuring VMware Infrastructure Navigator 5.8</h1>
-<div class=metas>
+<h1>Installing and configuring VMware Infrastructure Navigator 5.8</h1><div class=metas>
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 15/1/2014
 &#183; Read in about 6 min (1221 words)
-</div>
-<div class=clr-card-authors>
+</div><div class=clr-card-authors>
 Published under <a href=/category/vmware>VMware</a> and <a href=/category/vrealize-operations>vRealize Operations</a>
-</div>
-<div class=clr-card-authors>
+</div><div class=clr-card-authors>
 Tags:
 <a class=clr-tags href=https://www.definit.co.uk/tag/appliance>#appliance</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/dependencies>#dependencies</a>
@@ -95,303 +85,179 @@ Tags:
 <a class=clr-tags href=https://www.definit.co.uk/tag/vapp>#vapp</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/vmware>#VMWare</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/vmware-operations-management-suite>#vmware operations management suite</a>
-</div>
-</span>
-</div>
-<br clear=all>
+</div></span>
+</div><br clear=all>
 <div class="alert alert-danger" role=alert>
 <div class=alert-items>
 <div class="alert-item static">
 <div class=alert-icon-wrapper>
 <clr-icon class=alert-icon shape=warning-standard></clr-icon>
-</div>
-<span class=alert-text>This article is now 8 years old! It is highly likely that this information is out of date and the author will have completely forgotten about it. Please take care when following any guidance to ensure you have up-to-date recommendations.</span>
-</div>
-</div>
-</div>
-<p>According to VMware, Infrastructure Navigator is</p>
-<blockquote>
-<p>…a component of the VMware vCenter Operations Management Suite. It automatically discovers application services, visualizes relationships and maps dependencies of applications on virtualized compute, storage and network resources.</p>
-</blockquote>
-<p>Effectively it takes a look at the network connections that are running between your VMs (and physical servers) and works out which applications and services are running on each, and the dependencies – both upstream and downstream – for each VM.</p>
-<p>This is particularly useful in large enterprise environments where perhaps application developers have not (shock) documented the dependencies for a particular application. I can think of several times when I’ve been 100% confident that (according to all the documentation provided) I can decommission a server, or the service running on a server, only to have to turn it back on due to a production outage – because an un-documented dependency exists.</p>
-<p>Effectively, Infrastructure Navigator leverages VMware Tools to run a netstat command on each VM and work out what connections are being used. It comes with a library of already classified services – e.g. MSSQL running on port 1433 is a pretty obvious service. Non-classified services (or services configured for running on a non-standard port) can be easily added to the library to build up a detailed picture of which VMs depend on each other (as well as “unmanaged” servers/services that are out of the scope of vCenter).</p>
-<h2 id=licensing>Licensing <a class=anchor href=#licensing>
+</div><span class=alert-text>This article is now 8 years old! It is highly likely that this information is out of date and the author will have completely forgotten about it. Please take care when following any guidance to ensure you have up-to-date recommendations.</span>
+</div></div></div><p>According to VMware, Infrastructure Navigator is</p><blockquote>
+<p>…a component of the VMware vCenter Operations Management Suite. It automatically discovers application services, visualizes relationships and maps dependencies of applications on virtualized compute, storage and network resources.</p></blockquote><p>Effectively it takes a look at the network connections that are running between your VMs (and physical servers) and works out which applications and services are running on each, and the dependencies – both upstream and downstream – for each VM.</p><p>This is particularly useful in large enterprise environments where perhaps application developers have not (shock) documented the dependencies for a particular application. I can think of several times when I’ve been 100% confident that (according to all the documentation provided) I can decommission a server, or the service running on a server, only to have to turn it back on due to a production outage – because an un-documented dependency exists.</p><p>Effectively, Infrastructure Navigator leverages VMware Tools to run a netstat command on each VM and work out what connections are being used. It comes with a library of already classified services – e.g. MSSQL running on port 1433 is a pretty obvious service. Non-classified services (or services configured for running on a non-standard port) can be easily added to the library to build up a detailed picture of which VMs depend on each other (as well as “unmanaged” servers/services that are out of the scope of vCenter).</p><h2 id=licensing>Licensing <a class=anchor href=#licensing>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>Infrastructure Navigator comes as part of vCenter Operations Management Suite Advanced or Enterprise editions, which may put it out of reach of many SMEs. That said, for me it’s ideal use is the mapping of really complex enterprise environments where VMs and applications can number in the thousands and tens of thousands.</p>
-<h2 id=prerequisites>Prerequisites <a class=anchor href=#prerequisites>
+</a></h2><p>Infrastructure Navigator comes as part of vCenter Operations Management Suite Advanced or Enterprise editions, which may put it out of reach of many SMEs. That said, for me it’s ideal use is the mapping of really complex enterprise environments where VMs and applications can number in the thousands and tens of thousands.</p><h2 id=prerequisites>Prerequisites <a class=anchor href=#prerequisites>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>Infrastructure Navigator comes in the form of an OVA which deploys a single VM, this has 2 vCPUs and 4GB of RAM (though I’m running it in my lab with just 2GB). It requires about 20GB of disk (but can be thin provisioned) and a Gigabit Ethernet connection.</p>
-<p>vCenter Infrastructure Navigator is supported on vCenter Server 5.1 U1 and 5.5, with the vSphere Web Client 5.5.</p>
-<p>In addition to all builds of ESXi 5.x, a lot of previous ESX/ESXi versions are supported, check the product interop matrix for specifics.</p>
-<h2 id=deploying-the-vapp>Deploying the vApp <a class=anchor href=#deploying-the-vapp>
+</a></h2><p>Infrastructure Navigator comes in the form of an OVA which deploys a single VM, this has 2 vCPUs and 4GB of RAM (though I’m running it in my lab with just 2GB). It requires about 20GB of disk (but can be thin provisioned) and a Gigabit Ethernet connection.</p><p>vCenter Infrastructure Navigator is supported on vCenter Server 5.1 U1 and 5.5, with the vSphere Web Client 5.5.</p><p>In addition to all builds of ESXi 5.x, a lot of previous ESX/ESXi versions are supported, check the product interop matrix for specifics.</p><h2 id=deploying-the-vapp>Deploying the vApp <a class=anchor href=#deploying-the-vapp>
 <i class="fas fa-hashtag"></i>
 </a></h2><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/20140114001.png><img style=display:inline;border:0 title="VIN 5.8 Deploy Wizard - Select the OVA" alt="VIN 5.8 Deploy Wizard - Select the OVA" src=/images/2014/01/20140114001_thumb.png width=644 height=379 border=0></a>
 <p class=wp-caption-text>
 Select the OVA file
-</p>
-</div>
-<div style=width:654px class="wp-caption alignnone">
+</p></div><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/20140114002.png><img style=display:inline;border:0 title="VIN 5.8 Deploy Wizard - Review details" alt="VIN 5.8 Deploy Wizard - Review details" src=/images/2014/01/20140114002_thumb.png width=644 height=379 border=0></a>
 <p class=wp-caption-text>
 Review the vApp details, and tick the box to accept the configuration risk
-</p>
-</div>
-<div style=width:654px class="wp-caption alignnone">
+</p></div><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/20140114003.png><img style=display:inline;border:0 title="VIN 5.8 Deploy Wizard - Accept EULA" alt="VIN 5.8 Deploy Wizard - Accept EULA" src=/images/2014/01/20140114003_thumb.png width=644 height=379 border=0></a>
 <p class=wp-caption-text>
 Read and accept the EULA
-</p>
-</div>
-<div style=width:654px class="wp-caption alignnone">
+</p></div><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/image8.png><img style=display:inline;border:0 title="VIN 5.8 Deploy Wizard - Name and Location" alt="VIN 5.8 Deploy Wizard - Name and Location" src=/images/2014/01/image_thumb6.png width=644 height=379 border=0></a>
 <p class=wp-caption-text>
 Name the VM and select a location to deploy to
-</p>
-</div>
-<div style=width:654px class="wp-caption alignnone">
+</p></div><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/20140114004.png><img style=display:inline;border:0 title="VIN 5.8 Deploy Wizard - Select storage" alt="VIN 5.8 Deploy Wizard - Select storage" src=/images/2014/01/20140114004_thumb.png width=644 height=379 border=0></a>
 <p class=wp-caption-text>
 Select your datastore and disk format - I've gone with thin provisioning
-</p>
-</div>
-<div style=width:654px class="wp-caption alignnone">
+</p></div><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/20140114005.png><img style=display:inline;border:0 title="VIN 5.8 Deploy Wizard - Select network" alt="VIN 5.8 Deploy Wizard - Select network" src=/images/2014/01/20140114005_thumb.png width=644 height=379 border=0></a>
 <p class=wp-caption-text>
 Select the network you wish to use - bear in mind it should have access to vCenter and Hosts
-</p>
-</div>
-<div style=width:654px class="wp-caption alignnone">
+</p></div><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/20140114006.png><img style=display:inline;border:0 title="VIN 5.8 Deploy Wizard - Customise template" alt="VIN 5.8 Deploy Wizard - Customise template" src=/images/2014/01/20140114006_thumb.png width=644 height=379 border=0></a>
 <p class=wp-caption-text>
 Customise the vApp - enter a password and then you can set IP details, if you don't have DHCP or would prefer a static IP
-</p>
-</div>
-<div style=width:654px class="wp-caption alignnone">
+</p></div><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/20140114007.png><img style=display:inline;border:0 title="VIN 5.8 Deploy Wizard - vService bindings" alt="VIN 5.8 Deploy Wizard - vService bindings" src=/images/2014/01/20140114007_thumb.png width=644 height=379 border=0></a>
 <p class=wp-caption-text>
 Review the vService bindings
-</p>
-</div>
-<div style=width:654px class="wp-caption alignnone">
+</p></div><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/20140114008.png><img style=display:inline;border:0 title="VIN 5.8 Deploy Wizard - Ready to complete" alt="VIN 5.8 Deploy Wizard - Ready to complete" src=/images/2014/01/20140114008_thumb.png width=644 height=379 border=0></a>
 <p class=wp-caption-text>
 Review all your settings and finish.
-</p>
-</div>
-<p>At this point, I made a cup of coffee while the vApp deployed. Once it had completed I took a look at the virtual machine. I also took the opportunity to edit the settings and drop the RAM to 2GB. You can see that the appliance is a SUSE Linux Enterprise 11 64-bit VM. The VM tools are 3rd party, which really bugs me – if anyone can make sure that their VM runs the proper and up-to-date VM tools you’d think it’d be VMware right? Anyway…the VM is deployed correctly, so power it on.</p>
-<div style=width:551px class="wp-caption alignnone">
+</p></div><p>At this point, I made a cup of coffee while the vApp deployed. Once it had completed I took a look at the virtual machine. I also took the opportunity to edit the settings and drop the RAM to 2GB. You can see that the appliance is a SUSE Linux Enterprise 11 64-bit VM. The VM tools are 3rd party, which really bugs me – if anyone can make sure that their VM runs the proper and up-to-date VM tools you’d think it’d be VMware right? Anyway…the VM is deployed correctly, so power it on.</p><div style=width:551px class="wp-caption alignnone">
 <a href=/images/2014/01/20140114009.png><img style=display:inline;border:0 title="VIN 5.8 - VM is deployed" alt="VIN 5.8 - VM is deployed" src=/images/2014/01/20140114009_thumb.png width=541 height=484 border=0></a>
 <p class=wp-caption-text>
 The VM is deployed
-</p>
-</div>
-<h2 id=some-initial-configuration-steps>Some Initial Configuration Steps <a class=anchor href=#some-initial-configuration-steps>
+</p></div><h2 id=some-initial-configuration-steps>Some Initial Configuration Steps <a class=anchor href=#some-initial-configuration-steps>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>Once the VM was booted, I opened the console and it tells you where to go to manage the VM – in my case <a href=https://192.168.1.109:5480>https://192.168.1.109:5480</a>. I duly opened the web page.</p>
-<p><img src=https://www.definit.co.uk/images/2014/01/20140114010_thumb.png alt></p>
-<p>You can log in using the user name “root” and the password that you specified in the vApp deployment. You get a fairly familiar looking web interface for some basic appliance management:</p>
-<p><img src=https://www.definit.co.uk/images/2014/01/image_thumb7.png alt></p>
-<p>I went to the network tab and updated the network settings to use a static IP that I’ve pre-defined for the appliance. If you re-IP the appliance after you connect to vCenter, you’ll need a reboot to continue working with it.</p>
-<p>If you want to change the hostname for the appliance, you can’t use the hostname command, or edit the /etc/HOSTNAME or /etc/hosts files – they will not persist across reboots. There’s a script that runs when the appliance reboots that checks the reverse DNS lookup for the primary IP address, and sets the hostname accordingly. If the script can’t see a DNS entry for the IP it will rename it to localhost.localdomain. (<a href=http://jreypo.wordpress.com/2013/11/20/infrastructure-navigator-lose-configured-hostname-after-a-reboot/ target=_blank>Credit to Juan Rey for this info</a>)</p>
-<h2 id=configuring-vcenter-infrastructure-navigator-in-vcenter-web-client>Configuring vCenter Infrastructure Navigator in vCenter Web Client <a class=anchor href=#configuring-vcenter-infrastructure-navigator-in-vcenter-web-client>
+</a></h2><p>Once the VM was booted, I opened the console and it tells you where to go to manage the VM – in my case <a href=https://192.168.1.109:5480>https://192.168.1.109:5480</a>. I duly opened the web page.</p><p><img src=https://www.definit.co.uk/images/2014/01/20140114010_thumb.png alt></p><p>You can log in using the user name “root” and the password that you specified in the vApp deployment. You get a fairly familiar looking web interface for some basic appliance management:</p><p><img src=https://www.definit.co.uk/images/2014/01/image_thumb7.png alt></p><p>I went to the network tab and updated the network settings to use a static IP that I’ve pre-defined for the appliance. If you re-IP the appliance after you connect to vCenter, you’ll need a reboot to continue working with it.</p><p>If you want to change the hostname for the appliance, you can’t use the hostname command, or edit the /etc/HOSTNAME or /etc/hosts files – they will not persist across reboots. There’s a script that runs when the appliance reboots that checks the reverse DNS lookup for the primary IP address, and sets the hostname accordingly. If the script can’t see a DNS entry for the IP it will rename it to localhost.localdomain. (<a href=http://jreypo.wordpress.com/2013/11/20/infrastructure-navigator-lose-configured-hostname-after-a-reboot/ target=_blank>Credit to Juan Rey for this info</a>)</p><h2 id=configuring-vcenter-infrastructure-navigator-in-vcenter-web-client>Configuring vCenter Infrastructure Navigator in vCenter Web Client <a class=anchor href=#configuring-vcenter-infrastructure-navigator-in-vcenter-web-client>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>If you’re still logged into the vCenter Web Client, you’ll need to log out and back in again to see the Infrastructure Navigator components.</p>
-<h3 id=assign-a-license-key>Assign a license key <a class=anchor href=#assign-a-license-key>
+</a></h2><p>If you’re still logged into the vCenter Web Client, you’ll need to log out and back in again to see the Infrastructure Navigator components.</p><h3 id=assign-a-license-key>Assign a license key <a class=anchor href=#assign-a-license-key>
 <i class="fas fa-hashtag"></i>
 </a></h3><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/20140114012.png><img style=display:inline;border:0 title="VIN 5.8 - Licensing tab" alt="VIN 5.8 - Licensing tab" src=/images/2014/01/20140114012_thumb.png width=644 height=177 border=0></a>
 <p class=wp-caption-text>
 From the Web Client home, click on the Licensing icon, then select the Solutions tab. You can see that VIN is unlicensed. Select it and click "Assign License Key&#8230;"
-</p>
-</div>
-<div style=width:654px class="wp-caption alignnone">
+</p></div><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/20140114013.png><img style=display:inline;border:0 title="VIN 5.8 - Assigning Licensing" alt="VIN 5.8 - Assigning Licensing" src=/images/2014/01/20140114013_thumb.png width=644 height=341 border=0></a>
 <p class=wp-caption-text>
 Select your license key (mine is a vCloud Suite license and covers vCenter Operations Suite too) and apply it
-</p>
-</div>
-<h3 id=configure-infrastructure-navigators-access-to-vms>Configure Infrastructure Navigator’s access to VMs <a class=anchor href=#configure-infrastructure-navigators-access-to-vms>
+</p></div><h3 id=configure-infrastructure-navigators-access-to-vms>Configure Infrastructure Navigator’s access to VMs <a class=anchor href=#configure-infrastructure-navigators-access-to-vms>
 <i class="fas fa-hashtag"></i>
 </a></h3><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/20140114014.png><img style=display:inline;border:0 title="VIN 5.8 - Configuring VIN" alt="VIN 5.8 - Configuring VIN" src=/images/2014/01/20140114014_thumb.png width=644 height=322 border=0></a>
 <p class=wp-caption-text>
 From the vSphere Web Client home page, click on the Infrastructure Navigator icon, you get presented with another annoying getting started page!
-</p>
-</div>
-<div style=width:654px class="wp-caption alignnone">
+</p></div><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/20140114015.png><img style=display:inline;border:0 title="VIN 5.8 - Access to VMs" alt="VIN 5.8 - Access to VMs" src=/images/2014/01/20140114015_thumb.png width=644 height=304 border=0></a>
 <p class=wp-caption-text>
 Select the settings tab, then click the "Turn on access to VMs" button
-</p>
-</div>
-<div style=width:364px class="wp-caption alignnone">
+</p></div><div style=width:364px class="wp-caption alignnone">
 <a href=/images/2014/01/20140114016.png><img style=display:inline;border:0 title="VIN 5.8 - Access to VMs - Credentials" alt="VIN 5.8 - Access to VMs - Credentials" src=/images/2014/01/20140114016_thumb.png width=354 height=222 border=0></a>
 <p class=wp-caption-text>
 Enter some administrative credentials to allow VIN to access VMs. It's better to use a dedicated admin account, rather than your own, but this is a lab 🙂
-</p>
-</div>
-<div style=width:654px class="wp-caption alignnone">
+</p></div><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/20140114017.png><img style=display:inline;border:0 title="VIN 5.8 - Access to VMs is on" alt="VIN 5.8 - Access to VMs is on" src=/images/2014/01/20140114017_thumb.png width=644 height=295 border=0></a>
 <p class=wp-caption-text>
 VIN can now access your VMs and will begin to gather information on a scheduled basis.
-</p>
-</div>
-<div style=width:421px class="wp-caption alignnone">
+</p></div><div style=width:421px class="wp-caption alignnone">
 <a href=/images/2014/01/20140114018.png><img style=display:inline;border:0 title="VIN 5.8 - VIN tab on a VM status" alt="VIN 5.8 - VIN tab on a VM status" src=/images/2014/01/20140114018_thumb.png width=411 height=177 border=0></a>
 <p class=wp-caption-text>
 If you now select a VM in your inventory, you'll see that theres a new box for VIN and that it's "Pending first discovery". Give it plenty of time to complete discovery depending on your environment size. My lab took 15 minutes.
-</p>
-</div>
-<div style=width:460px class="wp-caption alignnone">
+</p></div><div style=width:460px class="wp-caption alignnone">
 <a href=/images/2014/01/image10.png><img style=display:inline;border:0 title="VIN 5.8 - VIN discovery completed" alt="VIN 5.8 - VIN discovery completed" src=/images/2014/01/image_thumb8.png width=450 height=172 border=0></a>
 <p class=wp-caption-text>
 This is the completed discovery of the VM - in this case my vCloud Director VM. You can see that the information is less than an hour old and that it's detected vCloud Director as an Application Service running on the VM. You can also see that it's detected 2 dependencies.
-</p>
-</div>
-<h2 id=viewing-dependencies>Viewing Dependencies <a class=anchor href=#viewing-dependencies>
+</p></div><h2 id=viewing-dependencies>Viewing Dependencies <a class=anchor href=#viewing-dependencies>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>Now that it’s installed and running, I couldn’t finish without a really quick view of it working, and how to add a definition for an unknown service.</p>
-<div style=width:654px class="wp-caption alignnone">
+</a></h2><p>Now that it’s installed and running, I couldn’t finish without a really quick view of it working, and how to add a definition for an unknown service.</p><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/image11.png><img style=display:inline;border:0 title="VIN 5.8 - Viewing dependency maps" alt="VIN 5.8 - Viewing dependency maps" src=/images/2014/01/image_thumb9.png width=644 height=425 border=0></a>
 <p class=wp-caption-text>
 You can click on "View Dependencies" from a VM overview page, or select the "Manage" tab and then the "Applicaiton Dependencies" tab. This will, by default, show one level of dependencies. You can see that it's defined some known services, and that there's an unknown service running on my VCSA appliance.
-</p>
-</div>
-<div style=width:654px class="wp-caption alignnone">
+</p></div><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/image12.png><img style=display:inline;border:0 title="VIN 5.8 - Expanding dependency maps" alt="VIN 5.8 - Expanding dependency maps" src=/images/2014/01/image_thumb10.png width=644 height=425 border=0></a>
 <p class=wp-caption-text>
 Now I've expanded out the dependencies to a second level, you can see more links and more services that are used within this application dependency map.
-</p>
-</div>
-<h2 id=defining-custom-services>Defining Custom Services <a class=anchor href=#defining-custom-services>
+</p></div><h2 id=defining-custom-services>Defining Custom Services <a class=anchor href=#defining-custom-services>
 <i class="fas fa-hashtag"></i>
 </a></h2><div style=width:654px class="wp-caption alignnone">
 <a href=/images/2014/01/image13.png><img style=display:inline;border:0 title="VIN 5.8 - Define a custom service" alt="VIN 5.8 - Define a custom service" src=/images/2014/01/image_thumb11.png width=644 height=130 border=0></a>
 <p class=wp-caption-text>
 In the services tab, from the Application Dependencies view, you can see an undefined service talking on port 445. I happen to know that it's an SMB share on my NAS which is mapped from my DC and SQL VMs. Click on the + symbol to define the service.
-</p>
-</div>
-<div style=width:364px class="wp-caption alignnone">
+</p></div><div style=width:364px class="wp-caption alignnone">
 <a href=/images/2014/01/image14.png><img style=display:inline;border:0 title="VIN 5.8 - Custom service definition" alt="VIN 5.8 - Custom service definition" src=/images/2014/01/image_thumb12.png width=354 height=261 border=0></a>
 <p class=wp-caption-text>
 Enter the details for the new service definition - remember that it's not specific to this server or my NAS, so just naming the protocol is sufficient.
-</p>
-</div>
-<div style=width:517px class="wp-caption alignnone">
+</p></div><div style=width:517px class="wp-caption alignnone">
 <a href=/images/2014/01/image15.png><img style=display:inline;border:0 title="VIN 5.8 - Updated map with custom service definition" alt="VIN 5.8 - Updated map with custom service definition" src=/images/2014/01/image_thumb13.png width=507 height=360 border=0></a>
 <p class=wp-caption-text>
 Now the application map has updated with my new SMB definition.
-</p>
-</div>
-<h6>Share this post</h6>
-<span class=share-box>
-<a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-facebook-official"></i></a>
-<a href="https://twitter.com/intent/tweet?text=Installing%20and%20configuring%20VMware%20Infrastructure%20Navigator%205.8&url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-twitter"></i></a>
-<a href="https://plus.google.com/share?url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-google-plus"></i></a>
-<a href="http://www.reddit.com/submit?url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=900,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-reddit"></i></a>
-<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f&title=Installing%20and%20configuring%20VMware%20Infrastructure%20Navigator%205.8" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-linkedin"></i></a>
+</p></div><h6>Share this post</h6><span class=share-box>
+<a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-facebook-official"></i></a>
+<a href="https://twitter.com/intent/tweet?text=Installing%20and%20configuring%20VMware%20Infrastructure%20Navigator%205.8&url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-twitter"></i></a>
+<a href="https://plus.google.com/share?url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-google-plus"></i></a>
+<a href="http://www.reddit.com/submit?url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=900,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-reddit"></i></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f&title=Installing%20and%20configuring%20VMware%20Infrastructure%20Navigator%205.8" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-linkedin"></i></a>
 <a href="mailto:?subject=Installing%20and%20configuring%20VMware%20Infrastructure%20Navigator%205.8&body=Check out this site https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f" data-proofer-ignore><i class="fa fa-envelope"></i></a>
 </span>
 <a class=resp-sharing-button__link href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://twitter.com/intent/tweet/?text=Installing%20and%20configuring%20VMware%20Infrastructure%20Navigator%205.8&url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.44 4.83c-.8.37-1.5.38-2.22.02.93-.56.98-.96 1.32-2.02-.88.52-1.86.9-2.9 1.1-.82-.88-2-1.43-3.3-1.43-2.5.0-4.55 2.04-4.55 4.54.0.36.03.7.1 1.04-3.77-.2-7.12-2-9.36-4.75-.4.67-.6 1.45-.6 2.3.0 1.56.8 2.95 2 3.77-.74-.03-1.44-.23-2.05-.57v.06c0 2.2 1.56 4.03 3.64 4.44-.67.2-1.37.2-2.06.08.58 1.8 2.26 3.12 4.25 3.16C5.78 18.1 3.37 18.74 1 18.46c2 1.3 4.4 2.04 6.97 2.04 8.35.0 12.92-6.92 12.92-12.93.0-.2.0-.4-.02-.6.9-.63 1.96-1.22 2.56-2.14z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://www.tumblr.com/widgets/share/tool?posttype=link&title=Installing%20and%20configuring%20VMware%20Infrastructure%20Navigator%205.8&caption=Installing%20and%20configuring%20VMware%20Infrastructure%20Navigator%205.8&content=https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f&canonicalUrl=https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f&shareSource=tumblr_share_button" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--tumblr resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.5.5v5h5v4h-5V15c0 5 3.5 4.4 6 2.8v4.4c-6.7 3.2-12 0-12-4.2V9.5h-3V6.7c1-.3 2.2-.7 3-1.3.5-.5 1-1.2 1.4-2 .3-.7.6-1.7.7-3h3.8z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f&title=Installing%20and%20configuring%20VMware%20Infrastructure%20Navigator%205.8&summary=Installing%20and%20configuring%20VMware%20Infrastructure%20Navigator%205.8&source=https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 21.5h-5v-13h5v13zM4 6.5C2.5 6.5 1.5 5.3 1.5 4s1-2.4 2.5-2.4c1.6.0 2.5 1 2.6 2.5.0 1.4-1 2.5-2.6 2.5zm11.5 6c-1 0-2 1-2 2v7h-5v-13h5V10s1.6-1.5 4-1.5c3 0 5 2.2 5 6.3v6.7h-5v-7c0-1-1-2-2-2z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://reddit.com/submit/?url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f&resubmit=true&title=Installing%20and%20configuring%20VMware%20Infrastructure%20Navigator%205.8" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 11.5c0-1.65-1.35-3-3-3-.96.0-1.86.48-2.42 1.24-1.64-1-3.75-1.64-6.07-1.72.08-1.1.4-3.05 1.52-3.7.72-.4 1.73-.24 3 .5C17.2 6.3 18.46 7.5 20 7.5c1.65.0 3-1.35 3-3s-1.35-3-3-3c-1.38.0-2.54.94-2.88 2.22-1.43-.72-2.64-.8-3.6-.25-1.64.94-1.95 3.47-2 4.55-2.33.08-4.45.7-6.1 1.72C4.86 8.98 3.96 8.5 3 8.5c-1.65.0-3 1.35-3 3 0 1.32.84 2.44 2.05 2.84-.03.22-.05.44-.05.66.0 3.86 4.5 7 10 7s10-3.14 10-7c0-.22-.02-.44-.05-.66 1.2-.4 2.05-1.54 2.05-2.84zM2.3 13.37C1.5 13.07 1 12.35 1 11.5c0-1.1.9-2 2-2 .64.0 1.22.32 1.6.82-1.1.85-1.92 1.9-2.3 3.05zm3.7.13c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9.8 4.8c-1.08.63-2.42.96-3.8.96-1.4.0-2.74-.34-3.8-.95-.24-.13-.32-.44-.2-.68.15-.24.46-.32.7-.18 1.83 1.06 4.76 1.06 6.6.0.23-.13.53-.05.67.2.14.23.06.54-.18.67zm.2-2.8c-1.1.0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm5.7-2.13c-.38-1.16-1.2-2.2-2.3-3.05.38-.5.97-.82 1.6-.82 1.1.0 2 .9 2 2 0 .84-.53 1.57-1.3 1.87z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="mailto:?subject=Installing%20and%20configuring%20VMware%20Infrastructure%20Navigator%205.8&body=https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f" target=_self rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 4H2C.9 4 0 4.9.0 6v12c0 1.1.9 2 2 2h20c1.1.0 2-.9 2-2V6c0-1.1-.9-2-2-2zM7.25 14.43l-3.5 2c-.08.05-.17.07-.25.07-.17.0-.34-.1-.43-.25-.14-.24-.06-.55.18-.68l3.5-2c.24-.14.55-.06.68.18.14.24.06.55-.18.68zm4.75.07c-.1.0-.2-.03-.27-.08l-8.5-5.5c-.23-.15-.3-.46-.15-.7.15-.22.46-.3.7-.14L12 13.4l8.23-5.32c.23-.15.54-.08.7.15.14.23.07.54-.16.7l-8.5 5.5c-.08.04-.17.07-.27.07zm8.93 1.75c-.1.16-.26.25-.43.25-.08.0-.17-.02-.25-.07l-3.5-2c-.24-.13-.32-.44-.18-.68s.44-.32.68-.18l3.5 2c.24.13.32.44.18.68z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="whatsapp://send?text=Installing%20and%20configuring%20VMware%20Infrastructure%20Navigator%205.8%20https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.1 3.9C17.9 1.7 15 .5 12 .5 5.8.5.7 5.6.7 11.9c0 2 .5 3.9 1.5 5.6L.6 23.4l6-1.6c1.6.9 3.5 1.3 5.4 1.3 6.3.0 11.4-5.1 11.4-11.4-.1-2.8-1.2-5.7-3.3-7.8zM12 21.4c-1.7.0-3.3-.5-4.8-1.3l-.4-.2-3.5 1 1-3.4L4 17c-1-1.5-1.4-3.2-1.4-5.1.0-5.2 4.2-9.4 9.4-9.4 2.5.0 4.9 1 6.7 2.8s2.8 4.2 2.8 6.7c-.1 5.2-4.3 9.4-9.5 9.4zm5.1-7.1c-.3-.1-1.7-.9-1.9-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1s-1.2-.5-2.3-1.4c-.9-.8-1.4-1.7-1.6-2s0-.5.1-.6.3-.3.4-.5c.2-.1.3-.3.4-.5s0-.4.0-.5C10 9 9.3 7.6 9 7c-.1-.4-.4-.3-.5-.3h-.6s-.4.1-.7.3c-.3.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.3-.3-.4-.6-.5z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://telegram.me/share/url?text=Installing%20and%20configuring%20VMware%20Infrastructure%20Navigator%205.8&url=https%3a%2f%2fwww.definit.co.uk%2f2014%2f01%2finstalling-and-configuring-vmware-infrastructure-navigator-5-8%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M.707 8.475C.275 8.64.0 9.508.0 9.508s.284.867.718 1.03l5.09 1.897 1.986 6.38a1.102 1.102.0 001.75.527l2.96-2.41a.405.405.0 01.494-.013l5.34 3.87a1.1 1.1.0 001.046.135 1.1 1.1.0 00.682-.803l3.91-18.795A1.102 1.102.0 0022.5.075L.706 8.475z"/></svg>
-</div>
-</div>
-</a>
-<div id=disqus_thread></div>
-<script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var a=document.createElement('script');a.async=!0,a.type='text/javascript',a.src='//definit.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
-<div class="clarity-prev-next col-xs-12 col-sm-12 col-md-12 col-lg-12">
+</div></div></a>
+<div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var e=document.createElement("script");e.async=!0,e.type="text/javascript",e.src="//definit.disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><div class="clarity-prev-next col-xs-12 col-sm-12 col-md-12 col-lg-12">
 <nav class=clarity-page-prev-next>
 <div class=clr-nav-previous>
 <a href=https://www.definit.co.uk/2014/01/installing-vcops-5-8-in-the-definit-lab-4gb-ram-and-2-vcpu/ title="Installing vCOps 5.8 in the DefinIT Lab &amp;ndash; 4GB RAM and 2 vCPU" class="btn btn-sm btn-outline">
 Previous
 </a>
-</div>
-<div class=clr-nav-next>
+</div><div class=clr-nav-next>
 <a href=https://www.definit.co.uk/2014/01/how-to-virtualize-mac-os-x-using-esxi-5-1/ title="How to Virtualize Mac OS X using ESXi 5.1" class="btn btn-sm btn-outline">
 Next
 </a>
-</div>
-</nav>
-</div>
-</div>
-<nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+</div></nav></div></div><nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <section class=sidenav-content>
 <section class="nav-group collapsible">
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">16</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">44</span></a></li>
-<li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
-<li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">16</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">40</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">70</span></a></li>
-<li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">23</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
-</ul>
-</section>
-<section class="nav-group collapsible">
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li><li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">16</span></a></li><li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">44</span></a></li><li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li><li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">29</span></a></li><li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">16</span></a></li><li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">1</span></a></li><li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li><li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">40</span></a></li><li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">70</span></a></li><li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">23</span></a></li><li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li></ul></section><section class="nav-group collapsible">
 <input id=Tags type=checkbox>
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
-<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">55</span></a></li>
-<li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">40</span></a></li>
-<li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
-<li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">32</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">30</span></a></li>
-<li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">29</span></a></li>
-</section>
-</section>
-</nav>
-</div>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-4368767-1"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-4368767-1')</script>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li><li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">55</span></a></li><li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">40</span></a></li><li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li><li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li><li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li><li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">33</span></a></li><li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">32</span></a></li><li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">30</span></a></li><li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">29</span></a></li></section></section></nav></div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-4368767-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-4368767-1")</script>
 <script src=/js/lightbox-plus-jquery.min.js></script>
-</div>
-</body>
-</html>
+</div></body></html>

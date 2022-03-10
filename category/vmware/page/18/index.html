@@ -1,8 +1,7 @@
 <!doctype html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class=no-js><!--<![endif]-->
 <head>
 <meta charset=utf-8>
-<title>VMware &#183; DefinIT</title>
-<meta http-equiv=x-ua-compatible content="IE=edge">
+<title>VMware &#183; DefinIT</title><meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=HandheldFriendly content="True">
 <meta name=MobileOptimized content="320">
 <meta name=viewport content="width=device-width,initial-scale=1">
@@ -17,7 +16,7 @@
 <link rel=canonical href=https://www.definit.co.uk/category/vmware/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.90.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.93.3"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -25,8 +24,7 @@
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
-</head>
-<body data-ng-app=myapp data-ng-controller=MyController data-ng-mouseleave=MouseLeave($event)>
+</head><body data-ng-app=myapp data-ng-controller=MyController data-ng-mouseleave=MouseLeave($event)>
 <div class=main-container>
 <header class=header-6>
 <div class=branding>
@@ -34,8 +32,7 @@
 <img alt src=/images/logos/definit-logo.png>
 <span class=title>DefinIT</span>
 </a>
-</div>
-<nav class=header-nav>
+</div><nav class=header-nav>
 <a class="nav-link nav-text" href=https://www.definit.co.uk/ title=Home>
 Home
 </a>
@@ -48,416 +45,259 @@ GitHub
 <a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml title=RSS>
 RSS
 </a>
-</nav>
-<div class=header-actions>
+</nav><div class=header-actions>
 <form class=search id=search method=get action=//google.com/search>
 <label for=search_input>
 <input id=search_input type=text name=q placeholder="Search with Google">
 <input type=hidden name=as_sitesearch value=https://www.definit.co.uk>
 </label>
-</form>
-</div>
-</header>
-<div class=content-container>
+</form></div></header><div class=content-container>
 <div class=content-area>
-<h1>VMware</h1>
-<div class=clr-row>
+<h1>VMware</h1><div class=clr-row>
 <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
 <a href=https://www.definit.co.uk/2013/03/powercli-script-to-set-rdm-luns-to-perennially-reserved-fixes-slow-boot-of-esxi-5-1-with-mscs-rdms/>PowerCLI Script to set RDM LUNs to Perennially Reserved – Fixes Slow Boot of ESXi 5.1 with MSCS RDMs</a>
-</div>
-<div class=card-block>
+</div><div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 6/3/2013
-</div>
-<div class=clr-card-authors>
+</div><div class=clr-card-authors>
 Published under <a href=/category/microsoft>Microsoft</a>, <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
+</div></span>
+</div></div></div><div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
 I&rsquo;ve previously posted around this topic as part of another problem but having had to figure out the process again I think it&rsquo;s worth re-posting a proper script for this. VMware KB 1016106 is snappily titled &ldquo;ESXi/ESX hosts with visibility to RDM LUNs being used by MSCS nodes with RDMs may take a long time to boot or during LUN rescan&rdquo; and describes the situation where booting ESXi (5.1 in my case) takes a huge amount of time to boot because it&rsquo;s attempting to gain a SCSI reservation on an RDM disk used by MS Clustering Services.
-</div>
-</div>
-<div class=card-footer>
+</div></div><div class=card-footer>
 <a class=card-link href=https://www.definit.co.uk/2013/03/powercli-script-to-set-rdm-luns-to-perennially-reserved-fixes-slow-boot-of-esxi-5-1-with-mscs-rdms/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+</div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
 <a href=https://www.definit.co.uk/2013/02/vmware-vcenter-linked-mode-not-supported-through-firewalls/>VMware vCenter Linked Mode not supported through firewalls</a>
-</div>
-<div class=card-block>
+</div><div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 15/2/2013
-</div>
-<div class=clr-card-authors>
+</div><div class=clr-card-authors>
 Published under <a href=/category/networking>Networking</a>, <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
+</div></span>
+</div></div></div><div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
 This article originally started off life as a record of how I managed to get this working, as a lot of my posts do, but this time it appears I am foiled.
 Last week, I had 3 vCenter Servers that appeared to be happily talking to each other in Linked Mode sharing a singe Multi-site SSO domain without any real issues. I had a single-pane-of-glass view of all 3 and I could manage them all from the one client.
-</div>
-</div>
-<div class=card-footer>
+</div></div><div class=card-footer>
 <a class=card-link href=https://www.definit.co.uk/2013/02/vmware-vcenter-linked-mode-not-supported-through-firewalls/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+</div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
 <a href=https://www.definit.co.uk/2013/02/fixing-the-the-server-fault-invalidargument-had-no-message-error-message/>Fixing the – the server fault invalidargument had no message – error message</a>
-</div>
-<div class=card-block>
+</div><div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
 on 5/2/2013
-</div>
-<div class=clr-card-authors>
+</div><div class=clr-card-authors>
 Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
+</div></span>
+</div></div></div><div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
 Today while creating new VMs from a template I got the error &ldquo;the server fault invalidargument had no message&rdquo; when editing the VM settings, the settings were modified successfully but the error was present whether a change had been made or not to the settings of the VM.
 A quick search of the web suggested removing said VM from the inventory and re-adding from the datastore, for many this fixed the issue but not for me.
-</div>
-</div>
-<div class=card-footer>
+</div></div><div class=card-footer>
 <a class=card-link href=https://www.definit.co.uk/2013/02/fixing-the-the-server-fault-invalidargument-had-no-message-error-message/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+</div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
 <a href=https://www.definit.co.uk/2013/02/vm-power-on-fails-with-error-cpuid-corespersocket-must-be-a-number-between-1-and-8/>VM Power On fails with error: cpuid.coresPerSocket must be a number between 1 and 8</a>
-</div>
-<div class=card-block>
+</div><div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 1/2/2013
-</div>
-<div class=clr-card-authors>
+</div><div class=clr-card-authors>
 Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
+</div></span>
+</div></div></div><div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
 Had a strange one after deploying an XP VM from a template today - the VM would not power on and threw the following error:
 An error was received from the ESX host while powering on VM [VM name].
 cpuid.coresPerSocket must be a number between 1 and 8
 Digging around on google the error seemed to be related to over-allocating vCPUs (e.g. assigning 8 vCPUs on a VM with 4 physical CPU cores).
-</div>
-</div>
-<div class=card-footer>
+</div></div><div class=card-footer>
 <a class=card-link href=https://www.definit.co.uk/2013/02/vm-power-on-fails-with-error-cpuid-corespersocket-must-be-a-number-between-1-and-8/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+</div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
 <a href=https://www.definit.co.uk/2013/01/installing-the-vmware-support-assistant/>Installing the VMware Support Assistant</a>
-</div>
-<div class=card-block>
+</div><div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 25/1/2013
-</div>
-<div class=clr-card-authors>
+</div><div class=clr-card-authors>
 Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
+</div></span>
+</div></div></div><div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
 So VMware&rsquo;s Support Assistant is pretty awesome and it&rsquo;s free! I thought I&rsquo;d do a quick run through of the installation and set up for anyone who was interested, it&rsquo;s fairly straightforward and if you raise a lot of calls or have multiple calls on the go it&rsquo;s a time saver!
 VMware&rsquo;s official page for the Support Assistant is here - https://www.vmware.com/products/datacenter-virtualization/vcenter-support-assistant/overview.html
 The OVF deploy is so simple I&rsquo;ve just taken screenshots:
-</div>
-</div>
-<div class=card-footer>
+</div></div><div class=card-footer>
 <a class=card-link href=https://www.definit.co.uk/2013/01/installing-the-vmware-support-assistant/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+</div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
 <a href=https://www.definit.co.uk/2012/12/passed-the-vcp510-exam-vcp5-dv-qualified/>Passed the VCP510 exam – VCP5-DV Qualified!</a>
-</div>
-<div class=card-block>
+</div><div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 31/12/2012
-</div>
-<div class=clr-card-authors>
+</div><div class=clr-card-authors>
 Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
+</div></span>
+</div></div></div><div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
 I&rsquo;m very pleased to say that as of 21st December, I passed my VCP510 exam and am now VCP5 qualified! It&rsquo;s something that I&rsquo;ve wanted to do for a long time (since VCP3) but have never been able to get funding for the required course. My current employer sent me on the vSphere 5 Fast Track course earlier this year, so I was all set to take the exam.
 My exam experience was somewhat marred by a very poor first attempt which I narrowly failed.
-</div>
-</div>
-<div class=card-footer>
+</div></div><div class=card-footer>
 <a class=card-link href=https://www.definit.co.uk/2012/12/passed-the-vcp510-exam-vcp5-dv-qualified/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+</div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
 <a href=https://www.definit.co.uk/2012/12/a-good-year-with-vmware-and-better-things-to-come/>A good year with VMware and better things to come!</a>
-</div>
-<div class=card-block>
+</div><div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/Simon.Eady100k.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/simon-eady/>Simon Eady</a>
 on 20/12/2012
-</div>
-<div class=clr-card-authors>
+</div><div class=clr-card-authors>
 Published under <a href=/category/vmware>VMware</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
+</div></span>
+</div></div></div><div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
 This year for me personally has been extremely busy and eventful coupled with a great deal of learning.
 Without wishing to bore the pants off of any would be reader I shall summarize my ruminations as someone whom is still quite new to the VMware world.
-The first thing that comes to mind is a a couple of recent meetings I have had with VMware. Learning that they are now very keen to engage with &lsquo;the rest of us&rsquo; and by that I mean those of us working in SME&rsquo;s as we represent well over 50% of their business revenue.
-</div>
-</div>
-<div class=card-footer>
+The first thing that comes to mind is a a couple of recent meetings I have had with VMware. Learning that they are now very keen to engage with &rsquo;the rest of us&rsquo; and by that I mean those of us working in SME&rsquo;s as we represent well over 50% of their business revenue.
+</div></div><div class=card-footer>
 <a class=card-link href=https://www.definit.co.uk/2012/12/a-good-year-with-vmware-and-better-things-to-come/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+</div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
 <a href=https://www.definit.co.uk/2012/11/vcenter-5-1-single-sign-on-multi-site-error-user-credentials-are-incorrect-or-empty/>vCenter 5.1 Single Sign On Multi-Site error: User credentials are incorrect or empty</a>
-</div>
-<div class=card-block>
+</div><div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 24/11/2012
-</div>
-<div class=clr-card-authors>
+</div><div class=clr-card-authors>
 Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
+</div></span>
+</div></div></div><div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
 While adding an additional vCenter Server to our Multi-Site Single Sign On instance I encountered a problem as I entered the details of the existing SSO.
 The error thrown was:
 User credentials are incorrect or empty. Provide correct credentials.
 After a couple of hours online with VMware support I took a guess at the problem. On the existing Single Sign On Configuration I have added the Active Directory domain DefinIT and in order to enable integrated authentication from the vSphere Client I moved it to the top of the list - this meant that System-Domain is no longer the default authentication domain.
-</div>
-</div>
-<div class=card-footer>
+</div></div><div class=card-footer>
 <a class=card-link href=https://www.definit.co.uk/2012/11/vcenter-5-1-single-sign-on-multi-site-error-user-credentials-are-incorrect-or-empty/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+</div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
 <a href=https://www.definit.co.uk/2012/11/vcp5-vsphere-5-configuration-maximums-quiz-in-powershell/>VCP5 – vSphere 5 Configuration Maximums Quiz in PowerShell</a>
-</div>
-<div class=card-block>
+</div><div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 22/11/2012
-</div>
-<div class=clr-card-authors>
+</div><div class=clr-card-authors>
 Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
+</div></span>
+</div></div></div><div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
 I&rsquo;ve been learning my vSphere 5 config maximums before my upcoming VCP5 exam, so in a supreme effort of procrastination I thought I&rsquo;d write a PowerShell quiz script: here it is!
 Save the QuizMe.ps1 file into a folder and then place one or more text file in the same folder containing a comma delimited set of questions and answers. Then run QuizMe.ps1!
 You can choose the quiz you take (which text file it will use).
-</div>
-</div>
-<div class=card-footer>
+</div></div><div class=card-footer>
 <a class=card-link href=https://www.definit.co.uk/2012/11/vcp5-vsphere-5-configuration-maximums-quiz-in-powershell/>More</a>
-</div>
-</div>
-</div>
-<div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+</div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <div class=card>
 <div class=card-header style=height:74px>
 <a href=https://www.definit.co.uk/2012/11/powershell-generate-microsoft-ca-signed-ssl-certificates-with-vsphere-5-1/>Powershell – Generate Microsoft CA signed SSL certificates with vSphere 5.1</a>
-</div>
-<div class=card-block>
+</div><div class=card-block>
 <div class=card-media-block>
 <div class="card-media-desciption clr-card-authors">
 <span class="card-media-title clr-card-authors">
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 6/11/2012
-</div>
-<div class=clr-card-authors>
+</div><div class=clr-card-authors>
 Published under <a href=/category/vmware>VMware</a>
-</div>
-</span>
-</div>
-</div>
-</div>
-<div class=card-block>
+</div></span>
+</div></div></div><div class=card-block>
 <div class=card-text style=max-height:200px;min-height:200px;overflow:hidden>
 The process of requesting certificates for vSphere 5.1 is a fairly grim, manual process. It&rsquo;s repetitive and easy to make a mistake on any step of the way. Since I&rsquo;ve got to do this for quite a few VirtualCenter Servers, I thought I&rsquo;d script the certificate generation if nothing else. I am following the excellent documentation provided in Implementing CA signed SSL certificates with vSphere 5.1 and more specifically in Creating certificate requests and certificates for vCenter Server 5.
-</div>
-</div>
-<div class=card-footer>
+</div></div><div class=card-footer>
 <a class=card-link href=https://www.definit.co.uk/2012/11/powershell-generate-microsoft-ca-signed-ssl-certificates-with-vsphere-5-1/>More</a>
-</div>
-</div>
-</div>
-</div>
-<nav>
+</div></div></div></div><nav>
 <ul class=pagination>
 <li class="pagination__item pagination__item--first">
 <a class="btn btn-sm btn btn-outline" href=/category/vmware/>
 1
 </a>
-</li>
-<li class="pagination__item pagination__item--previous">
+</li><li class="pagination__item pagination__item--previous">
 <a href=/category/vmware/page/17/ class="btn btn-sm btn btn-outline">
 ...
 </a>
-</li>
-<li class=pagination__item>
+</li><li class=pagination__item>
 <a href=/category/vmware/page/16/ class="btn btn-sm btn btn-outline">
 16
 </a>
-</li>
-<li class=pagination__item>
+</li><li class=pagination__item>
 <a href=/category/vmware/page/17/ class="btn btn-sm btn btn-outline">
 17
 </a>
-</li>
-<li class="pagination__item pagination__item--current">
+</li><li class="pagination__item pagination__item--current">
 <a href=/category/vmware/page/18/ class="btn btn-sm btn btn-primary">
 18
 </a>
-</li>
-<li class=pagination__item>
+</li><li class=pagination__item>
 <a href=/category/vmware/page/19/ class="btn btn-sm btn btn-outline">
 19
 </a>
-</li>
-<li class=pagination__item>
+</li><li class=pagination__item>
 <a href=/category/vmware/page/20/ class="btn btn-sm btn btn-outline">
 20
 </a>
-</li>
-<li class="pagination__item pagination__item--next">
+</li><li class="pagination__item pagination__item--next">
 <a href=/category/vmware/page/19/ class="btn btn-sm btn-outline">
 ...
 </a>
-</li>
-<li class="pagination__item pagination__item--last">
+</li><li class="pagination__item pagination__item--last">
 <a class="btn btn-sm btn btn-outline" href=/category/vmware/page/21/>
 21
 </a>
-</li>
-</ul>
-</nav>
-</div>
-<nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+</li></ul></nav></div><nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <section class=sidenav-content>
 <section class="nav-group collapsible">
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">16</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">44</span></a></li>
-<li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
-<li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">16</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">40</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">70</span></a></li>
-<li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">23</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
-</ul>
-</section>
-<section class="nav-group collapsible">
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li><li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">16</span></a></li><li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">44</span></a></li><li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li><li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">29</span></a></li><li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">16</span></a></li><li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">1</span></a></li><li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li><li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">40</span></a></li><li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">70</span></a></li><li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">23</span></a></li><li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li></ul></section><section class="nav-group collapsible">
 <input id=Tags type=checkbox>
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
-<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">55</span></a></li>
-<li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">40</span></a></li>
-<li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
-<li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">32</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">30</span></a></li>
-<li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">29</span></a></li>
-</section>
-</section>
-</nav>
-</div>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-4368767-1"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-4368767-1')</script>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li><li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">55</span></a></li><li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">40</span></a></li><li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li><li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li><li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li><li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">33</span></a></li><li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">32</span></a></li><li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">30</span></a></li><li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">29</span></a></li></section></section></nav></div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-4368767-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-4368767-1")</script>
 <script src=/js/lightbox-plus-jquery.min.js></script>
-</div>
-</body>
-</html>
+</div></body></html>

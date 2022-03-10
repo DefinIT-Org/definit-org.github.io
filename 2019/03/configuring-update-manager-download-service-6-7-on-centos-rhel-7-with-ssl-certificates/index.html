@@ -1,8 +1,7 @@
 <!doctype html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--><!--[if IE 8]><html class="no-js lt-ie9"><![endif]--><!--[if gt IE 8]><!--><html class=no-js><!--<![endif]-->
 <head>
 <meta charset=utf-8>
-<title>Configuring Update Manager Download Service 6.7 on CentOS/RHEL 7 with SSL certificates &#183; DefinIT</title>
-<meta http-equiv=x-ua-compatible content="IE=edge">
+<title>Configuring Update Manager Download Service 6.7 on CentOS/RHEL 7 with SSL certificates &#183; DefinIT</title><meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=HandheldFriendly content="True">
 <meta name=MobileOptimized content="320">
 <meta name=viewport content="width=device-width,initial-scale=1">
@@ -32,7 +31,7 @@
 <link rel=canonical href=https://www.definit.co.uk/2019/03/configuring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates/>
 <link rel=apple-touch-icon-precomposed sizes=144x144 href=/touch-icon-144-precomposed.png>
 <link rel=icon href=/images/favicon-16x16.png>
-<meta name=generator content="Hugo 0.90.1"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
+<meta name=generator content="Hugo 0.93.3"><!--[if lt IE 9]><script src=https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js></script>
 <script src=https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js></script><![endif]-->
 <script src=/js/clr-icons.min.js></script>
 <script src=/js/custom-elements.min.js></script>
@@ -40,8 +39,7 @@
 <link href=/css/clr-icons.min.css rel=stylesheet>
 <link href=/css/definit-clarity.css rel=stylesheet>
 <link href=/css/lightbox.min.css rel=stylesheet>
-</head>
-<body data-ng-app=myapp data-ng-controller=MyController data-ng-mouseleave=MouseLeave($event)>
+</head><body data-ng-app=myapp data-ng-controller=MyController data-ng-mouseleave=MouseLeave($event)>
 <div class=main-container>
 <header class=header-6>
 <div class=branding>
@@ -49,8 +47,7 @@
 <img alt src=/images/logos/definit-logo.png>
 <span class=title>DefinIT</span>
 </a>
-</div>
-<nav class=header-nav>
+</div><nav class=header-nav>
 <a class="nav-link nav-text" href=https://www.definit.co.uk/ title=Home>
 Home
 </a>
@@ -63,104 +60,68 @@ GitHub
 <a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml title=RSS>
 RSS
 </a>
-</nav>
-<div class=header-actions>
+</nav><div class=header-actions>
 <form class=search id=search method=get action=//google.com/search>
 <label for=search_input>
 <input id=search_input type=text name=q placeholder="Search with Google">
 <input type=hidden name=as_sitesearch value=https://www.definit.co.uk>
 </label>
-</form>
-</div>
-</header>
-<div class=content-container>
+</form></div></header><div class=content-container>
 <div class=content-area>
-<h1>Configuring Update Manager Download Service 6.7 on CentOS/RHEL 7 with SSL certificates</h1>
-<div class=metas>
+<h1>Configuring Update Manager Download Service 6.7 on CentOS/RHEL 7 with SSL certificates</h1><div class=metas>
 <span class=clr-card-authors>
 <div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 14/3/2019
 &#183; Read in about 4 min (786 words)
-</div>
-<div class=clr-card-authors>
+</div><div class=clr-card-authors>
 Published under <a href=/category/vmware>VMware</a> and <a href=/category/vsphere>vSphere</a>
-</div>
-<div class=clr-card-authors>
+</div><div class=clr-card-authors>
 Tags:
 <a class=clr-tags href=https://www.definit.co.uk/tag/umds>#UMDS</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/update-manager>#update manager</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/update-manager-download-service>#Update Manager Download Service</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/vcenter-server>#vCenter Server</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/vmware-update-manager>#VMware Update Manager</a>
-</div>
-</span>
-</div>
-<br clear=all>
+</div></span>
+</div><br clear=all>
 <div class="alert alert-danger" role=alert>
 <div class=alert-items>
 <div class="alert-item static">
 <div class=alert-icon-wrapper>
 <clr-icon class=alert-icon shape=warning-standard></clr-icon>
-</div>
-<span class=alert-text>This article is now 3 years old! It is highly likely that this information is out of date and the author will have completely forgotten about it. Please take care when following any guidance to ensure you have up-to-date recommendations.</span>
-</div>
-</div>
-</div>
-<img src=/images/2015/07/download.png class=clr-post-featured-image>
-<p>Most vSphere admins are more than comfortable with using Update Manager to download patches and update their environment, but few that I talk to actually know a huge amount about the Update Mangaer Download Service (UMDS). UMDS is tool you can install to download patches (and third party VIBs - I&rsquo;ll get to that) for Update Manager and it&rsquo;s useful for environments that don&rsquo;t have access to the internet, or air-gapped, and also for environments with multiple vCenter Servers where you don&rsquo;t necessarily want to download the same patch on every server. You can control which patches you download (for example, limiting to ESXi 6.7+ only) and you can add third party Vendor repositories (e.g. Dell or HPE).</p>
-<p>I&rsquo;m going to install UMDS on a Linux VM, download the VMware, HPE and Dell patches and then publish those internally on an SSL secured site using NGINX. The high level process is:</p>
-<ul>
-<li>Deploy the UMDS server</li>
-<li>Install UMDS</li>
-<li>Configure UMDS</li>
-<li>Install NGINX</li>
-<li>Configure vCenter</li>
-</ul>
-<h2 id=deploy-the-umds-server>Deploy the UMDS server <a class=anchor href=#deploy-the-umds-server>
+</div><span class=alert-text>This article is now 3 years old! It is highly likely that this information is out of date and the author will have completely forgotten about it. Please take care when following any guidance to ensure you have up-to-date recommendations.</span>
+</div></div></div><img src=/images/2015/07/download.png class=clr-post-featured-image>
+<p>Most vSphere admins are more than comfortable with using Update Manager to download patches and update their environment, but few that I talk to actually know a huge amount about the Update Mangaer Download Service (UMDS). UMDS is tool you can install to download patches (and third party VIBs - I&rsquo;ll get to that) for Update Manager and it&rsquo;s useful for environments that don&rsquo;t have access to the internet, or air-gapped, and also for environments with multiple vCenter Servers where you don&rsquo;t necessarily want to download the same patch on every server. You can control which patches you download (for example, limiting to ESXi 6.7+ only) and you can add third party Vendor repositories (e.g. Dell or HPE).</p><p>I&rsquo;m going to install UMDS on a Linux VM, download the VMware, HPE and Dell patches and then publish those internally on an SSL secured site using NGINX. The high level process is:</p><ul>
+<li>Deploy the UMDS server</li><li>Install UMDS</li><li>Configure UMDS</li><li>Install NGINX</li><li>Configure vCenter</li></ul><h2 id=deploy-the-umds-server>Deploy the UMDS server <a class=anchor href=#deploy-the-umds-server>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>I’ve deployed a CentOS7 VM from a template and added a big data drive for the UMDS data (this makes it easier to extend later if I need to). Check out the currently supported Linux operating systems for UMDS for <a href=https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.update_manager.doc/GUID-C79C1454-779B-4CDE-BC97-F2BBFDF5BB7A.html>6.5</a> and <a href=https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.update_manager.doc/GUID-C79C1454-779B-4CDE-BC97-F2BBFDF5BB7A.html>6.7</a>.</p>
-<p><em>Note: for vSphere 6.7u1, VMware dropped the requirement for a PostgreSQL database</em></p>
-<ul>
-<li>Format the data drive and mount to /umds</li>
-<li>Install PostgreSQL 9.4</li>
-</ul>
-<div class=highlight><div class=chroma>
+</a></h2><p>I’ve deployed a CentOS7 VM from a template and added a big data drive for the UMDS data (this makes it easier to extend later if I need to). Check out the currently supported Linux operating systems for UMDS for <a href=https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.update_manager.doc/GUID-C79C1454-779B-4CDE-BC97-F2BBFDF5BB7A.html>6.5</a> and <a href=https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.update_manager.doc/GUID-C79C1454-779B-4CDE-BC97-F2BBFDF5BB7A.html>6.7</a>.</p><p><em>Note: for vSphere 6.7u1, VMware dropped the requirement for a PostgreSQL database</em></p><ul>
+<li>Format the data drive and mount to /umds</li><li>Install PostgreSQL 9.4</li></ul><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>yum install https://download.postgresql.org/pub/repos/yum/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-3.noarch.rpm
-yum install postgresql94 postgresql94-server postgresql94-odbc
-/usr/pgsql-9.4/bin/postgresql94-setup initdb
-systemctl <span class=nb>enable</span> postgresql-9.4
-systemctl start postgresql-9.4
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Create a UMDS user and database</li>
-</ul>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>yum install https://download.postgresql.org/pub/repos/yum/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-3.noarch.rpm
+</span></span><span class=line><span class=cl>yum install postgresql94 postgresql94-server postgresql94-odbc
+</span></span><span class=line><span class=cl>/usr/pgsql-9.4/bin/postgresql94-setup initdb
+</span></span><span class=line><span class=cl>systemctl <span class=nb>enable</span> postgresql-9.4
+</span></span><span class=line><span class=cl>systemctl start postgresql-9.4
+</span></span></code></pre></td></tr></table></div></div><ul>
+<li>Create a UMDS user and database</li></ul><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-postgres data-lang=postgres><span class=n>su</span> <span class=o>-</span> <span class=n>postgres</span>
-<span class=n>createdb</span> <span class=o>&lt;</span><span class=n>database_name</span><span class=o>&gt;</span><span class=p>;</span>
-<span class=n>createuser</span> <span class=o>-</span><span class=n>d</span> <span class=o>-</span><span class=n>e</span> <span class=o>-</span><span class=n>r</span> <span class=o>&lt;</span><span class=n>database_username</span><span class=o>&gt;</span><span class=p>;</span> <span class=o>-</span><span class=n>P</span>
-<span class=n>Pwd</span><span class=p>:</span> <span class=o>&lt;</span><span class=n>database_password</span><span class=o>&gt;</span><span class=p>;</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Edit <code>/var/lib/pgsql/9.4/data/pg_hba.conf</code> and change local, IPv4 and IPv6 to use md5 authentication (not ideal, but it works)</li>
-</ul>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-postgres data-lang=postgres><span class=line><span class=cl><span class=n>su</span> <span class=o>-</span> <span class=n>postgres</span>
+</span></span><span class=line><span class=cl><span class=n>createdb</span> <span class=o>&lt;</span><span class=n>database_name</span><span class=o>&gt;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>createuser</span> <span class=o>-</span><span class=n>d</span> <span class=o>-</span><span class=n>e</span> <span class=o>-</span><span class=n>r</span> <span class=o>&lt;</span><span class=n>database_username</span><span class=o>&gt;</span><span class=p>;</span> <span class=o>-</span><span class=n>P</span>
+</span></span><span class=line><span class=cl><span class=n>Pwd</span><span class=p>:</span> <span class=o>&lt;</span><span class=n>database_password</span><span class=o>&gt;</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><ul>
+<li>Edit <code>/var/lib/pgsql/9.4/data/pg_hba.conf</code> and change local, IPv4 and IPv6 to use md5 authentication (not ideal, but it works)</li></ul><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -174,26 +135,21 @@ systemctl start postgresql-9.4
 </span><span class=lnt>10
 </span><span class=lnt>11
 </span><span class=lnt>12
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># TYPE  DATABASE        USER            ADDRESS                 METHOD</span>
-<span class=c1># &#34;local&#34; is for Unix domain socket connections only</span>
-<span class=nb>local</span>   all             all                                     md5
-<span class=c1># IPv4 local connections:</span>
-host    all             all             127.0.0.1/32            md5
-<span class=c1># IPv6 local connections:</span>
-host    all             all             ::1/128                 md5
-<span class=c1># Allow replication connections from localhost, by a user with the</span>
-<span class=c1># replication privilege.</span>
-<span class=c1>#local   replication     postgres                                peer</span>
-<span class=c1>#host    replication     postgres        127.0.0.1/32            ident</span>
-<span class=c1>#host    replication     postgres        ::1/128                 ident</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Edit <code>/etc/odbcinst.ini</code> to use the ODBC driver</li>
-</ul>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># TYPE  DATABASE        USER            ADDRESS                 METHOD</span>
+</span></span><span class=line><span class=cl><span class=c1># &#34;local&#34; is for Unix domain socket connections only</span>
+</span></span><span class=line><span class=cl><span class=nb>local</span>   all             all                                     md5
+</span></span><span class=line><span class=cl><span class=c1># IPv4 local connections:</span>
+</span></span><span class=line><span class=cl>host    all             all             127.0.0.1/32            md5
+</span></span><span class=line><span class=cl><span class=c1># IPv6 local connections:</span>
+</span></span><span class=line><span class=cl>host    all             all             ::1/128                 md5
+</span></span><span class=line><span class=cl><span class=c1># Allow replication connections from localhost, by a user with the</span>
+</span></span><span class=line><span class=cl><span class=c1># replication privilege.</span>
+</span></span><span class=line><span class=cl><span class=c1>#local   replication     postgres                                peer</span>
+</span></span><span class=line><span class=cl><span class=c1>#host    replication     postgres        127.0.0.1/32            ident</span>
+</span></span><span class=line><span class=cl><span class=c1>#host    replication     postgres        ::1/128                 ident</span>
+</span></span></code></pre></td></tr></table></div></div><ul>
+<li>Edit <code>/etc/odbcinst.ini</code> to use the ODBC driver</li></ul><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -202,21 +158,16 @@ host    all             all             ::1/128                 md5
 </span><span class=lnt>5
 </span><span class=lnt>6
 </span><span class=lnt>7
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=o>[</span>PostgreSQL<span class=o>]</span>
-<span class=nv>Description</span><span class=o>=</span>PostgreSQL ODBC driver <span class=o>(</span>Unicode version<span class=o>)</span>
-<span class=nv>Driver64</span><span class=o>=</span>/usr/pgsql-9.4/lib/psqlodbcw.so
-<span class=nv>Setup64</span><span class=o>=</span>/usr/lib64/libodbcpsqlS.so
-<span class=nv>Debug</span><span class=o>=</span><span class=m>0</span>
-<span class=nv>CommLog</span><span class=o>=</span><span class=m>1</span>
-<span class=nv>UsageCount</span><span class=o>=</span><span class=m>1</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Create the ODBC DSN <code>/etc/odbc.ini</code></li>
-</ul>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=o>[</span>PostgreSQL<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=nv>Description</span><span class=o>=</span>PostgreSQL ODBC driver <span class=o>(</span>Unicode version<span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=nv>Driver64</span><span class=o>=</span>/usr/pgsql-9.4/lib/psqlodbcw.so
+</span></span><span class=line><span class=cl><span class=nv>Setup64</span><span class=o>=</span>/usr/lib64/libodbcpsqlS.so
+</span></span><span class=line><span class=cl><span class=nv>Debug</span><span class=o>=</span><span class=m>0</span>
+</span></span><span class=line><span class=cl><span class=nv>CommLog</span><span class=o>=</span><span class=m>1</span>
+</span></span><span class=line><span class=cl><span class=nv>UsageCount</span><span class=o>=</span><span class=m>1</span>
+</span></span></code></pre></td></tr></table></div></div><ul>
+<li>Create the ODBC DSN <code>/etc/odbc.ini</code></li></ul><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -228,27 +179,21 @@ host    all             all             ::1/128                 md5
 </span><span class=lnt> 8
 </span><span class=lnt> 9
 </span><span class=lnt>10
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=o>[</span>&lt;dsn_name&gt;<span class=o>]</span>
-<span class=nv>Driver</span> <span class=o>=</span> PostgreSQL
-<span class=nv>DSN</span> <span class=o>=</span> &lt;dsn_name&gt;
-<span class=nv>ServerName</span> <span class=o>=</span> localhost
-<span class=nv>PortNumber</span> <span class=o>=</span> <span class=m>5432</span>
-<span class=nv>Server</span> <span class=o>=</span> localhost
-<span class=nv>Port</span> <span class=o>=</span> <span class=m>5432</span>
-<span class=nv>UserID</span> <span class=o>=</span> &lt;database_username&gt;<span class=p>;</span>
-<span class=nv>User</span> <span class=o>=</span> &lt;database_username&gt;<span class=p>;</span>
-<span class=nv>Database</span> <span class=o>=</span> &lt;database_name&gt;<span class=p>;</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Validate the connection using <code>isql -v UMDS_DSN &amp;lt;database_username&amp;gt; &lt;database_password>;</code></li>
-</ul>
-<h2 id=install-umds>Install UMDS <a class=anchor href=#install-umds>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=o>[</span>&lt;dsn_name&gt;<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=nv>Driver</span> <span class=o>=</span> PostgreSQL
+</span></span><span class=line><span class=cl><span class=nv>DSN</span> <span class=o>=</span> &lt;dsn_name&gt;
+</span></span><span class=line><span class=cl><span class=nv>ServerName</span> <span class=o>=</span> localhost
+</span></span><span class=line><span class=cl><span class=nv>PortNumber</span> <span class=o>=</span> <span class=m>5432</span>
+</span></span><span class=line><span class=cl><span class=nv>Server</span> <span class=o>=</span> localhost
+</span></span><span class=line><span class=cl><span class=nv>Port</span> <span class=o>=</span> <span class=m>5432</span>
+</span></span><span class=line><span class=cl><span class=nv>UserID</span> <span class=o>=</span> &lt;database_username&gt;<span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=nv>User</span> <span class=o>=</span> &lt;database_username&gt;<span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=nv>Database</span> <span class=o>=</span> &lt;database_name&gt;<span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><ul>
+<li>Validate the connection using <code>isql -v UMDS_DSN &amp;lt;database_username&amp;gt; &lt;database_password>;</code></li></ul><h2 id=install-umds>Install UMDS <a class=anchor href=#install-umds>
 <i class="fas fa-hashtag"></i>
-</a></h2><p>Next, mount the vCenter Server Appliance ISO file, copy the UMDS installer tar.gz file into the /umds folder and extract the installer. When this is complete there should be a vmware-umds-distrib folder.</p>
-<div class=highlight><div class=chroma>
+</a></h2><p>Next, mount the vCenter Server Appliance ISO file, copy the UMDS installer tar.gz file into the /umds folder and extract the installer. When this is complete there should be a vmware-umds-distrib folder.</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -256,135 +201,83 @@ host    all             all             ::1/128                 md5
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>mkdir /mnt/cdrom
-mount /dev/cdrom /mnt/cdrom
-cp /mnt/cdrom/umds/VMware-UMDS-6.7.0-8169861.tar.gz /umds/VMware-UMDS-6.7.0-8169861.tar.gz
-<span class=nb>cd</span> /umds
-tar xvzf VMware-UMDS-6.7.0-8169861.tar.gz
-umount /mnt/cdrom
-</code></pre></td></tr></table>
-</div>
-</div><p>Run the UMDS installation script <code>/umds/vmware-umds-distrib/vmware-install.pl</code></p>
-<ul>
-<li>Accept the EULA</li>
-<li>Enter the install location (/umds/vmware-umds)</li>
-<li>Configure proxy (you can configure it later if required)</li>
-<li>Enter the patch location (/umds/vmware-umds-patches)</li>
-<li>Configure database connection using &lt;dsn_name>, &lt;database_username> and &lt;database_password></li>
-</ul>
-<h2 id=configure-umds>Configure UMDS <a class=anchor href=#configure-umds>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mkdir /mnt/cdrom
+</span></span><span class=line><span class=cl>mount /dev/cdrom /mnt/cdrom
+</span></span><span class=line><span class=cl>cp /mnt/cdrom/umds/VMware-UMDS-6.7.0-8169861.tar.gz /umds/VMware-UMDS-6.7.0-8169861.tar.gz
+</span></span><span class=line><span class=cl><span class=nb>cd</span> /umds
+</span></span><span class=line><span class=cl>tar xvzf VMware-UMDS-6.7.0-8169861.tar.gz
+</span></span><span class=line><span class=cl>umount /mnt/cdrom
+</span></span></code></pre></td></tr></table></div></div><p>Run the UMDS installation script <code>/umds/vmware-umds-distrib/vmware-install.pl</code></p><ul>
+<li>Accept the EULA</li><li>Enter the install location (/umds/vmware-umds)</li><li>Configure proxy (you can configure it later if required)</li><li>Enter the patch location (/umds/vmware-umds-patches)</li><li>Configure database connection using &lt;dsn_name>, &lt;database_username> and &lt;database_password></li></ul><h2 id=configure-umds>Configure UMDS <a class=anchor href=#configure-umds>
 <i class="fas fa-hashtag"></i>
 </a></h2><ul>
-<li>View the current configuration</li>
-</ul>
-<div class=highlight><div class=chroma>
+<li>View the current configuration</li></ul><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>/umds/vmware-umds/bin/vmware-umds -G
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Disable older patches (I just want 6.7)</li>
-</ul>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>/umds/vmware-umds/bin/vmware-umds -G
+</span></span></code></pre></td></tr></table></div></div><ul>
+<li>Disable older patches (I just want 6.7)</li></ul><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>/umds/vmware-umds/bin/vmware-umds -S -d embeddedEsx-6.0.0 embeddedEsx-6.5.0 embeddedEsx-6.6.1 embeddedEsx-6.6.2 embeddedEsx-6.6.3
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Add the Dell and HPE repositories</li>
-</ul>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>/umds/vmware-umds/bin/vmware-umds -S -d embeddedEsx-6.0.0 embeddedEsx-6.5.0 embeddedEsx-6.6.1 embeddedEsx-6.6.2 embeddedEsx-6.6.3
+</span></span></code></pre></td></tr></table></div></div><ul>
+<li>Add the Dell and HPE repositories</li></ul><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>/umds/vmware-umds/bin/vmware-umds -S --add-url https://vmwaredepot.dell.com/index.xml --url-type HOST
-/umds/vmware-umds/bin/vmware-umds -S --add-url https://vibsdepot.hpe.com/index.xml --url-type HOST
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Fix the SSL errors (use the local lib curl binary)</li>
-</ul>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>/umds/vmware-umds/bin/vmware-umds -S --add-url https://vmwaredepot.dell.com/index.xml --url-type HOST
+</span></span><span class=line><span class=cl>/umds/vmware-umds/bin/vmware-umds -S --add-url https://vibsdepot.hpe.com/index.xml --url-type HOST
+</span></span></code></pre></td></tr></table></div></div><ul>
+<li>Fix the SSL errors (use the local lib curl binary)</li></ul><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>mv /usr/local/vmware-umds/lib/libcurl.so.4 /usr/local/vmware-umds/lib/libcurl.so.4.backup
-ln -s /usr/lib64/libcurl.so.4 /usr/local/vmware-umds/lib/libcurl.so.4
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Download the updates</li>
-</ul>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mv /usr/local/vmware-umds/lib/libcurl.so.4 /usr/local/vmware-umds/lib/libcurl.so.4.backup
+</span></span><span class=line><span class=cl>ln -s /usr/lib64/libcurl.so.4 /usr/local/vmware-umds/lib/libcurl.so.4
+</span></span></code></pre></td></tr></table></div></div><ul>
+<li>Download the updates</li></ul><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>/umds/vmware-umds/bin/vmware-umds -D
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=install-nginx>Install NGINX <a class=anchor href=#install-nginx>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>/umds/vmware-umds/bin/vmware-umds -D
+</span></span></code></pre></td></tr></table></div></div><h2 id=install-nginx>Install NGINX <a class=anchor href=#install-nginx>
 <i class="fas fa-hashtag"></i>
 </a></h2><ul>
-<li>Install and start nginx</li>
-</ul>
-<div class=highlight><div class=chroma>
+<li>Install and start nginx</li></ul><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>yum install epel-release
-yum install nginx
-sudo systemctl start nginx
-sudo systemctl <span class=nb>enable</span> nginx
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Configure the firewall for HTTPS</li>
-</ul>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>yum install epel-release
+</span></span><span class=line><span class=cl>yum install nginx
+</span></span><span class=line><span class=cl>sudo systemctl start nginx
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> nginx
+</span></span></code></pre></td></tr></table></div></div><ul>
+<li>Configure the firewall for HTTPS</li></ul><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>firewall-cmd --permanent --add-port<span class=o>=</span>443/tcp
-firewall-cmd --reload
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Generate SSL certificates</li>
-</ul>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>firewall-cmd --permanent --add-port<span class=o>=</span>443/tcp
+</span></span><span class=line><span class=cl>firewall-cmd --reload
+</span></span></code></pre></td></tr></table></div></div><ul>
+<li>Generate SSL certificates</li></ul><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>mkdir /etc/nginx/ssl-certs/
-openssl req -x509 -nodes -days <span class=m>365</span> -newkey rsa:2048 -keyout /etc/nginx/ssl-certs/umds.key -out /etc/nginx/ssl-certs/umds.crt
-</code></pre></td></tr></table>
-</div>
-</div><img class="alignright size-full wp-image-9012" src=/images/2019/03/2019-03-14_10-58-49.png style=max-width:100%>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mkdir /etc/nginx/ssl-certs/
+</span></span><span class=line><span class=cl>openssl req -x509 -nodes -days <span class=m>365</span> -newkey rsa:2048 -keyout /etc/nginx/ssl-certs/umds.key -out /etc/nginx/ssl-certs/umds.crt
+</span></span></code></pre></td></tr></table></div></div><img class="alignright size-full wp-image-9012" src=/images/2019/03/2019-03-14_10-58-49.png style=max-width:100%>
 <ul>
-<li>Create an NGINX config file for UMDS - <code>/etc/nginx/conf.d/umds.conf</code></li>
-</ul>
-<div class=highlight><div class=chroma>
+<li>Create an NGINX config file for UMDS - <code>/etc/nginx/conf.d/umds.conf</code></li></ul><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -400,149 +293,83 @@ openssl req -x509 -nodes -days <span class=m>365</span> -newkey rsa:2048 -keyout
 </span><span class=lnt>12
 </span><span class=lnt>13
 </span><span class=lnt>14
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-nginx data-lang=nginx><span class=k>server</span> <span class=p>{</span>
-    <span class=kn>listen</span> <span class=mi>443</span> <span class=s>ssl</span><span class=p>;</span><span class=kn>ssl</span> <span class=no>on</span><span class=p>;</span>
-    <span class=kn>ssl_certificate</span> <span class=s>/etc/nginx/ssl-certs/umds.crt</span><span class=p>;</span>
-    <span class=kn>ssl_trusted_certificate</span> <span class=s>/etc/nginx/ssl-certs/umds.crt</span><span class=p>;</span>
-    <span class=kn>ssl_certificate_key</span> <span class=s>/etc/nginx/ssl-certs/umds.key</span><span class=p>;</span>
-
-    <span class=kn>server_name</span> <span class=s>umds.definit.local</span><span class=p>;</span>
-    <span class=kn>root</span> <span class=s>/umds/vmware-umds-patches</span><span class=p>;</span>
-    <span class=kn>index</span> <span class=s>index.html</span><span class=p>;</span>
-    <span class=kn>location</span> <span class=s>/</span> <span class=p>{</span>
-        <span class=kn>autoindex</span> <span class=no>on</span><span class=p>;</span>
-        <span class=kn>try_files</span> <span class=nv>$uri</span> <span class=nv>$uri/</span> <span class=p>=</span><span class=mi>404</span><span class=p>;</span>
-    <span class=p>}</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Restart NGINX - <code>systemctl restart nginx</code></li>
-</ul>
-<h2 id=configure-vcenter-update-manager>Configure vCenter Update Manager <a class=anchor href=#configure-vcenter-update-manager>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-nginx data-lang=nginx><span class=line><span class=cl><span class=k>server</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kn>listen</span> <span class=mi>443</span> <span class=s>ssl</span><span class=p>;</span><span class=kn>ssl</span> <span class=no>on</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>ssl_certificate</span> <span class=s>/etc/nginx/ssl-certs/umds.crt</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>ssl_trusted_certificate</span> <span class=s>/etc/nginx/ssl-certs/umds.crt</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>ssl_certificate_key</span> <span class=s>/etc/nginx/ssl-certs/umds.key</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kn>server_name</span> <span class=s>umds.definit.local</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>root</span> <span class=s>/umds/vmware-umds-patches</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>index</span> <span class=s>index.html</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>location</span> <span class=s>/</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=kn>autoindex</span> <span class=no>on</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=kn>try_files</span> <span class=nv>$uri</span> <span class=nv>$uri/</span> <span class=p>=</span><span class=mi>404</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><ul>
+<li>Restart NGINX - <code>systemctl restart nginx</code></li></ul><h2 id=configure-vcenter-update-manager>Configure vCenter Update Manager <a class=anchor href=#configure-vcenter-update-manager>
 <i class="fas fa-hashtag"></i>
 </a></h2><ul>
-<li>Add the certificate to vCenter trust - log in to vCenter and navigate to Administration > Certificate Management</li>
-<li>Log in as <a href=mailto:administrator@vsphere.local>administrator@vsphere.local</a></li>
-</ul>
-<img class="size-full wp-image-9013 alignnone" src=/images/2019/03/2019-03-14_12-06-33.png alt width=504 height=334>
+<li>Add the certificate to vCenter trust - log in to vCenter and navigate to Administration > Certificate Management</li><li>Log in as <a href=mailto:administrator@vsphere.local>administrator@vsphere.local</a></li></ul><img class="size-full wp-image-9013 alignnone" src=/images/2019/03/2019-03-14_12-06-33.png alt width=504 height=334>
 <ul>
-<li>Under Trusted Root Certificates click ADD and upload the generated umds.crt</li>
-<li>Navigate to Update Manager > Settings > Patch Setup and click Change Download Source - enter the UMDS web server</li>
-</ul>
-<img class="size-full wp-image-9015 alignnone" src=/images/2019/03/2019-03-14_12-09-08.png alt width=586 height=417>
+<li>Under Trusted Root Certificates click ADD and upload the generated umds.crt</li><li>Navigate to Update Manager > Settings > Patch Setup and click Change Download Source - enter the UMDS web server</li></ul><img class="size-full wp-image-9015 alignnone" src=/images/2019/03/2019-03-14_12-09-08.png alt width=586 height=417>
 <ul>
-<li>Navigate to Patch Downloads > DOWNLOAD NOW</li>
-</ul>
-<h6>Share this post</h6>
-<span class=share-box>
-<a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-facebook-official"></i></a>
-<a href="https://twitter.com/intent/tweet?text=Configuring%20Update%20Manager%20Download%20Service%206.7%20on%20CentOS%2fRHEL%207%20with%20SSL%20certificates&url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-twitter"></i></a>
-<a href="https://plus.google.com/share?url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-google-plus"></i></a>
-<a href="http://www.reddit.com/submit?url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f" onclick="return window.open(this.href,'mywin','left=20,top=20,width=900,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-reddit"></i></a>
-<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f&title=Configuring%20Update%20Manager%20Download%20Service%206.7%20on%20CentOS%2fRHEL%207%20with%20SSL%20certificates" onclick="return window.open(this.href,'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'),!1"><i class="fa fa-linkedin"></i></a>
+<li>Navigate to Patch Downloads > DOWNLOAD NOW</li></ul><h6>Share this post</h6><span class=share-box>
+<a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-facebook-official"></i></a>
+<a href="https://twitter.com/intent/tweet?text=Configuring%20Update%20Manager%20Download%20Service%206.7%20on%20CentOS%2fRHEL%207%20with%20SSL%20certificates&url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-twitter"></i></a>
+<a href="https://plus.google.com/share?url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-google-plus"></i></a>
+<a href="http://www.reddit.com/submit?url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=900,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-reddit"></i></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f&title=Configuring%20Update%20Manager%20Download%20Service%206.7%20on%20CentOS%2fRHEL%207%20with%20SSL%20certificates" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-linkedin"></i></a>
 <a href="mailto:?subject=Configuring%20Update%20Manager%20Download%20Service%206.7%20on%20CentOS%2fRHEL%207%20with%20SSL%20certificates&body=Check out this site https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f" data-proofer-ignore><i class="fa fa-envelope"></i></a>
 </span>
 <a class=resp-sharing-button__link href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://twitter.com/intent/tweet/?text=Configuring%20Update%20Manager%20Download%20Service%206.7%20on%20CentOS%2fRHEL%207%20with%20SSL%20certificates&url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.44 4.83c-.8.37-1.5.38-2.22.02.93-.56.98-.96 1.32-2.02-.88.52-1.86.9-2.9 1.1-.82-.88-2-1.43-3.3-1.43-2.5.0-4.55 2.04-4.55 4.54.0.36.03.7.1 1.04-3.77-.2-7.12-2-9.36-4.75-.4.67-.6 1.45-.6 2.3.0 1.56.8 2.95 2 3.77-.74-.03-1.44-.23-2.05-.57v.06c0 2.2 1.56 4.03 3.64 4.44-.67.2-1.37.2-2.06.08.58 1.8 2.26 3.12 4.25 3.16C5.78 18.1 3.37 18.74 1 18.46c2 1.3 4.4 2.04 6.97 2.04 8.35.0 12.92-6.92 12.92-12.93.0-.2.0-.4-.02-.6.9-.63 1.96-1.22 2.56-2.14z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://www.tumblr.com/widgets/share/tool?posttype=link&title=Configuring%20Update%20Manager%20Download%20Service%206.7%20on%20CentOS%2fRHEL%207%20with%20SSL%20certificates&caption=Configuring%20Update%20Manager%20Download%20Service%206.7%20on%20CentOS%2fRHEL%207%20with%20SSL%20certificates&content=https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f&canonicalUrl=https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f&shareSource=tumblr_share_button" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--tumblr resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.5.5v5h5v4h-5V15c0 5 3.5 4.4 6 2.8v4.4c-6.7 3.2-12 0-12-4.2V9.5h-3V6.7c1-.3 2.2-.7 3-1.3.5-.5 1-1.2 1.4-2 .3-.7.6-1.7.7-3h3.8z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f&title=Configuring%20Update%20Manager%20Download%20Service%206.7%20on%20CentOS%2fRHEL%207%20with%20SSL%20certificates&summary=Configuring%20Update%20Manager%20Download%20Service%206.7%20on%20CentOS%2fRHEL%207%20with%20SSL%20certificates&source=https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 21.5h-5v-13h5v13zM4 6.5C2.5 6.5 1.5 5.3 1.5 4s1-2.4 2.5-2.4c1.6.0 2.5 1 2.6 2.5.0 1.4-1 2.5-2.6 2.5zm11.5 6c-1 0-2 1-2 2v7h-5v-13h5V10s1.6-1.5 4-1.5c3 0 5 2.2 5 6.3v6.7h-5v-7c0-1-1-2-2-2z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://reddit.com/submit/?url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f&resubmit=true&title=Configuring%20Update%20Manager%20Download%20Service%206.7%20on%20CentOS%2fRHEL%207%20with%20SSL%20certificates" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 11.5c0-1.65-1.35-3-3-3-.96.0-1.86.48-2.42 1.24-1.64-1-3.75-1.64-6.07-1.72.08-1.1.4-3.05 1.52-3.7.72-.4 1.73-.24 3 .5C17.2 6.3 18.46 7.5 20 7.5c1.65.0 3-1.35 3-3s-1.35-3-3-3c-1.38.0-2.54.94-2.88 2.22-1.43-.72-2.64-.8-3.6-.25-1.64.94-1.95 3.47-2 4.55-2.33.08-4.45.7-6.1 1.72C4.86 8.98 3.96 8.5 3 8.5c-1.65.0-3 1.35-3 3 0 1.32.84 2.44 2.05 2.84-.03.22-.05.44-.05.66.0 3.86 4.5 7 10 7s10-3.14 10-7c0-.22-.02-.44-.05-.66 1.2-.4 2.05-1.54 2.05-2.84zM2.3 13.37C1.5 13.07 1 12.35 1 11.5c0-1.1.9-2 2-2 .64.0 1.22.32 1.6.82-1.1.85-1.92 1.9-2.3 3.05zm3.7.13c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9.8 4.8c-1.08.63-2.42.96-3.8.96-1.4.0-2.74-.34-3.8-.95-.24-.13-.32-.44-.2-.68.15-.24.46-.32.7-.18 1.83 1.06 4.76 1.06 6.6.0.23-.13.53-.05.67.2.14.23.06.54-.18.67zm.2-2.8c-1.1.0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm5.7-2.13c-.38-1.16-1.2-2.2-2.3-3.05.38-.5.97-.82 1.6-.82 1.1.0 2 .9 2 2 0 .84-.53 1.57-1.3 1.87z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="mailto:?subject=Configuring%20Update%20Manager%20Download%20Service%206.7%20on%20CentOS%2fRHEL%207%20with%20SSL%20certificates&body=https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f" target=_self rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 4H2C.9 4 0 4.9.0 6v12c0 1.1.9 2 2 2h20c1.1.0 2-.9 2-2V6c0-1.1-.9-2-2-2zM7.25 14.43l-3.5 2c-.08.05-.17.07-.25.07-.17.0-.34-.1-.43-.25-.14-.24-.06-.55.18-.68l3.5-2c.24-.14.55-.06.68.18.14.24.06.55-.18.68zm4.75.07c-.1.0-.2-.03-.27-.08l-8.5-5.5c-.23-.15-.3-.46-.15-.7.15-.22.46-.3.7-.14L12 13.4l8.23-5.32c.23-.15.54-.08.7.15.14.23.07.54-.16.7l-8.5 5.5c-.08.04-.17.07-.27.07zm8.93 1.75c-.1.16-.26.25-.43.25-.08.0-.17-.02-.25-.07l-3.5-2c-.24-.13-.32-.44-.18-.68s.44-.32.68-.18l3.5 2c.24.13.32.44.18.68z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="whatsapp://send?text=Configuring%20Update%20Manager%20Download%20Service%206.7%20on%20CentOS%2fRHEL%207%20with%20SSL%20certificates%20https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.1 3.9C17.9 1.7 15 .5 12 .5 5.8.5.7 5.6.7 11.9c0 2 .5 3.9 1.5 5.6L.6 23.4l6-1.6c1.6.9 3.5 1.3 5.4 1.3 6.3.0 11.4-5.1 11.4-11.4-.1-2.8-1.2-5.7-3.3-7.8zM12 21.4c-1.7.0-3.3-.5-4.8-1.3l-.4-.2-3.5 1 1-3.4L4 17c-1-1.5-1.4-3.2-1.4-5.1.0-5.2 4.2-9.4 9.4-9.4 2.5.0 4.9 1 6.7 2.8s2.8 4.2 2.8 6.7c-.1 5.2-4.3 9.4-9.5 9.4zm5.1-7.1c-.3-.1-1.7-.9-1.9-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1s-1.2-.5-2.3-1.4c-.9-.8-1.4-1.7-1.6-2s0-.5.1-.6.3-.3.4-.5c.2-.1.3-.3.4-.5s0-.4.0-.5C10 9 9.3 7.6 9 7c-.1-.4-.4-.3-.5-.3h-.6s-.4.1-.7.3c-.3.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.3-.3-.4-.6-.5z"/></svg>
-</div>
-</div>
-</a>
+</div></div></a>
 <a class=resp-sharing-button__link href="https://telegram.me/share/url?text=Configuring%20Update%20Manager%20Download%20Service%206.7%20on%20CentOS%2fRHEL%207%20with%20SSL%20certificates&url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f03%2fconfiguring-update-manager-download-service-6-7-on-centos-rhel-7-with-ssl-certificates%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--small"><div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M.707 8.475C.275 8.64.0 9.508.0 9.508s.284.867.718 1.03l5.09 1.897 1.986 6.38a1.102 1.102.0 001.75.527l2.96-2.41a.405.405.0 01.494-.013l5.34 3.87a1.1 1.1.0 001.046.135 1.1 1.1.0 00.682-.803l3.91-18.795A1.102 1.102.0 0022.5.075L.706 8.475z"/></svg>
-</div>
-</div>
-</a>
-<div id=disqus_thread></div>
-<script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var a=document.createElement('script');a.async=!0,a.type='text/javascript',a.src='//definit.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
-<div class="clarity-prev-next col-xs-12 col-sm-12 col-md-12 col-lg-12">
+</div></div></a>
+<div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var e=document.createElement("script");e.async=!0,e.type="text/javascript",e.src="//definit.disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><div class="clarity-prev-next col-xs-12 col-sm-12 col-md-12 col-lg-12">
 <nav class=clarity-page-prev-next>
 <div class=clr-nav-previous>
 <a href=https://www.definit.co.uk/2019/03/am-i-the-best-i-can-be-right-now/ title="Am I the best I can be right now?" class="btn btn-sm btn-outline">
 Previous
 </a>
-</div>
-<div class=clr-nav-next>
+</div><div class=clr-nav-next>
 <a href=https://www.definit.co.uk/2019/04/upgrading-vra-with-vrlcm-and-java-versions/ title="Upgrading vRA with	vRLCM and JAVA versions" class="btn btn-sm btn-outline">
 Next
 </a>
-</div>
-</nav>
-</div>
-</div>
-<nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
+</div></nav></div></div><nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
 <section class=sidenav-content>
 <section class="nav-group collapsible">
 <input id=Categories type=checkbox>
 <label for=Categories>Categories</label>
 <ul class=nav-list>
-<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li>
-<li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">16</span></a></li>
-<li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">44</span></a></li>
-<li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li>
-<li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">29</span></a></li>
-<li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">16</span></a></li>
-<li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li>
-<li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">40</span></a></li>
-<li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">70</span></a></li>
-<li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">23</span></a></li>
-<li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li>
-</ul>
-</section>
-<section class="nav-group collapsible">
+<li><a href=/category/career class=nav-link>CAREER <span class="badge badge-1">24</span></a></li><li><a href=/category/cloud-native class=nav-link>CLOUD-NATIVE <span class="badge badge-1">16</span></a></li><li><a href=/category/community class=nav-link>COMMUNITY <span class="badge badge-1">44</span></a></li><li><a href=/category/microsoft class=nav-link>MICROSOFT <span class="badge badge-1">60</span></a></li><li><a href=/category/networking class=nav-link>NETWORKING <span class="badge badge-1">29</span></a></li><li><a href=/category/nsx class=nav-link>NSX <span class="badge badge-1">16</span></a></li><li><a href=/category/vcf class=nav-link>VCF <span class="badge badge-1">1</span></a></li><li><a href=/category/vmware class=nav-link>VMWARE <span class="badge badge-1">205</span></a></li><li><a href=/category/vrealize-automation class=nav-link>VREALIZE-AUTOMATION <span class="badge badge-1">40</span></a></li><li><a href=/category/vrealize-operations class=nav-link>VREALIZE-OPERATIONS <span class="badge badge-1">70</span></a></li><li><a href=/category/vrealize-orchestrator class=nav-link>VREALIZE-ORCHESTRATOR <span class="badge badge-1">23</span></a></li><li><a href=/category/vsphere class=nav-link>VSPHERE <span class="badge badge-1">56</span></a></li></ul></section><section class="nav-group collapsible">
 <input id=Tags type=checkbox>
 <label for=Tags>Tags (Top 10)</label>
 <ul class=nav-list>
-<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li>
-<li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">55</span></a></li>
-<li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">40</span></a></li>
-<li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li>
-<li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">33</span></a></li>
-<li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">32</span></a></li>
-<li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">30</span></a></li>
-<li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">29</span></a></li>
-</section>
-</section>
-</nav>
-</div>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-4368767-1"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-4368767-1')</script>
+<li><a href=/tag/vrops class=nav-link>VROPS <span class="badge badge-1">68</span></a></li><li><a href=/tag/vmware class=nav-link>VMWARE <span class="badge badge-1">55</span></a></li><li><a href=/tag/automation class=nav-link>AUTOMATION <span class="badge badge-1">40</span></a></li><li><a href=/tag/windows class=nav-link>WINDOWS <span class="badge badge-1">38</span></a></li><li><a href=/tag/esx-and-esxi class=nav-link>ESX-AND-ESXI <span class="badge badge-1">33</span></a></li><li><a href=/tag/vcenter-server class=nav-link>VCENTER-SERVER <span class="badge badge-1">33</span></a></li><li><a href=/tag/vmworld class=nav-link>VMWORLD <span class="badge badge-1">33</span></a></li><li><a href=/tag/nsx class=nav-link>NSX <span class="badge badge-1">32</span></a></li><li><a href=/tag/vra class=nav-link>VRA <span class="badge badge-1">30</span></a></li><li><a href=/tag/webinar class=nav-link>WEBINAR <span class="badge badge-1">29</span></a></li></section></section></nav></div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-4368767-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-4368767-1")</script>
 <script src=/js/lightbox-plus-jquery.min.js></script>
-</div>
-</body>
-</html>
+</div></body></html>
