@@ -4,5 +4,7 @@ QuerySpec
 QueryName: dam-auto-generated: ConfigureVsanActionResolver:dr-57
 ResourceSpec
 Constraint: ObjectIdentityConstraint
-TargetType: ClusterComputeResource</description></item><item><title>vSphere 6 Lab Upgrade – VSAN</title><link>https://www.definit.co.uk/2015/04/vsphere-6-lab-upgrade-vsan/</link><pubDate>Thu, 02 Apr 2015 11:16:38 +0000</pubDate><guid>https://www.definit.co.uk/2015/04/vsphere-6-lab-upgrade-vsan/</guid><description>I tested vSphere 6 quite intensively when it was in beta, but I didn’t ever upgrade my lab – basically because I need a stable environment to work on and I wasn’t sure that I could maintain that with the beta.
+TargetType: ClusterComputeResource
+Target: ManagedObjectReference: type = ClusterComputeResource, value = domain-c481, serverGuid = a44e7d15-e63f-46c2-a1aa-b9b1cbf972be
+I was able to enable VSAN on the cluster using rvc commands</description></item><item><title>vSphere 6 Lab Upgrade – VSAN</title><link>https://www.definit.co.uk/2015/04/vsphere-6-lab-upgrade-vsan/</link><pubDate>Thu, 02 Apr 2015 11:16:38 +0000</pubDate><guid>https://www.definit.co.uk/2015/04/vsphere-6-lab-upgrade-vsan/</guid><description>I tested vSphere 6 quite intensively when it was in beta, but I didn’t ever upgrade my lab – basically because I need a stable environment to work on and I wasn’t sure that I could maintain that with the beta.
 Now 6 has been GA a while and I have a little bit of time, I have begun the lab upgrade process. You can see a bit more about my lab hardware over on my lab page.</description></item></channel></rss>

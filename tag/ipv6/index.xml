@@ -4,4 +4,5 @@ The maximum of 8 nodes has been doubled to 16!
 SSO integration has been added (requires vSphere 6.0)
 **Support for SRM has been added
 **
-         vRealize Hyperic functionality has been added</description></item></channel></rss>
+vRealize Hyperic functionality has been added
+With the addition of End Point Operations Management, the value of vRealize Hyperic functionality has been extended to the vRealize Operations Manager core product, without the need to deploy vRealize Hyperic</description></item></channel></rss>

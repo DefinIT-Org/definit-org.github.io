@@ -15,7 +15,8 @@ After having a play around with it, to suit my own needs, I made some modificati
 # William Lam
 # Edited by Simon Eady to support vDS
 # www.virtuallyghetto.com
-# Deployment of vRealize Operations Manager 6.0 (vROps)</description></item><item><title>Another fantastic South West UK VMUG</title><link>https://www.definit.co.uk/2014/06/another-fantastic-south-west-uk-vmug/</link><pubDate>Sun, 08 Jun 2014 09:09:33 +0000</pubDate><guid>https://www.definit.co.uk/2014/06/another-fantastic-south-west-uk-vmug/</guid><description>On the 3rd of June we had our second South West UK VMUG and I am pleased to say it went superbly well.
+# Deployment of vRealize Operations Manager 6.0 (vROps)
+### NOTE: SSH can not be enabled because hidden properties do not seem to be implemented in Get-OvfConfiguration cmdlet ###</description></item><item><title>Another fantastic South West UK VMUG</title><link>https://www.definit.co.uk/2014/06/another-fantastic-south-west-uk-vmug/</link><pubDate>Sun, 08 Jun 2014 09:09:33 +0000</pubDate><guid>https://www.definit.co.uk/2014/06/another-fantastic-south-west-uk-vmug/</guid><description>On the 3rd of June we had our second South West UK VMUG and I am pleased to say it went superbly well.
 As before we held it at the Mshed facilities in Bristol.
 We had a great day with many sessions from sponsors,vendors and community speakers alike!
 Big thanks go to our speakers that day who were..

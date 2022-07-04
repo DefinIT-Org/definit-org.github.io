@@ -5,4 +5,7 @@ Event Category: None
 Event ID: 1030
 Date: 10/09/2009
 Time: 06:24:29
-User: NT AUTHORITY\SYSTEM</description></item></channel></rss>
+User: NT AUTHORITY\SYSTEM
+Computer: DC
+Description:
+Windows cannot query for the list of Group Policy objects.</description></item></channel></rss>

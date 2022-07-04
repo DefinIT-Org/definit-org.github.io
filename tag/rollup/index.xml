@@ -2,4 +2,5 @@
 Uninstall the update package from the Programs and Features control panel
 Download the package file directly from Microsoft, don’t use Windows Update
 Open a command prompt or PowerShell prompt as Administrator
-Navigate to the location of the package (.msp) and run from the elevated command prompt.</description></item></channel></rss>
+Navigate to the location of the package (.msp) and run from the elevated command prompt.
+Apparently when Windows update installs the package it doesn’t run it with the elevated privileges to write to the folder in the Exchange program files – why, I have no idea!</description></item></channel></rss>

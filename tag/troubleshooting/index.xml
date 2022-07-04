@@ -4,4 +4,6 @@ QuerySpec
 QueryName: dam-auto-generated: ConfigureVsanActionResolver:dr-57
 ResourceSpec
 Constraint: ObjectIdentityConstraint
-TargetType: ClusterComputeResource</description></item></channel></rss>
+TargetType: ClusterComputeResource
+Target: ManagedObjectReference: type = ClusterComputeResource, value = domain-c481, serverGuid = a44e7d15-e63f-46c2-a1aa-b9b1cbf972be
+I was able to enable VSAN on the cluster using rvc commands</description></item></channel></rss>
