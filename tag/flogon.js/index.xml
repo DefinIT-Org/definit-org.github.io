@@ -1,6 +1,17 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>flogon.js on DefinIT</title><link>https://www.definit.co.uk/tag/flogon.js/</link><description>Recent content in flogon.js on DefinIT</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Tue, 10 Aug 2010 11:02:55 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/flogon.js/index.xml" rel="self" type="application/rss+xml"/><item><title>Unable to access Outlook Web Access (OWA) after installing Update Rollup 1, 2, 3 or 4 – flogon.js errors</title><link>https://www.definit.co.uk/2010/08/unable-to-access-outlook-web-access-owa-after-installing-update-rollup-1-2-3-or-4-flogon-js-errors/</link><pubDate>Tue, 10 Aug 2010 11:02:55 +0000</pubDate><guid>https://www.definit.co.uk/2010/08/unable-to-access-outlook-web-access-owa-after-installing-update-rollup-1-2-3-or-4-flogon-js-errors/</guid><description>If you’re having trouble accessing OWA after updating Exchange 2010 with any of the Rollup packages, try this:
-Uninstall the update package from the Programs and Features control panel
-Download the package file directly from Microsoft, don’t use Windows Update
-Open a command prompt or PowerShell prompt as Administrator
-Navigate to the location of the package (.msp) and run from the elevated command prompt.
-Apparently when Windows update installs the package it doesn’t run it with the elevated privileges to write to the folder in the Exchange program files – why, I have no idea!</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Flogon.js on DefinIT</title><link>https://www.definit.co.uk/tag/flogon.js/</link><description>Recent content in Flogon.js on DefinIT</description><generator>Hugo</generator><language>en-gb</language><lastBuildDate>Tue, 10 Aug 2010 11:02:55 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/flogon.js/index.xml" rel="self" type="application/rss+xml"/><item><title>Unable to access Outlook Web Access (OWA) after installing Update Rollup 1, 2, 3 or 4 – flogon.js errors</title><link>https://www.definit.co.uk/2010/08/unable-to-access-outlook-web-access-owa-after-installing-update-rollup-1-2-3-or-4-flogon-js-errors/</link><pubDate>Tue, 10 Aug 2010 11:02:55 +0000</pubDate><guid>https://www.definit.co.uk/2010/08/unable-to-access-outlook-web-access-owa-after-installing-update-rollup-1-2-3-or-4-flogon-js-errors/</guid><description>&lt;p&gt;&lt;img src="https://www.definit.co.uk/images/2010/08/image_thumb.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;If you’re having trouble accessing OWA after updating Exchange 2010 with any of the Rollup packages, try this:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Uninstall the update package from the Programs and Features control panel&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Download the package file directly from Microsoft, don’t use Windows Update&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Open a command prompt or PowerShell prompt as Administrator&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Navigate to the location of the package (.msp) and run from the elevated command prompt.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Apparently when Windows update installs the package it doesn’t run it with the elevated privileges to write to the folder in the Exchange program files – why, I have no idea!&lt;/p&gt;</description></item></channel></rss>

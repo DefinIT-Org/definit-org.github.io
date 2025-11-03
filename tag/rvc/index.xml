@@ -1,10 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RVC on DefinIT</title><link>https://www.definit.co.uk/tag/rvc/</link><description>Recent content in RVC on DefinIT</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Fri, 16 Sep 2016 16:10:44 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/rvc/index.xml" rel="self" type="application/rss+xml"/><item><title>vSphere Web Client – VSAN is Turned Off – Edit button disappears</title><link>https://www.definit.co.uk/2016/09/vsphere-web-client-vsan-is-turned-off-edit-button-disappears/</link><pubDate>Fri, 16 Sep 2016 16:10:44 +0000</pubDate><guid>https://www.definit.co.uk/2016/09/vsphere-web-client-vsan-is-turned-off-edit-button-disappears/</guid><description>I ran into a strange one with my lab today where the previously working VSAN cluster couldn&amp;rsquo;t be enabled. Symptoms included:
-The button to enable VSAN was missing from vSphere Web Client vsphere_client_virgo.log had the following error: [2016-09-16T14:49:03.473Z] [ERROR] http-bio-9090-exec-18 70001918 100023 200008 com.vmware.vise.data.query.impl.DataServiceImpl Error occurred while executing query:
-QuerySpec
-QueryName: dam-auto-generated: ConfigureVsanActionResolver:dr-57
-ResourceSpec
-Constraint: ObjectIdentityConstraint
-TargetType: ClusterComputeResource
-Target: ManagedObjectReference: type = ClusterComputeResource, value = domain-c481, serverGuid = a44e7d15-e63f-46c2-a1aa-b9b1cbf972be
-I was able to enable VSAN on the cluster using rvc commands</description></item><item><title>vSphere 6 Lab Upgrade – VSAN</title><link>https://www.definit.co.uk/2015/04/vsphere-6-lab-upgrade-vsan/</link><pubDate>Thu, 02 Apr 2015 11:16:38 +0000</pubDate><guid>https://www.definit.co.uk/2015/04/vsphere-6-lab-upgrade-vsan/</guid><description>I tested vSphere 6 quite intensively when it was in beta, but I didn’t ever upgrade my lab – basically because I need a stable environment to work on and I wasn’t sure that I could maintain that with the beta.
-Now 6 has been GA a while and I have a little bit of time, I have begun the lab upgrade process. You can see a bit more about my lab hardware over on my lab page.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RVC on DefinIT</title><link>https://www.definit.co.uk/tag/rvc/</link><description>Recent content in RVC on DefinIT</description><generator>Hugo</generator><language>en-gb</language><lastBuildDate>Fri, 16 Sep 2016 16:10:44 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/rvc/index.xml" rel="self" type="application/rss+xml"/><item><title>vSphere Web Client – VSAN is Turned Off – Edit button disappears</title><link>https://www.definit.co.uk/2016/09/vsphere-web-client-vsan-is-turned-off-edit-button-disappears/</link><pubDate>Fri, 16 Sep 2016 16:10:44 +0000</pubDate><guid>https://www.definit.co.uk/2016/09/vsphere-web-client-vsan-is-turned-off-edit-button-disappears/</guid><description>&lt;p&gt;I ran into a strange one with my lab today where the previously working VSAN cluster couldn&amp;rsquo;t be enabled. Symptoms included:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The button to enable VSAN was missing from vSphere Web Client&lt;!-- raw HTML omitted --&gt;&lt;/li&gt;
+&lt;li&gt;vsphere_client_virgo.log had the following error:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[2016-09-16T14:49:03.473Z] [ERROR] http-bio-9090-exec-18 70001918 100023 200008 com.vmware.vise.data.query.impl.DataServiceImpl Error occurred while executing query:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;QuerySpec&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;QueryName: dam-auto-generated: ConfigureVsanActionResolver:dr-57&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ResourceSpec&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Constraint: ObjectIdentityConstraint&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;TargetType: ClusterComputeResource&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Target: ManagedObjectReference: type = ClusterComputeResource, value = domain-c481, serverGuid = a44e7d15-e63f-46c2-a1aa-b9b1cbf972be&lt;/p&gt;</description></item><item><title>vSphere 6 Lab Upgrade – VSAN</title><link>https://www.definit.co.uk/2015/04/vsphere-6-lab-upgrade-vsan/</link><pubDate>Thu, 02 Apr 2015 11:16:38 +0000</pubDate><guid>https://www.definit.co.uk/2015/04/vsphere-6-lab-upgrade-vsan/</guid><description>&lt;p&gt;&lt;img src="https://www.definit.co.uk/images/2014/07/vSphereLogo.png" alt=""&gt;I tested vSphere 6 quite intensively when it was in beta, but I didn’t ever upgrade my lab – basically because I need a stable environment to work on and I wasn’t sure that I could maintain that with the beta.&lt;/p&gt;
+&lt;p&gt;Now 6 has been GA a while and I have a little bit of time, I have begun the lab upgrade process. You can see a bit more about my lab hardware over on my &lt;a href="https://www.definit.co.uk/lab/"&gt;lab page&lt;/a&gt;.&lt;/p&gt;</description></item></channel></rss>

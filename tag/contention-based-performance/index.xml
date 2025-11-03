@@ -1,2 +1,32 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>contention based performance on DefinIT</title><link>https://www.definit.co.uk/tag/contention-based-performance/</link><description>Recent content in contention based performance on DefinIT</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Mon, 25 Apr 2016 08:17:39 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/contention-based-performance/index.xml" rel="self" type="application/rss+xml"/><item><title>#vROps Webinar 2016 : Part 4 – Contention Based Performance &amp; Capacity Management</title><link>https://www.definit.co.uk/2016/04/vrops-webinar-2016-part-4-contention-based-performance-capacity-management/</link><pubDate>Mon, 25 Apr 2016 08:17:39 +0000</pubDate><guid>https://www.definit.co.uk/2016/04/vrops-webinar-2016-part-4-contention-based-performance-capacity-management/</guid><description>As promised, I am posting the recording for the 4th Session of vROps Webinar Series 2016. We successfully delivered the session on Contention Based Performance &amp;amp; Capacity Management using vRealize Operations Manager!
-This time around I could not not attend at short notice due to circumstances beyond my control but as you will see the session was awesome! &amp;lt;p&amp;gt; &amp;lt;b&amp;gt;&amp;lt;i&amp;gt;Session Details:- &amp;lt;/i&amp;gt;&amp;lt;/b&amp;gt;With this instalment of the series, we have a new speaker &amp;lt;a href=&amp;quot;https://twitter.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Contention Based Performance on DefinIT</title><link>https://www.definit.co.uk/tag/contention-based-performance/</link><description>Recent content in Contention Based Performance on DefinIT</description><generator>Hugo</generator><language>en-gb</language><lastBuildDate>Mon, 25 Apr 2016 08:17:39 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/contention-based-performance/index.xml" rel="self" type="application/rss+xml"/><item><title>#vROps Webinar 2016 : Part 4 – Contention Based Performance &amp; Capacity Management</title><link>https://www.definit.co.uk/2016/04/vrops-webinar-2016-part-4-contention-based-performance-capacity-management/</link><pubDate>Mon, 25 Apr 2016 08:17:39 +0000</pubDate><guid>https://www.definit.co.uk/2016/04/vrops-webinar-2016-part-4-contention-based-performance-capacity-management/</guid><description>&lt;p&gt;&lt;img src="https://www.definit.co.uk/images/2016/01/CZFR4nKUsAADI5G.png" alt=""&gt;As promised, I am posting the recording for the 4th Session of vROps Webinar Series 2016. We successfully delivered the session on Contention Based Performance &amp;amp; Capacity Management using vRealize Operations Manager!&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt; &amp;lt;p&amp;gt;
+ &amp;lt;b&amp;gt;&amp;lt;i&amp;gt;Session Details:- &amp;lt;/i&amp;gt;&amp;lt;/b&amp;gt;With this instalment of the series, we have a new speaker &amp;lt;a href=&amp;quot;https://twitter.com/e1_ang&amp;quot;&amp;gt;Iwan Rahabok&amp;lt;/a&amp;gt;, who will entertain and educate us 🙂 He is no stranger to the world of vRealize Operations Manager and has written a couple of books on vROps as well.
+ &amp;lt;/p&amp;gt;
+ 
+ &amp;lt;p&amp;gt;
+ During this session we will help you understand a few basic concepts of using the right counters to monitor performance and capacity in your infrastructure. We will deep dive into the concept of the consumer and the provider layer and help you with solving issues which you might face as a provider of infrastructure to your business.
+ &amp;lt;/p&amp;gt;
+ 
+ &amp;lt;p&amp;gt;
+ &amp;lt;b&amp;gt;I also want to personally thank &amp;lt;a href=&amp;quot;https://twitter.com/Sunny_Dua&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;Sunny&amp;lt;/a&amp;gt; &amp;amp; &amp;lt;a href=&amp;quot;https://twitter.com/e1_ang&amp;quot;&amp;gt;Iwan&amp;lt;/a&amp;gt;&amp;lt;a href=&amp;quot;https://twitter.com/simoneady&amp;quot;&amp;gt; &amp;lt;/a&amp;gt;for their continued support to this series.&amp;lt;/b&amp;gt;
+ &amp;lt;/p&amp;gt;
+ 
+ &amp;lt;p&amp;gt;
+ &amp;lt;b&amp;gt;Here is the recording for this session:::&amp;lt;/b&amp;gt;
+ &amp;lt;/p&amp;gt;
+ 
+ &amp;lt;p&amp;gt;
+ Note : It is recommended that you watch the video in HD quality for a great experience.
+ &amp;lt;/p&amp;gt;
+ 
+ &amp;lt;p&amp;gt;
+ &amp;lt;iframe width=&amp;quot;500&amp;quot; height=&amp;quot;281&amp;quot; src=&amp;quot;https://www.youtube.com/embed/mhXkiRWXEBg?feature=oembed&amp;quot; frameborder=&amp;quot;0&amp;quot; allowfullscreen&amp;gt;&amp;lt;/iframe&amp;gt;
+ &amp;lt;/p&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt; &lt;/p&gt;</description></item></channel></rss>

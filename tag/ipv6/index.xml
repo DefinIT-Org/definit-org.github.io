@@ -1,8 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>IPv6 on DefinIT</title><link>https://www.definit.co.uk/tag/ipv6/</link><description>Recent content in IPv6 on DefinIT</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Thu, 10 Sep 2015 21:12:08 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/ipv6/index.xml" rel="self" type="application/rss+xml"/><item><title>vROps 6.1 whats new?</title><link>https://www.definit.co.uk/2015/09/vrops-6-1-whats-new/</link><pubDate>Thu, 10 Sep 2015 21:12:08 +0000</pubDate><guid>https://www.definit.co.uk/2015/09/vrops-6-1-whats-new/</guid><description>So vROps 6.1 has gone GA!
-What have the guys at VMware added? I have listed what I consider the hi-lights below
-The maximum of 8 nodes has been doubled to 16!
-SSO integration has been added (requires vSphere 6.0)
-**Support for SRM has been added
-**
-vRealize Hyperic functionality has been added
-With the addition of End Point Operations Management, the value of vRealize Hyperic functionality has been extended to the vRealize Operations Manager core product, without the need to deploy vRealize Hyperic</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>IPv6 on DefinIT</title><link>https://www.definit.co.uk/tag/ipv6/</link><description>Recent content in IPv6 on DefinIT</description><generator>Hugo</generator><language>en-gb</language><lastBuildDate>Thu, 10 Sep 2015 21:12:08 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/ipv6/index.xml" rel="self" type="application/rss+xml"/><item><title>vROps 6.1 whats new?</title><link>https://www.definit.co.uk/2015/09/vrops-6-1-whats-new/</link><pubDate>Thu, 10 Sep 2015 21:12:08 +0000</pubDate><guid>https://www.definit.co.uk/2015/09/vrops-6-1-whats-new/</guid><description>&lt;p&gt;&lt;img src="https://www.definit.co.uk/images/2010/11/VMware1.jpg" alt=""&gt;So vROps 6.1 has gone GA!&lt;/p&gt;
+&lt;p&gt;What have the guys at VMware added? I have listed what I consider the hi-lights below&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The maximum of 8 nodes has been doubled to 16!&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SSO integration has been added (requires vSphere 6.0)&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;**Support for SRM has been added&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://www.definit.co.uk/images/2015/09/srm1.jpg" alt=""&gt;**&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;vRealize Hyperic functionality has been added&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;With the addition of End Point Operations Management, the value of vRealize Hyperic functionality has been extended to the vRealize Operations Manager core product, without the need to deploy vRealize Hyperic&lt;/p&gt;</description></item></channel></rss>

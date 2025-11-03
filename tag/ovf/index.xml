@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ovf on DefinIT</title><link>https://www.definit.co.uk/tag/ovf/</link><description>Recent content in ovf on DefinIT</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Tue, 24 Jun 2014 09:01:17 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/ovf/index.xml" rel="self" type="application/rss+xml"/><item><title>vCAC 6.0 build-out to distributed model &amp;ndash; Part 2: vPostgres</title><link>https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-2-vpostgres/</link><pubDate>Tue, 24 Jun 2014 09:01:17 +0000</pubDate><guid>https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-2-vpostgres/</guid><description>This is the second article in a series about how to build-out a simple vCAC 6 installation to a distributed model.
-The diagram below shows the deployment at the end of this part, with vPostgres deployed and the vCAC Appliance running from the remote database.
-vCAC deploymnent with vPostgres deployed An overview of the steps required are below:
-Issue and install certificates Deploy an external vPostgres appliance and migrate the vCAC database Configure load balancing Deploy a second vCAC appliance and configure clustering Install and configure additional IaaS server Deploy vCenter Orchestrator Appliance cluster Create the required DNS records First of all, create DNS records for your vPostgres database server – you need both an A and PTR record.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ovf on DefinIT</title><link>https://www.definit.co.uk/tag/ovf/</link><description>Recent content in Ovf on DefinIT</description><generator>Hugo</generator><language>en-gb</language><lastBuildDate>Tue, 24 Jun 2014 09:01:17 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/ovf/index.xml" rel="self" type="application/rss+xml"/><item><title>vCAC 6.0 build-out to distributed model &amp;ndash; Part 2: vPostgres</title><link>https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-2-vpostgres/</link><pubDate>Tue, 24 Jun 2014 09:01:17 +0000</pubDate><guid>https://www.definit.co.uk/2014/06/vcac-6-0-build-out-to-distributed-model-part-2-vpostgres/</guid><description>&lt;p&gt;&lt;!-- raw HTML omitted --&gt;This is the second article in a series about how to build-out a simple vCAC 6 installation to a distributed model.&lt;/p&gt;
+&lt;p&gt;The diagram below shows the deployment at the end of this part, with vPostgres deployed and the vCAC Appliance running from the remote database.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;An overview of the steps required are below:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Issue and install certificates&lt;/li&gt;
+&lt;li&gt;Deploy an external vPostgres appliance and migrate the vCAC database&lt;/li&gt;
+&lt;li&gt;Configure load balancing&lt;/li&gt;
+&lt;li&gt;Deploy a second vCAC appliance and configure clustering&lt;/li&gt;
+&lt;li&gt;Install and configure additional IaaS server&lt;/li&gt;
+&lt;li&gt;Deploy vCenter Orchestrator Appliance cluster&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="create-the-required-dns-records"&gt;Create the required DNS records &lt;a class="anchor" href="#create-the-required-dns-records"&gt;
+ &lt;i class="fas fa-hashtag"&gt;&lt;/i&gt;
+&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;First of all, create DNS records for your vPostgres database server – you need both an A and PTR record. Most VMware appliances will check for a reverse DNS lookup when they boot and will set the hostname accordingly.&lt;/p&gt;</description></item></channel></rss>

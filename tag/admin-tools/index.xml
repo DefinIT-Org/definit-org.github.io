@@ -1,4 +1,156 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Admin Tools on DefinIT</title><link>https://www.definit.co.uk/tag/admin-tools/</link><description>Recent content in Admin Tools on DefinIT</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Wed, 02 Jun 2010 10:07:39 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/admin-tools/index.xml" rel="self" type="application/rss+xml"/><item><title>Unable to access admin shares (c$, d$, ADMIN$, IPC$) on Windows Server 2008 in a Workgroup</title><link>https://www.definit.co.uk/2010/06/unable-to-access-admin-shares-c-d-admin-ipc-on-windows-server-2008-in-a-workgroup/</link><pubDate>Wed, 02 Jun 2010 10:07:39 +0000</pubDate><guid>https://www.definit.co.uk/2010/06/unable-to-access-admin-shares-c-d-admin-ipc-on-windows-server-2008-in-a-workgroup/</guid><description>If you have a Windows Server 2008 box in a workgroup that you require access to one of the admin shares, it can be a little more complicated than with Server 2003. In my case, we had a SQL server on the back end which was trying to access the web server in the DMZ using PSExec.exe to remotely run a process. Executing PSExec and passing the correct credentials failed with “Access is Denied”.</description></item><item><title>Migrating the HP Systems Insight Manager 6.x database</title><link>https://www.definit.co.uk/2010/04/migrating-the-hp-systems-insight-manager-6-x-database/</link><pubDate>Thu, 15 Apr 2010 10:57:44 +0000</pubDate><guid>https://www.definit.co.uk/2010/04/migrating-the-hp-systems-insight-manager-6-x-database/</guid><description>We run to monitoring systems where I work, the first is HP SIM and the second is Microsoft System Center Operations Manager. Currently, they and their databases all reside on a single rather battered server, “MONITOR1”.
-I’ve installed a new SQL Server 2008 server “SQL1” on Windows Server 2008 to take some of the load, and take advantage of the 64-bit OS and SQL installation.
-Both servers are part of the domain “DOMAIN”</description></item><item><title>Configuring Server 2008 R2 Core Series: Management Tasks</title><link>https://www.definit.co.uk/2010/03/configuring-server-2008-r2-core-series-management-tasks/</link><pubDate>Wed, 24 Mar 2010 15:41:20 +0000</pubDate><guid>https://www.definit.co.uk/2010/03/configuring-server-2008-r2-core-series-management-tasks/</guid><description>So, you’ve installed a new server with Server 2008 R2 Core – what next? Logging on, you’re presented with a shiny command prompt, you can run notepad or regedit…but aside from that, where do you go from there? In the next few series of posts I’ll hopefully point out the basics, and some not so basics!
-I’m going to look at some management tasks – the bread and butter of being a Windows admin.</description></item><item><title>Windows Server 2003 Admin tools under Vista</title><link>https://www.definit.co.uk/2007/06/windows-server-2003-admin-tools-under-vista/</link><pubDate>Thu, 07 Jun 2007 19:40:00 +0000</pubDate><guid>https://www.definit.co.uk/2007/06/windows-server-2003-admin-tools-under-vista/</guid><description>If, like me, you want to administrate your Windows 2003 servers from your Vista workstation, you may find that you recieve an &amp;ldquo;MMC could not create snap in&amp;rdquo; error when you open one of the admin tools, it also manifests as&amp;nbsp;corrupted graphics within some MMC Add-ins. It appears that the dlls are not registered correctly, there&amp;rsquo;s a KB article from Microsoft&amp;nbsp;that contains a script to reregister the dlls. It&amp;rsquo;s a simple fix: Copy and paste the following script into a text document, save it as RegisterAdminPack.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Admin Tools on DefinIT</title><link>https://www.definit.co.uk/tag/admin-tools/</link><description>Recent content in Admin Tools on DefinIT</description><generator>Hugo</generator><language>en-gb</language><lastBuildDate>Wed, 02 Jun 2010 10:07:39 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/admin-tools/index.xml" rel="self" type="application/rss+xml"/><item><title>Unable to access admin shares (c$, d$, ADMIN$, IPC$) on Windows Server 2008 in a Workgroup</title><link>https://www.definit.co.uk/2010/06/unable-to-access-admin-shares-c-d-admin-ipc-on-windows-server-2008-in-a-workgroup/</link><pubDate>Wed, 02 Jun 2010 10:07:39 +0000</pubDate><guid>https://www.definit.co.uk/2010/06/unable-to-access-admin-shares-c-d-admin-ipc-on-windows-server-2008-in-a-workgroup/</guid><description>&lt;p&gt;If you have a Windows Server 2008 box in a workgroup that you require access to one of the admin shares, it can be a little more complicated than with Server 2003. In my case, we had a SQL server on the back end which was trying to access the web server in the DMZ using PSExec.exe to remotely run a process. Executing PSExec and passing the correct credentials failed with “Access is Denied”.&lt;/p&gt;</description></item><item><title>Migrating the HP Systems Insight Manager 6.x database</title><link>https://www.definit.co.uk/2010/04/migrating-the-hp-systems-insight-manager-6-x-database/</link><pubDate>Thu, 15 Apr 2010 10:57:44 +0000</pubDate><guid>https://www.definit.co.uk/2010/04/migrating-the-hp-systems-insight-manager-6-x-database/</guid><description>&lt;p&gt;We run to monitoring systems where I work, the first is HP SIM and the second is Microsoft System Center Operations Manager. Currently, they and their databases all reside on a single rather battered server, “MONITOR1”.&lt;/p&gt;
+&lt;p&gt;I’ve installed a new SQL Server 2008 server “SQL1” on Windows Server 2008 to take some of the load, and take advantage of the 64-bit OS and SQL installation.&lt;/p&gt;
+&lt;p&gt;Both servers are part of the domain “DOMAIN”&lt;/p&gt;</description></item><item><title>Configuring Server 2008 R2 Core Series: Management Tasks</title><link>https://www.definit.co.uk/2010/03/configuring-server-2008-r2-core-series-management-tasks/</link><pubDate>Wed, 24 Mar 2010 15:41:20 +0000</pubDate><guid>https://www.definit.co.uk/2010/03/configuring-server-2008-r2-core-series-management-tasks/</guid><description>&lt;p&gt;So, you’ve installed a new server with Server 2008 R2 Core – what next? Logging on, you’re presented with a shiny command prompt, you can run notepad or regedit…but aside from that, where do you go from there? In the next few series of posts I’ll hopefully point out the basics, and some not so basics!&lt;/p&gt;
+&lt;p&gt;I’m going to look at some management tasks – the bread and butter of being a Windows admin.&lt;/p&gt;</description></item><item><title>Windows Server 2003 Admin tools under Vista</title><link>https://www.definit.co.uk/2007/06/windows-server-2003-admin-tools-under-vista/</link><pubDate>Thu, 07 Jun 2007 19:40:00 +0000</pubDate><guid>https://www.definit.co.uk/2007/06/windows-server-2003-admin-tools-under-vista/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt; &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;span class=&amp;quot;co1&amp;quot;&amp;gt;&amp;lt;font size=&amp;quot;2&amp;quot; color=&amp;quot;#808080&amp;quot;&amp;gt;REM RegisterAdminPak.cmd&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;span class=&amp;quot;co1&amp;quot;&amp;gt;&amp;lt;font size=&amp;quot;2&amp;quot; color=&amp;quot;#808080&amp;quot;&amp;gt;REM (c) 2006 Microsoft Corporation. All rights reserved.&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;kw3&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#000066&amp;quot;&amp;gt;set&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;re1&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;=adprop.dll azroles.dll azroleui.dll ccfg95.dll&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;kw3&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#000066&amp;quot;&amp;gt;set&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;re1&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;=%&amp;lt;span class=&amp;quot;re2&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;% certadm.dll certmmc.dll certpdef.dll certtmpl.dll&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;kw3&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#000066&amp;quot;&amp;gt;set&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;re1&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;=%&amp;lt;span class=&amp;quot;re2&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;% certxds.dll cladmwiz.dll clcfgsrv.dll clnetrex.dll&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;kw3&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#000066&amp;quot;&amp;gt;set&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;re1&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;=%&amp;lt;span class=&amp;quot;re2&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;% cluadmex.dll cluadmmc.dll cmproxy.dll cmroute.dll&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;kw3&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#000066&amp;quot;&amp;gt;set&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;re1&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;=%&amp;lt;span class=&amp;quot;re2&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;% cmutoa.dll cnet16.dll debugex.dll dfscore.dll&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;kw3&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#000066&amp;quot;&amp;gt;set&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;re1&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;=%&amp;lt;span class=&amp;quot;re2&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;% dfsgui.dll dhcpsnap.dll dnsmgr.dll domadmin.dll&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;kw3&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#000066&amp;quot;&amp;gt;set&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;re1&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;=%&amp;lt;span class=&amp;quot;re2&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;% dsadmin.dll dsuiwiz.dll imadmui.dll lrwizdll.dll&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;kw3&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#000066&amp;quot;&amp;gt;set&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;re1&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;=%&amp;lt;span class=&amp;quot;re2&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;% mprsnap.dll msclus.dll mstsmhst.dll mstsmmc.dll&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;kw3&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#000066&amp;quot;&amp;gt;set&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;re1&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;=%&amp;lt;span class=&amp;quot;re2&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;% nntpadm.dll nntpapi.dll nntpsnap.dll ntdsbsrv.dll&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;kw3&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#000066&amp;quot;&amp;gt;set&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;re1&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;=%&amp;lt;span class=&amp;quot;re2&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;% ntfrsapi.dll rasuser.dll rigpsnap.dll rsadmin.dll&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;kw3&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#000066&amp;quot;&amp;gt;set&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;re1&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;=%&amp;lt;span class=&amp;quot;re2&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;% rscommon.dll rsconn.dll rsengps.dll rsjob.dll&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;kw3&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#000066&amp;quot;&amp;gt;set&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;re1&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;=%&amp;lt;span class=&amp;quot;re2&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;% rsservps.dll rsshell.dll rssubps.dll rtrfiltr.dll&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;kw3&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#000066&amp;quot;&amp;gt;set&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;re1&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;=%&amp;lt;span class=&amp;quot;re2&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;% schmmgmt.dll tapisnap.dll tsuserex.dll vsstskex.dll&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;kw3&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#000066&amp;quot;&amp;gt;set&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;re1&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;=%&amp;lt;span class=&amp;quot;re2&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;% w95inf16.dll w95inf32.dll winsevnt.dll winsmon.dll&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;kw3&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#000066&amp;quot;&amp;gt;set&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;re1&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;=%&amp;lt;span class=&amp;quot;re2&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;% winsrpc.dll winssnap.dll ws03res.dll&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;amp;nbsp;&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;kw1&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#a1a100&amp;quot;&amp;gt;for&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; %%i &amp;lt;span class=&amp;quot;kw1&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#a1a100&amp;quot;&amp;gt;in&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;br0&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#66cc66&amp;quot;&amp;gt;(&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt;%&amp;lt;span class=&amp;quot;re2&amp;quot;&amp;gt;filelist&amp;lt;/span&amp;gt;%&amp;lt;span class=&amp;quot;br0&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#66cc66&amp;quot;&amp;gt;)&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;kw1&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#a1a100&amp;quot;&amp;gt;do&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;br0&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#66cc66&amp;quot;&amp;gt;(&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;amp;nbsp;&amp;lt;span class=&amp;quot;kw3&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#000066&amp;quot;&amp;gt;echo&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; Registering %%i &amp;amp;hellip;&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;amp;nbsp;regsvr32 /s %%i&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;span class=&amp;quot;br0&amp;quot;&amp;gt;&amp;lt;font size=&amp;quot;2&amp;quot; color=&amp;quot;#66cc66&amp;quot;&amp;gt;)&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;kw3&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#000066&amp;quot;&amp;gt;echo&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt;.&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ 
+ &amp;lt;li class=&amp;quot;li1&amp;quot;&amp;gt;
+ &amp;lt;div class=&amp;quot;de1&amp;quot;&amp;gt;
+ &amp;lt;font size=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;kw3&amp;quot;&amp;gt;&amp;lt;font color=&amp;quot;#000066&amp;quot;&amp;gt;Echo&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt; Command Completed&amp;lt;/font&amp;gt;
+ &amp;lt;/div&amp;gt;
+ &amp;lt;/li&amp;gt;
+ &amp;lt;/ol&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;</description></item></channel></rss>

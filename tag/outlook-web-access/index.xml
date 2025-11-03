@@ -1,11 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Outlook Web Access on DefinIT</title><link>https://www.definit.co.uk/tag/outlook-web-access/</link><description>Recent content in Outlook Web Access on DefinIT</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Tue, 10 Aug 2010 11:02:55 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/outlook-web-access/index.xml" rel="self" type="application/rss+xml"/><item><title>Unable to access Outlook Web Access (OWA) after installing Update Rollup 1, 2, 3 or 4 – flogon.js errors</title><link>https://www.definit.co.uk/2010/08/unable-to-access-outlook-web-access-owa-after-installing-update-rollup-1-2-3-or-4-flogon-js-errors/</link><pubDate>Tue, 10 Aug 2010 11:02:55 +0000</pubDate><guid>https://www.definit.co.uk/2010/08/unable-to-access-outlook-web-access-owa-after-installing-update-rollup-1-2-3-or-4-flogon-js-errors/</guid><description>If you’re having trouble accessing OWA after updating Exchange 2010 with any of the Rollup packages, try this:
-Uninstall the update package from the Programs and Features control panel
-Download the package file directly from Microsoft, don’t use Windows Update
-Open a command prompt or PowerShell prompt as Administrator
-Navigate to the location of the package (.msp) and run from the elevated command prompt.
-Apparently when Windows update installs the package it doesn’t run it with the elevated privileges to write to the folder in the Exchange program files – why, I have no idea!</description></item><item><title>Outlook Web Access over SSL using Forms Based Authentication AND Integrated Authentication</title><link>https://www.definit.co.uk/2008/07/outlook-web-access-over-ssl-using-forms-based-authentication-and-integrated-authentication/</link><pubDate>Wed, 16 Jul 2008 16:00:00 +0000</pubDate><guid>https://www.definit.co.uk/2008/07/outlook-web-access-over-ssl-using-forms-based-authentication-and-integrated-authentication/</guid><description>Outlook Web access is a fantastic tool for our company, providing on-the-go
-access to people&amp;rsquo;s mailboxes - which is of course secured by SSL and uses Forms
-Based Authentication. Internally, we have an intranet portal that allows us to
-access the various systems - one of which is OWA. One of the stipulations for
-this internal portal is that it is all Single Sign On using NTLM authentication
-integrated authentication. This is where the problem lies because enabling OWA with Forms Based Authentication over SSL disables Integrated Authentication.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Outlook Web Access on DefinIT</title><link>https://www.definit.co.uk/tag/outlook-web-access/</link><description>Recent content in Outlook Web Access on DefinIT</description><generator>Hugo</generator><language>en-gb</language><lastBuildDate>Tue, 10 Aug 2010 11:02:55 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/outlook-web-access/index.xml" rel="self" type="application/rss+xml"/><item><title>Unable to access Outlook Web Access (OWA) after installing Update Rollup 1, 2, 3 or 4 – flogon.js errors</title><link>https://www.definit.co.uk/2010/08/unable-to-access-outlook-web-access-owa-after-installing-update-rollup-1-2-3-or-4-flogon-js-errors/</link><pubDate>Tue, 10 Aug 2010 11:02:55 +0000</pubDate><guid>https://www.definit.co.uk/2010/08/unable-to-access-outlook-web-access-owa-after-installing-update-rollup-1-2-3-or-4-flogon-js-errors/</guid><description>&lt;p&gt;&lt;img src="https://www.definit.co.uk/images/2010/08/image_thumb.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;If you’re having trouble accessing OWA after updating Exchange 2010 with any of the Rollup packages, try this:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Uninstall the update package from the Programs and Features control panel&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Download the package file directly from Microsoft, don’t use Windows Update&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Open a command prompt or PowerShell prompt as Administrator&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Navigate to the location of the package (.msp) and run from the elevated command prompt.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Apparently when Windows update installs the package it doesn’t run it with the elevated privileges to write to the folder in the Exchange program files – why, I have no idea!&lt;/p&gt;</description></item><item><title>Outlook Web Access over SSL using Forms Based Authentication AND Integrated Authentication</title><link>https://www.definit.co.uk/2008/07/outlook-web-access-over-ssl-using-forms-based-authentication-and-integrated-authentication/</link><pubDate>Wed, 16 Jul 2008 16:00:00 +0000</pubDate><guid>https://www.definit.co.uk/2008/07/outlook-web-access-over-ssl-using-forms-based-authentication-and-integrated-authentication/</guid><description>&lt;p&gt;Outlook Web access is a fantastic tool for our company, providing on-the-go&lt;/p&gt;
+&lt;p&gt;access to people&amp;rsquo;s mailboxes - which is of course secured by SSL and uses Forms&lt;/p&gt;
+&lt;p&gt;Based Authentication. Internally, we have an intranet portal that allows us to&lt;/p&gt;
+&lt;p&gt;access the various systems - one of which is OWA. One of the stipulations for&lt;/p&gt;
+&lt;p&gt;this internal portal is that it is all Single Sign On using NTLM authentication&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;integrated authentication. This is where the problem lies because enabling OWA&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;with Forms Based Authentication over SSL disables Integrated Authentication. So&lt;/p&gt;</description></item></channel></rss>

@@ -1,4 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>route redistribution on DefinIT</title><link>https://www.definit.co.uk/tag/route-redistribution/</link><description>Recent content in route redistribution on DefinIT</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Thu, 23 May 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/route-redistribution/index.xml" rel="self" type="application/rss+xml"/><item><title>Unable to configure route redistribution with cross-vCenter NSX 6.4</title><link>https://www.definit.co.uk/2019/05/unable-to-configure-route-redistribution-with-cross-vcenter-nsx-6.4/</link><pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate><guid>https://www.definit.co.uk/2019/05/unable-to-configure-route-redistribution-with-cross-vcenter-nsx-6.4/</guid><description>I ran into this UI bug the other day when I was trying to enable route redistribution on an Edge in a Secondary site of a cross-vCenter NSX deployment.
-The Edge itself was deployed correctly, and configured to peer with a physical northbound router, however when I attempted to configure the route redistribution I was unable to do so.
-Fortunately, the solution was simple - use the API.
-Perform a GET operation to retrieve the current BGP configuration 1 GET https://{{nsxmanager}}/api/4.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Route Redistribution on DefinIT</title><link>https://www.definit.co.uk/tag/route-redistribution/</link><description>Recent content in Route Redistribution on DefinIT</description><generator>Hugo</generator><language>en-gb</language><lastBuildDate>Thu, 23 May 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/route-redistribution/index.xml" rel="self" type="application/rss+xml"/><item><title>Unable to configure route redistribution with cross-vCenter NSX 6.4</title><link>https://www.definit.co.uk/2019/05/unable-to-configure-route-redistribution-with-cross-vcenter-nsx-6.4/</link><pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate><guid>https://www.definit.co.uk/2019/05/unable-to-configure-route-redistribution-with-cross-vcenter-nsx-6.4/</guid><description>&lt;p&gt;I ran into this UI bug the other day when I was trying to enable route
+redistribution on an Edge in a Secondary site of a cross-vCenter NSX deployment.&lt;/p&gt;
+&lt;p&gt;The Edge itself was deployed correctly, and configured to peer with a physical
+northbound router, however when I attempted to configure the route
+redistribution I was unable to do so.&lt;/p&gt;
+
+
+
+
+ 
+
+
+ 
+
+
+&lt;br clear="none"&gt;
+&lt;div class="clr-content-image-wrap"&gt;
+ 
+ &lt;a href="images/CsWy53.jpg" data-lightbox="images/CsWy53.jpg" data-title="" class="lb"&gt;
+ &lt;img class="lb" src="images/CsWy53.jpg" alt="" /&gt;
+ &lt;/a&gt;
+ 
+&lt;/div&gt;
+
+
+&lt;p&gt;Fortunately, the solution was simple - use the API.&lt;/p&gt;</description></item></channel></rss>

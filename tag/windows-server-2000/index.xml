@@ -1,11 +1,30 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows Server 2000 on DefinIT</title><link>https://www.definit.co.uk/tag/windows-server-2000/</link><description>Recent content in Windows Server 2000 on DefinIT</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Thu, 10 Sep 2009 12:46:00 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/windows-server-2000/index.xml" rel="self" type="application/rss+xml"/><item><title>Multi-homed Domain controller logs Event ID 1030 and 1058</title><link>https://www.definit.co.uk/2009/09/multi-homed-domain-controller-logs-event-id-1030-and-1058/</link><pubDate>Thu, 10 Sep 2009 12:46:00 +0000</pubDate><guid>https://www.definit.co.uk/2009/09/multi-homed-domain-controller-logs-event-id-1030-and-1058/</guid><description>I recently had an issue where a hosting environment was registering a lot of Netlogon Event 1030/1058 issues, being unable to find the Group Policy objects or download them. In this example, the server DC is the domain controller for DOMAIN.LCL.
-_Event Type: Error
-Event Source: Userenv
-Event Category: None
-Event ID: 1030
-Date: 10/09/2009
-Time: 06:24:29
-User: NT AUTHORITY\SYSTEM
-Computer: DC
-Description:
-Windows cannot query for the list of Group Policy objects.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows Server 2000 on DefinIT</title><link>https://www.definit.co.uk/tag/windows-server-2000/</link><description>Recent content in Windows Server 2000 on DefinIT</description><generator>Hugo</generator><language>en-gb</language><lastBuildDate>Thu, 10 Sep 2009 12:46:00 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/windows-server-2000/index.xml" rel="self" type="application/rss+xml"/><item><title>Multi-homed Domain controller logs Event ID 1030 and 1058</title><link>https://www.definit.co.uk/2009/09/multi-homed-domain-controller-logs-event-id-1030-and-1058/</link><pubDate>Thu, 10 Sep 2009 12:46:00 +0000</pubDate><guid>https://www.definit.co.uk/2009/09/multi-homed-domain-controller-logs-event-id-1030-and-1058/</guid><description>&lt;p&gt;I recently had an issue where a hosting environment was registering a lot of Netlogon Event 1030/1058 issues, being unable to find the Group Policy objects or download them. In this example, the server DC is the domain controller for DOMAIN.LCL.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;_Event Type: Error&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Event Source: Userenv&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Event Category: None&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Event ID: 1030&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Date:  10/09/2009&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Time:  06:24:29&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;User:  NT AUTHORITY\SYSTEM&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Computer: DC&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Description:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Windows cannot query for the list of Group Policy objects. Check the event log for possible messages previously logged by the policy engine that describes the reason for this. For more information, see Help and Support Center at_ &lt;a href="http://go.microsoft.com/fwlink/events.asp"&gt;&lt;em&gt;http://go.microsoft.com/fwlink/events.asp&lt;/em&gt;&lt;/a&gt;&lt;em&gt;.&lt;/em&gt;&lt;/p&gt;</description></item></channel></rss>
