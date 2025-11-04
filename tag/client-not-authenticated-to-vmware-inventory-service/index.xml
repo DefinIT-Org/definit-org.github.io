@@ -7,5 +7,7 @@
 &lt;p&gt; &lt;/p&gt;
 &lt;p&gt; &lt;/p&gt;
 &lt;p&gt;So a quick look at the VMware knowledge base brought up the following article&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&amp;amp;cmd=displayKC&amp;amp;externalId=2063020" title="Search Inventory fails from vSphere Server Client when using vCenter Server Appliance 5.5 with the error: Login to the query service failed (2063020)"&gt;http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&amp;amp;cmd=displayKC&amp;amp;externalId=2063020&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&amp;amp;cmd=displayKC&amp;amp;externalId=2063020" title="Search Inventory fails from vSphere Server Client when using vCenter Server Appliance 5.5 with the error: Login to the query service failed (2063020)" target="_blank"&gt;
+ &lt;clr-icon shape="pop-out" size="12"&gt;&lt;/clr-icon&gt; http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&amp;amp;cmd=displayKC&amp;amp;externalId=2063020
+&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;So I went ahead and followed the KB artricle and then tried to search again.. the following error was generated.&lt;/p&gt;</description></item></channel></rss>

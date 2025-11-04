@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Spbm on DefinIT</title><link>https://www.definit.co.uk/tag/spbm/</link><description>Recent content in Spbm on DefinIT</description><generator>Hugo</generator><language>en-gb</language><lastBuildDate>Wed, 19 Jun 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/spbm/index.xml" rel="self" type="application/rss+xml"/><item><title>Lab Guide - Kubernetes and Storage with the vSphere Cloud Provider - Step by Step</title><link>https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-storage-with-the-vsphere-cloud-provider-step-by-step/</link><pubDate>Wed, 19 Jun 2019 00:00:00 +0000</pubDate><guid>https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-storage-with-the-vsphere-cloud-provider-step-by-step/</guid><description>&lt;p&gt;Following on from me recent post &lt;a href="https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step/"&gt;deploying Kubernetes with the NSX-T
-CNP&lt;/a&gt;,
-I wanted to extend my environment to make use of the &lt;a href="https://vmware.github.io/vsphere-storage-for-kubernetes/documentation/index.html"&gt;vSphere Cloud
-Provider&lt;/a&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Spbm on DefinIT</title><link>https://www.definit.co.uk/tag/spbm/</link><description>Recent content in Spbm on DefinIT</description><generator>Hugo</generator><language>en-gb</language><lastBuildDate>Wed, 19 Jun 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/spbm/index.xml" rel="self" type="application/rss+xml"/><item><title>Lab Guide - Kubernetes and Storage with the vSphere Cloud Provider - Step by Step</title><link>https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-storage-with-the-vsphere-cloud-provider-step-by-step/</link><pubDate>Wed, 19 Jun 2019 00:00:00 +0000</pubDate><guid>https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-storage-with-the-vsphere-cloud-provider-step-by-step/</guid><description>&lt;p&gt;Following on from me recent post &lt;a href="https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step/" target="_blank"&gt;
+ &lt;clr-icon shape="pop-out" size="12"&gt;&lt;/clr-icon&gt; deploying Kubernetes with the NSX-T
+CNP
+&lt;/a&gt;,
+I wanted to extend my environment to make use of the &lt;a href="https://vmware.github.io/vsphere-storage-for-kubernetes/documentation/index.html" target="_blank"&gt;
+ &lt;clr-icon shape="pop-out" size="12"&gt;&lt;/clr-icon&gt; vSphere Cloud
+Provider
+&lt;/a&gt;
 to enable Persistent Volumes backed by vSphere storage. This allows me to use
 Storage Policy to create Persistent Volumes based on policy. For example, I’m
 going to create two classes of storage, &lt;em&gt;Fast&lt;/em&gt; and &lt;em&gt;Slow&lt;/em&gt; - &lt;em&gt;Fast&lt;/em&gt; will be vSAN

@@ -3,5 +3,7 @@
 &lt;p&gt;I have had several discussions with my colleagues on the subject about whether you should or should not enable it in any given deployment of a vROps cluster.&lt;/p&gt;
 &lt;p&gt;So the following are my thoughts and bullet points for you to consider when faced with same dilemma.&lt;/p&gt;</description></item><item><title>vROps – first look – part 1 – installation</title><link>https://www.definit.co.uk/2014/12/vrops-first-look-part-1-installation/</link><pubDate>Fri, 12 Dec 2014 11:29:18 +0000</pubDate><guid>https://www.definit.co.uk/2014/12/vrops-first-look-part-1-installation/</guid><description>&lt;p&gt;For several months now we have seen glimpses of vROps by way of limited blog posts and the HOL demo&amp;rsquo;s so it was great to see it finally released.&lt;/p&gt;
 &lt;p&gt;So what is it like out of the box?&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://www.vmware.com/support/vrops/doc/vrops-60-release-notes.html" title="Release notes"&gt;vROps 6.0 Release notes&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.vmware.com/support/vrops/doc/vrops-60-release-notes.html" title="Release notes" target="_blank"&gt;
+ &lt;clr-icon shape="pop-out" size="12"&gt;&lt;/clr-icon&gt; vROps 6.0 Release notes
+&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The first clear change is the move away from 2 VMs in a vAPP and consolidation down to 1 VM which is then easily scalable to more as you require.&lt;/p&gt;</description></item></channel></rss>

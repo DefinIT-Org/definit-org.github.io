@@ -6,8 +6,11 @@
 &lt;p&gt;Symptoms were:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;iPhone fails to sync, generic timeout error (or is very slow)&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.testexchangeconnectivity.com/" title="https://www.testexchangeconnectivity.com/"&gt;https://www.testexchangeconnectivity.com/&lt;/a&gt; successfully tests the mailbox access&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.testexchangeconnectivity.com/" title="https://www.testexchangeconnectivity.com/" target="_blank"&gt;
+ &lt;clr-icon shape="pop-out" size="12"&gt;&lt;/clr-icon&gt; https://www.testexchangeconnectivity.com/
+&lt;/a&gt; successfully tests the mailbox access&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt; &lt;/p&gt;
-&lt;p&gt;The server was configured as per &lt;a href="http://support.microsoft.com/kb/817379/en-us" title="http://support.microsoft.com/kb/817379/en-us"&gt;http://support.microsoft.com/kb/817379/en-us&lt;/a&gt; to allow OWA/ActiveSync with SSL on OWA.&lt;/p&gt;
-&lt;p&gt;The iPhone was configured to accept the SSL certificate on the Exchange Server.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;The server was configured as per &lt;a href="http://support.microsoft.com/kb/817379/en-us" title="http://support.microsoft.com/kb/817379/en-us" target="_blank"&gt;
+ &lt;clr-icon shape="pop-out" size="12"&gt;&lt;/clr-icon&gt; http://support.microsoft.com/kb/817379/en-us
+&lt;/a&gt; to allow OWA/ActiveSync with SSL on OWA.&lt;/p&gt;</description></item></channel></rss>

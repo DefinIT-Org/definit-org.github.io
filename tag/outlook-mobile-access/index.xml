@@ -2,4 +2,6 @@
 &lt;blockquote&gt;
 &lt;p&gt;Outlook(R) Mobile Access is supported only on Microsoft(R) Exchange Server 2003. Currently your mailbox is stored on an older version of Exchange server. Please contact your system administrator for additional assistance.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&amp;ldquo;That&amp;rsquo;s odd&amp;rdquo;, I thought, &amp;ldquo;I only have Exchange Server 2003 in my organisation, how can I have an older version of Exchange?&amp;rdquo; It turns out that this has nothing to do with the version of Exchange you are using. I have set up my Exchange OWA to require SSL (see previous article on &lt;a href="https://www.definit.co.uk/BlogEngine/post/2008/07/16/Outlook-Web-Access-over-SSL-using-Forms-Based-Authentication-AND-Integrated-Authentication.aspx"&gt;SSL and Integrated Authentication&lt;/a&gt;) and apparently this can cause issues for OMA.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;&amp;ldquo;That&amp;rsquo;s odd&amp;rdquo;, I thought, &amp;ldquo;I only have Exchange Server 2003 in my organisation, how can I have an older version of Exchange?&amp;rdquo; It turns out that this has nothing to do with the version of Exchange you are using. I have set up my Exchange OWA to require SSL (see previous article on &lt;a href="https://www.definit.co.uk/BlogEngine/post/2008/07/16/Outlook-Web-Access-over-SSL-using-Forms-Based-Authentication-AND-Integrated-Authentication.aspx"&gt;
+ SSL and Integrated Authentication
+&lt;/a&gt;) and apparently this can cause issues for OMA.&lt;/p&gt;</description></item></channel></rss>

@@ -5,11 +5,12 @@
 </a><a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml title=RSS>RSS</a></nav><div class=header-actions><form class=search id=search method=get action=//google.com/search><label for=search_input><input id=search_input type=text name=q placeholder="Search with Google">
 <input type=hidden name=as_sitesearch value=https://www.definit.co.uk/></label></form><a class="nav-link nav-icon" aria-label=theme onclick=toggleThemeMode()><clr-icon shape=moon id=icon-theme-mode title="Toggle theme mode"></clr-icon></a></div></header><div class=content-container><div class=content-area><h1>Cnp</h1><div class=clr-row><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-storage-with-the-vsphere-cloud-provider-step-by-step/>Lab Guide - Kubernetes and Storage with the vSphere Cloud Provider - Step by Step</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
 on 19/6/2019</div><div class=clr-card-authors>Published under
-<a href=/category/vmware>VMware</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden><img src=/images/logos/kubernetes.svg class=clr-card-featured-image><p>Following on from me recent post <a href=https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step/>deploying Kubernetes with the NSX-T
-CNP</a>,
-I wanted to extend my environment to make use of the <a href=https://vmware.github.io/vsphere-storage-for-kubernetes/documentation/index.html>vSphere Cloud
-Provider</a>
-to enable Persistent Volumes backed by vSphere storage. This allows me to use
+<a href=/category/vmware>VMware</a></div></span></div></div></div><div class=card-block><div class=card-text style=max-height:200px;min-height:200px;overflow:hidden><img src=/images/logos/kubernetes.svg class=clr-card-featured-image><p>Following on from me recent post <a href=https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step/ target=_blank><clr-icon shape=pop-out size=12></clr-icon>deploying Kubernetes with the NSX-T
+CNP
+</a>,
+I wanted to extend my environment to make use of the <a href=https://vmware.github.io/vsphere-storage-for-kubernetes/documentation/index.html target=_blank><clr-icon shape=pop-out size=12></clr-icon>vSphere Cloud
+Provider
+</a>to enable Persistent Volumes backed by vSphere storage. This allows me to use
 Storage Policy to create Persistent Volumes based on policy. For example, I’m
 going to create two classes of storage, <em>Fast</em> and <em>Slow</em> - <em>Fast</em> will be vSAN
 based and <em>Slow</em> will be NFS based.</p></div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-storage-with-the-vsphere-cloud-provider-step-by-step/>More</a></div></div></div><div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6"><div class=card><div class=card-header style=height:74px><a href=https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step/>Lab Guide - Kubernetes and NSX-T Container Network Plugin - Step by Step</a></div><div class=card-block><div class=card-media-block><div class="card-media-desciption clr-card-authors"><span class="card-media-title clr-card-authors"><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a>
@@ -18,12 +19,12 @@ on 12/6/2019</div><div class=clr-card-authors>Published under
 drop down a level and get more familiar with the inner workings for Kubernetes,
 as well as explore some of the newer features that are exposed by the NSX
 Container Plugin that are not yet in the PKS integrations.</p><p>The NSX-T docs are…not great, I certainly don’t think you can work out the steps
-required from the official <a href=https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-FB641321-319D-41DC-9D16-37D6BA0BC0DE.html>NCP installation
-guide</a>
-without a healthy dollop of background knowledge and familiarity with Kubernetes
-and CNI. <a href=https://networkinferno.net/preparing-a-node-for-kubernetes-and-nsx-ncp>Anthony Burke published this
-guide</a>
-which is great, and I am lucky enough to be able to pick his brains on our
+required from the official <a href=https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-FB641321-319D-41DC-9D16-37D6BA0BC0DE.html target=_blank><clr-icon shape=pop-out size=12></clr-icon>NCP installation
+guide
+</a>without a healthy dollop of background knowledge and familiarity with Kubernetes
+and CNI. <a href=https://networkinferno.net/preparing-a-node-for-kubernetes-and-nsx-ncp target=_blank><clr-icon shape=pop-out size=12></clr-icon>Anthony Burke published this
+guide
+</a>which is great, and I am lucky enough to be able to pick his brains on our
 corporate slack.</p></div></div><div class=card-footer><a class=card-link href=https://www.definit.co.uk/2019/06/lab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step/>More</a></div></div></div></div></div><clr-vertical-nav class="clr-vertical-nav has-nav-groups"><div class=nav-content><section class=sidenav-content><clr-vertical-nav-group class=nav-group><div class=nav-group-content><button type=button class=nav-group-trigger aria-expanded=false aria-label="Toggle vertical navigation group" onclick='toggleNavigation("categories")'><div class=nav-group-text>Categories</div><clr-icon shape=angle class=nav-group-trigger-icon id=icon-categories dir=down title=Collapse></clr-icon></button></div><div id=section-categories class=nav-group-children><clr-vertical-nav-group-children><a class=nav-link href=https://www.definit.co.uk/category/career/><span class=nav-text>career <span class="badge badge-1">28</span></span>
 </a><a class=nav-link href=https://www.definit.co.uk/category/cloud-native/><span class=nav-text>cloud-native <span class="badge badge-1">17</span></span>
 </a><a class=nav-link href=https://www.definit.co.uk/category/community/><span class=nav-text>community <span class="badge badge-1">46</span></span>

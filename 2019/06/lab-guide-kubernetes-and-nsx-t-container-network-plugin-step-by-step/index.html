@@ -4,7 +4,7 @@
 </a><a class="nav-link nav-text" href=https://www.github.com/sammcgeown title=GitHub>GitHub
 </a><a class="nav-link nav-text" href=https://www.definit.co.uk/index.xml title=RSS>RSS</a></nav><div class=header-actions><form class=search id=search method=get action=//google.com/search><label for=search_input><input id=search_input type=text name=q placeholder="Search with Google">
 <input type=hidden name=as_sitesearch value=https://www.definit.co.uk/></label></form><a class="nav-link nav-icon" aria-label=theme onclick=toggleThemeMode()><clr-icon shape=moon id=icon-theme-mode title="Toggle theme mode"></clr-icon></a></div></header><div class=content-container><div class=content-area><h1>Lab Guide - Kubernetes and NSX-T Container Network Plugin - Step by Step</h1><div class=metas><span class=clr-card-authors><div class=clr-card-authors><img src=/images/SamMcGeown2020.jpg alt class=img-author>Written by <a href=https://www.definit.co.uk/authors/sam-mcgeown/>Sam McGeown</a></div><div class=clr-card-authors>Published on 12/6/2019 -
-Read in about 16 min (3266 words)</div><div class=clr-card-authors>Published under
+Read in about 16 min (3269 words)</div><div class=clr-card-authors>Published under
 <a href=/category/nsx>NSX</a>, <a href=/category/vmware>VMware</a>, <a href=/category/cloud-native>Cloud Native</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/nsx>#nsx</a>
 <a class=clr-tags href=https://www.definit.co.uk/tag/cnp>#cnp</a>
@@ -14,18 +14,18 @@ Read in about 16 min (3266 words)</div><div class=clr-card-authors>Published und
 drop down a level and get more familiar with the inner workings for Kubernetes,
 as well as explore some of the newer features that are exposed by the NSX
 Container Plugin that are not yet in the PKS integrations.</p><p>The NSX-T docs are…not great, I certainly don’t think you can work out the steps
-required from the official <a href=https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-FB641321-319D-41DC-9D16-37D6BA0BC0DE.html>NCP installation
-guide</a>
-without a healthy dollop of background knowledge and familiarity with Kubernetes
-and CNI. <a href=https://networkinferno.net/preparing-a-node-for-kubernetes-and-nsx-ncp>Anthony Burke published this
-guide</a>
-which is great, and I am lucky enough to be able to pick his brains on our
+required from the official <a href=https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-FB641321-319D-41DC-9D16-37D6BA0BC0DE.html target=_blank><clr-icon shape=pop-out size=12></clr-icon>NCP installation
+guide
+</a>without a healthy dollop of background knowledge and familiarity with Kubernetes
+and CNI. <a href=https://networkinferno.net/preparing-a-node-for-kubernetes-and-nsx-ncp target=_blank><clr-icon shape=pop-out size=12></clr-icon>Anthony Burke published this
+guide
+</a>which is great, and I am lucky enough to be able to pick his brains on our
 corporate slack.</p><p>So, what follows is a step-by-step guide that is the product of my learning
 process - I can’t guarantee it’s perfect, but I’ve tried to write these steps in
 a logical order, validate them and add some explanation as I go through. If you
 spot a mistake, or an error, please feel free to get in touch (for my learning,
 and so I can correct it!)</p><h1 id=preparing-the-nodes>Preparing the Nodes <a class=anchor href=#preparing-the-nodes><i class="fas fa-hashtag"></i></a></h1><h2 id=software-versions>Software Versions <a class=anchor href=#software-versions><i class="fas fa-hashtag"></i></a></h2><table><thead><tr><th><strong>Component</strong></th><th><strong>Version</strong></th><th><strong>Notes</strong></th></tr></thead><tbody><tr><td>NSX-T</td><td>2.4.1</td><td>Latest at time of writing</td></tr><tr><td>Server OS</td><td>Ubuntu 16.04</td><td>16.04 is the most recent supported by NSX-T NCP</td></tr><tr><td>Docker</td><td>current</td><td></td></tr><tr><td>Kubernetes</td><td>1.13.5-00</td><td>Required for NSX-T NCP</td></tr><tr><td>Open vSwitch</td><td>2.9.1</td><td>Must be the version packaged with NSX-T 2.4</td></tr></tbody></table><p>Be sure to check compatibility requirements for the NSX Container Plug-in
-<a href=https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-AD7BA088-2A51-4D5F-BC86-6EE14CE17665.html>https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-AD7BA088-2A51-4D5F-BC86-6EE14CE17665.html</a></p><h2 id=ubuntu-vms>Ubuntu VMs <a class=anchor href=#ubuntu-vms><i class="fas fa-hashtag"></i></a></h2><p>Three Ubuntu 16.04 virtual machines deployed with 2 vCPU and 4GB RAM each. The
+<a href=https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-AD7BA088-2A51-4D5F-BC86-6EE14CE17665.html target=_blank><clr-icon shape=pop-out size=12></clr-icon>https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-AD7BA088-2A51-4D5F-BC86-6EE14CE17665.html</a></p><h2 id=ubuntu-vms>Ubuntu VMs <a class=anchor href=#ubuntu-vms><i class="fas fa-hashtag"></i></a></h2><p>Three Ubuntu 16.04 virtual machines deployed with 2 vCPU and 4GB RAM each. The
 VMs have been deployed as default installations, and this guide assumes the
 same.</p><p>DNS records have been created for each VM.</p><table><thead><tr><th><strong>Name</strong></th><th><strong>Role</strong></th><th><strong>FQDN</strong></th><th><strong>IP</strong></th></tr></thead><tbody><tr><td>k8s-m01</td><td>Master</td><td>k8s-m01.definit.local</td><td>10.0.0.10</td></tr><tr><td>k8s-w01</td><td>Worker</td><td>k8s-w01.definit.local</td><td>10.0.0.11</td></tr><tr><td>k8s-w02</td><td>Worker</td><td>k8s-w02.definit.local</td><td>10.0.0.12</td></tr></tbody></table><h4 id=network-adapters>Network adapters <a class=anchor href=#network-adapters><i class="fas fa-hashtag"></i></a></h4><p>Each node is configured with three network adapters.</p><table><thead><tr><th><strong>Network</strong></th><th><strong>NIC</strong></th><th><strong>IP Addressing</strong></th><th><strong>Notes</strong></th></tr></thead><tbody><tr><td>Management</td><td>ens160</td><td>192.168.10.0/24</td><td>VLAN backed network used for management access from the Kubernetes nodes to the NSX Manager</td></tr><tr><td>Kubernetes Access</td><td>ens192</td><td>10.0.0.0/24</td><td>NSX-T segment (logical switch) that’s connected to the tier 1 router (t1-kubernetes) and provides access to Kubernetes nodes. Default route.</td></tr><tr><td>Kubernetes Transport</td><td>ens224</td><td>None</td><td>NSX-T segment (logical switch) that provides a transport network.</td></tr></tbody></table><p>Example <code>/etc/network/interfaces</code> file:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -214,18 +214,20 @@ more granular control over access and permissions.</p><div class=highlight><div 
 </span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nsx-system</span><span class=w>
-</span></span></span></code></pre></td></tr></table></div></div><p>The recommended RBAC policy for the NCP pod is documented under <a href=https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-AC96C51A-052B-403F-9670-67E55C4C9170.html>Security
+</span></span></span></code></pre></td></tr></table></div></div><p>The recommended RBAC policy for the NCP pod is documented under <a href=https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-AC96C51A-052B-403F-9670-67E55C4C9170.html target=_blank><clr-icon shape=pop-out size=12></clr-icon>Security
 Considerations in the NSX-T NCP
-documentation</a>.
+documentation
+</a>.
 We can modify this policy to create the namespace, service account and role
 resources.</p><p>The first <strong>ServiceAccount</strong> we create is called <em>ncp-svc</em> along with two
 <strong>ClusterRoles</strong> <em>ncp-cluster-role</em> and <em>ncp-patch-role</em>. The two roles are
 assigned to the new <strong>ServiceAccount</strong> using two <strong>ClusterRoleBinding</strong>. As the
 name suggests the account is used to run processes in the NCP pod.</p><p>Figuring out these YAML files can be daunting, especially when you’re just
 getting started like me. I found the official documentation pretty useful to
-understand how Kubernetes service accounts and roles interact - see <a href=https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/>Managing
+understand how Kubernetes service accounts and roles interact - see <a href=https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/ target=_blank><clr-icon shape=pop-out size=12></clr-icon>Managing
 Service
-Accounts</a>.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+Accounts
+</a>.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
 </span><span class=lnt>  2
 </span><span class=lnt>  3
 </span><span class=lnt>  4
@@ -565,9 +567,10 @@ nsx-ncp-rbac.yml, and then deploy the new resources using the following command:
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>kubectl apply -f nsx-ncp-rbac.yml
 </span></span></code></pre></td></tr></table></div></div><h2 id=prepare-the-ncp-config-file>Prepare the NCP config file <a class=anchor href=#prepare-the-ncp-config-file><i class="fas fa-hashtag"></i></a></h2><p>In order to deploy the NCP we use a YAML config file that’s included in the NSX
 Container Plugin zip package. This consists of a
-<a href=https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/>ConfigMap</a>
-and a
-<a href=https://kubernetes.io/docs/concepts/workloads/controllers/deployment/>Deployment</a>.
+<a href=https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/ target=_blank><clr-icon shape=pop-out size=12></clr-icon>ConfigMap
+</a>and a
+<a href=https://kubernetes.io/docs/concepts/workloads/controllers/deployment/ target=_blank><clr-icon shape=pop-out size=12></clr-icon>Deployment
+</a>.
 These specify the configuration data required to run the application (in this
 case NCP) and the pod deployment details.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -575,7 +578,7 @@ case NCP) and the pod deployment details.</p><div class=highlight><div class=chr
 </span></span><span class=line><span class=cl>cp nsx-container-2.4.1.13515827/Kubernetes/ncp-deployment.yml . 
 </span></span></code></pre></td></tr></table></div></div><p>Next we need to edit the settings to match our environment - the file below has
 all the comments removed for clarity but I suggest reading through them all.</p><ul><li>Be sure to add the <em>namespace</em></li><li><em>cluster</em> must match the value created in the NSX ncp/cluster tags</li><li>I’m using password authentication for NSX in my lab…don’t do this in
-production! <a href=https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-6BB49AC0-2A18-4F1B-819C-4C14890F4EB2.html>Configure TLS
+production! <a href=https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.doc/GUID-6BB49AC0-2A18-4F1B-819C-4C14890F4EB2.html target=_blank><clr-icon shape=pop-out size=12></clr-icon>Configure TLS
 Certificates</a></li><li>All the component IDs below are the ones collected when we created the NSX
 components</li><li>Be sure to update the <em>serviceAccountName</em> value with the ServiceAccount
 created in the RBAC</li><li>Make sure the <em>image</em> value is updated with the tagged name in the docker
@@ -1028,7 +1031,8 @@ deploy the NCP and Node Agent.</p><h4 id=master-node-or-admin-workstation-1><str
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>kubectl apply -f ncp-deployment.yml
 </span></span><span class=line><span class=cl>kubectl apply -f nsx-node-agent-ds.yml
 </span></span></code></pre></td></tr></table></div></div><p>All being well, we should now have NCP configured and ready to go, switch to the
-nsx-system namespace (check out <a href=https://github.com/ahmetb/kubectx>kubens</a> for
+nsx-system namespace (check out <a href=https://github.com/ahmetb/kubectx target=_blank><clr-icon shape=pop-out size=12></clr-icon>kubens
+</a>for
 this!) and view the resources using <code>kubectl get &lt;resource></code> and <code>kubectl describe &lt;resource> &lt;resource name></code></p><p>NCP will create components for each Kubernetes namespace, these can be viewed
 through the Advanced Networking and Security Tab.</p><h4 id=routers-1>Routers <a class=anchor href=#routers-1><i class="fas fa-hashtag"></i></a></h4><br clear=none><div class=clr-content-image-wrap><a href=index.images/Gs6Jut.png data-lightbox=index.images/Gs6Jut.png data-title class=lb><img class=lb src=index.images/Gs6Jut.png alt></a></div><h4 id=switches>Switches <a class=anchor href=#switches><i class="fas fa-hashtag"></i></a></h4><br clear=none><div class=clr-content-image-wrap><a href=index.images/9xMcCi.png data-lightbox=index.images/9xMcCi.png data-title class=lb><img class=lb src=index.images/9xMcCi.png alt></a></div><h4 id=load-balancer>Load Balancer <a class=anchor href=#load-balancer><i class="fas fa-hashtag"></i></a></h4><br clear=none><div class=clr-content-image-wrap><a href=index.images/MBD3UW.png data-lightbox=index.images/MBD3UW.png data-title class=lb><img class=lb src=index.images/MBD3UW.png alt></a></div><h4 id=firewall-rules>Firewall Rules <a class=anchor href=#firewall-rules><i class="fas fa-hashtag"></i></a></h4><br clear=none><div class=clr-content-image-wrap><a href=index.images/rtQkFK.png data-lightbox=index.images/rtQkFK.png data-title class=lb><img class=lb src=index.images/rtQkFK.png alt></a></div><h6>Share this post</h6><span class=share-box><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-facebook-official"></i></a>
 <a href="https://twitter.com/intent/tweet?text=Lab%20Guide%20-%20Kubernetes%20and%20NSX-T%20Container%20Network%20Plugin%20-%20Step%20by%20Step&amp;url=https%3a%2f%2fwww.definit.co.uk%2f2019%2f06%2flab-guide-kubernetes-and-nsx-t-container-network-plugin-step-by-step%2f" onclick='return window.open(this.href,"mywin","left=20,top=20,width=500,height=500,toolbar=1,resizable=0"),!1'><i class="fa fa-twitter"></i></a>

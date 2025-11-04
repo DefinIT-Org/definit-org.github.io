@@ -5,9 +5,12 @@
 &lt;p&gt;Symptoms were:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;iPhone fails to sync, generic timeout error (or is very slow)&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.testexchangeconnectivity.com/" title="https://www.testexchangeconnectivity.com/"&gt;https://www.testexchangeconnectivity.com/&lt;/a&gt; successfully tests the mailbox access&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.testexchangeconnectivity.com/" title="https://www.testexchangeconnectivity.com/" target="_blank"&gt;
+ &lt;clr-icon shape="pop-out" size="12"&gt;&lt;/clr-icon&gt; https://www.testexchangeconnectivity.com/
+&lt;/a&gt; successfully tests the mailbox access&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt; &lt;/p&gt;
-&lt;p&gt;The server was configured as per &lt;a href="http://support.microsoft.com/kb/817379/en-us" title="http://support.microsoft.com/kb/817379/en-us"&gt;http://support.microsoft.com/kb/817379/en-us&lt;/a&gt; to allow OWA/ActiveSync with SSL on OWA.&lt;/p&gt;
-&lt;p&gt;The iPhone was configured to accept the SSL certificate on the Exchange Server.&lt;/p&gt;</description></item><item><title>Syncing email, calendar and tasks over a laptop, desktop and iPhone</title><link>https://www.definit.co.uk/2009/12/syncing-email-calendar-and-tasks-over-a-laptop-desktop-and-iphone/</link><pubDate>Thu, 10 Dec 2009 16:58:09 +0000</pubDate><guid>https://www.definit.co.uk/2009/12/syncing-email-calendar-and-tasks-over-a-laptop-desktop-and-iphone/</guid><description>&lt;p&gt;In the past, I would often say to my wife, “if it’s not in Outlook, it isn’t going to happen”. Increasingly it’s “if it’s not on my iPhone, it’s not going to happen”. The fact is that I can’t actually remember all the things that I need to do each day, I need reminding!&lt;/p&gt;
+&lt;p&gt;The server was configured as per &lt;a href="http://support.microsoft.com/kb/817379/en-us" title="http://support.microsoft.com/kb/817379/en-us" target="_blank"&gt;
+ &lt;clr-icon shape="pop-out" size="12"&gt;&lt;/clr-icon&gt; http://support.microsoft.com/kb/817379/en-us
+&lt;/a&gt; to allow OWA/ActiveSync with SSL on OWA.&lt;/p&gt;</description></item><item><title>Syncing email, calendar and tasks over a laptop, desktop and iPhone</title><link>https://www.definit.co.uk/2009/12/syncing-email-calendar-and-tasks-over-a-laptop-desktop-and-iphone/</link><pubDate>Thu, 10 Dec 2009 16:58:09 +0000</pubDate><guid>https://www.definit.co.uk/2009/12/syncing-email-calendar-and-tasks-over-a-laptop-desktop-and-iphone/</guid><description>&lt;p&gt;In the past, I would often say to my wife, “if it’s not in Outlook, it isn’t going to happen”. Increasingly it’s “if it’s not on my iPhone, it’s not going to happen”. The fact is that I can’t actually remember all the things that I need to do each day, I need reminding!&lt;/p&gt;
 &lt;p&gt;I spend perhaps 8 hours a day at my work PC, maybe 2 hours a day on my home laptop and my iPhone is with me pretty much 24/7 – all of which are both data sources, and data endpoints. They all remind me to do things. To add a bit more complication to the mix, some things are personal, some things are work related.&lt;/p&gt;</description></item></channel></rss>

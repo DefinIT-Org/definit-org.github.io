@@ -27,4 +27,6 @@
 &lt;p&gt;Description:&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Windows cannot query for the list of Group Policy objects. Check the event log for possible messages previously logged by the policy engine that describes the reason for this. For more information, see Help and Support Center at_ &lt;a href="http://go.microsoft.com/fwlink/events.asp"&gt;&lt;em&gt;http://go.microsoft.com/fwlink/events.asp&lt;/em&gt;&lt;/a&gt;&lt;em&gt;.&lt;/em&gt;&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;Windows cannot query for the list of Group Policy objects. Check the event log for possible messages previously logged by the policy engine that describes the reason for this. For more information, see Help and Support Center at_ &lt;a href="http://go.microsoft.com/fwlink/events.asp" target="_blank"&gt;
+ &lt;clr-icon shape="pop-out" size="12"&gt;&lt;/clr-icon&gt; &lt;em&gt;http://go.microsoft.com/fwlink/events.asp&lt;/em&gt;
+&lt;/a&gt;&lt;em&gt;.&lt;/em&gt;&lt;/p&gt;</description></item></channel></rss>
