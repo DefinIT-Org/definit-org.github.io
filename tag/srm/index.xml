@@ -1,39 +1,28 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Srm on DefinIT</title><link>https://www.definit.co.uk/tag/srm/</link><description>Recent content in Srm on DefinIT</description><generator>Hugo</generator><language>en-gb</language><lastBuildDate>Tue, 12 Sep 2017 13:29:58 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/srm/index.xml" rel="self" type="application/rss+xml"/><item><title>Simon’s #VMworld 2017: Sunday and Monday</title><link>https://www.definit.co.uk/2017/09/simons-vmworld-day-1-and-2-sunday-and-monday/</link><pubDate>Tue, 12 Sep 2017 13:29:58 +0000</pubDate><guid>https://www.definit.co.uk/2017/09/simons-vmworld-day-1-and-2-sunday-and-monday/</guid><description>&lt;h2 id="sunday"&gt;&lt;img src="https://www.definit.co.uk/images/2017/09/VMworld-2017.jpg" alt=""&gt;Sunday &lt;a class="anchor" href="#sunday"&gt;
- &lt;i class="fas fa-hashtag"&gt;&lt;/i&gt;
-&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Arriving in early on Sunday as the local flight choices are more limited from Bristol than perhaps a larger Airport, very fortunate to have a hotel so close to the VMworld venue, perhaps not so great for the evening activities but I am happy with it this way around.&lt;/p&gt;
-&lt;p&gt;Other than registration (4pm-8pm) and hopefully catching up with a few folk who have also arrived early.&lt;/p&gt;
-&lt;p&gt;In the evening I had the pleasure to meet many awesome people from the vCommunity.&lt;/p&gt;</description></item><item><title>vROps 6.1 whats new?</title><link>https://www.definit.co.uk/2015/09/vrops-6-1-whats-new/</link><pubDate>Thu, 10 Sep 2015 21:12:08 +0000</pubDate><guid>https://www.definit.co.uk/2015/09/vrops-6-1-whats-new/</guid><description>&lt;p&gt;&lt;img src="https://www.definit.co.uk/images/2010/11/VMware1.jpg" alt=""&gt;So vROps 6.1 has gone GA!&lt;/p&gt;
-&lt;p&gt;What have the guys at VMware added? I have listed what I consider the hi-lights below&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;The maximum of 8 nodes has been doubled to 16!&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;SSO integration has been added (requires vSphere 6.0)&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;**Support for SRM has been added&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://www.definit.co.uk/images/2015/09/srm1.jpg" alt=""&gt;**&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt; &lt;/p&gt;
-&lt;p&gt; &lt;/p&gt;
-&lt;p&gt; &lt;/p&gt;
-&lt;p&gt; &lt;/p&gt;
-&lt;p&gt; &lt;/p&gt;
-&lt;p&gt; &lt;/p&gt;
-&lt;p&gt; &lt;/p&gt;
-&lt;p&gt; &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;vRealize Hyperic functionality has been added&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;With the addition of End Point Operations Management, the value of vRealize Hyperic functionality has been extended to the vRealize Operations Manager core product, without the need to deploy vRealize Hyperic&lt;/p&gt;</description></item><item><title>Installing SRM VNXe SRA &amp;ndash; Failed to load SRA, &amp;lsquo;queryInfo&amp;rsquo; didn&amp;rsquo;t return a response</title><link>https://www.definit.co.uk/2014/07/installing-srm-vnxe-sra-failed-to-load-sra-queryinfo-didnt-return-a-response/</link><pubDate>Wed, 23 Jul 2014 13:23:33 +0000</pubDate><guid>https://www.definit.co.uk/2014/07/installing-srm-vnxe-sra-failed-to-load-sra-queryinfo-didnt-return-a-response/</guid><description>&lt;p&gt;Quick post to cover a fix for installing the VNXe SRA when you encounter the below error:&lt;/p&gt;
-&lt;p&gt;Failed to load SRA from &amp;lsquo;C:/Program Files/VMware/VMware vCenter Site Recovery Manager/storage/sra/EMC VNXe SRA&amp;rsquo;. SRA command &amp;lsquo;queryInfo&amp;rsquo; didn&amp;rsquo;t return a response.&lt;/p&gt;
-&lt;p&gt;The components installed (in this order) are:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;vSphere 5.5&lt;/li&gt;
-&lt;li&gt;SRM 5.5&lt;/li&gt;
-&lt;li&gt;UNISphere CLI 1.5.4.1.0027-1&lt;/li&gt;
-&lt;li&gt;VNXe SRA 5.0.0&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;The root cause is that the system locale is EN-GB rather than EN-US, however even changing the locale does not resolve the issue. The Java installation will still try and load an en_GB module and fail. The solution is as follows:&lt;/p&gt;</description></item><item><title>Installing VMware Site Recovery Manager (SRM) 5.5 in the Lab</title><link>https://www.definit.co.uk/2014/03/installing-vmware-site-recovery-manager-srm-5-5-in-the-lab/</link><pubDate>Thu, 06 Mar 2014 12:04:22 +0000</pubDate><guid>https://www.definit.co.uk/2014/03/installing-vmware-site-recovery-manager-srm-5-5-in-the-lab/</guid><description>&lt;p&gt;&lt;!-- raw HTML omitted --&gt;I&amp;rsquo;ve been playing about with a compact SRM install in my lab - since I have limited resources and only one site I wanted to create a run-through for anyone learning SRM to be able to do it in their own lab too. I am creating two sites on the same IP subnet (pretend it&amp;rsquo;s a stretched LAN across two sites) and will be protecting a single, tiny Linux web server using vSphere Replication. I&amp;rsquo;m aiming to cover SAN based replication in a later post.&lt;/p&gt;</description></item><item><title>Generating and Installing CA Signed Certificates for VMware SRM 5.5</title><link>https://www.definit.co.uk/2014/03/generating-and-installing-ca-signed-certificates-for-vmware-srm-5-5/</link><pubDate>Wed, 05 Mar 2014 10:11:10 +0000</pubDate><guid>https://www.definit.co.uk/2014/03/generating-and-installing-ca-signed-certificates-for-vmware-srm-5-5/</guid><description>&lt;p&gt;&lt;!-- raw HTML omitted --&gt;I’m fairly new to SRM, but even so this one seemed like a real head-scratcher! If you happen to be using CA signed certificates on your “protected site” vCenter and “recovery site” vCenter servers, when you come to linking the two SRM sites you encounter SSLHandShake errors – basically SRM assumes you want to use certificates for authentication because you’re using signed certificates. If you use the default self-signed certificates, SRM will default to using password authentication (see &lt;!-- raw HTML omitted --&gt;SRM Authentication&lt;!-- raw HTML omitted --&gt;). Where the process fails is during the “configure connection” stage, if either one of your vCenter servers does not have CA signed and the other does (throws an error that they are using different authentication methods) or that you are using self-signed certificates for either SRM installation (throws an error that the certificate or CA could not be trusted).&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Srm on DefinIT</title><link>https://www.definit.co.uk/tag/srm/</link><description>Recent content in Srm on DefinIT</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© 2026</copyright><lastBuildDate>Tue, 12 Sep 2017 13:29:58 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/srm/index.xml" rel="self" type="application/rss+xml"/><item><title>Simon’s #VMworld 2017: Sunday and Monday</title><link>https://www.definit.co.uk/2017/09/simons-vmworld-day-1-and-2-sunday-and-monday/</link><pubDate>Tue, 12 Sep 2017 13:29:58 +0000</pubDate><guid>https://www.definit.co.uk/2017/09/simons-vmworld-day-1-and-2-sunday-and-monday/</guid><description>&lt;h2 class="relative group"&gt;&lt;figure&gt;&lt;img
+ class="my-0 rounded-md"
+ loading="lazy"
+ decoding="async"
+ fetchpriority="low"
+ alt=""
+ src="https://www.definit.co.uk/images/2017/09/VMworld-2017.jpg"
+ &gt;&lt;/figure&gt;
+Sunday
+ &lt;div id="sunday" class="anchor"&gt;&lt;/div&gt;
+ 
+ &lt;span
+ class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+ &lt;a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#sunday" aria-label="Anchor"&gt;#&lt;/a&gt;
+ &lt;/span&gt;
+ 
+&lt;/h2&gt;
+&lt;p&gt;Arriving in early on Sunday as the local flight choices are more limited from Bristol than perhaps a larger Airport, very fortunate to have a hotel so close to the VMworld venue, perhaps not so great for the evening activities but I am happy with it this way around.&lt;/p&gt;</description></item><item><title>vROps 6.1 whats new?</title><link>https://www.definit.co.uk/2015/09/vrops-6-1-whats-new/</link><pubDate>Thu, 10 Sep 2015 21:12:08 +0000</pubDate><guid>https://www.definit.co.uk/2015/09/vrops-6-1-whats-new/</guid><description>&lt;p&gt;&lt;figure&gt;&lt;img
+ class="my-0 rounded-md"
+ loading="lazy"
+ decoding="async"
+ fetchpriority="low"
+ alt=""
+ src="https://www.definit.co.uk/images/2010/11/VMware1.jpg"
+ &gt;&lt;/figure&gt;
+So vROps 6.1 has gone GA!&lt;/p&gt;
+&lt;p&gt;What have the guys at VMware added? I have listed what I consider the hi-lights below&lt;/p&gt;</description></item><item><title>Installing SRM VNXe SRA &amp;ndash; Failed to load SRA, &amp;lsquo;queryInfo&amp;rsquo; didn&amp;rsquo;t return a response</title><link>https://www.definit.co.uk/2014/07/installing-srm-vnxe-sra-failed-to-load-sra-queryinfo-didnt-return-a-response/</link><pubDate>Wed, 23 Jul 2014 13:23:33 +0000</pubDate><guid>https://www.definit.co.uk/2014/07/installing-srm-vnxe-sra-failed-to-load-sra-queryinfo-didnt-return-a-response/</guid><description>&lt;p&gt;Quick post to cover a fix for installing the VNXe SRA when you encounter the below error:&lt;/p&gt;
+&lt;p&gt;Failed to load SRA from &amp;lsquo;C:/Program Files/VMware/VMware vCenter Site Recovery Manager/storage/sra/EMC VNXe SRA&amp;rsquo;. SRA command &amp;lsquo;queryInfo&amp;rsquo; didn&amp;rsquo;t return a response.&lt;/p&gt;</description></item><item><title>Installing VMware Site Recovery Manager (SRM) 5.5 in the Lab</title><link>https://www.definit.co.uk/2014/03/installing-vmware-site-recovery-manager-srm-5-5-in-the-lab/</link><pubDate>Thu, 06 Mar 2014 12:04:22 +0000</pubDate><guid>https://www.definit.co.uk/2014/03/installing-vmware-site-recovery-manager-srm-5-5-in-the-lab/</guid><description>&lt;p&gt;&lt;img class="alignright size-full wp-image-3998" alt="Site Recovery Manager" src="https://www.definit.co.uk/images/2014/03/image.png" width="126" height="130" /&gt;I&amp;rsquo;ve been playing about with a compact SRM install in my lab - since I have limited resources and only one site I wanted to create a run-through for anyone learning SRM to be able to do it in their own lab too. I am creating two sites on the same IP subnet (pretend it&amp;rsquo;s a stretched LAN across two sites) and will be protecting a single, tiny Linux web server using vSphere Replication. I&amp;rsquo;m aiming to cover SAN based replication in a later post.&lt;/p&gt;</description></item><item><title>Generating and Installing CA Signed Certificates for VMware SRM 5.5</title><link>https://www.definit.co.uk/2014/03/generating-and-installing-ca-signed-certificates-for-vmware-srm-5-5/</link><pubDate>Wed, 05 Mar 2014 10:11:10 +0000</pubDate><guid>https://www.definit.co.uk/2014/03/generating-and-installing-ca-signed-certificates-for-vmware-srm-5-5/</guid><description>&lt;p&gt;&lt;img style="margin-left: 0px; display: inline; margin-right: 0px; border: 0px;" title="image" alt="image" src="https://www.definit.co.uk/images/2014/03/image.png" width="126" height="130" align="right" border="0" /&gt;I’m fairly new to SRM, but even so this one seemed like a real head-scratcher! If you happen to be using CA signed certificates on your “protected site” vCenter and “recovery site” vCenter servers, when you come to linking the two SRM sites you encounter SSLHandShake errors – basically SRM assumes you want to use certificates for authentication because you’re using signed certificates. If you use the default self-signed certificates, SRM will default to using password authentication (see &lt;a href="http://pubs.vmware.com/srm-55/index.jsp#com.vmware.srm.install_config.doc/GUID-4FBC345A-F3CA-4A0A-9FC2-970BBFB293CD.html?resultof=%2522%2563%2565%2572%2574%2569%2566%2569%2563%2561%2574%2565%2573%2522%2520%2522%2563%2565%2572%2574%2569%2566%2522%2520" target="_blank"&gt;SRM Authentication&lt;/a&gt;). Where the process fails is during the “configure connection” stage, if either one of your vCenter servers does not have CA signed and the other does (throws an error that they are using different authentication methods) or that you are using self-signed certificates for either SRM installation (throws an error that the certificate or CA could not be trusted).&lt;/p&gt;</description></item></channel></rss>
