@@ -1,18 +1,1 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Guest Agent on DefinIT</title><link>https://www.definit.co.uk/tag/guest-agent/</link><description>Recent content in Guest Agent on DefinIT</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© 2026</copyright><lastBuildDate>Fri, 18 Nov 2016 17:09:14 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/guest-agent/index.xml" rel="self" type="application/rss+xml"/><item><title>Deploying to AWS with Software Components on vRealize Automation 7</title><link>https://www.definit.co.uk/2016/11/deploying-to-aws-with-software-components-on-vrealize-automation-7/</link><pubDate>Fri, 18 Nov 2016 17:09:14 +0000</pubDate><guid>https://www.definit.co.uk/2016/11/deploying-to-aws-with-software-components-on-vrealize-automation-7/</guid><description>&lt;h2 class="relative group"&gt;&lt;figure&gt;&lt;img
- class="my-0 rounded-md"
- loading="lazy"
- decoding="async"
- fetchpriority="low"
- alt=""
- src="https://www.definit.co.uk/images/2016/11/AWS-vRA.png"
- &gt;&lt;/figure&gt;
-
- &lt;div id="" class="anchor"&gt;&lt;/div&gt;
- 
- &lt;span
- class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
- &lt;a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#" aria-label="Anchor"&gt;#&lt;/a&gt;
- &lt;/span&gt;
- 
-&lt;/h2&gt;
-&lt;p&gt;Recently I&amp;rsquo;ve been working on some ideas in my lab to leverage the AWS endpoint on vRealize Automation. One of the things I needed to get working was getting Software Components working on my AWS deployed instances.&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Guest Agent on DefinIT</title><link>https://www.definit.co.uk/tag/guest-agent/</link><description>Recent content in Guest Agent on DefinIT</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© 2026</copyright><lastBuildDate>Fri, 18 Nov 2016 17:09:14 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/guest-agent/index.xml" rel="self" type="application/rss+xml"/><item><title>Deploying to AWS with Software Components on vRealize Automation 7</title><link>https://www.definit.co.uk/2016/11/deploying-to-aws-with-software-components-on-vrealize-automation-7/</link><pubDate>Fri, 18 Nov 2016 17:09:14 +0000</pubDate><guid>https://www.definit.co.uk/2016/11/deploying-to-aws-with-software-components-on-vrealize-automation-7/</guid><description>&lt;h2 class="relative group"&gt;&lt;figure&gt;&lt;img&#10; class="my-0 rounded-md"&#10; loading="lazy"&#10; decoding="async"&#10; fetchpriority="low"&#10; alt=""&#10; src="https://www.definit.co.uk/images/2016/11/AWS-vRA.png"&#10; &gt;&lt;/figure&gt;&#10;&#10; &lt;div id="" class="anchor"&gt;&lt;/div&gt;&#10; &#10; &lt;span&#10; class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;&#10; &lt;a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#" aria-label="Anchor"&gt;#&lt;/a&gt;&#10; &lt;/span&gt;&#10; &#10;&lt;/h2&gt;&#10;&lt;p&gt;Recently I&amp;rsquo;ve been working on some ideas in my lab to leverage the AWS endpoint on vRealize Automation. One of the things I needed to get working was getting Software Components working on my AWS deployed instances.&lt;/p&gt;</description></item></channel></rss>

@@ -1,18 +1,1 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Query Service on DefinIT</title><link>https://www.definit.co.uk/tag/query-service/</link><description>Recent content in Query Service on DefinIT</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© 2026</copyright><lastBuildDate>Sat, 30 Aug 2014 11:56:37 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/query-service/index.xml" rel="self" type="application/rss+xml"/><item><title>Fixing a couple of search/inventory service related errors with vCenter appliance 5.5 update 1c</title><link>https://www.definit.co.uk/2014/08/fixing-a-couple-of-searchinventory-service-related-errors-with-vcenter-appliance-5-5-update-1c/</link><pubDate>Sat, 30 Aug 2014 11:56:37 +0000</pubDate><guid>https://www.definit.co.uk/2014/08/fixing-a-couple-of-searchinventory-service-related-errors-with-vcenter-appliance-5-5-update-1c/</guid><description>&lt;figure&gt;&lt;img
- class="my-0 rounded-md"
- loading="lazy"
- decoding="async"
- fetchpriority="low"
- alt=""
- src="https://www.definit.co.uk/images/2010/11/VMware1.jpg"
- &gt;&lt;/figure&gt;
-&lt;p&gt;So recently I came across an error in the vSphere windows &amp;ldquo;fat client&amp;rdquo; when trying to use the search field.&lt;/p&gt;
-&lt;figure&gt;&lt;img
- class="my-0 rounded-md"
- loading="lazy"
- decoding="async"
- fetchpriority="low"
- alt=""
- src="https://www.definit.co.uk/images/2014/08/login_to_query.jpg"
- &gt;&lt;/figure&gt;
-&lt;p&gt; &lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Query Service on DefinIT</title><link>https://www.definit.co.uk/tag/query-service/</link><description>Recent content in Query Service on DefinIT</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© 2026</copyright><lastBuildDate>Sat, 30 Aug 2014 11:56:37 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/query-service/index.xml" rel="self" type="application/rss+xml"/><item><title>Fixing a couple of search/inventory service related errors with vCenter appliance 5.5 update 1c</title><link>https://www.definit.co.uk/2014/08/fixing-a-couple-of-searchinventory-service-related-errors-with-vcenter-appliance-5-5-update-1c/</link><pubDate>Sat, 30 Aug 2014 11:56:37 +0000</pubDate><guid>https://www.definit.co.uk/2014/08/fixing-a-couple-of-searchinventory-service-related-errors-with-vcenter-appliance-5-5-update-1c/</guid><description>&lt;figure&gt;&lt;img&#10; class="my-0 rounded-md"&#10; loading="lazy"&#10; decoding="async"&#10; fetchpriority="low"&#10; alt=""&#10; src="https://www.definit.co.uk/images/2010/11/VMware1.jpg"&#10; &gt;&lt;/figure&gt;&#10;&lt;p&gt;So recently I came across an error in the vSphere windows &amp;ldquo;fat client&amp;rdquo; when trying to use the search field.&lt;/p&gt;&#10;&lt;figure&gt;&lt;img&#10; class="my-0 rounded-md"&#10; loading="lazy"&#10; decoding="async"&#10; fetchpriority="low"&#10; alt=""&#10; src="https://www.definit.co.uk/images/2014/08/login_to_query.jpg"&#10; &gt;&lt;/figure&gt;&#10;&lt;p&gt; &lt;/p&gt;</description></item></channel></rss>

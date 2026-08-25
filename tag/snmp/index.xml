@@ -1,14 +1,1 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SNMP on DefinIT</title><link>https://www.definit.co.uk/tag/snmp/</link><description>Recent content in SNMP on DefinIT</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© 2026</copyright><lastBuildDate>Fri, 27 Nov 2015 20:43:43 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/snmp/index.xml" rel="self" type="application/rss+xml"/><item><title>vROps multinode SNMP gotcha</title><link>https://www.definit.co.uk/2015/11/vrops-multinode-snmp-gotcha/</link><pubDate>Fri, 27 Nov 2015 20:43:43 +0000</pubDate><guid>https://www.definit.co.uk/2015/11/vrops-multinode-snmp-gotcha/</guid><description>&lt;p&gt;&lt;figure&gt;&lt;img
- class="my-0 rounded-md"
- loading="lazy"
- decoding="async"
- fetchpriority="low"
- alt=""
- src="https://www.definit.co.uk/images/2015/11/vRealize-Operations-Manager-Logo_thumb.jpg"
- &gt;&lt;/figure&gt;
-So if you are already familiar with vROps you will know you can now have multiple nodes in your cluster.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;8 nodes if you are on versions 6.0.x&lt;/li&gt;
-&lt;li&gt;16 nodes if you are on version 6.1&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Why does this matter if you plan to use SNMP with your vROps cluster?&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SNMP on DefinIT</title><link>https://www.definit.co.uk/tag/snmp/</link><description>Recent content in SNMP on DefinIT</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© 2026</copyright><lastBuildDate>Fri, 27 Nov 2015 20:43:43 +0000</lastBuildDate><atom:link href="https://www.definit.co.uk/tag/snmp/index.xml" rel="self" type="application/rss+xml"/><item><title>vROps multinode SNMP gotcha</title><link>https://www.definit.co.uk/2015/11/vrops-multinode-snmp-gotcha/</link><pubDate>Fri, 27 Nov 2015 20:43:43 +0000</pubDate><guid>https://www.definit.co.uk/2015/11/vrops-multinode-snmp-gotcha/</guid><description>&lt;p&gt;&lt;figure&gt;&lt;img&#10; class="my-0 rounded-md"&#10; loading="lazy"&#10; decoding="async"&#10; fetchpriority="low"&#10; alt=""&#10; src="https://www.definit.co.uk/images/2015/11/vRealize-Operations-Manager-Logo_thumb.jpg"&#10; &gt;&lt;/figure&gt;&#10;So if you are already familiar with vROps you will know you can now have multiple nodes in your cluster.&lt;/p&gt;&#10;&lt;ul&gt;&#10;&lt;li&gt;8 nodes if you are on versions 6.0.x&lt;/li&gt;&#10;&lt;li&gt;16 nodes if you are on version 6.1&lt;/li&gt;&#10;&lt;/ul&gt;&#10;&lt;p&gt;Why does this matter if you plan to use SNMP with your vROps cluster?&lt;/p&gt;</description></item></channel></rss>
